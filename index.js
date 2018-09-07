@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
-// Version 0.1.0, 2018.04.14
+// Version 0.1.0, 2018.08.14
 
 'use strict';
 
@@ -46,6 +46,8 @@ var Types = {
     media: 'media',
     motion: 'motion',
     rgb: 'rgb',
+    rgbSingle: 'rgbSingle',
+    hue: 'hue',
     slider: 'slider',
     socket: 'socket',
     temperature: 'temperature',
@@ -183,49 +185,90 @@ function ChannelDetector() {
         },
         rgb: {
             states: [
-                {role: /^level.color.r$/,                                 indicator: false, type: 'number', write: true,            name: 'RED',           required: true},
-                {role: /^level.color.g$/,                                 indicator: false, type: 'number', write: true,            name: 'GREEN',         required: true},
-                {role: /^level.color.b$/,                                 indicator: false, type: 'number', write: true,            name: 'BLUE',          required: true},
-                {role: /^level.dimmer$/,                                  indicator: false, type: 'number', write: true,            name: 'DIMMER',        required: false},
-                {role: /^level.brightness$/,                              indicator: false, type: 'number', write: true,            name: 'DIMMER',        required: false},
-                {role: /^level.color.saturation$/,                        indicator: false, type: 'number', write: true,            name: 'SATURATION',    required: false},
-                {role: /^level.color.temperature$/,                       indicator: false, type: 'number', write: true,            name: 'TEMPERATURE',   required: false},
+                {role: /^level\.color\.red$/,                             indicator: false, type: 'number',  write: true,           name: 'RED',           required: true},
+                {role: /^level\.color\.green$/,                           indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true},
+                {role: /^level\.color\.blue$/,                            indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
+                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
+                {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false},
+                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON_LIGHT',      required: false},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                patternWorking,
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
             ],
             type: Types.rgb
         },
-        rgb1: {
+        // remove it when all adapters fixed (2018.08.15) r=>red, g=>green, b=>blue
+        rgbOld: {
             states: [
-                {role: /^level.color.rgb$/,                               indicator: false, type: 'string', write: true,            name: 'RGB',           required: true},
-                {role: /^level.dimmer$/,                                  indicator: false, type: 'number', write: true,            name: 'DIMMER',        required: false},
-                {role: /^level.brightness$/,                              indicator: false, type: 'number', write: true,            name: 'DIMMER',        required: false},
-                {role: /^level.color.saturation$/,                        indicator: false, type: 'number', write: true,            name: 'SATURATION',    required: false},
-                {role: /^level.color.temperature$/,                       indicator: false, type: 'number', write: true,            name: 'TEMPERATURE',   required: false},
+                {role: /^level\.color\.r$/,                               indicator: false, type: 'number',  write: true,           name: 'RED',           required: true},
+                {role: /^level\.color\.g$/,                               indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true},
+                {role: /^level\.color\.b$/,                               indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
+                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
+                {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false},
+                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON_LIGHT',      required: false},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                patternWorking,
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
             ],
             type: Types.rgb
+        },
+        rgbSingle: {
+            states: [
+                {role: /^level\.color\.rgb$/,                             indicator: false, type: 'string',  write: true,           name: 'RGB',           required: true},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
+                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
+                {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false},
+                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON_LIGHT',      required: false},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                patternWorking,
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.rgbSingle
         },
         hue: {
             states: [
-                {role: /^level.color.hue/,                                indicator: false, type: 'number', write: true,            name: 'HUE',           required: true},
-                {role: /^level.dimmer$/,                                  indicator: false, type: 'number', write: true,            name: 'DIMMER',        required: false},
-                {role: /^level.brightness$/,                              indicator: false, type: 'number', write: true,            name: 'DIMMER',        required: false},
-                {role: /^level.color.saturation$/,                        indicator: false, type: 'number', write: true,            name: 'SATURATION',    required: false},
-                {role: /^level.color.temperature$/,                       indicator: false, type: 'number', write: true,            name: 'TEMPERATURE',   required: false},
+                {role: /^level\.color\.hue$/,                             indicator: false, type: 'number',  write: true,           name: 'HUE',           required: true},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, searchInParent: true},
+                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
+                {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false},
+                {role: /^switch.light$/,                                  indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                patternWorking,
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
             ],
-            type: Types.rgb
+            type: Types.hue
         },
         warning: {
             states: [
-                {role: /^value.warning$/,                                 indicator: false,                  name: 'LEVEL',         required: true},
+                {role: /^value\.warning$/,                                indicator: false,                  name: 'LEVEL',         required: true},
                 // optional
-                {role: /^weather.title.short$/,                           indicator: false, type: 'string',  name: 'TITLE',         required: false},
-                {role: /^weather.title$/,                                 indicator: false, type: 'string',  name: 'INFO',          required: false},
-                {role: /^date.start$/,                                    indicator: false, type: 'string',  name: 'START',         required: false},
-                {role: /^date.end$/,                                      indicator: false, type: 'string',  name: 'END',           required: false},
+                {role: /^weather\.title\.short$/,                         indicator: false, type: 'string',  name: 'TITLE',         required: false},
+                {role: /^weather\.title$/,                                indicator: false, type: 'string',  name: 'INFO',          required: false},
+                {role: /^date\.start$/,                                   indicator: false, type: 'string',  name: 'START',         required: false},
+                {role: /^date\.end$/,                                     indicator: false, type: 'string',  name: 'END',           required: false},
                 {role: /^date$/,                                          indicator: false, type: 'string',  name: 'START',         required: false},
-                {role: /^weather.chart.url/,                              indicator: false, type: 'string',  name: 'ICON',          required: false},
+                {role: /^weather\.chart\.url/,                            indicator: false, type: 'string',  name: 'ICON',          required: false},
 
                 // For detailed screen
-                {role: /^weather.state$/,                                 indicator: false, type: 'string',  name: 'DESC',          required: false, noSubscribe: true},
+                {role: /^weather\.state$/,                                indicator: false, type: 'string',  name: 'DESC',          required: false, noSubscribe: true},
             ],
             type: Types.warning
         },
@@ -261,7 +304,7 @@ function ChannelDetector() {
         },
         lock: {
             states: [
-                {role: /^switch.lock$/,                       indicator: false, type: 'boolean',  write: true,              name: 'SET',                 required: true},
+                {role: /^switch\.lock$/,                      indicator: false, type: 'boolean',  write: true,              name: 'SET',                 required: true},
                 // optional
                 {role: /^state$/,                             indicator: false, type: 'boolean',  write: false,             name: 'ACTUAL',              required: false},
                 {                                             indicator: false, type: 'boolean',  write: true, read: false, name: 'OPEN',                required: false, noSubscribe: true},
@@ -332,7 +375,7 @@ function ChannelDetector() {
         },
         dimmer: {
             states: [
-                {role: /^level(\.dimmer)?|^level.brightness$/, indicator: false, type: 'number',  write: true,       enums: roleOrEnumLight, name: 'SET',         required: true},
+                {role: /^level(\.dimmer)?|^level\.brightness$/, indicator: false, type: 'number',  write: true,       enums: roleOrEnumLight, name: 'SET',         required: true},
                 // optional
                 {role: /^value(\.dimmer)?$/,                   indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false},
                 {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'ON_SET',      required: false},
@@ -360,10 +403,10 @@ function ChannelDetector() {
         },
         volume: {
             states: [
-                {role: /^level.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true},
+                {role: /^level\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true},
                 // optional
-                {role: /^value.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false},
-                {role: /^media.mute$/,                     indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false},
+                {role: /^value\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false},
+                {role: /^media\.mute$/,                     indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -374,9 +417,9 @@ function ChannelDetector() {
         },
         volumeGroup: {
             states: [
-                {role: /^level.volume.group?$/,            indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true},
-                {role: /^value.volume.group$/,             indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false},
-                {role: /^media.mute.group$/,               indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false},
+                {role: /^level\.volume\.group?$/,            indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true},
+                {role: /^value\.volume\.group$/,             indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false},
+                {role: /^media\.mute\.group$/,               indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -699,15 +742,16 @@ function ChannelDetector() {
     }
 
     this._testOneState = function (context) {
-        var objects = context.objects;
-        var pattern = context.pattern;
-        var state = context.state;
-        var channelStates = context.channelStates;
-        var usedIds = context.usedIds;
-        var _usedIds = context._usedIds;
-        var ignoreIndicators = context.ignoreIndicators;
-        var result = context.result;
-        var found = false;
+        var objects             = context.objects;
+        var pattern             = context.pattern;
+        var state               = context.state;
+        var channelStates       = context.channelStates;
+        var usedIds             = context.usedIds;
+        var _usedIds            = context._usedIds;
+        var ignoreIndicators    = context.ignoreIndicators;
+        var result              = context.result;
+        var found               = false;
+
         channelStates.forEach(function (_id) {
             if ((state.indicator || (usedIds.indexOf(_id) === -1 && (state.notSingle || _usedIds.indexOf(_id) === -1))) &&
                 this._applyPattern(objects, _id, state)) {
@@ -783,12 +827,12 @@ function ChannelDetector() {
     };
 
     this._detectNext = function (options) {
-        const objects           = options.objects;
-        const id                = options.id;
-        let keys                = options._keysOptional;
-        let usedIds             = options._usedIdsOptional;
-        const ignoreIndicators  = options.ignoreIndicators;
-        const allowedTypes      = options.allowedTypes;
+        var objects           = options.objects;
+        var id                = options.id;
+        var keys                = options._keysOptional;
+        var usedIds             = options._usedIdsOptional;
+        var ignoreIndicators  = options.ignoreIndicators;
+        var allowedTypes      = options.allowedTypes;
 
         if (!usedIds) {
             usedIds = [];
@@ -820,7 +864,7 @@ function ChannelDetector() {
                 if (!patterns.hasOwnProperty(pattern) || (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1)) continue;
                 context.result = null;
 
-                if (pattern === 'warning' && id.indexOf('warning') !== -1) {
+                if (pattern === 'hue' && id.indexOf('yeelight-2.0') !== -1) {
                     console.log(pattern);
                 }
 
@@ -829,6 +873,10 @@ function ChannelDetector() {
                 context._usedIds = _usedIds;
                 patterns[pattern].states.forEach(function (state) {
                     var found = false;
+
+                    if (state.name === 'ON') {
+                        //console.log('ON');
+                    }
 
                     // one of following
                     if (state instanceof Array) {
@@ -942,12 +990,12 @@ function ChannelDetector() {
     };
 
     this.detect = function (options) {
-        const objects           = options.objects;
-        const id                = options.id;
-        let _keysOptional       = options._keysOptional;
-        let _usedIdsOptional    = options._usedIdsOptional;
-        const ignoreIndicators  = options.ignoreIndicators;
-        const allowedTypes      = options.allowedTypes;
+        var objects           = options.objects;
+        var id                = options.id;
+        var _keysOptional     = options._keysOptional;
+        var _usedIdsOptional  = options._usedIdsOptional;
+        var ignoreIndicators  = options.ignoreIndicators;
+        var allowedTypes      = options.allowedTypes;
 
         if (this.cache[id] !== undefined) {
             return this.cache[id];
@@ -986,7 +1034,7 @@ function ChannelDetector() {
 
 if (typeof module !== 'undefined' && module.parent) {
     module.exports = {
-        Types,
-        ChannelDetector
+        Types: Types,
+        ChannelDetector: ChannelDetector
     };
 }
