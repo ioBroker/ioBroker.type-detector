@@ -10,7 +10,7 @@ Just now this module used in material adapter to detect devices and to visualize
 
 Following code detect devices in some state's tree.
 
-```
+```javascript
 // 
 const ChannelDetector = require('iobroker.type-detector');
 const detector = new ChannelDetector();
@@ -47,12 +47,11 @@ if (controls) {
 } else {
 	console.log(`Nothing found for ${options.id}`);
 }
-
+```
 
 
 ## Description
 Following devices can be detected:
-
 
 
 ### Media player
