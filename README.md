@@ -28,7 +28,6 @@ const options = {
 	ignoreIndicators:   ignoreIndicators
 };
 
-let controls;
 let controls = detector.detect(options);
 if (controls) {
 	controls = controls.map(function (control) {
