@@ -46,6 +46,7 @@ var Types = {
     media: 'media',
     motion: 'motion',
     rgb: 'rgb',
+    ct: 'ct',
     rgbSingle: 'rgbSingle',
     hue: 'hue',
     slider: 'slider',
@@ -255,6 +256,22 @@ function ChannelDetector() {
                 patternError
             ],
             type: Types.hue
+        },
+        ct: {
+            states: [
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: true},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
+                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
+                {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
+                {role: /^switch.light$/,                                  indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                patternWorking,
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.ct
         },
         warning: {
             states: [
@@ -811,7 +828,7 @@ function ChannelDetector() {
                         if (cid === _id) return;
                         if ((state.indicator || (usedIds.indexOf(cid) === -1 && (state.notSingle || _usedIds.indexOf(cid) === -1))) &&
                             this._applyPattern(objects, cid, state)) {
-                            if (!state.indicator && !state.notSingle){
+                            if (!state.indicator && !state.notSingle) {
                                 _usedIds.push(cid);
                             }
                             var newState = copyState(state);
@@ -850,7 +867,7 @@ function ChannelDetector() {
                 channelStates = getAllStatesInChannel(keys, id);
             }
 
-            if (id.indexOf('javascript.0.devices.valueSimple') !== -1) {
+            if (id.indexOf('yeelight-2.0.color-') !== -1) {
                 console.log('aaa');
             }
             var context = {
@@ -864,7 +881,7 @@ function ChannelDetector() {
                 if (!patterns.hasOwnProperty(pattern) || (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1)) continue;
                 context.result = null;
 
-                if (pattern === 'hue' && id.indexOf('yeelight-2.0') !== -1) {
+                if (pattern === 'hue' && id.indexOf('yeelight-2.0.color-') !== -1) {
                     console.log(pattern);
                 }
 
@@ -995,7 +1012,7 @@ function ChannelDetector() {
         var _keysOptional     = options._keysOptional;
         var _usedIdsOptional  = options._usedIdsOptional;
         var ignoreIndicators  = options.ignoreIndicators;
-        var allowedTypes      = options.allowedTypes;
+        // var allowedTypes      = options.allowedTypes;
 
         if (this.cache[id] !== undefined) {
             return this.cache[id];
