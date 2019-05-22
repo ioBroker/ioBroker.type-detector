@@ -296,6 +296,7 @@ function ChannelDetector() {
                 {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false},
                 {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false},
                 {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'BOOST',              required: false},
+                {role: /^switch\.power$/,              indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'POWER',              required: false},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
