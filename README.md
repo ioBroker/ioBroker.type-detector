@@ -1,5 +1,4 @@
 # ioBroker.type-detector
-=================
 
 This is not the adapter. This is help function to detect devices from ioBroker states and channels.
 
@@ -95,6 +94,9 @@ Following devices can be detected:
 
 
 ## Changelog
+### 0.1.1 [2019-05-24]
+* (bluefox) add PRECIPITATION to weather
+* (bluefox) add location detection
 
 ### 0.1.0 [2018-08-14]
 * (bluefox) initial commit
@@ -103,6 +105,6 @@ Following devices can be detected:
 
 ## License
 
-Copyright (c) 2017-2018 bluefox <dogafox@gmail.com>
+Copyright (c) 2018-2019 bluefox <dogafox@gmail.com>
 
 MIT License

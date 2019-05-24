@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2019 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
-// Version 0.1.0, 2018.08.14
+// Version 0.1.1, 2019.05.24
 
 'use strict';
 
@@ -43,6 +43,7 @@ var Types = {
     instance: 'instance',
     light: 'light',
     lock: 'lock',
+    location: 'location',
     media: 'media',
     motion: 'motion',
     rgb: 'rgb',
@@ -143,6 +144,7 @@ function ChannelDetector() {
                 {role: /^value.temperature.max.forecast.0$/,                         indicator: false, type: 'number',  name: 'TEMP_MAX',      required: true},
                 // optional
                 {role: /^value.precipitation$|^value.precipitation.forecast.0$/,     indicator: false, type: 'number',  name: 'PRECIPITATION_CHANCE',     unit: '%', required: false},
+                {role: /^value.precipitation$|^value.precipitation.forecast.0$/,     indicator: false, type: 'number',  name: 'PRECIPITATION',            unit: 'mm', required: false},
                 {role: /^date$|^date.forecast.0$/,                                   indicator: false, type: 'string',  name: 'DATE',          required: false},
                 {role: /^dayofweek$|^dayofweek.forecast.0$/,                         indicator: false, type: 'string',  name: 'DOW',           required: false},
                 {role: /^weather.state$|^weather.state.forecast.0$/,                 indicator: false, type: 'string',  name: 'STATE',         required: false},
@@ -176,6 +178,7 @@ function ChannelDetector() {
                 {role: /^value.humidity.max.forecast.(\d)$/,                         indicator: false, type: 'number',  name: 'HUMIDITY_MAX%d',  required: false, searchInParent: true, multiple: true, noSubscribe: true},
 
                 {role: /^value.precipitation.forecast.(\d)$/,                        indicator: false, type: 'number',  unit: '%', name: 'PRECIPITATION_CHANCE%d', required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^value.precipitation.forecast.(\d)$/,                        indicator: false, type: 'number',  unit: 'mm', name: 'PRECIPITATION%d', required: false, searchInParent: true, multiple: true, noSubscribe: true},
 
                 {role: /^value.speed.wind.forecast.(\d)$/,                           indicator: false, type: 'number',  name: 'WIND_SPEED%d',    required: false, searchInParent: true, multiple: true, noSubscribe: true},
                 {role: /^value.direction.wind.forecast.(\d)$/,                       indicator: false, type: 'number',  name: 'WIND_DIRECTION%d',required: false, searchInParent: true, multiple: true, noSubscribe: true},
@@ -431,6 +434,35 @@ function ChannelDetector() {
                 patternError
             ],
             type: Types.volume
+        },
+        location_one: {
+            states: [
+                {role: /^value\.gps$/,                             indicator: false, type: 'string',  write: false,      name: 'GPS',           required: true},
+                // optional
+                {role: /^value\.gps\.elevation$/,                  indicator: false, type: 'number',  write: false,      name: 'ELEVATION',     required: false},
+                {role: /^value\.radius$|value\.gps\.radius$/,      indicator: false, type: 'number',  write: false,      name: 'RADIUS',        required: false},
+                {role: /^value\.accuracy$|^value\.gps\.accuracy$/, indicator: false, type: 'number',  write: false,      name: 'ACCURACY',      required: false},
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.location
+        },
+        location: {
+            states: [
+                {role: /^value\.gps\.longitude$/,                  indicator: false, type: 'number',  write: false,      name: 'LONGITUDE',     required: true},
+                {role: /^value\.gps\.latitude$/,                   indicator: false, type: 'number',  write: false,      name: 'LATITUDE',      required: true},
+                // optional
+                {role: /^value\.gps\.elevation$/,                  indicator: false, type: 'number',  write: false,      name: 'ELEVATION',     required: false},
+                {role: /^value\.radius$|value\.gps\.radius$/,      indicator: false, type: 'number',  write: false,      name: 'RADIUS',        required: false},
+                {role: /^value\.accuracy$|^value\.gps\.accuracy$/, indicator: false, type: 'number',  write: false,      name: 'ACCURACY',      required: false},
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.location
         },
         volumeGroup: {
             states: [
