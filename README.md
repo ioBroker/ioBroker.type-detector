@@ -94,6 +94,9 @@ Following devices can be detected:
 
 
 ## Changelog
+### 0.1.1 [2019-06-29]
+* (kirovilya) In some cases, devices may not have channels, but immediately have a states. For example in the zigbee-adapter.
+
 ### 0.1.1 [2019-05-24]
 * (bluefox) add PRECIPITATION to weather
 * (bluefox) add location detection
