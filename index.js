@@ -906,6 +906,10 @@ function ChannelDetector() {
                 channelStates = [id];
             } else if (objects[id].type === 'device') {
                 channelStates = getAllStatesInDevice(keys, id);
+                // if no states, it may be device without channels
+                if (!channelStates.length) {
+                    channelStates = getAllStatesInChannel(keys, id);
+                }
             } else { // channel
                 channelStates = getAllStatesInChannel(keys, id);
             }
