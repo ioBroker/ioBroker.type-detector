@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  **/
 // Version 0.1.1, 2019.05.24
+// Keep this file ES5 conform!
 
 'use strict';
 
@@ -84,6 +85,8 @@ var Types = {
 // notSingle - this state may belong to more than one tile simultaneously (e.g. volume tile and media with volume)
 // inverted - is state of indicator must be inverted
 // stateName - regex for state names (IDs). Not suggested
+// allowedTypes - list of allowed device types
+// excludedTypes - list of device types to exclude
 
 function ChannelDetector() {
     if (!(this instanceof ChannelDetector)) return new ChannelDetector();
@@ -523,6 +526,16 @@ function ChannelDetector() {
             ],
             type: Types.temperature
         },
+        humidity: {
+            states: [
+                {role: /humidity$/,                indicator: false, write: false, type: 'number',  name: 'ACTUAL',     required: true},
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.humidity
+        },
         image: {
             states: [
                 {role: /\.icon$|^icon$|^icon\.|\.icon\.|\.chart\.url\.|\.chart\.url$|^url.icon$/, indicator: false, write: false, type: 'string', name: 'URL', required: true},
@@ -889,10 +902,11 @@ function ChannelDetector() {
     this._detectNext = function (options) {
         var objects           = options.objects;
         var id                = options.id;
-        var keys                = options._keysOptional;
-        var usedIds             = options._usedIdsOptional;
+        var keys              = options._keysOptional;
+        var usedIds           = options._usedIdsOptional;
         var ignoreIndicators  = options.ignoreIndicators;
         var allowedTypes      = options.allowedTypes;
+        var excludedTypes     = options.excludedTypes;
 
         if (!usedIds) {
             usedIds = [];
@@ -925,7 +939,10 @@ function ChannelDetector() {
             };
 
             for (var pattern in patterns) {
-                if (!patterns.hasOwnProperty(pattern) || (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1)) continue;
+                if (!patterns.hasOwnProperty(pattern) ||
+                    (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1) ||
+                    (excludedTypes && excludedTypes.indexOf(patterns[pattern].type) !== -1)
+                ) continue;
                 context.result = null;
 
                 if (pattern === 'hue' && id.indexOf('yeelight-2.0.color-') !== -1) {
@@ -1059,7 +1076,6 @@ function ChannelDetector() {
         var _keysOptional     = options._keysOptional;
         var _usedIdsOptional  = options._usedIdsOptional;
         var ignoreIndicators  = options.ignoreIndicators;
-        // var allowedTypes      = options.allowedTypes;
 
         if (this.cache[id] !== undefined) {
             return this.cache[id];
@@ -1096,9 +1112,16 @@ function ChannelDetector() {
     return this;
 }
 
+// Node.js
 if (typeof module !== 'undefined' && module.parent) {
     module.exports = {
         Types: Types,
         ChannelDetector: ChannelDetector
     };
+} else
+// ReactJS
+if (typeof exports !== 'undefined') {
+    exports.ChannelDetector = ChannelDetector;
+    exports.Types = Types;
+    exports['default'] = ChannelDetector;
 }

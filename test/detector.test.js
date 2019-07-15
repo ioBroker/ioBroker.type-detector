@@ -40,7 +40,7 @@ describe('Test Detector', () => {
         const controls = detector.detect(options);
 
         console.log(JSON.stringify(controls));
-        expect(controls[0].type).to.be.equal(Types.info);
+        expect(controls[0].type).to.be.equal(Types.humidity);
 
         done();
     });
@@ -76,7 +76,7 @@ describe('Test Detector', () => {
         const controls = detector.detect(options);
 
         console.log(JSON.stringify(controls));
-        expect(controls[0].type).to.be.equal(Types.info);
+        expect(controls[0].type).to.be.equal(Types.humidity);
 
         done();
     });
