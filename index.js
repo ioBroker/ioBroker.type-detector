@@ -85,8 +85,6 @@ var Types = {
 // notSingle - this state may belong to more than one tile simultaneously (e.g. volume tile and media with volume)
 // inverted - is state of indicator must be inverted
 // stateName - regex for state names (IDs). Not suggested
-// allowedTypes - list of allowed device types
-// excludedTypes - list of device types to exclude
 
 function ChannelDetector() {
     if (!(this instanceof ChannelDetector)) return new ChannelDetector();
@@ -928,9 +926,9 @@ function ChannelDetector() {
                 channelStates = getAllStatesInChannel(keys, id);
             }
 
-            if (id.indexOf('yeelight-2.0.color-') !== -1) {
+            /*if (id.indexOf('yeelight-2.0.color-') !== -1) {
                 console.log('aaa');
-            }
+            }*/
             var context = {
                 objects:            objects,
                 channelStates:      channelStates,
@@ -945,9 +943,9 @@ function ChannelDetector() {
                 ) continue;
                 context.result = null;
 
-                if (pattern === 'hue' && id.indexOf('yeelight-2.0.color-') !== -1) {
+                /*if (pattern === 'hue' && id.indexOf('yeelight-2.0.color-') !== -1) {
                     console.log(pattern);
-                }
+                }*/
 
                 var _usedIds = [];
                 context.pattern = pattern;
@@ -1070,6 +1068,21 @@ function ChannelDetector() {
         return null;
     };
 
+    /**
+     * detect
+     *
+     * Detect devices in some given path. Path can show to state, channel or device.
+     *
+     * @param options - parameters with following fields
+     *                  objects - Object, that has all objects in form {'id1': {obj1params...}, 'id2': {obj2params...}}
+     *                  id - Root ID from which the detection must start
+     *                  _keysOptional - Array with keys from options.objects for optimization
+     *                  _usedIdsOptional - Array with yet detected devices to do not similar device under different types
+     *                  ignoreIndicators - If simple indicators like "low battery", "not rechable" must be detected as device or only as a part of other device.
+     *                  allowedTypes - array with names of device types, that can be detected. Not listed device types will be ignored.
+     *                  excludedTypes - array with names of device types, that must be ignored. The listed device types will be ignored.
+     * @returns {*|boolean|"DIR"|"FILE"|ReadonlyArray<string>}
+     */
     this.detect = function (options) {
         var objects           = options.objects;
         var id                = options.id;
@@ -1113,15 +1126,18 @@ function ChannelDetector() {
 }
 
 // Node.js
-if (typeof module !== 'undefined' && module.parent) {
+if (typeof module !== 'undefined') {
     module.exports = {
         Types: Types,
         ChannelDetector: ChannelDetector
     };
+    module.exports.default = ChannelDetector;
 } else
 // ReactJS
 if (typeof exports !== 'undefined') {
-    exports.ChannelDetector = ChannelDetector;
-    exports.Types = Types;
-    exports['default'] = ChannelDetector;
+    exports = {
+        Types: Types,
+        ChannelDetector: ChannelDetector
+    };
+    exports.default = ChannelDetector;
 }
