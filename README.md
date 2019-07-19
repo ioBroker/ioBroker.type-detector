@@ -94,6 +94,9 @@ Following devices can be detected:
 
 
 ## Changelog
+### 0.1.4 [2019-07-19]
+* (bluefox) Added function "getPatterns".
+
 ### 0.1.3 [2019-07-16]
 * (bluefox) Add description to function "detect".
 

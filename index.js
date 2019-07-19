@@ -1117,6 +1117,24 @@ function ChannelDetector() {
         return this.cache[id];
     };
 
+    this.getPatterns = function () {
+        var copyPatterns = {};
+        Object.keys(patterns).forEach(function (type) {
+            var item = JSON.parse(JSON.stringify(patterns[type]));
+            item.states.forEach(function (state, i) {
+                if (patterns[type].states[i].role) {
+                    state.role = patterns[type].states[i].role.toString();
+                }
+
+                if (patterns[type].states[i].enum) {
+                    state.enum = true;
+                }
+            });
+            copyPatterns[type] = item;
+        });
+        return copyPatterns;
+    };
+
     (function _constructor (that) {
         that.enums = null;
         that.cache = {};
