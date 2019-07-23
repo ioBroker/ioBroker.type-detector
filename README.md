@@ -94,20 +94,23 @@ Following devices can be detected:
 
 
 ## Changelog
-### 0.1.4 [2019-07-19]
+### 0.1.5 (2019-07-23)
+* (bluefox) Fixed search for multimple items.
+
+### 0.1.4 (2019-07-19)
 * (bluefox) Added function "getPatterns".
 
-### 0.1.3 [2019-07-16]
+### 0.1.3 (2019-07-16)
 * (bluefox) Add description to function "detect".
 
-### 0.1.1 [2019-06-29]
+### 0.1.1 (2019-06-29)
 * (kirovilya) In some cases, devices may not have channels, but immediately have a states. For example in the zigbee-adapter.
 
-### 0.1.1 [2019-05-24]
+### 0.1.1 (2019-05-24)
 * (bluefox) add PRECIPITATION to weather
 * (bluefox) add location detection
 
-### 0.1.0 [2018-08-14]
+### 0.1.0 (2018-08-14)
 * (bluefox) initial commit
 
 

@@ -824,7 +824,7 @@ function ChannelDetector() {
         var found               = false;
 
         channelStates.forEach(function (_id) {
-            if ((state.indicator || (usedIds.indexOf(_id) === -1 && (state.notSingle || _usedIds.indexOf(_id) === -1))) &&
+            if ((state.indicator || (_usedIds.indexOf(_id) === -1 && (state.notSingle || usedIds.indexOf(_id) === -1))) &&
                 this._applyPattern(objects, _id, state)) {
                 if (state.indicator && ignoreIndicators) {
                     var parts = _id.split('.');
@@ -835,7 +835,7 @@ function ChannelDetector() {
                     }
                 }
 
-                if (!state.indicator && !state.notSingle){
+                if (!state.indicator){
                     _usedIds.push(_id);
                 }
                 if (!result) {
@@ -880,9 +880,9 @@ function ChannelDetector() {
                     // execute this rule for every state in this channel
                     channelStates.forEach(function (cid) {
                         if (cid === _id) return;
-                        if ((state.indicator || (usedIds.indexOf(cid) === -1 && (state.notSingle || _usedIds.indexOf(cid) === -1))) &&
+                        if ((state.indicator || (_usedIds.indexOf(cid) === -1 && (state.notSingle || usedIds.indexOf(cid) === -1))) &&
                             this._applyPattern(objects, cid, state)) {
-                            if (!state.indicator && !state.notSingle) {
+                            if (!state.indicator) {
                                 _usedIds.push(cid);
                             }
                             var newState = copyState(state);
