@@ -826,7 +826,7 @@ function ChannelDetector() {
         channelStates.forEach(function (_id) {
             if ((state.indicator || (_usedIds.indexOf(_id) === -1 && (state.notSingle || usedIds.indexOf(_id) === -1))) &&
                 this._applyPattern(objects, _id, state)) {
-                if (state.indicator && ignoreIndicators) {
+                if (ignoreIndicators) {
                     var parts = _id.split('.');
 
                     if (ignoreIndicators.indexOf(parts.pop()) !== -1) {
