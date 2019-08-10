@@ -102,7 +102,7 @@ function ChannelDetector() {
             // receive the state of player via media.state. Controlling of the player via buttons
             states: [
                 // one of
-                {role: /^media.state(\..*)?$/,                               indicator: false,                   type: ['boolean', 'number'], name: 'STATE',    required: true},
+                {role: /^media.state(\..*)?$|^media.command(\..*)?$/,                               indicator: false,                   type: ['boolean', 'number', 'string'], name: 'STATE',    required: true},
                 // optional
                 {role: /^button.play(\..*)?$|^action.play(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'PLAY',     required: false, noSubscribe: true},
                 {role: /^button.pause(\..*)?$|^action.pause(\..*)?$/,        indicator: false,     write: true,  type: 'boolean', name: 'PAUSE',    required: false, noSubscribe: true},
@@ -114,11 +114,10 @@ function ChannelDetector() {
                 {role: /^media.artist(\..*)?$/,         indicator: false,     write: false, type: 'string',  name: 'ARTIST',   required: false},
                 {role: /^media.album(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'ALBUM',    required: false},
                 {role: /^media.title(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'TITLE',    required: false},
-                // one of following
-                [
-                    {role: /^media.cover$|^media.cover.big$/, indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true},
-                    {role: /^media.cover(\..*)$/,             indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true},
-                ],
+                
+                {role: /^media.cover$|^media.cover.big$/, indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true},
+                {role: /^media.cover(\..*)$/,             indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true},
+                
                 {role: /^media.duration(\..*)?$/,       indicator: false,     write: false, type: 'number',  name: 'DURATION', required: false, noSubscribe: true},
                 {role: /^media.elapsed(\..*)?$/,        indicator: false,                   type: 'number',  name: 'ELAPSED',  required: false, noSubscribe: true},
                 {role: /^media.season(\..*)?$/,         indicator: false,     write: true,  type: 'number',  name: 'SEEK',     required: false, noSubscribe: true},
