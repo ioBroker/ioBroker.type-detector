@@ -94,6 +94,9 @@ Following devices can be detected:
 
 
 ## Changelog
+### 0.1.7 (2019-08-14)
+* (bluefox) Add default roles
+
 ### 0.1.5 (2019-07-23)
 * (bluefox) Fixed search for multimple items.
 

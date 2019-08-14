@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
-// Version 0.1.1, 2019.05.24
-// Keep this file ES5 conform!
+// Version 0.1.6, 2019.08.14
+// Keep this file ES5 conform! No const, let, not lambdas => , no ..., no default values for arguments, no let [arg] = abc() and other modern stuff.
 
 'use strict';
 
@@ -85,50 +85,50 @@ var Types = {
 // notSingle - this state may belong to more than one tile simultaneously (e.g. volume tile and media with volume)
 // inverted - is state of indicator must be inverted
 // stateName - regex for state names (IDs). Not suggested
+// defaultRole - is for detection irrelevant, but will be used by iobroker.devices.
 
 function ChannelDetector() {
     if (!(this instanceof ChannelDetector)) return new ChannelDetector();
 
-    var patternWorking   = {role: /^indicator\.working$/,                 indicator: true,                                            name: 'WORKING',            required: false};
-    var patternUnreach   = {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',                          name: 'UNREACH',            required: false};
-    var patternLowbat    = {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery/,  indicator: true,  type: 'boolean',  name: 'LOWBAT', required: false};
-    var patternMaintain  = {role: /^indicator\.maintenance$/,             indicator: true,  type: 'boolean',                          name: 'MAINTAIN',           required: false};
-    var patternError     = {role: /^indicator\.error$/,                   indicator: true,                                            name: 'ERROR',              required: false};
-    var patternDirection = {role: /^indicator\.direction$/,               indicator: true,                                            name: 'DIRECTION',          required: false};
-    var patternReachable = {role: /^indicator\.reachable$/,               indicator: true,  type: 'boolean',                          name: 'CONNECTED',          required: false, inverted: true};
+    var patternWorking   = {role: /^indicator\.working$/,                 indicator: true,                                            name: 'WORKING',            required: false, defaultRole: 'indicator.working'};
+    var patternUnreach   = {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',                          name: 'UNREACH',            required: false, defaultRole: 'indicator.maintenance.unreach'};
+    var patternLowbat    = {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery/,  indicator: true,  type: 'boolean',  name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'};
+    var patternMaintain  = {role: /^indicator\.maintenance$/,             indicator: true,  type: 'boolean',                          name: 'MAINTAIN',           required: false, defaultRole: 'indicator.maintenance'};
+    var patternError     = {role: /^indicator\.error$/,                   indicator: true,                                            name: 'ERROR',              required: false, defaultRole: 'indicator.error'};
+    var patternDirection = {role: /^indicator\.direction$/,               indicator: true,                                            name: 'DIRECTION',          required: false, defaultRole: 'indicator.direction'};
+    var patternReachable = {role: /^indicator\.reachable$/,               indicator: true,  type: 'boolean',                          name: 'CONNECTED',          required: false, defaultRole: 'indicator.reachable', inverted: true};
 
     var patterns = {
         mediaPlayer: {
             // receive the state of player via media.state. Controlling of the player via buttons
             states: [
                 // one of
-                {role: /^media.state(\..*)?$/,                               indicator: false,                   type: ['boolean', 'number'], name: 'STATE',    required: true},
+                {role: /^media.state(\..*)?$/,                               indicator: false,                   type: ['boolean', 'number'], name: 'STATE',    required: true,   defaultRole: 'media.state'},
                 // optional
-                {role: /^button.play(\..*)?$|^action.play(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'PLAY',     required: false, noSubscribe: true},
-                {role: /^button.pause(\..*)?$|^action.pause(\..*)?$/,        indicator: false,     write: true,  type: 'boolean', name: 'PAUSE',    required: false, noSubscribe: true},
-                {role: /^button.stop(\..*)?$|^action.stop(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'STOP',     required: false, noSubscribe: true},
-                {role: /^button.next(\..*)?$|^action.next(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'NEXT',     required: false, noSubscribe: true},
-                {role: /^button.prev(\..*)?$|^action.prev(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'PREV',     required: false, noSubscribe: true},
-                {role: /^media.mode.shuffle(\..*)?$/,   indicator: false,     write: true,  type: 'boolean', name: 'SHUFFLE',  required: false, noSubscribe: true},
-                {role: /^media.mode.repeat(\..*)?$/,    indicator: false,     write: true,  type: 'number',  name: 'REPEAT',   required: false, noSubscribe: true},
-                {role: /^media.artist(\..*)?$/,         indicator: false,     write: false, type: 'string',  name: 'ARTIST',   required: false},
-                {role: /^media.album(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'ALBUM',    required: false},
-                {role: /^media.title(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'TITLE',    required: false},
+                {role: /^button.play(\..*)?$|^action.play(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'PLAY',     required: false, noSubscribe: true,   defaultRole: 'button.play'},
+                {role: /^button.pause(\..*)?$|^action.pause(\..*)?$/,        indicator: false,     write: true,  type: 'boolean', name: 'PAUSE',    required: false, noSubscribe: true,   defaultRole: 'button.pause'},
+                {role: /^button.stop(\..*)?$|^action.stop(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'STOP',     required: false, noSubscribe: true,   defaultRole: 'button.stop'},
+                {role: /^button.next(\..*)?$|^action.next(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'NEXT',     required: false, noSubscribe: true,   defaultRole: 'button.next'},
+                {role: /^button.prev(\..*)?$|^action.prev(\..*)?$/,          indicator: false,     write: true,  type: 'boolean', name: 'PREV',     required: false, noSubscribe: true,   defaultRole: 'button.prev'},
+                {role: /^media.mode.shuffle(\..*)?$/,   indicator: false,     write: true,  type: 'boolean', name: 'SHUFFLE',  required: false, noSubscribe: true,   defaultRole: 'media.mode.shuffle'},
+                {role: /^media.mode.repeat(\..*)?$/,    indicator: false,     write: true,  type: 'number',  name: 'REPEAT',   required: false, noSubscribe: true,   defaultRole: 'media.mode.repeat'},
+                {role: /^media.artist(\..*)?$/,         indicator: false,     write: false, type: 'string',  name: 'ARTIST',   required: false,   defaultRole: 'media.artist'},
+                {role: /^media.album(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'ALBUM',    required: false,   defaultRole: 'media.album'},
+                {role: /^media.title(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'TITLE',    required: false,   defaultRole: 'media.title'},
                 // one of following
                 [
-                    {role: /^media.cover$|^media.cover.big$/, indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true},
+                    {role: /^media.cover$|^media.cover.big$/, indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true,   defaultRole: 'media.cover'},
                     {role: /^media.cover(\..*)$/,             indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true},
                 ],
-                {role: /^media.duration(\..*)?$/,       indicator: false,     write: false, type: 'number',  name: 'DURATION', required: false, noSubscribe: true},
-                {role: /^media.elapsed(\..*)?$/,        indicator: false,                   type: 'number',  name: 'ELAPSED',  required: false, noSubscribe: true},
-                {role: /^media.season(\..*)?$/,         indicator: false,     write: true,  type: 'number',  name: 'SEEK',     required: false, noSubscribe: true},
-                {role: /^media.seek(\..*)?$/,           indicator: false,     write: true,  type: 'number',  name: 'SEEK',     required: false, noSubscribe: true},
-                {role: /^media.track(\..*)?$/,          indicator: false,                   type: 'string',  name: 'TRACK',    required: false, noSubscribe: true},
-                {role: /^media.episode(\..*)?$/,        indicator: false,                   type: 'string',  name: 'EPISODE',  required: false, noSubscribe: true},
-                {role: /^media.season(\..*)?$/,         indicator: false,                   type: 'string',  name: 'SEASON',   required: false, noSubscribe: true},
-                {role: /^level.volume?$/,               indicator: false,                   type: 'number',  min: 'number', max: 'number', write: true,       name: 'VOLUME',         required: false, notSingle: true, noSubscribe: true},
-                {role: /^value.volume?$/,               indicator: false,                   type: 'number',  min: 'number', max: 'number', write: false,      name: 'VOLUME_ACTUAL',  required: false, notSingle: true, noSubscribe: true},
-                {role: /^media.mute?$/,                 indicator: false,                   type: 'boolean',                               write: true,       name: 'MUTE',           required: false, notSingle: true, noSubscribe: true},
+                {role: /^media.duration(\..*)?$/,       indicator: false,     write: false, type: 'number',  name: 'DURATION', required: false, noSubscribe: true,   defaultRole: 'media.duration'},
+                {role: /^media.elapsed(\..*)?$/,        indicator: false,                   type: 'number',  name: 'ELAPSED',  required: false, noSubscribe: true,   defaultRole: 'media.elapsed'},
+                {role: /^media.seek(\..*)?$/,           indicator: false,     write: true,  type: 'number',  name: 'SEEK',     required: false, noSubscribe: true,   defaultRole: 'media.seek'},
+                {role: /^media.track(\..*)?$/,          indicator: false,                   type: 'string',  name: 'TRACK',    required: false, noSubscribe: true,   defaultRole: 'media.track'},
+                {role: /^media.episode(\..*)?$/,        indicator: false,                   type: 'string',  name: 'EPISODE',  required: false, noSubscribe: true,   defaultRole: 'media.episode'},
+                {role: /^media.season(\..*)?$/,         indicator: false,                   type: 'string',  name: 'SEASON',   required: false, noSubscribe: true,   defaultRole: 'media.season'},
+                {role: /^level.volume?$/,               indicator: false,                   type: 'number',  min: 'number', max: 'number', write: true,       name: 'VOLUME',         required: false, notSingle: true, noSubscribe: true,   defaultRole: 'level.volume'},
+                {role: /^value.volume?$/,               indicator: false,                   type: 'number',  min: 'number', max: 'number', write: false,      name: 'VOLUME_ACTUAL',  required: false, notSingle: true, noSubscribe: true,   defaultRole: 'value.volume'},
+                {role: /^media.mute?$/,                 indicator: false,                   type: 'boolean',                               write: true,       name: 'MUTE',           required: false, notSingle: true, noSubscribe: true,   defaultRole: 'media.mute'},
                 // Ignore following states of chromecast
                 {stateName: /\.paused$|\.playerState$/, indicator: false,                                                                                     name: 'IGNORE',         required: false, multiple: true,  noSubscribe: true},
                 patternReachable,
@@ -140,29 +140,29 @@ function ChannelDetector() {
         },
         weatherForecast : {
             states: [
-                {role: /^weather.icon$|^weather.icon.forecast.0$/,                   indicator: false, type: 'string',  name: 'ICON',          required: true},
-                {role: /^value.temperature.min.forecast.0$/,                         indicator: false, type: 'number',  name: 'TEMP_MIN',      required: true},
-                {role: /^value.temperature.max.forecast.0$/,                         indicator: false, type: 'number',  name: 'TEMP_MAX',      required: true},
+                {role: /^weather.icon$|^weather.icon.forecast.0$/,                   indicator: false, type: 'string',  name: 'ICON',          required: true, defaultRole: 'weather.icon.forecast.0'},
+                {role: /^value.temperature.min.forecast.0$/,                         indicator: false, type: 'number',  name: 'TEMP_MIN',      required: true, defaultRole: 'value.temperature.min.forecast.0'},
+                {role: /^value.temperature.max.forecast.0$/,                         indicator: false, type: 'number',  name: 'TEMP_MAX',      required: true, defaultRole: 'value.temperature.max.forecast.0'},
                 // optional
-                {role: /^value.precipitation$|^value.precipitation.forecast.0$/,     indicator: false, type: 'number',  name: 'PRECIPITATION_CHANCE',     unit: '%', required: false},
-                {role: /^value.precipitation$|^value.precipitation.forecast.0$/,     indicator: false, type: 'number',  name: 'PRECIPITATION',            unit: 'mm', required: false},
-                {role: /^date$|^date.forecast.0$/,                                   indicator: false, type: 'string',  name: 'DATE',          required: false},
-                {role: /^dayofweek$|^dayofweek.forecast.0$/,                         indicator: false, type: 'string',  name: 'DOW',           required: false},
-                {role: /^weather.state$|^weather.state.forecast.0$/,                 indicator: false, type: 'string',  name: 'STATE',         required: false},
-                {role: /^value.temperature$|^value.temperature.forecast.0$/,         indicator: false, type: 'number',  name: 'TEMP',          required: false},
-                {role: /^value.pressure$/,                                           indicator: false, type: 'number',  name: 'PRESSURE',      required: false},
+                {role: /^value.precipitation$|^value.precipitation.forecast.0$/,     indicator: false, type: 'number',  name: 'PRECIPITATION_CHANCE',     unit: '%', required: false, defaultRole: 'value.precipitation.forecast.0'},
+                {role: /^value.precipitation$|^value.precipitation.forecast.0$/,     indicator: false, type: 'number',  name: 'PRECIPITATION',            unit: 'mm', required: false, defaultRole: 'value.precipitation.forecast.0'},
+                {role: /^date$|^date.forecast.0$/,                                   indicator: false, type: 'string',  name: 'DATE',          required: false, defaultRole: 'date.forecast.0'},
+                {role: /^dayofweek$|^dayofweek.forecast.0$/,                         indicator: false, type: 'string',  name: 'DOW',           required: false, defaultRole: 'dayofweek.forecast.0'},
+                {role: /^weather.state$|^weather.state.forecast.0$/,                 indicator: false, type: 'string',  name: 'STATE',         required: false, defaultRole: 'weather.state.forecast.0'},
+                {role: /^value.temperature$|^value.temperature.forecast.0$/,         indicator: false, type: 'number',  name: 'TEMP',          required: false, defaultRole: 'value.temperature.forecast.0'},
+                {role: /^value.pressure$/,                                           indicator: false, type: 'number',  name: 'PRESSURE',      required: false, defaultRole: 'weather.icon.forecast.0'},
 
-                {role: /^value.humidity$|value.humidity.forecast.0$/,                indicator: false, type: 'number',  name: 'HUMIDITY',      required: false},
+                {role: /^value.humidity$|value.humidity.forecast.0$/,                indicator: false, type: 'number',  name: 'HUMIDITY',      required: false, defaultRole: 'value.humidity.forecast.0'},
 
-                {role: /^value.temperature.windchill$|^value.temperature.windchill.forecast.0$/,           indicator: false, type: 'number',  name: 'WIND_CHILL',    required: false},
-                {role: /^value.temperature.feelslike$|^value.temperature.feelslike$.forecast.0$/,          indicator: false, type: 'number',  name: 'FEELS_LIKE',    required: false},
-                {role: /^value.speed.wind$|^value.speed.wind.forecast.0$/,           indicator: false, type: 'number',  name: 'WIND_SPEED',    required: false},
-                {role: /^value.direction.wind$|^value.direction.wind.forecast.0$/,   indicator: false, type: 'number',  name: 'WIND_DIRECTION',required: false},
-                {role: /^weather.direction.wind$|^weather.direction.wind.forecast.0$/, indicator: false, type: 'string',  name: 'WIND_DIRECTION_STR',required: false},
-                {role: /^weather.icon.wind$|^weather.icon.wind.forecast.0$/,         indicator: false, type: 'string',  name: 'WIND_ICON',     required: false},
-                {role: /^weather.chart.url$/,                                        indicator: false, type: 'string',  name: 'HISTORY_CHART',   required: false, noSubscribe: true},
-                {role: /^weather.chart.url.forecast$/,                               indicator: false, type: 'string',  name: 'FORECAST_CHART',  required: false, noSubscribe: true},
-                {role: /^location$/,                                                 indicator: false, type: 'string',  name: 'LOCATION',        required: false, multiple: true},
+                {role: /^value.temperature.windchill$|^value.temperature.windchill.forecast.0$/, indicator: false, type: 'number',  name: 'WIND_CHILL',    required: false, defaultRole: 'value.temperature.windchill.forecast.0'},
+                {role: /^value.temperature.feelslike$|^value.temperature.feelslike.forecast.0$/, indicator: false, type: 'number',  name: 'FEELS_LIKE',    required: false, defaultRole: 'value.temperature.feelslike.forecast.0'},
+                {role: /^value.speed.wind$|^value.speed.wind.forecast.0$/,           indicator: false, type: 'number',  name: 'WIND_SPEED',    required: false, defaultRole: 'value.speed.wind.forecast.0'},
+                {role: /^value.direction.wind$|^value.direction.wind.forecast.0$/,   indicator: false, type: 'number',  name: 'WIND_DIRECTION',required: false, defaultRole: 'value.direction.wind.forecast.0'},
+                {role: /^weather.direction.wind$|^weather.direction.wind.forecast.0$/, indicator: false, type: 'string',  name: 'WIND_DIRECTION_STR',required: false, defaultRole: 'weather.direction.wind.forecast.0'},
+                {role: /^weather.icon.wind$|^weather.icon.wind.forecast.0$/,         indicator: false, type: 'string',  name: 'WIND_ICON',     required: false, defaultRole: 'weather.icon.wind.forecast.0'},
+                {role: /^weather.chart.url$/,                                        indicator: false, type: 'string',  name: 'HISTORY_CHART',   required: false, noSubscribe: true, defaultRole: 'weather.chart.url'},
+                {role: /^weather.chart.url.forecast$/,                               indicator: false, type: 'string',  name: 'FORECAST_CHART',  required: false, noSubscribe: true, defaultRole: 'weather.chart.url.forecast'},
+                {role: /^location$/,                                                 indicator: false, type: 'string',  name: 'LOCATION',        required: false, multiple: true, defaultRole: 'location'},
 
                 // other days
                 {role: /^weather.icon.forecast.(\d)$/,                               indicator: false, type: 'string',  name: 'ICON%d',          required: false, searchInParent: true, multiple: true, noSubscribe: true, notSingle: true},
@@ -190,15 +190,16 @@ function ChannelDetector() {
         },
         rgb: {
             states: [
-                {role: /^level\.color\.red$/,                             indicator: false, type: 'number',  write: true,           name: 'RED',           required: true},
-                {role: /^level\.color\.green$/,                           indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true},
-                {role: /^level\.color\.blue$/,                            indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true},
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
+                {role: /^level\.color\.red$/,                             indicator: false, type: 'number',  write: true,           name: 'RED',           required: true,   defaultRole: 'level.color.red'},
+                {role: /^level\.color\.green$/,                           indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true,   defaultRole: 'level.color.green'},
+                {role: /^level\.color\.blue$/,                            indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true,   defaultRole: 'level.color.blue'},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
-                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false},
-                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON_LIGHT',      required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature'},
+                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON_LIGHT',      required: false,  defaultRole: 'switch.light'},
                 {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                {role: /^state(\.light)?$/,                               indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false,  defaultRole: 'state.light'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -229,13 +230,14 @@ function ChannelDetector() {
         },
         rgbSingle: {
             states: [
-                {role: /^level\.color\.rgb$/,                             indicator: false, type: 'string',  write: true,           name: 'RGB',           required: true},
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
+                {role: /^level\.color\.rgb$/,                             indicator: false, type: 'string',  write: true,           name: 'RGB',           required: true,   defaultRole: 'level.color.rgb'},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
-                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false},
-                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON_LIGHT',      required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature'},
+                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON_LIGHT',      required: false,  defaultRole: 'switch.light'},
                 {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                {role: /^state(\.light)?$/,                               indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false,  defaultRole: 'state.light'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -246,13 +248,14 @@ function ChannelDetector() {
         },
         hue: {
             states: [
-                {role: /^level\.color\.hue$/,                             indicator: false, type: 'number',  write: true,           name: 'HUE',           required: true},
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, searchInParent: true},
+                {role: /^level\.color\.hue$/,                             indicator: false, type: 'number',  write: true,           name: 'HUE',           required: true,  defaultRole: 'level.color.hue'},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, searchInParent: true, defaultRole: 'level.dimmer'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
-                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false},
-                {role: /^switch.light$/,                                  indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false, defaultRole: 'level.color.temperature'},
+                {role: /^switch.light$/,                                  indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false, defaultRole: 'switch.light'},
                 {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                {role: /^state(\.light)?$/,                               indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false,  defaultRole: 'state.light'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -263,11 +266,11 @@ function ChannelDetector() {
         },
         ct: {
             states: [
-                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: true},
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: true,  defaultRole: 'level.color.temperature'},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, defaultRole: 'level.dimmer'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
-                {role: /^switch.light$/,                                  indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
+                {role: /^switch.light$/,                                  indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false, defaultRole: 'switch.light'},
                 {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
                 patternWorking,
                 patternUnreach,
@@ -279,28 +282,28 @@ function ChannelDetector() {
         },
         warning: {
             states: [
-                {role: /^value\.warning$/,                                indicator: false,                  name: 'LEVEL',         required: true},
+                {role: /^value\.warning$/,                                indicator: false,                  name: 'LEVEL',         required: true,  defaultRole: 'value.warning'},
                 // optional
-                {role: /^weather\.title\.short$/,                         indicator: false, type: 'string',  name: 'TITLE',         required: false},
-                {role: /^weather\.title$/,                                indicator: false, type: 'string',  name: 'INFO',          required: false},
-                {role: /^date\.start$/,                                   indicator: false, type: 'string',  name: 'START',         required: false},
-                {role: /^date\.end$/,                                     indicator: false, type: 'string',  name: 'END',           required: false},
-                {role: /^date$/,                                          indicator: false, type: 'string',  name: 'START',         required: false},
-                {role: /^weather\.chart\.url/,                            indicator: false, type: 'string',  name: 'ICON',          required: false},
+                {role: /^weather\.title\.short$/,                         indicator: false, type: 'string',  name: 'TITLE',         required: false, defaultRole: 'weather.title.short'},
+                {role: /^weather\.title$/,                                indicator: false, type: 'string',  name: 'INFO',          required: false, defaultRole: 'weather.title'},
+                {role: /^date\.start$/,                                   indicator: false, type: 'string',  name: 'START',         required: false, defaultRole: 'date.start'},
+                {role: /^date\.end$/,                                     indicator: false, type: 'string',  name: 'END',           required: false, defaultRole: 'date.end'},
+                {role: /^date$/,                                          indicator: false, type: 'string',  name: 'START',         required: false, defaultRole: 'date'},
+                {role: /^weather\.chart\.url/,                            indicator: false, type: 'string',  name: 'ICON',          required: false, defaultRole: 'weather.chart.url'},
 
                 // For detailed screen
-                {role: /^weather\.state$/,                                indicator: false, type: 'string',  name: 'DESC',          required: false, noSubscribe: true},
+                {role: /^weather\.state$/,                                indicator: false, type: 'string',  name: 'DESC',          required: false, noSubscribe: true, defaultRole: 'weather.state'},
             ],
             type: Types.warning
         },
         thermostat: {
             states: [
-                {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true},
+                {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true, defaultRole: 'level.temperature'},
                 // optional
-                {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false},
-                {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false},
-                {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'BOOST',              required: false},
-                {role: /^switch\.power$/,              indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'POWER',              required: false},
+                {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature'},
+                {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false, defaultRole: 'value.humidity'},
+                {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
+                {role: /^switch\.power$/,              indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'POWER',              required: false, defaultRole: 'switch.power'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -311,10 +314,10 @@ function ChannelDetector() {
         },
         blinds: {
             states: [
-                {role: /^level(\.blind)?$/,                   indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'SET',                 required: true},
+                {role: /^level(\.blind)?$/,                   indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'SET',                 required: true, defaultRole: 'level.blind'},
                 // optional
-                {role: /^value(\.blind)?$/,                   indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'ACTUAL',              required: false},
-                {role: /^button\.stop$|^action\.stop$/,       indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',                required: false, noSubscribe: true},
+                {role: /^value(\.blind)?$/,                   indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'ACTUAL',              required: false, defaultRole: 'value.blind'},
+                {role: /^button\.stop$|^action\.stop$/,       indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',                required: false, noSubscribe: true, defaultRole: 'button.stop'},
                 patternDirection,
                 patternWorking,
                 patternUnreach,
@@ -326,10 +329,10 @@ function ChannelDetector() {
         },
         lock: {
             states: [
-                {role: /^switch\.lock$/,                      indicator: false, type: 'boolean',  write: true,              name: 'SET',                 required: true},
+                {role: /^switch\.lock$/,                      indicator: false, type: 'boolean',  write: true,              name: 'SET',                 required: true, defaultRole: 'switch.lock'},
                 // optional
-                {role: /^state$/,                             indicator: false, type: 'boolean',  write: false,             name: 'ACTUAL',              required: false},
-                {                                             indicator: false, type: 'boolean',  write: true, read: false, name: 'OPEN',                required: false, noSubscribe: true},
+                {role: /^state$/,                             indicator: false, type: 'boolean',  write: false,             name: 'ACTUAL',              required: false, defaultRole: 'state'},
+                {                                             indicator: false, type: 'boolean',  write: true, read: false, name: 'OPEN',                required: false, noSubscribe: true, defaultRole: 'button'},
                 patternDirection,
                 patternWorking,
                 patternUnreach,
@@ -341,9 +344,9 @@ function ChannelDetector() {
         },
         motion: {
             states: [
-                {role: /^state\.motion$|^sensor\.motion$/,                   indicator: false, type: 'boolean', name: 'ACTUAL',     required: true},
+                {role: /^state\.motion$|^sensor\.motion$/,                   indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, defaultRole: 'sensor.motion'},
                 // optional
-                {role: /brightness$/,                                        indicator: false, type: 'number',  name: 'SECOND',     required: false},
+                {role: /brightness$/,                                        indicator: false, type: 'number',  name: 'SECOND',     required: false, defaultRole: 'value.brightness'},
                 patternUnreach,
                 patternLowbat,
                 patternMaintain,
@@ -353,7 +356,7 @@ function ChannelDetector() {
         },
         window: {
             states: [
-                {role: /^state(\.window)?$|^sensor(\.window)?/,                   indicator: false, type: 'boolean', enums: roleOrEnumWindow, name: 'ACTUAL',     required: true},
+                {role: /^state(\.window)?$|^sensor(\.window)?/,                   indicator: false, type: 'boolean', enums: roleOrEnumWindow, name: 'ACTUAL',     required: true, defaultRole: 'sensor.window'},
                 // optional
                 patternUnreach,
                 patternLowbat,
@@ -364,7 +367,7 @@ function ChannelDetector() {
         },
         windowTilt: {
             states: [
-                {role: /^state?$|^value(\.window)?$/,                             indicator: false, type: 'number',  enums: roleOrEnumWindow, name: 'ACTUAL',     required: true},
+                {role: /^state?$|^value(\.window)?$/,                             indicator: false, type: 'number',  enums: roleOrEnumWindow, name: 'ACTUAL',     required: true, defaultRole: 'value.window'},
                 // optional
                 patternUnreach,
                 patternLowbat,
@@ -375,7 +378,7 @@ function ChannelDetector() {
         },
         fireAlarm: {
             states: [
-                {role: /^state?$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.fire$/},
+                {role: /^state?$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.fire$/, defaultRole: 'sensor.alarm.fire'},
                 // optional
                 patternUnreach,
                 patternLowbat,
@@ -386,7 +389,7 @@ function ChannelDetector() {
         },
         door: {
             states: [
-                {role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,              indicator: false, type: 'boolean', write: false, enums: roleOrEnumDoor, name: 'ACTUAL',     required: true},
+                {role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,              indicator: false, type: 'boolean', write: false, enums: roleOrEnumDoor, name: 'ACTUAL',     required: true, defaultRole: 'sensor.door'},
                 // optional
                 patternUnreach,
                 patternLowbat,
@@ -397,11 +400,11 @@ function ChannelDetector() {
         },
         dimmer: {
             states: [
-                {role: /^level(\.dimmer)?|^level\.brightness$/, indicator: false, type: 'number',  write: true,       enums: roleOrEnumLight, name: 'SET',         required: true},
+                {role: /^level(\.dimmer)?|^level\.brightness$/, indicator: false, type: 'number',  write: true,       enums: roleOrEnumLight, name: 'SET',        required: true, defaultRole: 'level.dimmer'},
                 // optional
-                {role: /^value(\.dimmer)?$/,                   indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false},
-                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'ON_SET',      required: false},
-                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ON_ACTUAL',   required: false},
+                {role: /^value(\.dimmer)?$/,                   indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false, defaultRole: 'value.dimmer'},
+                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'ON_SET',      required: false, defaultRole: 'switch.light'},
+                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ON_ACTUAL',   required: false, defaultRole: 'switch.light'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -412,9 +415,9 @@ function ChannelDetector() {
         },
         light: {
             states: [
-                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'SET',         required: true},
+                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'SET',         required: true, defaultRole: 'switch.light'},
                 // optional
-                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false},
+                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false, defaultRole: 'switch.light'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -425,10 +428,10 @@ function ChannelDetector() {
         },
         volume: {
             states: [
-                {role: /^level\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true},
+                {role: /^level\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true,  defaultRole: 'level.volume'},
                 // optional
-                {role: /^value\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false},
-                {role: /^media\.mute$/,                     indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false},
+                {role: /^value\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false,  defaultRole: 'value.volume'},
+                {role: /^media\.mute$/,                     indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false,  defaultRole: 'media.mute'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -439,11 +442,11 @@ function ChannelDetector() {
         },
         location_one: {
             states: [
-                {role: /^value\.gps$/,                             indicator: false, type: 'string',  write: false,      name: 'GPS',           required: true},
+                {role: /^value\.gps$/,                             indicator: false, type: 'string',  write: false,      name: 'GPS',           required: true,  defaultRole: 'value.gps'},
                 // optional
-                {role: /^value\.gps\.elevation$/,                  indicator: false, type: 'number',  write: false,      name: 'ELEVATION',     required: false},
-                {role: /^value\.radius$|value\.gps\.radius$/,      indicator: false, type: 'number',  write: false,      name: 'RADIUS',        required: false},
-                {role: /^value\.accuracy$|^value\.gps\.accuracy$/, indicator: false, type: 'number',  write: false,      name: 'ACCURACY',      required: false},
+                {role: /^value\.gps\.elevation$/,                  indicator: false, type: 'number',  write: false,      name: 'ELEVATION',     required: false,  defaultRole: 'value.gps.elevation'},
+                {role: /^value\.radius$|value\.gps\.radius$/,      indicator: false, type: 'number',  write: false,      name: 'RADIUS',        required: false,  defaultRole: 'value.gps.radius'},
+                {role: /^value\.accuracy$|^value\.gps\.accuracy$/, indicator: false, type: 'number',  write: false,      name: 'ACCURACY',      required: false,  defaultRole: 'value.gps.accuracy'},
                 patternUnreach,
                 patternLowbat,
                 patternMaintain,
@@ -453,12 +456,12 @@ function ChannelDetector() {
         },
         location: {
             states: [
-                {role: /^value\.gps\.longitude$/,                  indicator: false, type: 'number',  write: false,      name: 'LONGITUDE',     required: true},
-                {role: /^value\.gps\.latitude$/,                   indicator: false, type: 'number',  write: false,      name: 'LATITUDE',      required: true},
+                {role: /^value\.gps\.longitude$/,                  indicator: false, type: 'number',  write: false,      name: 'LONGITUDE',     required: true,  defaultRole: 'value.gps.longitude'},
+                {role: /^value\.gps\.latitude$/,                   indicator: false, type: 'number',  write: false,      name: 'LATITUDE',      required: true,  defaultRole: 'value.gps.latitude'},
                 // optional
-                {role: /^value\.gps\.elevation$/,                  indicator: false, type: 'number',  write: false,      name: 'ELEVATION',     required: false},
-                {role: /^value\.radius$|value\.gps\.radius$/,      indicator: false, type: 'number',  write: false,      name: 'RADIUS',        required: false},
-                {role: /^value\.accuracy$|^value\.gps\.accuracy$/, indicator: false, type: 'number',  write: false,      name: 'ACCURACY',      required: false},
+                {role: /^value\.gps\.elevation$/,                  indicator: false, type: 'number',  write: false,      name: 'ELEVATION',     required: false,  defaultRole: 'value.gps.elevation'},
+                {role: /^value\.radius$|value\.gps\.radius$/,      indicator: false, type: 'number',  write: false,      name: 'RADIUS',        required: false,  defaultRole: 'value.gps.radius'},
+                {role: /^value\.accuracy$|^value\.gps\.accuracy$/, indicator: false, type: 'number',  write: false,      name: 'ACCURACY',      required: false,  defaultRole: 'value.gps.accuracy'},
                 patternUnreach,
                 patternLowbat,
                 patternMaintain,
@@ -468,9 +471,9 @@ function ChannelDetector() {
         },
         volumeGroup: {
             states: [
-                {role: /^level\.volume\.group?$/,            indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true},
-                {role: /^value\.volume\.group$/,             indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false},
-                {role: /^media\.mute\.group$/,               indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false},
+                {role: /^level\.volume\.group?$/,            indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true,  defaultRole: 'level.volume.group'},
+                {role: /^value\.volume\.group$/,             indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false, defaultRole: 'value.volume.group'},
+                {role: /^media\.mute\.group$/,               indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false, defaultRole: 'media.mute.group'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -481,8 +484,8 @@ function ChannelDetector() {
         },
         levelSlider: {
             states: [
-                {role: /^level(\..*)?$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true},
-                {role: /^value(\..*)?$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false},
+                {role: /^level(\..*)?$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true, defaultRole: 'level'},
+                {role: /^value(\..*)?$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false, defaultRole: 'value'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -493,8 +496,8 @@ function ChannelDetector() {
         },
         socket: {
             states: [
-                {role: /^switch$|^state$|^switch\.active$/,           indicator: false, type: 'boolean', write: true,       name: 'SET',         required: true},
-                {role: /^state$|^state\.active$/,                     indicator: false, type: 'boolean', write: false,      name: 'ACTUAL',      required: false},
+                {role: /^switch$|^state$|^switch\.active$/,           indicator: false, type: 'boolean', write: true,       name: 'SET',         required: true, defaultRole: 'switch'},
+                {role: /^state$|^state\.active$/,                     indicator: false, type: 'boolean', write: false,      name: 'ACTUAL',      required: false, defaultRole: 'switch'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
@@ -505,7 +508,7 @@ function ChannelDetector() {
         },
         button: {
             states: [
-                {role: /^button(\.[.\w]+)?$|^action(\.[.\w]+)?$/,           indicator: false, type: 'boolean', read: false, write: true,       name: 'SET',         required: true, noSubscribe: true},
+                {role: /^button(\.[.\w]+)?$|^action(\.[.\w]+)?$/,           indicator: false, type: 'boolean', read: false, write: true,       name: 'SET',         required: true, noSubscribe: true, defaultRole: 'button'},
                 patternUnreach,
                 patternLowbat,
                 patternMaintain,
@@ -515,8 +518,8 @@ function ChannelDetector() {
         },
         temperature: {
             states: [
-                {role: /temperature$/,             indicator: false, write: false, type: 'number',  name: 'ACTUAL',     required: true},
-                {role: /humidity$/,                indicator: false, write: false, type: 'number',  name: 'SECOND',     required: false},
+                {role: /temperature$/,             indicator: false, write: false, type: 'number',  name: 'ACTUAL',     required: true,  defaultRole: 'value.temperature'},
+                {role: /humidity$/,                indicator: false, write: false, type: 'number',  name: 'SECOND',     required: false, defaultRole: 'value.humidity'},
                 patternUnreach,
                 patternLowbat,
                 patternMaintain,
@@ -526,7 +529,7 @@ function ChannelDetector() {
         },
         humidity: {
             states: [
-                {role: /humidity$/,                indicator: false, write: false, type: 'number',  name: 'ACTUAL',     required: true},
+                {role: /humidity$/,                indicator: false, write: false, type: 'number',  name: 'ACTUAL',     required: true, defaultRole: 'value.humidity'},
                 patternUnreach,
                 patternLowbat,
                 patternMaintain,
@@ -546,7 +549,7 @@ function ChannelDetector() {
         },
         info: {
             states: [
-                {                                  indicator: false,                                 name: 'ACTUAL',         required: true, multiple: true, noDeviceDetection: true, ignoreRole: /\.inhibit$/},
+                {                                  indicator: false,                                 name: 'ACTUAL',         required: true, multiple: true, noDeviceDetection: true, ignoreRole: /\.inhibit$/, defaultRole: 'state'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
