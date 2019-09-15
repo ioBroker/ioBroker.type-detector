@@ -288,7 +288,7 @@ function ChannelDetector() {
                 {role: /^weather\.title$/,                                indicator: false, type: 'string',  name: 'INFO',          required: false, defaultRole: 'weather.title'},
                 {role: /^date\.start$/,                                   indicator: false, type: 'string',  name: 'START',         required: false, defaultRole: 'date.start'},
                 {role: /^date\.end$/,                                     indicator: false, type: 'string',  name: 'END',           required: false, defaultRole: 'date.end'},
-                {role: /^date$/,                                          indicator: false, type: 'string',  name: 'START',         required: false, defaultRole: 'date'},
+                {role: /^date$/,                                          indicator: false, type: 'string',  name: 'START',         required: false},
                 {role: /^weather\.chart\.url/,                            indicator: false, type: 'string',  name: 'ICON',          required: false, defaultRole: 'weather.chart.url'},
 
                 // For detailed screen
