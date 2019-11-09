@@ -62,6 +62,7 @@ var Types = {
     windowTilt: 'windowTilt',
     weatherCurrent: 'weatherCurrent',
     weatherForecast: 'weatherForecast',
+    accuWeatherForecast: 'accuWeatherForecast',
     warning: 'warning'
 };
 
@@ -187,6 +188,51 @@ function ChannelDetector() {
                 {role: /^weather.icon.wind.forecast.(\d)$/,                          indicator: false, type: 'string',  name: 'WIND_ICON%d',     required: false, searchInParent: true, multiple: true, noSubscribe: true},
             ],
             type: Types.weatherForecast
+        },
+        accuWeatherForecast : {
+            states: [
+                {role: /^weather.state$/,                                            indicator: false, type: 'string',  name: 'STATE',          required: true, defaultRole: 'weather.state'},
+                {role: /^value.temperature.current$/,                                indicator: false, type: 'number',  name: 'TEMP',      required: true, defaultRole: 'value.temperature'},
+                // optional
+                {role: /^value.precipitation$/,                                      indicator: false, type: 'number',  name: 'PRECIPITATION_CHANCE',     unit: '%', required: false, defaultRole: 'value.precipitation.'},
+                {role: /^value.precipitation$/,                                      indicator: false, type: 'number',  name: 'PRECIPITATION',            unit: 'mm', required: false, defaultRole: 'value.precipitation'},
+                {role: /^date$/,                                                     indicator: false, type: 'string',  name: 'DATE',          required: false, defaultRole: 'date'},
+                {role: /^time.sunrise$/,                                             indicator: false, type: 'string',  name: 'TIME_SUNRISE',  required: false, defaultRole: 'time.sunrise'},
+                {role: /^time.sunset$/,                                              indicator: false, type: 'string',  name: 'TIME_SUNSET',  required: false, defaultRole: 'time.sunset'},
+                {role: /^dayofweek$/,                                                indicator: false, type: 'string',  name: 'DOW',           required: false, defaultRole: 'dayofweek'},
+                {role: /^weather.icon.url$/,                                         indicator: false, type: 'string',  name: 'ICON_URL',         required: false, defaultRole: 'weather.state'},
+                {role: /^weather.icon$/,                                             indicator: false, type: 'number',  name: 'ICON',          required: false, defaultRole: 'value.temperature'},
+                {role: /^value.pressure$/,                                           indicator: false, type: 'number',  name: 'PRESSURE',      required: false, defaultRole: 'weather.icon'},
+                {role: /^value.humidity$/,                                           indicator: false, type: 'number',  name: 'HUMIDITY',      required: false, defaultRole: 'value.humidity'},
+                {role: /^value.temperature.feelslike$/,                              indicator: false, type: 'number',  name: 'FEELS_LIKE',    required: false, defaultRole: 'value.temperature.feelslike'},
+                {role: /^value.speed.wind$/,                                         indicator: false, type: 'number',  name: 'WIND_SPEED',    required: false, defaultRole: 'value.speed.wind'},
+                {role: /^value.direction.wind$/,                                     indicator: false, type: 'number',  name: 'WIND_DIRECTION',required: false, defaultRole: 'value.direction.wind'},
+                {role: /^weather.direction.wind$/,                                   indicator: false, type: 'string',  name: 'WIND_DIRECTION_STR',required: false, defaultRole: 'weather.direction.wind'},
+
+                // other days
+                {role: /^weather.icon.forecast.(\d)$/,                               indicator: false, type: 'string',  name: 'ICON%d',          required: false, searchInParent: true, multiple: true, noSubscribe: true, notSingle: true},
+                {role: /^weather.icon.url.forecast.(\d)$/,                               indicator: false, type: 'string',  name: 'ICON_URL%d',          required: false, searchInParent: true, multiple: true, noSubscribe: true, notSingle: true},
+
+                {role: /^value.temperature.min.forecast.(\d)$/,                      indicator: false, type: 'number',  name: 'TEMP_MIN%d',      required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^value.temperature.max.forecast.(\d)$/,                      indicator: false, type: 'number',  name: 'TEMP_MAX%d',      required: false, searchInParent: true, multiple: true, noSubscribe: true},
+
+                {role: /^date.forecast.(\d)$/,                                       indicator: false, type: 'string',  name: 'DATE%d',          required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^dayofweek.forecast.(\d)$/,                                  indicator: false, type: 'string',  name: 'DOW%d',           required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^weather.state.forecast.(\d)$/,                              indicator: false, type: 'string',  name: 'STATE%d',         required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^value.temperature.forecast.(\d)$/,                          indicator: false, type: 'number',  name: 'TEMP%d',          required: false, searchInParent: true, multiple: true, noSubscribe: true},
+
+                {role: /^value.humidity.forecast.(\d)$/,                             indicator: false, type: 'number',  name: 'HUMIDITY%d',      required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^value.humidity.max.forecast.(\d)$/,                         indicator: false, type: 'number',  name: 'HUMIDITY_MAX%d',  required: false, searchInParent: true, multiple: true, noSubscribe: true},
+
+                {role: /^value.precipitation.forecast.(\d)$/,                        indicator: false, type: 'number',  unit: '%', name: 'PRECIPITATION_CHANCE%d', required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^value.precipitation.forecast.(\d)$/,                        indicator: false, type: 'number',  unit: 'mm', name: 'PRECIPITATION%d', required: false, searchInParent: true, multiple: true, noSubscribe: true},
+
+                {role: /^value.speed.wind.forecast.(\d)$/,                           indicator: false, type: 'number',  name: 'WIND_SPEED%d',    required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^value.direction.wind.forecast.(\d)$/,                       indicator: false, type: 'number',  name: 'WIND_DIRECTION%d',required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^weather.direction.wind.forecast.(\d)$/,                     indicator: false, type: 'string',  name: 'WIND_DIRECTION_STR%d',required: false, searchInParent: true, multiple: true, noSubscribe: true},
+                {role: /^weather.icon.wind.forecast.(\d)$/,                          indicator: false, type: 'string',  name: 'WIND_ICON%d',     required: false, searchInParent: true, multiple: true, noSubscribe: true},
+            ],
+            type: Types.accuWeatherForecast
         },
         rgb: {
             states: [
