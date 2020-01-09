@@ -193,6 +193,7 @@ function ChannelDetector() {
                 {role: /^level\.color\.red$/,                             indicator: false, type: 'number',  write: true,           name: 'RED',           required: true,   defaultRole: 'level.color.red'},
                 {role: /^level\.color\.green$/,                           indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true,   defaultRole: 'level.color.green'},
                 {role: /^level\.color\.blue$/,                            indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true,   defaultRole: 'level.color.blue'},
+                {role: /^level\.color\.white$/,                           indicator: false, type: 'number',  write: true,           name: 'WHITE',         required: false,  defaultRole: 'level.color.white'},
                 {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
