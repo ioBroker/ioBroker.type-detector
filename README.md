@@ -94,6 +94,9 @@ Following devices can be detected:
 
 
 ## Changelog
+### 0.1.9 (2020-01-12)
+* (Garfonso) Added "white" to rgb
+
 ### 0.1.7 (2019-08-14)
 * (bluefox) Add default roles
 
@@ -120,6 +123,6 @@ Following devices can be detected:
 
 ## License
 
-Copyright (c) 2018-2019 bluefox <dogafox@gmail.com>
+Copyright (c) 2018-2020 Bluefox <dogafox@gmail.com>
 
 MIT License
