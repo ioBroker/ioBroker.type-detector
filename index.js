@@ -1082,7 +1082,7 @@ function ChannelDetector() {
      *                  id - Root ID from which the detection must start
      *                  _keysOptional - Array with keys from options.objects for optimization
      *                  _usedIdsOptional - Array with yet detected devices to do not similar device under different types
-     *                  ignoreIndicators - If simple indicators like "low battery", "not rechable" must be detected as device or only as a part of other device.
+     *                  ignoreIndicators - If simple indicators like "low battery", "not reachable" must be detected as device or only as a part of other device.
      *                  allowedTypes - array with names of device types, that can be detected. Not listed device types will be ignored.
      *                  excludedTypes - array with names of device types, that must be ignored. The listed device types will be ignored.
      * @returns {*|boolean|"DIR"|"FILE"|ReadonlyArray<string>}
