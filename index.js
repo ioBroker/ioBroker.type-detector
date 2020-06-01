@@ -708,7 +708,7 @@ function ChannelDetector() {
                 return;
             }
 
-            if (statePattern.write !== undefined && statePattern.write !== (objects[id].common.write || false)) {
+            if (statePattern.write !== undefined && statePattern.write !== (!!objects[id].common.write || false)) {
                 return;
             }
             if (statePattern.min === 'number' && typeof objects[id].common.min !== 'number') {
@@ -718,7 +718,7 @@ function ChannelDetector() {
                 return;
             }
 
-            if (statePattern.read !== undefined && statePattern.read !== (objects[id].common.read === undefined ? true : objects[id].common.read)) {
+            if (statePattern.read !== undefined && statePattern.read !== (!!objects[id].common.read === undefined ? true : !!objects[id].common.read)) {
                 return;
             }
 
