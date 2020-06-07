@@ -32,6 +32,7 @@ var Types = {
     airCondition: 'airCondition',
     blind: 'blind',
     blindSlider: 'blindSlider',
+    blindButtons: 'blindButton',
     button: 'button',
     buttonSensor: 'buttonSensor',
     camera: 'camera',
@@ -406,6 +407,28 @@ function ChannelDetector() {
                 patternError
             ],
             type: Types.blindSlider
+        },
+        blindButtons: {
+            states: [
+                //blinds with no percentage setting / reading but buttons for up/down and stop:
+                {role: /^button\.stop$|^action\.stop$/,       indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',                required: true,  noSubscribe: true, defaultRole: 'button.stop'},
+                {role: /^button(\.blind)?\.open$/,            indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: true,  noSubscribe: true, defaultRole: 'button.blind.open'},
+                {role: /^button(\.blind)?\.close$/,           indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: true,  noSubscribe: true, defaultRole: 'button.blind.close'},
+                {role: /^level(\.open)?\.tilt$/,              indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'TILT_OPEN_SET',       required: false, defaultRole: 'level.open.tilt'},
+                {role: /^level\.close\.tilt$/,                indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'TILT_CLOSE_SET',      required: false, defaultRole: 'level.close.tilt'},
+                {role: /^value(\.open)?\.tilt$/,              indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'TILT_OPEN_ACTUAL',    required: false, defaultRole: 'value.open.tilt'},
+                {role: /^value\.tilt$/,                       indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'TILT_CLOSE_ACTUAL',   required: false, defaultRole: 'value.close.tilt'},
+                {role: /^button\.tilt\.stop$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_STOP',           required: false, noSubscribe: true, defaultRole: 'button.tilt.stop'},
+                {role: /^button\.tilt\.open$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_OPEN',           required: false, noSubscribe: true, defaultRole: 'button.tilt.open'},
+                {role: /^button\.tilt\.close$/,               indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_CLOSE',          required: false, noSubscribe: true, defaultRole: 'button.tilt.close'},
+                patternDirection,
+                patternWorking,
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.blindButtons
         },
         lock: {
             states: [
