@@ -365,6 +365,8 @@ function ChannelDetector() {
                 // optional
                 {role: /^value(\.blind)?$/,                   indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'ACTUAL',              required: false, defaultRole: 'value.blind', defaultUnit: '%'},
                 {role: /^button\.stop$|^action\.stop$/,       indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',                required: false, noSubscribe: true, defaultRole: 'button.stop'},
+                {role: /^button(\.blind)?\.open$/,            indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: false, noSubscribe: true, defaultRole: 'button.blind.open'},
+                {role: /^button(\.blind)?\.close$/,           indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: false, noSubscribe: true, defaultRole: 'button.blind.close'},
                 patternDirection,
                 patternWorking,
                 patternUnreach,
