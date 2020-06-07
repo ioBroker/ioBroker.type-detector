@@ -303,8 +303,8 @@ function ChannelDetector() {
                 // optional
                 {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature'},
                 {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false, defaultRole: 'value.humidity'},
-                {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
-                {role: /^switch\.power$/,              indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'POWER',              required: false, defaultRole: 'switch.power'},
+                {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,                           name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
+                {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,                           name: 'POWER',              required: false, defaultRole: 'switch.power'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
