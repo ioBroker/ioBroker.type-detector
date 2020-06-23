@@ -520,8 +520,9 @@ function ChannelDetector() {
         },
         buttonSensor: {
             states: [
-                {role: /^button(\.[.\w]+)?$/,           indicator: false, type: 'boolean', read: true, write: false,       name: 'PRESS',         required: true,  defaultRole: 'button.sensor'},
-                {role: /^button\.long/,                 indicator: false, type: 'boolean', read: true, write: false,       name: 'PRESS_LONG',    required: false, defaultRole: 'button.sensor'},
+                {role: /^button(\.[.\w]+)?$/,           indicator: false, type: 'boolean', read: true, write: false,       name: 'PRESS',         required: true,  defaultRole: 'button.press'},
+                // optional
+                {role: /^button\.long/,                 indicator: false, type: 'boolean', read: true, write: false,       name: 'PRESS_LONG',    required: false, defaultRole: 'button.long'},
                 patternUnreach,
                 patternLowbat,
                 patternMaintain,

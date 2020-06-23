@@ -95,8 +95,8 @@ Following devices can be detected:
 
 ## Changelog
 ### 0.1.10 (2020-06-23)
-* (bluefox) Ignore level.dmispeed for dimmer
-* (bluefox) Add new type button.sensor
+* (bluefox) Ignore level.dimspeed for dimmer
+* (bluefox) Add new type button.press
 
 ### 0.1.9 (2020-01-12)
 * (Garfonso) Added "white" to rgb
@@ -105,7 +105,7 @@ Following devices can be detected:
 * (bluefox) Add default roles
 
 ### 0.1.5 (2019-07-23)
-* (bluefox) Fixed search for multimple items.
+* (bluefox) Fixed search for multiple items.
 
 ### 0.1.4 (2019-07-19)
 * (bluefox) Added function "getPatterns".
