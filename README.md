@@ -94,6 +94,10 @@ Following devices can be detected:
 
 
 ## Changelog
+### 0.1.10 (2020-06-23)
+* (bluefox) Ignore level.dmispeed for dimmer
+* (bluefox) Add new type button.sensor
+
 ### 0.1.9 (2020-01-12)
 * (Garfonso) Added "white" to rgb
 
