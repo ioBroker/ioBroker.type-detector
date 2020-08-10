@@ -31,6 +31,7 @@ var Types = {
 
     blind: 'blind',
     button: 'button',
+    buttonSensor: 'buttonSensor',
     camera: 'camera',
     url: 'url',
     image: 'image',
@@ -401,7 +402,7 @@ function ChannelDetector() {
         },
         dimmer: {
             states: [
-                {role: /^level(\.dimmer)?$|^level\.brightness$/, indicator: false, type: 'number',  write: true,       enums: roleOrEnumLight, name: 'SET',        required: true, defaultRole: 'level.dimmer'},
+                {role: /^level(\.dimmer)?$|^level\.brightness$/, indicator: false, type: 'number',  write: true,       enums: roleOrEnumLight, name: 'SET',        required: true, defaultRole: 'level.dimmer', ignoreRole: /^level\.dimspeed$/},
                 // optional
                 {role: /^value(\.dimmer)?$/,                   indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false, defaultRole: 'value.dimmer'},
                 {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'ON_SET',      required: false, defaultRole: 'switch.light'},
@@ -516,6 +517,18 @@ function ChannelDetector() {
                 patternError
             ],
             type: Types.button
+        },
+        buttonSensor: {
+            states: [
+                {role: /^button(\.[.\w]+)?$/,           indicator: false, type: 'boolean', read: true, write: false,       name: 'PRESS',         required: true,  defaultRole: 'button.press'},
+                // optional
+                {role: /^button\.long/,                 indicator: false, type: 'boolean', read: true, write: false,       name: 'PRESS_LONG',    required: false, defaultRole: 'button.long'},
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.buttonSensor
         },
         temperature: {
             states: [
