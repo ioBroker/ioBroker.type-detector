@@ -24,12 +24,12 @@ const options = {
 	id:                 'hm-rpc.0.LEQ1214232.1',
 	_keysOptional:      keys,
 	_usedIdsOptional:   usedIds,
-	ignoreIndicators:   ignoreIndicators
+	ignoreIndicators
 };
 
 let controls = detector.detect(options);
 if (controls) {
-	controls = controls.map(function (control) {
+	controls = controls.map(control => {
 		const id = control.states.find(state => state.id).id;
 		if (id) {
 			console.log(`In ${options.id} was detected "${control.type}" with following states:`);
@@ -94,6 +94,10 @@ Following devices can be detected:
 
 
 ## Changelog
+### 1.0.0 (2020-08-10)
+* (Garfonso) The switch could have the boolean type 
+* (Garfonso) Fixed level.dimspeed issue
+
 ### 0.1.10 (2020-06-23)
 * (bluefox) Ignore level.dimspeed for dimmer
 * (bluefox) Add new type button.press
