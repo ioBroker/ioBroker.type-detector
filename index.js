@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2019 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2020 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -29,6 +29,7 @@
 var Types = {
     unknown: 'unknown',
 
+    airCondition: 'airCondition',
     blind: 'blind',
     button: 'button',
     buttonSensor: 'buttonSensor',
@@ -298,14 +299,33 @@ function ChannelDetector() {
             ],
             type: Types.warning
         },
+        // most full description could be found here: https://yandex.ru/dev/dialogs/alice/doc/smart-home/concepts/device-type-thermostat-ac-docpage/
+        airCondition: {
+            states: [
+                {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true, defaultRole: 'level.temperature'},
+                // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
+                {role: /thermostat$/,                  indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'MODE',               required: true, defaultRole: 'level.mode.thermostat'},
+                // optional
+                {role: /speed\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',              required: false, defaultRole: 'level.speed.fan'},
+                {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
+                {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature'},
+                {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false, defaultRole: 'value.humidity'},
+                {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
+                {role: /swing$/,                       indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'SWING',              required: false, defaultRole: 'level.swing'},
+                patternUnreach,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.thermostat
+        },
         thermostat: {
             states: [
                 {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true, defaultRole: 'level.temperature'},
                 // optional
                 {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature'},
                 {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false, defaultRole: 'value.humidity'},
-                {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,                           name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
-                {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,                           name: 'POWER',              required: false, defaultRole: 'switch.power'},
+                {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
+                {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
                 patternWorking,
                 patternUnreach,
                 patternLowbat,
