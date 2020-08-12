@@ -316,7 +316,7 @@ function ChannelDetector() {
                 patternMaintain,
                 patternError
             ],
-            type: Types.thermostat
+            type: Types.airCondition
         },
         thermostat: {
             states: [
