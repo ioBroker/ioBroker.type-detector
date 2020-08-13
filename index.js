@@ -302,9 +302,9 @@ function ChannelDetector() {
         // most full description could be found here: https://yandex.ru/dev/dialogs/alice/doc/smart-home/concepts/device-type-thermostat-ac-docpage/
         airCondition: {
             states: [
-                {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true, defaultRole: 'level.temperature'},
+                {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true,  defaultRole: 'level.temperature'},
                 // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
-                {role: /thermostat$/,                  indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'MODE',               required: true, defaultRole: 'level.mode.thermostat'},
+                {role: /thermostat$/,                  indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'MODE',               required: true,  defaultRole: 'level.mode.thermostat', defaultStates: {0: 'OFF', 1: 'AUTO', 2: 'COOL', 3: 'HEAT', 4: 'ECO', 5: 'FAN_ONLY', 6: 'DRY'}},
                 // optional
                 {role: /speed\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',              required: false, defaultRole: 'level.speed.fan'},
                 {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
