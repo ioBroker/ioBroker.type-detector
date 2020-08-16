@@ -94,7 +94,7 @@ Following devices can be detected:
 
 
 ## Changelog
-### 1.0.6 (2020-08-12)
+### 1.0.7 (2020-08-12)
 * (bluefox) Added the vacuum cleaner.
 
 ### 1.0.4 (2020-08-12)
