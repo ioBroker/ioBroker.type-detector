@@ -59,6 +59,7 @@ var Types = {
     thermostat: 'thermostat',
     valve: 'valve',
     volume: 'volume',
+    vacuumCleaner: 'vacuumCleaner',
     volumeGroup: 'volumeGroup',
     window: 'window',
     windowTilt: 'windowTilt',
@@ -90,7 +91,9 @@ var Types = {
 // defaultRole - is for detection irrelevant, but will be used by iobroker.devices.
 
 function ChannelDetector() {
-    if (!(this instanceof ChannelDetector)) return new ChannelDetector();
+    if (!(this instanceof ChannelDetector)) {
+        return new ChannelDetector();
+    }
 
     var patternWorking   = {role: /^indicator\.working$/,                 indicator: true,                                            name: 'WORKING',            required: false, defaultRole: 'indicator.working'};
     var patternUnreach   = {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',                          name: 'UNREACH',            required: false, defaultRole: 'indicator.maintenance.unreach'};
@@ -306,12 +309,12 @@ function ChannelDetector() {
                 // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
                 {role: /thermostat$/,                  indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'MODE',               required: true,  defaultRole: 'level.mode.thermostat', defaultStates: {0: 'OFF', 1: 'AUTO', 2: 'COOL', 3: 'HEAT', 4: 'ECO', 5: 'FAN_ONLY', 6: 'DRY'}},
                 // optional
-                {role: /speed\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',              required: false, defaultRole: 'level.speed.fan',       defaultStates: {0: 'AUTO', 1: 'HIGH', 2: 'LOW', 3: 'MEDIUM', 4: 'QUIET', 5: 'TURBO'}},
+                {role: /speed\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',              required: false, defaultRole: 'level.mode.fan',        defaultStates: {0: 'AUTO', 1: 'HIGH', 2: 'LOW', 3: 'MEDIUM', 4: 'QUIET', 5: 'TURBO'}},
                 {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
                 {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature'},
                 {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false, defaultRole: 'value.humidity'},
                 {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
-                {role: /swing$/,                       indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'SWING',              required: false, defaultRole: 'level.swing',           defaultStates: {0: 'AUTO', 1: 'HORIZONTAL', 2: 'STATIONARY', 3: 'VERTICAL'}},
+                {role: /swing$/,                       indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'SWING',              required: false, defaultRole: 'level.mode.swing',      defaultStates: {0: 'AUTO', 1: 'HORIZONTAL', 2: 'STATIONARY', 3: 'VERTICAL'}},
                 patternUnreach,
                 patternMaintain,
                 patternError
@@ -333,6 +336,26 @@ function ChannelDetector() {
                 patternError
             ],
             type: Types.thermostat
+        },
+        vacuumCleaner: {
+            states: [
+                {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: true,  defaultRole: 'switch.power'},
+                // AUTO, ECO, EXPRESS, NORMAL, QUIET
+                {role: /mode\.cleanup$/,               indicator: false,     write: true,  type: 'number',                                                    name: 'MODE',               required: true,  defaultRole: 'level.mode.cleanup'},
+                // optional
+                {role: /mode\.work$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'WORK_MODE',          required: false, defaultRole: 'level.mode.work'},
+                {role: /^value\.water$/,               indicator: false,     write: true,  type: 'number',                                                    name: 'WATER',              required: false, defaultRole: 'value.water'},
+                {role: /^value\.waste$/,               indicator: false,     write: true,  type: 'number',                                                    name: 'WASTE',              required: false, defaultRole: 'value.waste'},
+                {role: /^value\.state$/,               indicator: false,     write: true,  type: ['number', 'string'],                                        name: 'STATE',              required: false, defaultRole: 'value.state'},
+                {role: /^button\.pause$/,              indicator: false,     write: true,  type: 'boolean',               searchInParent: true,               name: 'PAUSE',              required: false, defaultRole: 'button.pause'},
+                {role: /^indicator(\.maintenance)?\.waste$|^indicator(\.alarm)?\.waste/,  indicator: true,  type: 'boolean',                                  name: 'WASTE_ALARM',        required: false, defaultRole: 'indicator.maintenance.waste'},
+                {role: /^indicator(\.maintenance)?\.water$|^indicator(\.alarm)?\.water/,  indicator: true,  type: 'boolean',                                  name: 'WATER_ALARM',        required: false, defaultRole: 'indicator.maintenance.water'},
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.vacuumCleaner
         },
         blinds: {
             states: [
