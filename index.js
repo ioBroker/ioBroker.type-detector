@@ -311,6 +311,7 @@ function ChannelDetector() {
                 // optional
                 {role: /speed\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',              required: false, defaultRole: 'level.mode.fan',        defaultStates: {0: 'AUTO', 1: 'HIGH', 2: 'LOW', 3: 'MEDIUM', 4: 'QUIET', 5: 'TURBO'}},
                 {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
+                {role: /^switch$/,                     indicator: false,     write: true,  type: 'boolean',   searchInParent: true,                           name: 'POWER',              required: false},
                 {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature',     defaultUnit: '°C'},
                 {role: /humidity(\..*)?$/,             indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'HUMIDITY',           required: false, defaultRole: 'value.humidity',        defaultUnit: '%'},
                 {role: /^switch\.boost(\..*)?$/,       indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'BOOST',              required: false, defaultRole: 'switch.boost'},
@@ -461,7 +462,7 @@ function ChannelDetector() {
         },
         light: {
             states: [
-                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'SET',         required: true, defaultRole: 'switch.light'},
+                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'SET',         required: true,  defaultRole: 'switch.light'},
                 // optional
                 {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false, defaultRole: 'switch.light'},
                 patternWorking,
@@ -474,7 +475,7 @@ function ChannelDetector() {
         },
         volume: {
             states: [
-                {role: /^level\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true,  defaultRole: 'level.volume'},
+                {role: /^level\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true,   defaultRole: 'level.volume'},
                 // optional
                 {role: /^value\.volume$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false,  defaultRole: 'value.volume'},
                 {role: /^media\.mute$/,                     indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false,  defaultRole: 'media.mute'},

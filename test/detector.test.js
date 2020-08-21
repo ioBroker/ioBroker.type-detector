@@ -68,7 +68,7 @@ describe('Test Detector', () => {
 
         const options = {
             objects:            objects,
-            id:                 'ham.0.TemperatureAndHumidity.Current-Relative-Humidity',
+            id:                  Object.keys(objects)[0],
             _keysOptional:      Object.keys(objects),
             _usedIdsOptional:   []
         };
@@ -77,6 +77,94 @@ describe('Test Detector', () => {
 
         console.log(JSON.stringify(controls));
         expect(controls[0].type).to.be.equal(Types.humidity);
+
+        done();
+    });
+
+    it('Must detect air conditioner sensor from state', done => {
+        const detector = new ChannelDetector();
+
+        const objects = {
+            "alias.0.Hauptzimmer.AC": {
+                "common": {
+                    "name": {
+                        "de": "AC"
+                    },
+                    "role": "airCondition",
+                },
+                "native": {},
+                "type": "channel"
+            },
+            "alias.0.Hauptzimmer.AC.SET": {
+                "common": {
+                    "name": "SET",
+                    "role": "level.temperature",
+                    "type": "number",
+                    "read": true,
+                    "write": true,
+                    "alias": {
+                        "id": "javascript.0.ac.temperature"
+                    },
+                    "unit": "°C"
+                },
+                "native": {},
+                "type": "state"
+            },
+            "alias.0.Hauptzimmer.AC.MODE": {
+                "common": {
+                    "name": "MODE",
+                    "role": "level.mode.thermostat",
+                    "type": "number",
+                    "read": true,
+                    "write": true,
+                    "alias": {
+                        "id": "javascript.0.ac.mode"
+                    },
+                    "states": {
+                        "0": "OFF",
+                        "1": "AUTO",
+                        "2": "COOL",
+                        "3": "HEAT",
+                        "4": "ECO",
+                        "5": "FAN_ONLY",
+                        "6": "DRY"
+                    }
+                },
+                "native": {},
+                "type": "state"
+            },
+            "alias.0.Hauptzimmer.AC.POWER": {
+                "native": {},
+                "type": "state",
+                "common": {
+                    "alias": {
+                        "id": "javascript.0.ac.power"
+                    },
+                    "name": "POWER",
+                    "role": "switch.power",
+                    "write": true,
+                    "type": "boolean"
+                }
+            }
+        };
+
+        Object.keys(objects).forEach(id => objects[id]._id = id);
+
+        const options = {
+            objects:            objects,
+            id:                 Object.keys(objects)[0],
+            _keysOptional:      Object.keys(objects),
+            _usedIdsOptional:   [],
+            //allowedTypes:       [Types.airCondition], // for tests
+        };
+
+        const controls = detector.detect(options);
+
+        console.log(JSON.stringify(controls));
+        expect(controls[0].type).to.be.equal(Types.airCondition);
+
+        const powerId = controls[0].states.find(s => s.name === 'POWER').id;
+        expect(powerId).to.be.equal(Object.keys(objects).pop());
 
         done();
     });
