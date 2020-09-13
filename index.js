@@ -996,11 +996,9 @@ function ChannelDetector() {
         }
 
         if (objects[id] && objects[id].common) {
-            var channelStates = this._getChannelStates(objects, id, keys);
-
             var context = {
                 objects:            objects,
-                channelStates:      channelStates,
+                channelStates:      this._getChannelStates(objects, id, keys),
                 usedIds:            usedIds,
                 ignoreIndicators:   ignoreIndicators
             };
