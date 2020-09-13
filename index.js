@@ -979,7 +979,42 @@ function ChannelDetector() {
           // channel
           return getAllStatesInChannel(keys, id);
       }
-    };
+    }
+
+    function allRequiredStatesFound(){
+        var allRequiredFound = true;
+        if (context.result) {
+          for (var a = 0; a < context.result.states.length; a++) {
+            if (context.result.states[a] instanceof Array) {
+              // one of
+              var oneOf = false;
+              for (var b = 0; b < context.result.states[a].length; b++) {
+                if (
+                  context.result.states[a][b].required &&
+                  context.result.states[a].id
+                ) {
+                  oneOf = true;
+                  break;
+                }
+              }
+              if (!oneOf) {
+                allRequiredFound = false;
+                break;
+              }
+            } else {
+              if (
+                context.result.states[a].required &&
+                !context.result.states[a].id
+              ) {
+                allRequiredFound = false;
+                break;
+              }
+            }
+          }
+        } else {
+          allRequiredFound = false;
+        }
+    }
 
     this._detectNext = function (options) {
         var objects           = options.objects;
@@ -1044,36 +1079,7 @@ function ChannelDetector() {
                 }
             }.bind(this));
 
-            // if all required states found?
-            var allRequiredFound = true;
-            if (context.result) {
-                for (var a = 0; a < context.result.states.length; a++) {
-                    if (context.result.states[a] instanceof Array) {
-                        // one of
-                        var oneOf = false;
-                        for (var b = 0; b < context.result.states[a].length; b++) {
-                            if (context.result.states[a][b].required && context.result.states[a].id) {
-                                oneOf = true;
-                                break;
-                            }
-                        }
-                        if (!oneOf) {
-                            allRequiredFound = false;
-                            break;
-                        }
-                    } else {
-                        if (context.result.states[a].required && !context.result.states[a].id) {
-                            allRequiredFound = false;
-                            break;
-                        }
-                    }
-                }
-            } else {
-                allRequiredFound = false;
-            }
-
-
-            if (allRequiredFound) {
+            if (allRequiredStatesFound()) {
                 _usedIds.forEach(function (id) {usedIds.push(id);});
                 // context.result.id = id;
                 //this.cache[id] = context.result;
