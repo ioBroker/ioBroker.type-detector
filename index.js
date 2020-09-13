@@ -981,6 +981,21 @@ function ChannelDetector() {
       }
     }
 
+    function patternIsAllowed(pattern, allowedTypes, excludedTypes) {
+      if (!pattern) {
+        return false;
+      }
+
+      if (allowedTypes && allowedTypes.indexOf(pattern.type) === -1) {
+        return false;
+      }
+      if (excludedTypes && excludedTypes.indexOf(pattern.type) !== -1) {
+        return false;
+      }
+
+      return true;
+    }
+
     function allRequiredStatesFound(context) {
       if (!context.result) {
         return false;
@@ -1014,8 +1029,6 @@ function ChannelDetector() {
         var keys              = options._keysOptional;
         var usedIds           = options._usedIdsOptional;
         var ignoreIndicators  = options.ignoreIndicators;
-        var allowedTypes      = options.allowedTypes;
-        var excludedTypes     = options.excludedTypes;
 
         if (!usedIds) {
             usedIds = [];
@@ -1034,10 +1047,16 @@ function ChannelDetector() {
         };
 
         for (var pattern in patterns) {
-            if (!patterns.hasOwnProperty(pattern) ||
-                (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1) ||
-                (excludedTypes && excludedTypes.indexOf(patterns[pattern].type) !== -1)
-            ) continue;
+            if (
+              !patternIsAllowed(
+                patterns[pattern],
+                options.allowedTypes,
+                options.excludedTypes
+              )
+            ) {
+              continue;
+            }
+
             context.result = null;
 
             var _usedIds = [];
