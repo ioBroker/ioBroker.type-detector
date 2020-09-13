@@ -981,39 +981,31 @@ function ChannelDetector() {
       }
     }
 
-    function allRequiredStatesFound(){
-        var allRequiredFound = true;
-        if (context.result) {
-          for (var a = 0; a < context.result.states.length; a++) {
-            if (context.result.states[a] instanceof Array) {
-              // one of
-              var oneOf = false;
-              for (var b = 0; b < context.result.states[a].length; b++) {
-                if (
-                  context.result.states[a][b].required &&
-                  context.result.states[a].id
-                ) {
-                  oneOf = true;
-                  break;
-                }
-              }
-              if (!oneOf) {
-                allRequiredFound = false;
-                break;
-              }
-            } else {
-              if (
-                context.result.states[a].required &&
-                !context.result.states[a].id
-              ) {
-                allRequiredFound = false;
-                break;
-              }
+    function allRequiredStatesFound(context) {
+      if (!context.result) {
+        return false;
+      }
+
+      var states = context.result.states;
+
+      for (var a = 0; a < states.length; a++) {
+        if (states[a] instanceof Array) {
+          // one of
+          for (var b = 0; b < states[a].length; b++) {
+            if (states[a][b].required && states[a].id) {
+              return true;
             }
           }
+
+          return false;
         } else {
-          allRequiredFound = false;
+          if (states[a].required && !states[a].id) {
+            return false;
+          }
         }
+      }
+
+      return true;
     }
 
     this._detectNext = function (options) {
@@ -1079,53 +1071,71 @@ function ChannelDetector() {
                 }
             }.bind(this));
 
-            if (allRequiredStatesFound()) {
-                _usedIds.forEach(function (id) {usedIds.push(id);});
-                // context.result.id = id;
-                //this.cache[id] = context.result;
-                var deviceStates;
+            if (allRequiredStatesFound(context)) {
+              _usedIds.forEach(function (id) {
+                usedIds.push(id);
+              });
+              // context.result.id = id;
+              //this.cache[id] = context.result;
+              var deviceStates;
 
-                // looking for indicators and special states
-                if (objects[id].type !== 'device') {
-                    // get device name
-                    var deviceId = getParentId(id);
-                    if (objects[deviceId] && (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')) {
-                        deviceStates = getAllStatesInDevice(keys, deviceId);
-                        if (deviceStates) {
-                            deviceStates.forEach(function (_id) {
-                                context.result.states.forEach(function (state, i) {
-                                    if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
-                                        if (this._applyPattern(objects, _id, state.original)) {
-                                            context.result.states[i].id = _id;
-                                        }
-                                    }
-                                }.bind(this));
-                            }.bind(this));
-                        }
-                    }
+              // looking for indicators and special states
+              if (objects[id].type !== 'device') {
+                // get device name
+                var deviceId = getParentId(id);
+                if (
+                  objects[deviceId] &&
+                  (objects[deviceId].type === 'channel' ||
+                    objects[deviceId].type === 'device')
+                ) {
+                  deviceStates = getAllStatesInDevice(keys, deviceId);
+                  if (deviceStates) {
+                    deviceStates.forEach(
+                      function (_id) {
+                        context.result.states.forEach(
+                          function (state, i) {
+                            if (
+                              !state.id &&
+                              (state.indicator || state.searchInParent) &&
+                              !state.noDeviceDetection
+                            ) {
+                              if (
+                                this._applyPattern(objects, _id, state.original)
+                              ) {
+                                context.result.states[i].id = _id;
+                              }
+                            }
+                          }.bind(this),
+                        );
+                      }.bind(this),
+                    );
+                  }
                 }
-                context.result.states.forEach(function (state) {
-                    if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
-                        var m = state.role.exec(context.objects[state.id].common.role);
-                        if (m) {
-                            state.name = state.name.replace('%d', m[1]);
-                        }
-                    }
-                    if (state.role) {
-                        delete state.role;
-                    }
-                    if (state.enums) {
-                        delete state.enums;
-                    }
-                    if (state.original) {
-                        if (state.original.icon) {
-                            state.icon = state.original.icon;
-                        }
-                        delete state.original;
-                    }
-                });
+              }
+              context.result.states.forEach(function (state) {
+                if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
+                  var m = state.role.exec(
+                    context.objects[state.id].common.role,
+                  );
+                  if (m) {
+                    state.name = state.name.replace('%d', m[1]);
+                  }
+                }
+                if (state.role) {
+                  delete state.role;
+                }
+                if (state.enums) {
+                  delete state.enums;
+                }
+                if (state.original) {
+                  if (state.original.icon) {
+                    state.icon = state.original.icon;
+                  }
+                  delete state.original;
+                }
+              });
 
-                return context.result;
+              return context.result;
             }
         }
     };
