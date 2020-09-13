@@ -962,22 +962,23 @@ function ChannelDetector() {
     };
 
     this._getChannelStates = function (objects, id, keys) {
-      var result = [];
+      switch (objects[id].type) {
+        case 'state':
+          return [id];
 
-      if (objects[id].type === 'state') {
-        result = [id];
-      } else if (objects[id].type === 'device') {
-        result = getAllStatesInDevice(keys, id);
-        // if no states, it may be device without channels
-        if (!result.length) {
-          result = getAllStatesInChannel(keys, id);
-        }
-      } else {
-        // channel
-        result = getAllStatesInChannel(keys, id);
+        case 'device':
+          var result = getAllStatesInDevice(keys, id);
+          if (result.length) {
+            return result;
+          }
+
+          // if no states, it may be device without channels
+          return getAllStatesInChannel(keys, id);
+
+        default:
+          // channel
+          return getAllStatesInChannel(keys, id);
       }
-
-      return result;
     };
 
     this._detectNext = function (options) {
