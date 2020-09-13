@@ -1071,72 +1071,74 @@ function ChannelDetector() {
                 }
             }.bind(this));
 
-            if (allRequiredStatesFound(context)) {
-              _usedIds.forEach(function (id) {
-                usedIds.push(id);
-              });
-              // context.result.id = id;
-              //this.cache[id] = context.result;
-              var deviceStates;
-
-              // looking for indicators and special states
-              if (objects[id].type !== 'device') {
-                // get device name
-                var deviceId = getParentId(id);
-                if (
-                  objects[deviceId] &&
-                  (objects[deviceId].type === 'channel' ||
-                    objects[deviceId].type === 'device')
-                ) {
-                  deviceStates = getAllStatesInDevice(keys, deviceId);
-                  if (deviceStates) {
-                    deviceStates.forEach(
-                      function (_id) {
-                        context.result.states.forEach(
-                          function (state, i) {
-                            if (
-                              !state.id &&
-                              (state.indicator || state.searchInParent) &&
-                              !state.noDeviceDetection
-                            ) {
-                              if (
-                                this._applyPattern(objects, _id, state.original)
-                              ) {
-                                context.result.states[i].id = _id;
-                              }
-                            }
-                          }.bind(this),
-                        );
-                      }.bind(this),
-                    );
-                  }
-                }
-              }
-              context.result.states.forEach(function (state) {
-                if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
-                  var m = state.role.exec(
-                    context.objects[state.id].common.role,
-                  );
-                  if (m) {
-                    state.name = state.name.replace('%d', m[1]);
-                  }
-                }
-                if (state.role) {
-                  delete state.role;
-                }
-                if (state.enums) {
-                  delete state.enums;
-                }
-                if (state.original) {
-                  if (state.original.icon) {
-                    state.icon = state.original.icon;
-                  }
-                  delete state.original;
-                }
-              });
-
-              return context.result;
+            if (!allRequiredStatesFound(context)) {
+                continue;
             }
+
+            _usedIds.forEach(function (id) {
+            usedIds.push(id);
+            });
+            // context.result.id = id;
+            //this.cache[id] = context.result;
+            var deviceStates;
+
+            // looking for indicators and special states
+            if (objects[id].type !== 'device') {
+            // get device name
+            var deviceId = getParentId(id);
+            if (
+                objects[deviceId] &&
+                (objects[deviceId].type === 'channel' ||
+                objects[deviceId].type === 'device')
+            ) {
+                deviceStates = getAllStatesInDevice(keys, deviceId);
+                if (deviceStates) {
+                deviceStates.forEach(
+                    function (_id) {
+                    context.result.states.forEach(
+                        function (state, i) {
+                        if (
+                            !state.id &&
+                            (state.indicator || state.searchInParent) &&
+                            !state.noDeviceDetection
+                        ) {
+                            if (
+                            this._applyPattern(objects, _id, state.original)
+                            ) {
+                            context.result.states[i].id = _id;
+                            }
+                        }
+                        }.bind(this),
+                    );
+                    }.bind(this),
+                );
+                }
+            }
+            }
+            context.result.states.forEach(function (state) {
+            if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
+                var m = state.role.exec(
+                context.objects[state.id].common.role,
+                );
+                if (m) {
+                state.name = state.name.replace('%d', m[1]);
+                }
+            }
+            if (state.role) {
+                delete state.role;
+            }
+            if (state.enums) {
+                delete state.enums;
+            }
+            if (state.original) {
+                if (state.original.icon) {
+                state.icon = state.original.icon;
+                }
+                delete state.original;
+            }
+            });
+
+            return context.result;
         }
     };
 
