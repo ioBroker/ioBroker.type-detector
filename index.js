@@ -1164,14 +1164,13 @@ function ChannelDetector() {
             options._keysOptional = _keysOptional;
         }
 
-        var result  = [];
         if (_usedIdsOptional) {
             _usedIdsOptional = [];
             options._usedIdsOptional = _usedIdsOptional;
         }
 
+        var result = [];
         var detected;
-
         while((detected = this._detectNext(options))) {
             result.push(detected);
         }
