@@ -961,6 +961,25 @@ function ChannelDetector() {
         return found;
     };
 
+    this._getChannelStates = function (objects, id, keys) {
+      var result = [];
+
+      if (objects[id].type === 'state') {
+        result = [id];
+      } else if (objects[id].type === 'device') {
+        result = getAllStatesInDevice(keys, id);
+        // if no states, it may be device without channels
+        if (!result.length) {
+          result = getAllStatesInChannel(keys, id);
+        }
+      } else {
+        // channel
+        result = getAllStatesInChannel(keys, id);
+      }
+
+      return result;
+    };
+
     this._detectNext = function (options) {
         var objects           = options.objects;
         var id                = options.id;
@@ -976,19 +995,7 @@ function ChannelDetector() {
         }
 
         if (objects[id] && objects[id].common) {
-            var channelStates;
-
-            if (objects[id].type === 'state') {
-                channelStates = [id];
-            } else if (objects[id].type === 'device') {
-                channelStates = getAllStatesInDevice(keys, id);
-                // if no states, it may be device without channels
-                if (!channelStates.length) {
-                    channelStates = getAllStatesInChannel(keys, id);
-                }
-            } else { // channel
-                channelStates = getAllStatesInChannel(keys, id);
-            }
+            var channelStates = this._getChannelStates(objects, id, keys);
 
             /*if (id.indexOf('yeelight-2.0.color-') !== -1) {
                 console.log('aaa');
