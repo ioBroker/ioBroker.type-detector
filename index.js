@@ -995,132 +995,133 @@ function ChannelDetector() {
             options._usedIdsOptional = usedIds;
         }
 
-        if (objects[id] && objects[id].common) {
-            var context = {
-                objects:            objects,
-                channelStates:      this._getChannelStates(objects, id, keys),
-                usedIds:            usedIds,
-                ignoreIndicators:   ignoreIndicators
-            };
+        if (!objects[id] || !objects[id].common) {
+            return null;
+        }
 
-            for (var pattern in patterns) {
-                if (!patterns.hasOwnProperty(pattern) ||
-                    (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1) ||
-                    (excludedTypes && excludedTypes.indexOf(patterns[pattern].type) !== -1)
-                ) continue;
-                context.result = null;
+        var context = {
+            objects:            objects,
+            channelStates:      this._getChannelStates(objects, id, keys),
+            usedIds:            usedIds,
+            ignoreIndicators:   ignoreIndicators
+        };
 
-                var _usedIds = [];
-                context.pattern = pattern;
-                context._usedIds = _usedIds;
-                patterns[pattern].states.forEach(function (state) {
-                    var found = false;
+        for (var pattern in patterns) {
+            if (!patterns.hasOwnProperty(pattern) ||
+                (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1) ||
+                (excludedTypes && excludedTypes.indexOf(patterns[pattern].type) !== -1)
+            ) continue;
+            context.result = null;
 
-                    // one of following
-                    if (state instanceof Array) {
-                        for (var s = 0; s < state.length; s++) {
-                            context.state = state[s];
-                            if (this._testOneState(context)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            context.result = null;
-                            return false;
-                        }
-                    } else {
-                        context.state = state;
+            var _usedIds = [];
+            context.pattern = pattern;
+            context._usedIds = _usedIds;
+            patterns[pattern].states.forEach(function (state) {
+                var found = false;
+
+                // one of following
+                if (state instanceof Array) {
+                    for (var s = 0; s < state.length; s++) {
+                        context.state = state[s];
                         if (this._testOneState(context)) {
                             found = true;
-                        }
-                        if (state.required && !found) {
-                            context.result = null;
-                            return false;
+                            break;
                         }
                     }
-                }.bind(this));
-
-                // if all required states found?
-                var allRequiredFound = true;
-                if (context.result) {
-                    for (var a = 0; a < context.result.states.length; a++) {
-                        if (context.result.states[a] instanceof Array) {
-                            // one of
-                            var oneOf = false;
-                            for (var b = 0; b < context.result.states[a].length; b++) {
-                                if (context.result.states[a][b].required && context.result.states[a].id) {
-                                    oneOf = true;
-                                    break;
-                                }
-                            }
-                            if (!oneOf) {
-                                allRequiredFound = false;
-                                break;
-                            }
-                        } else {
-                            if (context.result.states[a].required && !context.result.states[a].id) {
-                                allRequiredFound = false;
-                                break;
-                            }
-                        }
+                    if (!found) {
+                        context.result = null;
+                        return false;
                     }
                 } else {
-                    allRequiredFound = false;
+                    context.state = state;
+                    if (this._testOneState(context)) {
+                        found = true;
+                    }
+                    if (state.required && !found) {
+                        context.result = null;
+                        return false;
+                    }
                 }
+            }.bind(this));
 
-
-                if (allRequiredFound) {
-                    _usedIds.forEach(function (id) {usedIds.push(id);});
-                    // context.result.id = id;
-                    //this.cache[id] = context.result;
-                    var deviceStates;
-
-                    // looking for indicators and special states
-                    if (objects[id].type !== 'device') {
-                        // get device name
-                        var deviceId = getParentId(id);
-                        if (objects[deviceId] && (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')) {
-                            deviceStates = getAllStatesInDevice(keys, deviceId);
-                            if (deviceStates) {
-                                deviceStates.forEach(function (_id) {
-                                    context.result.states.forEach(function (state, i) {
-                                        if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
-                                            if (this._applyPattern(objects, _id, state.original)) {
-                                                context.result.states[i].id = _id;
-                                            }
-                                        }
-                                    }.bind(this));
-                                }.bind(this));
+            // if all required states found?
+            var allRequiredFound = true;
+            if (context.result) {
+                for (var a = 0; a < context.result.states.length; a++) {
+                    if (context.result.states[a] instanceof Array) {
+                        // one of
+                        var oneOf = false;
+                        for (var b = 0; b < context.result.states[a].length; b++) {
+                            if (context.result.states[a][b].required && context.result.states[a].id) {
+                                oneOf = true;
+                                break;
                             }
+                        }
+                        if (!oneOf) {
+                            allRequiredFound = false;
+                            break;
+                        }
+                    } else {
+                        if (context.result.states[a].required && !context.result.states[a].id) {
+                            allRequiredFound = false;
+                            break;
                         }
                     }
-                    context.result.states.forEach(function (state) {
-                        if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
-                            var m = state.role.exec(context.objects[state.id].common.role);
-                            if (m) {
-                                state.name = state.name.replace('%d', m[1]);
-                            }
-                        }
-                        if (state.role) {
-                            delete state.role;
-                        }
-                        if (state.enums) {
-                            delete state.enums;
-                        }
-                        if (state.original) {
-                            if (state.original.icon) {
-                                state.icon = state.original.icon;
-                            }
-                            delete state.original;
-                        }
-                    });
-
-                    return context.result;
                 }
+            } else {
+                allRequiredFound = false;
+            }
+
+
+            if (allRequiredFound) {
+                _usedIds.forEach(function (id) {usedIds.push(id);});
+                // context.result.id = id;
+                //this.cache[id] = context.result;
+                var deviceStates;
+
+                // looking for indicators and special states
+                if (objects[id].type !== 'device') {
+                    // get device name
+                    var deviceId = getParentId(id);
+                    if (objects[deviceId] && (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')) {
+                        deviceStates = getAllStatesInDevice(keys, deviceId);
+                        if (deviceStates) {
+                            deviceStates.forEach(function (_id) {
+                                context.result.states.forEach(function (state, i) {
+                                    if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
+                                        if (this._applyPattern(objects, _id, state.original)) {
+                                            context.result.states[i].id = _id;
+                                        }
+                                    }
+                                }.bind(this));
+                            }.bind(this));
+                        }
+                    }
+                }
+                context.result.states.forEach(function (state) {
+                    if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
+                        var m = state.role.exec(context.objects[state.id].common.role);
+                        if (m) {
+                            state.name = state.name.replace('%d', m[1]);
+                        }
+                    }
+                    if (state.role) {
+                        delete state.role;
+                    }
+                    if (state.enums) {
+                        delete state.enums;
+                    }
+                    if (state.original) {
+                        if (state.original.icon) {
+                            state.icon = state.original.icon;
+                        }
+                        delete state.original;
+                    }
+                });
+
+                return context.result;
             }
         }
-        return null;
     };
 
     /**
