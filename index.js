@@ -961,7 +961,7 @@ function ChannelDetector() {
         return found;
     };
 
-    this._getChannelStates = function (objects, id, keys) {
+    function getChannelStates(objects, id, keys) {
       switch (objects[id].type) {
         case 'state':
           return [id];
@@ -1001,7 +1001,7 @@ function ChannelDetector() {
 
         var context = {
             objects:            objects,
-            channelStates:      this._getChannelStates(objects, id, keys),
+            channelStates:      getChannelStates(objects, id, keys),
             usedIds:            usedIds,
             ignoreIndicators:   ignoreIndicators
         };
