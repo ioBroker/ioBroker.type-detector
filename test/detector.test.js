@@ -3,6 +3,45 @@ var expect = require('chai').expect;
 const {Types, ChannelDetector} = require('../index');
 
 describe('Test Detector', () => {
+    it('Must detect nothing if not all required states are defined', done => {
+      const detector = new ChannelDetector();
+
+      const objects = {
+        'something.0.channel': {
+          common: {
+            name: 'Channel',
+          },
+          type: 'channel',
+        },
+        'something.0.channel.state': {
+          common: {
+            name: 'Some state',
+            type: 'some-type',
+            role: 'some-role.inhibit',
+            read: false,
+            write: false,
+          },
+          type: 'state',
+        },
+      };
+
+      Object.keys(objects).forEach(id => (objects[id]._id = id));
+
+      const options = {
+        objects: objects,
+        id: 'something.0.channel',
+        _keysOptional: Object.keys(objects),
+        _usedIdsOptional: [],
+      };
+
+      const controls = detector.detect(options);
+
+      console.log(JSON.stringify(controls));
+      expect(controls).to.be.null;
+
+      done();
+    });
+
     it('Must detect temperature sensor from channel', done => {
         const detector = new ChannelDetector();
 
