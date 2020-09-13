@@ -998,9 +998,6 @@ function ChannelDetector() {
         if (objects[id] && objects[id].common) {
             var channelStates = this._getChannelStates(objects, id, keys);
 
-            /*if (id.indexOf('yeelight-2.0.color-') !== -1) {
-                console.log('aaa');
-            }*/
             var context = {
                 objects:            objects,
                 channelStates:      channelStates,
@@ -1015,19 +1012,11 @@ function ChannelDetector() {
                 ) continue;
                 context.result = null;
 
-                /*if (pattern === 'hue' && id.indexOf('yeelight-2.0.color-') !== -1) {
-                    console.log(pattern);
-                }*/
-
                 var _usedIds = [];
                 context.pattern = pattern;
                 context._usedIds = _usedIds;
                 patterns[pattern].states.forEach(function (state) {
                     var found = false;
-
-                    if (state.name === 'ON') {
-                        //console.log('ON');
-                    }
 
                     // one of following
                     if (state instanceof Array) {
@@ -1088,10 +1077,6 @@ function ChannelDetector() {
                     // context.result.id = id;
                     //this.cache[id] = context.result;
                     var deviceStates;
-
-                    if (pattern === 'info') {
-                        //console.log('AA');
-                    }
 
                     // looking for indicators and special states
                     if (objects[id].type !== 'device') {
