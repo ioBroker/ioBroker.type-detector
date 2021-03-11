@@ -690,7 +690,7 @@ function ChannelDetector() {
 
     function getAllStatesInChannel(keys, channelId) {
         var list = [];
-        var reg = new RegExp('^' + channelId.replace(/\./g, '\\.') + '\\.[^.]+$');
+        var reg = new RegExp('^' + channelId.replace(/([$^.)(\[\]{}])/g, '\\$1') + '\\.[^.]+$');
         keys.forEach(function(_id) {
             if (reg.test(_id)) list.push(_id);
         });
@@ -698,7 +698,7 @@ function ChannelDetector() {
     }
     function getAllStatesInDevice(keys, channelId) {
         var list = [];
-        var reg = new RegExp('^' + channelId.replace(/\./g, '\\.') + '\\.[^.]+\\.[^.]+$');
+        var reg = new RegExp('^' + channelId.replace(/([$^.)(\[\]{}])/g, '\\$1') + '\\.[^.]+\\.[^.]+$');
         keys.forEach(function(_id) {
             if (reg.test(_id)) list.push(_id);
         });

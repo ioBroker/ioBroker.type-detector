@@ -94,6 +94,9 @@ Following devices can be detected:
 
 
 ## Changelog
+### 1.0.8 (2021-03-11)
+* (bluefox) Escape chars in IDs.
+
 ### 1.0.7 (2020-08-12)
 * (bluefox) Added the vacuum cleaner.
 
