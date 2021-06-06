@@ -1,2 +1,5 @@
-node_modules
-.idea
+*
+!/package.json
+!/README.md
+!/index.js
+!/LICENSE

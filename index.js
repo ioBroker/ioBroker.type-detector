@@ -24,6 +24,7 @@
 // Version 0.1.6, 2019.08.14
 // Keep this file ES5 conform! No const, let, not lambdas => , no ..., no default values for arguments, no let [arg] = abc() and other modern stuff.
 
+// eslint-disable-next-line
 'use strict';
 
 var Types = {
@@ -374,6 +375,59 @@ function ChannelDetector() {
             ],
             type: Types.blind
         },
+        gate: {
+            states: [
+                {role: /^switch(\.gate)?$/,                   indicator: false, type: 'boolean',  write: true, enums: roleOrEnumGate, name: 'SET',                 required: true, defaultRole: 'switch.gate'},
+                // optional
+                {role: /^value(\.position)?|^value(\.gate)?$/,indicator: false, type: 'number',                enums: roleOrEnumGate,  name: 'ACTUAL',             required: false, defaultRole: 'value.blind', defaultUnit: '%'},
+                {role: /^button\.stop$|^action\.stop$/,       indicator: false, type: 'boolean', write: true,  enums: roleOrEnumGate,  name: 'STOP',               required: false, noSubscribe: true, defaultRole: 'button.stop'},
+                patternDirection,
+                patternWorking,
+                patternUnreach,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.gate
+        },
+        weatherCurrent: {
+            states: [
+                {role: /^value(\.temperature)?$/,                     indicator: false, type: 'number',                name: 'ACTUAL',                                      required: true, defaultRole: 'value.temperature', defaultUnit: '°C'},
+                {role: /^weather\.icon$/,                             indicator: false,                                name: 'ICON',                                        required: true, defaultRole: 'weather.icon'},
+                // optional
+                {role: /^value\.precipitation\.chance$/,              indicator: false, type: 'number',                name: 'PRECIPITATION_CHANCE',                        defaultRole: 'value.precipitation.chance', defaultUnit: '%'},
+                {role: /^value\.precipitation\.type$/,                indicator: false, type: 'number',                name: 'PRECIPITATION_TYPE',                          defaultRole: 'value.precipitation.type', defaultStates: {0: 'NO', 1: 'RAIN', 2: 'SNOW', 3: 'HAIL'}},
+                {role: /^value\.pressure$/,                           indicator: false, type: 'number',                name: 'PRESSURE',                                    defaultRole: 'value.pressure', defaultUnit: 'mbar'},
+                {role: /^value\.pressure\.tendency$/,                 indicator: false, type: 'string',                name: 'PRESSURE_TENDENCY',                           defaultRole: 'value.pressure.tendency'},
+                {role: /^value\.temperature\.windchill$/,             indicator: false, type: 'number',                name: 'REAL_FEEL_TEMPERATURE',                       defaultRole: 'value.temperature.windchill', defaultUnit: '°C'},
+                {role: /^value.humidity$/,                            indicator: false, type: 'number',                name: 'HUMIDITY',                                    defaultRole: 'value.humidity', defaultUnit: '%'},
+                {role: /^value.uv$/,                                  indicator: false, type: 'number',                name: 'UV',                                          defaultRole: 'value.uv'},
+                {role: /^weather\.state$/,                            indicator: false, type: 'string',                name: 'WEATHER',                                     defaultRole: 'weather.state'},
+                {role: /^value\.direction\.wind$/,                    indicator: false, type: 'string',                name: 'WIND_DIRECTION',                              defaultRole: 'value.direction.wind', defaultUnit: '°'},
+                {role: /^value\.speed\.wind\.gust$/,                  indicator: false, type: 'number',                name: 'WIND_GUST',                                   defaultRole: 'value.speed.wind.gust', defaultUnit: 'km/h'},
+                {role: /^value\.speed\.wind$/,                        indicator: false, type: 'number',                name: 'WIND_SPEED',                                  defaultRole: 'value.speed.wind$', defaultUnit: 'km/h'},
+                patternLowbat,
+                patternUnreach,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.weatherCurrent
+        },
+        camera: {
+            states: [
+                {role: /^camera(\.\w+)?$/,                                        indicator: false, type: 'file',     name: 'FILE',                           required: true, defaultRole: 'camera'},
+                // optional
+                {role: /^switch(\.camera)?\.autofocus$/,                          indicator: false, type: 'boolean',  write: true,  name: 'AUTOFOCUS',        required: false, defaultRole: 'switch.camera.autofocus'},
+                {role: /^switch(\.camera)?\.autowhitebalance$/,                   indicator: false, type: 'boolean',  write: true,  name: 'AUTOWHITEBALANCE', required: false, defaultRole: 'switch.camera.autowhitebalance'},
+                {role: /^switch(\.camera)?\.brightness$/,                         indicator: false, type: 'boolean',  write: true,  name: 'BRIGHTNESS',       required: false, defaultRole: 'switch.camera.brightness'},
+                {role: /^switch(\.camera)?\.nightmode$/,                          indicator: false, type: 'boolean',  write: true,  name: 'NIGHTMODE',        required: false, defaultRole: 'switch.camera.nightmode'},
+                {role: /^level(\.camera)?\.position$|^level(\.camera)?(\.ptz)$/,  indicator: false, type: 'number',   write: true,  name: 'PTZ',              required: false, defaultRole: 'level.camera.position'},
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.camera
+        },
         lock: {
             states: [
                 {role: /^switch\.lock$/,                      indicator: false, type: 'boolean',  write: true,              name: 'SET',                 required: true, defaultRole: 'switch.lock'},
@@ -425,7 +479,7 @@ function ChannelDetector() {
         },
         fireAlarm: {
             states: [
-                {role: /^state?$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.fire$/, defaultRole: 'sensor.alarm.fire'},
+                {role: /^state(\.alarm)?\.fire$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.fire$/, defaultRole: 'sensor.alarm.fire'},
                 // optional
                 patternUnreach,
                 patternLowbat,
@@ -433,6 +487,17 @@ function ChannelDetector() {
                 patternError
             ],
             type: Types.fireAlarm
+        },
+        floodAlarm: {
+            states: [
+                {role: /^state(\.alarm)?\.flood$|^sensor(\.alarm)?\.flood/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.flood$/, defaultRole: 'sensor.alarm.flood'},
+                // optional
+                patternUnreach,
+                patternLowbat,
+                patternMaintain,
+                patternError
+            ],
+            type: Types.floodAlarm
         },
         door: {
             states: [
@@ -670,6 +735,18 @@ function ChannelDetector() {
         return roleOrEnum(obj, enums, blindRoles, blindWords);
     }
 
+// -------------- GATES ------------------------------------------
+    var gateWords = {
+        en: [/gates?/i],
+        de: [/toren/i, /tor/i],
+        ru: [/ворота/i],
+    };
+
+    var gateRoles = ['gate', 'value.gate', 'switch.gate', 'action.stop', 'button.stop'];
+    function roleOrEnumGate(obj, enums) {
+        return roleOrEnum(obj, enums, gateRoles, gateWords);
+    }
+
 // -------------- WINDOWS -----------------------------------------
     var windowRoles = ['window', 'state.window', 'sensor.window', 'value.window'];
     function roleOrEnumWindow(obj, enums) {
@@ -690,7 +767,7 @@ function ChannelDetector() {
 
     function getAllStatesInChannel(keys, channelId) {
         var list = [];
-        var reg = new RegExp('^' + channelId.replace(/([$^.)(\[\]{}])/g, '\\$1') + '\\.[^.]+$');
+        var reg = new RegExp('^' + channelId.replace(/([$^.)([\]{}])/g, '\\$1') + '\\.[^.]+$');
         keys.forEach(function(_id) {
             if (reg.test(_id)) list.push(_id);
         });
@@ -698,7 +775,7 @@ function ChannelDetector() {
     }
     function getAllStatesInDevice(keys, channelId) {
         var list = [];
-        var reg = new RegExp('^' + channelId.replace(/([$^.)(\[\]{}])/g, '\\$1') + '\\.[^.]+\\.[^.]+$');
+        var reg = new RegExp('^' + channelId.replace(/([$^.)([\]{}])/g, '\\$1') + '\\.[^.]+\\.[^.]+$');
         keys.forEach(function(_id) {
             if (reg.test(_id)) list.push(_id);
         });
@@ -1150,7 +1227,7 @@ function ChannelDetector() {
         var id                = options.id;
         var _keysOptional     = options._keysOptional;
         var _usedIdsOptional  = options._usedIdsOptional;
-        var ignoreIndicators  = options.ignoreIndicators;
+        // var ignoreIndicators  = options.ignoreIndicators;
 
         if (this.cache[id] !== undefined) {
             return this.cache[id];

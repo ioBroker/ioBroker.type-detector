@@ -92,8 +92,15 @@ Following devices can be detected:
 
 ### Info
 
+<!--
+	Placeholder for the next version (at the beginning of the line):
+	### __WORK IN PROGRESS__
+-->
 
 ## Changelog
+### __WORK IN PROGRESS__
+* (bluefox) Added new types: gate, camera, flood alarm, current weather.
+
 ### 1.0.8 (2021-03-11)
 * (bluefox) Escape chars in IDs.
 
