@@ -98,7 +98,7 @@ Following devices can be detected:
 -->
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 1.0.9 (2021-06-06)
 * (bluefox) Added new types: gate, camera, flood alarm, current weather.
 
 ### 1.0.8 (2021-03-11)

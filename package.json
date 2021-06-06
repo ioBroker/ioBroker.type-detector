@@ -1,6 +1,6 @@
 {
   "name": "iobroker.type-detector",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Detects devices in ioBroker for Material, Google home, Homekit, ...",
   "author": {
     "name": "bluefox",
