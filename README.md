@@ -98,7 +98,7 @@ Following devices can be detected:
 -->
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 1.0.10 (2021-06-07)
 * (bluefox) Added some states to thermostat
 
 ### 1.0.9 (2021-06-06)
