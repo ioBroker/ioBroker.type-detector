@@ -1,6 +1,6 @@
 # ioBroker.type-detector
-
-This is not the adapter. This is help function to detect devices from ioBroker states and channels.
+This is not the adapter. 
+This is help function to detect devices from ioBroker states and channels.
 
 ## How to use
 You can use this module in Browser and in Node.js projects. 
@@ -98,6 +98,9 @@ Following devices can be detected:
 -->
 
 ## Changelog
+### __WORK IN PROGRESS__
+* (bluefox) Added some states to thermostat
+
 ### 1.0.9 (2021-06-06)
 * (bluefox) Added new types: gate, camera, flood alarm, current weather.
 
@@ -144,9 +147,7 @@ Following devices can be detected:
 * (bluefox) initial commit
 
 
-
 ## License
-
 Copyright (c) 2018-2021 Bluefox <dogafox@gmail.com>
 
 MIT License
