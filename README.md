@@ -100,7 +100,7 @@ Following devices can be detected:
 ## Changelog
 ### __WORK IN PROGRESS__
 * (Garfonso) Added buttons to blinds and added new type: blinds with only buttons
-* (agross) 
+* (agross) refactoring
 
 ### 1.0.10 (2021-06-07)
 * (bluefox) Added some states to thermostat
