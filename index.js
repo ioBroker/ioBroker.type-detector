@@ -1069,175 +1069,193 @@ function ChannelDetector() {
         return found;
     };
 
+    function getChannelStates(objects, id, keys) {
+        switch (objects[id].type) {
+            case 'state':
+                return [id];
+
+            case 'device':
+                var result = getAllStatesInDevice(keys, id);
+                if (result.length) {
+                    return result;
+                }
+
+                // if no states, it may be device without channels
+                return getAllStatesInChannel(keys, id);
+
+            default:
+                // channel
+                return getAllStatesInChannel(keys, id);
+        }
+    }
+
+    function patternIsAllowed(pattern, allowedTypes, excludedTypes) {
+        if (!pattern) {
+            return false;
+        } else
+        if (allowedTypes && allowedTypes.indexOf(pattern.type) === -1) {
+            return false;
+        } else {
+            return !excludedTypes || excludedTypes.indexOf(pattern.type) === -1;
+        }
+    }
+
+    function allRequiredStatesFound(context) {
+        if (!context.result) {
+            return false;
+        }
+
+        var states = context.result.states;
+
+        for (var a = 0; a < states.length; a++) {
+            if (states[a] instanceof Array) {
+                // one of
+                for (var b = 0; b < states[a].length; b++) {
+                    if (states[a][b].required && states[a].id) {
+                        return true;
+                    }
+                }
+
+                return false;
+            } else {
+                if (states[a].required && !states[a].id) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     this._detectNext = function (options) {
         var objects           = options.objects;
         var id                = options.id;
         var keys              = options._keysOptional;
         var usedIds           = options._usedIdsOptional;
         var ignoreIndicators  = options.ignoreIndicators;
-        var allowedTypes      = options.allowedTypes;
-        var excludedTypes     = options.excludedTypes;
 
         if (!usedIds) {
             usedIds = [];
             options._usedIdsOptional = usedIds;
         }
 
-        if (objects[id] && objects[id].common) {
-            var channelStates;
+        if (!objects[id] || !objects[id].common) {
+            return null;
+        }
 
-            if (objects[id].type === 'state') {
-                channelStates = [id];
-            } else if (objects[id].type === 'device') {
-                channelStates = getAllStatesInDevice(keys, id);
-                // if no states, it may be device without channels
-                if (!channelStates.length) {
-                    channelStates = getAllStatesInChannel(keys, id);
-                }
-            } else { // channel
-                channelStates = getAllStatesInChannel(keys, id);
+        var context = {
+            objects:            objects,
+            channelStates:      getChannelStates(objects, id, keys),
+            usedIds:            usedIds,
+            ignoreIndicators:   ignoreIndicators
+        };
+
+        for (var pattern in patterns) {
+            if (
+                !patternIsAllowed(
+                    patterns[pattern],
+                    options.allowedTypes,
+                    options.excludedTypes
+                )
+            ) {
+                continue;
             }
 
-            /*if (id.indexOf('yeelight-2.0.color-') !== -1) {
-                console.log('aaa');
-            }*/
-            var context = {
-                objects:            objects,
-                channelStates:      channelStates,
-                usedIds:            usedIds,
-                ignoreIndicators:   ignoreIndicators
-            };
+            context.result = null;
 
-            for (var pattern in patterns) {
-                if (!patterns.hasOwnProperty(pattern) ||
-                    (allowedTypes && allowedTypes.indexOf(patterns[pattern].type) === -1) ||
-                    (excludedTypes && excludedTypes.indexOf(patterns[pattern].type) !== -1)
-                ) continue;
-                context.result = null;
+            var _usedIds = [];
+            context.pattern = pattern;
+            context._usedIds = _usedIds;
+            patterns[pattern].states.forEach(function (state) {
+                var found = false;
 
-                /*if (pattern === 'hue' && id.indexOf('yeelight-2.0.color-') !== -1) {
-                    console.log(pattern);
-                }*/
-
-                var _usedIds = [];
-                context.pattern = pattern;
-                context._usedIds = _usedIds;
-                patterns[pattern].states.forEach(function (state) {
-                    var found = false;
-
-                    if (state.name === 'ON') {
-                        //console.log('ON');
-                    }
-
-                    // one of following
-                    if (state instanceof Array) {
-                        for (var s = 0; s < state.length; s++) {
-                            context.state = state[s];
-                            if (this._testOneState(context)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            context.result = null;
-                            return false;
-                        }
-                    } else {
-                        context.state = state;
+                // one of following
+                if (state instanceof Array) {
+                    for (var s = 0; s < state.length; s++) {
+                        context.state = state[s];
                         if (this._testOneState(context)) {
                             found = true;
-                        }
-                        if (state.required && !found) {
-                            context.result = null;
-                            return false;
+                            break;
                         }
                     }
-                }.bind(this));
-
-                // if all required states found?
-                var allRequiredFound = true;
-                if (context.result) {
-                    for (var a = 0; a < context.result.states.length; a++) {
-                        if (context.result.states[a] instanceof Array) {
-                            // one of
-                            var oneOf = false;
-                            for (var b = 0; b < context.result.states[a].length; b++) {
-                                if (context.result.states[a][b].required && context.result.states[a].id) {
-                                    oneOf = true;
-                                    break;
-                                }
-                            }
-                            if (!oneOf) {
-                                allRequiredFound = false;
-                                break;
-                            }
-                        } else {
-                            if (context.result.states[a].required && !context.result.states[a].id) {
-                                allRequiredFound = false;
-                                break;
-                            }
-                        }
+                    if (!found) {
+                        context.result = null;
+                        return false;
                     }
                 } else {
-                    allRequiredFound = false;
+                    context.state = state;
+                    if (this._testOneState(context)) {
+                        found = true;
+                    }
+                    if (state.required && !found) {
+                        context.result = null;
+                        return false;
+                    }
                 }
+            }.bind(this));
 
+            if (!allRequiredStatesFound(context)) {
+                continue;
+            }
 
-                if (allRequiredFound) {
-                    _usedIds.forEach(function (id) {usedIds.push(id);});
-                    // context.result.id = id;
-                    //this.cache[id] = context.result;
-                    var deviceStates;
+            _usedIds.forEach(function (id) {
+                usedIds.push(id);
+            });
 
-                    if (pattern === 'info') {
-                        //console.log('AA');
+            var deviceStates;
+
+            // looking for indicators and special states
+            if (objects[id].type !== 'device') {
+                // get device name
+                var deviceId = getParentId(id);
+                if (
+                    objects[deviceId] &&
+                    (objects[deviceId].type === 'channel' ||
+                        objects[deviceId].type === 'device')
+                ) {
+                    deviceStates = getAllStatesInDevice(keys, deviceId);
+                    if (deviceStates) {
+                        deviceStates.forEach(function (_id) {
+                            context.result.states.forEach(function (state, i) {
+                                if (
+                                    !state.id &&
+                                    (state.indicator || state.searchInParent) &&
+                                    !state.noDeviceDetection
+                                ) {
+                                    if (this._applyPattern(objects, _id, state.original)) {
+                                        context.result.states[i].id = _id;
+                                    }
+                                }
+                            }.bind(this));
+                        }.bind(this));
                     }
-
-                    // looking for indicators and special states
-                    if (objects[id].type !== 'device') {
-                        // get device name
-                        var deviceId = getParentId(id);
-                        if (objects[deviceId] && (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')) {
-                            deviceStates = getAllStatesInDevice(keys, deviceId);
-                            if (deviceStates) {
-                                deviceStates.forEach(function (_id) {
-                                    context.result.states.forEach(function (state, i) {
-                                        if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
-                                            if (this._applyPattern(objects, _id, state.original)) {
-                                                context.result.states[i].id = _id;
-                                            }
-                                        }
-                                    }.bind(this));
-                                }.bind(this));
-                            }
-                        }
-                    }
-                    context.result.states.forEach(function (state) {
-                        if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
-                            var m = state.role.exec(context.objects[state.id].common.role);
-                            if (m) {
-                                state.name = state.name.replace('%d', m[1]);
-                            }
-                        }
-                        if (state.role) {
-                            delete state.role;
-                        }
-                        if (state.enums) {
-                            delete state.enums;
-                        }
-                        if (state.original) {
-                            if (state.original.icon) {
-                                state.icon = state.original.icon;
-                            }
-                            delete state.original;
-                        }
-                    });
-
-                    return context.result;
                 }
             }
+            context.result.states.forEach(function (state) {
+                if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
+                    var m = state.role.exec(
+                        context.objects[state.id].common.role
+                    );
+                    if (m) {
+                        state.name = state.name.replace('%d', m[1]);
+                    }
+                }
+                if (state.role) {
+                    delete state.role;
+                }
+                if (state.enums) {
+                    delete state.enums;
+                }
+                if (state.original) {
+                    if (state.original.icon) {
+                        state.icon = state.original.icon;
+                    }
+                    delete state.original;
+                }
+            });
+
+            return context.result;
         }
-        return null;
     };
 
     /**
@@ -1272,15 +1290,15 @@ function ChannelDetector() {
             options._keysOptional = _keysOptional;
         }
 
-        var result  = [];
         if (_usedIdsOptional) {
             _usedIdsOptional = [];
             options._usedIdsOptional = _usedIdsOptional;
         }
 
+        var result = [];
         var detected;
 
-        while((detected = this._detectNext(options))) {
+        while ((detected = this._detectNext(options))) {
             result.push(detected);
         }
 
@@ -1307,7 +1325,7 @@ function ChannelDetector() {
         return copyPatterns;
     };
 
-    (function _constructor (that) {
+    (function _constructor(that) {
         that.enums = null;
         that.cache = {};
     })(this);
