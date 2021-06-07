@@ -29,6 +29,7 @@
   "main": "main.js",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit",
+    "watch": "node node_modules/mocha/bin/mocha --watch",
     "release": "release-script"
   },
   "license": "MIT",
