@@ -280,7 +280,7 @@ function ChannelDetector() {
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
                 {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false, defaultRole: 'switch.light'},
-                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false, defaultRole: 'switch.light'},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
