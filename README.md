@@ -98,7 +98,7 @@ Following devices can be detected:
 -->
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 1.0.11 (2021-06-11)
 * (Garfonso) Added buttons to blinds and added new type: blinds with only buttons
 * (agross) refactoring
 * (bluefox) Extend socket and light with electricity parameters
