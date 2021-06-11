@@ -563,6 +563,11 @@ function ChannelDetector() {
                 {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'SET',         required: true,  defaultRole: 'switch.light'},
                 // optional
                 {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false, defaultRole: 'switch.light'},
+                {role: /^value\.power$/,                       indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'ELECTRIC_POWER', required: false, defaultRole: 'value.power', defaultUnit: 'W'},
+                {role: /^value\.current$/,                     indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'CURRENT',        required: false, defaultRole: 'value.current', defaultUnit: 'mA'},
+                {role: /^value\.voltage$/,                     indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'VOLTAGE',        required: false, defaultRole: 'value.voltage', defaultUnit: 'V'},
+                {role: /^value\.power\.consumption$/,          indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'CONSUMPTION',    required: false, defaultRole: 'value.power.consumption', defaultUnit: 'Wh'},
+                {role: /^value\.frequency$/,                   indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'FREQUENCY',      required: false, defaultRole: 'value.frequency', defaultUnit: 'Hz'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
@@ -641,8 +646,13 @@ function ChannelDetector() {
         },
         socket: {
             states: [
-                {role: /^switch$|^state$|^switch\.active$/,           indicator: false, type: 'boolean', write: true,       name: 'SET',         required: true, defaultRole: 'switch'},
-                {role: /^state$|^state\.active$/,                     indicator: false, type: 'boolean', write: false,      name: 'ACTUAL',      required: false, defaultRole: 'switch'},
+                {role: /^switch$|^state$|^switch\.active$/,           indicator: false, type: 'boolean', write: true,       name: 'SET',            required: true,  defaultRole: 'switch'},
+                {role: /^state$|^state\.active$/,                     indicator: false, type: 'boolean', write: false,      name: 'ACTUAL',         required: false, defaultRole: 'switch'},
+                {role: /^value\.power$/,                              indicator: false, type: 'number', write: false,       name: 'ELECTRIC_POWER', required: false, defaultRole: 'value.power', defaultUnit: 'W'},
+                {role: /^value\.current$/,                            indicator: false, type: 'number', write: false,       name: 'CURRENT',        required: false, defaultRole: 'value.current', defaultUnit: 'mA'},
+                {role: /^value\.voltage$/,                            indicator: false, type: 'number', write: false,       name: 'VOLTAGE',        required: false, defaultRole: 'value.voltage', defaultUnit: 'V'},
+                {role: /^value\.power\.consumption$/,                 indicator: false, type: 'number', write: false,       name: 'CONSUMPTION',    required: false, defaultRole: 'value.power.consumption', defaultUnit: 'Wh'},
+                {role: /^value\.frequency$/,                          indicator: false, type: 'number', write: false,       name: 'FREQUENCY',      required: false, defaultRole: 'value.frequency', defaultUnit: 'Hz'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
