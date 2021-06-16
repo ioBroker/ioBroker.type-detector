@@ -310,7 +310,7 @@ function ChannelDetector() {
             states: [
                 {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true,  defaultRole: 'level.temperature',     defaultUnit: '°C'},
                 // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
-                {role: /airconditioner$/,                  indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'MODE',           required: true,  defaultRole: 'level.mode.airconditioner', defaultStates: {0: 'OFF', 1: 'AUTO', 2: 'COOL', 3: 'HEAT', 4: 'ECO', 5: 'FAN_ONLY', 6: 'DRY'}},
+                {role: /airconditioner$/,              indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'MODE',               required: true,  defaultRole: 'level.mode.airconditioner', defaultStates: {0: 'OFF', 1: 'AUTO', 2: 'COOL', 3: 'HEAT', 4: 'ECO', 5: 'FAN_ONLY', 6: 'DRY'}},
                 // optional
                 {role: /speed\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',              required: false, defaultRole: 'level.mode.fan',        defaultStates: {0: 'AUTO', 1: 'HIGH', 2: 'LOW', 3: 'MEDIUM', 4: 'QUIET', 5: 'TURBO'}},
                 {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
