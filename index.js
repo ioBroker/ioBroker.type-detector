@@ -32,7 +32,7 @@ var Types = {
 
     airCondition: 'airCondition',
     blind: 'blind',
-    blindButtons: 'blindButton',
+    blindButtons: 'blindButtons',
     button: 'button',
     buttonSensor: 'buttonSensor',
     camera: 'camera',
@@ -312,7 +312,7 @@ function ChannelDetector() {
                 // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
                 {role: /airconditioner$/,              indicator: false,     write: true,  type: 'number',    searchInParent: true,                           name: 'MODE',               required: true,  defaultRole: 'level.mode.airconditioner', defaultStates: {0: 'OFF', 1: 'AUTO', 2: 'COOL', 3: 'HEAT', 4: 'ECO', 5: 'FAN_ONLY', 6: 'DRY'}},
                 // optional
-                {role: /speed\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',              required: false, defaultRole: 'level.mode.fan',        defaultStates: {0: 'AUTO', 1: 'HIGH', 2: 'LOW', 3: 'MEDIUM', 4: 'QUIET', 5: 'TURBO'}},
+                {role: /(speed|mode)\.fan$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'SPEED',       required: false, defaultRole: 'level.mode.fan',        defaultStates: {0: 'AUTO', 1: 'HIGH', 2: 'LOW', 3: 'MEDIUM', 4: 'QUIET', 5: 'TURBO'}},
                 {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
                 {role: /^switch$/,                     indicator: false,     write: true,  type: 'boolean',   searchInParent: true,                           name: 'POWER',              required: false},
                 {role: /temperature(\..*)?$/,          indicator: false,     write: false, type: 'number',    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature',     defaultUnit: '°C'},
@@ -371,9 +371,9 @@ function ChannelDetector() {
                 {role: /^level(\.blind)?$/,                   indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'SET',                 required: true, defaultRole: 'level.blind', defaultUnit: '%'},
                 // optional
                 {role: /^value(\.blind)?$/,                   indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'ACTUAL',              required: false, defaultRole: 'value.blind', defaultUnit: '%'},
-                {role: /^button(\.blind)?\.stop$|^action\.stop$/, indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',            required: false, noSubscribe: true, defaultRole: 'button.blind.stop'},
-                {role: /^button(\.blind)?\.open$/,            indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: false, noSubscribe: true, defaultRole: 'button.blind.open'},
-                {role: /^button(\.blind)?\.close$/,           indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: false, noSubscribe: true, defaultRole: 'button.blind.close'},
+                {role: /^button\.stop(\.blind)?$|^action\.stop$/, indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',            required: false, noSubscribe: true, defaultRole: 'button.stop.blind'},
+                {role: /^button\.open(\.blind)?$/,            indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: false, noSubscribe: true, defaultRole: 'button.open.blind'},
+                {role: /^button\.close(\.blind)?$/,           indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: false, noSubscribe: true, defaultRole: 'button.close.blind'},
                 {role: /^level\.tilt$/,                       indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'TILT_SET',            required: false, defaultRole: 'level.open.tilt'},
                 {role: /^value\.tilt$/,                       indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'TILT_ACTUAL',         required: false, defaultRole: 'value.open.tilt'},
                 {role: /^button\.stop\.tilt$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_STOP',           required: false, noSubscribe: true, defaultRole: 'button.tilt.stop'},
