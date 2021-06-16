@@ -100,6 +100,8 @@ var SharedPatterns = {
 // inverted - is state of indicator must be inverted
 // stateName - regex for state names (IDs). Not suggested
 // defaultRole - is for detection irrelevant, but will be used by iobroker.devices.
+// defaultUnit - is for detection irrelevant, but will be used by iobroker.devices.
+// defaultType - is for detection irrelevant, but will be used by iobroker.devices.
 
 function ChannelDetector() {
     if (!(this instanceof ChannelDetector)) {

@@ -30,6 +30,7 @@
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit",
     "watch": "node node_modules/mocha/bin/mocha --watch",
+    "build": "node lib/createMd",
     "release": "release-script"
   },
   "license": "MIT",

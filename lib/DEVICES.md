@@ -14,4 +14,3 @@ Fields:
 - **Ind** - Is the state is an indicator. Indicators will be shown as a small icon in material.
 - **Regex** - Role regex
 
-
