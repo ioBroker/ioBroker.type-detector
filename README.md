@@ -2,6 +2,8 @@
 This is not the adapter. 
 This is help function to detect devices from ioBroker states and channels.
 
+You can find the description of devices in [DEVICES.md](DEVICES.md).
+
 ## How to use
 You can use this module in Browser and in Node.js projects. 
 
