@@ -49,57 +49,16 @@ if (controls) {
 }
 ```
 
-
-## Description
-Following devices can be detected:
-
-
-### Media player
-
-### Weather forecast
-
-### RGB color
-
-### Warnings
-
-### Thermostat
-
-### Blinds
-
-### Motion detector
-
-### Window
-
-### Window with tilted position
-
-### Fire alarm
-
-### Door
-
-### Dimmer
-
-### Light
-
-### Volume
-
-### Group volume
-
-### Level slider
-
-### Socket
-
-### Button
-
-### Temperature
-
-### Info
-
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### __WORK IN PROGRESS__
 -->
 
 ## Changelog
+### 1.0.12 (2021-06-16)
+* (bluefox) Changed the air conditioner detection
+* (Garfonso) Corrected blind with buttons
+
 ### 1.0.11 (2021-06-11)
 * (Garfonso) Added buttons to blinds and added new type: blinds with only buttons
 * (agross) refactoring
