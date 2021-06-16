@@ -75,7 +75,7 @@ var SharedPatterns = {
     unreach:   {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',                          name: 'UNREACH',            required: false, defaultRole: 'indicator.maintenance.unreach'},
     lowbat:    {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery/,  indicator: true,  type: 'boolean',  name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'},
     maintain:  {role: /^indicator\.maintenance$/,             indicator: true,  type: 'boolean',                          name: 'MAINTAIN',           required: false, defaultRole: 'indicator.maintenance'},
-    error:     {role: /^indicator\.error$/,                   indicator: true,                                            name: 'ERROR',              required: false, defaultRole: 'indicator.error'},
+    error:     {role: /^indicator\.error$/,                   indicator: true,                                            name: 'ERROR',              required: false, defaultRole: 'indicator.error', defaultType: 'string'},
     direction: {role: /^indicator\.direction$/,               indicator: true,                                            name: 'DIRECTION',          required: false, defaultRole: 'indicator.direction'},
     reachable: {role: /^indicator\.reachable$/,               indicator: true,  type: 'boolean',                          name: 'CONNECTED',          required: false, defaultRole: 'indicator.reachable', inverted: true},
 };

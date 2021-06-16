@@ -152,7 +152,7 @@ describe('Test Detector', () => {
             "alias.0.Hauptzimmer.AC.MODE": {
                 "common": {
                     "name": "MODE",
-                    "role": "level.mode.thermostat",
+                    "role": "level.mode.airconditioner",
                     "type": "number",
                     "read": true,
                     "write": true,
