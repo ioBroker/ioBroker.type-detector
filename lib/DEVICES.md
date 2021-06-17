@@ -20,7 +20,7 @@ Fields:
 
 Restrictions:
 - Blinds are always opened with 100% and closed with 0%.
-- Switch is always boolean and so can have only `true` and `false` values. Not 0 / 1, `ON / OFF`.
+- Switch is always boolean and so can have only `true` and `false` values. Not `0 / 1` or `ON / OFF`.
 
 What is not important for detection:
 - Name - name of functionality in the device 
