@@ -73,7 +73,7 @@ var Types = {
 var SharedPatterns = {
     working:   {role: /^indicator\.working$/,                 indicator: true,                                            name: 'WORKING',            required: false, defaultRole: 'indicator.working'},
     unreach:   {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',                          name: 'UNREACH',            required: false, defaultRole: 'indicator.maintenance.unreach'},
-    lowbat:    {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery/,  indicator: true,  type: 'boolean',  name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'},
+    lowbat:    {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery$/,  indicator: true,  type: 'boolean',  name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'},
     maintain:  {role: /^indicator\.maintenance$/,             indicator: true,  type: 'boolean',                          name: 'MAINTAIN',           required: false, defaultRole: 'indicator.maintenance'},
     error:     {role: /^indicator\.error$/,                   indicator: true,                                            name: 'ERROR',              required: false, defaultRole: 'indicator.error', defaultType: 'string'},
     direction: {role: /^indicator\.direction$/,               indicator: true,                                            name: 'DIRECTION',          required: false, defaultRole: 'indicator.direction'},
@@ -99,6 +99,7 @@ var SharedPatterns = {
 // notSingle - this state may belong to more than one tile simultaneously (e.g. volume tile and media with volume)
 // inverted - is state of indicator must be inverted
 // stateName - regex for state names (IDs). Not suggested
+// defaultStates - is for detection irrelevant, but will be used by iobroker.devices.
 // defaultRole - is for detection irrelevant, but will be used by iobroker.devices.
 // defaultUnit - is for detection irrelevant, but will be used by iobroker.devices.
 // defaultType - is for detection irrelevant, but will be used by iobroker.devices.
@@ -809,6 +810,31 @@ function ChannelDetector() {
     var doorsRoles = ['door', 'state.door', 'sensor.door'];
     function roleOrEnumDoor(obj, enums) {
         return roleOrEnum(obj, enums, doorsRoles, doorsWords);
+    }
+
+    this.getEnums = function () {
+        return {
+            door: {
+                roles: doorsRoles,
+                words: doorsWords
+            },
+            window: {
+                roles: windowRoles,
+                words: blindWords,
+            },
+            blind: {
+                roles: blindRoles,
+                words: blindWords,
+            },
+            gate: {
+                roles: gateRoles,
+                words: gateWords
+            },
+            light: {
+                roles: lightRoles,
+                words: lightWords
+            }
+        }
     }
 
     function getAllStatesInChannel(keys, channelId) {
