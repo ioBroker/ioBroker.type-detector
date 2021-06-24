@@ -71,7 +71,7 @@ var Types = {
 };
 
 var SharedPatterns = {
-    working:   {role: /^indicator\.working$/,                 indicator: true,                                            name: 'WORKING',            required: false, defaultRole: 'indicator.working'},
+    working:   {role: /^indicator\.working$/,                 indicator: true,                                            name: 'WORKING',            required: false, defaultRole: 'indicator.working', defaultType: 'boolean'},
     unreach:   {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',                          name: 'UNREACH',            required: false, defaultRole: 'indicator.maintenance.unreach'},
     lowbat:    {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery$/,  indicator: true,  type: 'boolean',  name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'},
     maintain:  {role: /^indicator\.maintenance$/,             indicator: true,  type: 'boolean',                          name: 'MAINTAIN',           required: false, defaultRole: 'indicator.maintenance'},
@@ -204,6 +204,7 @@ function ChannelDetector() {
                 {role: /^level\.color\.red$/,                             indicator: false, type: 'number',  write: true,           name: 'RED',           required: true,   defaultRole: 'level.color.red'},
                 {role: /^level\.color\.green$/,                           indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true,   defaultRole: 'level.color.green'},
                 {role: /^level\.color\.blue$/,                            indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true,   defaultRole: 'level.color.blue'},
+                // optional
                 {role: /^level\.color\.white$/,                           indicator: false, type: 'number',  write: true,           name: 'WHITE',         required: false,  defaultRole: 'level.color.white'},
                 {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer', defaultUnit: '%'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
@@ -226,6 +227,7 @@ function ChannelDetector() {
                 {role: /^level\.color\.r$/,                               indicator: false, type: 'number',  write: true,           name: 'RED',           required: true},
                 {role: /^level\.color\.g$/,                               indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true},
                 {role: /^level\.color\.b$/,                               indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true},
+                // optional
                 {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
@@ -243,8 +245,9 @@ function ChannelDetector() {
         rgbSingle: {
             states: [
                 {role: /^level\.color\.rgb$/,                             indicator: false, type: 'string',  write: true,           name: 'RGB',           required: true,   defaultRole: 'level.color.rgb'},
+                // optional
                 {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer'},
-                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false, defaultUnit: '%'},
+                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false,  defaultUnit: '%'},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
                 {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature', defaultUnit: '°K'},
                 {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
@@ -261,6 +264,7 @@ function ChannelDetector() {
         hue: {
             states: [
                 {role: /^level\.color\.hue$/,                             indicator: false, type: 'number',  write: true,           name: 'HUE',           required: true,  defaultRole: 'level.color.hue', defaultUnit: '°'},
+                // optional
                 {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, searchInParent: true, defaultRole: 'level.dimmer', defaultUnit: '°C'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
@@ -279,6 +283,7 @@ function ChannelDetector() {
         ct: {
             states: [
                 {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: true,  defaultRole: 'level.color.temperature', defaultUnit: '°K'},
+                // optional
                 {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, defaultRole: 'level.dimmer', defaultUnit: '%'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
@@ -371,17 +376,17 @@ function ChannelDetector() {
         },
         blinds: {
             states: [
-                {role: /^level(\.blind)?$/,                   indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'SET',                 required: true, defaultRole: 'level.blind', defaultUnit: '%'},
+                {role: /^level(\.blind)?$/,                       indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'SET',                 required: true, defaultRole: 'level.blind', defaultUnit: '%'},
                 // optional
-                {role: /^value(\.blind)?$/,                   indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'ACTUAL',              required: false, defaultRole: 'value.blind', defaultUnit: '%'},
-                {role: /^button\.stop(\.blind)?$|^action\.stop$/, indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',            required: false, noSubscribe: true, defaultRole: 'button.stop.blind'},
-                {role: /^button\.open(\.blind)?$/,            indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: false, noSubscribe: true, defaultRole: 'button.open.blind'},
-                {role: /^button\.close(\.blind)?$/,           indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: false, noSubscribe: true, defaultRole: 'button.close.blind'},
-                {role: /^level\.tilt$/,                       indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'TILT_SET',            required: false, defaultRole: 'level.open.tilt'},
-                {role: /^value\.tilt$/,                       indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'TILT_ACTUAL',         required: false, defaultRole: 'value.open.tilt'},
-                {role: /^button\.stop\.tilt$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_STOP',           required: false, noSubscribe: true, defaultRole: 'button.tilt.stop'},
-                {role: /^button\.open\.tilt$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_OPEN',           required: false, noSubscribe: true, defaultRole: 'button.tilt.open'},
-                {role: /^button\.close\.tilt$/,               indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_CLOSE',          required: false, noSubscribe: true, defaultRole: 'button.tilt.close'},
+                {role: /^value(\.blind)?$/,                       indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'ACTUAL',              required: false, defaultRole: 'value.blind', defaultUnit: '%'},
+                {role: /^button\.stop(\.blind)?$|^action\.stop$/, indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',                required: false, noSubscribe: true, defaultRole: 'button.stop.blind'},
+                {role: /^button\.open(\.blind)?$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: false, noSubscribe: true, defaultRole: 'button.open.blind'},
+                {role: /^button\.close(\.blind)?$/,               indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: false, noSubscribe: true, defaultRole: 'button.close.blind'},
+                {role: /^level\.tilt$/,                           indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'TILT_SET',            required: false, defaultRole: 'level.open.tilt'},
+                {role: /^value\.tilt$/,                           indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'TILT_ACTUAL',         required: false, defaultRole: 'value.open.tilt'},
+                {role: /^button\.stop\.tilt$/,                    indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_STOP',           required: false, noSubscribe: true, defaultRole: 'button.tilt.stop'},
+                {role: /^button\.open\.tilt$/,                    indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_OPEN',           required: false, noSubscribe: true, defaultRole: 'button.tilt.open'},
+                {role: /^button\.close\.tilt$/,                   indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_CLOSE',          required: false, noSubscribe: true, defaultRole: 'button.tilt.close'},
                 SharedPatterns.direction,
                 SharedPatterns.working,
                 SharedPatterns.unreach,
@@ -394,15 +399,15 @@ function ChannelDetector() {
         blindButtons: {
             states: [
                 // blinds with no percentage setting / reading but buttons for up/down and stop:
-                {role: /^button\.stop(\.blind)?$|^action\.stop$/, indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',            required: true,  noSubscribe: true, defaultRole: 'button.blind.stop'},
-                {role: /^button\.open(\.blind)?$/,            indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: true,  noSubscribe: true, defaultRole: 'button.blind.open'},
-                {role: /^button\.close(\.blind)?$/,           indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: true,  noSubscribe: true, defaultRole: 'button.blind.close'},
+                {role: /^button\.stop(\.blind)?$|^action\.stop$/, indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'STOP',                required: true,  noSubscribe: true, defaultRole: 'button.blind.stop'},
+                {role: /^button\.open(\.blind)?$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'OPEN',                required: true,  noSubscribe: true, defaultRole: 'button.blind.open'},
+                {role: /^button\.close(\.blind)?$/,               indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'CLOSE',               required: true,  noSubscribe: true, defaultRole: 'button.blind.close'},
                 //optional tilt:
-                {role: /^level\.tilt$/,                       indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'TILT_SET',            required: false, defaultRole: 'level.open.tilt'},
-                {role: /^value\.tilt$/,                       indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'TILT_ACTUAL',         required: false, defaultRole: 'value.open.tilt'},
-                {role: /^button\.stop\.tilt$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_STOP',           required: false, noSubscribe: true, defaultRole: 'button.tilt.stop'},
-                {role: /^button\.open\.tilt$/,                indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_OPEN',           required: false, noSubscribe: true, defaultRole: 'button.tilt.open'},
-                {role: /^button\.close\.tilt$/,               indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_CLOSE',          required: false, noSubscribe: true, defaultRole: 'button.tilt.close'},
+                {role: /^level\.tilt$/,                           indicator: false, type: 'number',  write: true, enums: roleOrEnumBlind, name: 'TILT_SET',            required: false, defaultRole: 'level.open.tilt'},
+                {role: /^value\.tilt$/,                           indicator: false, type: 'number',               enums: roleOrEnumBlind, name: 'TILT_ACTUAL',         required: false, defaultRole: 'value.open.tilt'},
+                {role: /^button\.stop\.tilt$/,                    indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_STOP',           required: false, noSubscribe: true, defaultRole: 'button.tilt.stop'},
+                {role: /^button\.open\.tilt$/,                    indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_OPEN',           required: false, noSubscribe: true, defaultRole: 'button.tilt.open'},
+                {role: /^button\.close\.tilt$/,                   indicator: false, type: 'boolean', write: true, enums: roleOrEnumBlind, name: 'TILT_CLOSE',          required: false, noSubscribe: true, defaultRole: 'button.tilt.close'},
                 SharedPatterns.direction,
                 SharedPatterns.working,
                 SharedPatterns.unreach,
@@ -463,7 +468,8 @@ function ChannelDetector() {
                 SharedPatterns.maintain,
                 SharedPatterns.error
             ],
-            type: Types.camera
+            type: Types.camera,
+            enumRequired: false
         },
         lock: {
             states: [
@@ -523,7 +529,8 @@ function ChannelDetector() {
                 SharedPatterns.maintain,
                 SharedPatterns.error
             ],
-            type: Types.fireAlarm
+            type: Types.fireAlarm,
+            enumRequired: false
         },
         floodAlarm: {
             states: [
@@ -551,9 +558,9 @@ function ChannelDetector() {
             states: [
                 {role: /^level(\.dimmer)?$|^level\.brightness$/, indicator: false, type: 'number',  write: true,       enums: roleOrEnumLight, name: 'SET',        required: true, defaultRole: 'level.dimmer', ignoreRole: /^level\.dimspeed$/, defaultUnit: '%'},
                 // optional
-                {role: /^value(\.dimmer)?$/,                   indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false, defaultRole: 'value.dimmer', defaultUnit: '%'},
-                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'ON_SET',      required: false, defaultRole: 'switch.light'},
-                {role: /^switch(\.light)?$|^state$/,           indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ON_ACTUAL',   required: false, defaultRole: 'switch.light'},
+                {role: /^value(\.dimmer)?$/,                     indicator: false, type: 'number',  write: false,      enums: roleOrEnumLight, name: 'ACTUAL',      required: false, defaultRole: 'value.dimmer', defaultUnit: '%'},
+                {role: /^switch(\.light)?$|^state$/,             indicator: false, type: 'boolean', write: true,       enums: roleOrEnumLight, name: 'ON_SET',      required: false, defaultRole: 'switch.light'},
+                {role: /^switch(\.light)?$|^state$/,             indicator: false, type: 'boolean', write: false,      enums: roleOrEnumLight, name: 'ON_ACTUAL',   required: false, defaultRole: 'switch.light'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
@@ -626,6 +633,7 @@ function ChannelDetector() {
         volumeGroup: {
             states: [
                 {role: /^level\.volume\.group?$/,            indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true,  defaultRole: 'level.volume.group'},
+                // optional
                 {role: /^value\.volume\.group$/,             indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false, defaultRole: 'value.volume.group'},
                 {role: /^media\.mute\.group$/,               indicator: false, type: 'boolean',                               write: true,       name: 'MUTE',        required: false, defaultRole: 'media.mute.group'},
                 SharedPatterns.working,
@@ -639,6 +647,7 @@ function ChannelDetector() {
         levelSlider: {
             states: [
                 {role: /^level(\..*)?$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: true,       name: 'SET',         required: true, defaultRole: 'level', defaultUnit: '%'},
+                // optional
                 {role: /^value(\..*)?$/,                   indicator: false, type: 'number',  min: 'number', max: 'number', write: false,      name: 'ACTUAL',      required: false, defaultRole: 'value'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
@@ -650,13 +659,14 @@ function ChannelDetector() {
         },
         socket: {
             states: [
-                {role: /^switch$|^state$|^switch\.active$/,           indicator: false, type: 'boolean', write: true,       name: 'SET',            required: true,  defaultRole: 'switch'},
-                {role: /^state$|^state\.active$/,                     indicator: false, type: 'boolean', write: false,      name: 'ACTUAL',         required: false, defaultRole: 'switch'},
-                {role: /^value\.power$/,                              indicator: false, type: 'number', write: false,       name: 'ELECTRIC_POWER', required: false, defaultRole: 'value.power', defaultUnit: 'W'},
-                {role: /^value\.current$/,                            indicator: false, type: 'number', write: false,       name: 'CURRENT',        required: false, defaultRole: 'value.current', defaultUnit: 'mA'},
-                {role: /^value\.voltage$/,                            indicator: false, type: 'number', write: false,       name: 'VOLTAGE',        required: false, defaultRole: 'value.voltage', defaultUnit: 'V'},
-                {role: /^value\.power\.consumption$/,                 indicator: false, type: 'number', write: false,       name: 'CONSUMPTION',    required: false, defaultRole: 'value.power.consumption', defaultUnit: 'Wh'},
-                {role: /^value\.frequency$/,                          indicator: false, type: 'number', write: false,       name: 'FREQUENCY',      required: false, defaultRole: 'value.frequency', defaultUnit: 'Hz'},
+                {role: /^switch$|^state$|^switch\.active$/,           indicator: false, type: 'boolean', write: true,  name: 'SET',            required: true,  defaultRole: 'switch'},
+                // optional
+                {role: /^state$|^state\.active$/,                     indicator: false, type: 'boolean', write: false, name: 'ACTUAL',         required: false, defaultRole: 'switch'},
+                {role: /^value\.power$/,                              indicator: false, type: 'number',  write: false, name: 'ELECTRIC_POWER', required: false, defaultRole: 'value.power', defaultUnit: 'W'},
+                {role: /^value\.current$/,                            indicator: false, type: 'number',  write: false, name: 'CURRENT',        required: false, defaultRole: 'value.current', defaultUnit: 'mA'},
+                {role: /^value\.voltage$/,                            indicator: false, type: 'number',  write: false, name: 'VOLTAGE',        required: false, defaultRole: 'value.voltage', defaultUnit: 'V'},
+                {role: /^value\.power\.consumption$/,                 indicator: false, type: 'number',  write: false, name: 'CONSUMPTION',    required: false, defaultRole: 'value.power.consumption', defaultUnit: 'Wh'},
+                {role: /^value\.frequency$/,                          indicator: false, type: 'number',  write: false, name: 'FREQUENCY',      required: false, defaultRole: 'value.frequency', defaultUnit: 'Hz'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
@@ -668,6 +678,7 @@ function ChannelDetector() {
         button: {
             states: [
                 {role: /^button(\.[.\w]+)?$|^action(\.[.\w]+)?$/,           indicator: false, type: 'boolean', read: false, write: true,       name: 'SET',         required: true, noSubscribe: true, defaultRole: 'button'},
+                // optional
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
                 SharedPatterns.maintain,
@@ -734,14 +745,14 @@ function ChannelDetector() {
     function checkEnum(obj, enums, words) {
         var found = false;
         if (enums) {
-            enums.forEach(function(en) {
+            enums.forEach(function (en) {
                 var pos = en.lastIndexOf('.');
                 if (pos !== -1) {
                     en = en.substring(pos + 1);
                 }
                 for (var lang in words) {
                     if (words.hasOwnProperty(lang)) {
-                        if (words[lang].find(function (reg) {return reg.test(en);})) {
+                        if (words[lang].find(function (reg) { return reg.test(en); })) {
                             found = true;
                             return false;
                         }
@@ -845,6 +856,7 @@ function ChannelDetector() {
         });
         return list;
     }
+
     function getAllStatesInDevice(keys, channelId) {
         var list = [];
         var reg = new RegExp('^' + channelId.replace(/([$^.)([\]{}])/g, '\\$1') + '\\.[^.]+\\.[^.]+$');
@@ -899,6 +911,7 @@ function ChannelDetector() {
             if (statePattern.stateName && !statePattern.stateName.test(id)) {
                 return false;
             }
+
             if (statePattern.unit && statePattern.unit !== objects[id].common.unit) {
                 return false;
             }
@@ -918,9 +931,11 @@ function ChannelDetector() {
             if (statePattern.write !== undefined && statePattern.write !== (objects[id].common.write || false)) {
                 return;
             }
+
             if (statePattern.min === 'number' && typeof objects[id].common.min !== 'number') {
                 return;
             }
+
             if (statePattern.max === 'number' && typeof objects[id].common.max !== 'number') {
                 return;
             }
@@ -1270,6 +1285,7 @@ function ChannelDetector() {
                     }
                 }
             }
+
             context.result.states.forEach(function (state) {
                 if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
                     var m = state.role.exec(
