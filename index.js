@@ -788,7 +788,7 @@ function ChannelDetector() {
         ru: [/ставни/i,     /рольставни/i,  /окна|окно/, /жалюзи/i]
     };
 
-    var blindRoles = ['blind', 'level.blind', 'value.blind', 'action.stop', 'button.stop'];
+    var blindRoles = ['blind', 'level.blind', 'value.blind', 'action.stop', 'button.stop', 'button.stop.blind', 'button.open.blind', 'button.close.blind'];
     function roleOrEnumBlind(obj, enums) {
         return roleOrEnum(obj, enums, blindRoles, blindWords);
     }
