@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
-// Version 1.0.10, 2021.06.07
+// Version 1.0.13, 2021.06.27
 // Keep this file ES5 conform! No const, let, not lambdas => , no ..., no default values for arguments, no let [arg] = abc() and other modern stuff.
 
 // eslint-disable-next-line
@@ -71,13 +71,13 @@ var Types = {
 };
 
 var SharedPatterns = {
-    working:   {role: /^indicator\.working$/,                 indicator: true,                                            name: 'WORKING',            required: false, defaultRole: 'indicator.working', defaultType: 'boolean'},
-    unreach:   {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',                          name: 'UNREACH',            required: false, defaultRole: 'indicator.maintenance.unreach'},
-    lowbat:    {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery$/,  indicator: true,  type: 'boolean',  name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'},
-    maintain:  {role: /^indicator\.maintenance$/,             indicator: true,  type: 'boolean',                          name: 'MAINTAIN',           required: false, defaultRole: 'indicator.maintenance'},
-    error:     {role: /^indicator\.error$/,                   indicator: true,                                            name: 'ERROR',              required: false, defaultRole: 'indicator.error', defaultType: 'string'},
-    direction: {role: /^indicator\.direction$/,               indicator: true,                                            name: 'DIRECTION',          required: false, defaultRole: 'indicator.direction'},
-    reachable: {role: /^indicator\.reachable$/,               indicator: true,  type: 'boolean',                          name: 'CONNECTED',          required: false, defaultRole: 'indicator.reachable', inverted: true},
+    working:   {role: /^indicator\.working$/,                 indicator: true,                    notSingle: true, name: 'WORKING',   required: false, defaultRole: 'indicator.working', defaultType: 'boolean'},
+    unreach:   {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: 'boolean',  notSingle: true, name: 'UNREACH',   required: false, defaultRole: 'indicator.maintenance.unreach'},
+    lowbat:    {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery$/, indicator: true,  type: 'boolean', notSingle: true, name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'},
+    maintain:  {role: /^indicator\.maintenance$/,             indicator: true,  type: 'boolean',  notSingle: true, name: 'MAINTAIN',  required: false, defaultRole: 'indicator.maintenance'},
+    error:     {role: /^indicator\.error$/,                   indicator: true,                    notSingle: true, name: 'ERROR',     required: false, defaultRole: 'indicator.error', defaultType: 'string'},
+    direction: {role: /^indicator\.direction$/,               indicator: true,                    notSingle: true, name: 'DIRECTION', required: false, defaultRole: 'indicator.direction'},
+    reachable: {role: /^indicator\.reachable$/,               indicator: true,  type: 'boolean',  notSingle: true, name: 'CONNECTED', required: false, defaultRole: 'indicator.reachable', inverted: true},
 };
 // Description of flags
 // role - RegEx to detect role
@@ -357,16 +357,22 @@ function ChannelDetector() {
             states: [
                 {role: /^switch\.power$/,              indicator: false,     write: true,  type: ['boolean', 'number'],   searchInParent: true,               name: 'POWER',              required: true,  defaultRole: 'switch.power'},
                 // AUTO, ECO, EXPRESS, NORMAL, QUIET
-                {role: /mode\.cleanup$/,               indicator: false,     write: true,  type: 'number',                                                    name: 'MODE',               required: true,  defaultRole: 'level.mode.cleanup', defaultStates: {0: 'AUTO', 1: 'NORMAL', 2: 'QUIET', 3: 'ECO', 4: 'EXPRESS'}},
+                {role: /mode\.cleanup$/,               indicator: false,     write: true,  type: 'number',                searchInParent: true,               name: 'MODE',               required: true,  defaultRole: 'level.mode.cleanup', defaultStates: {0: 'AUTO', 1: 'NORMAL', 2: 'QUIET', 3: 'ECO', 4: 'EXPRESS'}},
                 // optional
-                {role: /mode\.work$/,                  indicator: false,     write: true,  type: 'number',                                                    name: 'WORK_MODE',          required: false, defaultRole: 'level.mode.work',    defaultStates: {0: 'AUTO', 1: 'FAST', 2: 'MEDIUM', 3: 'SLOW', 4: 'TURBO'}},
-                {role: /^value\.water$/,               indicator: false,     write: true,  type: 'number',               unit: '%',                           name: 'WATER',              required: false, defaultRole: 'value.water', defaultUnit: '%'},
-                {role: /^value\.waste$/,               indicator: false,     write: true,  type: 'number',               unit: '%',                           name: 'WASTE',              required: false, defaultRole: 'value.waste', defaultUnit: '%'},
-                {role: /^value\.battery$/,             indicator: false,     write: true,  type: 'number',               unit: '%',                           name: 'BATTERY',            required: false, defaultRole: 'value.battery', defaultUnit: '%'},
-                {role: /^value\.state$/,               indicator: false,     write: true,  type: ['number', 'string'],                                        name: 'STATE',              required: false, defaultRole: 'value.state'},
+                {role: /vacuum\.map\.base64$/,         indicator: false,     write: false, type: 'string',                searchInParent: true,               name: 'MAP_BASE64',         required: false, defaultRole: 'vacuum.map.base64'},
+                {role: /vacuum\.map\.url$/,            indicator: false,     write: false, type: 'string',                searchInParent: true,               name: 'MAP_URL',            required: false},
+                {role: /mode\.work$/,                  indicator: false,     write: true,  type: 'number',                searchInParent: true,               name: 'WORK_MODE',          required: false, defaultRole: 'level.mode.work',    defaultStates: {0: 'AUTO', 1: 'FAST', 2: 'MEDIUM', 3: 'SLOW', 4: 'TURBO'}},
+                {role: /^value\.water$/,               indicator: false,     write: false, type: 'number',                searchInParent: true, unit: '%',    name: 'WATER',              required: false, defaultRole: 'value.water',   defaultUnit: '%'},
+                {role: /^value\.waste$/,               indicator: false,     write: false, type: 'number',                searchInParent: true, unit: '%',    name: 'WASTE',              required: false, defaultRole: 'value.waste',   defaultUnit: '%'},
+                {role: /^value\.battery$/,             indicator: false,     write: false, type: 'number',                searchInParent: true, unit: '%',    name: 'BATTERY',            required: false, defaultRole: 'value.battery', defaultUnit: '%'},
+                {role: /^value\.state$/,               indicator: false,     write: false, type: ['number', 'string'],    searchInParent: true,               name: 'STATE',              required: false, defaultRole: 'value.state'},
                 {role: /^switch\.pause$/,              indicator: false,     write: true,  type: 'boolean',               searchInParent: true,               name: 'PAUSE',              required: false, defaultRole: 'switch.pause'},
-                {role: /^indicator(\.maintenance)?\.waste$|^indicator(\.alarm)?\.waste/,  indicator: true,  type: 'boolean',                                  name: 'WASTE_ALARM',        required: false, defaultRole: 'indicator.maintenance.waste'},
-                {role: /^indicator(\.maintenance)?\.water$|^indicator(\.alarm)?\.water/,  indicator: true,  type: 'boolean',                                  name: 'WATER_ALARM',        required: false, defaultRole: 'indicator.maintenance.water'},
+                {role: /^indicator(\.maintenance)?\.waste$|^indicator(\.alarm)?\.waste/,  indicator: true,  type: 'boolean', searchInParent: true,            name: 'WASTE_ALARM',        required: false, defaultRole: 'indicator.maintenance.waste'},
+                {role: /^indicator(\.maintenance)?\.water$|^indicator(\.alarm)?\.water/,  indicator: true,  type: 'boolean', searchInParent: true,            name: 'WATER_ALARM',        required: false, defaultRole: 'indicator.maintenance.water'},
+                {role: /^value(\.usage)?\.filter/,     indicator: true,                    type: 'number',                searchInParent: true,               name: 'FILTER',             required: false, defaultRole: 'value.usage.filter', defaultUnit: '%'},
+                {role: /^value(\.usage)?\.brush/,      indicator: true,                    type: 'number',                searchInParent: true,               name: 'BRUSH',              required: false, defaultRole: 'value.usage.brush', defaultUnit: '%'},
+                {role: /^value(\.usage)?\.sensors/,    indicator: true,                    type: 'number',                searchInParent: true,               name: 'SENSORS',            required: false, defaultRole: 'value.usage.sensors', defaultUnit: '%'},
+                {role: /^value(\.usage)?\.brush\.side/,indicator: true,                    type: 'number',                searchInParent: true,               name: 'SIDE_BRUSH',         required: false, defaultRole: 'value.usage.brush.side', defaultUnit: '%'},
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
                 SharedPatterns.maintain,

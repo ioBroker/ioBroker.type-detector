@@ -55,6 +55,10 @@ if (controls) {
 -->
 
 ## Changelog
+### 1.0.13 (2021-06-27)
+* (bluefox) Changed the air conditioner detection
+* (Garfonso) Corrected blind with buttons
+
 ### 1.0.12 (2021-06-16)
 * (bluefox) Changed the air conditioner detection
 * (Garfonso) Corrected blind with buttons

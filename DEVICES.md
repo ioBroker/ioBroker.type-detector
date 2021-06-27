@@ -373,14 +373,20 @@ What is not important for detection:
 |---|-------------|-------------------------------|------|----------------|----|-----|------|--------------------------------------------------------------------------------|
 | * | POWER       | switch.power                  |      | boolean/number | W  |     |      | ``/^switch\.power$/``                                                          |
 | * | MODE        | level.mode.cleanup            |      | number         | W  |     |      | ``/mode\.cleanup$/``                                                           |
+|   | MAP_BASE64  | vacuum.map.base64             |      | string         | -  |     |      | ``/vacuum\.map\.base64$/``                                                     |
+|   | MAP_URL     |                               |      | string         | -  |     |      | ``/vacuum\.map\.url$/``                                                        |
 |   | WORK_MODE   | level.mode.work               |      | number         | W  |     |      | ``/mode\.work$/``                                                              |
-|   | WATER       | value.water                   | %    | number         | W  |     |      | ``/^value\.water$/``                                                           |
-|   | WASTE       | value.waste                   | %    | number         | W  |     |      | ``/^value\.waste$/``                                                           |
-|   | BATTERY     | value.battery                 | %    | number         | W  |     |      | ``/^value\.battery$/``                                                         |
-|   | STATE       | value.state                   |      | number/string  | W  |     |      | ``/^value\.state$/``                                                           |
+|   | WATER       | value.water                   | %    | number         | -  |     |      | ``/^value\.water$/``                                                           |
+|   | WASTE       | value.waste                   | %    | number         | -  |     |      | ``/^value\.waste$/``                                                           |
+|   | BATTERY     | value.battery                 | %    | number         | -  |     |      | ``/^value\.battery$/``                                                         |
+|   | STATE       | value.state                   |      | number/string  | -  |     |      | ``/^value\.state$/``                                                           |
 |   | PAUSE       | switch.pause                  |      | boolean        | W  |     |      | ``/^switch\.pause$/``                                                          |
 |   | WASTE_ALARM | indicator.maintenance.waste   |      | boolean        |    | X   |      | ``/^indicator(\.maintenance)?\.waste$｜^indicator(\.alarm)?\.waste/``           |
 |   | WATER_ALARM | indicator.maintenance.water   |      | boolean        |    | X   |      | ``/^indicator(\.maintenance)?\.water$｜^indicator(\.alarm)?\.water/``           |
+|   | FILTER      | value.usage.filter            | %    | number         |    | X   |      | ``/^value(\.usage)?\.filter/``                                                 |
+|   | BRUSH       | value.usage.brush             | %    | number         |    | X   |      | ``/^value(\.usage)?\.brush/``                                                  |
+|   | SENSORS     | value.usage.sensors           | %    | number         |    | X   |      | ``/^value(\.usage)?\.sensors/``                                                |
+|   | SIDE_BRUSH  | value.usage.brush.side        | %    | number         |    | X   |      | ``/^value(\.usage)?\.brush\.side/``                                            |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean        |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean        |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
 |   | MAINTAIN    | indicator.maintenance         |      | boolean        |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
