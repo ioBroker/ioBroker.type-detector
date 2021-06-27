@@ -20,7 +20,7 @@ Fields:
 
 Restrictions:
 - Blinds are always opened with 100% and closed with 0%.
-- Switch is always boolean and so can have only `true` and `false` values. Not 0 / 1, `ON / OFF`.
+- Switch is always boolean and so can have only `true` and `false` values. Not `0 / 1` or `ON / OFF`.
 
 What is not important for detection:
 - Name - name of functionality in the device 
@@ -535,7 +535,7 @@ To detect these devices, it must belong to one of following category (any regex 
 - **ru**: ``/ставни/i``, ``/рольставни/i``, ``/окна|окно/``, ``/жалюзи/i``
 
 Or has one of the roles: 
-`blind`, `level.blind`, `value.blind`, `action.stop`, `button.stop`
+`blind`, `level.blind`, `value.blind`, `action.stop`, `button.stop`, `button.stop.blind`, `button.open.blind`, `button.close.blind`
 
 ### gate
 To detect these devices, it must belong to one of following category (any regex in any language):
