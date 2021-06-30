@@ -37,6 +37,7 @@ var Types = {
     buttonSensor: 'buttonSensor',
     camera: 'camera',
     url: 'url',
+    chart: 'chart',
     image: 'image',
     dimmer: 'dimmer',
     door: 'door',
@@ -110,6 +111,12 @@ function ChannelDetector() {
     }
 
     var patterns = {
+        chart: {
+            states: [
+                {objectType: 'chart', name: 'CHART'}
+            ],
+            type: Types.chart
+        },
         mediaPlayer: {
             // receive the state of player via media.state. Controlling of the player via buttons
             states: [
@@ -528,7 +535,7 @@ function ChannelDetector() {
         },
         fireAlarm: {
             states: [
-                {role: /^state(\.alarm)?\.fire$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.fire$/, defaultRole: 'sensor.alarm.fire'},
+                {role: /^state(\.alarm)?\.fire$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.fire$/, defaultRole: 'sensor.alarm.fire', defaultChannelRole: 'sensor.alarm.fire'},
                 // optional
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
@@ -540,7 +547,7 @@ function ChannelDetector() {
         },
         floodAlarm: {
             states: [
-                {role: /^state(\.alarm)?\.flood$|^sensor(\.alarm)?\.flood/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.flood$/, defaultRole: 'sensor.alarm.flood'},
+                {role: /^state(\.alarm)?\.flood$|^sensor(\.alarm)?\.flood/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.flood$/, defaultRole: 'sensor.alarm.flood', defaultChannelRole: 'sensor.alarm.flood'},
                 // optional
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
@@ -857,8 +864,8 @@ function ChannelDetector() {
     function getAllStatesInChannel(keys, channelId) {
         var list = [];
         var reg = new RegExp('^' + channelId.replace(/([$^.)([\]{}])/g, '\\$1') + '\\.[^.]+$');
-        keys.forEach(function(_id) {
-            if (reg.test(_id)) list.push(_id);
+        keys.forEach(function (_id) {
+            reg.test(_id) && list.push(_id);
         });
         return list;
     }
@@ -911,7 +918,11 @@ function ChannelDetector() {
                 }
             }
             if (role === false) {
-                return;
+                return false;
+            }
+
+            if (statePattern.objectType && objects[id].type !== statePattern.objectType) {
+                return false;
             }
 
             if (statePattern.stateName && !statePattern.stateName.test(id)) {
@@ -923,37 +934,37 @@ function ChannelDetector() {
             }
 
             if (statePattern.ignoreRole && statePattern.ignoreRole.test(objects[id].common.role)) {
-                return;
+                return false;
             }
 
             if (statePattern.indicator === false && (objects[id].common.role || '').match(/^indicator(\.[.\w]+)?$/)) {
-                return;
+                return false;
             }
 
             if (statePattern.state && !statePattern.state.test(id.split('.').pop())) {
-                return;
+                return false;
             }
 
             if (statePattern.write !== undefined && statePattern.write !== (objects[id].common.write || false)) {
-                return;
+                return false;
             }
 
             if (statePattern.min === 'number' && typeof objects[id].common.min !== 'number') {
-                return;
+                return false;
             }
 
             if (statePattern.max === 'number' && typeof objects[id].common.max !== 'number') {
-                return;
+                return false;
             }
 
             if (statePattern.read !== undefined && statePattern.read !== (objects[id].common.read === undefined ? true : objects[id].common.read)) {
-                return;
+                return false;
             }
 
             if (statePattern.type) {
                 if (typeof statePattern.type === 'string') {
                     if (statePattern.type !== objects[id].common.type) {
-                        return;
+                        return false;
                     }
                 } else {
                     var noOneOk = true;
@@ -964,7 +975,7 @@ function ChannelDetector() {
                         }
                     }
                     if (noOneOk) {
-                        return;
+                        return false;
                     }
                 }
             }
@@ -972,7 +983,7 @@ function ChannelDetector() {
             if (statePattern.enums && typeof statePattern.enums === 'function') {
                 var enums = this._getEnumsForId(objects, id);
                 if (!statePattern.enums(objects[id], enums)) {
-                    return;
+                    return false;
                 }
             }
 
@@ -1131,6 +1142,7 @@ function ChannelDetector() {
 
     function getChannelStates(objects, id, keys) {
         switch (objects[id].type) {
+            case 'chart':
             case 'state':
                 return [id];
 

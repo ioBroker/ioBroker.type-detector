@@ -105,6 +105,12 @@ What is not important for detection:
 |   | ERROR            | indicator.error                |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
+### chart
+| R | Name  | Ind | Mult |
+|---|-------|-----|------|
+|   | CHART |     |      |
+
+
 ### Light with color temperature
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|

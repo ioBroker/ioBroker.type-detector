@@ -55,6 +55,9 @@ if (controls) {
 -->
 
 ## Changelog
+### 1.0.14 (2021-06-30)
+* (bluefox) Add chart device
+
 ### 1.0.13 (2021-06-27)
 * (bluefox) Changed the air conditioner detection
 * (Garfonso) Corrected blind with buttons
