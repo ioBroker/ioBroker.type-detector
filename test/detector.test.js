@@ -207,4 +207,30 @@ describe('Test Detector', () => {
 
         done();
     });
+
+    it('Must detect vacuum mihome from states', done => {
+        const detector = new ChannelDetector();
+
+        const objects = require('./mihome-vacuum.0.json');
+
+        Object.keys(objects).forEach(id => objects[id]._id = id);
+
+        const options = {
+            objects,
+            id:                 Object.keys(objects)[0],
+            _keysOptional:      Object.keys(objects),
+            _usedIdsOptional:   [],
+            //allowedTypes:       [Types.airCondition], // for tests
+        };
+
+        const controls = detector.detect(options);
+
+        console.log(JSON.stringify(controls));
+        expect(controls[0].type).to.be.equal(Types.vacuumCleaner);
+
+        const powerId = controls[0].states.find(s => s.name === 'POWER').id;
+        expect(powerId).to.be.equal('mihome-vacuum.0.control.clean_home');
+
+        done();
+    });
 });

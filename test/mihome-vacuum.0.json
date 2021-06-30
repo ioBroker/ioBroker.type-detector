@@ -1,0 +1,787 @@
+{
+    "mihome-vacuum.0": {
+        "_id": "mihome-vacuum.0",
+        "type": "device",
+        "common": {
+            "name": "Vacuum robot",
+            "role": "vacuumCleaner"
+        },
+        "native": {},
+        "from": "system.adapter.mihome-vacuum.0"
+    },
+    "mihome-vacuum.0.cleanmap": {
+        "_id": "mihome-vacuum.0.cleanmap",
+        "type": "channel",
+        "common": {
+            "name": "Map"
+        },
+        "native": {},
+        "user": "system.user.admin"
+    },
+    "mihome-vacuum.0.cleanmap.actualMap": {
+        "_id": "mihome-vacuum.0.cleanmap.actualMap",
+        "type": "state",
+        "common": {
+            "name": "actual Map id",
+            "type": "number",
+            "read": true,
+            "write": true,
+            "desc": "Number off map witch is selected"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.cleanmap.loadMap": {
+        "_id": "mihome-vacuum.0.cleanmap.loadMap",
+        "type": "state",
+        "common": {
+            "name": "load Map",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "load the current Map"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.cleanmap.map64": {
+        "_id": "mihome-vacuum.0.cleanmap.map64",
+        "type": "state",
+        "common": {
+            "name": "Map64",
+            "type": "string",
+            "role": "vacuum.map.base64",
+            "read": true,
+            "write": false,
+            "desc": "Map in a decoded Base64 PNG"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.cleanmap.mapStatus": {
+        "_id": "mihome-vacuum.0.cleanmap.mapStatus",
+        "type": "state",
+        "common": {
+            "name": "actual Map status",
+            "type": "number",
+            "read": true,
+            "write": false,
+            "desc": "Number off map witch is selected",
+            "states": {
+                "0": "None",
+                "1": "WithoutSegments",
+                "2": "??",
+                "3": "WithSegments"
+            }
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.cleanmap.mapURL": {
+        "_id": "mihome-vacuum.0.cleanmap.mapURL",
+        "type": "state",
+        "common": {
+            "name": "MapURL",
+            "type": "string",
+            "role": "vacuum.map.url",
+            "read": true,
+            "write": false,
+            "desc": "Path to actual PNG File"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable": {
+        "_id": "mihome-vacuum.0.consumable",
+        "type": "channel",
+        "common": {
+            "name": "Filters and sensors"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.filter": {
+        "_id": "mihome-vacuum.0.consumable.filter",
+        "type": "state",
+        "common": {
+            "name": "Filter lifetime",
+            "type": "number",
+            "role": "value.usage.filter",
+            "read": true,
+            "write": false,
+            "unit": "%"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.filter_reset": {
+        "_id": "mihome-vacuum.0.consumable.filter_reset",
+        "type": "state",
+        "common": {
+            "role": "button",
+            "name": "Reset filter lifetime",
+            "type": "boolean",
+            "read": false,
+            "write": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.main_brush": {
+        "_id": "mihome-vacuum.0.consumable.main_brush",
+        "type": "state",
+        "common": {
+            "name": "Main brush lifetime",
+            "type": "number",
+            "role": "value.usage.brush",
+            "read": true,
+            "write": false,
+            "unit": "%"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.main_brush_reset": {
+        "_id": "mihome-vacuum.0.consumable.main_brush_reset",
+        "type": "state",
+        "common": {
+            "role": "button",
+            "name": "Reset main brush lifetime",
+            "type": "boolean",
+            "read": false,
+            "write": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.sensors": {
+        "_id": "mihome-vacuum.0.consumable.sensors",
+        "type": "state",
+        "common": {
+            "name": "sensors lifetime",
+            "type": "number",
+            "role": "value.usage.sensors",
+            "read": true,
+            "write": false,
+            "unit": "%"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.sensors_reset": {
+        "_id": "mihome-vacuum.0.consumable.sensors_reset",
+        "type": "state",
+        "common": {
+            "role": "button",
+            "name": "Reset sensors lifetime",
+            "type": "boolean",
+            "read": false,
+            "write": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.side_brush": {
+        "_id": "mihome-vacuum.0.consumable.side_brush",
+        "type": "state",
+        "common": {
+            "name": "side brush lifetime",
+            "type": "number",
+            "role": "value.usage.brush.side",
+            "read": true,
+            "write": false,
+            "unit": "%"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.consumable.side_brush_reset": {
+        "_id": "mihome-vacuum.0.consumable.side_brush_reset",
+        "type": "state",
+        "common": {
+            "role": "button",
+            "name": "Reset side brush lifetime",
+            "type": "boolean",
+            "read": false,
+            "write": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control": {
+        "_id": "mihome-vacuum.0.control",
+        "type": "channel",
+        "common": {
+            "name": "Controls"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.carpet_mode": {
+        "_id": "mihome-vacuum.0.control.carpet_mode",
+        "type": "state",
+        "common": {
+            "name": "Carpet mode",
+            "type": "boolean",
+            "role": "switch",
+            "read": true,
+            "write": true,
+            "desc": "Max fan speed on carpets"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.clean_home": {
+        "_id": "mihome-vacuum.0.control.clean_home",
+        "type": "state",
+        "common": {
+            "name": "Start/Home",
+            "type": "boolean",
+            "role": "switch.power",
+            "read": true,
+            "write": true,
+            "desc": "Start or go home",
+            "smartName": "Staubsauger"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.clearQueue": {
+        "_id": "mihome-vacuum.0.control.clearQueue",
+        "type": "state",
+        "common": {
+            "name": "clear cleaning queue",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "Clear cleaning queue, but not current job"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.fan_power": {
+        "_id": "mihome-vacuum.0.control.fan_power",
+        "type": "state",
+        "common": {
+            "name": "Suction power",
+            "type": "number",
+            "role": "mode.cleanup",
+            "read": true,
+            "write": true,
+            "max": 100,
+            "states": {
+                "5": "5%",
+                "10": "10%",
+                "15": "15%",
+                "20": "20%",
+                "25": "25%",
+                "30": "30%",
+                "35": "35%",
+                "38": "QUIET",
+                "40": "40%",
+                "45": "45%",
+                "50": "50%",
+                "55": "55%",
+                "60": "BALANCED",
+                "65": "65%",
+                "70": "70%",
+                "75": "75%",
+                "77": "TURBO",
+                "80": "80%",
+                "85": "85%",
+                "90": "MAXIMUM",
+                "95": "95%",
+                "100": "100%"
+            }
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.find": {
+        "_id": "mihome-vacuum.0.control.find",
+        "type": "state",
+        "common": {
+            "name": "Find Robot",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "Let the robot say something"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.goTo": {
+        "_id": "mihome-vacuum.0.control.goTo",
+        "type": "state",
+        "common": {
+            "name": "Go to point",
+            "type": "string",
+            "read": true,
+            "write": true,
+            "desc": "let the vacuum go to a point on the map"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.home": {
+        "_id": "mihome-vacuum.0.control.home",
+        "type": "state",
+        "common": {
+            "name": "Go home",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "let the robot return to dock"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.pause": {
+        "_id": "mihome-vacuum.0.control.pause",
+        "type": "state",
+        "common": {
+            "name": "Pause vacuum",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "Pause the actual cleaning"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.pauseResume": {
+        "_id": "mihome-vacuum.0.control.pauseResume",
+        "type": "state",
+        "common": {
+            "name": "Pause/Resume",
+            "type": "boolean",
+            "role": "switch.pause",
+            "read": true,
+            "write": true,
+            "desc": "Pause (true) or resume(false) work"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.resumeRoomClean": {
+        "_id": "mihome-vacuum.0.control.resumeRoomClean",
+        "type": "state",
+        "common": {
+            "name": "Resume paused roomClean",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "Resume paused roomClean"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.resumeZoneClean": {
+        "_id": "mihome-vacuum.0.control.resumeZoneClean",
+        "type": "state",
+        "common": {
+            "name": "Resume paused zoneClean",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "resume zoneClean that has been paused before"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.sound_volume": {
+        "_id": "mihome-vacuum.0.control.sound_volume",
+        "type": "state",
+        "common": {
+            "name": "sound volume",
+            "type": "number",
+            "role": "level.volume",
+            "read": true,
+            "write": true,
+            "unit": "%",
+            "min": 30,
+            "max": 100,
+            "desc": "Sound volume of the Robot"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.sound_volume_test": {
+        "_id": "mihome-vacuum.0.control.sound_volume_test",
+        "type": "state",
+        "common": {
+            "name": "sound volume test",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "let the speaker play sound"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.spotclean": {
+        "_id": "mihome-vacuum.0.control.spotclean",
+        "type": "state",
+        "common": {
+            "name": "Spot Cleaning",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "Start Spot Cleaning",
+            "smartName": "Spot clean"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.start": {
+        "_id": "mihome-vacuum.0.control.start",
+        "type": "state",
+        "common": {
+            "name": "start robot",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "Button to start"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.control.zoneClean": {
+        "_id": "mihome-vacuum.0.control.zoneClean",
+        "type": "state",
+        "common": {
+            "name": "Clean a zone",
+            "type": "string",
+            "read": true,
+            "write": true,
+            "desc": "let the vacuum go to a point and clean a zone"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.deviceInfo": {
+        "_id": "mihome-vacuum.0.deviceInfo",
+        "type": "channel",
+        "common": {
+            "name": "Info about device"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.deviceInfo.fw_ver": {
+        "_id": "mihome-vacuum.0.deviceInfo.fw_ver",
+        "type": "state",
+        "common": {
+            "name": "Device firmware version",
+            "type": "string",
+            "role": "text",
+            "read": true,
+            "write": false
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.deviceInfo.mac": {
+        "_id": "mihome-vacuum.0.deviceInfo.mac",
+        "type": "state",
+        "common": {
+            "name": "Device mac address",
+            "type": "string",
+            "role": "text",
+            "read": true,
+            "write": false
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.deviceInfo.model": {
+        "_id": "mihome-vacuum.0.deviceInfo.model",
+        "type": "state",
+        "common": {
+            "name": "Device model",
+            "type": "string",
+            "role": "text",
+            "read": true,
+            "write": false
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.deviceInfo.wifi_signal": {
+        "_id": "mihome-vacuum.0.deviceInfo.wifi_signal",
+        "type": "state",
+        "common": {
+            "name": "Wifi RSSI",
+            "type": "number",
+            "role": "value.signal.wifi",
+            "read": true,
+            "write": false,
+            "unit": "dBm",
+            "desc": "Wifi signal of the vacuum roboter"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.history": {
+        "_id": "mihome-vacuum.0.history",
+        "type": "channel",
+        "common": {
+            "name": "History"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.history.allTableHTML": {
+        "_id": "mihome-vacuum.0.history.allTableHTML",
+        "type": "state",
+        "common": {
+            "name": "History of clean as HTML",
+            "type": "string",
+            "role": "history",
+            "read": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.history.allTableJSON": {
+        "_id": "mihome-vacuum.0.history.allTableJSON",
+        "type": "state",
+        "common": {
+            "name": "History of clean as JSON",
+            "type": "object",
+            "role": "history",
+            "read": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.history.total_area": {
+        "_id": "mihome-vacuum.0.history.total_area",
+        "type": "state",
+        "common": {
+            "name": "Total area ",
+            "type": "number",
+            "role": "history",
+            "unit": "m²",
+            "read": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.history.total_cleanups": {
+        "_id": "mihome-vacuum.0.history.total_cleanups",
+        "type": "state",
+        "common": {
+            "name": "Total cleanups ",
+            "type": "number",
+            "role": "history",
+            "read": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.history.total_time": {
+        "_id": "mihome-vacuum.0.history.total_time",
+        "type": "state",
+        "common": {
+            "name": "Total time ",
+            "type": "number",
+            "role": "history",
+            "unit": "min.",
+            "read": true
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info": {
+        "_id": "mihome-vacuum.0.info",
+        "type": "channel",
+        "common": {
+            "name": "Information"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.battery": {
+        "_id": "mihome-vacuum.0.info.battery",
+        "type": "state",
+        "common": {
+            "name": "Battery status",
+            "type": "number",
+            "role": "value.battery",
+            "read": true,
+            "write": false,
+            "unit": "%",
+            "max": 100
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.cleanedarea": {
+        "_id": "mihome-vacuum.0.info.cleanedarea",
+        "type": "state",
+        "common": {
+            "name": "Cleaned area",
+            "type": "number",
+            "read": true,
+            "write": false,
+            "unit": "m²"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.cleanedtime": {
+        "_id": "mihome-vacuum.0.info.cleanedtime",
+        "type": "state",
+        "common": {
+            "name": "Cleaning time",
+            "type": "number",
+            "read": true,
+            "write": false,
+            "unit": "min"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.clearQueue": {
+        "_id": "mihome-vacuum.0.info.clearQueue",
+        "type": "state",
+        "common": {
+            "name": "clear cleaning queue",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "Clear cleaning queue, but not current job"
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.connection": {
+        "_id": "mihome-vacuum.0.info.connection",
+        "type": "state",
+        "common": {
+            "role": "indicator.connected",
+            "name": "If connected to CUL",
+            "type": "boolean",
+            "read": true,
+            "write": false
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.dnd": {
+        "_id": "mihome-vacuum.0.info.dnd",
+        "type": "state",
+        "common": {
+            "name": "DnD aktiv",
+            "type": "boolean",
+            "role": "indicator",
+            "read": true,
+            "write": false
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.error": {
+        "_id": "mihome-vacuum.0.info.error",
+        "type": "state",
+        "common": {
+            "name": "Error",
+            "type": "number",
+            "read": true,
+            "write": false,
+            "max": 30,
+            "states": {
+                "0": "No error",
+                "1": "Laser distance sensor error",
+                "2": "Collision sensor error",
+                "3": "Wheels on top of void, move robot",
+                "4": "Clean hovering sensors, move robot",
+                "5": "Clean main brush",
+                "6": "Clean side brush",
+                "7": "Main wheel stuck?",
+                "8": "Device stuck, clean area",
+                "9": "Dust collector missing",
+                "10": "Clean filter",
+                "11": "Stuck in magnetic barrier",
+                "12": "Low battery",
+                "13": "Charging fault",
+                "14": "Battery fault",
+                "15": "Wall sensors dirty, wipe them",
+                "16": "Place me on flat surface",
+                "17": "Side brushes problem, reboot me",
+                "18": "Suction fan problem",
+                "19": "Unpowered charging station"
+            }
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.nextTimer": {
+        "type": "state",
+        "common": {
+            "name": "next timer",
+            "type": "string",
+            "role": "info",
+            "read": true,
+            "write": false
+        },
+        "native": {},
+        "_id": "mihome-vacuum.0.info.nextTimer"
+    },
+    "mihome-vacuum.0.info.queue": {
+        "_id": "mihome-vacuum.0.info.queue",
+        "type": "state",
+        "common": {
+            "name": "Cleaning Queue",
+            "type": "object",
+            "role": "info",
+            "read": true,
+            "write": false
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.info.state": {
+        "_id": "mihome-vacuum.0.info.state",
+        "type": "state",
+        "common": {
+            "name": "Vacuum state",
+            "type": "number",
+            "role": "value.state",
+            "read": true,
+            "write": false,
+            "max": 30,
+            "states": {
+                "0": "Unknown",
+                "1": "Initiating",
+                "2": "Sleeping",
+                "3": "Waiting",
+                "4": "?",
+                "5": "Cleaning",
+                "6": "Back to home",
+                "7": "Manuell mode",
+                "8": "Charging",
+                "9": "Charging Erro",
+                "10": "Pause",
+                "11": "Spot Cleaning",
+                "12": "In Error",
+                "13": "Shutting down",
+                "14": "Updating",
+                "15": "Docking",
+                "16": "Going to Spot",
+                "17": "Zone cleaning",
+                "18": "Room cleaning"
+            }
+        },
+        "native": {}
+    },
+    "mihome-vacuum.0.rooms.addRoom": {
+        "type": "state",
+        "common": {
+            "name": "insert map Index or zone coordinates",
+            "type": "string",
+            "role": "value",
+            "read": true,
+            "write": true,
+            "desc": "add roos manual with map Index or zone coordinates"
+        },
+        "native": {},
+        "_id": "mihome-vacuum.0.rooms.addRoom"
+    },
+    "mihome-vacuum.0.rooms.loadRooms": {
+        "type": "state",
+        "common": {
+            "name": "load rooms from robot",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "loads id's from stored rooms"
+        },
+        "native": {},
+        "_id": "mihome-vacuum.0.rooms.loadRooms"
+    },
+    "mihome-vacuum.0.rooms.multiRoomClean": {
+        "type": "state",
+        "common": {
+            "name": "clean assigned rooms",
+            "type": "boolean",
+            "role": "button",
+            "read": false,
+            "write": true,
+            "desc": "clean all rooms, which are connected to this datapoint"
+        },
+        "native": {},
+        "_id": "mihome-vacuum.0.rooms.multiRoomClean"
+    },
+    "mihome-vacuum.0.timer": {
+        "id": "mihome-vacuum.0.timer",
+        "type": "channel",
+        "native": {},
+        "common": {
+            "name": "next timer: not available"
+        },
+        "_id": "mihome-vacuum.0.timer"
+    }
+}
