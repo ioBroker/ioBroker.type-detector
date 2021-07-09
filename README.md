@@ -55,6 +55,10 @@ if (controls) {
 -->
 
 ## Changelog
+### __WORK IN PROGRESS__
+* (algar42) extend weather forecast device with TIME_SUNRISE and TIME_SUNSET
+* (Garfonso) added weatherForecast tests
+
 ### 1.0.14 (2021-06-30)
 * (bluefox) Add chart device
 
