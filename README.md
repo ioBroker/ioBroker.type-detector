@@ -55,7 +55,7 @@ if (controls) {
 -->
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 1.0.15 (2021-07-09)
 * (algar42) extend weather forecast device with TIME_SUNRISE and TIME_SUNSET
 * (Garfonso) added weatherForecast tests
 

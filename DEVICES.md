@@ -474,6 +474,8 @@ What is not important for detection:
 |   | TEMP                   | value.temperature.forecast.0           |       | number |     |      | ``/^value.temperature$｜^value.temperature.forecast.0$/``                     |
 |   | PRESSURE               | weather.icon.forecast.0                |       | number |     |      | ``/^value.pressure$/``                                                       |
 |   | HUMIDITY               | value.humidity.forecast.0              |       | number |     |      | ``/^value.humidity$｜value.humidity.forecast.0$/``                            |
+|   | TIME_SUNRISE           | time.sunrise                           |       | string |     |      | ``/^time.sunrise$｜^time.sunrise.forecast.0$/``                               |
+|   | TIME_SUNSET            | time.sunset                            |       | string |     |      | ``/^time.sunset$｜^time.sunset.forecast.0$/``                                 |
 |   | WIND_CHILL             | value.temperature.windchill.forecast.0 |       | number |     |      | ``/^value.temperature.windchill$｜^value.temperature.windchill.forecast.0$/`` |
 |   | FEELS_LIKE             | value.temperature.feelslike.forecast.0 |       | number |     |      | ``/^value.temperature.feelslike$｜^value.temperature.feelslike.forecast.0$/`` |
 |   | WIND_SPEED             | value.speed.wind.forecast.0            |       | number |     |      | ``/^value.speed.wind$｜^value.speed.wind.forecast.0$/``                       |
