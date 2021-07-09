@@ -156,7 +156,7 @@ function ChannelDetector() {
             ],
             type: Types.media
         },
-        weatherForecast : {
+        weatherForecast: {
             states: [
                 {role: /^weather.icon$|^weather.icon.forecast.0$/,                   indicator: false, type: 'string',  name: 'ICON',          required: true, defaultRole: 'weather.icon.forecast.0'},
                 {role: /^value.temperature.min.forecast.0$/,                         indicator: false, type: 'number',  name: 'TEMP_MIN',      required: true, defaultRole: 'value.temperature.min.forecast.0'},
