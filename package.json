@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.type-detector/issues"
   },
-  "main": "main.js",
+  "main": "index.js",
   "files": [
     "LICENSE",
     "index.js"

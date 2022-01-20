@@ -55,7 +55,7 @@ if (controls) {
 -->
 
 ## Changelog
-### 1.0.16 (2022-01-20)
+### __WORK IN PROGRESS__
 * (bluefox) Fixed main attribute in package.json
 
 ### 1.0.15 (2021-07-09)
