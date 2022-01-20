@@ -125,6 +125,6 @@ if (controls) {
 
 
 ## License
-Copyright (c) 2018-2021 Bluefox <dogafox@gmail.com>
+Copyright (c) 2018-2022 Bluefox <dogafox@gmail.com>
 
 MIT License

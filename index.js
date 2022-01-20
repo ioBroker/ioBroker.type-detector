@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2021 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2022 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -170,7 +170,7 @@ function ChannelDetector() {
                 {role: /^value.temperature$|^value.temperature.forecast.0$/,         indicator: false, type: 'number',  name: 'TEMP',          required: false, defaultRole: 'value.temperature.forecast.0'},
                 {role: /^value.pressure$/,                                           indicator: false, type: 'number',  name: 'PRESSURE',      required: false, defaultRole: 'weather.icon.forecast.0'},
                 {role: /^value.humidity$|value.humidity.forecast.0$/,                indicator: false, type: 'number',  name: 'HUMIDITY',      required: false, defaultRole: 'value.humidity.forecast.0'},
-                
+
                 {role: /^time.sunrise$|^time.sunrise.forecast.0$/,                   indicator: false, type: 'string',  name: 'TIME_SUNRISE',  required: false, defaultRole: 'time.sunrise'},
                 {role: /^time.sunset$|^time.sunset.forecast.0$/,                     indicator: false, type: 'string',  name: 'TIME_SUNSET',   required: false, defaultRole: 'time.sunset'},
 

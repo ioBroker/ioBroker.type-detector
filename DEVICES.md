@@ -7,7 +7,7 @@ Fields:
 - **Name** - Name describes the function of a state in a channel or in a device and is not 
   connected to the name of the ioBroker state. 
   Important is that role, enum, type, and write attribute are the same as in the table.
-- **Role** - Optimal role of the state. But it could variate. Check the regex to be sure if the role is suitable.
+- **Role** - Optimal role of the state. But it could vary. Check the regex to be sure if the role is suitable.
 - **Unit** - Desired unit. After the slash is a *required unit*.
 - **Type** - Required type
 - **Wr** - (writable) Is the state must be writable or not. 'W' - must be writable, '-' - must be not writeable.

@@ -46,6 +46,7 @@ jobs:
       #   run: npm run lint
 #      - name: Test package files
 #        run: npm run test:package
+
   # Runs adapter tests on all supported node versions and OSes
   adapter-tests:
     if: contains(github.event.head_commit.message, '[skip ci]') == false
@@ -55,7 +56,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x, 16.x]
         os: [ubuntu-latest]
 
     steps:
@@ -69,7 +70,11 @@ jobs:
         run: npm install
 
       - name: Run local tests
-        run: npm test
+        #         npm downgrade to 6 (mainly for node.js 16) is needed because else testing fails
+        #         after installing additional adapters
+        run: |
+          npm install -g npm@6
+          npm test
 #      - name: Run unit tests
 #        run: npm run test:unit
 #      - name: Run integration tests # (linux/osx)
@@ -87,12 +92,11 @@ jobs:
     if: |
       contains(github.event.head_commit.message, '[skip ci]') == false &&
       github.event_name == 'push' &&
-      github.event.base_ref == 'refs/heads/master' &&
       startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - name: Checkout code
@@ -120,6 +124,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build
+        run: npm run build
+
+#      - name: Create a clean build
+#        run: npm run build
       - name: Publish package to npm
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
@@ -134,7 +143,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release v${{ steps.extract_release.outputs.VERSION }}
           draft: false
-          # Prerelease versions create pre-releases on Github
+          # Prerelease versions create pre-releases on GitHub
           prerelease: ${{ contains(steps.extract_release.outputs.VERSION, '-') }}
           body: ${{ steps.extract_release.outputs.BODY }}
 
