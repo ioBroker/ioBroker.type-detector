@@ -55,7 +55,7 @@ if (controls) {
 -->
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 1.0.16 (2022-01-20)
 * (bluefox) Fixed main attribute in package.json
 
 ### 1.0.15 (2021-07-09)
@@ -125,7 +125,6 @@ if (controls) {
 
 ### 0.1.0 (2018-08-14)
 * (bluefox) initial commit
-
 
 ## License
 Copyright (c) 2018-2022 Bluefox <dogafox@gmail.com>
