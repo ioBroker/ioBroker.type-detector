@@ -55,12 +55,15 @@ if (controls) {
 -->
 
 ## Changelog
+### __WORK IN PROGRESS__
+* (bluefox) Fixed main attribute in package.json
+
 ### 1.0.15 (2021-07-09)
 * (algar42) extend weather forecast device with TIME_SUNRISE and TIME_SUNSET
 * (Garfonso) added weatherForecast tests
 
 ### 1.0.14 (2021-06-30)
-* (bluefox) Add chart device
+* (bluefox) Added chart device
 
 ### 1.0.13 (2021-06-27)
 * (bluefox) Changed the air conditioner detection
@@ -92,11 +95,11 @@ if (controls) {
 
 ### 1.0.0 (2020-08-10)
 * (Garfonso) The switch could have the boolean type 
-* (Garfonso) Fixed level.dimspeed issue
+* (Garfonso) Fixed `level.dimspeed` issue
 
 ### 0.1.10 (2020-06-23)
-* (bluefox) Ignore level.dimspeed for dimmer
-* (bluefox) Add new type button.press
+* (bluefox) Ignore `level.dimspeed` for dimmer
+* (bluefox) Added new type `button.press`
 
 ### 0.1.9 (2020-01-12)
 * (Garfonso) Added "white" to rgb
@@ -117,8 +120,8 @@ if (controls) {
 * (kirovilya) In some cases, devices may not have channels, but immediately have a states. For example in the zigbee-adapter.
 
 ### 0.1.1 (2019-05-24)
-* (bluefox) add PRECIPITATION to weather
-* (bluefox) add location detection
+* (bluefox) added PRECIPITATION to weather
+* (bluefox) added location detection
 
 ### 0.1.0 (2018-08-14)
 * (bluefox) initial commit
