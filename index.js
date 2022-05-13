@@ -799,7 +799,7 @@ function ChannelDetector() {
 // -------------- BLINDS -----------------------------------------
     var blindWords = {
         en: [/blinds?/i,    /windows?/i,    /shutters?/i],
-        de: [/rollladen?/i, /fenstern?/i,   /beschattung(en)?/i, /jalousie(en)/i],
+        de: [/rollladen?/i, /fenstern?/i,   /beschattung(en)?/i, /jalousien?/i],
         ru: [/ставни/i,     /рольставни/i,  /окна|окно/, /жалюзи/i]
     };
 
