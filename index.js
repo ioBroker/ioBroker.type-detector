@@ -799,11 +799,11 @@ function ChannelDetector() {
 // -------------- BLINDS -----------------------------------------
     var blindWords = {
         en: [/blinds?/i,    /windows?/i,    /shutters?/i],
-        de: [/rollladen?/i, /fenstern?/i,   /beschattung(en)?/i],
+        de: [/rollladen?/i, /fenstern?/i,   /beschattung(en)?/i, /jalousie(en)/i],
         ru: [/ставни/i,     /рольставни/i,  /окна|окно/, /жалюзи/i]
     };
 
-    var blindRoles = ['blind', 'level.blind', 'value.blind', 'action.stop', 'button.stop', 'button.stop.blind', 'button.open.blind', 'button.close.blind'];
+    var blindRoles = ['blind', 'level.blind', 'value.blind', 'action.stop', 'button.stop', 'button.stop.blind', 'button.open.blind', 'button.close.blind', 'level.tilt', 'value.tilt', 'button.tilt.open', 'button.tilt.close', 'button.tilt.stop'];
     function roleOrEnumBlind(obj, enums) {
         return roleOrEnum(obj, enums, blindRoles, blindWords);
     }
