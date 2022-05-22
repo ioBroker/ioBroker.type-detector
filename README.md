@@ -51,10 +51,13 @@ if (controls) {
 
 <!--
 	Placeholder for the next version (at the beginning of the line):
-	### __WORK IN PROGRESS__
+	### **WORK IN PROGRESS**
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (Garfonso) blinds: corrected error in default role for tilt
+
 ### 1.0.17 (2022-01-20)
 * (bluefox) Fixed main attribute in package.json
 
