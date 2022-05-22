@@ -55,7 +55,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 1.1.0 (2022-05-22)
 * (Garfonso) blinds: corrected error in default role for tilt
 
 ### 1.0.17 (2022-01-20)

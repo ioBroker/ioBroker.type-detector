@@ -53,14 +53,14 @@ What is not important for detection:
 ### Blinds controlled only by buttons
 | R | Name        | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
-| * | STOP        | button.blind.stop             | boolean | W  |     |      | ``/^button\.stop(\.blind)?$｜^action\.stop$/``                                  |
-| * | OPEN        | button.blind.open             | boolean | W  |     |      | ``/^button\.open(\.blind)?$/``                                                 |
-| * | CLOSE       | button.blind.close            | boolean | W  |     |      | ``/^button\.close(\.blind)?$/``                                                |
-|   | TILT_SET    | level.open.tilt               | number  | W  |     |      | ``/^level\.tilt$/``                                                            |
-|   | TILT_ACTUAL | value.open.tilt               | number  |    |     |      | ``/^value\.tilt$/``                                                            |
-|   | TILT_STOP   | button.tilt.stop              | boolean | W  |     |      | ``/^button\.stop\.tilt$/``                                                     |
-|   | TILT_OPEN   | button.tilt.open              | boolean | W  |     |      | ``/^button\.open\.tilt$/``                                                     |
-|   | TILT_CLOSE  | button.tilt.close             | boolean | W  |     |      | ``/^button\.close\.tilt$/``                                                    |
+| * | STOP        | button.stop.blind             | boolean | W  |     |      | ``/^button\.stop(\.blind)?$｜^action\.stop$/``                                  |
+| * | OPEN        | button.open.blind             | boolean | W  |     |      | ``/^button\.open(\.blind)?$/``                                                 |
+| * | CLOSE       | button.close.blind            | boolean | W  |     |      | ``/^button\.close(\.blind)?$/``                                                |
+|   | TILT_SET    | level.tilt                    | number  | W  |     |      | ``/^level\.tilt$/``                                                            |
+|   | TILT_ACTUAL | value.tilt                    | number  |    |     |      | ``/^value\.tilt$/``                                                            |
+|   | TILT_STOP   | button.stop.tilt              | boolean | W  |     |      | ``/^button\.stop\.tilt$/``                                                     |
+|   | TILT_OPEN   | button.open.tilt              | boolean | W  |     |      | ``/^button\.open\.tilt$/``                                                     |
+|   | TILT_CLOSE  | button.close.tilt             | boolean | W  |     |      | ``/^button\.close\.tilt$/``                                                    |
 |   | DIRECTION   | indicator.direction           |         |    | X   |      | ``/^indicator\.direction$/``                                                   |
 |   | WORKING     | indicator.working             |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH     | indicator.maintenance.unreach | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
@@ -536,7 +536,7 @@ Or has one of the roles:
 ### window
 To detect these devices, it must belong to one of following category (any regex in any language):
 - **en**: ``/blinds?/i``, ``/windows?/i``, ``/shutters?/i``
-- **de**: ``/rollladen?/i``, ``/fenstern?/i``, ``/beschattung(en)?/i``
+- **de**: ``/rollladen?/i``, ``/fenstern?/i``, ``/beschattung(en)?/i``, ``/jalousien?/i``
 - **ru**: ``/ставни/i``, ``/рольставни/i``, ``/окна|окно/``, ``/жалюзи/i``
 
 Or has one of the roles: 
@@ -545,11 +545,11 @@ Or has one of the roles:
 ### blind
 To detect these devices, it must belong to one of following category (any regex in any language):
 - **en**: ``/blinds?/i``, ``/windows?/i``, ``/shutters?/i``
-- **de**: ``/rollladen?/i``, ``/fenstern?/i``, ``/beschattung(en)?/i``
+- **de**: ``/rollladen?/i``, ``/fenstern?/i``, ``/beschattung(en)?/i``, ``/jalousien?/i``
 - **ru**: ``/ставни/i``, ``/рольставни/i``, ``/окна|окно/``, ``/жалюзи/i``
 
 Or has one of the roles: 
-`blind`, `level.blind`, `value.blind`, `action.stop`, `button.stop`, `button.stop.blind`, `button.open.blind`, `button.close.blind`
+`blind`, `level.blind`, `value.blind`, `action.stop`, `button.stop`, `button.stop.blind`, `button.open.blind`, `button.close.blind`, `level.tilt`, `value.tilt`, `button.tilt.open`, `button.tilt.close`, `button.tilt.stop`
 
 ### gate
 To detect these devices, it must belong to one of following category (any regex in any language):
