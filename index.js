@@ -56,6 +56,7 @@ var Types = {
     ct: 'ct',
     rgbSingle: 'rgbSingle',
     hue: 'hue',
+    cie: 'cie',
     slider: 'slider',
     socket: 'socket',
     temperature: 'temperature',
@@ -269,6 +270,24 @@ function ChannelDetector() {
                 SharedPatterns.error
             ],
             type: Types.rgbSingle
+        },
+        cie: {
+            states: [
+                {role: /^level\.color\.cie$/,                             indicator: false, type: 'string',  write: true,           name: 'CIE',           required: true,   defaultRole: 'level.color.cie'},
+                // optional
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer'},
+                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false,  defaultRole: 'level.brightness', defaultUnit: '%'},
+                {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false,  defaultRole: 'level.color.saturation'},
+                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature', defaultUnit: '°K'},
+                {role: /^switch(\.light)?$/,                              indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
+                {role: /^(state|switch|sensor)\.light|switch$/,           indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false,  defaultRole: 'sensor.light'},
+                SharedPatterns.working,
+                SharedPatterns.unreach,
+                SharedPatterns.lowbat,
+                SharedPatterns.maintain,
+                SharedPatterns.error
+            ],
+            type: Types.cie
         },
         hue: {
             states: [
