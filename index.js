@@ -275,7 +275,7 @@ function ChannelDetector() {
             states: [
                 {role: /^level\.color\.cie$/,                             indicator: false, type: 'string',  write: true,           name: 'CIE',           required: true,   defaultRole: 'level.color.cie'},
                 // optional
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer'},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer', defaultUnit: '%'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false,  defaultUnit: '%'},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
                 {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature', defaultUnit: '°K'},
