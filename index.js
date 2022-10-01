@@ -1185,13 +1185,18 @@ function ChannelDetector() {
         for (var a = 0; a < states.length; a++) {
             if (states[a] instanceof Array) {
                 // one of
+                let required = false;
+                let found = false;
                 for (var b = 0; b < states[a].length; b++) {
-                    if (states[a][b].required && states[a].id) {
-                        return true;
+                    required = required || states[a][b].required;
+                    if (states[a].id) {
+                        found = true;
+                        break;
                     }
                 }
-
-                return false;
+                if (required && !found) {
+                    return false;
+                }
             } else {
                 if (states[a].required && !states[a].id) {
                     return false;
@@ -1246,14 +1251,16 @@ function ChannelDetector() {
 
                 // one of following
                 if (state instanceof Array) {
+                    let required = false;
                     for (var s = 0; s < state.length; s++) {
                         context.state = state[s];
+                        required = required || context.state.required; //if one required, require one of the array to be found.
                         if (this._testOneState(context)) {
                             found = true;
                             break;
                         }
                     }
-                    if (!found) {
+                    if (required && !found) { //only do this, if state is required.
                         context.result = null;
                         return false;
                     }
@@ -1307,7 +1314,7 @@ function ChannelDetector() {
                 }
             }
 
-            context.result.states.forEach(function (state) {
+            function cleanState(state) {
                 if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
                     var m = state.role.exec(
                         context.objects[state.id].common.role
@@ -1327,6 +1334,16 @@ function ChannelDetector() {
                         state.icon = state.original.icon;
                     }
                     delete state.original;
+                }
+            }
+
+            context.result.states.forEach(function (state) {
+                if (state instanceof Array) {
+                    for (const s of state) {
+                        cleanState(s);
+                    }
+                } else {
+                    cleanState(state);
                 }
             });
 
