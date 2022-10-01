@@ -220,7 +220,7 @@ function ChannelDetector() {
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
                 {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature', defaultUnit: '°K'},
                 {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
-                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
                 {role: /^(state|switch|sensor)\.light|switch$/,           indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false,  defaultRole: 'sensor.light'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
