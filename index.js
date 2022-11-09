@@ -102,7 +102,7 @@ var SharedPatterns = {
 // inverted - is state of indicator must be inverted
 // stateName - regex for state names (IDs). Not suggested
 // defaultStates - is for detection irrelevant, but will be used by iobroker.devices.
-// defaultRole - is for detection irrelevant, but will be used by iobroker.devices.
+// defaultRole - is for detection irrelevant, but will be used by iobroker.devices - only states WITH defaultRole will show up in UI.
 // defaultUnit - is for detection irrelevant, but will be used by iobroker.devices.
 // defaultType - is for detection irrelevant, but will be used by iobroker.devices.
 
@@ -221,7 +221,7 @@ function ChannelDetector() {
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
                 {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature', defaultUnit: '°K'},
                 {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
-                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
                 {role: /^(state|switch|sensor)\.light|switch$/,           indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false,  defaultRole: 'sensor.light'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
@@ -256,12 +256,12 @@ function ChannelDetector() {
             states: [
                 {role: /^level\.color\.rgb$/,                             indicator: false, type: 'string',  write: true,           name: 'RGB',           required: true,   defaultRole: 'level.color.rgb'},
                 // optional
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer'},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false,  defaultRole: 'level.dimmer', defaultUnit: '%'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false,  defaultUnit: '%'},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
                 {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultRole: 'level.color.temperature', defaultUnit: '°K'},
                 {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
-                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
                 {role: /^(state|switch|sensor)\.light|switch$/,           indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false,  defaultRole: 'sensor.light'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
@@ -293,12 +293,12 @@ function ChannelDetector() {
             states: [
                 {role: /^level\.color\.hue$/,                             indicator: false, type: 'number',  write: true,           name: 'HUE',           required: true,  defaultRole: 'level.color.hue', defaultUnit: '°'},
                 // optional
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, searchInParent: true, defaultRole: 'level.dimmer', defaultUnit: '°C'},
+                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false, searchInParent: true, defaultRole: 'level.dimmer', defaultUnit: '%'},
                 {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
                 {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
                 {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false, defaultRole: 'level.color.temperature', defaultUnit: '°K'},
                 {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false, defaultRole: 'switch.light'},
-                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false, defaultRole: 'switch.light'},
+                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
                 {role: /^(state|switch|sensor)\.light|switch$/,           indicator: false, type: 'boolean', write: false,          name: 'ON_ACTUAL',     required: false, defaultRole: 'sensor.light'},
                 SharedPatterns.working,
                 SharedPatterns.unreach,
@@ -1204,13 +1204,18 @@ function ChannelDetector() {
         for (var a = 0; a < states.length; a++) {
             if (states[a] instanceof Array) {
                 // one of
+                let required = false;
+                let found = false;
                 for (var b = 0; b < states[a].length; b++) {
-                    if (states[a][b].required && states[a].id) {
-                        return true;
+                    required = required || states[a][b].required;
+                    if (states[a].id) {
+                        found = true;
+                        break;
                     }
                 }
-
-                return false;
+                if (required && !found) {
+                    return false;
+                }
             } else {
                 if (states[a].required && !states[a].id) {
                     return false;
@@ -1265,14 +1270,16 @@ function ChannelDetector() {
 
                 // one of following
                 if (state instanceof Array) {
+                    let required = false;
                     for (var s = 0; s < state.length; s++) {
                         context.state = state[s];
+                        required = required || context.state.required; //if one required, require one of the array to be found.
                         if (this._testOneState(context)) {
                             found = true;
                             break;
                         }
                     }
-                    if (!found) {
+                    if (required && !found) { //only do this, if state is required.
                         context.result = null;
                         return false;
                     }
@@ -1326,7 +1333,7 @@ function ChannelDetector() {
                 }
             }
 
-            context.result.states.forEach(function (state) {
+            function cleanState(state) {
                 if (state.name.indexOf('%d') !== -1 && state.role && state.id) {
                     var m = state.role.exec(
                         context.objects[state.id].common.role
@@ -1346,6 +1353,16 @@ function ChannelDetector() {
                         state.icon = state.original.icon;
                     }
                     delete state.original;
+                }
+            }
+
+            context.result.states.forEach(function (state) {
+                if (state instanceof Array) {
+                    for (const s of state) {
+                        cleanState(s);
+                    }
+                } else {
+                    cleanState(state);
                 }
             });
 
