@@ -1273,13 +1273,13 @@ function ChannelDetector() {
                     let required = false;
                     for (var s = 0; s < state.length; s++) {
                         context.state = state[s];
-                        required = required || context.state.required; //if one required, require one of the array to be found.
+                        required = required || context.state.required; // if one required, require one of the array to be found.
                         if (this._testOneState(context)) {
                             found = true;
                             break;
                         }
                     }
-                    if (required && !found) { //only do this, if state is required.
+                    if (required && !found) { // only do this, if state is required.
                         context.result = null;
                         return false;
                     }

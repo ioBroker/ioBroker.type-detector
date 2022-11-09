@@ -55,6 +55,10 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (Garfonso) corrected the double states in light devices
+* (Garfonso) added CIE color type as equivalent to `rgbSingle` type
+
 ### 1.1.0 (2022-05-22)
 * (Garfonso) blinds: corrected error in default role for tilt
 
