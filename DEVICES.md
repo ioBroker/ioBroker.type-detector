@@ -111,6 +111,23 @@ What is not important for detection:
 |   | CHART |     |      |
 
 
+### cie
+| R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
+|---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
+| * | CIE         | level.color.cie               |      | string  | W  |     |      | ``/^level\.color\.cie$/``                                                      |
+|   | DIMMER      | level.dimmer                  | %    | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
+|   | BRIGHTNESS  |                               | %    | number  | W  |     |      | ``/^level\.brightness$/``                                                      |
+|   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
+|   | TEMPERATURE | level.color.temperature       | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
+|   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch(\.light)?$/``                                                       |
+|   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
+|   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
+|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
+|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN    | indicator.maintenance         |      | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
+
+
 ### Light with color temperature
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
@@ -120,6 +137,7 @@ What is not important for detection:
 |   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
 |   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
 |   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
+|   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
 |   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
@@ -133,7 +151,7 @@ What is not important for detection:
 | * | SET       | level.dimmer                  | %    | number  | W  |     |      | ``/^level(\.dimmer)?$｜^level\.brightness$/``                                   |
 |   | ACTUAL    | value.dimmer                  | %    | number  | -  |     |      | ``/^value(\.dimmer)?$/``                                                       |
 |   | ON_SET    | switch.light                  |      | boolean | W  |     |      | ``/^switch(\.light)?$｜^state$/``                                               |
-|   | ON_ACTUAL | switch.light                  |      | boolean | -  |     |      | ``/^switch(\.light)?$｜^state$/``                                               |
+|   | ON_ACTUAL | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
 |   | WORKING   | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH   | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
@@ -188,13 +206,13 @@ What is not important for detection:
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | HUE         | level.color.hue               | °    | number  | W  |     |      | ``/^level\.color\.hue$/``                                                      |
-|   | DIMMER      | level.dimmer                  | °C   | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
+|   | DIMMER      | level.dimmer                  | %    | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
 |   | BRIGHTNESS  |                               |      | number  | W  |     |      | ``/^level\.brightness$/``                                                      |
 |   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
 |   | TEMPERATURE | level.color.temperature       | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
 |   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
-|   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
-|   | ON_ACTUAL   | state.light                   |      | boolean | -  |     |      | ``/^state(\.light)?$/``                                                        |
+|   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
+|   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
 |   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
@@ -237,7 +255,7 @@ What is not important for detection:
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | SET            | switch.light                  |      | boolean | W  |     |      | ``/^switch(\.light)?$｜^state$/``                                               |
-|   | ACTUAL         | switch.light                  |      | boolean | -  |     |      | ``/^switch(\.light)?$｜^state$/``                                               |
+|   | ON_ACTUAL      | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
 |   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |      | ``/^value\.power$/``                                                           |
 |   | CURRENT        | value.current                 | mA   | number  | -  |     |      | ``/^value\.current$/``                                                         |
 |   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |      | ``/^value\.voltage$/``                                                         |
@@ -301,8 +319,8 @@ What is not important for detection:
 |   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
 |   | TEMPERATURE | level.color.temperature       | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
 |   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
-|   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
-|   | ON_ACTUAL   | state.light                   |      | boolean | -  |     |      | ``/^state(\.light)?$/``                                                        |
+|   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
+|   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
 |   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
@@ -314,13 +332,13 @@ What is not important for detection:
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | RGB         | level.color.rgb               |      | string  | W  |     |      | ``/^level\.color\.rgb$/``                                                      |
-|   | DIMMER      | level.dimmer                  |      | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
+|   | DIMMER      | level.dimmer                  | %    | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
 |   | BRIGHTNESS  |                               | %    | number  | W  |     |      | ``/^level\.brightness$/``                                                      |
 |   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
 |   | TEMPERATURE | level.color.temperature       | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
 |   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
-|   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
-|   | ON_ACTUAL   | state.light                   |      | boolean | -  |     |      | ``/^state(\.light)?$/``                                                        |
+|   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
+|   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
 |   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
