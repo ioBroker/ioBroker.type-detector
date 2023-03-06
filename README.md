@@ -27,7 +27,7 @@ const options = {
 	_keysOptional:      keys,
 	_usedIdsOptional:   usedIds,
 	ignoreIndicators,
-    allowedTypes,
+//    allowedTypes,
 };
 
 let controls = detector.detect(options);
