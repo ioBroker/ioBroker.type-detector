@@ -23,7 +23,7 @@ const allowedTypes = ['button', 'rgb', 'dimmer', 'light'];	// Supported types. L
 
 const options = {
 	objects:            this.props.objects,
-	id:                 'hm-rpc.0.LEQ1214232.1',
+	id:                 'hm-rpc.0.LEQ1214232.1', // Channel, device or state, that must be detected
 	_keysOptional:      keys,
 	_usedIdsOptional:   usedIds,
 	ignoreIndicators,
@@ -36,11 +36,11 @@ if (controls) {
 		const id = control.states.find(state => state.id).id;
 		if (id) {
 			console.log(`In ${options.id} was detected "${control.type}" with following states:`);
-			control.states.forEach(state => {
-				if (state.id) {
-					console.log(`    ${state.name} => ${state.id}`);
-				}
-			});
+			control.states
+                .filter(state => state.id)
+                .forEach(state => {
+                    console.log(`    ${state.name} => ${state.id}`);
+                });
 
 			return {control, id};
 		}
