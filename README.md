@@ -19,14 +19,15 @@ const detector = new ChannelDetector();
 const keys = Object.keys(objects);				// For optimization
 const usedIds = [];                 			// To not allow using of same ID in more than one device
 const ignoreIndicators = ['UNREACH_STICKY'];    // Ignore indicators by name
-const supportedTypes = ['button', 'rgb', 'dimmer', 'light'];	// Supported types. Leave it null if you want to get ALL devices.
+const allowedTypes = ['button', 'rgb', 'dimmer', 'light'];	// Supported types. Leave it null if you want to get ALL devices.
 
 const options = {
 	objects:            this.props.objects,
 	id:                 'hm-rpc.0.LEQ1214232.1',
 	_keysOptional:      keys,
 	_usedIdsOptional:   usedIds,
-	ignoreIndicators
+	ignoreIndicators,
+    allowedTypes,
 };
 
 let controls = detector.detect(options);
@@ -55,6 +56,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Fixed main attribute in package.json
+
 ### 1.1.1 (2022-11-09)
 * (Garfonso) corrected the double states in light devices
 * (Garfonso) added CIE color type as equivalent to `rgbSingle` type
@@ -134,6 +138,6 @@ if (controls) {
 * (bluefox) initial commit
 
 ## License
-Copyright (c) 2018-2022 Bluefox <dogafox@gmail.com>
+Copyright (c) 2018-2023 Bluefox <dogafox@gmail.com>
 
 MIT License
