@@ -32,7 +32,42 @@ What is not important for detection:
 - defaultType - Used for `devices` to set the `common.type` by creation.
 
 ## Devices
-### Air conditioner
+### Content
+* [Air conditioner - airCondition](#air-conditioner-aircondition-)
+* [Blinds controlled only by buttons - blindButtons](#blinds-controlled-only-by-buttons-blindbuttons-)
+* [Button - button](#button-button-)
+* [buttonSensor - buttonSensor](#buttonsensor-buttonsensor-)
+* [IP Camera - camera](#ip-camera-camera-)
+* [chart - chart](#chart)
+* [cie - cie](#cie)
+* [Light with color temperature - ct](#light-with-color-temperature-ct-)
+* [Light dimmer - dimmer](#light-dimmer-dimmer-)
+* [Door sensor - door](#door-sensor-door-)
+* [Fire alarm sensor - fireAlarm](#fire-alarm-sensor-firealarm-)
+* [Flood alarm sensor - floodAlarm](#flood-alarm-sensor-floodalarm-)
+* [Gate - gate](#gate-gate-)
+* [Light with HUE color - hue](#light-with-hue-color-hue-)
+* [Humidity - humidity](#humidity-humidity-)
+* [Image - image](#image-image-)
+* [Information device (very simple) - info](#information-device--very-simple--info-)
+* [Light switch - light](#light-switch-light-)
+* [GPS Location - location](#gps-location-location-)
+* [Lock - lock](#lock-lock-)
+* [Motion sensor - motion](#motion-sensor-motion-)
+* [RGB Light (R,G,B have different states) - rgb](#rgb-light--r-g-b-have-different-states--rgb-)
+* [RGB Light with hex color - rgbSingle](#rgb-light-with-hex-color-rgbsingle-)
+* [Socket - socket](#socket-socket-)
+* [Temperature - temperature](#temperature-temperature-)
+* [Thermostat - thermostat](#thermostat-thermostat-)
+* [Vacuum cleaner (robot) - vacuumCleaner](#vacuum-cleaner--robot--vacuumcleaner-)
+* [Volume - volume](#volume-volume-)
+* [Volume group - volumeGroup](#volume-group-volumegroup-)
+* [Warning - warning](#warning-warning-)
+* [Current weather - weatherCurrent](#current-weather-weathercurrent-)
+* [Weather forecast - weatherForecast](#weather-forecast-weatherforecast-)
+* [Window - window](#window-window-)
+* [Window that could be in tilted state - windowTilt](#window-that-could-be-in-tilted-state-windowtilt-)
+### Air conditioner[airCondition]
 | R | Name     | Role                          | Unit | Type           | Wr | Ind | Mult | Regex                                      |
 |---|----------|-------------------------------|------|----------------|----|-----|------|--------------------------------------------|
 | * | SET      | level.temperature             | °C   | number         | W  |     |      | ``/temperature(\..*)?$/``                  |
@@ -50,7 +85,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |      |                |    | X   |      | ``/^indicator\.error$/``                   |
 
 
-### Blinds controlled only by buttons
+### Blinds controlled only by buttons[blindButtons]
 | R | Name        | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | STOP        | button.stop.blind             | boolean | W  |     |      | ``/^button\.stop(\.blind)?$｜^action\.stop$/``                                  |
@@ -69,7 +104,7 @@ What is not important for detection:
 |   | ERROR       | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Button
+### Button[button]
 | R | Name     | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | SET      | button                        | boolean | W  |     |      | ``/^button(\.[.\w]+)?$｜^action(\.[.\w]+)?$/``                                  |
@@ -79,7 +114,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### buttonSensor
+### buttonSensor[buttonSensor]
 | R | Name       | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|------------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | PRESS      | button.press                  | boolean | -  |     |      | ``/^button(\.[.\w]+)?$/``                                                      |
@@ -90,7 +125,7 @@ What is not important for detection:
 |   | ERROR      | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### IP Camera
+### IP Camera[camera]
 | R | Name             | Role                           | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|------------------|--------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | FILE             | camera                         | file    |    |     |      | ``/^camera(\.\w+)?$/``                                                         |
@@ -128,7 +163,7 @@ What is not important for detection:
 |   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Light with color temperature
+### Light with color temperature[ct]
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | TEMPERATURE | level.color.temperature       | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
@@ -145,7 +180,7 @@ What is not important for detection:
 |   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Light dimmer
+### Light dimmer[dimmer]
 | R | Name      | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-----------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | SET       | level.dimmer                  | %    | number  | W  |     |      | ``/^level(\.dimmer)?$｜^level\.brightness$/``                                   |
@@ -159,7 +194,7 @@ What is not important for detection:
 |   | ERROR     | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Door sensor
+### Door sensor[door]
 | R | Name     | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | sensor.door                   | boolean | -  |     |      | ``/^state?$｜^state(\.door)?$｜^sensor(\.door)?/``                               |
@@ -169,7 +204,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Fire alarm sensor
+### Fire alarm sensor[fireAlarm]
 | R | Name     | Role                          | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | sensor.alarm.fire             | boolean |     |      | ``/^state(\.alarm)?\.fire$｜^sensor(\.alarm)?\.fire/``                          |
@@ -179,7 +214,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Flood alarm sensor
+### Flood alarm sensor[floodAlarm]
 | R | Name     | Role                          | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | sensor.alarm.flood            | boolean |     |      | ``/^state(\.alarm)?\.flood$｜^sensor(\.alarm)?\.flood/``                        |
@@ -189,7 +224,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Gate
+### Gate[gate]
 | R | Name      | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                      |
 |---|-----------|-------------------------------|------|---------|----|-----|------|--------------------------------------------|
 | * | SET       | switch.gate                   |      | boolean | W  |     |      | ``/^switch(\.gate)?$/``                    |
@@ -202,7 +237,7 @@ What is not important for detection:
 |   | ERROR     | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                   |
 
 
-### Light with HUE color
+### Light with HUE color[hue]
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | HUE         | level.color.hue               | °    | number  | W  |     |      | ``/^level\.color\.hue$/``                                                      |
@@ -220,7 +255,7 @@ What is not important for detection:
 |   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Humidity
+### Humidity[humidity]
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | value.humidity                | %    | number  | -  |     |      | ``/humidity$/``                                                                |
@@ -230,7 +265,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Image
+### Image[image]
 | R | Name     | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | URL      |                               | string  | -  |     |      | ``/\.icon$｜^icon$｜^icon\.｜\.icon\.｜\.chart\.url\.｜\.chart\.url$｜^url.icon$/``  |
@@ -240,7 +275,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Information device (very simple)
+### Information device (very simple)[info]
 | R | Name     | Role                          | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | state                         |         |     | x    |                                                                                |
@@ -251,7 +286,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Light switch
+### Light switch[light]
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | SET            | switch.light                  |      | boolean | W  |     |      | ``/^switch(\.light)?$｜^state$/``                                               |
@@ -268,7 +303,7 @@ What is not important for detection:
 |   | ERROR          | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### GPS Location
+### GPS Location[location]
 | R | Name      | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-----------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | LONGITUDE | value.gps.longitude           | °    | number  | -  |     |      | ``/^value\.gps\.longitude$/``                                                  |
@@ -282,7 +317,7 @@ What is not important for detection:
 |   | ERROR     | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Lock
+### Lock[lock]
 | R | Name      | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | SET       | switch.lock                   | boolean | W  |     |      | ``/^switch\.lock$/``                                                           |
@@ -296,7 +331,7 @@ What is not important for detection:
 |   | ERROR     | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Motion sensor
+### Motion sensor[motion]
 | R | Name     | Role                          | Unit | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|------|---------|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | sensor.motion                 |      | boolean |     |      | ``/^state\.motion$｜^sensor\.motion$/``                                         |
@@ -307,7 +342,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |      |         | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### RGB Light (R,G,B have different states)
+### RGB Light (R,G,B have different states)[rgb]
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | RED         | level.color.red               |      | number  | W  |     |      | ``/^level\.color\.red$/``                                                      |
@@ -328,7 +363,7 @@ What is not important for detection:
 |   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### RGB Light with hex color
+### RGB Light with hex color[rgbSingle]
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | RGB         | level.color.rgb               |      | string  | W  |     |      | ``/^level\.color\.rgb$/``                                                      |
@@ -346,7 +381,7 @@ What is not important for detection:
 |   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Socket
+### Socket[socket]
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | SET            | switch                        |      | boolean | W  |     |      | ``/^switch$｜^state$｜^switch\.active$/``                                        |
@@ -363,7 +398,7 @@ What is not important for detection:
 |   | ERROR          | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Temperature
+### Temperature[temperature]
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | value.temperature             | °C   | number  | -  |     |      | ``/temperature$/``                                                             |
@@ -374,7 +409,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Thermostat
+### Thermostat[thermostat]
 | R | Name     | Role                          | Unit | Type           | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|------|----------------|----|-----|------|--------------------------------------------------------------------------------|
 | * | SET      | level.temperature             | °C   | number         | W  |     |      | ``/temperature(\..*)?$/``                                                      |
@@ -392,7 +427,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |      |                |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Vacuum cleaner (robot)
+### Vacuum cleaner (robot)[vacuumCleaner]
 | R | Name        | Role                          | Unit | Type           | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|----------------|----|-----|------|--------------------------------------------------------------------------------|
 | * | POWER       | switch.power                  |      | boolean/number | W  |     |      | ``/^switch\.power$/``                                                          |
@@ -417,7 +452,7 @@ What is not important for detection:
 |   | ERROR       | indicator.error               |      |                |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Volume
+### Volume[volume]
 | R | Name     | Role                          | Type    | Wr | Min | Max | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|----|-----|-----|-----|------|--------------------------------------------------------------------------------|
 | * | SET      | level.volume                  | number  | W  | m   | M   |     |      | ``/^level\.volume$/``                                                          |
@@ -430,7 +465,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         |    |     |     | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Volume group
+### Volume group[volumeGroup]
 | R | Name     | Role                          | Type    | Wr | Min | Max | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|----|-----|-----|-----|------|--------------------------------------------------------------------------------|
 | * | SET      | level.volume.group            | number  | W  | m   | M   |     |      | ``/^level\.volume\.group?$/``                                                  |
@@ -443,7 +478,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         |    |     |     | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Warning
+### Warning[warning]
 | R | Name  | Role                | Type   | Ind | Mult | Regex                         |
 |---|-------|---------------------|--------|-----|------|-------------------------------|
 | * | LEVEL | value.warning       |        |     |      | ``/^value\.warning$/``        |
@@ -456,7 +491,7 @@ What is not important for detection:
 |   | DESC  | weather.state       | string |     |      | ``/^weather\.state$/``        |
 
 
-### Current weather
+### Current weather[weatherCurrent]
 | R | Name                  | Role                          | Unit | Type    | Ind | Mult | Regex                                                                          |
 |---|-----------------------|-------------------------------|------|---------|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL                | value.temperature             | °C   | number  |     |      | ``/^value(\.temperature)?$/``                                                  |
@@ -478,7 +513,7 @@ What is not important for detection:
 |   | ERROR                 | indicator.error               |      |         | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Weather forecast
+### Weather forecast[weatherForecast]
 | R | Name                   | Role                                   | Unit  | Type   | Ind | Mult | Regex                                                                        |
 |---|------------------------|----------------------------------------|-------|--------|-----|------|------------------------------------------------------------------------------|
 | * | ICON                   | weather.icon.forecast.0                |       | string |     |      | ``/^weather.icon$｜^weather.icon.forecast.0$/``                               |
@@ -520,7 +555,7 @@ What is not important for detection:
 |   | WIND_ICON%d            |                                        |       | string |     | x    | ``/^weather.icon.wind.forecast.(\d)$/``                                      |
 
 
-### Window
+### Window[window]
 | R | Name     | Role                          | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | sensor.window                 | boolean |     |      | ``/^state(\.window)?$｜^sensor(\.window)?/``                                    |
@@ -530,7 +565,7 @@ What is not important for detection:
 |   | ERROR    | indicator.error               |         | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Window that could be in tilted state
+### Window that could be in tilted state[windowTilt]
 | R | Name     | Role                          | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|-----|------|--------------------------------------------------------------------------------|
 | * | ACTUAL   | value.window                  | number  |     |      | ``/^state?$｜^value(\.window)?$/``                                              |
