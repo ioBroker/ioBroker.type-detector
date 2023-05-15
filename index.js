@@ -90,10 +90,10 @@ var SharedPatterns = {
 // name - own TAG of the state to process it in the logic
 // write - if set to true or false, it will be checked the write attribute, if no attribute, so "false" will be assumed
 // read - if set to true or false, it will be checked the write attribute, if no attribute, so "true" will be assumed
-// min - type of attribute: number', 'string' or 'boolean'. This attribute must exists in common
-// max - type of attribute: number', 'string' or 'boolean'. This attribute must exists in common
+// min - type of attribute: number', 'string' or 'boolean'. This attribute must exist in common
+// max - type of attribute: number', 'string' or 'boolean'. This attribute must exist in common
 // required - if required to detect the pattern as valid
-// noSubscribe - no automatic subscription for this state (e.g if write only)
+// noSubscribe - no automatic subscription for this state (e.g., if write only)
 // searchInParent - if this pattern should be search in device too and not only in channel
 // enums - function to execute custom category detection
 // multiple - if more than one state may have this pattern in channel
@@ -119,7 +119,7 @@ function ChannelDetector() {
             type: Types.chart
         },
         mediaPlayer: {
-            // receive the state of player via media.state. Controlling of the player via buttons
+            // Receive the state of player via `media.state`. Controlling the player via buttons.
             states: [
                 // one of
                 {role: /^media.state(\..*)?$/,                               indicator: false,                   type: ['boolean', 'number'], name: 'STATE',    required: true,   defaultRole: 'media.state'},
@@ -134,7 +134,7 @@ function ChannelDetector() {
                 {role: /^media.artist(\..*)?$/,         indicator: false,     write: false, type: 'string',  name: 'ARTIST',   required: false,   defaultRole: 'media.artist'},
                 {role: /^media.album(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'ALBUM',    required: false,   defaultRole: 'media.album'},
                 {role: /^media.title(\..*)?$/,          indicator: false,     write: false, type: 'string',  name: 'TITLE',    required: false,   defaultRole: 'media.title'},
-                // one of following
+                // one of the following
                 [
                     {role: /^media.cover$|^media.cover.big$/, indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true,   defaultRole: 'media.cover'},
                     {role: /^media.cover(\..*)$/,             indicator: false,     write: false, type: 'string',  name: 'COVER',    required: false, notSingle: true},
@@ -148,7 +148,7 @@ function ChannelDetector() {
                 {role: /^level.volume?$/,               indicator: false,                   type: 'number',  min: 'number', max: 'number', write: true,       name: 'VOLUME',         required: false, notSingle: true, noSubscribe: true,   defaultRole: 'level.volume'},
                 {role: /^value.volume?$/,               indicator: false,                   type: 'number',  min: 'number', max: 'number', write: false,      name: 'VOLUME_ACTUAL',  required: false, notSingle: true, noSubscribe: true,   defaultRole: 'value.volume'},
                 {role: /^media.mute?$/,                 indicator: false,                   type: 'boolean',                               write: true,       name: 'MUTE',           required: false, notSingle: true, noSubscribe: true,   defaultRole: 'media.mute'},
-                // Ignore following states of chromecast
+                // Ignore the following states of chromecast
                 {stateName: /\.paused$|\.playerState$/, indicator: false,                                                                                     name: 'IGNORE',         required: false, multiple: true,  noSubscribe: true},
                 SharedPatterns.reachable,
                 SharedPatterns.lowbat,
@@ -342,7 +342,8 @@ function ChannelDetector() {
             ],
             type: Types.warning
         },
-        // most full description could be found here: https://yandex.ru/dev/dialogs/alice/doc/smart-home/concepts/device-type-thermostat-ac-docpage/
+        // the most full description could be found here:
+        // https://yandex.ru/dev/dialogs/alice/doc/smart-home/concepts/device-type-thermostat-ac-docpage/
         airCondition: {
             states: [
                 {role: /temperature(\..*)?$/,          indicator: false,     write: true,  type: 'number',                                                    name: 'SET',                required: true,  defaultRole: 'level.temperature',     defaultUnit: '°C'},

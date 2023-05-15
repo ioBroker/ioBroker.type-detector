@@ -36,11 +36,12 @@ In [brackets] is given the class name of device.
 ### Content
 * [Air conditioner [airCondition]](#air-conditioner-aircondition)
 * [Blinds controlled only by buttons [blindButtons]](#blinds-controlled-only-by-buttons-blindbuttons)
+* [Blinds or Shutter [blinds]](#blinds-or-shutter-blinds)
 * [Button [button]](#button-button)
 * [buttonSensor [buttonSensor]](#buttonsensor-buttonsensor)
 * [IP Camera [camera]](#ip-camera-camera)
-* [chart [chart]](#chart)
-* [cie [cie]](#cie)
+* [Chart [chart]](#chart-chart)
+* [CIE Color space [cie]](#cie-color-space-cie)
 * [Light with color temperature [ct]](#light-with-color-temperature-ct)
 * [Light dimmer [dimmer]](#light-dimmer-dimmer)
 * [Door sensor [door]](#door-sensor-door)
@@ -51,11 +52,15 @@ In [brackets] is given the class name of device.
 * [Humidity [humidity]](#humidity-humidity)
 * [Image [image]](#image-image)
 * [Information device (very simple) [info]](#information-device--very-simple--info)
+* [Slider [levelSlider]](#slider-levelslider)
 * [Light switch [light]](#light-switch-light)
 * [GPS Location [location]](#gps-location-location)
+* [GPS Location [location_one]](#gps-location-location_one)
 * [Lock [lock]](#lock-lock)
+* [Media [mediaPlayer]](#media-mediaplayer)
 * [Motion sensor [motion]](#motion-sensor-motion)
 * [RGB Light (R,G,B have different states) [rgb]](#rgb-light--r-g-b-have-different-states--rgb)
+* [RGB Light (R,G,B have different states) [rgbOld]](#rgb-light--r-g-b-have-different-states--rgbold)
 * [RGB Light with hex color [rgbSingle]](#rgb-light-with-hex-color-rgbsingle)
 * [Socket [socket]](#socket-socket)
 * [Temperature [temperature]](#temperature-temperature)
@@ -105,6 +110,27 @@ In [brackets] is given the class name of device.
 |   | ERROR       | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
+### Blinds or Shutter [blinds]
+| R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
+|---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
+| * | SET         | level.blind                   | %    | number  | W  |     |      | ``/^level(\.blind)?$/``                                                        |
+|   | ACTUAL      | value.blind                   | %    | number  |    |     |      | ``/^value(\.blind)?$/``                                                        |
+|   | STOP        | button.stop.blind             |      | boolean | W  |     |      | ``/^button\.stop(\.blind)?$｜^action\.stop$/``                                  |
+|   | OPEN        | button.open.blind             |      | boolean | W  |     |      | ``/^button\.open(\.blind)?$/``                                                 |
+|   | CLOSE       | button.close.blind            |      | boolean | W  |     |      | ``/^button\.close(\.blind)?$/``                                                |
+|   | TILT_SET    | level.tilt                    |      | number  | W  |     |      | ``/^level(\.open)?\.tilt$/``                                                   |
+|   | TILT_ACTUAL | value.tilt                    |      | number  |    |     |      | ``/^value(\.open)?\.tilt$/``                                                   |
+|   | TILT_STOP   | button.stop.tilt              |      | boolean | W  |     |      | ``/^button\.stop\.tilt$/``                                                     |
+|   | TILT_OPEN   | button.open.tilt              |      | boolean | W  |     |      | ``/^button\.open\.tilt$/``                                                     |
+|   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  |     |      | ``/^button\.close\.tilt$/``                                                    |
+|   | DIRECTION   | indicator.direction           |      |         |    | X   |      | ``/^indicator\.direction$/``                                                   |
+|   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
+|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
+|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN    | indicator.maintenance         |      | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
+
+
 ### Button [button]
 | R | Name     | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
@@ -141,13 +167,13 @@ In [brackets] is given the class name of device.
 |   | ERROR            | indicator.error                |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### chart
+### Chart [chart]
 | R | Name  | Ind | Mult |
 |---|-------|-----|------|
 |   | CHART |     |      |
 
 
-### cie
+### CIE Color space [cie]
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | CIE         | level.color.cie               |      | string  | W  |     |      | ``/^level\.color\.cie$/``                                                      |
@@ -287,6 +313,18 @@ In [brackets] is given the class name of device.
 |   | ERROR    | indicator.error               |         | X   |      | ``/^indicator\.error$/``                                                       |
 
 
+### Slider [levelSlider]
+| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Mult | Regex                                                                          |
+|---|----------|-------------------------------|------|---------|----|-----|-----|-----|------|--------------------------------------------------------------------------------|
+| * | SET      | level                         | %    | number  | W  | m   | M   |     |      | ``/^level(\..*)?$/``                                                           |
+|   | ACTUAL   | value                         |      | number  | -  | m   | M   |     |      | ``/^value(\..*)?$/``                                                           |
+|   | WORKING  | indicator.working             |      |         |    |     |     | X   |      | ``/^indicator\.working$/``                                                     |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR    | indicator.error               |      |         |    |     |     | X   |      | ``/^indicator\.error$/``                                                       |
+
+
 ### Light switch [light]
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
@@ -318,6 +356,19 @@ In [brackets] is given the class name of device.
 |   | ERROR     | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
+### GPS Location [location_one]
+| R | Name      | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
+|---|-----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
+| * | GPS       | value.gps                     | string  | -  |     |      | ``/^value\.gps$/``                                                             |
+|   | ELEVATION | value.gps.elevation           | number  | -  |     |      | ``/^value\.gps\.elevation$/``                                                  |
+|   | RADIUS    | value.gps.radius              | number  | -  |     |      | ``/^value\.radius$｜value\.gps\.radius$/``                                      |
+|   | ACCURACY  | value.gps.accuracy            | number  | -  |     |      | ``/^value\.accuracy$｜^value\.gps\.accuracy$/``                                 |
+|   | UNREACH   | indicator.maintenance.unreach | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
+|   | LOWBAT    | indicator.maintenance.lowbat  | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN  | indicator.maintenance         | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR     | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
+
+
 ### Lock [lock]
 | R | Name      | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
@@ -330,6 +381,38 @@ In [brackets] is given the class name of device.
 |   | LOWBAT    | indicator.maintenance.lowbat  | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
 |   | MAINTAIN  | indicator.maintenance         | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
 |   | ERROR     | indicator.error               |         |    | X   |      | ``/^indicator\.error$/``                                                       |
+
+
+### Media [mediaPlayer]
+| R | Name          | Role                         | Unit | Type           | Wr | Min | Max | Ind | Mult | Regex                                                                          |
+|---|---------------|------------------------------|------|----------------|----|-----|-----|-----|------|--------------------------------------------------------------------------------|
+| * | STATE         | media.state                  |      | boolean/number |    |     |     |     |      | ``/^media.state(\..*)?$/``                                                     |
+|   | PLAY          | button.play                  |      | boolean        | W  |     |     |     |      | ``/^button.play(\..*)?$｜^action.play(\..*)?$/``                                |
+|   | PAUSE         | button.pause                 |      | boolean        | W  |     |     |     |      | ``/^button.pause(\..*)?$｜^action.pause(\..*)?$/``                              |
+|   | STOP          | button.stop                  |      | boolean        | W  |     |     |     |      | ``/^button.stop(\..*)?$｜^action.stop(\..*)?$/``                                |
+|   | NEXT          | button.next                  |      | boolean        | W  |     |     |     |      | ``/^button.next(\..*)?$｜^action.next(\..*)?$/``                                |
+|   | PREV          | button.prev                  |      | boolean        | W  |     |     |     |      | ``/^button.prev(\..*)?$｜^action.prev(\..*)?$/``                                |
+|   | SHUFFLE       | media.mode.shuffle           |      | boolean        | W  |     |     |     |      | ``/^media.mode.shuffle(\..*)?$/``                                              |
+|   | REPEAT        | media.mode.repeat            |      | number         | W  |     |     |     |      | ``/^media.mode.repeat(\..*)?$/``                                               |
+|   | ARTIST        | media.artist                 |      | string         | -  |     |     |     |      | ``/^media.artist(\..*)?$/``                                                    |
+|   | ALBUM         | media.album                  |      | string         | -  |     |     |     |      | ``/^media.album(\..*)?$/``                                                     |
+|   | TITLE         | media.title                  |      | string         | -  |     |     |     |      | ``/^media.title(\..*)?$/``                                                     |
+|   | COVER         | media.cover                  |      | string         | -  |     |     |     |      | ``[object Object]``                                                            |
+|   | COVER         |                              |      | string         | -  |     |     |     |      | ``[object Object]``                                                            |
+|   | DURATION      | media.duration               | sec  | number         | -  |     |     |     |      | ``/^media.duration(\..*)?$/``                                                  |
+|   | ELAPSED       | media.elapsed                | sec  | number         |    |     |     |     |      | ``/^media.elapsed(\..*)?$/``                                                   |
+|   | SEEK          | media.seek                   |      | number         | W  |     |     |     |      | ``/^media.seek(\..*)?$/``                                                      |
+|   | TRACK         | media.track                  |      | string         |    |     |     |     |      | ``/^media.track(\..*)?$/``                                                     |
+|   | EPISODE       | media.episode                |      | string         |    |     |     |     |      | ``/^media.episode(\..*)?$/``                                                   |
+|   | SEASON        | media.season                 |      | string         |    |     |     |     |      | ``/^media.season(\..*)?$/``                                                    |
+|   | VOLUME        | level.volume                 |      | number         | W  | m   | M   |     |      | ``/^level.volume?$/``                                                          |
+|   | VOLUME_ACTUAL | value.volume                 |      | number         | -  | m   | M   |     |      | ``/^value.volume?$/``                                                          |
+|   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |      | ``/^media.mute?$/``                                                            |
+|   | IGNORE        |                              |      |                |    |     |     |     | x    |                                                                                |
+|   | CONNECTED     | indicator.reachable          |      | boolean        |    |     |     | X   |      | ``/^indicator\.reachable$/``                                                   |
+|   | LOWBAT        | indicator.maintenance.lowbat |      | boolean        |    |     |     | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN      | indicator.maintenance        |      | boolean        |    |     |     | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR         | indicator.error              |      |                |    |     |     | X   |      | ``/^indicator\.error$/``                                                       |
 
 
 ### Motion sensor [motion]
@@ -357,6 +440,25 @@ In [brackets] is given the class name of device.
 |   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
 |   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
 |   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
+|   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
+|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
+|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN    | indicator.maintenance         |      | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
+
+
+### RGB Light (R,G,B have different states) [rgbOld]
+| R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
+|---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
+| * | RED         |                               |      | number  | W  |     |      | ``/^level\.color\.r$/``                                                        |
+| * | GREEN       |                               |      | number  | W  |     |      | ``/^level\.color\.g$/``                                                        |
+| * | BLUE        |                               |      | number  | W  |     |      | ``/^level\.color\.b$/``                                                        |
+|   | DIMMER      |                               |      | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
+|   | BRIGHTNESS  |                               |      | number  | W  |     |      | ``/^level\.brightness$/``                                                      |
+|   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
+|   | TEMPERATURE |                               | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
+|   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
+|   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
 |   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |

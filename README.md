@@ -9,7 +9,7 @@ You can use this module in Browser and in Node.js projects.
 
 Just now this module used in material adapter to detect devices and to visualize them.
 
-Following code detect devices in some state's tree.
+The following code detects devices in some state's tree:
 
 ```javascript
 // 
@@ -56,21 +56,22 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
-* (bluefox) Fixed main attribute in package.json
+### **WORK IN PROGRESS**    
+* (bluefox) Fixed creation of the `DEVICES.md`
+* (bluefox) Fixed the main attribute in package.json
 
 ### 1.1.1 (2022-11-09)
 * (Garfonso) corrected the double states in light devices
 * (Garfonso) added CIE color type as equivalent to `rgbSingle` type
 
 ### 1.1.0 (2022-05-22)
-* (Garfonso) blinds: corrected error in default role for tilt
+* (Garfonso) blinds: corrected error in the default role for tilt
 
 ### 1.0.17 (2022-01-20)
-* (bluefox) Fixed main attribute in package.json
+* (bluefox) Fixed the main attribute in package.json
 
 ### 1.0.15 (2021-07-09)
-* (algar42) extend weather forecast device with TIME_SUNRISE and TIME_SUNSET
+* (algar42) extend the weather forecast device with `TIME_SUNRISE` and `TIME_SUNSET`
 * (Garfonso) added weatherForecast tests
 
 ### 1.0.14 (2021-06-30)
@@ -85,7 +86,7 @@ if (controls) {
 * (Garfonso) Corrected blind with buttons
 
 ### 1.0.11 (2021-06-11)
-* (Garfonso) Added buttons to blinds and added new type: blinds with only buttons
+* (Garfonso) Added buttons to blinds and added THE new type: blinds with only buttons
 * (agross) refactoring
 * (bluefox) Extend socket and light with electricity parameters
 
@@ -128,7 +129,7 @@ if (controls) {
 * (bluefox) Add description to function "detect".
 
 ### 0.1.1 (2019-06-29)
-* (kirovilya) In some cases, devices may not have channels, but immediately have a states. For example in the zigbee-adapter.
+* (kirovilya) In some cases, devices may not have channels, but immediately have a states. For example, in the zigbee-adapter.
 
 ### 0.1.1 (2019-05-24)
 * (bluefox) added PRECIPITATION to weather
