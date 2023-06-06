@@ -1,0 +1,2796 @@
+{
+  "enum.functions": {
+    "_id": "enum.functions",
+    "common": {
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjRweCI+DQogICAgPHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNOSAyMWMwIC41NS40NSAxIDEgMWg0Yy41NSAwIDEtLjQ1IDEtMXYtMUg5djF6bTMtMTlDOC4xNCAyIDUgNS4xNCA1IDljMCAyLjM4IDEuMTkgNC40NyAzIDUuNzRWMTdjMCAuNTUuNDUgMSAxIDFoNmMuNTUgMCAxLS40NSAxLTF2LTIuMjZjMS44MS0xLjI3IDMtMy4zNiAzLTUuNzQgMC0zLjg2LTMuMTQtNy03LTd6bTIuODUgMTEuMWwtLjg1LjZWMTZoLTR2LTIuM2wtLjg1LS42QzcuOCAxMi4xNiA3IDEwLjYzIDcgOWMwLTIuNzYgMi4yNC01IDUtNXM1IDIuMjQgNSA1YzAgMS42My0uOCAzLjE2LTIuMTUgNC4xeiIvPg0KPC9zdmc+",
+      "name": {
+        "en": "Functions",
+        "de": "Funktionen",
+        "ru": "функции",
+        "pt": "Funções",
+        "nl": "functies",
+        "fr": "Les fonctions",
+        "it": "funzioni",
+        "es": "Funciones",
+        "pl": "Funkcje",
+        "zh-cn": "职能"
+      },
+      "desc": {
+        "en": "List of the functions",
+        "de": "Liste der Funktionen",
+        "ru": "Список функций",
+        "pt": "Lista das funções",
+        "nl": "Lijst met functies",
+        "fr": "Liste des fonctions",
+        "it": "Elenco delle funzioni",
+        "es": "Lista de las funciones",
+        "pl": "Lista funkcji",
+        "zh-cn": "功能列表"
+      },
+      "members": [],
+      "dontDelete": true
+    },
+    "type": "enum",
+    "acl": {
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator",
+      "object": 1911
+    },
+    "from": "system.host.raspberrypi.cli",
+    "ts": 1589638772370,
+    "user": "system.user.admin"
+  },
+  "enum.functions.Aktor": {
+    "_id": "enum.functions.Aktor",
+    "desc": "",
+    "type": "enum",
+    "common": {
+      "name": "Aktor",
+      "members": [
+        "hm-rpc.1.00AAABBBA74CCC.4"
+      ],
+      "smartName": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ4MC4wMDUgNDgwLjAwNSI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Ik0xMDQuMDA1LDEwOC4wMDNjLTEzLjI1NSwwLTI0LDEwLjc0NS0yNCwyNGMwLDQuNDE4LDMuNTgyLDgsOCw4czgtMy41ODIsOC04czMuNTgyLTgsOC04czgtMy41ODIsOC04CgkJCVMxMDguNDIzLDEwOC4wMDMsMTA0LjAwNSwxMDguMDAzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0zODUuMzU3LDc2LjExNWwtMjgwLTQ4Yy0wLjQ0Ny0wLjA3My0wLjg5OS0wLjExMS0xLjM1Mi0wLjExMkM0Ni42MTIsMjcuOTU2LDAuMDQ3LDc0LjQ0NCwwLDEzMS44MzcKCQkJYy0wLjAyNiwzMS4wNTksMTMuODQzLDYwLjUwMSwzNy44MDUsODAuMjYxbDU4LjQ0LDIzMy44NDhjMC44OTIsMy41NTksNC4wOTEsNi4wNTYsNy43Niw2LjA1Nmg2NAoJCQljNC40MTgsMC4wMDgsOC4wMDctMy41NjYsOC4wMTUtNy45ODVjMC0wLjE3MS0wLjAwNS0wLjM0MS0wLjAxNS0wLjUxMWwtMTMuNi0yMTcuNGwyMjIuOTItMzguMjE2CgkJCWMzLjg1NC0wLjY0NSw2LjY3OS0zLjk4LDYuNjgtNy44ODh2LTk2QzM5Mi4wMDcsODAuMTA1LDM4OS4xOTksNzYuNzczLDM4NS4zNTcsNzYuMTE1eiBNMTEwLjI1Myw0MzYuMDAzTDU3LjYwNSwyMjUuMTcxCgkJCWMwLjUwNCwwLjI0OCwxLjA0LDAuNDE2LDEuNTQ0LDAuNjY0YzIuNTc2LDEuMjMyLDUuMTg5LDIuMzUyLDcuODQsMy4zNmMwLjc0NCwwLjI4LDEuNDY0LDAuNiwyLjIwOCwwLjg2NAoJCQljMy4zMTksMS4xNzQsNi42OTcsMi4xNzUsMTAuMTIsM2MwLjgsMC4xOTIsMS42LDAuMzI4LDIuNCwwLjUwNGMyLjc2OCwwLjU5Miw1LjU2NSwxLjA3Nyw4LjM5MiwxLjQ1NgoJCQljMS4wMDgsMC4xMjgsMi4wMTYsMC4yNjQsMy4wMjQsMC4zNjhjMy42MTEsMC4zOSw3LjI0LDAuNTk2LDEwLjg3MiwwLjYxNmMwLjQ1My0wLjAwMSwwLjkwNS0wLjAzOSwxLjM1Mi0wLjExMmw0MS4yMTYtNy4wODgKCQkJbDEyLjkyLDIwNy4ySDExMC4yNTN6IE0zNDQuMDA1LDE3OC43MzlsLTIzOC4wODgsNDAuOGwtMi41NzYsMC40NjRjLTQ4LjM2Ny0wLjMwNC04Ny4zOTktMzkuNjMyLTg3LjMzNi04OAoJCQljMC4wNTUtNDguMzIsMzkuMDE4LTg3LjU3OSw4Ny4zMzYtODhsMjQwLjY2NCw0MS4yNjRWMTc4LjczOXogTTM3Ni4wMDUsMTczLjI1OWwtMTYsMi43NDR2LTg4bDE2LDIuNzQ0VjE3My4yNTl6Ii8+CiAgICAgICAgPHBhdGggZD0iTTEwNC4wMDUsNzYuMDAzYy0zMC45MjgsMC01NiwyNS4wNzItNTYsNTZjMC4wMzUsMzAuOTEzLDI1LjA4Nyw1NS45NjUsNTYsNTZjMzAuOTI4LDAsNTYtMjUuMDcyLDU2LTU2CgkJCUMxNjAuMDA1LDEwMS4wNzUsMTM0LjkzMyw3Ni4wMDMsMTA0LjAwNSw3Ni4wMDN6IE0xMDQuMDA1LDE3Mi4wMDNjLTIyLjA5MSwwLTQwLTE3LjkwOS00MC00MGMwLjAyNi0yMi4wOCwxNy45Mi0zOS45NzQsNDAtNDAKCQkJYzIyLjA5MSwwLDQwLDE3LjkwOSw0MCw0MFMxMjYuMDk3LDE3Mi4wMDMsMTA0LjAwNSwxNzIuMDAzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xNDEuOTMzLDQxMS41MjNsLTkuNjY0LTE1NS4wMjRjLTAuMjc2LTQuNDE4LTQuMDgyLTcuNzc2LTguNS03LjVjLTQuNDE4LDAuMjc2LTcuNzc2LDQuMDgyLTcuNSw4LjVsOS42NjQsMTU1CgkJCWMwLjI2Myw0LjIyNywzLjc3Myw3LjUxNiw4LjAwOCw3LjUwNGMwLjE2OCwwLDAuMzM2LDAsMC41MDQsMEMxMzguODU0LDQxOS43MjgsMTQyLjIwNyw0MTUuOTMyLDE0MS45MzMsNDExLjUyM3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDcyLjAwNSwxMjQuMDAzaC00OGMtNC40MTgsMC04LDMuNTgyLTgsOHMzLjU4Miw4LDgsOGg0OGM0LjQxOCwwLDgtMy41ODIsOC04UzQ3Ni40MjMsMTI0LjAwMyw0NzIuMDA1LDEyNC4wMDN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTQ3Mi4wMDUsMTU2LjAwM2gtNDhjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhoNDhjNC40MTgsMCw4LTMuNTgyLDgtOFM0NzYuNDIzLDE1Ni4wMDMsNDcyLjAwNSwxNTYuMDAzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik00NzIuMDA1LDkyLjAwM2gtNDhjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhoNDhjNC40MTgsMCw4LTMuNTgyLDgtOFM0NzYuNDIzLDkyLjAwMyw0NzIuMDA1LDkyLjAwM3oiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+    },
+    "native": {
+      "Name": "Aktor",
+      "TypeName": "ENUM",
+      "EnumInfo": ""
+    },
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "enums": {},
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1668030037080
+  },
+  "enum.functions.Fenster": {
+    "_id": "enum.functions.Fenster",
+    "desc": "",
+    "type": "enum",
+    "common": {
+      "name": "Fenster",
+      "members": [
+        "hm-rpc.1.00AAABBBA74CCC.2",
+        "hm-rpc.1.00AAABBBA74CCC.1",
+        "hm-rpc.1.00AAABBBA74CCC.3",
+        "hm-rpc.1.00AAABBBA74CCC.4"
+      ],
+      "smartName": false
+    },
+    "native": {
+      "Name": "Fenster",
+      "TypeName": "ENUM",
+      "EnumInfo": ""
+    },
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1666940796573
+  },
+  "enum.functions.Taster": {
+    "_id": "enum.functions.Taster",
+    "desc": "",
+    "type": "enum",
+    "common": {
+      "name": "Taster",
+      "members": [
+        "hm-rpc.1.00AAABBBA74CCC.2",
+        "hm-rpc.1.00AAABBBA74CCC.1"
+      ],
+      "custom": {
+        "material": {
+          "admin": {
+            "order": [],
+            "enabled": false,
+            "name": "Taster"
+          }
+        }
+      },
+      "smartName": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQ4MHB0IiB2aWV3Qm94PSIwIC0xMjAgNDgwIDQ4MCIgd2lkdGg9IjQ4MHB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGcgZmlsbD0iY3VycmVudENvbG9yIj4KICAgICAgICA8cGF0aCBkPSJtNDcyIDBoLTQ2NGMtNC40MTc5NjkgMC04IDMuNTgyMDMxLTggOHYxOTJjMCA0LjQxNzk2OSAzLjU4MjAzMSA4IDggOGgzMnYyNGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDQwYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTI0aDI4OHYyNGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDQwYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTI0aDMyYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTE5MmMwLTQuNDE3OTY5LTMuNTgyMDMxLTgtOC04em0tMzkyIDIyNGgtMjR2LTE2aDI0em0zNDQgMGgtMjR2LTE2aDI0em00MC0zMmgtNDQ4di0xNzZoNDQ4em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMjU2IDE3NmMzNS4zNDc2NTYgMCA2NC0yOC42NTIzNDQgNjQtNjRzLTI4LjY1MjM0NC02NC02NC02NC02NCAyOC42NTIzNDQtNjQgNjRjLjAzOTA2MiAzNS4zMjgxMjUgMjguNjcxODc1IDYzLjk2MDkzOCA2NCA2NHptLTgtMTExLjI4MTI1djE1LjI4MTI1aDE2di0xNS4yODEyNWMyNC42MDU0NjkgNC4xNjAxNTYgNDEuOTE3OTY5IDI2LjQ3NjU2MiAzOS44MzIwMzEgNTEuMzQzNzUtMi4wODU5MzcgMjQuODY3MTg4LTIyLjg3ODkwNiA0My45ODQzNzUtNDcuODMyMDMxIDQzLjk4NDM3NXMtNDUuNzQ2MDk0LTE5LjExNzE4Ny00Ny44MzIwMzEtNDMuOTg0Mzc1Yy0yLjA4NTkzOC0yNC44NjcxODggMTUuMjI2NTYyLTQ3LjE4MzU5NCAzOS44MzIwMzEtNTEuMzQzNzV6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im0xNjAgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTYwIDY0aDE2djE2aC0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTEyOCAzMmgxNnYxNmgtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im0xMjggNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtOTYgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtOTYgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNjQgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNjQgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzIgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzIgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzY4IDE3NmMxNi4wOTM3NS4wMTk1MzEgMjkuNjg3NS0xMS45Mzc1IDMxLjcxODc1LTI3LjkwNjI1IDIuMDM1MTU2LTE1Ljk2NDg0NC04LjEzMjgxMi0zMC45NDUzMTItMjMuNzE4NzUtMzQuOTU3MDMxdi0xNy4xMzY3MTloLTE2djE3LjEzNjcxOWMtMTUuNTg1OTM4IDQuMDExNzE5LTI1Ljc1MzkwNiAxOC45OTIxODctMjMuNzE4NzUgMzQuOTU3MDMxIDIuMDMxMjUgMTUuOTY4NzUgMTUuNjI1IDI3LjkyNTc4MSAzMS43MTg3NSAyNy45MDYyNXptMC00OGM4LjgzNTkzOCAwIDE2IDcuMTY0MDYyIDE2IDE2cy03LjE2NDA2MiAxNi0xNiAxNi0xNi03LjE2NDA2Mi0xNi0xNiA3LjE2NDA2Mi0xNiAxNi0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTE0NCAxNzZjMTYuMDkzNzUuMDE5NTMxIDI5LjY4NzUtMTEuOTM3NSAzMS43MTg3NS0yNy45MDYyNSAyLjAzNTE1Ni0xNS45NjQ4NDQtOC4xMzI4MTItMzAuOTQ1MzEyLTIzLjcxODc1LTM0Ljk1NzAzMXYtMTcuMTM2NzE5aC0xNnYxNy4xMzY3MTljLTE1LjU4NTkzOCA0LjAxMTcxOS0yNS43NTM5MDYgMTguOTkyMTg3LTIzLjcxODc1IDM0Ljk1NzAzMSAyLjAzMTI1IDE1Ljk2ODc1IDE1LjYyNSAyNy45MjU3ODEgMzEuNzE4NzUgMjcuOTA2MjV6bTAtNDhjOC44MzU5MzggMCAxNiA3LjE2NDA2MiAxNiAxNnMtNy4xNjQwNjIgMTYtMTYgMTYtMTYtNy4xNjQwNjItMTYtMTYgNy4xNjQwNjItMTYgMTYtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im02NCAxNzZjMTYuMDkzNzUuMDE5NTMxIDI5LjY4NzUtMTEuOTM3NSAzMS43MTg3NS0yNy45MDYyNSAyLjAzNTE1Ni0xNS45NjQ4NDQtOC4xMzI4MTItMzAuOTQ1MzEyLTIzLjcxODc1LTM0Ljk1NzAzMXYtMTcuMTM2NzE5aC0xNnYxNy4xMzY3MTljLTE1LjU4NTkzOCA0LjAxMTcxOS0yNS43NTM5MDYgMTguOTkyMTg3LTIzLjcxODc1IDM0Ljk1NzAzMSAyLjAzMTI1IDE1Ljk2ODc1IDE1LjYyNSAyNy45MjU3ODEgMzEuNzE4NzUgMjcuOTA2MjV6bTAtNDhjOC44MzU5MzggMCAxNiA3LjE2NDA2MiAxNiAxNnMtNy4xNjQwNjIgMTYtMTYgMTYtMTYtNy4xNjQwNjItMTYtMTYgNy4xNjQwNjItMTYgMTYtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im00MDggMTEyaDMyYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTY0YzAtNC40MTc5NjktMy41ODIwMzEtOC04LThoLTMyYy00LjQxNzk2OSAwLTggMy41ODIwMzEtOCA4djY0YzAgNC40MTc5NjkgMy41ODIwMzEgOCA4IDh6bTgtNjRoMTZ2MTZoLTE2em0wIDMyaDE2djE2aC0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTQzMiAxMzZjMCA0LjQxNzk2OS0zLjU4MjAzMSA4LTggOHMtOC0zLjU4MjAzMS04LTggMy41ODIwMzEtOCA4LTggOCAzLjU4MjAzMSA4IDh6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im00MzIgMTY4YzAgNC40MTc5NjktMy41ODIwMzEgOC04IDhzLTgtMy41ODIwMzEtOC04IDMuNTgyMDMxLTggOC04IDggMy41ODIwMzEgOCA4em0wIDAiLz4KICAgIDwvZz4KPC9zdmc+"
+    },
+    "native": {
+      "Name": "Taster",
+      "TypeName": "ENUM",
+      "EnumInfo": ""
+    },
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "enums": {},
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1667512423778
+  },
+  "enum.functions.shutters": {
+    "type": "enum",
+    "common": {
+      "name": {
+        "en": "Shutters",
+        "ru": "Ставни",
+        "de": "Rollladen",
+        "fr": "Volets",
+        "it": "Persiane",
+        "nl": "Shutters",
+        "pl": "Żaluzje",
+        "pt": "Persianas",
+        "es": "Persianas",
+        "zh-cn": "百叶窗"
+      },
+      "enabled": true,
+      "color": false,
+      "desc": "",
+      "members": [
+        "hm-rpc.1.00AAABBBA74CCC.3.LEVEL",
+        "hm-rpc.1.00AAABBBA74CCC.4"
+      ],
+      "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSIwIC0yIDUxMiA1MTIiIHdpZHRoPSI1MTJwdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgICAgICAgPHBhdGggZD0ibTM0OC4yNDYwOTQgMzc2Ljc4NTE1NmMtMy4yNS0yLjYwNTQ2OC03Ljk5MjE4OC0yLjA4MjAzMS0xMC41OTc2NTYgMS4xNjQwNjNsLTI4Ljk0OTIxOSAzNi4wOTM3NWMtMy45ODQzNzUgNC45Njg3NS0uMzY3MTg4IDEyLjI1NzgxMiA1Ljg3NSAxMi4yNTc4MTIgMi4yMTA5MzcgMCA0LjM5ODQzNy0uOTY4NzUgNS44ODY3MTktMi44MjQyMTlsMjguOTQ5MjE4LTM2LjA5Mzc1YzIuNjA1NDY5LTMuMjUgMi4wODU5MzgtNy45OTIxODctMS4xNjQwNjItMTAuNTk3NjU2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzkwLjM1OTM3NSAzNTguNzM4MjgxYy0zLjI1LTIuNjA1NDY5LTcuOTkyMTg3LTIuMDgyMDMxLTEwLjU5NzY1NiAxLjE2NDA2M2wtMjguOTQ5MjE5IDM2LjA5Mzc1Yy0zLjk4NDM3NSA0Ljk2ODc1LS4zNjcxODggMTIuMjU3ODEyIDUuODc1IDEyLjI1NzgxMiAyLjIxMDkzOCAwIDQuMzk4NDM4LS45Njg3NSA1Ljg4NjcxOS0yLjgyNDIxOGwyOC45NDkyMTktMzYuMDkzNzVjMi42MDU0NjgtMy4yNDYwOTQgMi4wODU5MzctNy45OTIxODgtMS4xNjQwNjMtMTAuNTk3NjU3em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTExLjc1IDQyMi4wNTA3ODFjMi4xMDkzNzUgMCA0LjIwNzAzMS0uODc4OTA2IDUuNjk5MjE5LTIuNTk3NjU2bDM5LjYxMzI4MS00NS42NDQ1MzFjMi43MzA0NjktMy4xNDQ1MzIgMi4zOTQ1MzEtNy45MDYyNS0uNzUtMTAuNjMyODEzLTMuMTQ0NTMxLTIuNzMwNDY5LTcuOTEwMTU2LTIuMzk0NTMxLTEwLjYzNjcxOS43NWwtMzkuNjE3MTg3IDQ1LjY0NDUzMWMtNC4yNTM5MDYgNC45MDIzNDQtLjY5NTMxMyAxMi40ODA0NjkgNS42OTE0MDYgMTIuNDgwNDY5em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTk2LjYyMTA5NCAzNzYuNzg1MTU2Yy0zLjI1LTIuNjA1NDY4LTcuOTk2MDk0LTIuMDgyMDMxLTEwLjYwMTU2MyAxLjE2NDA2M2wtMTQuNDcyNjU2IDE4LjA0Njg3NWMtMi42MDU0NjkgMy4yNS0yLjA4MjAzMSA3Ljk5NjA5NCAxLjE2NDA2MyAxMC41OTc2NTYgMy4yNjk1MzEgMi42MjUgOC4wMTE3MTggMi4wNjI1IDEwLjU5NzY1Ni0xLjE2NDA2MmwxNC40NzY1NjItMTguMDQ2ODc2YzIuNjA1NDY5LTMuMjUgMi4wODIwMzItNy45OTIxODctMS4xNjQwNjItMTAuNTk3NjU2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNDM3Ljk5MjE4OCAzOTQuODMyMDMxYy0zLjI1LTIuNjA1NDY5LTcuOTkyMTg4LTIuMDgyMDMxLTEwLjU5NzY1NyAxLjE2NDA2M2wtMTQuNDc2NTYyIDE4LjA0Njg3NWMtMi42MDU0NjkgMy4yNS0yLjA4MjAzMSA3Ljk5MjE4NyAxLjE2NDA2MiAxMC41OTc2NTYgMy4yNjk1MzEgMi42MjEwOTQgOC4wMTE3MTkgMi4wNjI1IDEwLjYwMTU2My0xLjE2NDA2M2wxNC40NzI2NTYtMTguMDQ2ODc0YzIuNjA1NDY5LTMuMjQ2MDk0IDIuMDgyMDMxLTcuOTkyMTg4LTEuMTY0MDYyLTEwLjU5NzY1N3ptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTExNi40NzI2NTYgMzYyLjk4NDM3NWMtMy4yNS0yLjYwNTQ2OS03Ljk5MjE4Ny0yLjA4MjAzMS0xMC41OTc2NTYgMS4xNjQwNjNsLTE0LjQ3NjU2MiAxOC4wNTA3ODFjLTIuNjA1NDY5IDMuMjQ2MDkzLTIuMDgyMDMyIDcuOTkyMTg3IDEuMTY0MDYyIDEwLjU5NzY1NiAzLjI2OTUzMSAyLjYyMTA5NCA4LjAxMTcxOSAyLjA2MjUgMTAuNTk3NjU2LTEuMTY0MDYzbDE0LjQ3MjY1Ni0xOC4wNDY4NzRjMi42MDkzNzYtMy4yNSAyLjA4NTkzOC03Ljk5NjA5NC0xLjE2MDE1Ni0xMC42MDE1NjN6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im01MDQuNDYwOTM4IDBjLTE3LjI1MzkwNyAwLTQ2Ni41OTM3NSAwLTQ5Ni45MjE4NzYgMC00LjE2MDE1NiAwLTcuNTM5MDYyIDMuMzY3MTg4LTcuNTM5MDYyIDcuNTM5MDYydjQ5My44NjcxODhjMCA0LjE3MTg3NSAzLjM3ODkwNiA3LjUzOTA2MiA3LjUzOTA2MiA3LjUzOTA2Mmg0MjIuMjEwOTM4YzQuMTYwMTU2IDAgNy41MzkwNjItMy4zNjcxODcgNy41MzkwNjItNy41MzkwNjIgMC00LjE2NDA2Mi0zLjM3ODkwNi03LjU0Mjk2OS03LjUzOTA2Mi03LjU0Mjk2OWgtNDE0LjY3MTg3NXYtMTQzLjg4MjgxMmgxNC4zNjcxODd2OTAuOTU3MDMxYzAgNC4xNjQwNjIgMy4zNzUgNy41MzkwNjIgNy41MzkwNjMgNy41MzkwNjJoMTI2LjQwMjM0NGM0LjE2MDE1NiAwIDcuNTM5MDYyLTMuMzc1IDcuNTM5MDYyLTcuNTM5MDYyIDAtNC4xNjAxNTYtMy4zNzg5MDYtNy41MzkwNjItNy41MzkwNjItNy41MzkwNjJoLTExOC44NjMyODF2LTgzLjQxNzk2OWgxNC41MzkwNjJ2MjYuMTIxMDkzYzAgNC4xNjQwNjMgMy4zNzUgNy41MzkwNjMgNy41MzkwNjIgNy41MzkwNjMgNC4xNjQwNjMgMCA3LjUzOTA2My0zLjM3NSA3LjUzOTA2My03LjUzOTA2M3YtMjYuMTIxMDkzaDE1My43MTA5Mzd2ODMuNDE3OTY5aC0zNC4zMDg1OTNjLTQuMTYwMTU3IDAtNy41MzkwNjMgMy4zNzg5MDYtNy41MzkwNjMgNy41MzkwNjIgMCA0LjE2NDA2MiAzLjM3ODkwNiA3LjUzOTA2MiA3LjUzOTA2MyA3LjUzOTA2MmgyODEuNDcyNjU2YzQuMTY0MDYzIDAgNy41MzkwNjMtMy4zNzUgNy41MzkwNjMtNy41MzkwNjJ2LTkwLjk1NzAzMWgxNC4zNjcxODd2MTQzLjg4MjgxMmgtMzcuMDE1NjI1Yy00LjE2MDE1NiAwLTcuNTM5MDYyIDMuMzc4OTA3LTcuNTM5MDYyIDcuNTQyOTY5IDAgNC4xNzE4NzUgMy4zNzg5MDYgNy41MzkwNjIgNy41MzkwNjIgNy41MzkwNjJoNDQuNTU0Njg4YzQuMTYwMTU2IDAgNy41MzkwNjItMy4zNjcxODcgNy41MzkwNjItNy41MzkwNjIgMC01My44NjMyODEgMC00MzcuNDk2MDk0IDAtNDkzLjg2NzE4OCAwLTQuMTcxODc0LTMuMzc4OTA2LTcuNTM5MDYyLTcuNTM5MDYyLTcuNTM5MDYyem0tNDQ1LjM5ODQzOCAzMzQuOTAyMzQ0Yy0xMy43MTQ4NDQgMC0zMC4wNTg1OTQgMC00My45ODQzNzUgMCAwLTkuNTUwNzgyIDAtMTYuMjU3ODEzIDAtMjYuNzgxMjVoNDMuOTg0Mzc1em0wLTQxLjg1OTM3NWgtNDMuOTg0Mzc1di0yNi43ODkwNjNoNDMuOTg0Mzc1em0wLTQxLjg2NzE4OGgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4OTA2Mmg0My45ODQzNzV6bTAtNDEuODcxMDk0aC00My45ODQzNzV2LTI2Ljc3NzM0M2g0My45ODQzNzV6bTAtNDEuODU5Mzc0Yy05LjcwMzEyNSAwLTMzLjkxNzk2OSAwLTQzLjk4NDM3NSAwdi0yNi43ODkwNjNoNDMuOTg0Mzc1em0wLTQxLjg2NzE4OGgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4MTI1aDQzLjk4NDM3NXptMTUuMDc4MTI1LTI2Ljc4MTI1aDM2My43MTg3NXYyNi43ODEyNWgtMzYzLjcxODc1em0wIDgzLjcxODc1aDI4OS4zMDA3ODFjNC4xNjQwNjMgMCA3LjUzOTA2My0zLjM2NzE4NyA3LjUzOTA2My03LjUzOTA2MyAwLTQuMTYwMTU2LTMuMzc1LTcuNTM5MDYyLTcuNTM5MDYzLTcuNTM5MDYyLTEuMjM0Mzc1IDAtMjgyLjk0MTQwNiAwLTI4OS4zMDA3ODEgMHYtMjYuNzgxMjVoMzYzLjcxODc1djI2Ljc4MTI1aC00NC4yNTc4MTNjLTQuMTY0MDYyIDAtNy41MzkwNjIgMy4zNzg5MDYtNy41MzkwNjIgNy41MzkwNjIgMCA0LjE3MTg3NiAzLjM3NSA3LjUzOTA2MyA3LjUzOTA2MiA3LjUzOTA2M2g0NC4yNTc4MTN2MjYuNzg5MDYzYy0xMS42MjUgMC0zNTQuNDkyMTg3IDAtMzYzLjcxODc1IDB6bTAgNDEuODcxMDk0aDM2My43MTg3NXYyNi43NzczNDNoLTM2My43MTg3NXptMCA0MS44NTkzNzVoMzYzLjcxODc1djI2Ljc4OTA2MmgtMzYzLjcxODc1em0wIDQxLjg2NzE4N2gzNjMuNzE4NzV2MjYuNzgxMjVoLTM2My43MTg3NXptMCA0MS44NTkzNzVoMzYzLjcxODc1djI2Ljc4OTA2M2gtMzYzLjcxODc1em0wIDY4LjY0ODQzOHYtMjYuNzgxMjVoMzYzLjcxODc1djI2Ljc4MTI1Yy0zNS42MTcxODcgMC0zMjYuOTUzMTI1IDAtMzYzLjcxODc1IDB6bTM5My4zMzU5MzcgOTguNDk2MDk0aC0xODMuMzI4MTI0di00MC42Njc5NjljMC00LjE2NDA2My0zLjM3NS03LjUzOTA2My03LjUzOTA2My03LjUzOTA2M3MtNy41MzkwNjMgMy4zNzUtNy41MzkwNjMgNy41MzkwNjN2NDAuNjY3OTY5aC0yNi4xNDA2MjR2LTgzLjQxNDA2M2gyNi4xNDA2MjR2MTIuNTg1OTM3YzAgNC4xNjc5NjkgMy4zNzUgNy41MzkwNjMgNy41MzkwNjMgNy41MzkwNjNzNy41MzkwNjMtMy4zNzEwOTQgNy41MzkwNjMtNy41MzkwNjN2LTEyLjU4OTg0M2gxNTMuNzEwOTM3djI2LjEyMTA5M2MwIDQuMTY0MDYzIDMuMzc1IDcuNTM5MDYzIDcuNTM5MDYzIDcuNTM5MDYzIDQuMTY0MDYyIDAgNy41MzkwNjItMy4zNzUgNy41MzkwNjItNy41MzkwNjN2LTI2LjEyMTA5M2gxNC41MzkwNjJ6bTI5LjQ0NTMxMy05OC40OTYwOTRjLTEzLjc4OTA2MyAwLTI5Ljg2NzE4NyAwLTQzLjk4NDM3NSAwdi0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4OTA2M2g0My45ODQzNzV6bTAtNDEuODY3MTg4aC00My45ODQzNzV2LTI2Ljc4MTI1aDQzLjk4NDM3NXptMC00MS44NTkzNzVoLTQzLjk4NDM3NXYtMjYuNzg5MDYyaDQzLjk4NDM3NXptMC00MS44NzEwOTRoLTQzLjk4NDM3NXYtMjYuNzc3MzQzaDQzLjk4NDM3NXptMC00MS44NTkzNzRoLTQzLjk4NDM3NXYtMjYuNzg5MDYzaDQzLjk4NDM3NXptMC00MS44NjcxODhoLTQzLjk4NDM3NXYtMjYuNzgxMjVoNDMuOTg0Mzc1em0wLTQxLjg1OTM3NWgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAgMCIvPgogICAgPC9nPgo8L3N2Zz4="
+    },
+    "native": {},
+    "_id": "enum.functions.shutters",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1678970680250
+  },
+  "enum.rooms.Schlafzimmer": {
+    "_id": "enum.rooms.Schlafzimmer",
+    "type": "enum",
+    "common": {
+      "name": "Schlafzimmer",
+      "desc": "",
+      "members": [
+        "hm-rpc.1.00AAABBBA74CCC.1",
+        "hm-rpc.1.00AAABBBA74CCC.2",
+        "hm-rpc.1.00AAABBBA74CCC.3",
+        "hm-rpc.1.00AAABBBA74CCC.4"
+      ],
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Ik00OTYsMzQ0aC04VjI4MGEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMyVjExMmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDg4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJWMjQ4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJ2NjRIMTZhOCw4LDAsMCwwLTgsOHYzMmE4LDgsMCwwLDAsOCw4aDh2MzJhOCw4LDAsMCwwLDgsOEg1NmE3Ljk5LDcuOTksMCwwLDAsNy44NC02LjQzTDcwLjU2LDM5Mkg0NDEuNDRsNi43MiwzMy41N0E3Ljk5LDcuOTksMCwwLDAsNDU2LDQzMmgyNGE4LDgsMCwwLDAsOC04VjM5Mmg4YTgsOCwwLDAsMCw4LThWMzUyQTgsOCwwLDAsMCw0OTYsMzQ0Wk03MiwxMTJBMTYuMDIxLDE2LjAyMSwwLDAsMSw4OCw5Nkg0MjRhMTYuMDIxLDE2LjAyMSwwLDAsMSwxNiwxNlYyNDhINDI0VjIxNmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDI5NmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLDMydjMySDI0OFYyMTZhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMi0zMkgxMjBhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMiwzMnYzMkg3MlpNNDA4LDIxNnYzMkgyODBWMjE2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZoOTZBMTYuMDIxLDE2LjAyMSwwLDAsMSw0MDgsMjE2Wm0tMTc2LDB2MzJIMTA0VjIxNmExNi4wMjEsMTYuMDIxLDAsMCwxLDE2LTE2aDk2QTE2LjAyMSwxNi4wMjEsMCwwLDEsMjMyLDIxNlpNNDAsMjgwYTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZINDU2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYsMTZ2NjRINDBabTkuNDQsMTM2SDQwVjM5Mkg1NC4yNFpNNDcyLDQxNmgtOS40NGwtNC44LTI0SDQ3MlptMTYtNDBIMjRWMzYwSDQ4OFoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+    },
+    "native": {
+      "Name": "Schlafzimmer",
+      "TypeName": "ENUM",
+      "EnumInfo": ""
+    },
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "enums": {},
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1678970670210
+  },
+  "hm-rpc.1.00AAABBBA74CCC": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC",
+    "type": "device",
+    "common": {
+      "name": "Schlafzimmer Rollladen",
+      "icon": "/icons/PushButton-2ch-wm_thumb.png"
+    },
+    "native": {
+      "TYPE": "HmIP-BROLL",
+      "SUBTYPE": "BROLL",
+      "ADDRESS": "00AAABBBA74CCC",
+      "RF_ADDRESS": 6272478,
+      "CHILDREN": [
+        "00AAABBBA74CCC:0",
+        "00AAABBBA74CCC:1",
+        "00AAABBBA74CCC:2",
+        "00AAABBBA74CCC:3",
+        "00AAABBBA74CCC:4",
+        "00AAABBBA74CCC:5",
+        "00AAABBBA74CCC:6",
+        "00AAABBBA74CCC:7"
+      ],
+      "PARENT": "",
+      "PARENT_TYPE": "",
+      "INDEX": 0,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "SERVICE"
+      ],
+      "FIRMWARE": "1.8.20",
+      "AVAILABLE_FIRMWARE": "0.0.0",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "UP_TO_DATE",
+      "VERSION": 4,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612002,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0"
+    },
+    "native": {
+      "TYPE": "MAINTENANCE",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:0",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 0,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 4,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612014,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.ACTUAL_TEMPERATURE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.ACTUAL_TEMPERATURE",
+      "role": "value.temperature",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -3276.8,
+      "max": 3276.7,
+      "unit": "°C"
+    },
+    "native": {
+      "MIN": -3276.8,
+      "UNIT": "�C",
+      "OPERATIONS": 5,
+      "MAX": 3276.7,
+      "FLAGS": 1,
+      "ID": "ACTUAL_TEMPERATURE",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "MAINTENANCE.ACTUAL_TEMPERATURE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612143,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.ACTUAL_TEMPERATURE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.ACTUAL_TEMPERATURE_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.ACTUAL_TEMPERATURE_STATUS",
+      "role": "value",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNDERFLOW",
+      "FLAGS": 1,
+      "ID": "ACTUAL_TEMPERATURE_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612073,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.ACTUAL_TEMPERATURE_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.CONFIG_PENDING": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.CONFIG_PENDING",
+      "role": "indicator",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "CONFIG_PENDING",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612027,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.CONFIG_PENDING",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.DUTY_CYCLE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.DUTY_CYCLE",
+      "role": "value",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "DUTY_CYCLE",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612036,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.DUTY_CYCLE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.ERROR_CODE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.ERROR_CODE",
+      "role": "value",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 255
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 255,
+      "FLAGS": 9,
+      "ID": "ERROR_CODE",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0,
+      "CONTROL": "MAINTENANCE.ERROR_CODE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612095,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.ERROR_CODE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.ERROR_OVERHEAT": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.ERROR_OVERHEAT",
+      "role": "indicator.error.overheat",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "ERROR_OVERHEAT",
+      "TYPE": "BOOL",
+      "DEFAULT": false,
+      "CONTROL": "MAINTENANCE.ERROR_OVERHEAT"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612053,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.ERROR_OVERHEAT",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.INSTALL_TEST": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.INSTALL_TEST",
+      "role": "indicator",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": true
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 3,
+      "MAX": true,
+      "FLAGS": 2,
+      "ID": "INSTALL_TEST",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612045,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.INSTALL_TEST",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.OPERATING_VOLTAGE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.OPERATING_VOLTAGE",
+      "role": "value.voltage",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 25.2,
+      "unit": "V"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "V",
+      "OPERATIONS": 5,
+      "MAX": 25.2,
+      "FLAGS": 1,
+      "ID": "OPERATING_VOLTAGE",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "MAINTENANCE.OPERATING_VOLTAGE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612153,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.OPERATING_VOLTAGE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.OPERATING_VOLTAGE_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.OPERATING_VOLTAGE_STATUS",
+      "role": "value",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "EXTERNAL"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "EXTERNAL",
+      "FLAGS": 1,
+      "ID": "OPERATING_VOLTAGE_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "EXTERNAL"
+      ],
+      "CONTROL": "MAINTENANCE.OPERATING_VOLTAGE_STATUS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612062,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.OPERATING_VOLTAGE_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.RSSI_DEVICE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.RSSI_DEVICE",
+      "role": "value.rssi",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -128,
+      "max": 128,
+      "unit": "dBm"
+    },
+    "native": {
+      "MIN": -128,
+      "OPERATIONS": 5,
+      "MAX": 127,
+      "FLAGS": 1,
+      "ID": "RSSI_DEVICE",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612131,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.RSSI_DEVICE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.RSSI_PEER": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.RSSI_PEER",
+      "role": "value.rssi",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -128,
+      "max": 127,
+      "unit": "dBm"
+    },
+    "native": {
+      "MIN": -128,
+      "OPERATIONS": 5,
+      "MAX": 127,
+      "FLAGS": 1,
+      "ID": "RSSI_PEER",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612084,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.RSSI_PEER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.UNREACH": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.UNREACH",
+      "role": "indicator.unreach",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 25,
+      "ID": "UNREACH",
+      "TYPE": "BOOL",
+      "DEFAULT": false,
+      "CONTROL": "MAINTENANCE.UNREACH"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612120,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.UNREACH",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.0.UPDATE_PENDING": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:0.UPDATE_PENDING",
+      "role": "indicator",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "UPDATE_PENDING",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612106,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.0.UPDATE_PENDING",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.1": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.1",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Zu",
+      "enums": [
+        {
+          "_id": "enum.functions.Fenster",
+          "common": {
+            "name": "Fenster",
+            "smartName": false
+          },
+          "native": {
+            "Name": "Fenster",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.functions.Taster",
+          "common": {
+            "name": "Taster",
+            "smartName": false,
+            "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQ4MHB0IiB2aWV3Qm94PSIwIC0xMjAgNDgwIDQ4MCIgd2lkdGg9IjQ4MHB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGcgZmlsbD0iY3VycmVudENvbG9yIj4KICAgICAgICA8cGF0aCBkPSJtNDcyIDBoLTQ2NGMtNC40MTc5NjkgMC04IDMuNTgyMDMxLTggOHYxOTJjMCA0LjQxNzk2OSAzLjU4MjAzMSA4IDggOGgzMnYyNGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDQwYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTI0aDI4OHYyNGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDQwYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTI0aDMyYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTE5MmMwLTQuNDE3OTY5LTMuNTgyMDMxLTgtOC04em0tMzkyIDIyNGgtMjR2LTE2aDI0em0zNDQgMGgtMjR2LTE2aDI0em00MC0zMmgtNDQ4di0xNzZoNDQ4em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMjU2IDE3NmMzNS4zNDc2NTYgMCA2NC0yOC42NTIzNDQgNjQtNjRzLTI4LjY1MjM0NC02NC02NC02NC02NCAyOC42NTIzNDQtNjQgNjRjLjAzOTA2MiAzNS4zMjgxMjUgMjguNjcxODc1IDYzLjk2MDkzOCA2NCA2NHptLTgtMTExLjI4MTI1djE1LjI4MTI1aDE2di0xNS4yODEyNWMyNC42MDU0NjkgNC4xNjAxNTYgNDEuOTE3OTY5IDI2LjQ3NjU2MiAzOS44MzIwMzEgNTEuMzQzNzUtMi4wODU5MzcgMjQuODY3MTg4LTIyLjg3ODkwNiA0My45ODQzNzUtNDcuODMyMDMxIDQzLjk4NDM3NXMtNDUuNzQ2MDk0LTE5LjExNzE4Ny00Ny44MzIwMzEtNDMuOTg0Mzc1Yy0yLjA4NTkzOC0yNC44NjcxODggMTUuMjI2NTYyLTQ3LjE4MzU5NCAzOS44MzIwMzEtNTEuMzQzNzV6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im0xNjAgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTYwIDY0aDE2djE2aC0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTEyOCAzMmgxNnYxNmgtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im0xMjggNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtOTYgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtOTYgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNjQgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNjQgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzIgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzIgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzY4IDE3NmMxNi4wOTM3NS4wMTk1MzEgMjkuNjg3NS0xMS45Mzc1IDMxLjcxODc1LTI3LjkwNjI1IDIuMDM1MTU2LTE1Ljk2NDg0NC04LjEzMjgxMi0zMC45NDUzMTItMjMuNzE4NzUtMzQuOTU3MDMxdi0xNy4xMzY3MTloLTE2djE3LjEzNjcxOWMtMTUuNTg1OTM4IDQuMDExNzE5LTI1Ljc1MzkwNiAxOC45OTIxODctMjMuNzE4NzUgMzQuOTU3MDMxIDIuMDMxMjUgMTUuOTY4NzUgMTUuNjI1IDI3LjkyNTc4MSAzMS43MTg3NSAyNy45MDYyNXptMC00OGM4LjgzNTkzOCAwIDE2IDcuMTY0MDYyIDE2IDE2cy03LjE2NDA2MiAxNi0xNiAxNi0xNi03LjE2NDA2Mi0xNi0xNiA3LjE2NDA2Mi0xNiAxNi0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTE0NCAxNzZjMTYuMDkzNzUuMDE5NTMxIDI5LjY4NzUtMTEuOTM3NSAzMS43MTg3NS0yNy45MDYyNSAyLjAzNTE1Ni0xNS45NjQ4NDQtOC4xMzI4MTItMzAuOTQ1MzEyLTIzLjcxODc1LTM0Ljk1NzAzMXYtMTcuMTM2NzE5aC0xNnYxNy4xMzY3MTljLTE1LjU4NTkzOCA0LjAxMTcxOS0yNS43NTM5MDYgMTguOTkyMTg3LTIzLjcxODc1IDM0Ljk1NzAzMSAyLjAzMTI1IDE1Ljk2ODc1IDE1LjYyNSAyNy45MjU3ODEgMzEuNzE4NzUgMjcuOTA2MjV6bTAtNDhjOC44MzU5MzggMCAxNiA3LjE2NDA2MiAxNiAxNnMtNy4xNjQwNjIgMTYtMTYgMTYtMTYtNy4xNjQwNjItMTYtMTYgNy4xNjQwNjItMTYgMTYtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im02NCAxNzZjMTYuMDkzNzUuMDE5NTMxIDI5LjY4NzUtMTEuOTM3NSAzMS43MTg3NS0yNy45MDYyNSAyLjAzNTE1Ni0xNS45NjQ4NDQtOC4xMzI4MTItMzAuOTQ1MzEyLTIzLjcxODc1LTM0Ljk1NzAzMXYtMTcuMTM2NzE5aC0xNnYxNy4xMzY3MTljLTE1LjU4NTkzOCA0LjAxMTcxOS0yNS43NTM5MDYgMTguOTkyMTg3LTIzLjcxODc1IDM0Ljk1NzAzMSAyLjAzMTI1IDE1Ljk2ODc1IDE1LjYyNSAyNy45MjU3ODEgMzEuNzE4NzUgMjcuOTA2MjV6bTAtNDhjOC44MzU5MzggMCAxNiA3LjE2NDA2MiAxNiAxNnMtNy4xNjQwNjIgMTYtMTYgMTYtMTYtNy4xNjQwNjItMTYtMTYgNy4xNjQwNjItMTYgMTYtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im00MDggMTEyaDMyYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTY0YzAtNC40MTc5NjktMy41ODIwMzEtOC04LThoLTMyYy00LjQxNzk2OSAwLTggMy41ODIwMzEtOCA4djY0YzAgNC40MTc5NjkgMy41ODIwMzEgOCA4IDh6bTgtNjRoMTZ2MTZoLTE2em0wIDMyaDE2djE2aC0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTQzMiAxMzZjMCA0LjQxNzk2OS0zLjU4MjAzMSA4LTggOHMtOC0zLjU4MjAzMS04LTggMy41ODIwMzEtOCA4LTggOCAzLjU4MjAzMSA4IDh6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im00MzIgMTY4YzAgNC40MTc5NjktMy41ODIwMzEgOC04IDhzLTgtMy41ODIwMzEtOC04IDMuNTgyMDMxLTggOC04IDggMy41ODIwMzEgOCA4em0wIDAiLz4KICAgIDwvZz4KPC9zdmc+"
+          },
+          "native": {
+            "Name": "Taster",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.rooms.Schlafzimmer",
+          "common": {
+            "name": "Schlafzimmer",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Ik00OTYsMzQ0aC04VjI4MGEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMyVjExMmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDg4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJWMjQ4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJ2NjRIMTZhOCw4LDAsMCwwLTgsOHYzMmE4LDgsMCwwLDAsOCw4aDh2MzJhOCw4LDAsMCwwLDgsOEg1NmE3Ljk5LDcuOTksMCwwLDAsNy44NC02LjQzTDcwLjU2LDM5Mkg0NDEuNDRsNi43MiwzMy41N0E3Ljk5LDcuOTksMCwwLDAsNDU2LDQzMmgyNGE4LDgsMCwwLDAsOC04VjM5Mmg4YTgsOCwwLDAsMCw4LThWMzUyQTgsOCwwLDAsMCw0OTYsMzQ0Wk03MiwxMTJBMTYuMDIxLDE2LjAyMSwwLDAsMSw4OCw5Nkg0MjRhMTYuMDIxLDE2LjAyMSwwLDAsMSwxNiwxNlYyNDhINDI0VjIxNmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDI5NmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLDMydjMySDI0OFYyMTZhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMi0zMkgxMjBhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMiwzMnYzMkg3MlpNNDA4LDIxNnYzMkgyODBWMjE2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZoOTZBMTYuMDIxLDE2LjAyMSwwLDAsMSw0MDgsMjE2Wm0tMTc2LDB2MzJIMTA0VjIxNmExNi4wMjEsMTYuMDIxLDAsMCwxLDE2LTE2aDk2QTE2LjAyMSwxNi4wMjEsMCwwLDEsMjMyLDIxNlpNNDAsMjgwYTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZINDU2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYsMTZ2NjRINDBabTkuNDQsMTM2SDQwVjM5Mkg1NC4yNFpNNDcyLDQxNmgtOS40NGwtNC44LTI0SDQ3MlptMTYtNDBIMjRWMzYwSDQ4OFoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Schlafzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "TYPE": "KEY_TRANSCEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:1",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 1,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 14,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "REMOTE_CONTROL",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 1,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612163,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.1.PRESS_LONG": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Zu.PRESS_LONG",
+      "role": "button.long",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_LONG",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "BUTTON_NO_FUNCTION.LONG"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612209,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.1.PRESS_LONG",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.1.PRESS_LONG_RELEASE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Zu.PRESS_LONG_RELEASE",
+      "role": "button.release",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_LONG_RELEASE",
+      "TYPE": "ACTION",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612172,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.1.PRESS_LONG_RELEASE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.1.PRESS_LONG_START": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Zu.PRESS_LONG_START",
+      "role": "",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_LONG_START",
+      "TYPE": "ACTION",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612200,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.1.PRESS_LONG_START",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.1.PRESS_SHORT": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Zu.PRESS_SHORT",
+      "role": "button",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_SHORT",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "BUTTON_NO_FUNCTION.SHORT"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612187,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.1.PRESS_SHORT",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.2": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.2",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Auf",
+      "enums": [
+        {
+          "_id": "enum.functions.Fenster",
+          "common": {
+            "name": "Fenster",
+            "smartName": false
+          },
+          "native": {
+            "Name": "Fenster",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.functions.Taster",
+          "common": {
+            "name": "Taster",
+            "smartName": false,
+            "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQ4MHB0IiB2aWV3Qm94PSIwIC0xMjAgNDgwIDQ4MCIgd2lkdGg9IjQ4MHB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGcgZmlsbD0iY3VycmVudENvbG9yIj4KICAgICAgICA8cGF0aCBkPSJtNDcyIDBoLTQ2NGMtNC40MTc5NjkgMC04IDMuNTgyMDMxLTggOHYxOTJjMCA0LjQxNzk2OSAzLjU4MjAzMSA4IDggOGgzMnYyNGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDQwYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTI0aDI4OHYyNGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDQwYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTI0aDMyYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTE5MmMwLTQuNDE3OTY5LTMuNTgyMDMxLTgtOC04em0tMzkyIDIyNGgtMjR2LTE2aDI0em0zNDQgMGgtMjR2LTE2aDI0em00MC0zMmgtNDQ4di0xNzZoNDQ4em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMjU2IDE3NmMzNS4zNDc2NTYgMCA2NC0yOC42NTIzNDQgNjQtNjRzLTI4LjY1MjM0NC02NC02NC02NC02NCAyOC42NTIzNDQtNjQgNjRjLjAzOTA2MiAzNS4zMjgxMjUgMjguNjcxODc1IDYzLjk2MDkzOCA2NCA2NHptLTgtMTExLjI4MTI1djE1LjI4MTI1aDE2di0xNS4yODEyNWMyNC42MDU0NjkgNC4xNjAxNTYgNDEuOTE3OTY5IDI2LjQ3NjU2MiAzOS44MzIwMzEgNTEuMzQzNzUtMi4wODU5MzcgMjQuODY3MTg4LTIyLjg3ODkwNiA0My45ODQzNzUtNDcuODMyMDMxIDQzLjk4NDM3NXMtNDUuNzQ2MDk0LTE5LjExNzE4Ny00Ny44MzIwMzEtNDMuOTg0Mzc1Yy0yLjA4NTkzOC0yNC44NjcxODggMTUuMjI2NTYyLTQ3LjE4MzU5NCAzOS44MzIwMzEtNTEuMzQzNzV6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im0xNjAgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTYwIDY0aDE2djE2aC0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTEyOCAzMmgxNnYxNmgtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im0xMjggNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtOTYgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtOTYgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNjQgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNjQgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzIgMzJoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzIgNjRoMTZ2MTZoLTE2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzY4IDE3NmMxNi4wOTM3NS4wMTk1MzEgMjkuNjg3NS0xMS45Mzc1IDMxLjcxODc1LTI3LjkwNjI1IDIuMDM1MTU2LTE1Ljk2NDg0NC04LjEzMjgxMi0zMC45NDUzMTItMjMuNzE4NzUtMzQuOTU3MDMxdi0xNy4xMzY3MTloLTE2djE3LjEzNjcxOWMtMTUuNTg1OTM4IDQuMDExNzE5LTI1Ljc1MzkwNiAxOC45OTIxODctMjMuNzE4NzUgMzQuOTU3MDMxIDIuMDMxMjUgMTUuOTY4NzUgMTUuNjI1IDI3LjkyNTc4MSAzMS43MTg3NSAyNy45MDYyNXptMC00OGM4LjgzNTkzOCAwIDE2IDcuMTY0MDYyIDE2IDE2cy03LjE2NDA2MiAxNi0xNiAxNi0xNi03LjE2NDA2Mi0xNi0xNiA3LjE2NDA2Mi0xNiAxNi0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTE0NCAxNzZjMTYuMDkzNzUuMDE5NTMxIDI5LjY4NzUtMTEuOTM3NSAzMS43MTg3NS0yNy45MDYyNSAyLjAzNTE1Ni0xNS45NjQ4NDQtOC4xMzI4MTItMzAuOTQ1MzEyLTIzLjcxODc1LTM0Ljk1NzAzMXYtMTcuMTM2NzE5aC0xNnYxNy4xMzY3MTljLTE1LjU4NTkzOCA0LjAxMTcxOS0yNS43NTM5MDYgMTguOTkyMTg3LTIzLjcxODc1IDM0Ljk1NzAzMSAyLjAzMTI1IDE1Ljk2ODc1IDE1LjYyNSAyNy45MjU3ODEgMzEuNzE4NzUgMjcuOTA2MjV6bTAtNDhjOC44MzU5MzggMCAxNiA3LjE2NDA2MiAxNiAxNnMtNy4xNjQwNjIgMTYtMTYgMTYtMTYtNy4xNjQwNjItMTYtMTYgNy4xNjQwNjItMTYgMTYtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im02NCAxNzZjMTYuMDkzNzUuMDE5NTMxIDI5LjY4NzUtMTEuOTM3NSAzMS43MTg3NS0yNy45MDYyNSAyLjAzNTE1Ni0xNS45NjQ4NDQtOC4xMzI4MTItMzAuOTQ1MzEyLTIzLjcxODc1LTM0Ljk1NzAzMXYtMTcuMTM2NzE5aC0xNnYxNy4xMzY3MTljLTE1LjU4NTkzOCA0LjAxMTcxOS0yNS43NTM5MDYgMTguOTkyMTg3LTIzLjcxODc1IDM0Ljk1NzAzMSAyLjAzMTI1IDE1Ljk2ODc1IDE1LjYyNSAyNy45MjU3ODEgMzEuNzE4NzUgMjcuOTA2MjV6bTAtNDhjOC44MzU5MzggMCAxNiA3LjE2NDA2MiAxNiAxNnMtNy4xNjQwNjIgMTYtMTYgMTYtMTYtNy4xNjQwNjItMTYtMTYgNy4xNjQwNjItMTYgMTYtMTZ6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im00MDggMTEyaDMyYzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTY0YzAtNC40MTc5NjktMy41ODIwMzEtOC04LThoLTMyYy00LjQxNzk2OSAwLTggMy41ODIwMzEtOCA4djY0YzAgNC40MTc5NjkgMy41ODIwMzEgOCA4IDh6bTgtNjRoMTZ2MTZoLTE2em0wIDMyaDE2djE2aC0xNnptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTQzMiAxMzZjMCA0LjQxNzk2OS0zLjU4MjAzMSA4LTggOHMtOC0zLjU4MjAzMS04LTggMy41ODIwMzEtOCA4LTggOCAzLjU4MjAzMSA4IDh6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im00MzIgMTY4YzAgNC40MTc5NjktMy41ODIwMzEgOC04IDhzLTgtMy41ODIwMzEtOC04IDMuNTgyMDMxLTggOC04IDggMy41ODIwMzEgOCA4em0wIDAiLz4KICAgIDwvZz4KPC9zdmc+"
+          },
+          "native": {
+            "Name": "Taster",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.rooms.Schlafzimmer",
+          "common": {
+            "name": "Schlafzimmer",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Ik00OTYsMzQ0aC04VjI4MGEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMyVjExMmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDg4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJWMjQ4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJ2NjRIMTZhOCw4LDAsMCwwLTgsOHYzMmE4LDgsMCwwLDAsOCw4aDh2MzJhOCw4LDAsMCwwLDgsOEg1NmE3Ljk5LDcuOTksMCwwLDAsNy44NC02LjQzTDcwLjU2LDM5Mkg0NDEuNDRsNi43MiwzMy41N0E3Ljk5LDcuOTksMCwwLDAsNDU2LDQzMmgyNGE4LDgsMCwwLDAsOC04VjM5Mmg4YTgsOCwwLDAsMCw4LThWMzUyQTgsOCwwLDAsMCw0OTYsMzQ0Wk03MiwxMTJBMTYuMDIxLDE2LjAyMSwwLDAsMSw4OCw5Nkg0MjRhMTYuMDIxLDE2LjAyMSwwLDAsMSwxNiwxNlYyNDhINDI0VjIxNmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDI5NmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLDMydjMySDI0OFYyMTZhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMi0zMkgxMjBhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMiwzMnYzMkg3MlpNNDA4LDIxNnYzMkgyODBWMjE2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZoOTZBMTYuMDIxLDE2LjAyMSwwLDAsMSw0MDgsMjE2Wm0tMTc2LDB2MzJIMTA0VjIxNmExNi4wMjEsMTYuMDIxLDAsMCwxLDE2LTE2aDk2QTE2LjAyMSwxNi4wMjEsMCwwLDEsMjMyLDIxNlpNNDAsMjgwYTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZINDU2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYsMTZ2NjRINDBabTkuNDQsMTM2SDQwVjM5Mkg1NC4yNFpNNDcyLDQxNmgtOS40NGwtNC44LTI0SDQ3MlptMTYtNDBIMjRWMzYwSDQ4OFoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Schlafzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "TYPE": "KEY_TRANSCEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:2",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 2,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 14,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "REMOTE_CONTROL",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 1,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612218,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.2.PRESS_LONG": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Auf.PRESS_LONG",
+      "role": "button.long",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_LONG",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "BUTTON_NO_FUNCTION.LONG"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612255,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.2.PRESS_LONG",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.2.PRESS_LONG_RELEASE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Auf.PRESS_LONG_RELEASE",
+      "role": "button.release",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_LONG_RELEASE",
+      "TYPE": "ACTION",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612227,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.2.PRESS_LONG_RELEASE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.2.PRESS_LONG_START": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Auf.PRESS_LONG_START",
+      "role": "",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_LONG_START",
+      "TYPE": "ACTION",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612245,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.2.PRESS_LONG_START",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.2.PRESS_SHORT": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Taster Auf.PRESS_SHORT",
+      "role": "button",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 4,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "PRESS_SHORT",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "BUTTON_NO_FUNCTION.SHORT"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612237,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.2.PRESS_SHORT",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status",
+      "enums": [
+        {
+          "_id": "enum.functions.Fenster",
+          "common": {
+            "name": "Fenster",
+            "smartName": false
+          },
+          "native": {
+            "Name": "Fenster",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.rooms.Schlafzimmer",
+          "common": {
+            "name": "Schlafzimmer",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Ik00OTYsMzQ0aC04VjI4MGEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMyVjExMmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDg4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJWMjQ4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJ2NjRIMTZhOCw4LDAsMCwwLTgsOHYzMmE4LDgsMCwwLDAsOCw4aDh2MzJhOCw4LDAsMCwwLDgsOEg1NmE3Ljk5LDcuOTksMCwwLDAsNy44NC02LjQzTDcwLjU2LDM5Mkg0NDEuNDRsNi43MiwzMy41N0E3Ljk5LDcuOTksMCwwLDAsNDU2LDQzMmgyNGE4LDgsMCwwLDAsOC04VjM5Mmg4YTgsOCwwLDAsMCw4LThWMzUyQTgsOCwwLDAsMCw0OTYsMzQ0Wk03MiwxMTJBMTYuMDIxLDE2LjAyMSwwLDAsMSw4OCw5Nkg0MjRhMTYuMDIxLDE2LjAyMSwwLDAsMSwxNiwxNlYyNDhINDI0VjIxNmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDI5NmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLDMydjMySDI0OFYyMTZhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMi0zMkgxMjBhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMiwzMnYzMkg3MlpNNDA4LDIxNnYzMkgyODBWMjE2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZoOTZBMTYuMDIxLDE2LjAyMSwwLDAsMSw0MDgsMjE2Wm0tMTc2LDB2MzJIMTA0VjIxNmExNi4wMjEsMTYuMDIxLDAsMCwxLDE2LTE2aDk2QTE2LjAyMSwxNi4wMjEsMCwwLDEsMjMyLDIxNlpNNDAsMjgwYTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZINDU2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYsMTZ2NjRINDBabTkuNDQsMTM2SDQwVjM5Mkg1NC4yNFpNNDcyLDQxNmgtOS40NGwtNC44LTI0SDQ3MlptMTYtNDBIMjRWMzYwSDQ4OFoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Schlafzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "TYPE": "SHUTTER_TRANSMITTER",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:3",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 3,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 4,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612263,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ],
+      "CONTROL": "SHUTTER_TRANSMITTER.ACTIVITY_STATE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612331,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.LEVEL",
+      "role": "level",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "enums": [
+        {
+          "_id": "enum.functions.shutters",
+          "common": {
+            "name": {
+              "en": "Shutters",
+              "ru": "Ставни",
+              "de": "Rollladen",
+              "fr": "Volets",
+              "it": "Persiane",
+              "nl": "Shutters",
+              "pl": "Żaluzje",
+              "pt": "Persianas",
+              "es": "Persianas",
+              "zh-cn": "百叶窗"
+            },
+            "enabled": true,
+            "color": false,
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSIwIC0yIDUxMiA1MTIiIHdpZHRoPSI1MTJwdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgICAgICAgPHBhdGggZD0ibTM0OC4yNDYwOTQgMzc2Ljc4NTE1NmMtMy4yNS0yLjYwNTQ2OC03Ljk5MjE4OC0yLjA4MjAzMS0xMC41OTc2NTYgMS4xNjQwNjNsLTI4Ljk0OTIxOSAzNi4wOTM3NWMtMy45ODQzNzUgNC45Njg3NS0uMzY3MTg4IDEyLjI1NzgxMiA1Ljg3NSAxMi4yNTc4MTIgMi4yMTA5MzcgMCA0LjM5ODQzNy0uOTY4NzUgNS44ODY3MTktMi44MjQyMTlsMjguOTQ5MjE4LTM2LjA5Mzc1YzIuNjA1NDY5LTMuMjUgMi4wODU5MzgtNy45OTIxODctMS4xNjQwNjItMTAuNTk3NjU2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzkwLjM1OTM3NSAzNTguNzM4MjgxYy0zLjI1LTIuNjA1NDY5LTcuOTkyMTg3LTIuMDgyMDMxLTEwLjU5NzY1NiAxLjE2NDA2M2wtMjguOTQ5MjE5IDM2LjA5Mzc1Yy0zLjk4NDM3NSA0Ljk2ODc1LS4zNjcxODggMTIuMjU3ODEyIDUuODc1IDEyLjI1NzgxMiAyLjIxMDkzOCAwIDQuMzk4NDM4LS45Njg3NSA1Ljg4NjcxOS0yLjgyNDIxOGwyOC45NDkyMTktMzYuMDkzNzVjMi42MDU0NjgtMy4yNDYwOTQgMi4wODU5MzctNy45OTIxODgtMS4xNjQwNjMtMTAuNTk3NjU3em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTExLjc1IDQyMi4wNTA3ODFjMi4xMDkzNzUgMCA0LjIwNzAzMS0uODc4OTA2IDUuNjk5MjE5LTIuNTk3NjU2bDM5LjYxMzI4MS00NS42NDQ1MzFjMi43MzA0NjktMy4xNDQ1MzIgMi4zOTQ1MzEtNy45MDYyNS0uNzUtMTAuNjMyODEzLTMuMTQ0NTMxLTIuNzMwNDY5LTcuOTEwMTU2LTIuMzk0NTMxLTEwLjYzNjcxOS43NWwtMzkuNjE3MTg3IDQ1LjY0NDUzMWMtNC4yNTM5MDYgNC45MDIzNDQtLjY5NTMxMyAxMi40ODA0NjkgNS42OTE0MDYgMTIuNDgwNDY5em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTk2LjYyMTA5NCAzNzYuNzg1MTU2Yy0zLjI1LTIuNjA1NDY4LTcuOTk2MDk0LTIuMDgyMDMxLTEwLjYwMTU2MyAxLjE2NDA2M2wtMTQuNDcyNjU2IDE4LjA0Njg3NWMtMi42MDU0NjkgMy4yNS0yLjA4MjAzMSA3Ljk5NjA5NCAxLjE2NDA2MyAxMC41OTc2NTYgMy4yNjk1MzEgMi42MjUgOC4wMTE3MTggMi4wNjI1IDEwLjU5NzY1Ni0xLjE2NDA2MmwxNC40NzY1NjItMTguMDQ2ODc2YzIuNjA1NDY5LTMuMjUgMi4wODIwMzItNy45OTIxODctMS4xNjQwNjItMTAuNTk3NjU2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNDM3Ljk5MjE4OCAzOTQuODMyMDMxYy0zLjI1LTIuNjA1NDY5LTcuOTkyMTg4LTIuMDgyMDMxLTEwLjU5NzY1NyAxLjE2NDA2M2wtMTQuNDc2NTYyIDE4LjA0Njg3NWMtMi42MDU0NjkgMy4yNS0yLjA4MjAzMSA3Ljk5MjE4NyAxLjE2NDA2MiAxMC41OTc2NTYgMy4yNjk1MzEgMi42MjEwOTQgOC4wMTE3MTkgMi4wNjI1IDEwLjYwMTU2My0xLjE2NDA2M2wxNC40NzI2NTYtMTguMDQ2ODc0YzIuNjA1NDY5LTMuMjQ2MDk0IDIuMDgyMDMxLTcuOTkyMTg4LTEuMTY0MDYyLTEwLjU5NzY1N3ptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTExNi40NzI2NTYgMzYyLjk4NDM3NWMtMy4yNS0yLjYwNTQ2OS03Ljk5MjE4Ny0yLjA4MjAzMS0xMC41OTc2NTYgMS4xNjQwNjNsLTE0LjQ3NjU2MiAxOC4wNTA3ODFjLTIuNjA1NDY5IDMuMjQ2MDkzLTIuMDgyMDMyIDcuOTkyMTg3IDEuMTY0MDYyIDEwLjU5NzY1NiAzLjI2OTUzMSAyLjYyMTA5NCA4LjAxMTcxOSAyLjA2MjUgMTAuNTk3NjU2LTEuMTY0MDYzbDE0LjQ3MjY1Ni0xOC4wNDY4NzRjMi42MDkzNzYtMy4yNSAyLjA4NTkzOC03Ljk5NjA5NC0xLjE2MDE1Ni0xMC42MDE1NjN6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im01MDQuNDYwOTM4IDBjLTE3LjI1MzkwNyAwLTQ2Ni41OTM3NSAwLTQ5Ni45MjE4NzYgMC00LjE2MDE1NiAwLTcuNTM5MDYyIDMuMzY3MTg4LTcuNTM5MDYyIDcuNTM5MDYydjQ5My44NjcxODhjMCA0LjE3MTg3NSAzLjM3ODkwNiA3LjUzOTA2MiA3LjUzOTA2MiA3LjUzOTA2Mmg0MjIuMjEwOTM4YzQuMTYwMTU2IDAgNy41MzkwNjItMy4zNjcxODcgNy41MzkwNjItNy41MzkwNjIgMC00LjE2NDA2Mi0zLjM3ODkwNi03LjU0Mjk2OS03LjUzOTA2Mi03LjU0Mjk2OWgtNDE0LjY3MTg3NXYtMTQzLjg4MjgxMmgxNC4zNjcxODd2OTAuOTU3MDMxYzAgNC4xNjQwNjIgMy4zNzUgNy41MzkwNjIgNy41MzkwNjMgNy41MzkwNjJoMTI2LjQwMjM0NGM0LjE2MDE1NiAwIDcuNTM5MDYyLTMuMzc1IDcuNTM5MDYyLTcuNTM5MDYyIDAtNC4xNjAxNTYtMy4zNzg5MDYtNy41MzkwNjItNy41MzkwNjItNy41MzkwNjJoLTExOC44NjMyODF2LTgzLjQxNzk2OWgxNC41MzkwNjJ2MjYuMTIxMDkzYzAgNC4xNjQwNjMgMy4zNzUgNy41MzkwNjMgNy41MzkwNjIgNy41MzkwNjMgNC4xNjQwNjMgMCA3LjUzOTA2My0zLjM3NSA3LjUzOTA2My03LjUzOTA2M3YtMjYuMTIxMDkzaDE1My43MTA5Mzd2ODMuNDE3OTY5aC0zNC4zMDg1OTNjLTQuMTYwMTU3IDAtNy41MzkwNjMgMy4zNzg5MDYtNy41MzkwNjMgNy41MzkwNjIgMCA0LjE2NDA2MiAzLjM3ODkwNiA3LjUzOTA2MiA3LjUzOTA2MyA3LjUzOTA2MmgyODEuNDcyNjU2YzQuMTY0MDYzIDAgNy41MzkwNjMtMy4zNzUgNy41MzkwNjMtNy41MzkwNjJ2LTkwLjk1NzAzMWgxNC4zNjcxODd2MTQzLjg4MjgxMmgtMzcuMDE1NjI1Yy00LjE2MDE1NiAwLTcuNTM5MDYyIDMuMzc4OTA3LTcuNTM5MDYyIDcuNTQyOTY5IDAgNC4xNzE4NzUgMy4zNzg5MDYgNy41MzkwNjIgNy41MzkwNjIgNy41MzkwNjJoNDQuNTU0Njg4YzQuMTYwMTU2IDAgNy41MzkwNjItMy4zNjcxODcgNy41MzkwNjItNy41MzkwNjIgMC01My44NjMyODEgMC00MzcuNDk2MDk0IDAtNDkzLjg2NzE4OCAwLTQuMTcxODc0LTMuMzc4OTA2LTcuNTM5MDYyLTcuNTM5MDYyLTcuNTM5MDYyem0tNDQ1LjM5ODQzOCAzMzQuOTAyMzQ0Yy0xMy43MTQ4NDQgMC0zMC4wNTg1OTQgMC00My45ODQzNzUgMCAwLTkuNTUwNzgyIDAtMTYuMjU3ODEzIDAtMjYuNzgxMjVoNDMuOTg0Mzc1em0wLTQxLjg1OTM3NWgtNDMuOTg0Mzc1di0yNi43ODkwNjNoNDMuOTg0Mzc1em0wLTQxLjg2NzE4OGgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4OTA2Mmg0My45ODQzNzV6bTAtNDEuODcxMDk0aC00My45ODQzNzV2LTI2Ljc3NzM0M2g0My45ODQzNzV6bTAtNDEuODU5Mzc0Yy05LjcwMzEyNSAwLTMzLjkxNzk2OSAwLTQzLjk4NDM3NSAwdi0yNi43ODkwNjNoNDMuOTg0Mzc1em0wLTQxLjg2NzE4OGgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4MTI1aDQzLjk4NDM3NXptMTUuMDc4MTI1LTI2Ljc4MTI1aDM2My43MTg3NXYyNi43ODEyNWgtMzYzLjcxODc1em0wIDgzLjcxODc1aDI4OS4zMDA3ODFjNC4xNjQwNjMgMCA3LjUzOTA2My0zLjM2NzE4NyA3LjUzOTA2My03LjUzOTA2MyAwLTQuMTYwMTU2LTMuMzc1LTcuNTM5MDYyLTcuNTM5MDYzLTcuNTM5MDYyLTEuMjM0Mzc1IDAtMjgyLjk0MTQwNiAwLTI4OS4zMDA3ODEgMHYtMjYuNzgxMjVoMzYzLjcxODc1djI2Ljc4MTI1aC00NC4yNTc4MTNjLTQuMTY0MDYyIDAtNy41MzkwNjIgMy4zNzg5MDYtNy41MzkwNjIgNy41MzkwNjIgMCA0LjE3MTg3NiAzLjM3NSA3LjUzOTA2MyA3LjUzOTA2MiA3LjUzOTA2M2g0NC4yNTc4MTN2MjYuNzg5MDYzYy0xMS42MjUgMC0zNTQuNDkyMTg3IDAtMzYzLjcxODc1IDB6bTAgNDEuODcxMDk0aDM2My43MTg3NXYyNi43NzczNDNoLTM2My43MTg3NXptMCA0MS44NTkzNzVoMzYzLjcxODc1djI2Ljc4OTA2MmgtMzYzLjcxODc1em0wIDQxLjg2NzE4N2gzNjMuNzE4NzV2MjYuNzgxMjVoLTM2My43MTg3NXptMCA0MS44NTkzNzVoMzYzLjcxODc1djI2Ljc4OTA2M2gtMzYzLjcxODc1em0wIDY4LjY0ODQzOHYtMjYuNzgxMjVoMzYzLjcxODc1djI2Ljc4MTI1Yy0zNS42MTcxODcgMC0zMjYuOTUzMTI1IDAtMzYzLjcxODc1IDB6bTM5My4zMzU5MzcgOTguNDk2MDk0aC0xODMuMzI4MTI0di00MC42Njc5NjljMC00LjE2NDA2My0zLjM3NS03LjUzOTA2My03LjUzOTA2My03LjUzOTA2M3MtNy41MzkwNjMgMy4zNzUtNy41MzkwNjMgNy41MzkwNjN2NDAuNjY3OTY5aC0yNi4xNDA2MjR2LTgzLjQxNDA2M2gyNi4xNDA2MjR2MTIuNTg1OTM3YzAgNC4xNjc5NjkgMy4zNzUgNy41MzkwNjMgNy41MzkwNjMgNy41MzkwNjNzNy41MzkwNjMtMy4zNzEwOTQgNy41MzkwNjMtNy41MzkwNjN2LTEyLjU4OTg0M2gxNTMuNzEwOTM3djI2LjEyMTA5M2MwIDQuMTY0MDYzIDMuMzc1IDcuNTM5MDYzIDcuNTM5MDYzIDcuNTM5MDYzIDQuMTY0MDYyIDAgNy41MzkwNjItMy4zNzUgNy41MzkwNjItNy41MzkwNjN2LTI2LjEyMTA5M2gxNC41MzkwNjJ6bTI5LjQ0NTMxMy05OC40OTYwOTRjLTEzLjc4OTA2MyAwLTI5Ljg2NzE4NyAwLTQzLjk4NDM3NSAwdi0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4OTA2M2g0My45ODQzNzV6bTAtNDEuODY3MTg4aC00My45ODQzNzV2LTI2Ljc4MTI1aDQzLjk4NDM3NXptMC00MS44NTkzNzVoLTQzLjk4NDM3NXYtMjYuNzg5MDYyaDQzLjk4NDM3NXptMC00MS44NzEwOTRoLTQzLjk4NDM3NXYtMjYuNzc3MzQzaDQzLjk4NDM3NXptMC00MS44NTkzNzRoLTQzLjk4NDM3NXYtMjYuNzg5MDYzaDQzLjk4NDM3NXptMC00MS44NjcxODhoLTQzLjk4NDM3NXYtMjYuNzgxMjVoNDMuOTg0Mzc1em0wLTQxLjg1OTM3NWgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAgMCIvPgogICAgPC9nPgo8L3N2Zz4="
+          },
+          "native": {},
+          "type": "enum"
+        },
+        {
+          "_id": "enum.rooms.WearOS",
+          "common": {
+            "name": "WearOS",
+            "enabled": true,
+            "color": "rgba(30,86,24,1)",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzAwIDMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgICAgICAgPHBhdGggZD0ibTE5NC44MzYgNThoLTExOS4zMjhjLTI0LjQ0NSAwLTQ0LjMzNiAxOS44ODktNDQuMzM2IDQ0LjMzNnYxMTkuMzI4YzAgMjQuNDQ3IDE5Ljg5MSA0NC4zMzYgNDQuMzM2IDQ0LjMzNmgxMTkuMzI4YzI0LjQ0NSAwIDQ0LjMzNi0xOS44ODkgNDQuMzM2LTQ0LjMzNnYtMTE5LjMyOGMwLTI0LjQ0Ny0xOS44OTEtNDQuMzM2LTQ0LjMzNi00NC4zMzZ6bTM2LjMzNiAxNjMuNjY0YzAgMjAuMDM1LTE2LjMwMSAzNi4zMzYtMzYuMzM2IDM2LjMzNmgtMTE5LjMyOGMtMjAuMDM1IDAtMzYuMzM2LTE2LjMwMS0zNi4zMzYtMzYuMzM2di0xMTkuMzI4YzAtMjAuMDM1IDE2LjMwMS0zNi4zMzYgMzYuMzM2LTM2LjMzNmgxMTkuMzI4YzIwLjAzNSAwIDM2LjMzNiAxNi4zMDEgMzYuMzM2IDM2LjMzNnoiLz4KICAgICAgICA8cGF0aCBkPSJtMTM1LjE3MiA3NGMtNDkuNjI1IDAtOTAgNDAuMzczLTkwIDkwczQwLjM3NSA5MCA5MCA5MCA5MC00MC4zNzMgOTAtOTAtNDAuMzc1LTkwLTkwLTkwem0wIDE3MmMtNDUuMjE1IDAtODItMzYuNzg1LTgyLTgyczM2Ljc4NS04MiA4Mi04MiA4MiAzNi43ODUgODIgODItMzYuNzg1IDgyLTgyIDgyeiIvPgogICAgICAgIDxwYXRoIGQ9Im0xMzUuMTcyIDkwYy00MC44MDUgMC03NCAzMy4xOTUtNzQgNzRzMzMuMTk1IDc0IDc0IDc0IDc0LTMzLjE5NSA3NC03NC0zMy4xOTUtNzQtNzQtNzR6bTAgMTQwYy0zNi4zOTEgMC02Ni0yOS42MDctNjYtNjZzMjkuNjA5LTY2IDY2LTY2IDY2IDI5LjYwNyA2NiA2Ni0yOS42MSA2Ni02NiA2NnoiLz4KICAgICAgICA8cGF0aCBkPSJtNzkuMTcyIDEzOHYzMmMwIDIuMjA5IDEuNzg5IDQgNCA0aDEwNGMyLjIxMSAwIDQtMS43OTEgNC00di0zMmMwLTIuMjA5LTEuNzg5LTQtNC00aC0xMDRjLTIuMjExIDAtNCAxLjc5MS00IDR6bTggNGg5NnYyNGgtOTZ6Ii8+CiAgICAgICAgPHBhdGggZD0ibTExNy4xNzIgMTI4LjUzYzIuNTAxIDAgNC41My0yLjAyOCA0LjUzLTQuNTNzLTIuMDI4LTQuNTMtNC41My00LjUzLTQuNTMgMi4wMjgtNC41MyA0LjUzYzAgMi41MDEgMi4wMjggNC41MyA0LjUzIDQuNTN6Ii8+CiAgICAgICAgPHBhdGggZD0ibTEyOS4xNzIgMTI4LjUzYzIuNTAxIDAgNC41My0yLjAyOCA0LjUzLTQuNTNzLTIuMDI4LTQuNTMtNC41My00LjUzLTQuNTMgMi4wMjgtNC41MyA0LjUzYzAgMi41MDEgMi4wMjggNC41MyA0LjUzIDQuNTN6Ii8+CiAgICAgICAgPHBhdGggZD0ibTE0NS4xNzIgMTUxLjQ3Yy0yLjUwMiAwLTQuNTMgMi4wMjgtNC41MyA0LjUzIDAgMi41MDEgMi4wMjggNC41MyA0LjUzIDQuNTMgMi41MDEgMCA0LjUzLTIuMDI4IDQuNTMtNC41My0uMDAxLTIuNTAyLTIuMDI5LTQuNTMtNC41My00LjUzeiIvPgogICAgICAgIDxwYXRoIGQ9Im0xNDEuMTcyIDEyOC41M2MyLjUwMSAwIDQuNTMtMi4wMjggNC41My00LjUzcy0yLjAyOC00LjUzLTQuNTMtNC41My00LjUzIDIuMDI4LTQuNTMgNC41M2MwIDIuNTAxIDIuMDI4IDQuNTMgNC41MyA0LjUzeiIvPgogICAgICAgIDxwYXRoIGQ9Im0xNTMuMTcyIDEyOC41M2MyLjUwMSAwIDQuNTMtMi4wMjggNC41My00LjUzcy0yLjAyOC00LjUzLTQuNTMtNC41My00LjUzIDIuMDI4LTQuNTMgNC41M2MwIDIuNTAxIDIuMDI4IDQuNTMgNC41MyA0LjUzeiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjE5OS4xNzIiIGN5PSIzOCIgcj0iNCIvPgogICAgICAgIDxwYXRoIGQ9Im0yMzkuMTcyIDQ2Yy02LjYxNyAwLTEyIDUuMzgzLTEyIDEyczUuMzgzIDEyIDEyIDEyIDEyLTUuMzgzIDEyLTEyLTUuMzgzLTEyLTEyLTEyem0wIDE2Yy0yLjIwNyAwLTQtMS43OTUtNC00czEuNzkzLTQgNC00IDQgMS43OTUgNCA0LTEuNzkzIDQtNCA0eiIvPgogICAgICAgIDxwYXRoIGQ9Im0yNjQuODI4IDExMCAyLjgyOC0yLjgyOGMxLjU2Mi0xLjU2MiAxLjU2Mi00LjA5NCAwLTUuNjU2cy00LjA5NC0xLjU2Mi01LjY1NiAwbC0yLjgyOCAyLjgyOC0yLjgyOC0yLjgyOGMtMS41NjItMS41NjItNC4wOTQtMS41NjItNS42NTYgMHMtMS41NjIgNC4wOTQgMCA1LjY1NmwyLjgyOCAyLjgyOC0yLjgyOCAyLjgyOGMtMS41NjIgMS41NjItMS41NjIgNC4wOTQgMCA1LjY1Ni43ODEuNzgxIDEuODA1IDEuMTcyIDIuODI4IDEuMTcyczIuMDQ3LS4zOTEgMi44MjgtMS4xNzJsMi44MjgtMi44MjggMi44MjggMi44MjhjLjc4MS43ODEgMS44MDUgMS4xNzIgMi44MjggMS4xNzJzMi4wNDctLjM5MSAyLjgyOC0xLjE3MmMxLjU2Mi0xLjU2MiAxLjU2Mi00LjA5NCAwLTUuNjU2eiIvPgogICAgICAgIDxwYXRoIGQ9Im0xMzkuMTcyIDE5NGgtNC45MzRsNS44NTktOS43NjhjMS4xMzctMS44OTUuNTIzLTQuMzUyLTEuMzcxLTUuNDg4LTEuODk4LTEuMTM3LTQuMzUyLS41MjEtNS40ODggMS4zNzFsLTkuNDk2IDE1LjgyNmMtLjc0MiAxLjIzNi0uNzYyIDIuNzc1LS4wNTEgNC4wMjlzMi4wMzkgMi4wMjkgMy40OCAyLjAyOWg1LjUyN2wtNS4xMDUgMTAuMjExYy0uOTg4IDEuOTc3LS4xODggNC4zNzkgMS43ODkgNS4zNjcuNTc0LjI4NyAxLjE4NC40MjIgMS43ODUuNDIyIDEuNDY5IDAgMi44NzktLjgwOSAzLjU4Mi0yLjIxMWw4LTE2Yy42MjEtMS4yNC41NTUtMi43MTMtLjE3Ni0zLjg5My0uNzI5LTEuMTc2LTIuMDE0LTEuODk1LTMuNDAxLTEuODk1eiIvPgogICAgICAgIDxwYXRoIGQ9Im05NS4xNzIgMTQ2Yy0yLjIxMSAwLTQgMS43OTEtNCA0djhjMCAyLjIwOSAxLjc4OSA0IDQgNHM0LTEuNzkxIDQtNHYtOGMwLTIuMjA5LTEuNzg5LTQtNC00eiIvPgogICAgICAgIDxwYXRoIGQ9Im0xMDcuMTcyIDE0NmMtMi4yMTEgMC00IDEuNzkxLTQgNHY4YzAgMi4yMDkgMS43ODkgNCA0IDRzNC0xLjc5MSA0LTR2LThjMC0yLjIwOS0xLjc4OS00LTQtNHoiLz4KICAgICAgICA8cGF0aCBkPSJtMTE5LjE3MiAxNDZjLTIuMjExIDAtNCAxLjc5MS00IDR2OGMwIDIuMjA5IDEuNzg5IDQgNCA0czQtMS43OTEgNC00di04YzAtMi4yMDktMS43ODktNC00LTR6Ii8+CiAgICAgICAgPHBhdGggZD0ibTEzMS4xNzIgMTQ2Yy0yLjIxMSAwLTQgMS43OTEtNCA0djhjMCAyLjIwOSAxLjc4OSA0IDQgNHM0LTEuNzkxIDQtNHYtOGMwLTIuMjA5LTEuNzg5LTQtNC00eiIvPgogICAgICAgIDxwYXRoIGQ9Im0xNjMuMTcyIDE0NmMtMi4yMTEgMC00IDEuNzkxLTQgNHY4YzAgMi4yMDkgMS43ODkgNCA0IDRzNC0xLjc5MSA0LTR2LThjMC0yLjIwOS0xLjc4OS00LTQtNHoiLz4KICAgICAgICA8cGF0aCBkPSJtMTc1LjE3MiAxNDZjLTIuMjExIDAtNCAxLjc5MS00IDR2OGMwIDIuMjA5IDEuNzg5IDQgNCA0czQtMS43OTEgNC00di04YzAtMi4yMDktMS43ODktNC00LTR6Ii8+CiAgICA8L2c+Cjwvc3ZnPg=="
+          },
+          "native": {},
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 5,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "SHUTTER_TRANSMITTER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612313,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ],
+      "CONTROL": "SHUTTER_TRANSMITTER.LEVEL_STATUS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612282,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612303,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612322,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612271,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.SELF_CALIBRATION": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.SELF_CALIBRATION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STOP",
+        "1": "START"
+      }
+    },
+    "native": {
+      "MIN": "STOP",
+      "OPERATIONS": 2,
+      "MAX": "START",
+      "FLAGS": 1,
+      "ID": "SELF_CALIBRATION",
+      "TYPE": "ENUM",
+      "DEFAULT": "STOP",
+      "VALUE_LIST": [
+        "STOP",
+        "START"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612293,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.SELF_CALIBRATION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.3.SELF_CALIBRATION_RESULT": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Status.SELF_CALIBRATION_RESULT",
+      "role": "",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "SELF_CALIBRATION_RESULT",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612342,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.3.SELF_CALIBRATION_RESULT",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor",
+      "enums": [
+        {
+          "_id": "enum.functions.Aktor",
+          "common": {
+            "name": "Aktor",
+            "smartName": false,
+            "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ4MC4wMDUgNDgwLjAwNSI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Ik0xMDQuMDA1LDEwOC4wMDNjLTEzLjI1NSwwLTI0LDEwLjc0NS0yNCwyNGMwLDQuNDE4LDMuNTgyLDgsOCw4czgtMy41ODIsOC04czMuNTgyLTgsOC04czgtMy41ODIsOC04CgkJCVMxMDguNDIzLDEwOC4wMDMsMTA0LjAwNSwxMDguMDAzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0zODUuMzU3LDc2LjExNWwtMjgwLTQ4Yy0wLjQ0Ny0wLjA3My0wLjg5OS0wLjExMS0xLjM1Mi0wLjExMkM0Ni42MTIsMjcuOTU2LDAuMDQ3LDc0LjQ0NCwwLDEzMS44MzcKCQkJYy0wLjAyNiwzMS4wNTksMTMuODQzLDYwLjUwMSwzNy44MDUsODAuMjYxbDU4LjQ0LDIzMy44NDhjMC44OTIsMy41NTksNC4wOTEsNi4wNTYsNy43Niw2LjA1Nmg2NAoJCQljNC40MTgsMC4wMDgsOC4wMDctMy41NjYsOC4wMTUtNy45ODVjMC0wLjE3MS0wLjAwNS0wLjM0MS0wLjAxNS0wLjUxMWwtMTMuNi0yMTcuNGwyMjIuOTItMzguMjE2CgkJCWMzLjg1NC0wLjY0NSw2LjY3OS0zLjk4LDYuNjgtNy44ODh2LTk2QzM5Mi4wMDcsODAuMTA1LDM4OS4xOTksNzYuNzczLDM4NS4zNTcsNzYuMTE1eiBNMTEwLjI1Myw0MzYuMDAzTDU3LjYwNSwyMjUuMTcxCgkJCWMwLjUwNCwwLjI0OCwxLjA0LDAuNDE2LDEuNTQ0LDAuNjY0YzIuNTc2LDEuMjMyLDUuMTg5LDIuMzUyLDcuODQsMy4zNmMwLjc0NCwwLjI4LDEuNDY0LDAuNiwyLjIwOCwwLjg2NAoJCQljMy4zMTksMS4xNzQsNi42OTcsMi4xNzUsMTAuMTIsM2MwLjgsMC4xOTIsMS42LDAuMzI4LDIuNCwwLjUwNGMyLjc2OCwwLjU5Miw1LjU2NSwxLjA3Nyw4LjM5MiwxLjQ1NgoJCQljMS4wMDgsMC4xMjgsMi4wMTYsMC4yNjQsMy4wMjQsMC4zNjhjMy42MTEsMC4zOSw3LjI0LDAuNTk2LDEwLjg3MiwwLjYxNmMwLjQ1My0wLjAwMSwwLjkwNS0wLjAzOSwxLjM1Mi0wLjExMmw0MS4yMTYtNy4wODgKCQkJbDEyLjkyLDIwNy4ySDExMC4yNTN6IE0zNDQuMDA1LDE3OC43MzlsLTIzOC4wODgsNDAuOGwtMi41NzYsMC40NjRjLTQ4LjM2Ny0wLjMwNC04Ny4zOTktMzkuNjMyLTg3LjMzNi04OAoJCQljMC4wNTUtNDguMzIsMzkuMDE4LTg3LjU3OSw4Ny4zMzYtODhsMjQwLjY2NCw0MS4yNjRWMTc4LjczOXogTTM3Ni4wMDUsMTczLjI1OWwtMTYsMi43NDR2LTg4bDE2LDIuNzQ0VjE3My4yNTl6Ii8+CiAgICAgICAgPHBhdGggZD0iTTEwNC4wMDUsNzYuMDAzYy0zMC45MjgsMC01NiwyNS4wNzItNTYsNTZjMC4wMzUsMzAuOTEzLDI1LjA4Nyw1NS45NjUsNTYsNTZjMzAuOTI4LDAsNTYtMjUuMDcyLDU2LTU2CgkJCUMxNjAuMDA1LDEwMS4wNzUsMTM0LjkzMyw3Ni4wMDMsMTA0LjAwNSw3Ni4wMDN6IE0xMDQuMDA1LDE3Mi4wMDNjLTIyLjA5MSwwLTQwLTE3LjkwOS00MC00MGMwLjAyNi0yMi4wOCwxNy45Mi0zOS45NzQsNDAtNDAKCQkJYzIyLjA5MSwwLDQwLDE3LjkwOSw0MCw0MFMxMjYuMDk3LDE3Mi4wMDMsMTA0LjAwNSwxNzIuMDAzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xNDEuOTMzLDQxMS41MjNsLTkuNjY0LTE1NS4wMjRjLTAuMjc2LTQuNDE4LTQuMDgyLTcuNzc2LTguNS03LjVjLTQuNDE4LDAuMjc2LTcuNzc2LDQuMDgyLTcuNSw4LjVsOS42NjQsMTU1CgkJCWMwLjI2Myw0LjIyNywzLjc3Myw3LjUxNiw4LjAwOCw3LjUwNGMwLjE2OCwwLDAuMzM2LDAsMC41MDQsMEMxMzguODU0LDQxOS43MjgsMTQyLjIwNyw0MTUuOTMyLDE0MS45MzMsNDExLjUyM3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDcyLjAwNSwxMjQuMDAzaC00OGMtNC40MTgsMC04LDMuNTgyLTgsOHMzLjU4Miw4LDgsOGg0OGM0LjQxOCwwLDgtMy41ODIsOC04UzQ3Ni40MjMsMTI0LjAwMyw0NzIuMDA1LDEyNC4wMDN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTQ3Mi4wMDUsMTU2LjAwM2gtNDhjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhoNDhjNC40MTgsMCw4LTMuNTgyLDgtOFM0NzYuNDIzLDE1Ni4wMDMsNDcyLjAwNSwxNTYuMDAzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik00NzIuMDA1LDkyLjAwM2gtNDhjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhoNDhjNC40MTgsMCw4LTMuNTgyLDgtOFM0NzYuNDIzLDkyLjAwMyw0NzIuMDA1LDkyLjAwM3oiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Aktor",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.functions.Fenster",
+          "common": {
+            "name": "Fenster",
+            "smartName": false
+          },
+          "native": {
+            "Name": "Fenster",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.functions.shutters",
+          "common": {
+            "name": {
+              "en": "Shutters",
+              "ru": "Ставни",
+              "de": "Rollladen",
+              "fr": "Volets",
+              "it": "Persiane",
+              "nl": "Shutters",
+              "pl": "Żaluzje",
+              "pt": "Persianas",
+              "es": "Persianas",
+              "zh-cn": "百叶窗"
+            },
+            "enabled": true,
+            "color": false,
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSIwIC0yIDUxMiA1MTIiIHdpZHRoPSI1MTJwdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgICAgICAgPHBhdGggZD0ibTM0OC4yNDYwOTQgMzc2Ljc4NTE1NmMtMy4yNS0yLjYwNTQ2OC03Ljk5MjE4OC0yLjA4MjAzMS0xMC41OTc2NTYgMS4xNjQwNjNsLTI4Ljk0OTIxOSAzNi4wOTM3NWMtMy45ODQzNzUgNC45Njg3NS0uMzY3MTg4IDEyLjI1NzgxMiA1Ljg3NSAxMi4yNTc4MTIgMi4yMTA5MzcgMCA0LjM5ODQzNy0uOTY4NzUgNS44ODY3MTktMi44MjQyMTlsMjguOTQ5MjE4LTM2LjA5Mzc1YzIuNjA1NDY5LTMuMjUgMi4wODU5MzgtNy45OTIxODctMS4xNjQwNjItMTAuNTk3NjU2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMzkwLjM1OTM3NSAzNTguNzM4MjgxYy0zLjI1LTIuNjA1NDY5LTcuOTkyMTg3LTIuMDgyMDMxLTEwLjU5NzY1NiAxLjE2NDA2M2wtMjguOTQ5MjE5IDM2LjA5Mzc1Yy0zLjk4NDM3NSA0Ljk2ODc1LS4zNjcxODggMTIuMjU3ODEyIDUuODc1IDEyLjI1NzgxMiAyLjIxMDkzOCAwIDQuMzk4NDM4LS45Njg3NSA1Ljg4NjcxOS0yLjgyNDIxOGwyOC45NDkyMTktMzYuMDkzNzVjMi42MDU0NjgtMy4yNDYwOTQgMi4wODU5MzctNy45OTIxODgtMS4xNjQwNjMtMTAuNTk3NjU3em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTExLjc1IDQyMi4wNTA3ODFjMi4xMDkzNzUgMCA0LjIwNzAzMS0uODc4OTA2IDUuNjk5MjE5LTIuNTk3NjU2bDM5LjYxMzI4MS00NS42NDQ1MzFjMi43MzA0NjktMy4xNDQ1MzIgMi4zOTQ1MzEtNy45MDYyNS0uNzUtMTAuNjMyODEzLTMuMTQ0NTMxLTIuNzMwNDY5LTcuOTEwMTU2LTIuMzk0NTMxLTEwLjYzNjcxOS43NWwtMzkuNjE3MTg3IDQ1LjY0NDUzMWMtNC4yNTM5MDYgNC45MDIzNDQtLjY5NTMxMyAxMi40ODA0NjkgNS42OTE0MDYgMTIuNDgwNDY5em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtMTk2LjYyMTA5NCAzNzYuNzg1MTU2Yy0zLjI1LTIuNjA1NDY4LTcuOTk2MDk0LTIuMDgyMDMxLTEwLjYwMTU2MyAxLjE2NDA2M2wtMTQuNDcyNjU2IDE4LjA0Njg3NWMtMi42MDU0NjkgMy4yNS0yLjA4MjAzMSA3Ljk5NjA5NCAxLjE2NDA2MyAxMC41OTc2NTYgMy4yNjk1MzEgMi42MjUgOC4wMTE3MTggMi4wNjI1IDEwLjU5NzY1Ni0xLjE2NDA2MmwxNC40NzY1NjItMTguMDQ2ODc2YzIuNjA1NDY5LTMuMjUgMi4wODIwMzItNy45OTIxODctMS4xNjQwNjItMTAuNTk3NjU2em0wIDAiLz4KICAgICAgICA8cGF0aCBkPSJtNDM3Ljk5MjE4OCAzOTQuODMyMDMxYy0zLjI1LTIuNjA1NDY5LTcuOTkyMTg4LTIuMDgyMDMxLTEwLjU5NzY1NyAxLjE2NDA2M2wtMTQuNDc2NTYyIDE4LjA0Njg3NWMtMi42MDU0NjkgMy4yNS0yLjA4MjAzMSA3Ljk5MjE4NyAxLjE2NDA2MiAxMC41OTc2NTYgMy4yNjk1MzEgMi42MjEwOTQgOC4wMTE3MTkgMi4wNjI1IDEwLjYwMTU2My0xLjE2NDA2M2wxNC40NzI2NTYtMTguMDQ2ODc0YzIuNjA1NDY5LTMuMjQ2MDk0IDIuMDgyMDMxLTcuOTkyMTg4LTEuMTY0MDYyLTEwLjU5NzY1N3ptMCAwIi8+CiAgICAgICAgPHBhdGggZD0ibTExNi40NzI2NTYgMzYyLjk4NDM3NWMtMy4yNS0yLjYwNTQ2OS03Ljk5MjE4Ny0yLjA4MjAzMS0xMC41OTc2NTYgMS4xNjQwNjNsLTE0LjQ3NjU2MiAxOC4wNTA3ODFjLTIuNjA1NDY5IDMuMjQ2MDkzLTIuMDgyMDMyIDcuOTkyMTg3IDEuMTY0MDYyIDEwLjU5NzY1NiAzLjI2OTUzMSAyLjYyMTA5NCA4LjAxMTcxOSAyLjA2MjUgMTAuNTk3NjU2LTEuMTY0MDYzbDE0LjQ3MjY1Ni0xOC4wNDY4NzRjMi42MDkzNzYtMy4yNSAyLjA4NTkzOC03Ljk5NjA5NC0xLjE2MDE1Ni0xMC42MDE1NjN6bTAgMCIvPgogICAgICAgIDxwYXRoIGQ9Im01MDQuNDYwOTM4IDBjLTE3LjI1MzkwNyAwLTQ2Ni41OTM3NSAwLTQ5Ni45MjE4NzYgMC00LjE2MDE1NiAwLTcuNTM5MDYyIDMuMzY3MTg4LTcuNTM5MDYyIDcuNTM5MDYydjQ5My44NjcxODhjMCA0LjE3MTg3NSAzLjM3ODkwNiA3LjUzOTA2MiA3LjUzOTA2MiA3LjUzOTA2Mmg0MjIuMjEwOTM4YzQuMTYwMTU2IDAgNy41MzkwNjItMy4zNjcxODcgNy41MzkwNjItNy41MzkwNjIgMC00LjE2NDA2Mi0zLjM3ODkwNi03LjU0Mjk2OS03LjUzOTA2Mi03LjU0Mjk2OWgtNDE0LjY3MTg3NXYtMTQzLjg4MjgxMmgxNC4zNjcxODd2OTAuOTU3MDMxYzAgNC4xNjQwNjIgMy4zNzUgNy41MzkwNjIgNy41MzkwNjMgNy41MzkwNjJoMTI2LjQwMjM0NGM0LjE2MDE1NiAwIDcuNTM5MDYyLTMuMzc1IDcuNTM5MDYyLTcuNTM5MDYyIDAtNC4xNjAxNTYtMy4zNzg5MDYtNy41MzkwNjItNy41MzkwNjItNy41MzkwNjJoLTExOC44NjMyODF2LTgzLjQxNzk2OWgxNC41MzkwNjJ2MjYuMTIxMDkzYzAgNC4xNjQwNjMgMy4zNzUgNy41MzkwNjMgNy41MzkwNjIgNy41MzkwNjMgNC4xNjQwNjMgMCA3LjUzOTA2My0zLjM3NSA3LjUzOTA2My03LjUzOTA2M3YtMjYuMTIxMDkzaDE1My43MTA5Mzd2ODMuNDE3OTY5aC0zNC4zMDg1OTNjLTQuMTYwMTU3IDAtNy41MzkwNjMgMy4zNzg5MDYtNy41MzkwNjMgNy41MzkwNjIgMCA0LjE2NDA2MiAzLjM3ODkwNiA3LjUzOTA2MiA3LjUzOTA2MyA3LjUzOTA2MmgyODEuNDcyNjU2YzQuMTY0MDYzIDAgNy41MzkwNjMtMy4zNzUgNy41MzkwNjMtNy41MzkwNjJ2LTkwLjk1NzAzMWgxNC4zNjcxODd2MTQzLjg4MjgxMmgtMzcuMDE1NjI1Yy00LjE2MDE1NiAwLTcuNTM5MDYyIDMuMzc4OTA3LTcuNTM5MDYyIDcuNTQyOTY5IDAgNC4xNzE4NzUgMy4zNzg5MDYgNy41MzkwNjIgNy41MzkwNjIgNy41MzkwNjJoNDQuNTU0Njg4YzQuMTYwMTU2IDAgNy41MzkwNjItMy4zNjcxODcgNy41MzkwNjItNy41MzkwNjIgMC01My44NjMyODEgMC00MzcuNDk2MDk0IDAtNDkzLjg2NzE4OCAwLTQuMTcxODc0LTMuMzc4OTA2LTcuNTM5MDYyLTcuNTM5MDYyLTcuNTM5MDYyem0tNDQ1LjM5ODQzOCAzMzQuOTAyMzQ0Yy0xMy43MTQ4NDQgMC0zMC4wNTg1OTQgMC00My45ODQzNzUgMCAwLTkuNTUwNzgyIDAtMTYuMjU3ODEzIDAtMjYuNzgxMjVoNDMuOTg0Mzc1em0wLTQxLjg1OTM3NWgtNDMuOTg0Mzc1di0yNi43ODkwNjNoNDMuOTg0Mzc1em0wLTQxLjg2NzE4OGgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4OTA2Mmg0My45ODQzNzV6bTAtNDEuODcxMDk0aC00My45ODQzNzV2LTI2Ljc3NzM0M2g0My45ODQzNzV6bTAtNDEuODU5Mzc0Yy05LjcwMzEyNSAwLTMzLjkxNzk2OSAwLTQzLjk4NDM3NSAwdi0yNi43ODkwNjNoNDMuOTg0Mzc1em0wLTQxLjg2NzE4OGgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4MTI1aDQzLjk4NDM3NXptMTUuMDc4MTI1LTI2Ljc4MTI1aDM2My43MTg3NXYyNi43ODEyNWgtMzYzLjcxODc1em0wIDgzLjcxODc1aDI4OS4zMDA3ODFjNC4xNjQwNjMgMCA3LjUzOTA2My0zLjM2NzE4NyA3LjUzOTA2My03LjUzOTA2MyAwLTQuMTYwMTU2LTMuMzc1LTcuNTM5MDYyLTcuNTM5MDYzLTcuNTM5MDYyLTEuMjM0Mzc1IDAtMjgyLjk0MTQwNiAwLTI4OS4zMDA3ODEgMHYtMjYuNzgxMjVoMzYzLjcxODc1djI2Ljc4MTI1aC00NC4yNTc4MTNjLTQuMTY0MDYyIDAtNy41MzkwNjIgMy4zNzg5MDYtNy41MzkwNjIgNy41MzkwNjIgMCA0LjE3MTg3NiAzLjM3NSA3LjUzOTA2MyA3LjUzOTA2MiA3LjUzOTA2M2g0NC4yNTc4MTN2MjYuNzg5MDYzYy0xMS42MjUgMC0zNTQuNDkyMTg3IDAtMzYzLjcxODc1IDB6bTAgNDEuODcxMDk0aDM2My43MTg3NXYyNi43NzczNDNoLTM2My43MTg3NXptMCA0MS44NTkzNzVoMzYzLjcxODc1djI2Ljc4OTA2MmgtMzYzLjcxODc1em0wIDQxLjg2NzE4N2gzNjMuNzE4NzV2MjYuNzgxMjVoLTM2My43MTg3NXptMCA0MS44NTkzNzVoMzYzLjcxODc1djI2Ljc4OTA2M2gtMzYzLjcxODc1em0wIDY4LjY0ODQzOHYtMjYuNzgxMjVoMzYzLjcxODc1djI2Ljc4MTI1Yy0zNS42MTcxODcgMC0zMjYuOTUzMTI1IDAtMzYzLjcxODc1IDB6bTM5My4zMzU5MzcgOTguNDk2MDk0aC0xODMuMzI4MTI0di00MC42Njc5NjljMC00LjE2NDA2My0zLjM3NS03LjUzOTA2My03LjUzOTA2My03LjUzOTA2M3MtNy41MzkwNjMgMy4zNzUtNy41MzkwNjMgNy41MzkwNjN2NDAuNjY3OTY5aC0yNi4xNDA2MjR2LTgzLjQxNDA2M2gyNi4xNDA2MjR2MTIuNTg1OTM3YzAgNC4xNjc5NjkgMy4zNzUgNy41MzkwNjMgNy41MzkwNjMgNy41MzkwNjNzNy41MzkwNjMtMy4zNzEwOTQgNy41MzkwNjMtNy41MzkwNjN2LTEyLjU4OTg0M2gxNTMuNzEwOTM3djI2LjEyMTA5M2MwIDQuMTY0MDYzIDMuMzc1IDcuNTM5MDYzIDcuNTM5MDYzIDcuNTM5MDYzIDQuMTY0MDYyIDAgNy41MzkwNjItMy4zNzUgNy41MzkwNjItNy41MzkwNjN2LTI2LjEyMTA5M2gxNC41MzkwNjJ6bTI5LjQ0NTMxMy05OC40OTYwOTRjLTEzLjc4OTA2MyAwLTI5Ljg2NzE4NyAwLTQzLjk4NDM3NSAwdi0yNi43ODEyNWg0My45ODQzNzV6bTAtNDEuODU5Mzc1aC00My45ODQzNzV2LTI2Ljc4OTA2M2g0My45ODQzNzV6bTAtNDEuODY3MTg4aC00My45ODQzNzV2LTI2Ljc4MTI1aDQzLjk4NDM3NXptMC00MS44NTkzNzVoLTQzLjk4NDM3NXYtMjYuNzg5MDYyaDQzLjk4NDM3NXptMC00MS44NzEwOTRoLTQzLjk4NDM3NXYtMjYuNzc3MzQzaDQzLjk4NDM3NXptMC00MS44NTkzNzRoLTQzLjk4NDM3NXYtMjYuNzg5MDYzaDQzLjk4NDM3NXptMC00MS44NjcxODhoLTQzLjk4NDM3NXYtMjYuNzgxMjVoNDMuOTg0Mzc1em0wLTQxLjg1OTM3NWgtNDMuOTg0Mzc1di0yNi43ODEyNWg0My45ODQzNzV6bTAgMCIvPgogICAgPC9nPgo8L3N2Zz4="
+          },
+          "native": {},
+          "type": "enum"
+        },
+        {
+          "_id": "enum.rooms.Schlafzimmer",
+          "common": {
+            "name": "Schlafzimmer",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Ik00OTYsMzQ0aC04VjI4MGEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMyVjExMmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDg4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJWMjQ4YTMyLjA0MiwzMi4wNDIsMCwwLDAtMzIsMzJ2NjRIMTZhOCw4LDAsMCwwLTgsOHYzMmE4LDgsMCwwLDAsOCw4aDh2MzJhOCw4LDAsMCwwLDgsOEg1NmE3Ljk5LDcuOTksMCwwLDAsNy44NC02LjQzTDcwLjU2LDM5Mkg0NDEuNDRsNi43MiwzMy41N0E3Ljk5LDcuOTksMCwwLDAsNDU2LDQzMmgyNGE4LDgsMCwwLDAsOC04VjM5Mmg4YTgsOCwwLDAsMCw4LThWMzUyQTgsOCwwLDAsMCw0OTYsMzQ0Wk03MiwxMTJBMTYuMDIxLDE2LjAyMSwwLDAsMSw4OCw5Nkg0MjRhMTYuMDIxLDE2LjAyMSwwLDAsMSwxNiwxNlYyNDhINDI0VjIxNmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLTMySDI5NmEzMi4wNDIsMzIuMDQyLDAsMCwwLTMyLDMydjMySDI0OFYyMTZhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMi0zMkgxMjBhMzIuMDQyLDMyLjA0MiwwLDAsMC0zMiwzMnYzMkg3MlpNNDA4LDIxNnYzMkgyODBWMjE2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZoOTZBMTYuMDIxLDE2LjAyMSwwLDAsMSw0MDgsMjE2Wm0tMTc2LDB2MzJIMTA0VjIxNmExNi4wMjEsMTYuMDIxLDAsMCwxLDE2LTE2aDk2QTE2LjAyMSwxNi4wMjEsMCwwLDEsMjMyLDIxNlpNNDAsMjgwYTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYtMTZINDU2YTE2LjAyMSwxNi4wMjEsMCwwLDEsMTYsMTZ2NjRINDBabTkuNDQsMTM2SDQwVjM5Mkg1NC4yNFpNNDcyLDQxNmgtOS40NGwtNC44LTI0SDQ3MlptMTYtNDBIMjRWMzYwSDQ4OFoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Schlafzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "TYPE": "SHUTTER_VIRTUAL_RECEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:4",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 4,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 4,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "REMOTE_CONTROL SWITCH LEVEL CONDITIONAL_SWITCH",
+      "DIRECTION": 2,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612355,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ],
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.ACTIVITY_STATE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612428,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor.LEVEL",
+      "role": "level",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.LEVEL"
+    },
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1676401975620
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ],
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612380,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612400,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612419,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612370,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.4.STOP": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen Aktor.STOP",
+      "role": "button.stop",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 2,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "STOP",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.STOP"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666632612390,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.4.STOP",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5"
+    },
+    "native": {
+      "TYPE": "SHUTTER_VIRTUAL_RECEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:5",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 5,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 4,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "REMOTE_CONTROL SWITCH LEVEL CONDITIONAL_SWITCH",
+      "DIRECTION": 2,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186380,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ],
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.ACTIVITY_STATE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186452,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5.LEVEL",
+      "role": "level",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186433,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ],
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186399,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186422,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186443,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186389,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.5.STOP": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:5.STOP",
+      "role": "button.stop",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 2,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "STOP",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.STOP"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186410,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.5.STOP",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6"
+    },
+    "native": {
+      "TYPE": "SHUTTER_VIRTUAL_RECEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:6",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 6,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 4,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "REMOTE_CONTROL SWITCH LEVEL CONDITIONAL_SWITCH",
+      "DIRECTION": 2,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186461,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ],
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.ACTIVITY_STATE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186533,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6.LEVEL",
+      "role": "level",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186510,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ],
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186479,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186501,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186522,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186470,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.6.STOP": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:6.STOP",
+      "role": "button.stop",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 2,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "STOP",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "SHUTTER_VIRTUAL_RECEIVER.STOP"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186491,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.6.STOP",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.7": {
+    "_id": "hm-rpc.1.00AAABBBA74CCC.7",
+    "type": "channel",
+    "common": {
+      "name": "Schlafzimmer Rollladen:7"
+    },
+    "native": {
+      "TYPE": "BLIND_WEEK_PROFILE",
+      "SUBTYPE": "",
+      "ADDRESS": "00AAABBBA74CCC:7",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00AAABBBA74CCC",
+      "PARENT_TYPE": "HmIP-BROLL",
+      "INDEX": 7,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 4,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186544,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.7.COMBINED_PARAMETER": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:7.COMBINED_PARAMETER",
+      "role": "",
+      "def": "",
+      "type": "string",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": "",
+      "OPERATIONS": 2,
+      "MAX": "",
+      "FLAGS": 1,
+      "ID": "COMBINED_PARAMETER",
+      "TYPE": "STRING",
+      "DEFAULT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186556,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.7.COMBINED_PARAMETER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.7.WEEK_PROGRAM_CHANNEL_LOCKS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:7.WEEK_PROGRAM_CHANNEL_LOCKS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 16777215
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 16777215,
+      "FLAGS": 1,
+      "ID": "WEEK_PROGRAM_CHANNEL_LOCKS",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0,
+      "CONTROL": "WEEK_PROFILE.CHANNEL_LOCKS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186586,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.7.WEEK_PROGRAM_CHANNEL_LOCKS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.7.WEEK_PROGRAM_TARGET_CHANNEL_LOCK": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:7.WEEK_PROGRAM_TARGET_CHANNEL_LOCK",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 2,
+      "states": {
+        "0": "MANU_MODE",
+        "1": "AUTO_MODE_WITH_RESET",
+        "2": "AUTO_MODE_WITHOUT_RESET"
+      }
+    },
+    "native": {
+      "MIN": "MANU_MODE",
+      "OPERATIONS": 2,
+      "MAX": "AUTO_MODE_WITHOUT_RESET",
+      "FLAGS": 1,
+      "ID": "WEEK_PROGRAM_TARGET_CHANNEL_LOCK",
+      "TYPE": "ENUM",
+      "DEFAULT": "MANU_MODE",
+      "VALUE_LIST": [
+        "MANU_MODE",
+        "AUTO_MODE_WITH_RESET",
+        "AUTO_MODE_WITHOUT_RESET"
+      ],
+      "CONTROL": "WEEK_PROFILE.TARGET_CHANNEL_LOCK"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186570,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.7.WEEK_PROGRAM_TARGET_CHANNEL_LOCK",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00AAABBBA74CCC.7.WEEK_PROGRAM_TARGET_CHANNEL_LOCKS": {
+    "type": "state",
+    "common": {
+      "name": "Schlafzimmer Rollladen:7.WEEK_PROGRAM_TARGET_CHANNEL_LOCKS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 16777215
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 2,
+      "MAX": 16777215,
+      "FLAGS": 1,
+      "ID": "WEEK_PROGRAM_TARGET_CHANNEL_LOCKS",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0,
+      "CONTROL": "WEEK_PROFILE.TARGET_CHANNEL_LOCKS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1666685186578,
+    "_id": "hm-rpc.1.00AAABBBA74CCC.7.WEEK_PROGRAM_TARGET_CHANNEL_LOCKS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  }
+}

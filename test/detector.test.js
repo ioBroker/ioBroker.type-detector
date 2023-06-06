@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 
 const {Types, ChannelDetector} = require('../index');
+const objects = require('./weather_weatherunderground.json');
 
 function expectStateToHaveId(states, name, id, alternativeId) {
     const control = states.find(s => s.name === name);
@@ -453,6 +454,31 @@ describe('Test Detector', () => {
             expectMyStateToHaveId(`TEMP_MAX${day}`, `weatherunderground.0.forecast.${day}d.tempMax`);
             expectMyStateToHaveId(`DATE${day}`, `weatherunderground.0.forecast.${day}d.date`);
         }
+
+        done();
+    });
+
+    it('Must detect blinds correctly', done => {
+        const detector = new ChannelDetector();
+
+        const objects = require('./blinds.json');
+        Object.keys(objects).forEach(id => objects[id]._id = id);
+
+        const options = {
+            objects,
+            id:                 'hm-rpc.1.00AAABBBA74CCC.4',
+            _keysOptional:      Object.keys(objects),
+            _usedIdsOptional:   [],
+        };
+
+        const controls = detector.detect(options);
+        console.dir(controls, { depth: null});
+        for (const types of controls) {
+            console.log(`Found ${types.type}`);
+        }
+        expect(controls[0].type).to.be.equal(Types.blind);
+        const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
+        expectMyStateToHaveId('SET', 'hm-rpc.1.00AAABBBA74CCC.4.LEVEL');
 
         done();
     });

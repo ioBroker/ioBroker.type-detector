@@ -832,7 +832,7 @@ function ChannelDetector() {
 // -------------- GATES ------------------------------------------
     var gateWords = {
         en: [/gates?/i],
-        de: [/toren/i, /tor/i],
+        de: [/^toren$/i, /^tor$/i], // "^" because of Actor
         ru: [/ворота/i],
     };
 
@@ -850,7 +850,7 @@ function ChannelDetector() {
 // -------------- DOORS -----------------------------------------
     var doorsWords = {
         en: [/doors?/i,      /gates?/i,      /wickets?/i,        /entry|entries/i],
-        de: [/türe?/i,       /tuere?/i,      /tore?/i,           /einfahrt(en)?/i,  /pforten?/i],
+        de: [/^türe?/i,      /^tuere?/i,     /^tore?$/i,         /einfahrt(en)?/i,  /pforten?/i], // "^" because of Actor
         ru: [/двери|дверь/i, /ворота/i,      /калитка|калитки/,  /въезды?/i,        /входы?/i]
     };
 

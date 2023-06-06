@@ -59,6 +59,7 @@ if (controls) {
 ### **WORK IN PROGRESS**    
 * (bluefox) Fixed creation of the `DEVICES.md`
 * (bluefox) Fixed the main attribute in package.json
+* (bluefox) Better detection of the door devices
 
 ### 1.1.1 (2022-11-09)
 * (Garfonso) corrected the double states in light devices
