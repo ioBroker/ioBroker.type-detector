@@ -56,7 +56,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**    
+### 1.1.2 (2023-06-06)    
 * (bluefox) Fixed creation of the `DEVICES.md`
 * (bluefox) Fixed the main attribute in package.json
 * (bluefox) Better detection of the door devices

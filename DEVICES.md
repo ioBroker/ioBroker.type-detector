@@ -683,7 +683,7 @@ In [brackets] is given the class name of device.
 ### door
 To detect these devices, it must belong to one of following category (any regex in any language):
 - **en**: ``/doors?/i``, ``/gates?/i``, ``/wickets?/i``, ``/entry|entries/i``
-- **de**: ``/türe?/i``, ``/tuere?/i``, ``/tore?/i``, ``/einfahrt(en)?/i``, ``/pforten?/i``
+- **de**: ``/^türe?/i``, ``/^tuere?/i``, ``/^tore?$/i``, ``/einfahrt(en)?/i``, ``/pforten?/i``
 - **ru**: ``/двери|дверь/i``, ``/ворота/i``, ``/калитка|калитки/``, ``/въезды?/i``, ``/входы?/i``
 
 Or has one of the roles: 
@@ -710,7 +710,7 @@ Or has one of the roles:
 ### gate
 To detect these devices, it must belong to one of following category (any regex in any language):
 - **en**: ``/gates?/i``
-- **de**: ``/toren/i``, ``/tor/i``
+- **de**: ``/^toren$/i``, ``/^tor$/i``
 - **ru**: ``/ворота/i``
 
 Or has one of the roles: 
