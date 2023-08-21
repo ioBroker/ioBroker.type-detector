@@ -60,7 +60,6 @@ In [brackets] is given the class name of device.
 * [Media [mediaPlayer]](#media-mediaplayer)
 * [Motion sensor [motion]](#motion-sensor-motion)
 * [RGB Light (R,G,B have different states) [rgb]](#rgb-light--r-g-b-have-different-states--rgb)
-* [RGB Light (R,G,B have different states) [rgbOld]](#rgb-light--r-g-b-have-different-states--rgbold)
 * [RGB Light with hex color [rgbSingle]](#rgb-light-with-hex-color-rgbsingle)
 * [Socket [socket]](#socket-socket)
 * [Temperature [temperature]](#temperature-temperature)
@@ -440,25 +439,6 @@ In [brackets] is given the class name of device.
 |   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
 |   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
 |   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
-|   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
-|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
-|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
-|   | MAINTAIN    | indicator.maintenance         |      | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
-|   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
-
-
-### RGB Light (R,G,B have different states) [rgbOld]
-| R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
-|---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
-| * | RED         |                               |      | number  | W  |     |      | ``/^level\.color\.r$/``                                                        |
-| * | GREEN       |                               |      | number  | W  |     |      | ``/^level\.color\.g$/``                                                        |
-| * | BLUE        |                               |      | number  | W  |     |      | ``/^level\.color\.b$/``                                                        |
-|   | DIMMER      |                               |      | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
-|   | BRIGHTNESS  |                               |      | number  | W  |     |      | ``/^level\.brightness$/``                                                      |
-|   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
-|   | TEMPERATURE |                               | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
-|   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
-|   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
 |   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |

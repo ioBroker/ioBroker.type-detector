@@ -56,7 +56,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.0 (2023-08-21)
 * (bluefox) Removed `rgbOld` type from 2018
 
 ### 1.1.2 (2023-06-06)    
