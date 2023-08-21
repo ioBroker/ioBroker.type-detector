@@ -56,6 +56,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Removed `rgbOld` type from 2018
+
 ### 1.1.2 (2023-06-06)    
 * (bluefox) Fixed creation of the `DEVICES.md`
 * (bluefox) Fixed the main attribute in package.json
@@ -140,6 +143,6 @@ if (controls) {
 * (bluefox) initial commit
 
 ## License
-Copyright (c) 2018-2023 Bluefox <dogafox@gmail.com>
+Copyright (c) 2018-2023 Denis Haev <dogafox@gmail.com>
 
 MIT License

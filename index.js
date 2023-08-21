@@ -231,27 +231,6 @@ function ChannelDetector() {
             ],
             type: Types.rgb
         },
-        // remove it when all adapters fixed (2018.08.15) r=>red, g=>green, b=>blue
-        rgbOld: {
-            states: [
-                {role: /^level\.color\.r$/,                               indicator: false, type: 'number',  write: true,           name: 'RED',           required: true},
-                {role: /^level\.color\.g$/,                               indicator: false, type: 'number',  write: true,           name: 'GREEN',         required: true},
-                {role: /^level\.color\.b$/,                               indicator: false, type: 'number',  write: true,           name: 'BLUE',          required: true},
-                // optional
-                {role: /^level\.dimmer$/,                                 indicator: false, type: 'number',  write: true,           name: 'DIMMER',        required: false},
-                {role: /^level\.brightness$/,                             indicator: false, type: 'number',  write: true,           name: 'BRIGHTNESS',    required: false},
-                {role: /^level\.color\.saturation$/,                      indicator: false, type: 'number',  write: true,           name: 'SATURATION',    required: false},
-                {role: /^level\.color\.temperature$/,                     indicator: false, type: 'number',  write: true,           name: 'TEMPERATURE',   required: false,  defaultUnit: '°K'},
-                {role: /^switch\.light$/,                                 indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false,  defaultRole: 'switch.light'},
-                {role: /^switch$/,                                        indicator: false, type: 'boolean', write: true,           name: 'ON',            required: false},
-                SharedPatterns.working,
-                SharedPatterns.unreach,
-                SharedPatterns.lowbat,
-                SharedPatterns.maintain,
-                SharedPatterns.error
-            ],
-            type: Types.rgb
-        },
         rgbSingle: {
             states: [
                 {role: /^level\.color\.rgb$/,                             indicator: false, type: 'string',  write: true,           name: 'RGB',           required: true,   defaultRole: 'level.color.rgb'},
