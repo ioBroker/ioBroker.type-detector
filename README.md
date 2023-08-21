@@ -56,6 +56,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Added `rgbwSingle` device
+
 ### 2.0.0 (2023-08-21)
 * (bluefox) Removed `rgbOld` type from 2018
 
