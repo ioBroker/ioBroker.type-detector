@@ -56,7 +56,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.1 (2023-08-21)
 * (bluefox) Added `rgbwSingle` device
 
 ### 2.0.0 (2023-08-21)

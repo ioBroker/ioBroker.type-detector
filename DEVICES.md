@@ -61,6 +61,7 @@ In [brackets] is given the class name of device.
 * [Motion sensor [motion]](#motion-sensor-motion)
 * [RGB Light (R,G,B have different states) [rgb]](#rgb-light--r-g-b-have-different-states--rgb)
 * [RGB Light with hex color [rgbSingle]](#rgb-light-with-hex-color-rgbsingle)
+* [rgbwSingle [rgbwSingle]](#rgbwsingle)
 * [Socket [socket]](#socket-socket)
 * [Temperature [temperature]](#temperature-temperature)
 * [Thermostat [thermostat]](#thermostat-thermostat)
@@ -450,6 +451,24 @@ In [brackets] is given the class name of device.
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | RGB         | level.color.rgb               |      | string  | W  |     |      | ``/^level\.color\.rgb$/``                                                      |
+|   | DIMMER      | level.dimmer                  | %    | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
+|   | BRIGHTNESS  |                               | %    | number  | W  |     |      | ``/^level\.brightness$/``                                                      |
+|   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
+|   | TEMPERATURE | level.color.temperature       | °K   | number  | W  |     |      | ``/^level\.color\.temperature$/``                                              |
+|   | ON          | switch.light                  |      | boolean | W  |     |      | ``/^switch\.light$/``                                                          |
+|   | ON          |                               |      | boolean | W  |     |      | ``/^switch$/``                                                                 |
+|   | ON_ACTUAL   | sensor.light                  |      | boolean | -  |     |      | ``/^(state｜switch｜sensor)\.light｜switch$/``                                    |
+|   | WORKING     | indicator.working             |      |         |    | X   |      | ``/^indicator\.working$/``                                                     |
+|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
+|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN    | indicator.maintenance         |      | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
+
+
+### rgbwSingle
+| R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
+|---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
+| * | RGBW        | level.color.rgbw              |      | string  | W  |     |      | ``/^level\.color\.rgbw$/``                                                     |
 |   | DIMMER      | level.dimmer                  | %    | number  | W  |     |      | ``/^level\.dimmer$/``                                                          |
 |   | BRIGHTNESS  |                               | %    | number  | W  |     |      | ``/^level\.brightness$/``                                                      |
 |   | SATURATION  |                               |      | number  | W  |     |      | ``/^level\.color\.saturation$/``                                               |
