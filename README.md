@@ -56,6 +56,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (Garfonso) Added `rgbwSingle` device to types
+
 ### 2.0.1 (2023-08-21)
 * (bluefox) Added `rgbwSingle` device
 
