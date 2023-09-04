@@ -61,7 +61,7 @@ In [brackets] is given the class name of device.
 * [Motion sensor [motion]](#motion-sensor-motion)
 * [RGB Light (R,G,B have different states) [rgb]](#rgb-light--r-g-b-have-different-states--rgb)
 * [RGB Light with hex color [rgbSingle]](#rgb-light-with-hex-color-rgbsingle)
-* [rgbwSingle [rgbwSingle]](#rgbwsingle)
+* [RGBW Light with hex color [rgbwSingle]](#rgbw-light-with-hex-color-rgbwsingle)
 * [Socket [socket]](#socket-socket)
 * [Temperature [temperature]](#temperature-temperature)
 * [Thermostat [thermostat]](#thermostat-thermostat)
@@ -465,7 +465,7 @@ In [brackets] is given the class name of device.
 |   | ERROR       | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### rgbwSingle
+### RGBW Light with hex color [rgbwSingle]
 | R | Name        | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|-------------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | RGBW        | level.color.rgbw              |      | string  | W  |     |      | ``/^level\.color\.rgbw$/``                                                     |
