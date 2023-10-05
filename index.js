@@ -557,7 +557,7 @@ function ChannelDetector() {
         },
         fireAlarm: {
             states: [
-                {role: /^state(\.alarm)?\.fire$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.fire$/, defaultRole: 'sensor.alarm.fire', defaultChannelRole: 'sensor.alarm.fire'},
+                {role: /^state(\.alarm)?\.fire$|^sensor(\.alarm)?\.fire/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, defaultRole: 'sensor.alarm.fire', defaultChannelRole: 'sensor.alarm.fire'},
                 // optional
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
@@ -569,7 +569,7 @@ function ChannelDetector() {
         },
         floodAlarm: {
             states: [
-                {role: /^state(\.alarm)?\.flood$|^sensor(\.alarm)?\.flood/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, channelRole: /^sensor(\.alarm)?\.flood$/, defaultRole: 'sensor.alarm.flood', defaultChannelRole: 'sensor.alarm.flood'},
+                {role: /^state(\.alarm)?\.flood$|^sensor(\.alarm)?\.flood/,                        indicator: false, type: 'boolean', name: 'ACTUAL',     required: true, defaultRole: 'sensor.alarm.flood', defaultChannelRole: 'sensor.alarm.flood'},
                 // optional
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
