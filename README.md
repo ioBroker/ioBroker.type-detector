@@ -56,6 +56,10 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (Garfonso) Changed detection of fire and flood sensors
+* (Garfonso) Changed the role of TIME_SUNRISE and TIME_SUNSET
+
 ### 2.0.2 (2023-09-04)
 * (Garfonso) Added `rgbwSingle` device to types
 
