@@ -234,7 +234,7 @@ In [brackets] is given the class name of device.
 ### Fire alarm sensor [fireAlarm]
 | R | Name     | Role                          | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|-----|------|--------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.alarm.fire             | boolean |     |      | ``/^state(\.alarm)?\.fire$｜^sensor(\.alarm)?\.fire/``                          |
+| * | ACTUAL   | sensor.alarm.fire             | boolean |     |      | ``/^(state｜sensor｜indicator)(\.alarm)?\.fire$/``                               |
 |   | UNREACH  | indicator.maintenance.unreach | boolean | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  | boolean | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
 |   | MAINTAIN | indicator.maintenance         | boolean | X   |      | ``/^indicator\.maintenance$/``                                                 |
@@ -244,7 +244,7 @@ In [brackets] is given the class name of device.
 ### Flood alarm sensor [floodAlarm]
 | R | Name     | Role                          | Type    | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|-----|------|--------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.alarm.flood            | boolean |     |      | ``/^state(\.alarm)?\.flood$｜^sensor(\.alarm)?\.flood/``                        |
+| * | ACTUAL   | sensor.alarm.flood            | boolean |     |      | ``/^(state｜sensor｜indicator)(\.alarm)?\.flood$/``                              |
 |   | UNREACH  | indicator.maintenance.unreach | boolean | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  | boolean | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
 |   | MAINTAIN | indicator.maintenance         | boolean | X   |      | ``/^indicator\.maintenance$/``                                                 |

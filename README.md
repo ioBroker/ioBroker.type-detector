@@ -56,7 +56,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.3 (2023-10-09)
 * (Garfonso) Changed detection of fire and flood sensors
 * (Garfonso) Changed the role of TIME_SUNRISE and TIME_SUNSET
 
