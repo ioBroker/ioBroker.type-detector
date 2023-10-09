@@ -173,8 +173,8 @@ function ChannelDetector() {
                 {role: /^value.pressure$/,                                           indicator: false, type: 'number',  name: 'PRESSURE',      required: false, defaultRole: 'weather.icon.forecast.0'},
                 {role: /^value.humidity$|value.humidity.forecast.0$/,                indicator: false, type: 'number',  name: 'HUMIDITY',      required: false, defaultRole: 'value.humidity.forecast.0'},
 
-                {role: /^time.sunrise$|^time.sunrise.forecast.0$/,                   indicator: false, type: 'string',  name: 'TIME_SUNRISE',  required: false, defaultRole: 'time.sunrise'},
-                {role: /^time.sunset$|^time.sunset.forecast.0$/,                     indicator: false, type: 'string',  name: 'TIME_SUNSET',   required: false, defaultRole: 'time.sunset'},
+                {role: /^(?:date|time).sunrise(?:.forecast\.0)?$/,                   indicator: false, type: 'string',  name: 'TIME_SUNRISE',  required: false, defaultRole: 'date.sunrise'},
+                {role: /^(?:date|time).sunset(?:.forecast\.0)?$/,                    indicator: false, type: 'string',  name: 'TIME_SUNSET',   required: false, defaultRole: 'date.sunset'},
 
                 {role: /^value.temperature.windchill$|^value.temperature.windchill.forecast.0$/, indicator: false, type: 'number',  name: 'WIND_CHILL',    required: false, defaultRole: 'value.temperature.windchill.forecast.0'},
                 {role: /^value.temperature.feelslike$|^value.temperature.feelslike.forecast.0$/, indicator: false, type: 'number',  name: 'FEELS_LIKE',    required: false, defaultRole: 'value.temperature.feelslike.forecast.0'},
