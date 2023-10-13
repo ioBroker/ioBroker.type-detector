@@ -639,7 +639,7 @@ In [brackets] is given the class name of device.
 |   | WIND_ICON              | weather.icon.wind.forecast.0           |       | string |     |      | ``/^weather.icon.wind$｜^weather.icon.wind.forecast.0$/``                     |
 |   | HISTORY_CHART          | weather.chart.url                      |       | string |     |      | ``/^weather.chart.url$/``                                                    |
 |   | FORECAST_CHART         | weather.chart.url.forecast             |       | string |     |      | ``/^weather.chart.url.forecast$/``                                           |
-|   | LOCATION               | location                               |       | string |     | x    | ``/^location$/``                                                             |
+|   | LOCATION               | location                               |       | string |     |      | ``/^location$/``                                                             |
 |   | ICON%d                 |                                        |       | string |     | x    | ``/^weather.icon.forecast.(\d)$/``                                           |
 |   | TEMP_MIN%d             |                                        |       | number |     | x    | ``/^value.temperature.min.forecast.(\d)$/``                                  |
 |   | TEMP_MAX%d             |                                        |       | number |     | x    | ``/^value.temperature.max.forecast.(\d)$/``                                  |

@@ -56,7 +56,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.4 (2023-10-13)
 * (bluefox) Removed multiple for weather location
 
 ### 2.0.3 (2023-10-09)
