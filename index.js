@@ -184,7 +184,7 @@ function ChannelDetector() {
                 {role: /^weather.icon.wind$|^weather.icon.wind.forecast.0$/,         indicator: false, type: 'string',  name: 'WIND_ICON',     required: false, defaultRole: 'weather.icon.wind.forecast.0'},
                 {role: /^weather.chart.url$/,                                        indicator: false, type: 'string',  name: 'HISTORY_CHART',   required: false, noSubscribe: true, defaultRole: 'weather.chart.url'},
                 {role: /^weather.chart.url.forecast$/,                               indicator: false, type: 'string',  name: 'FORECAST_CHART',  required: false, noSubscribe: true, defaultRole: 'weather.chart.url.forecast'},
-                {role: /^location$/,                                                 indicator: false, type: 'string',  name: 'LOCATION',        required: false, multiple: true, defaultRole: 'location'},
+                {role: /^location$/,                                                 indicator: false, type: 'string',  name: 'LOCATION',        required: false, defaultRole: 'location'},
 
                 // other days
                 {role: /^weather.icon.forecast.(\d)$/,                               indicator: false, type: 'string',  name: 'ICON%d',          required: false, searchInParent: true, multiple: true, noSubscribe: true, notSingle: true},
