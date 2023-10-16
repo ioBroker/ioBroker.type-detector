@@ -13,7 +13,7 @@ The following code detects devices in some state's tree:
 
 ```javascript
 // 
-const ChannelDetector = require('iobroker.type-detector');
+const { ChannelDetector } = require('iobroker.type-detector');
 const detector = new ChannelDetector();
 
 const keys = Object.keys(objects);				// For optimization
