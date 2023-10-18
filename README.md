@@ -56,7 +56,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.5 (2023-10-18)
 * (bluefox) Removed valve as type (it is just a slider)
 
 ### 2.0.4 (2023-10-13)
