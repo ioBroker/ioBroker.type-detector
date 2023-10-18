@@ -56,8 +56,8 @@ if (controls) {
 -->
 
 ## Changelog
-### 2.0.5 (2023-10-18)
-* (bluefox) Removed valve as type (it is just a slider)
+### **WORK IN PROGRESS**
+* (bluefox) Removed `valve` and `url` as types (they just a `slider` and `image`)
 
 ### 2.0.4 (2023-10-13)
 * (bluefox) Removed multiple for weather location

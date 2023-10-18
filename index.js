@@ -36,7 +36,6 @@ var Types = {
     button: 'button',
     buttonSensor: 'buttonSensor',
     camera: 'camera',
-    url: 'url',
     chart: 'chart',
     image: 'image',
     dimmer: 'dimmer',
