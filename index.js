@@ -62,7 +62,6 @@ var Types = {
     socket: 'socket',
     temperature: 'temperature',
     thermostat: 'thermostat',
-    valve: 'valve',
     volume: 'volume',
     vacuumCleaner: 'vacuumCleaner',
     volumeGroup: 'volumeGroup',

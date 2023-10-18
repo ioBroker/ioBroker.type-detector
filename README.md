@@ -56,6 +56,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Removed valve as type (it is just a slider)
+
 ### 2.0.4 (2023-10-13)
 * (bluefox) Removed multiple for weather location
 
