@@ -56,7 +56,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.0.6 (2023-10-18)
 * (bluefox) Removed `valve` and `url` as types (they just a `slider` and `image`)
 
 ### 2.0.4 (2023-10-13)
