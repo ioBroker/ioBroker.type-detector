@@ -31,13 +31,13 @@ const options: DetectOptions = {
 
 let controls = detector.detect(options);
 if (controls) {
-	controls = controls.map((control: CopiedPatternControl) => {
-		const id = control.states.find((state: CopiedDetectorState) => state.id).id;
+	controls = controls.map((control: PatternControl) => {
+		const id = control.states.find((state: DetectorState) => state.id).id;
 		if (id) {
 			console.log(`In ${options.id} was detected "${control.type}" with following states:`);
 			control.states
-                .filter((state: CopiedDetectorState) => state.id)
-                .forEach((state: CopiedDetectorState) => {
+                .filter((state: DetectorState) => state.id)
+                .forEach((state: DetectorState) => {
                     console.log(`    ${state.name} => ${state.id}`);
                 });
 
