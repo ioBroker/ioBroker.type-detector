@@ -72,7 +72,7 @@ export enum StateType {
     File = 'file',
 }
 
-export interface DetectorState {
+interface InternalDetectorState {
     role?: RegExp; // RegEx to detect role
     channelRole?: RegExp; // RegEx to detect a channel role of state
     ignoreRole?: RegExp; // RegEx to ignore some specific roles
@@ -102,12 +102,12 @@ export interface DetectorState {
     state?: RegExp;
 }
 
-export interface CopiedDetectorState extends DetectorState {
-    original?: DetectorState;
+export interface DetectorState extends InternalDetectorState {
+    original?: InternalDetectorState;
     id: string;
 }
 
-const SharedPatterns: { [id: string]: DetectorState } = {
+const SharedPatterns: { [id: string]: InternalDetectorState } = {
     working:   {role: /^indicator\.working$/,                 indicator: true,                    notSingle: true, name: 'WORKING',   required: false, defaultRole: 'indicator.working', defaultType: StateType.Boolean},
     unreach:   {role: /^indicator(\.maintenance)?\.unreach$/, indicator: true,  type: StateType.Boolean,  notSingle: true, name: 'UNREACH',   required: false, defaultRole: 'indicator.maintenance.unreach'},
     lowbat:    {role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery$/, indicator: true,  type: StateType.Boolean, notSingle: true, name: 'LOWBAT', required: false, defaultRole: 'indicator.maintenance.lowbat'},
@@ -133,18 +133,18 @@ interface DetectorContext {
     usedIds: string[];
     usedInCurrentDevice: string[];
     ignoreIndicators: string[];
-    result: CopiedPatternControl | null;
+    result: PatternControl | null;
     pattern: Types;
-    state: DetectorState;
+    state: InternalDetectorState;
 }
 
-interface PatternControl {
-    states: DetectorState[];
+interface InternalPatternControl {
+    states: InternalDetectorState[];
     type: Types;
     enumRequired?: boolean;
 }
-export interface CopiedPatternControl {
-    states: CopiedDetectorState[];
+export interface PatternControl {
+    states: DetectorState[];
     type: Types;
     enumRequired?: boolean;
 }
@@ -159,7 +159,7 @@ class ChannelDetector {
     constructor() {
         this.cache = {};
     }
-    protected static patterns: { [key: string]: PatternControl } = {
+    protected static patterns: { [key: string]: InternalPatternControl } = {
         chart: {
             states: [
                 { objectType: 'chart', name: 'CHART' }
@@ -961,7 +961,7 @@ class ChannelDetector {
         return id;
     }
 
-    private _applyPattern(objects: Record<string, ioBroker.Object>, id: string, statePattern: DetectorState) {
+    private _applyPattern(objects: Record<string, ioBroker.Object>, id: string, statePattern: InternalDetectorState) {
         if (objects[id] && objects[id].common) {
             let role = null;
             if (statePattern.role) {
@@ -1081,7 +1081,7 @@ class ChannelDetector {
         return result.length ? result : null;
     };
 
-    private static copyState(oldState: DetectorState, newState?: CopiedDetectorState): CopiedDetectorState {
+    private static copyState(oldState: InternalDetectorState, newState?: DetectorState): DetectorState {
         newState = newState || JSON.parse(JSON.stringify(oldState));
         if (newState) {
             // @ts-ignore
@@ -1104,12 +1104,12 @@ class ChannelDetector {
     private _testOneState(context: DetectorContext): boolean {
         const objects: Record<string, ioBroker.Object> = context.objects;
         const pattern: Types = context.pattern;
-        const state: DetectorState = context.state;
+        const state: InternalDetectorState = context.state;
         const channelStates: string[] = context.channelStates;
         const usedIds: string[] = context.usedIds;
         const usedInCurrentDevice: string[] = context.usedInCurrentDevice;
         const ignoreIndicators: string[] = context.ignoreIndicators;
-        let result: CopiedPatternControl | null = context.result;
+        let result: PatternControl | null = context.result;
         let found: boolean = false;
         let count = 0;
 
@@ -1146,7 +1146,7 @@ class ChannelDetector {
                 if (!state.indicator) {
                     usedInCurrentDevice.push(_id);
                 }
-                // we detected a state, copy PatternControl
+                // we detected a state, copy InternalPatternControl
                 if (!result) {
                     result = JSON.parse(JSON.stringify(ChannelDetector.patterns[pattern]));
                     context.result = result;
@@ -1186,11 +1186,11 @@ class ChannelDetector {
                                 }
                                 if (result) {
                                     if (Array.isArray(state)) {
-                                        const newState: CopiedDetectorState = ChannelDetector.copyState(state[0]);
+                                        const newState: DetectorState = ChannelDetector.copyState(state[0]);
                                         newState.id = cid;
                                         result.states.push(newState);
                                     } else {
-                                        const newState: CopiedDetectorState = ChannelDetector.copyState(state);
+                                        const newState: DetectorState = ChannelDetector.copyState(state);
                                         newState.id = cid;
                                         result.states.push(newState);
                                     }
@@ -1225,7 +1225,7 @@ class ChannelDetector {
         }
     }
 
-    private static patternIsAllowed(pattern: PatternControl, allowedTypes: Types[] | undefined, excludedTypes: Types[] | undefined): boolean {
+    private static patternIsAllowed(pattern: InternalPatternControl, allowedTypes: Types[] | undefined, excludedTypes: Types[] | undefined): boolean {
         if (!pattern) {
             return false;
         }
@@ -1264,7 +1264,7 @@ class ChannelDetector {
         return true;
     }
 
-    private static cleanState(state: CopiedDetectorState, objects: Record<string, ioBroker.Object>) {
+    private static cleanState(state: DetectorState, objects: Record<string, ioBroker.Object>) {
         const role: string = objects[state.id]?.common?.role || '';
         if (state.name.includes('%d') && state.role && state.id && role) {
             const m = state.role.exec(role);
@@ -1283,7 +1283,7 @@ class ChannelDetector {
         }
     }
 
-    private _detectNext(options: DetectOptions): CopiedPatternControl | null {
+    private _detectNext(options: DetectOptions): PatternControl | null {
         const objects = options.objects;
         const id: string = options.id;
         const keys: string[] = options._keysOptional || [];
@@ -1307,7 +1307,7 @@ class ChannelDetector {
             result: null,
             pattern: Types.unknown,
             usedInCurrentDevice: [],
-            state: { } as DetectorState,
+            state: { } as InternalDetectorState,
         };
 
         for (const pattern in ChannelDetector.patterns) {
@@ -1368,7 +1368,7 @@ class ChannelDetector {
                                 (state.indicator || state.searchInParent) &&
                                 !state.noDeviceDetection
                             ) {
-                                if (this._applyPattern(objects, _id, state.original as DetectorState) && context.result) {
+                                if (this._applyPattern(objects, _id, state.original as InternalDetectorState) && context.result) {
                                     context.result.states[i].id = _id;
                                 }
                             }
@@ -1378,9 +1378,9 @@ class ChannelDetector {
             }
 
             if (context.result) {
-                const result = context.result as CopiedPatternControl;
+                const result = context.result as PatternControl;
                 if (result) {
-                    result.states.forEach((state: CopiedDetectorState) =>
+                    result.states.forEach((state: DetectorState) =>
                         ChannelDetector.cleanState(state, context.objects));
                 }
             }
@@ -1406,7 +1406,7 @@ class ChannelDetector {
      *                  excludedTypes - array with names of device types, that must be ignored. The listed device types will be ignored.
      * @returns {*|boolean|"DIR"|"FILE"|ReadonlyArray<string>}
      */
-    public detect(options: DetectOptions): CopiedPatternControl[] | null {
+    public detect(options: DetectOptions): PatternControl[] | null {
         const objects           = options.objects;
         const id = options.id;
         let _keysOptional = options._keysOptional;
@@ -1440,11 +1440,11 @@ class ChannelDetector {
         return this.cache[id];
     };
 
-    public static getPatterns(): { [type: string]: CopiedPatternControl } {
-        const copyPatterns: { [type: string]: CopiedPatternControl } = {};
+    public static getPatterns(): { [type: string]: PatternControl } {
+        const copyPatterns: { [type: string]: PatternControl } = {};
         Object.keys(ChannelDetector.patterns).forEach(type => {
             const item = JSON.parse(JSON.stringify(ChannelDetector.patterns[type]));
-            item.states.forEach((state: CopiedDetectorState | CopiedDetectorState[], i: number) => {
+            item.states.forEach((state: DetectorState | DetectorState[], i: number) => {
                 let oldState = ChannelDetector.patterns[type].states[i];
                 if (oldState.role) {
                     item.states[i].role = oldState.role.toString();
