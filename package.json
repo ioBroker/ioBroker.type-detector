@@ -40,7 +40,9 @@
   "main": "index.js",
   "files": [
     "LICENSE",
-    "index.js"
+    "index.js",
+    "index.d.ts",
+    "index.js.map"
   ],
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit",

@@ -94,7 +94,7 @@ if (controls) {
 -->
 
 ## Changelog
-### 3.0.2 (2023-10-24)
+### **WORK IN PROGRESS**
 * (bluefox) Implemented `@iobroker/type-detector` as npm module
 
 ### 2.0.6 (2023-10-18)
