@@ -34,6 +34,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build
+        run: npm run build:ts
+
 #      - name: Perform a type check
 #        run: npm run check:ts
 #        env:
@@ -64,6 +67,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Build
+        run: npm run build:ts
 
       - name: Run local tests
         #         npm downgrade to 6 (mainly for node.js 16) is needed because else testing fails
