@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  **/
 // Version 2.0.0, 2023.10.23
-
 export enum Types {
     unknown = 'unknown',
     airCondition = 'airCondition',
@@ -32,38 +31,38 @@ export enum Types {
     buttonSensor = 'buttonSensor',
     camera = 'camera',
     chart = 'chart',
-    image = 'image',
+    cie = 'cie',
+    ct = 'ct',
     dimmer = 'dimmer',
     door = 'door',
     fireAlarm = 'fireAlarm',
     floodAlarm = 'floodAlarm',
     gate = 'gate',
+    hue = 'hue',
     humidity = 'humidity',
+    image = 'image',
     info = 'info',
     instance = 'instance',
     light = 'light',
-    lock = 'lock',
     location = 'location',
+    lock = 'lock',
     media = 'media',
     motion = 'motion',
     rgb = 'rgb',
-    ct = 'ct',
     rgbSingle = 'rgbSingle',
     rgbwSingle = 'rgbwSingle',
-    hue = 'hue',
-    cie = 'cie',
     slider = 'slider',
     socket = 'socket',
     temperature = 'temperature',
     thermostat = 'thermostat',
-    volume = 'volume',
     vacuumCleaner = 'vacuumCleaner',
+    volume = 'volume',
     volumeGroup = 'volumeGroup',
-    window = 'window',
-    windowTilt = 'windowTilt',
+    warning = 'warning',
     weatherCurrent = 'weatherCurrent',
     weatherForecast = 'weatherForecast',
-    warning = 'warning'
+    window = 'window',
+    windowTilt = 'windowTilt',
 }
 
 export enum StateType {
