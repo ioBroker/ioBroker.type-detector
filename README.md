@@ -11,8 +11,46 @@ Just now this module used in material adapter to detect devices and to visualize
 
 The following code detects devices in some state's tree:
 
+```typescript
+import ChannelDetector, { DetectOptions } from '@iobroker/type-detector';
+const detector = new ChannelDetector();
+
+const keys = Object.keys(objects);				// For optimization
+const usedIds = [];                 			// To not allow using of same ID in more than one device
+const ignoreIndicators = ['UNREACH_STICKY'];    // Ignore indicators by name
+const allowedTypes = ['button', 'rgb', 'dimmer', 'light'];	// Supported types. Leave it null if you want to get ALL devices.
+
+const options: DetectOptions = {
+	objects:            this.props.objects,
+	id:                 'hm-rpc.0.LEQ1214232.1', // Channel, device or state, that must be detected
+	_keysOptional:      keys,
+	_usedIdsOptional:   usedIds,
+	ignoreIndicators,
+//    allowedTypes,
+};
+
+let controls = detector.detect(options);
+if (controls) {
+	controls = controls.map((control: CopiedPatternControl) => {
+		const id = control.states.find((state: CopiedDetectorState) => state.id).id;
+		if (id) {
+			console.log(`In ${options.id} was detected "${control.type}" with following states:`);
+			control.states
+                .filter((state: CopiedDetectorState) => state.id)
+                .forEach((state: CopiedDetectorState) => {
+                    console.log(`    ${state.name} => ${state.id}`);
+                });
+
+			return {control, id};
+		}
+	});
+} else {
+	console.log(`Nothing found for ${options.id}`);
+}
+```
+
 ```javascript
-// 
+// Legacy
 const { ChannelDetector } = require('iobroker.type-detector');
 const detector = new ChannelDetector();
 
@@ -56,6 +94,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Implemented `@iobroker/type-detector` as npm module
+
 ### 2.0.6 (2023-10-18)
 * (bluefox) Removed `valve` and `url` as types (they just a `slider` and `image`)
 

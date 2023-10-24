@@ -117,7 +117,7 @@ const SharedPatterns: { [id: string]: DetectorState } = {
     reachable: {role: /^indicator\.reachable$/,               indicator: true,  type: StateType.Boolean,  notSingle: true, name: 'CONNECTED', required: false, defaultRole: 'indicator.reachable', inverted: true},
 };
 
-interface DetectOptions {
+export interface DetectOptions {
     objects: Record<string, ioBroker.Object>; // all objects
     id: string;
     _keysOptional?: string[];      // For optimization, it is Object.keys(objects)
@@ -143,7 +143,7 @@ interface PatternControl {
     type: Types;
     enumRequired?: boolean;
 }
-interface CopiedPatternControl {
+export interface CopiedPatternControl {
     states: CopiedDetectorState[];
     type: Types;
     enumRequired?: boolean;
