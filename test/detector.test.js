@@ -1,7 +1,6 @@
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
-const {Types, ChannelDetector} = require('../index');
-const objects = require('./weather_weatherunderground.json');
+const { Types, ChannelDetector } = require('../index');
 
 function expectStateToHaveId(states, name, id, alternativeId) {
     const control = states.find(s => s.name === name);
@@ -431,7 +430,7 @@ describe('Test Detector', () => {
         const controls = detector.detect(options);
         console.dir(controls, { depth: null});
         for (const types of controls) {
-            console.log('Found ' + types.type);
+            console.log(`Found ${types.type}`);
         }
         expect(controls[0].type).to.be.equal(Types.weatherForecast);
         const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);

@@ -122,10 +122,15 @@ jobs:
 
 #      - name: Create a clean build
 #        run: npm run build
-      - name: Publish package to npm
+      - name: Publish legacy package to npm
         run: |
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm whoami
+          npm publish
+
+      - name: Publish types package to npm
+        working-directory: build
+        run: |
           npm publish
 
       - name: Create Github Release
