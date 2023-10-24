@@ -1,0 +1,48 @@
+{
+  "alias.0.Schlafzimmer.Licht": {
+    "common": {
+      "name": {
+        "de": "Licht"
+      },
+      "role": "light"
+    },
+    "native": {},
+    "type": "channel",
+    "_id": "alias.0.Schlafzimmer.Licht",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1684232700189
+  },
+  "alias.0.Schlafzimmer.Licht.SET": {
+    "_id": "alias.0.Schlafzimmer.Licht.SET",
+    "common": {
+      "name": "SET",
+      "role": "switch.light",
+      "type": "boolean",
+      "read": true,
+      "write": true,
+      "alias": {
+        "id": "javascript.0.boolean"
+      },
+      "smartName": {
+        "byON": ""
+      }
+    },
+    "native": {},
+    "type": "state",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1685447302074
+  }
+}

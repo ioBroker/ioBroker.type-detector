@@ -1004,9 +1004,11 @@ class ChannelDetector {
                 return false;
             }
 
-            const lastStateName = id.split('.').pop() || '';
-            if (statePattern.state && lastStateName && !statePattern.state.test(lastStateName)) {
-                return false;
+            if (statePattern.state) {
+                const lastStateName = id.split('.').pop() || '';
+                if (lastStateName && !statePattern.state.test(lastStateName)) {
+                    return false;
+                }
             }
 
             if (statePattern.write !== undefined && statePattern.write !== (objects[id].common.write || false)) {
@@ -1046,7 +1048,7 @@ class ChannelDetector {
 
             if (statePattern.enums && typeof statePattern.enums === 'function') {
                 const enums = this._getEnumsForId(objects, id);
-                if (!enums || !statePattern.enums(objects[id], enums)) {
+                if (!statePattern.enums(objects[id], enums || [])) {
                     return false;
                 }
             }
@@ -1309,6 +1311,10 @@ class ChannelDetector {
         };
 
         for (const pattern in ChannelDetector.patterns) {
+            if (pattern === 'light') {
+                debugger;
+            }
+
             if (
                 !ChannelDetector.patternIsAllowed(
                     ChannelDetector.patterns[pattern],
