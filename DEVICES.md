@@ -50,7 +50,7 @@ In [brackets] is given the class name of device.
 * [Gate [gate]](#gate-gate)
 * [Light with HUE color [hue]](#light-with-hue-color-hue)
 * [Humidity [humidity]](#humidity-humidity)
-* [Image [image]](#image-image)
+* [image [image]](#image-image)
 * [Information device (very simple) [info]](#information-device--very-simple--info)
 * [Slider [levelSlider]](#slider-levelslider)
 * [Light switch [light]](#light-switch-light)
@@ -292,7 +292,7 @@ In [brackets] is given the class name of device.
 |   | ERROR    | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
 
 
-### Image [image]
+### image [image]
 | R | Name     | Role                          | Type    | Wr | Ind | Mult | Regex                                                                          |
 |---|----------|-------------------------------|---------|----|-----|------|--------------------------------------------------------------------------------|
 | * | URL      |                               | string  | -  |     |      | ``/\.icon$｜^icon$｜^icon\.｜\.icon\.｜\.chart\.url\.｜\.chart\.url$｜^url.icon$/``  |
