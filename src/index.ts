@@ -415,7 +415,7 @@ class ChannelDetector {
                 {role: /temperature(\..*)?$/,          indicator: false,     read: true, write: false, type: StateType.Number,    searchInParent: true,                           name: 'ACTUAL',             required: false, defaultRole: 'value.temperature', defaultUnit: '°C'},
                 {role: /humidity(\..*)?$/,             indicator: false,     read: true, write: false, type: StateType.Number,    searchInParent: true,                           name: 'HUMIDITY',           required: false, defaultRole: 'value.humidity', defaultUnit: '%'},
                 {role: /^switch(\.mode)?\.boost(\..*)?$/, indicator: false,  read: true, write: true,  type: [StateType.Boolean, StateType.Number],   searchInParent: true,               name: 'BOOST',              required: false, defaultRole: 'switch.mode.boost'},
-                {role: /^switch\.power$/,              indicator: false,     wread: true, rite: true,  type: [StateType.Boolean, StateType.Number],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
+                {role: /^switch\.power$/,              indicator: false,     read: true, write: true,  type: [StateType.Boolean, StateType.Number],   searchInParent: true,               name: 'POWER',              required: false, defaultRole: 'switch.power'},
                 {role: /^switch(\.mode)?\.party$/,     indicator: false,     read: true, write: true,  type: [StateType.Boolean, StateType.Number],   searchInParent: true,               name: 'PARTY',              required: false, defaultRole: 'switch.mode.party'},
                 {role: /^switch$/,                     indicator: false,     read: true, write: true,  type: StateType.Boolean,   searchInParent: true,                           name: 'POWER',              required: false, defaultRole: 'switch.power'},
                 {role: /^level(\.mode)?\.thermostat$/, indicator: false,     read: true, write: true,  type: StateType.Number,    searchInParent: true,                           name: 'MODE',               required: false, defaultRole: 'level.mode.thermostat', defaultStates: {0: 'AUTO', 1: 'MANUAL'}},
@@ -768,9 +768,9 @@ class ChannelDetector {
         },
         buttonSensor: {
             states: [
-                {role: /^button(\.[.\w]+)?$/,           indicator: false, type: StateType.Boolean, read: false, write: false,       name: 'PRESS',         required: true,  defaultRole: 'button.press'},
+                {role: /^button(\.[.\w]+)?$/,           indicator: false, type: StateType.Boolean, read: false, write: true,       name: 'PRESS',         required: true,  defaultRole: 'button.press'},
                 // optional
-                {role: /^button\.long/,                 indicator: false, type: StateType.Boolean, read: false, write: false,       name: 'PRESS_LONG',    required: false, defaultRole: 'button.long'},
+                {role: /^button\.long/,                 indicator: false, type: StateType.Boolean, read: false, write: true,       name: 'PRESS_LONG',    required: false, defaultRole: 'button.long'},
                 SharedPatterns.unreach,
                 SharedPatterns.lowbat,
                 SharedPatterns.maintain,
