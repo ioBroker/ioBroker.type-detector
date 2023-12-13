@@ -1,3 +1,4 @@
+const objects = require('./light.json');
 const expect = require('chai').expect;
 
 function expectStateToHaveId(states, name, id, alternativeId) {
@@ -47,7 +48,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls[0].type).to.be.equal(Types.humidity);
 
             done();
@@ -86,7 +87,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls).to.be.null;
 
             done();
@@ -122,7 +123,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls[0].type).to.be.equal(Types.humidity);
 
             done();
@@ -207,7 +208,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls[0].type).to.be.equal(Types.airCondition);
 
             const powerId = controls[0].states.find(s => s.name === 'POWER').id;
@@ -233,7 +234,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls[0].type).to.be.equal(Types.vacuumCleaner);
 
             const powerId = controls[0].states.find(s => s.name === 'POWER').id;
@@ -259,7 +260,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls[0].type).to.be.equal(Types.camera);
 
             const powerId = controls[0].states.find(s => s.name === 'FILE').id;
@@ -299,7 +300,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls[0].type).to.be.equal(Types.chart);
 
             const powerId = controls[0].states.find(s => s.name === 'CHART').id;
@@ -325,7 +326,7 @@ function createTests(name, ChannelDetector, Types) {
 
             const controls = detector.detect(options);
 
-            console.log(JSON.stringify(controls));
+            // console.log(JSON.stringify(controls));
             expect(controls[0].type).to.be.equal(Types.fireAlarm);
 
             const powerId = controls[0].states.find(s => s.name === 'ACTUAL').id;
@@ -348,7 +349,7 @@ function createTests(name, ChannelDetector, Types) {
             };
 
             const controls = detector.detect(options);
-            console.dir(controls, { depth: null});
+            // console.dir(controls, { depth: null});
             expect(controls[0].type).to.be.equal(Types.weatherForecast);
             const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
             expectMyStateToHaveId('ICON', 'accuweather.0.Summary.WeatherIconURL_d1', 'accuweather.0.Summary.WeatherIconURL');
@@ -395,13 +396,12 @@ function createTests(name, ChannelDetector, Types) {
             };
 
             const controls = detector.detect(options);
-            console.dir(controls, { depth: null});
+            // console.dir(controls, { depth: null});
             expect(controls[0].type).to.be.equal(Types.weatherForecast);
             const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
             expectMyStateToHaveId('ICON', 'daswetter.0.NextDays.Location_1.Day_1.iconURL');
             expectMyStateToHaveId('TEMP_MIN', 'daswetter.0.NextDays.Location_1.Day_1.Minimale_Temperatur_value');
             expectMyStateToHaveId('TEMP_MAX', 'daswetter.0.NextDays.Location_1.Day_1.Maximale_Temperatur_value');
-
 
             const days = [1, 2, 3, 4, 5, 6];
             for (const day of days) {
@@ -427,7 +427,7 @@ function createTests(name, ChannelDetector, Types) {
             };
 
             const controls = detector.detect(options);
-            console.dir(controls, { depth: null});
+            // console.dir(controls, { depth: null});
             for (const types of controls) {
                 console.log(`Found ${types.type}`);
             }
@@ -470,7 +470,7 @@ function createTests(name, ChannelDetector, Types) {
             };
 
             const controls = detector.detect(options);
-            console.dir(controls, { depth: null});
+            // console.dir(controls, { depth: null});
             for (const types of controls) {
                 console.log(`Found ${types.type}`);
             }
@@ -495,13 +495,38 @@ function createTests(name, ChannelDetector, Types) {
             };
 
             const controls = detector.detect(options);
-            console.dir(controls, { depth: null});
+            // console.dir(controls, { depth: null});
             for (const types of controls) {
                 console.log(`Found ${types.type}`);
             }
             expect(controls[0].type).to.be.equal(Types.light);
             const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
             expectMyStateToHaveId('SET', 'alias.0.Schlafzimmer.Licht.SET');
+
+            done();
+        });
+
+        it(`${name} Must detect lock correctly`, done => {
+            const detector = new ChannelDetector();
+
+            const objects = require('./lock.json');
+            Object.keys(objects).forEach(id => objects[id]._id = id);
+
+            const options = {
+                objects,
+                id:                 'hm-rpc.0.LEQ090XYZ.1',
+                _keysOptional:      Object.keys(objects),
+                _usedIdsOptional:   [],
+            };
+
+            const controls = detector.detect(options);
+            // console.dir(controls, { depth: null});
+            for (const types of controls) {
+                console.log(`Found ${types.type}`);
+            }
+                expect(controls[0].type).to.be.equal(Types.lock);
+            const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
+            expectMyStateToHaveId('SET', 'hm-rpc.0.LEQ090XYZ.1.STATE');
 
             done();
         });

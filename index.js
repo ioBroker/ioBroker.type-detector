@@ -1266,7 +1266,7 @@ function ChannelDetector() {
             patterns[pattern].states.forEach(function (state) {
                 var found = false;
 
-                // one of following
+                // one of the following
                 if (state instanceof Array) {
                     let required = false;
                     for (var s = 0; s < state.length; s++) {

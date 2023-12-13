@@ -1131,7 +1131,7 @@ class ChannelDetector {
                 const lastStateName = parts.pop() || '';
 
                 if (lastStateName && ignoreIndicators.includes(lastStateName)) {
-                    console.log(`${_id} ignored`);
+                    // console.log(`${_id} ignored`);
                     return;
                 }
             }
@@ -1311,10 +1311,6 @@ class ChannelDetector {
         };
 
         for (const pattern in ChannelDetector.patterns) {
-            if (pattern === 'light') {
-                debugger;
-            }
-
             if (
                 !ChannelDetector.patternIsAllowed(
                     ChannelDetector.patterns[pattern],
