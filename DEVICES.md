@@ -680,7 +680,7 @@ In [brackets] is given the class name of device.
 
 ## Categories
 ### door
-To detect these devices, it must belong to one of following category (any regex in any language):
+To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: ``/doors?/i``, ``/gates?/i``, ``/wickets?/i``, ``/entry|entries/i``
 - **de**: ``/^türe?/i``, ``/^tuere?/i``, ``/^tore?$/i``, ``/einfahrt(en)?/i``, ``/pforten?/i``
 - **ru**: ``/двери|дверь/i``, ``/ворота/i``, ``/калитка|калитки/``, ``/въезды?/i``, ``/входы?/i``
@@ -689,7 +689,7 @@ Or has one of the roles:
 `door`, `state.door`, `sensor.door`
 
 ### window
-To detect these devices, it must belong to one of following category (any regex in any language):
+To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: ``/blinds?/i``, ``/windows?/i``, ``/shutters?/i``
 - **de**: ``/rollladen?/i``, ``/fenstern?/i``, ``/beschattung(en)?/i``, ``/jalousien?/i``
 - **ru**: ``/ставни/i``, ``/рольставни/i``, ``/окна|окно/``, ``/жалюзи/i``
@@ -698,7 +698,7 @@ Or has one of the roles:
 `window`, `state.window`, `sensor.window`, `value.window`
 
 ### blind
-To detect these devices, it must belong to one of following category (any regex in any language):
+To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: ``/blinds?/i``, ``/windows?/i``, ``/shutters?/i``
 - **de**: ``/rollladen?/i``, ``/fenstern?/i``, ``/beschattung(en)?/i``, ``/jalousien?/i``
 - **ru**: ``/ставни/i``, ``/рольставни/i``, ``/окна|окно/``, ``/жалюзи/i``
@@ -707,7 +707,7 @@ Or has one of the roles:
 `blind`, `level.blind`, `value.blind`, `action.stop`, `button.stop`, `button.stop.blind`, `button.open.blind`, `button.close.blind`, `level.tilt`, `value.tilt`, `button.tilt.open`, `button.tilt.close`, `button.tilt.stop`
 
 ### gate
-To detect these devices, it must belong to one of following category (any regex in any language):
+To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: ``/gates?/i``
 - **de**: ``/^toren$/i``, ``/^tor$/i``
 - **ru**: ``/ворота/i``
@@ -716,7 +716,7 @@ Or has one of the roles:
 `gate`, `value.gate`, `switch.gate`, `action.stop`, `button.stop`
 
 ### light
-To detect these devices, it must belong to one of following category (any regex in any language):
+To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: ``/lights?/i``, ``/lamps?/i``, ``/ceilings?/i``
 - **de**: ``/licht(er)?/i``, ``/lampen?/i``, ``/beleuchtung(en)?/i``
 - **ru**: ``/свет/i``, ``/ламп[аы]/i``, ``/торшеры?/``, ``/подсветк[аи]/i``, ``/лампочк[аи]/i``, ``/светильники?/i``
