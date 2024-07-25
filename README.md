@@ -94,6 +94,12 @@ if (controls) {
 -->
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Fix Electricity states for light type
+* (Apollon77) Add Electricity states for more types
+* (Apollon77) Internal Refactoring
+
 ### 3.0.5 (2023-10-24)
 * (bluefox) Implemented `@iobroker/type-detector` as npm module
 
