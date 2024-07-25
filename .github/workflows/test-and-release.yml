@@ -32,7 +32,7 @@ jobs:
 
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build:ts
@@ -66,31 +66,18 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build:ts
 
       - name: Run local tests
-        #         npm downgrade to 6 (mainly for node.js 16) is needed because else testing fails
-        #         after installing additional adapters
-        run: |
-          npm install -g npm@6
-          npm test
-#      - name: Run unit tests
-#        run: npm run test:unit
-#      - name: Run integration tests # (linux/osx)
-#        if: startsWith(runner.OS, 'windows') == false
-#        run: DEBUG=testing:* npm run test:integration
-#      - name: Run integration tests # (windows)
-#        if: startsWith(runner.OS, 'windows')
-#        run: set DEBUG=testing:* & npm run test:integration
+        run: npm test
 
   # Deploys the final package to NPM
   auto-merge:
     needs: [adapter-tests]
 
-    # Trigger this step only when a commit on master is tagged with a version number
     if: |
       always() &&
       github.event_name == 'pull_request'
@@ -134,7 +121,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.automerge.outputs.mergeResult == 'merged'
-        run: npm i
+        run: npm ci
 
       - name: Build
         if: steps.automerge.outputs.mergeResult == 'merged'
