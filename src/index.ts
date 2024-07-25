@@ -25,4 +25,10 @@
 import { ChannelDetector } from './ChannelDetector';
 
 export default ChannelDetector;
-export { Types, StateType, DetectorState, DetectOptions, PatternControl } from './types';
+export {
+    Types,
+    StateType,
+    DetectorState,
+    DetectOptions,
+    PatternControl,
+} from './types';

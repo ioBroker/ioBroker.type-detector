@@ -112,11 +112,11 @@ export interface DetectorState extends InternalDetectorState {
 export interface DetectOptions {
     objects: Record<string, ioBroker.Object>; // all objects
     id: string;
-    _keysOptional?: string[];      // For optimization, it is Object.keys(objects)
-    _usedIdsOptional?: string[];   // For optimization, initially it is empty array
-    ignoreIndicators?: string[];   // List of state names, that will be ignored. E.g., ['UNREACH_STICKY']
-    allowedTypes?: Types[];        // List of allowed types. E.g., ['channel', 'device', 'state']
-    excludedTypes?: Types[];        // List of excluded types. E.g., ['channel', 'device', 'state']
+    _keysOptional?: string[]; // For optimization, it is Object.keys(objects)
+    _usedIdsOptional?: string[]; // For optimization, initially it is empty array
+    ignoreIndicators?: string[]; // List of state names, that will be ignored. E.g., ['UNREACH_STICKY']
+    allowedTypes?: Types[]; // List of allowed types. E.g., ['channel', 'device', 'state']
+    excludedTypes?: Types[]; // List of excluded types. E.g., ['channel', 'device', 'state']
 }
 
 export interface DetectorContext {
@@ -142,5 +142,5 @@ export interface PatternControl {
 }
 
 export interface PatternWords {
-    [lang: string]: RegExp[]
+    [lang: string]: RegExp[];
 }

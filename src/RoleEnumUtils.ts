@@ -45,7 +45,12 @@ export function checkEnum(enums: string[], words: PatternWords): boolean {
     return found;
 }
 
-export function roleOrEnum(obj: ioBroker.Object, enums: string[], roles: string[], words: PatternWords): boolean {
+export function roleOrEnum(
+    obj: ioBroker.Object,
+    enums: string[],
+    roles: string[],
+    words: PatternWords
+): boolean {
     if (roles && obj.common.role && roles.includes(obj.common.role)) {
         return true;
     }
@@ -54,24 +59,58 @@ export function roleOrEnum(obj: ioBroker.Object, enums: string[], roles: string[
 
 // -------------- LIGHT -----------------------------------------
 const lightWords: PatternWords = {
-    en: [/lights?/i,    /lamps?/i,      /ceilings?/i],
-    de: [/licht(er)?/i, /lampen?/i,     /beleuchtung(en)?/i],
-    ru: [/свет/i,       /ламп[аы]/i,    /торшеры?/, /подсветк[аи]/i, /лампочк[аи]/i, /светильники?/i]
+    en: [/lights?/i, /lamps?/i, /ceilings?/i],
+    de: [/licht(er)?/i, /lampen?/i, /beleuchtung(en)?/i],
+    ru: [
+        /свет/i,
+        /ламп[аы]/i,
+        /торшеры?/,
+        /подсветк[аи]/i,
+        /лампочк[аи]/i,
+        /светильники?/i,
+    ],
 };
-const lightRoles: string[] = ['switch.light', 'dimmer', 'value.dimmer', 'level.dimmer', 'sensor.light', 'state.light'];
-export function roleOrEnumLight(obj: ioBroker.Object, enums: string[]): boolean {
+const lightRoles: string[] = [
+    'switch.light',
+    'dimmer',
+    'value.dimmer',
+    'level.dimmer',
+    'sensor.light',
+    'state.light',
+];
+export function roleOrEnumLight(
+    obj: ioBroker.Object,
+    enums: string[]
+): boolean {
     return roleOrEnum(obj, enums, lightRoles, lightWords);
 }
 
 // -------------- BLINDS -----------------------------------------
 const blindWords: { [lang: string]: RegExp[] } = {
-    en: [/blinds?/i,    /windows?/i,    /shutters?/i],
-    de: [/rollladen?/i, /fenstern?/i,   /beschattung(en)?/i, /jalousien?/i],
-    ru: [/ставни/i,     /рольставни/i,  /окна|окно/, /жалюзи/i]
+    en: [/blinds?/i, /windows?/i, /shutters?/i],
+    de: [/rollladen?/i, /fenstern?/i, /beschattung(en)?/i, /jalousien?/i],
+    ru: [/ставни/i, /рольставни/i, /окна|окно/, /жалюзи/i],
 };
 
-const blindRoles: string[] = ['blind', 'level.blind', 'value.blind', 'action.stop', 'button.stop', 'button.stop.blind', 'button.open.blind', 'button.close.blind', 'level.tilt', 'value.tilt', 'button.tilt.open', 'button.tilt.close', 'button.tilt.stop'];
-export function roleOrEnumBlind(obj: ioBroker.Object, enums: string[]): boolean {
+const blindRoles: string[] = [
+    'blind',
+    'level.blind',
+    'value.blind',
+    'action.stop',
+    'button.stop',
+    'button.stop.blind',
+    'button.open.blind',
+    'button.close.blind',
+    'level.tilt',
+    'value.tilt',
+    'button.tilt.open',
+    'button.tilt.close',
+    'button.tilt.stop',
+];
+export function roleOrEnumBlind(
+    obj: ioBroker.Object,
+    enums: string[]
+): boolean {
     return roleOrEnum(obj, enums, blindRoles, blindWords);
 }
 
@@ -82,22 +121,36 @@ const gateWords: { [lang: string]: RegExp[] } = {
     ru: [/ворота/i],
 };
 
-const gateRoles: string[] = ['gate', 'value.gate', 'switch.gate', 'action.stop', 'button.stop'];
+const gateRoles: string[] = [
+    'gate',
+    'value.gate',
+    'switch.gate',
+    'action.stop',
+    'button.stop',
+];
 export function roleOrEnumGate(obj: ioBroker.Object, enums: string[]): boolean {
     return roleOrEnum(obj, enums, gateRoles, gateWords);
 }
 
 // -------------- WINDOWS -----------------------------------------
-const windowRoles: string[] = ['window', 'state.window', 'sensor.window', 'value.window'];
-export function roleOrEnumWindow(obj: ioBroker.Object, enums: string[]): boolean {
+const windowRoles: string[] = [
+    'window',
+    'state.window',
+    'sensor.window',
+    'value.window',
+];
+export function roleOrEnumWindow(
+    obj: ioBroker.Object,
+    enums: string[]
+): boolean {
     return roleOrEnum(obj, enums, windowRoles, blindWords);
 }
 
 // -------------- DOORS -----------------------------------------
 const doorsWords: { [lang: string]: RegExp[] } = {
-    en: [/doors?/i,      /gates?/i,      /wickets?/i,        /entry|entries/i],
-    de: [/^türe?/i,      /^tuere?/i,     /^tore?$/i,         /einfahrt(en)?/i,  /pforten?/i], // "^" because of Actor
-    ru: [/двери|дверь/i, /ворота/i,      /калитка|калитки/,  /въезды?/i,        /входы?/i]
+    en: [/doors?/i, /gates?/i, /wickets?/i, /entry|entries/i],
+    de: [/^türe?/i, /^tuere?/i, /^tore?$/i, /einfahrt(en)?/i, /pforten?/i], // "^" because of Actor
+    ru: [/двери|дверь/i, /ворота/i, /калитка|калитки/, /въезды?/i, /входы?/i],
 };
 
 const doorsRoles: string[] = ['door', 'state.door', 'sensor.door'];
@@ -105,7 +158,9 @@ export function roleOrEnumDoor(obj: ioBroker.Object, enums: string[]): boolean {
     return roleOrEnum(obj, enums, doorsRoles, doorsWords);
 }
 
-export function getEnums(): { [id: string]: { roles: string[], words: { [lang: string]: RegExp[] } }} {
+export function getEnums(): {
+    [id: string]: { roles: string[]; words: { [lang: string]: RegExp[] } };
+} {
     return {
         door: {
             roles: doorsRoles,
@@ -121,34 +176,54 @@ export function getEnums(): { [id: string]: { roles: string[], words: { [lang: s
         },
         gate: {
             roles: gateRoles,
-            words: gateWords
+            words: gateWords,
         },
         light: {
             roles: lightRoles,
             words: lightWords,
-        }
-    }
+        },
+    };
 }
 
-export function getAllStatesInChannel(keys: string[], channelId: string): string[] {
+export function getAllStatesInChannel(
+    keys: string[],
+    channelId: string
+): string[] {
     const list: string[] = [];
-    const reg = new RegExp(`^${channelId.replace(/([$^.)([\]{}])/g, '\\$1')}\\.[^.]+$`);
+    const reg = new RegExp(
+        `^${channelId.replace(/([$^.)([\]{}])/g, '\\$1')}\\.[^.]+$`
+    );
     keys.forEach(_id => reg.test(_id) && list.push(_id));
     return list;
 }
 
-export function getAllStatesInDevice(keys: string[], channelId: string): string[] {
+export function getAllStatesInDevice(
+    keys: string[],
+    channelId: string
+): string[] {
     const list: string[] = [];
-    const reg = new RegExp(`^${channelId.replace(/([$^.)([\]{}])/g, '\\$1')}\\.[^.]+\\.[^.]+$`);
-    keys.forEach(_id =>reg.test(_id) && list.push(_id));
+    const reg = new RegExp(
+        `^${channelId.replace(/([$^.)([\]{}])/g, '\\$1')}\\.[^.]+\\.[^.]+$`
+    );
+    keys.forEach(_id => reg.test(_id) && list.push(_id));
     return list;
 }
 
-export function getFunctionEnums(objects: Record<string, ioBroker.Object>): string[] {
+export function getFunctionEnums(
+    objects: Record<string, ioBroker.Object>
+): string[] {
     const enums: string[] = [];
     const reg = /^enum\.functions\./;
     for (const id in objects) {
-        if (objects.hasOwnProperty(id) && reg.test(id) && objects[id] && objects[id].type === 'enum' && objects[id].common && objects[id].common.members && objects[id].common.members.length) {
+        if (
+            objects.hasOwnProperty(id) &&
+            reg.test(id) &&
+            objects[id] &&
+            objects[id].type === 'enum' &&
+            objects[id].common &&
+            objects[id].common.members &&
+            objects[id].common.members.length
+        ) {
             enums.push(id);
         }
     }
