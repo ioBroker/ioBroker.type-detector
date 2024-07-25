@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  **/
 
+// Make sure when you add a new entry here to also add in lib/types with the
+// end user facing name for documentation
 export enum Types {
     unknown = 'unknown',
     airCondition = 'airCondition',

@@ -527,7 +527,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     },
     light: {
         states: [
-            {role: /^switch(\.light)?$|^state$/,           indicator: false, type: StateType.Boolean, write: true,  name: 'SET',         required: true,  defaultRole: 'switch.light'},
+            {role: /^switch(\.light)?$|^state$/, enums: roleOrEnumLight,          indicator: false, type: StateType.Boolean, write: true,  name: 'SET',         required: true,  defaultRole: 'switch.light'},
             // optional
             {role: /^(state|switch|sensor)\.light|switch$/, indicator: false, type: StateType.Boolean, write: false,      enums: roleOrEnumLight, name: 'ON_ACTUAL',      required: false, defaultRole: 'sensor.light'},
             {role: /^value\.power$/,                        indicator: false, type: StateType.Number,  write: false,      enums: roleOrEnumLight, name: 'ELECTRIC_POWER', required: false, defaultRole: 'value.power', defaultUnit: 'W'},

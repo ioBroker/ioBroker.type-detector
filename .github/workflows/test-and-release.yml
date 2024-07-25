@@ -138,13 +138,6 @@ jobs:
           BODY="${BODY//$'\r'/'%0D'}"
           echo "::set-output name=BODY::$BODY"
 
-      - name: Publish legacy package to npm
-        if: steps.automerge.outputs.mergeResult == 'merged'
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-          npm whoami
-          npm publish
-
       - name: Publish types package to npm
         if: steps.automerge.outputs.mergeResult == 'merged'
         working-directory: build

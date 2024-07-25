@@ -32,7 +32,7 @@ import {
     StateType,
     Types,
 } from './types';
-import { getAllStatesInChannel, getAllStatesInDevice, getFunctionEnums, getParentId } from './RoleEnumUtils';
+import { getAllStatesInChannel, getAllStatesInDevice, getFunctionEnums, getParentId, getEnums } from './RoleEnumUtils';
 import { patterns } from './TypePatterns';
 
 // Version 2.0.0, 2023.10.23
@@ -42,6 +42,8 @@ export class ChannelDetector {
     constructor() {
         this.cache = {};
     }
+
+    public static getEnums = getEnums;
 
     private _applyPattern(objects: Record<string, ioBroker.Object>, id: string, statePattern: InternalDetectorState) {
         if (objects[id] && objects[id].common) {
