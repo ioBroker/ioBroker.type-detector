@@ -206,6 +206,6 @@ if (controls) {
 * (bluefox) initial commit
 
 ## License
-Copyright (c) 2018-2023 Denis Haev <dogafox@gmail.com>
+Copyright (c) 2018-2024 Denis Haev <dogafox@gmail.com>
 
 MIT License
