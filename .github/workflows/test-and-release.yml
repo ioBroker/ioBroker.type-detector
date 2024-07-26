@@ -142,6 +142,8 @@ jobs:
         if: steps.automerge.outputs.mergeResult == 'merged'
         working-directory: build
         run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          npm whoami
           npm publish
 
       - name: Create Github Release

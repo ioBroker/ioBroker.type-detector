@@ -94,7 +94,7 @@ if (controls) {
 -->
 
 ## Changelog
-### 4.0.0 (2024-07-26)
+### __WORK IN PROGRESS__
 * (Apollon77) Fix Electricity states for light type
 * (Apollon77) Add Electricity states for more types
 * (Apollon77) Internal Refactoring
