@@ -52,7 +52,7 @@
     "build:ts": "tsc -p tsconfig.build.json && node build",
     "build:doc": "node lib/createMd",
     "build": "npm run build:ts && npm run build:doc",
-    "release": "release-script -p iobroker --noPush -y",
+    "release": "release-script --noPush -y",
     "format": "prettier --write 'src/**/*.ts'"
   },
   "license": "MIT",
