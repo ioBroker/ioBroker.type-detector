@@ -363,14 +363,11 @@ export class ChannelDetector {
                 return [id];
 
             case 'device':
-                const result = getAllStatesInDevice(keys, id);
-                if (result.length) {
-                    return result;
-                }
-
-                // if no states, it may be device without channels
-                return getAllStatesInChannel(keys, id);
-
+                //get states device->channel->state
+                const deviceStates = getAllStatesInDevice(keys, id);
+                //get states device->state
+                const channelStates = getAllStatesInChannel(keys, id);
+                return deviceStates.concat(channelStates);
             default:
                 // channel
                 return getAllStatesInChannel(keys, id);
