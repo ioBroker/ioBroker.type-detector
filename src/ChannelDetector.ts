@@ -363,9 +363,9 @@ export class ChannelDetector {
                 return [id];
 
             case 'device':
-                //get states device->channel->state
+                // get states device->channel->state
                 const deviceStates = getAllStatesInDevice(keys, id);
-                //get states device->state
+                // get states device->state
                 const channelStates = getAllStatesInChannel(keys, id);
                 return deviceStates.concat(channelStates);
             default:
