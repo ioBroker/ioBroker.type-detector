@@ -2674,7 +2674,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: false,
                 name: 'ACTUAL',
                 required: false,
-                defaultRole: 'switch',
+                defaultRole: 'sensor.switch',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
