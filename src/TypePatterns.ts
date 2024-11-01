@@ -2122,12 +2122,12 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     camera: {
         states: [
             {
-                role: /^camera(\.\w+)?$/,
+                role: /^link\.camera(\.\w+)?$/,
                 indicator: false,
-                type: StateType.File,
-                name: 'FILE',
+                type: StateType.String,
+                name: 'URL',
                 required: true,
-                defaultRole: 'camera',
+                defaultRole: 'link.camera',
             },
             // optional
             {
