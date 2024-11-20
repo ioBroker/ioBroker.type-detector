@@ -2784,6 +2784,25 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.humidity,
     },
+    brightness: {
+        states: [
+            {
+                role: /brightness$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'value.brightness',
+                defaultUnit: '%',
+            },
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+        ],
+        type: Types.brightness,
+    },
     image: {
         states: [
             {

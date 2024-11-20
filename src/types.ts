@@ -29,6 +29,7 @@ export enum Types {
     airCondition = 'airCondition',
     blind = 'blind',
     blindButtons = 'blindButtons',
+    brightness = 'brightness',
     button = 'button',
     buttonSensor = 'buttonSensor',
     camera = 'camera',
