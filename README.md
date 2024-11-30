@@ -99,11 +99,15 @@ if (controls) {
 
 ### **WORK IN PROGRESS**
 
+-   (@Garfonso) Added new device type - illuminance (brightness sensor)
+-   (@Garfonso) Added battery state
+-   (@Garfonso) Added the transition time state
+-   (@Garfonso) Allowed the mixed `device->state` and `device->channel->state` structures
 -   (@GermanBluefox) Used new eslint config library
 -   (@GermanBluefox) Types were slightly changed
--   (Apollon77) Remove File tate type
--   (Apollon77) Adjust Camera states to remove Binary state and replace by link
--   (Apollon77) Fix role for ACTUAL state for socket
+-   (Apollon77) Removed File state type
+-   (Apollon77) Adjusted Camera states to remove Binary state and replace by link
+-   (Apollon77) Fixed role for ACTUAL state for socket
 
 ### 4.0.1 (2024-07-26)
 

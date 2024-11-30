@@ -25,7 +25,16 @@
 import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types';
 import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './RoleEnumUtils';
 
-const SharedPatterns: { [id: string]: InternalDetectorState } = {
+const SharedPatterns: {
+    working: InternalDetectorState;
+    unreach: InternalDetectorState;
+    lowbat: InternalDetectorState;
+    maintain: InternalDetectorState;
+    error: InternalDetectorState;
+    direction: InternalDetectorState;
+    reachable: InternalDetectorState;
+    battery: InternalDetectorState;
+} = {
     working: {
         role: /^indicator\.working$/,
         indicator: true,
@@ -98,7 +107,7 @@ const SharedPatterns: { [id: string]: InternalDetectorState } = {
         required: false,
         defaultRole: 'value.battery',
         defaultUnit: '%',
-    }
+    },
 };
 
 const ElectricityPatterns: { [id: string]: InternalDetectorState } = {
@@ -858,7 +867,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'TRANSITION_TIME',
                 required: false,
                 defaultRole: 'time.span',
-                defaultUnit: 'ms'
+                defaultUnit: 'ms',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
@@ -953,7 +962,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'TRANSITION_TIME',
                 required: false,
                 defaultRole: 'time.span',
-                defaultUnit: 'ms'
+                defaultUnit: 'ms',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
@@ -1048,7 +1057,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'TRANSITION_TIME',
                 required: false,
                 defaultRole: 'time.span',
-                defaultUnit: 'ms'
+                defaultUnit: 'ms',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
@@ -1135,7 +1144,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'TRANSITION_TIME',
                 required: false,
                 defaultRole: 'time.span',
-                defaultUnit: 'ms'
+                defaultUnit: 'ms',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
@@ -1231,7 +1240,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'TRANSITION_TIME',
                 required: false,
                 defaultRole: 'time.span',
-                defaultUnit: 'ms'
+                defaultUnit: 'ms',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
@@ -1316,7 +1325,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'TRANSITION_TIME',
                 required: false,
                 defaultRole: 'time.span',
-                defaultUnit: 'ms'
+                defaultUnit: 'ms',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
@@ -2481,7 +2490,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'TRANSITION_TIME',
                 required: false,
                 defaultRole: 'time.span',
-                defaultUnit: 'ms'
+                defaultUnit: 'ms',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
@@ -2776,10 +2785,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
-            SharedPatterns.lowbat,
             SharedPatterns.maintain,
             SharedPatterns.error,
-            SharedPatterns.battery,
         ],
         type: Types.socket,
     },
@@ -2902,6 +2909,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.lowbat,
             SharedPatterns.maintain,
             SharedPatterns.error,
+            SharedPatterns.battery,
         ],
         type: Types.illuminance,
     },
