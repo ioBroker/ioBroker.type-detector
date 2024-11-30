@@ -96,10 +96,14 @@ if (controls) {
 -->
 
 ## Changelog
+
 ### **WORK IN PROGRESS**
 
 -   (@GermanBluefox) Used new eslint config library
 -   (@GermanBluefox) Types were slightly changed
+-   (Apollon77) Remove File tate type
+-   (Apollon77) Adjust Camera states to remove Binary state and replace by link
+-   (Apollon77) Fix role for ACTUAL state for socket
 
 ### 4.0.1 (2024-07-26)
 
