@@ -2122,12 +2122,12 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     camera: {
         states: [
             {
-                role: /^camera(\.\w+)?$/,
+                role: /^link\.camera(\.\w+)?$/,
                 indicator: false,
-                type: StateType.File,
-                name: 'FILE',
+                type: StateType.String,
+                name: 'URL',
                 required: true,
-                defaultRole: 'camera',
+                defaultRole: 'link.camera',
             },
             // optional
             {
@@ -2674,7 +2674,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: false,
                 name: 'ACTUAL',
                 required: false,
-                defaultRole: 'switch',
+                defaultRole: 'sensor.switch',
             },
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
