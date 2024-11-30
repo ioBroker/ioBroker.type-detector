@@ -1,22 +1,22 @@
 {
-  "cameras.0.cameras": {
-    "_id": "cameras.0.cameras",
-    "type": "channel",
-    "common": {
-      "name": "Cameras"
+    "cameras.0.cameras": {
+        "_id": "cameras.0.cameras",
+        "type": "channel",
+        "common": {
+            "name": "Cameras"
+        },
+        "native": {}
     },
-    "native": {}
-  },
-  "cameras.0.cameras.cam1": {
-    "_id": "cameras.0.cameras.cam1",
-    "common": {
-      "name": "Floor camera",
-      "desc": "Floor camera",
-      "role": "camera",
-      "type": "file"
-    },
-    "binary": true,
-    "type": "state",
-    "native": {}
-  }
+    "cameras.0.cameras.cam1": {
+        "_id": "cameras.0.cameras.cam1",
+        "common": {
+            "name": "Floor camera",
+            "desc": "Floor camera",
+            "role": "camera",
+            "type": "file"
+        },
+        "binary": true,
+        "type": "state",
+        "native": {}
+    }
 }

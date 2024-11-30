@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2023 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2024 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -23,39 +23,32 @@
  **/
 
 import {
-    DetectOptions,
-    DetectorContext,
-    DetectorState,
-    InternalDetectorState,
-    InternalPatternControl,
-    PatternControl,
+    type DetectOptions,
+    type DetectorContext,
+    type DetectorState,
+    type ExternalDetectorState,
+    type ExternalPatternControl,
+    type InternalDetectorState,
+    type InternalPatternControl,
+    type PatternControl,
     StateType,
     Types,
 } from './types';
-import {
-    getAllStatesInChannel,
-    getAllStatesInDevice,
-    getFunctionEnums,
-    getParentId,
-    getEnums,
-} from './RoleEnumUtils';
+import { getAllStatesInChannel, getAllStatesInDevice, getFunctionEnums, getParentId, getEnums } from './RoleEnumUtils';
 import { patterns } from './TypePatterns';
 
 // Version 2.0.0, 2023.10.23
 export class ChannelDetector {
     private enums: string[] | null = null;
-    private cache: any;
-    constructor() {
-        this.cache = {};
-    }
+    private readonly cache: Record<string, PatternControl[] | null> = {};
 
     public static getEnums = getEnums;
 
     private _applyPattern(
         objects: Record<string, ioBroker.Object>,
         id: string,
-        statePattern: InternalDetectorState
-    ) {
+        statePattern: InternalDetectorState,
+    ): boolean {
         if (objects[id] && objects[id].common) {
             let role = null;
             if (statePattern.role) {
@@ -66,8 +59,7 @@ export class ChannelDetector {
                     const channelRole = objects[channelId]?.common.role || '';
                     if (
                         channelRole &&
-                        (objects[channelId].type === 'channel' ||
-                            objects[channelId].type === 'device')
+                        (objects[channelId].type === 'channel' || objects[channelId].type === 'device')
                     ) {
                         role = statePattern.channelRole.test(channelRole);
                     } else {
@@ -79,10 +71,7 @@ export class ChannelDetector {
                 return false;
             }
 
-            if (
-                statePattern.objectType &&
-                objects[id].type !== statePattern.objectType
-            ) {
+            if (statePattern.objectType && objects[id].type !== statePattern.objectType) {
                 return false;
             }
 
@@ -90,10 +79,7 @@ export class ChannelDetector {
                 return false;
             }
 
-            if (
-                statePattern.unit &&
-                statePattern.unit !== objects[id].common.unit
-            ) {
+            if (statePattern.unit && statePattern.unit !== objects[id].common.unit) {
                 return false;
             }
 
@@ -104,10 +90,7 @@ export class ChannelDetector {
                 }
             }
 
-            if (
-                statePattern.indicator === false &&
-                (objects[id].common.role || '').match(/^indicator(\.[.\w]+)?$/)
-            ) {
+            if (statePattern.indicator === false && (objects[id].common.role || '').match(/^indicator(\.[.\w]+)?$/)) {
                 return false;
             }
 
@@ -118,33 +101,21 @@ export class ChannelDetector {
                 }
             }
 
-            if (
-                statePattern.write !== undefined &&
-                statePattern.write !== !!objects[id].common.write
-            ) {
+            if (statePattern.write !== undefined && statePattern.write !== !!objects[id].common.write) {
                 return false;
             }
 
-            if (
-                statePattern.min === StateType.Number &&
-                typeof objects[id].common.min !== StateType.Number
-            ) {
+            if (statePattern.min === StateType.Number && typeof objects[id].common.min !== StateType.Number) {
                 return false;
             }
 
-            if (
-                statePattern.max === StateType.Number &&
-                typeof objects[id].common.max !== StateType.Number
-            ) {
+            if (statePattern.max === StateType.Number && typeof objects[id].common.max !== StateType.Number) {
                 return false;
             }
 
             if (
                 statePattern.read !== undefined &&
-                statePattern.read !==
-                    (objects[id].common.read === undefined
-                        ? true
-                        : objects[id].common.read)
+                statePattern.read !== (objects[id].common.read === undefined ? true : objects[id].common.read)
             ) {
                 return false;
             }
@@ -168,10 +139,7 @@ export class ChannelDetector {
                 }
             }
 
-            if (
-                statePattern.enums &&
-                typeof statePattern.enums === 'function'
-            ) {
+            if (statePattern.enums && typeof statePattern.enums === 'function') {
                 const enums = this._getEnumsForId(objects, id);
                 if (!statePattern.enums(objects[id], enums || [])) {
                     return false;
@@ -179,15 +147,11 @@ export class ChannelDetector {
             }
 
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
-    private _getEnumsForId(
-        objects: Record<string, ioBroker.Object>,
-        id: string
-    ): string[] | null {
+    private _getEnumsForId(objects: Record<string, ioBroker.Object>, id: string): string[] | null {
         this.enums = this.enums || getFunctionEnums(objects);
         const result: string[] = [];
         this.enums.forEach(e => {
@@ -196,12 +160,8 @@ export class ChannelDetector {
             }
         });
         if (!result.length && objects[id] && objects[id].type === 'state') {
-            let channel = getParentId(id);
-            if (
-                objects[channel] &&
-                (objects[channel].type === 'channel' ||
-                    objects[channel].type === 'device')
-            ) {
+            const channel = getParentId(id);
+            if (objects[channel] && (objects[channel].type === 'channel' || objects[channel].type === 'device')) {
                 this.enums.forEach(e => {
                     if (objects[e].common.members.includes(channel)) {
                         result.push(e);
@@ -213,27 +173,21 @@ export class ChannelDetector {
         return result.length ? result : null;
     }
 
-    private static copyState(
-        oldState: InternalDetectorState,
-        newState?: DetectorState
-    ): DetectorState {
-        newState = newState || JSON.parse(JSON.stringify(oldState));
-        if (newState) {
-            // @ts-ignore
-            newState.original = oldState.original || oldState;
-            if ('enums' in oldState && oldState.enums) {
-                newState.enums = oldState.enums;
-            }
-            if ('role' in oldState && oldState.role) {
-                newState.role = oldState.role;
-            }
-            if ('channelRole' in oldState && oldState.channelRole) {
-                newState.channelRole = oldState.channelRole;
-            }
+    private static copyState(oldState: InternalDetectorState, newState?: DetectorState): DetectorState {
+        const _newState: DetectorState = newState || JSON.parse(JSON.stringify(oldState));
+        // @ts-expect-error original is internal state
+        _newState.original = oldState.original || oldState;
+        if ('enums' in oldState && oldState.enums) {
+            _newState.enums = oldState.enums;
+        }
+        if ('role' in oldState && oldState.role) {
+            _newState.role = oldState.role;
+        }
+        if ('channelRole' in oldState && oldState.channelRole) {
+            _newState.channelRole = oldState.channelRole;
         }
 
-        // @ts-ignore
-        return newState;
+        return _newState;
     }
 
     private _testOneState(context: DetectorContext): boolean {
@@ -245,8 +199,8 @@ export class ChannelDetector {
         const usedInCurrentDevice: string[] = context.usedInCurrentDevice;
         const ignoreIndicators: string[] = context.ignoreIndicators;
         let result: PatternControl | null = context.result;
-        let found: boolean = false;
-        let count = 0;
+        let found = false;
+        // let count = 0;
 
         // check every state in channel
         channelStates.forEach(_id => {
@@ -257,10 +211,7 @@ export class ChannelDetector {
             // }
 
             // one exception: if we already found a state with name COVER, so ignore the second one
-            if (
-                state.name === 'COVER' &&
-                result?.states.find(e => e.id && e.name === 'COVER')
-            ) {
+            if (state.name === 'COVER' && result?.states.find(e => e.id && e.name === 'COVER')) {
                 return;
             }
 
@@ -287,12 +238,7 @@ export class ChannelDetector {
                 if (!result) {
                     result = JSON.parse(JSON.stringify(patterns[pattern]));
                     context.result = result;
-                    result?.states.forEach((state, j) =>
-                        ChannelDetector.copyState(
-                            patterns[pattern].states[j],
-                            state
-                        )
-                    );
+                    result?.states.forEach((state, j) => ChannelDetector.copyState(patterns[pattern].states[j], state));
                 }
 
                 if (result) {
@@ -301,7 +247,7 @@ export class ChannelDetector {
                         let _found = false;
                         for (let u = 0; u < result.states.length; u++) {
                             if (result.states[u].name === state.name) {
-                                count++;
+                                // count++;
                                 result.states[u].id = _id;
                                 _found = true;
                                 break;
@@ -323,8 +269,7 @@ export class ChannelDetector {
                             if (
                                 (state.indicator ||
                                     (!usedInCurrentDevice.includes(cid) &&
-                                        (state.notSingle ||
-                                            !usedIds.includes(cid)))) &&
+                                        (state.notSingle || !usedIds.includes(cid)))) &&
                                 this._applyPattern(objects, cid, state)
                             ) {
                                 if (!state.indicator) {
@@ -332,13 +277,11 @@ export class ChannelDetector {
                                 }
                                 if (result) {
                                     if (Array.isArray(state)) {
-                                        const newState: DetectorState =
-                                            ChannelDetector.copyState(state[0]);
+                                        const newState: DetectorState = ChannelDetector.copyState(state[0]);
                                         newState.id = cid;
                                         result.states.push(newState);
                                     } else {
-                                        const newState: DetectorState =
-                                            ChannelDetector.copyState(state);
+                                        const newState: DetectorState = ChannelDetector.copyState(state);
                                         newState.id = cid;
                                         result.states.push(newState);
                                     }
@@ -352,17 +295,13 @@ export class ChannelDetector {
         return found;
     }
 
-    private static getChannelStates(
-        objects: Record<string, ioBroker.Object>,
-        id: string,
-        keys: string[]
-    ): string[] {
+    private static getChannelStates(objects: Record<string, ioBroker.Object>, id: string, keys: string[]): string[] {
         switch (objects[id].type) {
             case 'chart':
             case 'state':
                 return [id];
 
-            case 'device':
+            case 'device': {
                 const result = getAllStatesInDevice(keys, id);
                 if (result.length) {
                     return result;
@@ -370,7 +309,7 @@ export class ChannelDetector {
 
                 // if no states, it may be device without channels
                 return getAllStatesInChannel(keys, id);
-
+            }
             default:
                 // channel
                 return getAllStatesInChannel(keys, id);
@@ -380,7 +319,7 @@ export class ChannelDetector {
     private static patternIsAllowed(
         pattern: InternalPatternControl,
         allowedTypes: Types[] | undefined,
-        excludedTypes: Types[] | undefined
+        excludedTypes: Types[] | undefined,
     ): boolean {
         if (!pattern) {
             return false;
@@ -395,16 +334,15 @@ export class ChannelDetector {
                 }
             }
             return true;
-        } else {
-            if (allowedTypes && !allowedTypes.includes(pattern.type)) {
-                return false;
-            }
-
-            return !excludedTypes || !excludedTypes.includes(pattern.type);
         }
+        if (allowedTypes && !allowedTypes.includes(pattern.type)) {
+            return false;
+        }
+
+        return !excludedTypes || !excludedTypes.includes(pattern.type);
     }
 
-    private static allRequiredStatesFound(context: DetectorContext) {
+    private static allRequiredStatesFound(context: DetectorContext): boolean {
         if (!context.result) {
             return false;
         }
@@ -420,10 +358,7 @@ export class ChannelDetector {
         return true;
     }
 
-    private static cleanState(
-        state: DetectorState,
-        objects: Record<string, ioBroker.Object>
-    ) {
+    private static cleanState(state: DetectorState, objects: Record<string, ioBroker.Object>): void {
         const role: string = objects[state.id]?.common?.role || '';
         if (state.name.includes('%d') && state.role && state.id && role) {
             const m = state.role.exec(role);
@@ -460,11 +395,7 @@ export class ChannelDetector {
 
         const context: DetectorContext = {
             objects,
-            channelStates: ChannelDetector.getChannelStates(
-                objects,
-                id,
-                keys || []
-            ),
+            channelStates: ChannelDetector.getChannelStates(objects, id, keys || []),
             usedIds,
             ignoreIndicators: ignoreIndicators || [],
             result: null,
@@ -474,13 +405,7 @@ export class ChannelDetector {
         };
 
         for (const pattern in patterns) {
-            if (
-                !ChannelDetector.patternIsAllowed(
-                    patterns[pattern],
-                    options.allowedTypes,
-                    options.excludedTypes
-                )
-            ) {
+            if (!ChannelDetector.patternIsAllowed(patterns[pattern], options.allowedTypes, options.excludedTypes)) {
                 continue;
             }
 
@@ -513,26 +438,17 @@ export class ChannelDetector {
             // looking for indicators and special states
             if (objects[id].type !== 'device') {
                 // get device name
-                let deviceId = getParentId(id);
+                const deviceId = getParentId(id);
                 if (
                     objects[deviceId] &&
-                    (objects[deviceId].type === 'channel' ||
-                        objects[deviceId].type === 'device')
+                    (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')
                 ) {
                     deviceStates = getAllStatesInDevice(keys, deviceId);
                     deviceStates?.forEach(_id => {
                         context.result?.states.forEach((state, i) => {
-                            if (
-                                !state.id &&
-                                (state.indicator || state.searchInParent) &&
-                                !state.noDeviceDetection
-                            ) {
+                            if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
                                 if (
-                                    this._applyPattern(
-                                        objects,
-                                        _id,
-                                        state.original as InternalDetectorState
-                                    ) &&
+                                    this._applyPattern(objects, _id, state.original as InternalDetectorState) &&
                                     context.result
                                 ) {
                                     context.result.states[i].id = _id;
@@ -546,9 +462,7 @@ export class ChannelDetector {
             if (context.result) {
                 const result = context.result as PatternControl;
                 if (result) {
-                    result.states.forEach((state: DetectorState) =>
-                        ChannelDetector.cleanState(state, context.objects)
-                    );
+                    result.states.forEach((state: DetectorState) => ChannelDetector.cleanState(state, context.objects));
                 }
             }
 
@@ -571,7 +485,6 @@ export class ChannelDetector {
      *                  ignoreIndicators - If simple indicators like "low battery", "not reachable" must be detected as device or only as a part of other device.
      *                  allowedTypes - array with names of device types, that can be detected. Not listed device types will be ignored.
      *                  excludedTypes - array with names of device types, that must be ignored. The listed device types will be ignored.
-     * @returns {*|boolean|"DIR"|"FILE"|ReadonlyArray<string>}
      */
     public detect(options: DetectOptions): PatternControl[] | null {
         const objects = options.objects;
@@ -607,25 +520,21 @@ export class ChannelDetector {
         return this.cache[id];
     }
 
-    public static getPatterns(): { [type: string]: PatternControl } {
-        const copyPatterns: { [type: string]: PatternControl } = {};
-        Object.keys(patterns).forEach(type => {
-            const item = JSON.parse(JSON.stringify(patterns[type]));
-            item.states.forEach(
-                (state: DetectorState | DetectorState[], i: number) => {
-                    let oldState = patterns[type].states[i];
-                    if (oldState.role) {
-                        item.states[i].role = oldState.role.toString();
-                    }
+    public static getPatterns(): { [type: string]: ExternalPatternControl } {
+        const copyPatterns: { [type: string]: ExternalPatternControl } = {};
 
-                    if (oldState.enums) {
-                        // @ts-ignore
-                        item.states[i].enums = true;
-                        // @ts-ignore
-                        item.states[i].enum = true; // it was an error and it is not used anymore, but for back compatibility it must be here
-                    }
+        Object.keys(patterns).forEach(type => {
+            const item: ExternalPatternControl = JSON.parse(JSON.stringify(patterns[type]));
+            item.states.forEach((_state: ExternalDetectorState | ExternalDetectorState[], i: number) => {
+                const oldState = patterns[type].states[i];
+                if (oldState.role) {
+                    item.states[i].role = oldState.role.toString();
                 }
-            );
+
+                if (oldState.enums) {
+                    item.states[i].enums = true;
+                }
+            });
 
             copyPatterns[type] = item;
         });

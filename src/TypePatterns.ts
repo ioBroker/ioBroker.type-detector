@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2023 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2024 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -20,21 +20,10 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- **/
+ */
 
-import {
-    StateType,
-    Types,
-    InternalDetectorState,
-    InternalPatternControl,
-} from './types';
-import {
-    roleOrEnumBlind,
-    roleOrEnumDoor,
-    roleOrEnumGate,
-    roleOrEnumLight,
-    roleOrEnumWindow,
-} from './RoleEnumUtils';
+import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types';
+import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './RoleEnumUtils';
 
 const SharedPatterns: { [id: string]: InternalDetectorState } = {
     working: {

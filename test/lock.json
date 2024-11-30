@@ -1,518 +1,505 @@
 {
-  "hm-rpc.0.LEQ090XYZ.1": {
-    "_id": "hm-rpc.0.LEQ090XYZ.1",
-    "type": "channel",
-    "common": {
-      "name": "Schloss Kanal",
-      "enums": [
-        {
-          "_id": "enum.functions.Türe",
-          "common": {
-            "name": "Türe",
-            "smartName": false,
-            "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Im0xMTMuMjA2IDEwNi4yNjVoLTEzLjYyM3YtODYuMjhhMS43NDkgMS43NDkgMCAwIDAgLTEuNTU0LTEuNzM4bC00Ni01LjE5MmExLjc1IDEuNzUgMCAwIDAgLTEuOTQ2IDEuNzM5djMuNDQxaC0xOS45MTZhMS43NSAxLjc1IDAgMCAwIC0xLjc1IDEuNzV2ODYuMjhoLTEzLjYyM2ExLjc1IDEuNzUgMCAxIDAgMCAzLjVoMzUuMjg5djMuNDQxYTEuNzUgMS43NSAwIDAgMCAxLjc1IDEuNzUgMS42MSAxLjYxIDAgMCAwIC4yLS4wMTFsNDUuOS01LjE4aDE1LjI3NmExLjc1IDEuNzUgMCAwIDAgMC0zLjV6bS04MS4yODktODQuNTNoMTguMTY2djQuNWgtMTEuOTE3YTEuNzUgMS43NSAwIDAgMCAtMS43NSAxLjc1djc4LjI4aC00LjV6bTggODQuNTN2LTc2LjUzaDEwLjE2NnY3Ni41M3ptMTMuNjY2LTg5LjUxMyA0Mi41IDQuOHY4NC45bC00Mi41IDQuOHoiLz4KICAgICAgICA8cGF0aCBkPSJtNjEuMTI1IDU4Ljc5MmE1LjIwOCA1LjIwOCAwIDEgMCA1LjIwOCA1LjIwOCA1LjIxNCA1LjIxNCAwIDAgMCAtNS4yMDgtNS4yMDh6bTAgNi45MTZhMS43MDggMS43MDggMCAxIDEgMS43MDgtMS43MDggMS43MSAxLjcxIDAgMCAxIC0xLjcwOCAxLjcwOHoiLz4KICAgIDwvZz4KPC9zdmc+"
-          },
-          "native": {
-            "Name": "Türe",
-            "TypeName": "ENUM",
-            "EnumInfo": ""
-          },
-          "type": "enum"
+    "hm-rpc.0.LEQ090XYZ.1": {
+        "_id": "hm-rpc.0.LEQ090XYZ.1",
+        "type": "channel",
+        "common": {
+            "name": "Schloss Kanal",
+            "enums": [
+                {
+                    "_id": "enum.functions.Türe",
+                    "common": {
+                        "name": "Türe",
+                        "smartName": false,
+                        "icon": "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSJjdXJyZW50Q29sb3IiPgogICAgICAgIDxwYXRoIGQ9Im0xMTMuMjA2IDEwNi4yNjVoLTEzLjYyM3YtODYuMjhhMS43NDkgMS43NDkgMCAwIDAgLTEuNTU0LTEuNzM4bC00Ni01LjE5MmExLjc1IDEuNzUgMCAwIDAgLTEuOTQ2IDEuNzM5djMuNDQxaC0xOS45MTZhMS43NSAxLjc1IDAgMCAwIC0xLjc1IDEuNzV2ODYuMjhoLTEzLjYyM2ExLjc1IDEuNzUgMCAxIDAgMCAzLjVoMzUuMjg5djMuNDQxYTEuNzUgMS43NSAwIDAgMCAxLjc1IDEuNzUgMS42MSAxLjYxIDAgMCAwIC4yLS4wMTFsNDUuOS01LjE4aDE1LjI3NmExLjc1IDEuNzUgMCAwIDAgMC0zLjV6bS04MS4yODktODQuNTNoMTguMTY2djQuNWgtMTEuOTE3YTEuNzUgMS43NSAwIDAgMCAtMS43NSAxLjc1djc4LjI4aC00LjV6bTggODQuNTN2LTc2LjUzaDEwLjE2NnY3Ni41M3ptMTMuNjY2LTg5LjUxMyA0Mi41IDQuOHY4NC45bC00Mi41IDQuOHoiLz4KICAgICAgICA8cGF0aCBkPSJtNjEuMTI1IDU4Ljc5MmE1LjIwOCA1LjIwOCAwIDEgMCA1LjIwOCA1LjIwOCA1LjIxNCA1LjIxNCAwIDAgMCAtNS4yMDgtNS4yMDh6bTAgNi45MTZhMS43MDggMS43MDggMCAxIDEgMS43MDgtMS43MDggMS43MSAxLjcxIDAgMCAxIC0xLjcwOCAxLjcwOHoiLz4KICAgIDwvZz4KPC9zdmc+"
+                    },
+                    "native": {
+                        "Name": "Türe",
+                        "TypeName": "ENUM",
+                        "EnumInfo": ""
+                    },
+                    "type": "enum"
+                },
+                {
+                    "_id": "enum.rooms.Flur",
+                    "common": {
+                        "name": "Flur",
+                        "desc": "",
+                        "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICAgIDxnIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgICAgICAgPHBhdGggZD0iTTIzOC45MzMsMzQuMTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNWNzYuOGMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNzOC41MzMtMy44MjMsOC41MzMtOC41MzNWNDIuNjY3CgkJCUMyNDcuNDY3LDM3Ljk1NiwyNDMuNjQ0LDM0LjEzMywyMzguOTMzLDM0LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDc3Ljg2NywzNC4xMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM1Y3Ni44YzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM1M0ODYuNCw4MS41MSw0ODYuNCw3Ni44VjQyLjY2NwoJCQlDNDg2LjQsMzcuOTU2LDQ4Mi41NzcsMzQuMTMzLDQ3Ny44NjcsMzQuMTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xNzkuMiwwSDguNTMzQzMuODIzLDAsMCwzLjgyMywwLDguNTMzdjQ5NC45MzNDMCw1MDguMTc3LDMuODIzLDUxMiw4LjUzMyw1MTJIMTc5LjJjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzCgkJCVY4LjUzM0MxODcuNzMzLDMuODIzLDE4My45MSwwLDE3OS4yLDB6IE0xNzAuNjY3LDQ5NC45MzNoLTE1My42VjE3LjA2N2gxNTMuNlY0OTQuOTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik01MDMuNDY3LDM1OC40SDE3OS4yYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2MTM2LjUzM2MwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNoMzI0LjI2NwoJCQljNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzVjM2Ni45MzNDNTEyLDM2Mi4yMjMsNTA4LjE3NywzNTguNCw1MDMuNDY3LDM1OC40eiBNNDk0LjkzMyw0OTQuOTMzaC0zMDcuMlYzNzUuNDY3aDMwNy4yCgkJCVY0OTQuOTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik01MDMuNDY3LDBIMTc5LjJjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3YzNC4xMzNjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzaDMyNC4yNjcKCQkJYzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzM1Y4LjUzM0M1MTIsMy44MjMsNTA4LjE3NywwLDUwMy40NjcsMHogTTQ5NC45MzMsMzQuMTMzaC0zMDcuMlYxNy4wNjdoMzA3LjJWMzQuMTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMzYuNTMzLDI0Ny40NjdoLTI1LjZjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3MzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2gyNS42YzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzMwoJCQlTMTQxLjI0NCwyNDcuNDY3LDEzNi41MzMsMjQ3LjQ2N3oiLz4KICAgICAgICA8cGF0aCBkPSJNMTEwLjkzMywyNDcuNDY3Yy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2MjUuNmMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNzOC41MzMtMy44MjMsOC41MzMtOC41MzNWMjU2CgkJCUMxMTkuNDY3LDI1MS4yOSwxMTUuNjQ0LDI0Ny40NjcsMTEwLjkzMywyNDcuNDY3eiIvPgogICAgICAgIDxwYXRoIGQ9Ik0zNjYuOTMzLDQxOC4xMzNoLTUxLjJjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3MzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2g1MS4yYzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzMwoJCQlTMzcxLjY0NCw0MTguMTMzLDM2Ni45MzMsNDE4LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNMzQxLjMzMyw0MTguMTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2MTcuMDY3YzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM3M4LjUzMy0zLjgyMyw4LjUzMy04LjUzMwoJCQl2LTE3LjA2N0MzNDkuODY3LDQyMS45NTYsMzQ2LjA0NCw0MTguMTMzLDM0MS4zMzMsNDE4LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNMjkwLjEzMywzNC4xMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3Y1MS4yYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM3M4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtNTEuMgoJCQlDMjk4LjY2NywzNy45NTYsMjk0Ljg0NCwzNC4xMzMsMjkwLjEzMywzNC4xMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTI5MC4xMzMsMTE5LjQ2N2MtNDUuOTM1LDAtNzYuOCwxNy4xNDMtNzYuOCw0Mi42NjdWMTc5LjJjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzaDE3LjA2N3Y3Ni44CgkJCWMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNIMzMyLjhjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi03Ni44SDM1OC40YzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtMTcuMDY3CgkJCUMzNjYuOTMzLDEzNi42MSwzMzYuMDY4LDExOS40NjcsMjkwLjEzMywxMTkuNDY3eiBNMzQ5Ljg2NywxNzAuNjY3SDMzMi44Yy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNWMjU2SDI1NnYtNzYuOAoJCQljMC00LjcxLTMuODIzLTguNTMzLTguNTMzLTguNTMzSDIzMC40di04LjUzM2MwLTEyLjQwNywyMC45MzItMjUuNiw1OS43MzMtMjUuNnM1OS43MzMsMTMuMTkzLDU5LjczMywyNS42VjE3MC42Njd6Ii8+CiAgICAgICAgPHBhdGggZD0iTTM0OS44NjcsMTE5LjQ2N2MtMTEuMzc1LDAtMjIuMDQyLDEuMDc1LTMxLjY5MywzLjE5MWMtMy45MTcsMC44NjItNi43MDcsNC4zMjYtNi43MDcsOC4zMzcKCQkJYzAsNC4wMTEsMi43OSw3LjQ3NSw2LjcwNyw4LjMzN2MxOS4yNTEsNC4yMTUsMzEuNjkzLDEzLjE2NywzMS42OTMsMjIuODAxdjguNTMzSDMzMi44Yy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2ODUuMzMzCgkJCWMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNoNTkuNzMzYzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtNzYuOGgxNy4wNjdjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi0xNy4wNjcKCQkJQzQyNi42NjcsMTM2LjYxLDM5NS44MDIsMTE5LjQ2NywzNDkuODY3LDExOS40Njd6IE00MDkuNiwxNzAuNjY3aC0xNy4wNjdjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM1YyNTZoLTQyLjY2N3YtNjguMjY3CgkJCUgzNTguNGM0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTE3LjA2N2MwLTkuODEzLTQuNzM2LTE4LjU3Ny0xMy4zOC0yNS41NTdjMzYuNDM3LDAuODAyLDU2LjA0NywxMy41NDIsNTYuMDQ3LDI1LjU1NwoJCQlWMTcwLjY2N3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDA5LjYsMTE5LjQ2N2MtMTEuMzc1LDAtMjIuMDQyLDEuMDc1LTMxLjY5MywzLjE5MWMtMy45MTcsMC44NjItNi43MDcsNC4zMjYtNi43MDcsOC4zMzcKCQkJYzAsNC4wMTEsMi43OSw3LjQ3NSw2LjcwNyw4LjMzN2MxOS4yNTEsNC4yMTUsMzEuNjkzLDEzLjE2NywzMS42OTMsMjIuODAxdjguNTMzaC0xNy4wNjdjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3Y4NS4zMzMKCQkJYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2g1OS43MzNjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi03Ni44aDE3LjA2N2M0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTE3LjA2NwoJCQlDNDg2LjQsMTM2LjYxLDQ1NS41MzUsMTE5LjQ2Nyw0MDkuNiwxMTkuNDY3eiBNNDY5LjMzMywxNzAuNjY3aC0xNy4wNjdjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM1YyNTZoLTQyLjY2N3YtNjguMjY3CgkJCWgxNy4wNjdjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi0xNy4wNjdjMC05LjgxMy00LjczNi0xOC41NzctMTMuMzgtMjUuNTU3YzM2LjQzNywwLjgwMiw1Ni4wNDcsMTMuNTQyLDU2LjA0NywyNS41NTcKCQkJVjE3MC42Njd6Ii8+CiAgICAgICAgPHBhdGggZD0iTTI5MC4xMzMsODUuMzMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzYzQuNzAyLDAsOC41MzMsMy44MzEsOC41MzMsOC41MzMKCQkJYzAsNC43MDItMy44MzEsOC41MzMtOC41MzMsOC41MzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3MzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2MxNC4xMTQsMCwyNS42LTExLjQ4NiwyNS42LTI1LjYKCQkJUzMwNC4yNDcsODUuMzMzLDI5MC4xMzMsODUuMzMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0zNTguNCwzNC4xMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3Y1MS4yYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM3M4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtNTEuMgoJCQlDMzY2LjkzMywzNy45NTYsMzYzLjExLDM0LjEzMywzNTguNCwzNC4xMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTM1OC40LDg1LjMzM2MtNC43MSwwLTguNTMzLDMuODIzLTguNTMzLDguNTMzYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2M0LjcwMiwwLDguNTMzLDMuODMxLDguNTMzLDguNTMzCgkJCWMwLDQuNzAyLTMuODMxLDguNTMzLTguNTMzLDguNTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNzMy44MjMsOC41MzMsOC41MzMsOC41MzNjMTQuMTE0LDAsMjUuNi0xMS40ODYsMjUuNi0yNS42CgkJCVMzNzIuNTE0LDg1LjMzMywzNTguNCw4NS4zMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTQyNi42NjcsMzQuMTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2NTEuMmMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNzOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTUxLjIKCQkJQzQzNS4yLDM3Ljk1Niw0MzEuMzc3LDM0LjEzMyw0MjYuNjY3LDM0LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDI2LjY2Nyw4NS4zMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM2MwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNjNC43MDIsMCw4LjUzMywzLjgzMSw4LjUzMyw4LjUzMwoJCQljMCw0LjcwMi0zLjgzMSw4LjUzMy04LjUzMyw4LjUzM2MtNC43MSwwLTguNTMzLDMuODIzLTguNTMzLDguNTMzczMuODIzLDguNTMzLDguNTMzLDguNTMzYzE0LjExNCwwLDI1LjYtMTEuNDg2LDI1LjYtMjUuNgoJCQlTNDQwLjc4MSw4NS4zMzMsNDI2LjY2Nyw4NS4zMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTQ4Ni40LDMyNC4yNjdIMTc5LjJjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3YzNC4xMzNjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzaDMwNy4yCgkJCWM0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzNWMzMyLjhDNDk0LjkzMywzMjguMDksNDkxLjExLDMyNC4yNjcsNDg2LjQsMzI0LjI2N3ogTTQ3Ny44NjcsMzU4LjRIMTg3LjczM3YtMTcuMDY3aDI5MC4xMzMKCQkJVjM1OC40eiIvPgogICAgICAgIDxwYXRoIGQ9Ik00NjkuMzMzLDM5Mi41MzNoLTI1NmMtNC43MSwwLTguNTMzLDMuODIzLTguNTMzLDguNTMzdjY4LjI2N2MwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNoMjU2CgkJCWM0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTY4LjI2N0M0NzcuODY3LDM5Ni4zNTYsNDc0LjA0NCwzOTIuNTMzLDQ2OS4zMzMsMzkyLjUzM3ogTTQ2MC44LDQ2MC44SDIyMS44Njd2LTUxLjJINDYwLjgKCQkJVjQ2MC44eiIvPgogICAgPC9nPgo8L3N2Zz4K"
+                    },
+                    "native": {
+                        "Name": "Flur",
+                        "TypeName": "ENUM",
+                        "EnumInfo": ""
+                    },
+                    "type": "enum"
+                }
+            ]
         },
-        {
-          "_id": "enum.rooms.Flur",
-          "common": {
-            "name": "Flur",
-            "desc": "",
-            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICAgIDxnIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgICAgICAgPHBhdGggZD0iTTIzOC45MzMsMzQuMTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNWNzYuOGMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNzOC41MzMtMy44MjMsOC41MzMtOC41MzNWNDIuNjY3CgkJCUMyNDcuNDY3LDM3Ljk1NiwyNDMuNjQ0LDM0LjEzMywyMzguOTMzLDM0LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDc3Ljg2NywzNC4xMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM1Y3Ni44YzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM1M0ODYuNCw4MS41MSw0ODYuNCw3Ni44VjQyLjY2NwoJCQlDNDg2LjQsMzcuOTU2LDQ4Mi41NzcsMzQuMTMzLDQ3Ny44NjcsMzQuMTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xNzkuMiwwSDguNTMzQzMuODIzLDAsMCwzLjgyMywwLDguNTMzdjQ5NC45MzNDMCw1MDguMTc3LDMuODIzLDUxMiw4LjUzMyw1MTJIMTc5LjJjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzCgkJCVY4LjUzM0MxODcuNzMzLDMuODIzLDE4My45MSwwLDE3OS4yLDB6IE0xNzAuNjY3LDQ5NC45MzNoLTE1My42VjE3LjA2N2gxNTMuNlY0OTQuOTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik01MDMuNDY3LDM1OC40SDE3OS4yYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2MTM2LjUzM2MwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNoMzI0LjI2NwoJCQljNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzVjM2Ni45MzNDNTEyLDM2Mi4yMjMsNTA4LjE3NywzNTguNCw1MDMuNDY3LDM1OC40eiBNNDk0LjkzMyw0OTQuOTMzaC0zMDcuMlYzNzUuNDY3aDMwNy4yCgkJCVY0OTQuOTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik01MDMuNDY3LDBIMTc5LjJjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3YzNC4xMzNjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzaDMyNC4yNjcKCQkJYzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzM1Y4LjUzM0M1MTIsMy44MjMsNTA4LjE3NywwLDUwMy40NjcsMHogTTQ5NC45MzMsMzQuMTMzaC0zMDcuMlYxNy4wNjdoMzA3LjJWMzQuMTMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMzYuNTMzLDI0Ny40NjdoLTI1LjZjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3MzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2gyNS42YzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzMwoJCQlTMTQxLjI0NCwyNDcuNDY3LDEzNi41MzMsMjQ3LjQ2N3oiLz4KICAgICAgICA8cGF0aCBkPSJNMTEwLjkzMywyNDcuNDY3Yy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2MjUuNmMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNzOC41MzMtMy44MjMsOC41MzMtOC41MzNWMjU2CgkJCUMxMTkuNDY3LDI1MS4yOSwxMTUuNjQ0LDI0Ny40NjcsMTEwLjkzMywyNDcuNDY3eiIvPgogICAgICAgIDxwYXRoIGQ9Ik0zNjYuOTMzLDQxOC4xMzNoLTUxLjJjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3MzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2g1MS4yYzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzMwoJCQlTMzcxLjY0NCw0MTguMTMzLDM2Ni45MzMsNDE4LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNMzQxLjMzMyw0MTguMTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2MTcuMDY3YzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM3M4LjUzMy0zLjgyMyw4LjUzMy04LjUzMwoJCQl2LTE3LjA2N0MzNDkuODY3LDQyMS45NTYsMzQ2LjA0NCw0MTguMTMzLDM0MS4zMzMsNDE4LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNMjkwLjEzMywzNC4xMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3Y1MS4yYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM3M4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtNTEuMgoJCQlDMjk4LjY2NywzNy45NTYsMjk0Ljg0NCwzNC4xMzMsMjkwLjEzMywzNC4xMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTI5MC4xMzMsMTE5LjQ2N2MtNDUuOTM1LDAtNzYuOCwxNy4xNDMtNzYuOCw0Mi42NjdWMTc5LjJjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzaDE3LjA2N3Y3Ni44CgkJCWMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNIMzMyLjhjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi03Ni44SDM1OC40YzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtMTcuMDY3CgkJCUMzNjYuOTMzLDEzNi42MSwzMzYuMDY4LDExOS40NjcsMjkwLjEzMywxMTkuNDY3eiBNMzQ5Ljg2NywxNzAuNjY3SDMzMi44Yy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNWMjU2SDI1NnYtNzYuOAoJCQljMC00LjcxLTMuODIzLTguNTMzLTguNTMzLTguNTMzSDIzMC40di04LjUzM2MwLTEyLjQwNywyMC45MzItMjUuNiw1OS43MzMtMjUuNnM1OS43MzMsMTMuMTkzLDU5LjczMywyNS42VjE3MC42Njd6Ii8+CiAgICAgICAgPHBhdGggZD0iTTM0OS44NjcsMTE5LjQ2N2MtMTEuMzc1LDAtMjIuMDQyLDEuMDc1LTMxLjY5MywzLjE5MWMtMy45MTcsMC44NjItNi43MDcsNC4zMjYtNi43MDcsOC4zMzcKCQkJYzAsNC4wMTEsMi43OSw3LjQ3NSw2LjcwNyw4LjMzN2MxOS4yNTEsNC4yMTUsMzEuNjkzLDEzLjE2NywzMS42OTMsMjIuODAxdjguNTMzSDMzMi44Yy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2ODUuMzMzCgkJCWMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNoNTkuNzMzYzQuNzEsMCw4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtNzYuOGgxNy4wNjdjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi0xNy4wNjcKCQkJQzQyNi42NjcsMTM2LjYxLDM5NS44MDIsMTE5LjQ2NywzNDkuODY3LDExOS40Njd6IE00MDkuNiwxNzAuNjY3aC0xNy4wNjdjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM1YyNTZoLTQyLjY2N3YtNjguMjY3CgkJCUgzNTguNGM0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTE3LjA2N2MwLTkuODEzLTQuNzM2LTE4LjU3Ny0xMy4zOC0yNS41NTdjMzYuNDM3LDAuODAyLDU2LjA0NywxMy41NDIsNTYuMDQ3LDI1LjU1NwoJCQlWMTcwLjY2N3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDA5LjYsMTE5LjQ2N2MtMTEuMzc1LDAtMjIuMDQyLDEuMDc1LTMxLjY5MywzLjE5MWMtMy45MTcsMC44NjItNi43MDcsNC4zMjYtNi43MDcsOC4zMzcKCQkJYzAsNC4wMTEsMi43OSw3LjQ3NSw2LjcwNyw4LjMzN2MxOS4yNTEsNC4yMTUsMzEuNjkzLDEzLjE2NywzMS42OTMsMjIuODAxdjguNTMzaC0xNy4wNjdjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3Y4NS4zMzMKCQkJYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2g1OS43MzNjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi03Ni44aDE3LjA2N2M0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTE3LjA2NwoJCQlDNDg2LjQsMTM2LjYxLDQ1NS41MzUsMTE5LjQ2Nyw0MDkuNiwxMTkuNDY3eiBNNDY5LjMzMywxNzAuNjY3aC0xNy4wNjdjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM1YyNTZoLTQyLjY2N3YtNjguMjY3CgkJCWgxNy4wNjdjNC43MSwwLDguNTMzLTMuODIzLDguNTMzLTguNTMzdi0xNy4wNjdjMC05LjgxMy00LjczNi0xOC41NzctMTMuMzgtMjUuNTU3YzM2LjQzNywwLjgwMiw1Ni4wNDcsMTMuNTQyLDU2LjA0NywyNS41NTcKCQkJVjE3MC42Njd6Ii8+CiAgICAgICAgPHBhdGggZD0iTTI5MC4xMzMsODUuMzMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzYzQuNzAyLDAsOC41MzMsMy44MzEsOC41MzMsOC41MzMKCQkJYzAsNC43MDItMy44MzEsOC41MzMtOC41MzMsOC41MzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3MzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2MxNC4xMTQsMCwyNS42LTExLjQ4NiwyNS42LTI1LjYKCQkJUzMwNC4yNDcsODUuMzMzLDI5MC4xMzMsODUuMzMzeiIvPgogICAgICAgIDxwYXRoIGQ9Ik0zNTguNCwzNC4xMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3Y1MS4yYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM3M4LjUzMy0zLjgyMyw4LjUzMy04LjUzM3YtNTEuMgoJCQlDMzY2LjkzMywzNy45NTYsMzYzLjExLDM0LjEzMywzNTguNCwzNC4xMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTM1OC40LDg1LjMzM2MtNC43MSwwLTguNTMzLDMuODIzLTguNTMzLDguNTMzYzAsNC43MSwzLjgyMyw4LjUzMyw4LjUzMyw4LjUzM2M0LjcwMiwwLDguNTMzLDMuODMxLDguNTMzLDguNTMzCgkJCWMwLDQuNzAyLTMuODMxLDguNTMzLTguNTMzLDguNTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzNzMy44MjMsOC41MzMsOC41MzMsOC41MzNjMTQuMTE0LDAsMjUuNi0xMS40ODYsMjUuNi0yNS42CgkJCVMzNzIuNTE0LDg1LjMzMywzNTguNCw4NS4zMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTQyNi42NjcsMzQuMTMzYy00LjcxLDAtOC41MzMsMy44MjMtOC41MzMsOC41MzN2NTEuMmMwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNzOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTUxLjIKCQkJQzQzNS4yLDM3Ljk1Niw0MzEuMzc3LDM0LjEzMyw0MjYuNjY3LDM0LjEzM3oiLz4KICAgICAgICA8cGF0aCBkPSJNNDI2LjY2Nyw4NS4zMzNjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM2MwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNjNC43MDIsMCw4LjUzMywzLjgzMSw4LjUzMyw4LjUzMwoJCQljMCw0LjcwMi0zLjgzMSw4LjUzMy04LjUzMyw4LjUzM2MtNC43MSwwLTguNTMzLDMuODIzLTguNTMzLDguNTMzczMuODIzLDguNTMzLDguNTMzLDguNTMzYzE0LjExNCwwLDI1LjYtMTEuNDg2LDI1LjYtMjUuNgoJCQlTNDQwLjc4MSw4NS4zMzMsNDI2LjY2Nyw4NS4zMzN6Ii8+CiAgICAgICAgPHBhdGggZD0iTTQ4Ni40LDMyNC4yNjdIMTc5LjJjLTQuNzEsMC04LjUzMywzLjgyMy04LjUzMyw4LjUzM3YzNC4xMzNjMCw0LjcxLDMuODIzLDguNTMzLDguNTMzLDguNTMzaDMwNy4yCgkJCWM0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzNWMzMyLjhDNDk0LjkzMywzMjguMDksNDkxLjExLDMyNC4yNjcsNDg2LjQsMzI0LjI2N3ogTTQ3Ny44NjcsMzU4LjRIMTg3LjczM3YtMTcuMDY3aDI5MC4xMzMKCQkJVjM1OC40eiIvPgogICAgICAgIDxwYXRoIGQ9Ik00NjkuMzMzLDM5Mi41MzNoLTI1NmMtNC43MSwwLTguNTMzLDMuODIzLTguNTMzLDguNTMzdjY4LjI2N2MwLDQuNzEsMy44MjMsOC41MzMsOC41MzMsOC41MzNoMjU2CgkJCWM0LjcxLDAsOC41MzMtMy44MjMsOC41MzMtOC41MzN2LTY4LjI2N0M0NzcuODY3LDM5Ni4zNTYsNDc0LjA0NCwzOTIuNTMzLDQ2OS4zMzMsMzkyLjUzM3ogTTQ2MC44LDQ2MC44SDIyMS44Njd2LTUxLjJINDYwLjgKCQkJVjQ2MC44eiIvPgogICAgPC9nPgo8L3N2Zz4K"
-          },
-          "native": {
-            "Name": "Flur",
-            "TypeName": "ENUM",
-            "EnumInfo": ""
-          },
-          "type": "enum"
+        "native": {
+            "ADDRESS": "LEQ090XYZ:1",
+            "AES_ACTIVE": 1,
+            "DIRECTION": 2,
+            "FLAGS": 1,
+            "INDEX": 1,
+            "LINK_SOURCE_ROLES": "",
+            "LINK_TARGET_ROLES": "KEYMATIC",
+            "PARAMSETS": ["LINK", "MASTER", "VALUES"],
+            "PARENT": "LEQ090XYZ",
+            "PARENT_TYPE": "HM-Sec-Key",
+            "TYPE": "KEYMATIC",
+            "VERSION": 7
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832891105,
+        "acl": {
+            "object": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
         }
-      ]
     },
-    "native": {
-      "ADDRESS": "LEQ090XYZ:1",
-      "AES_ACTIVE": 1,
-      "DIRECTION": 2,
-      "FLAGS": 1,
-      "INDEX": 1,
-      "LINK_SOURCE_ROLES": "",
-      "LINK_TARGET_ROLES": "KEYMATIC",
-      "PARAMSETS": [
-        "LINK",
-        "MASTER",
-        "VALUES"
-      ],
-      "PARENT": "LEQ090XYZ",
-      "PARENT_TYPE": "HM-Sec-Key",
-      "TYPE": "KEYMATIC",
-      "VERSION": 7
+    "hm-rpc.0.LEQ090XYZ.1.DIRECTION": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.DIRECTION",
+            "def": 0,
+            "type": "number",
+            "read": true,
+            "write": false,
+            "min": 0,
+            "max": 3,
+            "states": {
+                "0": "NONE",
+                "1": "UP",
+                "2": "DOWN",
+                "3": "UNDEFINED"
+            },
+            "role": "indicator.direction"
+        },
+        "native": {
+            "DEFAULT": 0,
+            "FLAGS": 3,
+            "ID": "DIRECTION",
+            "MAX": 3,
+            "MIN": 0,
+            "OPERATIONS": 5,
+            "TAB_ORDER": 6,
+            "TYPE": "ENUM",
+            "UNIT": "",
+            "VALUE_LIST": ["NONE", "UP", "DOWN", "UNDEFINED"]
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832891047,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.DIRECTION",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
     },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832891105,
-    "acl": {
-      "object": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
+    "hm-rpc.0.LEQ090XYZ.1.ERROR": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.ERROR",
+            "def": 0,
+            "type": "number",
+            "read": true,
+            "write": false,
+            "min": 0,
+            "max": 2,
+            "states": {
+                "0": "NO_ERROR",
+                "1": "CLUTCH_FAILURE",
+                "2": "MOTOR_ABORTED"
+            },
+            "role": "indicator.error"
+        },
+        "native": {
+            "CONTROL": "NONE",
+            "DEFAULT": 0,
+            "FLAGS": 9,
+            "ID": "ERROR",
+            "MAX": 2,
+            "MIN": 0,
+            "OPERATIONS": 5,
+            "TAB_ORDER": 5,
+            "TYPE": "ENUM",
+            "UNIT": "",
+            "VALUE_LIST": ["NO_ERROR", "CLUTCH_FAILURE", "MOTOR_ABORTED"]
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832890987,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.ERROR",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.ERROR-1_ALARM": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.ERROR-1_ALARM",
+            "type": "number",
+            "role": "indicator.alarm",
+            "read": true,
+            "write": true,
+            "def": 0,
+            "states": {
+                "0": "NO ALARM",
+                "1": "ALARM",
+                "2": "ACKNOWLEDGED"
+            }
+        },
+        "native": {
+            "Name": "Schloss Kanal.ERROR-1_ALARM",
+            "TypeName": "ALARM",
+            "DP": "21158"
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832923431,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.ERROR-1_ALARM",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.ERROR-2_ALARM": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.ERROR-2_ALARM",
+            "type": "number",
+            "role": "indicator.alarm",
+            "read": true,
+            "write": true,
+            "def": 0,
+            "states": {
+                "0": "NO ALARM",
+                "1": "ALARM",
+                "2": "ACKNOWLEDGED"
+            }
+        },
+        "native": {
+            "Name": "Schloss Kanal.ERROR-2_ALARM",
+            "TypeName": "ALARM",
+            "DP": "21161"
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832923431,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.ERROR-2_ALARM",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.INHIBIT": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.INHIBIT",
+            "def": false,
+            "type": "boolean",
+            "read": true,
+            "write": true,
+            "role": "state.inhibit"
+        },
+        "native": {
+            "CONTROL": "NONE",
+            "DEFAULT": false,
+            "FLAGS": 1,
+            "ID": "INHIBIT",
+            "MAX": true,
+            "MIN": false,
+            "OPERATIONS": 7,
+            "TAB_ORDER": 4,
+            "TYPE": "BOOL",
+            "UNIT": ""
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832890930,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.INHIBIT",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": false,
+        "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.INSTALL_TEST": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.INSTALL_TEST",
+            "def": false,
+            "type": "boolean",
+            "read": false,
+            "write": true,
+            "role": "indicator"
+        },
+        "native": {
+            "DEFAULT": false,
+            "FLAGS": 3,
+            "ID": "INSTALL_TEST",
+            "MAX": true,
+            "MIN": false,
+            "OPERATIONS": 2,
+            "TAB_ORDER": 7,
+            "TYPE": "ACTION",
+            "UNIT": ""
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832890866,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.INSTALL_TEST",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": false,
+        "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.OPEN": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.OPEN",
+            "def": false,
+            "type": "boolean",
+            "read": false,
+            "write": true,
+            "role": "button",
+            "custom": {
+                "telegram.0": {
+                    "enabled": true,
+                    "readOnly": false,
+                    "writeOnly": true,
+                    "report": false,
+                    "alias": "Tür",
+                    "onStatus": "aufgemacht",
+                    "offStatus": "",
+                    "onCommand": "aufmachen",
+                    "offCommand": "",
+                    "onlyTrue": true,
+                    "buttons": 3
+                },
+                "history.0": {
+                    "enabled": true,
+                    "changesOnly": false,
+                    "debounce": "",
+                    "maxLength": "",
+                    "retention": "",
+                    "changesRelogInterval": 0,
+                    "changesMinDelta": 0,
+                    "aliasId": ""
+                },
+                "eventlist.0": {
+                    "enabled": true,
+                    "event": "default",
+                    "trueText": "default",
+                    "falseText": "default",
+                    "trueColor": "default",
+                    "falseColor": "default",
+                    "changesOnly": true
+                }
+            }
+        },
+        "native": {
+            "CONTROL": "LOCK.OPEN",
+            "DEFAULT": false,
+            "FLAGS": 1,
+            "ID": "OPEN",
+            "MAX": true,
+            "MIN": false,
+            "OPERATIONS": 2,
+            "TAB_ORDER": 1,
+            "TYPE": "ACTION",
+            "UNIT": ""
+        },
+        "_id": "hm-rpc.0.LEQ090XYZ.1.OPEN",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "from": "system.adapter.admin.0",
+        "user": "system.user.admin",
+        "ts": 1702473425622,
+        "val": true,
+        "ack": false
+    },
+    "hm-rpc.0.LEQ090XYZ.1.RELOCK_DELAY": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.RELOCK_DELAY",
+            "def": 111600,
+            "type": "number",
+            "read": false,
+            "write": true,
+            "min": 0,
+            "max": 65535,
+            "states": {
+                "111600": "NOT_USED"
+            },
+            "unit": "s"
+        },
+        "native": {
+            "CONTROL": "NONE",
+            "DEFAULT": 111600,
+            "FLAGS": 1,
+            "ID": "RELOCK_DELAY",
+            "MAX": 65535,
+            "MIN": 0,
+            "OPERATIONS": 2,
+            "SPECIAL": [
+                {
+                    "ID": "NOT_USED",
+                    "VALUE": 111600
+                }
+            ],
+            "TAB_ORDER": 2,
+            "TYPE": "FLOAT",
+            "UNIT": "s"
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832890737,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.RELOCK_DELAY",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.STATE": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.STATE",
+            "def": false,
+            "type": "boolean",
+            "read": true,
+            "write": true,
+            "role": "switch.lock",
+            "custom": {
+                "history.0": {
+                    "enabled": true,
+                    "changesOnly": false,
+                    "debounce": "",
+                    "maxLength": "",
+                    "retention": "",
+                    "changesRelogInterval": 0,
+                    "changesMinDelta": 0,
+                    "aliasId": ""
+                },
+                "telegram.0": {
+                    "enabled": true,
+                    "readOnly": false,
+                    "writeOnly": false,
+                    "report": true,
+                    "alias": "Schloss",
+                    "onStatus": "entrigelt",
+                    "offStatus": "verrigelt",
+                    "onCommand": "entrigeln",
+                    "offCommand": "verrigeln",
+                    "onlyTrue": false,
+                    "buttons": 3
+                },
+                "material": {
+                    "admin": {
+                        "chartId": "hm-rpc.0.LEQ090XYZ.1.STATE",
+                        "useDefaultIcon": "",
+                        "name": "Schloss",
+                        "colorOn": "",
+                        "noAck": "",
+                        "colorOff": "",
+                        "icon": "",
+                        "iconOff": "",
+                        "background": "",
+                        "enabled": true
+                    }
+                }
+            }
+        },
+        "native": {
+            "CONTROL": "LOCK.STATE",
+            "DEFAULT": false,
+            "FLAGS": 1,
+            "ID": "STATE",
+            "MAX": true,
+            "MIN": false,
+            "OPERATIONS": 7,
+            "TAB_ORDER": 0,
+            "TYPE": "BOOL",
+            "UNIT": ""
+        },
+        "_id": "hm-rpc.0.LEQ090XYZ.1.STATE",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "from": "system.adapter.web.0",
+        "user": "system.user.admin",
+        "ts": 1626893980024,
+        "val": true,
+        "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.STATE_UNCERTAIN": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.STATE_UNCERTAIN",
+            "def": true,
+            "type": "boolean",
+            "read": true,
+            "write": false
+        },
+        "native": {
+            "CONTROL": "LOCK.UNCERTAIN",
+            "DEFAULT": true,
+            "FLAGS": 1,
+            "ID": "STATE_UNCERTAIN",
+            "MAX": true,
+            "MIN": false,
+            "OPERATIONS": 5,
+            "TAB_ORDER": 3,
+            "TYPE": "BOOL",
+            "UNIT": ""
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1592832890620,
+        "_id": "hm-rpc.0.LEQ090XYZ.1.STATE_UNCERTAIN",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": false,
+        "ack": true
     }
-  },
-  "hm-rpc.0.LEQ090XYZ.1.DIRECTION": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.DIRECTION",
-      "def": 0,
-      "type": "number",
-      "read": true,
-      "write": false,
-      "min": 0,
-      "max": 3,
-      "states": {
-        "0": "NONE",
-        "1": "UP",
-        "2": "DOWN",
-        "3": "UNDEFINED"
-      },
-      "role": "indicator.direction"
-    },
-    "native": {
-      "DEFAULT": 0,
-      "FLAGS": 3,
-      "ID": "DIRECTION",
-      "MAX": 3,
-      "MIN": 0,
-      "OPERATIONS": 5,
-      "TAB_ORDER": 6,
-      "TYPE": "ENUM",
-      "UNIT": "",
-      "VALUE_LIST": [
-        "NONE",
-        "UP",
-        "DOWN",
-        "UNDEFINED"
-      ]
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832891047,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.DIRECTION",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": 0,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.ERROR": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.ERROR",
-      "def": 0,
-      "type": "number",
-      "read": true,
-      "write": false,
-      "min": 0,
-      "max": 2,
-      "states": {
-        "0": "NO_ERROR",
-        "1": "CLUTCH_FAILURE",
-        "2": "MOTOR_ABORTED"
-      },
-      "role": "indicator.error"
-    },
-    "native": {
-      "CONTROL": "NONE",
-      "DEFAULT": 0,
-      "FLAGS": 9,
-      "ID": "ERROR",
-      "MAX": 2,
-      "MIN": 0,
-      "OPERATIONS": 5,
-      "TAB_ORDER": 5,
-      "TYPE": "ENUM",
-      "UNIT": "",
-      "VALUE_LIST": [
-        "NO_ERROR",
-        "CLUTCH_FAILURE",
-        "MOTOR_ABORTED"
-      ]
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832890987,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.ERROR",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": 0,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.ERROR-1_ALARM": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.ERROR-1_ALARM",
-      "type": "number",
-      "role": "indicator.alarm",
-      "read": true,
-      "write": true,
-      "def": 0,
-      "states": {
-        "0": "NO ALARM",
-        "1": "ALARM",
-        "2": "ACKNOWLEDGED"
-      }
-    },
-    "native": {
-      "Name": "Schloss Kanal.ERROR-1_ALARM",
-      "TypeName": "ALARM",
-      "DP": "21158"
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832923431,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.ERROR-1_ALARM",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": 0,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.ERROR-2_ALARM": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.ERROR-2_ALARM",
-      "type": "number",
-      "role": "indicator.alarm",
-      "read": true,
-      "write": true,
-      "def": 0,
-      "states": {
-        "0": "NO ALARM",
-        "1": "ALARM",
-        "2": "ACKNOWLEDGED"
-      }
-    },
-    "native": {
-      "Name": "Schloss Kanal.ERROR-2_ALARM",
-      "TypeName": "ALARM",
-      "DP": "21161"
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832923431,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.ERROR-2_ALARM",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": 0,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.INHIBIT": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.INHIBIT",
-      "def": false,
-      "type": "boolean",
-      "read": true,
-      "write": true,
-      "role": "state.inhibit"
-    },
-    "native": {
-      "CONTROL": "NONE",
-      "DEFAULT": false,
-      "FLAGS": 1,
-      "ID": "INHIBIT",
-      "MAX": true,
-      "MIN": false,
-      "OPERATIONS": 7,
-      "TAB_ORDER": 4,
-      "TYPE": "BOOL",
-      "UNIT": ""
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832890930,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.INHIBIT",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": false,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.INSTALL_TEST": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.INSTALL_TEST",
-      "def": false,
-      "type": "boolean",
-      "read": false,
-      "write": true,
-      "role": "indicator"
-    },
-    "native": {
-      "DEFAULT": false,
-      "FLAGS": 3,
-      "ID": "INSTALL_TEST",
-      "MAX": true,
-      "MIN": false,
-      "OPERATIONS": 2,
-      "TAB_ORDER": 7,
-      "TYPE": "ACTION",
-      "UNIT": ""
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832890866,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.INSTALL_TEST",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": false,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.OPEN": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.OPEN",
-      "def": false,
-      "type": "boolean",
-      "read": false,
-      "write": true,
-      "role": "button",
-      "custom": {
-        "telegram.0": {
-          "enabled": true,
-          "readOnly": false,
-          "writeOnly": true,
-          "report": false,
-          "alias": "Tür",
-          "onStatus": "aufgemacht",
-          "offStatus": "",
-          "onCommand": "aufmachen",
-          "offCommand": "",
-          "onlyTrue": true,
-          "buttons": 3
-        },
-        "history.0": {
-          "enabled": true,
-          "changesOnly": false,
-          "debounce": "",
-          "maxLength": "",
-          "retention": "",
-          "changesRelogInterval": 0,
-          "changesMinDelta": 0,
-          "aliasId": ""
-        },
-        "eventlist.0": {
-          "enabled": true,
-          "event": "default",
-          "trueText": "default",
-          "falseText": "default",
-          "trueColor": "default",
-          "falseColor": "default",
-          "changesOnly": true
-        }
-      }
-    },
-    "native": {
-      "CONTROL": "LOCK.OPEN",
-      "DEFAULT": false,
-      "FLAGS": 1,
-      "ID": "OPEN",
-      "MAX": true,
-      "MIN": false,
-      "OPERATIONS": 2,
-      "TAB_ORDER": 1,
-      "TYPE": "ACTION",
-      "UNIT": ""
-    },
-    "_id": "hm-rpc.0.LEQ090XYZ.1.OPEN",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "from": "system.adapter.admin.0",
-    "user": "system.user.admin",
-    "ts": 1702473425622,
-    "val": true,
-    "ack": false
-  },
-  "hm-rpc.0.LEQ090XYZ.1.RELOCK_DELAY": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.RELOCK_DELAY",
-      "def": 111600,
-      "type": "number",
-      "read": false,
-      "write": true,
-      "min": 0,
-      "max": 65535,
-      "states": {
-        "111600": "NOT_USED"
-      },
-      "unit": "s"
-    },
-    "native": {
-      "CONTROL": "NONE",
-      "DEFAULT": 111600,
-      "FLAGS": 1,
-      "ID": "RELOCK_DELAY",
-      "MAX": 65535,
-      "MIN": 0,
-      "OPERATIONS": 2,
-      "SPECIAL": [
-        {
-          "ID": "NOT_USED",
-          "VALUE": 111600
-        }
-      ],
-      "TAB_ORDER": 2,
-      "TYPE": "FLOAT",
-      "UNIT": "s"
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832890737,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.RELOCK_DELAY",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": 0,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.STATE": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.STATE",
-      "def": false,
-      "type": "boolean",
-      "read": true,
-      "write": true,
-      "role": "switch.lock",
-      "custom": {
-        "history.0": {
-          "enabled": true,
-          "changesOnly": false,
-          "debounce": "",
-          "maxLength": "",
-          "retention": "",
-          "changesRelogInterval": 0,
-          "changesMinDelta": 0,
-          "aliasId": ""
-        },
-        "telegram.0": {
-          "enabled": true,
-          "readOnly": false,
-          "writeOnly": false,
-          "report": true,
-          "alias": "Schloss",
-          "onStatus": "entrigelt",
-          "offStatus": "verrigelt",
-          "onCommand": "entrigeln",
-          "offCommand": "verrigeln",
-          "onlyTrue": false,
-          "buttons": 3
-        },
-        "material": {
-          "admin": {
-            "chartId": "hm-rpc.0.LEQ090XYZ.1.STATE",
-            "useDefaultIcon": "",
-            "name": "Schloss",
-            "colorOn": "",
-            "noAck": "",
-            "colorOff": "",
-            "icon": "",
-            "iconOff": "",
-            "background": "",
-            "enabled": true
-          }
-        }
-      }
-    },
-    "native": {
-      "CONTROL": "LOCK.STATE",
-      "DEFAULT": false,
-      "FLAGS": 1,
-      "ID": "STATE",
-      "MAX": true,
-      "MIN": false,
-      "OPERATIONS": 7,
-      "TAB_ORDER": 0,
-      "TYPE": "BOOL",
-      "UNIT": ""
-    },
-    "_id": "hm-rpc.0.LEQ090XYZ.1.STATE",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "from": "system.adapter.web.0",
-    "user": "system.user.admin",
-    "ts": 1626893980024,
-    "val": true,
-    "ack": true
-  },
-  "hm-rpc.0.LEQ090XYZ.1.STATE_UNCERTAIN": {
-    "type": "state",
-    "common": {
-      "name": "Schloss Kanal.STATE_UNCERTAIN",
-      "def": true,
-      "type": "boolean",
-      "read": true,
-      "write": false
-    },
-    "native": {
-      "CONTROL": "LOCK.UNCERTAIN",
-      "DEFAULT": true,
-      "FLAGS": 1,
-      "ID": "STATE_UNCERTAIN",
-      "MAX": true,
-      "MIN": false,
-      "OPERATIONS": 5,
-      "TAB_ORDER": 3,
-      "TYPE": "BOOL",
-      "UNIT": ""
-    },
-    "from": "system.adapter.hm-rega.0",
-    "user": "system.user.admin",
-    "ts": 1592832890620,
-    "_id": "hm-rpc.0.LEQ090XYZ.1.STATE_UNCERTAIN",
-    "acl": {
-      "object": 1636,
-      "state": 1636,
-      "owner": "system.user.admin",
-      "ownerGroup": "system.group.administrator"
-    },
-    "val": false,
-    "ack": true
-  }
 }

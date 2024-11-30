@@ -108,6 +108,10 @@ export interface DetectorState extends InternalDetectorState {
     original?: InternalDetectorState;
     id: string;
 }
+export interface ExternalDetectorState extends Omit<InternalDetectorState, 'enums' | 'role'> {
+    enums?: boolean;
+    role?: string;
+}
 
 export interface DetectOptions {
     objects: Record<string, ioBroker.Object>; // all objects
@@ -137,6 +141,12 @@ export interface InternalPatternControl {
 }
 export interface PatternControl {
     states: DetectorState[];
+    type: Types;
+    enumRequired?: boolean;
+}
+
+export interface ExternalPatternControl {
+    states: ExternalDetectorState[];
     type: Types;
     enumRequired?: boolean;
 }

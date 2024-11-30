@@ -1,30 +1,30 @@
 {
-  "alias.0.MyFolder.Gerät_1": {
-    "_id": "alias.0.MyFolder.Gerät_1",
-    "common": {
-      "name": {
-        "de": "Gerät 1"
-      },
-      "role": "sensor.alarm.fire",
-      "icon": "",
-      "color": null
+    "alias.0.MyFolder.Gerät_1": {
+        "_id": "alias.0.MyFolder.Gerät_1",
+        "common": {
+            "name": {
+                "de": "Gerät 1"
+            },
+            "role": "sensor.alarm.fire",
+            "icon": "",
+            "color": null
+        },
+        "native": {},
+        "type": "channel"
     },
-    "native": {},
-    "type": "channel"
-  },
-  "alias.0.MyFolder.Gerät_1.ACTUAL": {
-    "_id": "alias.0.MyFolder.Gerät_1.ACTUAL",
-    "common": {
-      "name": "ACTUAL",
-      "role": "sensor.alarm.fire",
-      "type": "boolean",
-      "read": true,
-      "write": false,
-      "alias": {
-        "id": "consumption.0.instances.12_03b81.trigger"
-      }
-    },
-    "native": {},
-    "type": "state"
-  }
+    "alias.0.MyFolder.Gerät_1.ACTUAL": {
+        "_id": "alias.0.MyFolder.Gerät_1.ACTUAL",
+        "common": {
+            "name": "ACTUAL",
+            "role": "sensor.alarm.fire",
+            "type": "boolean",
+            "read": true,
+            "write": false,
+            "alias": {
+                "id": "consumption.0.instances.12_03b81.trigger"
+            }
+        },
+        "native": {},
+        "type": "state"
+    }
 }
