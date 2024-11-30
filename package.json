@@ -46,9 +46,6 @@
         "build:doc": "node lib/createMd",
         "build": "npm run build:ts && npm run build:doc",
         "release": "release-script --noPush -y",
-        "release-patch": "release-script patch --yes",
-        "release-minor": "release-script minor --yes",
-        "release-major": "release-script major --yes",
         "npm": "npm i -f"
     },
     "license": "MIT",
