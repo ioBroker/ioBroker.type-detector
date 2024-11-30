@@ -12,10 +12,9 @@
     "common": {
       "name": "Floor camera",
       "desc": "Floor camera",
-      "role": "camera",
-      "type": "file"
+      "role": "link.camera",
+      "type": "string"
     },
-    "binary": true,
     "type": "state",
     "native": {}
   }
