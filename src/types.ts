@@ -71,7 +71,6 @@ export enum StateType {
     Number = 'number',
     String = 'string',
     Boolean = 'boolean',
-    File = 'file',
 }
 
 export interface InternalDetectorState {
