@@ -34,6 +34,7 @@ What is not important for detection:
 ## Devices
 In [brackets] is given the class name of device.
 ### Content
+* [Illuminance [Illuminance]](#illuminance)
 * [Air conditioner [airCondition]](#air-conditioner-aircondition)
 * [Blinds controlled only by buttons [blindButtons]](#blinds-controlled-only-by-buttons-blindbuttons)
 * [Blinds or Shutter [blinds]](#blinds-or-shutter-blinds)
@@ -73,6 +74,16 @@ In [brackets] is given the class name of device.
 * [Weather forecast [weatherForecast]](#weather-forecast-weatherforecast)
 * [Window [window]](#window-window)
 * [Window that could be in tilted state [windowTilt]](#window-that-could-be-in-tilted-state-windowtilt)
+### Illuminance
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                          |
+|---|----------|-------------------------------|------|---------|----|-----|------|--------------------------------------------------------------------------------|
+| * | ACTUAL   | value.brightness              | %    | number  | -  |     |      | ``/brightness$/``                                                              |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.unreach$/``                                     |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |      | ``/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/`` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |      | ``/^indicator\.maintenance$/``                                                 |
+|   | ERROR    | indicator.error               |      |         |    | X   |      | ``/^indicator\.error$/``                                                       |
+
+
 ### Air conditioner [airCondition]
 | R | Name           | Role                          | Unit | Type           | Wr | Ind | Mult | Regex                                      |
 |---|----------------|-------------------------------|------|----------------|----|-----|------|--------------------------------------------|
