@@ -94,6 +94,12 @@ if (controls) {
 -->
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Remove File tate type
+* (Apollon77) Adjust Camera states to remove Binary state and replace by link
+* (Apollon77) Fix role for ACTUAL state for socket
+
 ### 4.0.1 (2024-07-26)
 * (Apollon77) Fix Electricity states for light type
 * (Apollon77) Add Electricity states for more types
