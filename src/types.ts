@@ -42,6 +42,7 @@ export enum Types {
     gate = 'gate',
     hue = 'hue',
     humidity = 'humidity',
+    illuminance = 'illuminance',
     image = 'image',
     info = 'info',
     instance = 'instance',
