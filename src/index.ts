@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2023 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2024 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -20,15 +20,9 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- **/
+ */
 
 import { ChannelDetector } from './ChannelDetector';
 
 export default ChannelDetector;
-export {
-    Types,
-    StateType,
-    DetectorState,
-    DetectOptions,
-    PatternControl,
-} from './types';
+export { type DetectorState, type DetectOptions, type PatternControl, Types, StateType } from './types';

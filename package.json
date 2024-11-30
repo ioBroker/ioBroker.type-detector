@@ -1,60 +1,53 @@
 {
-  "name": "iobroker.type-detector",
-  "version": "4.0.1",
-  "description": "Detects devices in ioBroker for Material, Google home, Homekit, ...",
-  "author": {
-    "name": "bluefox",
-    "email": "dogafox@gmail.com"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "homepage": "https://github.com/ioBroker/ioBroker.type-detector",
-  "keywords": [
-    "ioBroker",
-    "types",
-    "devices"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ioBroker/ioBroker.type-detector"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "@alcalzone/release-script": "^3.8.0",
-    "@alcalzone/release-script-plugin-license": "^3.7.0",
-    "@types/iobroker": "^5.0.6",
-    "chai": "^4.5.0",
-    "eslint": "^8.57.0",
-    "eslint-config-standard-with-typescript": "^42.0.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.6.0",
-    "gulp": "^4.0.2",
-    "mocha": "^10.7.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-organize-imports": "^4.0.0",
-    "typescript": "~5.5.4"
-  },
-  "bugs": {
-    "url": "https://github.com/ioBroker/ioBroker.type-detector/issues"
-  },
-  "main": "index.js",
-  "files": [
-    "LICENSE",
-    "*.js",
-    "*.d.ts",
-    "*.js.map"
-  ],
-  "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --exit",
-    "watch": "node node_modules/mocha/bin/mocha --watch",
-    "build:ts": "tsc -p tsconfig.build.json && node build",
-    "build:doc": "node lib/createMd",
-    "build": "npm run build:ts && npm run build:doc",
-    "release": "release-script --noPush -y",
-    "format": "prettier --write 'src/**/*.ts'"
-  },
-  "license": "MIT",
-  "readmeFilename": "README.md"
+    "name": "iobroker.type-detector",
+    "version": "4.0.1",
+    "description": "Detects devices in ioBroker for Material, Google home, Homekit, ...",
+    "author": {
+        "name": "bluefox",
+        "email": "dogafox@gmail.com"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "homepage": "https://github.com/ioBroker/ioBroker.type-detector",
+    "keywords": [
+        "ioBroker",
+        "types",
+        "devices"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ioBroker/ioBroker.type-detector"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@alcalzone/release-script": "^3.8.0",
+        "@alcalzone/release-script-plugin-license": "^3.7.0",
+        "@iobroker/types": "^6.0.11",
+        "@iobroker/eslint-config": "^1.0.0",
+        "chai": "^4.5.0",
+        "mocha": "^10.8.2",
+        "typescript": "~5.7.2"
+    },
+    "bugs": {
+        "url": "https://github.com/ioBroker/ioBroker.type-detector/issues"
+    },
+    "main": "index.js",
+    "files": [
+        "LICENSE",
+        "*.js",
+        "*.d.ts",
+        "*.js.map"
+    ],
+    "scripts": {
+        "test": "node node_modules/mocha/bin/mocha --exit",
+        "watch": "node node_modules/mocha/bin/mocha --watch",
+        "build:ts": "tsc -p tsconfig.build.json && node build",
+        "build:doc": "node lib/createMd",
+        "build": "npm run build:ts && npm run build:doc",
+        "release": "release-script --noPush -y",
+        "npm": "npm i -f"
+    },
+    "license": "MIT",
+    "readmeFilename": "README.md"
 }
