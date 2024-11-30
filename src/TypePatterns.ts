@@ -2784,7 +2784,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.humidity,
     },
-    brightness: {
+    illuminance: {
         states: [
             {
                 role: /brightness$/,
@@ -2801,7 +2801,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.maintain,
             SharedPatterns.error,
         ],
-        type: Types.brightness,
+        type: Types.illuminance,
     },
     image: {
         states: [
