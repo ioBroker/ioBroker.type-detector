@@ -175,8 +175,7 @@ export class ChannelDetector {
 
     private static copyState(oldState: InternalDetectorState, newState?: DetectorState): DetectorState {
         const _newState: DetectorState = newState || JSON.parse(JSON.stringify(oldState));
-        // @ts-expect-error original is internal state
-        _newState.original = oldState.original || oldState;
+        _newState.original = (oldState as DetectorState).original || oldState;
         if ('enums' in oldState && oldState.enums) {
             _newState.enums = oldState.enums;
         }
