@@ -96,8 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 4.1.0 (2024-12-06)
 
 -   (@Garfonso) Added new device type - illuminance (brightness sensor)
 -   (@Garfonso) Added battery state
