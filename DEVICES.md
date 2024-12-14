@@ -338,7 +338,7 @@ In [brackets] is given the class name of device.
 ### Illuminance sensor [illuminance]
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.brightness              | %    | number  | -  |     |      | `/brightness$/`                                                              |
+| * | ACTUAL   | value.brightness              | lux  | number  | -  |     |      | `/brightness$/`                                                              |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |      | `/^indicator\.maintenance$/`                                                 |
@@ -568,19 +568,20 @@ In [brackets] is given the class name of device.
 
 
 ### Socket [socket]
-| R | Name           | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                    |
-|---|----------------|-------------------------------|------|---------|----|-----|------|------------------------------------------|
-| * | SET            | switch                        |      | boolean | W  |     |      | `/^switch$｜^state$｜^switch\.active$/`    |
-|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |      | `/^state$｜^state\.active$/`              |
-|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |      | `/^value\.power$/`                       |
-|   | CURRENT        | value.current                 | mA   | number  | -  |     |      | `/^value\.current$/`                     |
-|   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |      | `/^value\.voltage$/`                     |
-|   | CONSUMPTION    | value.power.consumption       | Wh   | number  | -  |     |      | `/^value\.power\.consumption$/`          |
-|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |     |      | `/^value\.frequency$/`                   |
-|   | WORKING        | indicator.working             |      |         |    | X   |      | `/^indicator\.working$/`                 |
-|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.unreach$/` |
-|   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |      | `/^indicator\.maintenance$/`             |
-|   | ERROR          | indicator.error               |      |         |    | X   |      | `/^indicator\.error$/`                   |
+| R | Name           | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                        |
+|---|----------------|-------------------------------|------|---------|----|-----|------|------------------------------------------------------------------------------|
+| * | SET            | switch                        |      | boolean | W  |     |      | `/^switch$｜^state$｜^switch\.active$/`                                        |
+|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |      | `/^state$｜^state\.active$/`                                                  |
+|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |      | `/^value\.power$/`                                                           |
+|   | CURRENT        | value.current                 | mA   | number  | -  |     |      | `/^value\.current$/`                                                         |
+|   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |      | `/^value\.voltage$/`                                                         |
+|   | CONSUMPTION    | value.power.consumption       | Wh   | number  | -  |     |      | `/^value\.power\.consumption$/`                                              |
+|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |     |      | `/^value\.frequency$/`                                                       |
+|   | WORKING        | indicator.working             |      |         |    | X   |      | `/^indicator\.working$/`                                                     |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |      | `/^indicator\.maintenance$/`                                                 |
+|   | ERROR          | indicator.error               |      |         |    | X   |      | `/^indicator\.error$/`                                                       |
 
 
 ### Temperature [temperature]
