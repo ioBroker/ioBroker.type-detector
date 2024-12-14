@@ -96,6 +96,11 @@ if (controls) {
 -->
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+-   (@Apollon77) Fixed default unit for Illuminance to "lux"
+-   (@Apollon77) Added Low-Battery state for switch to be consistent with other devices
+
 ### 4.1.0 (2024-12-06)
 
 -   (@Garfonso) Added new device type - illuminance (brightness sensor)
