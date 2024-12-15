@@ -96,8 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-
-### __WORK IN PROGRESS__
+### 4.1.1 (2024-12-15)
 -   (@Apollon77) Fixed default unit for Illuminance to "lux"
 -   (@Apollon77) Added Low-Battery state for switch to be consistent with other devices
 
