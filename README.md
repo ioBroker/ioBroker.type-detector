@@ -96,6 +96,10 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+
+-   (@GermanBluefox) Added detection of `level.direction`
+
 ### 4.1.1 (2024-12-15)
 -   (@Apollon77) Fixed default unit for Illuminance to "lux"
 -   (@Apollon77) Added Low-Battery state for switch to be consistent with other devices
@@ -106,7 +110,7 @@ if (controls) {
 -   (@Garfonso) Added battery state
 -   (@Garfonso) Added the transition time state
 -   (@Garfonso) Allowed the mixed `device->state` and `device->channel->state` structures
--   (@GermanBluefox) Used new eslint config library
+-   (@GermanBluefox) Used a new eslint config library
 -   (@GermanBluefox) Types were slightly changed
 -   (Apollon77) Removed File state type
 -   (Apollon77) Adjusted Camera states to remove Binary state and replace by link
@@ -256,6 +260,6 @@ if (controls) {
 
 ## License
 
-Copyright (c) 2018-2024 Denis Haev <dogafox@gmail.com>
+Copyright (c) 2018-2025 Denis Haev <dogafox@gmail.com>
 
 MIT License
