@@ -91,12 +91,13 @@ const SharedPatterns: {
         defaultRole: 'indicator.direction',
     },
     direction_enum: {
-        role: /^(indicator|level)\.direction$/, // some old adapters implement `indicator.direction` even for number types. So try to detect it too
+        role: /^(indicator|value)\.direction$/, // some old adapters implement `indicator.direction` even for number types. So try to detect it too
         type: StateType.Number,
         notSingle: true,
         name: 'DIRECTION',
         required: false,
-        defaultRole: 'level.direction',
+        defaultStates: { 0: 'None', 1: 'Up/Open', 2: 'Down/Close', 3: 'Unknown' },
+        defaultRole: 'value.direction',
     },
     reachable: {
         role: /^indicator\.reachable$/,
