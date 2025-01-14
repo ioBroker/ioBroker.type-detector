@@ -109,7 +109,7 @@ In [brackets] is given the class name of device.
 |   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |      | `/^button\.open\.tilt$/`                                                     |
 |   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |      | `/^button\.close\.tilt$/`                                                    |
 |   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |      | `/^indicator\.direction$/`                                                   |
-|   | DIRECTION   | level.direction               |      | number  |    |      |     |      | `/^(indicator｜level)\.direction$/`                                           |
+|   | DIRECTION   | value.direction               |      | number  |    |      |     |      | `/^(indicator｜value)\.direction$/`                                           |
 |   | WORKING     | indicator.working             |      |         |    |      | X   |      | `/^indicator\.working$/`                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |      | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
@@ -132,7 +132,7 @@ In [brackets] is given the class name of device.
 |   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |      | `/^button\.open\.tilt$/`                                                     |
 |   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |      | `/^button\.close\.tilt$/`                                                    |
 |   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |      | `/^indicator\.direction$/`                                                   |
-|   | DIRECTION   | level.direction               |      | number  |    |      |     |      | `/^(indicator｜level)\.direction$/`                                           |
+|   | DIRECTION   | value.direction               |      | number  |    |      |     |      | `/^(indicator｜value)\.direction$/`                                           |
 |   | WORKING     | indicator.working             |      |         |    |      | X   |      | `/^indicator\.working$/`                                                     |
 |   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |      | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
@@ -295,7 +295,7 @@ In [brackets] is given the class name of device.
 |   | ACTUAL    | value.blind                   | %    | number  |    | E    |     |      | `/^value(\.position)?｜^value(\.gate)?$/` |
 |   | STOP      | button.stop                   |      | boolean | W  | E    |     |      | `/^button\.stop$｜^action\.stop$/`        |
 |   | DIRECTION | indicator.direction           |      | boolean |    |      | X   |      | `/^indicator\.direction$/`               |
-|   | DIRECTION | level.direction               |      | number  |    |      |     |      | `/^(indicator｜level)\.direction$/`       |
+|   | DIRECTION | value.direction               |      | number  |    |      |     |      | `/^(indicator｜value)\.direction$/`       |
 |   | WORKING   | indicator.working             |      |         |    |      | X   |      | `/^indicator\.working$/`                 |
 |   | UNREACH   | indicator.maintenance.unreach |      | boolean |    |      | X   |      | `/^indicator(\.maintenance)?\.unreach$/` |
 |   | MAINTAIN  | indicator.maintenance         |      | boolean |    |      | X   |      | `/^indicator\.maintenance$/`             |
@@ -439,7 +439,7 @@ In [brackets] is given the class name of device.
 |   | ACTUAL    | state                         |      | boolean | -  |     |      | `/^state$/`                                                                  |
 |   | OPEN      | button                        |      | boolean | W  |     |      |                                                                              |
 |   | DIRECTION | indicator.direction           |      | boolean |    | X   |      | `/^indicator\.direction$/`                                                   |
-|   | DIRECTION | level.direction               |      | number  |    |     |      | `/^(indicator｜level)\.direction$/`                                           |
+|   | DIRECTION | value.direction               |      | number  |    |     |      | `/^(indicator｜value)\.direction$/`                                           |
 |   | WORKING   | indicator.working             |      |         |    | X   |      | `/^indicator\.working$/`                                                     |
 |   | UNREACH   | indicator.maintenance.unreach |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
