@@ -32,6 +32,7 @@ const SharedPatterns: {
     maintain: InternalDetectorState;
     error: InternalDetectorState;
     direction: InternalDetectorState;
+    direction_enum: InternalDetectorState;
     reachable: InternalDetectorState;
     battery: InternalDetectorState;
 } = {
@@ -83,10 +84,20 @@ const SharedPatterns: {
     direction: {
         role: /^indicator\.direction$/,
         indicator: true,
+        type: StateType.Boolean,
         notSingle: true,
         name: 'DIRECTION',
         required: false,
         defaultRole: 'indicator.direction',
+    },
+    direction_enum: {
+        role: /^(indicator|value)\.direction$/, // some old adapters implement `indicator.direction` even for number types. So try to detect it too
+        type: StateType.Number,
+        notSingle: true,
+        name: 'DIRECTION',
+        required: false,
+        defaultStates: { 0: 'None', 1: 'Up/Open', 2: 'Down/Close', 3: 'Unknown' },
+        defaultRole: 'value.direction',
     },
     reachable: {
         role: /^indicator\.reachable$/,
@@ -1937,6 +1948,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.close.tilt',
             },
             SharedPatterns.direction,
+            SharedPatterns.direction_enum,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
@@ -2036,6 +2048,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.close.tilt',
             },
             SharedPatterns.direction,
+            SharedPatterns.direction_enum,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
@@ -2080,6 +2093,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.stop',
             },
             SharedPatterns.direction,
+            SharedPatterns.direction_enum,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.maintain,
@@ -2296,6 +2310,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button',
             },
             SharedPatterns.direction,
+            SharedPatterns.direction_enum,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,

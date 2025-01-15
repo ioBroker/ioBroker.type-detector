@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2023 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2025 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -86,13 +86,13 @@ export interface InternalDetectorState {
     min?: StateType; // type of attribute: number', 'string' or 'boolean'. This attribute must exist in common
     max?: StateType; // type of attribute: number', 'string' or 'boolean'. This attribute must exist in common
     required?: boolean; // if required to detect the pattern as valid
-    noSubscribe?: boolean; // no automatic subscription for this state (e.g., if write only)
-    searchInParent?: boolean; // if this pattern should be search in a device too and not only in channel
+    noSubscribe?: boolean; // no automatic subscription for this state (e.g., if write-only)
+    searchInParent?: boolean; // if this pattern should be searched in a device too and not only in channel
     enums?: (obj: ioBroker.Object, enums: string[]) => boolean; // function to execute custom category detection
     multiple?: boolean; // if more than one state may have this pattern in channel
-    noDeviceDetection?: boolean; // do not search indicators in parent device
+    noDeviceDetection?: boolean; // do not search indicators in a parent device
     notSingle?: boolean; // this state may belong to more than one tile simultaneously (e.g., volume tile and media with volume)
-    inverted?: boolean; // is state of indicator must be inverted
+    inverted?: boolean; // if the state of indicator must be inverted
     stateName?: RegExp; // regex for state names (IDs). Not suggested
     defaultStates?: { [key: string]: string }; // is for detection irrelevant, but will be used by iobroker.devices.
     defaultRole?: string; // is for detection irrelevant, but will be used by iobroker.devices - only states WITH defaultRole will show up in UI.
