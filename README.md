@@ -97,8 +97,9 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
-
 -   (@GermanBluefox) Added detection of `level.direction`
+-   (@Apollon77) Added door state for device type "lock"
+-   (@Apollon77) Added default unit for volume states
 
 ### 4.1.1 (2024-12-15)
 -   (@Apollon77) Fixed default unit for Illuminance to "lux"

@@ -2309,6 +2309,15 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
                 defaultRole: 'button',
             },
+            {
+                role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,
+                indicator: false,
+                type: StateType.Boolean,
+                write: false,
+                name: 'DOOR_STATE',
+                required: false,
+                defaultRole: 'sensor.door',
+            },
             SharedPatterns.direction,
             SharedPatterns.direction_enum,
             SharedPatterns.working,
@@ -2562,6 +2571,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'SET',
                 required: true,
                 defaultRole: 'level.volume',
+                defaultUnit: '%',
             },
             // optional
             {
@@ -2574,6 +2584,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'ACTUAL',
                 required: false,
                 defaultRole: 'value.volume',
+                defaultUnit: '%',
             },
             {
                 role: /^media\.mute$/,
