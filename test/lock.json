@@ -501,5 +501,28 @@
         },
         "val": false,
         "ack": true
+    },
+    "hm-rpc.0.LEQ090XYZ.1.DOOR_STATE": {
+        "type": "state",
+        "common": {
+            "name": "Schloss Kanal.DOOR_STATE",
+            "def": false,
+            "type": "boolean",
+            "read": true,
+            "write": false,
+            "role": "sensor.door"
+        },
+        "_id": "hm-rpc.0.LEQ090XYZ.1.DOOR_STATE",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "from": "system.adapter.web.0",
+        "user": "system.user.admin",
+        "ts": 1626893980024,
+        "val": true,
+        "ack": true
     }
 }

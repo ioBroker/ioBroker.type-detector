@@ -551,6 +551,7 @@ function createTests(name, ChannelDetector, Types) {
             expect(controls[0].type).to.be.equal(Types.lock);
             const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
             expectMyStateToHaveId('SET', 'hm-rpc.0.LEQ090XYZ.1.STATE');
+            expectMyStateToHaveId('DOOR_STATE', 'hm-rpc.0.LEQ090XYZ.1.DOOR_STATE');
 
             done();
         });
