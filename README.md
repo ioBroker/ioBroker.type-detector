@@ -100,6 +100,8 @@ if (controls) {
 -   (@GermanBluefox) Added detection of `level.direction`
 -   (@Apollon77) Added door state for device type "lock"
 -   (@Apollon77) Added default unit for volume states
+-   (@Apollon77) Added new option ignoreEnums to execute the detection without enums-matching logic
+-   (@Apollon77) Added new option detectAllPossibleDevices to detect multiple devices in one run without checking for already used IDs
 
 ### 4.1.1 (2024-12-15)
 -   (@Apollon77) Fixed default unit for Illuminance to "lux"

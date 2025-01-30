@@ -1,0 +1,467 @@
+{
+  "hm-rpc.0.001658A99FD264.2": {
+    "_id": "hm-rpc.0.001658A99FD264.2",
+    "type": "channel",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2",
+      "enums": [
+        {
+          "_id": "enum.rooms.Hauswirtschaftsraum",
+          "common": {
+            "name": "Hauswirtschaftsraum",
+            "desc": ""
+          },
+          "native": {
+            "Name": "Hauswirtschaftsraum",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "TYPE": "BLIND_VIRTUAL_RECEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "001658A99FD264:2",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "001658A99FD264",
+      "PARENT_TYPE": "HmIPW-DRBL4",
+      "INDEX": 2,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "CONDITIONAL_SWITCH SWITCH LEVEL REMOTE_CONTROL",
+      "DIRECTION": 2,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772731,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.0.001658A99FD264.2.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.ACTIVITY_STATE",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      },
+      "role": ""
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ],
+      "CONTROL": "BLIND_VIRTUAL_RECEIVER.ACTIVITY_STATE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772960,
+    "_id": "hm-rpc.0.001658A99FD264.2.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 3,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.COMBINED_PARAMETER": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.COMBINED_PARAMETER",
+      "def": "",
+      "type": "string",
+      "read": false,
+      "write": true,
+      "role": ""
+    },
+    "native": {
+      "MIN": "",
+      "OPERATIONS": 2,
+      "MAX": "",
+      "FLAGS": 1,
+      "ID": "COMBINED_PARAMETER",
+      "TYPE": "STRING",
+      "DEFAULT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772780,
+    "_id": "hm-rpc.0.001658A99FD264.2.COMBINED_PARAMETER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.LEVEL",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "role": "level"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "BLIND_VIRTUAL_RECEIVER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772931,
+    "_id": "hm-rpc.0.001658A99FD264.2.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 100,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.LEVEL_2": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.LEVEL_2",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "role": ""
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL_2",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "BLIND_VIRTUAL_RECEIVER.LEVEL_2"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772832,
+    "_id": "hm-rpc.0.001658A99FD264.2.LEVEL_2",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.LEVEL_2_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.LEVEL_2_STATUS",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      },
+      "role": ""
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_2_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ],
+      "CONTROL": "BLIND_VIRTUAL_RECEIVER.LEVEL_2_STATUS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772817,
+    "_id": "hm-rpc.0.001658A99FD264.2.LEVEL_2_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 1,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.LEVEL_STATUS",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      },
+      "role": ""
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ],
+      "CONTROL": "BLIND_VIRTUAL_RECEIVER.LEVEL_STATUS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772848,
+    "_id": "hm-rpc.0.001658A99FD264.2.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.PROCESS",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      },
+      "role": ""
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772910,
+    "_id": "hm-rpc.0.001658A99FD264.2.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.SECTION",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15,
+      "role": ""
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772945,
+    "_id": "hm-rpc.0.001658A99FD264.2.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 4,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.SECTION_STATUS",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      },
+      "role": ""
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772754,
+    "_id": "hm-rpc.0.001658A99FD264.2.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.0.001658A99FD264.2.STOP": {
+    "type": "state",
+    "common": {
+      "name": "HmIPW-DRBL4_RA2:2.STOP",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": true,
+      "role": "button.stop"
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 2,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "STOP",
+      "TYPE": "ACTION",
+      "DEFAULT": false,
+      "CONTROL": "BLIND_VIRTUAL_RECEIVER.STOP"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1675547772885,
+    "_id": "hm-rpc.0.001658A99FD264.2.STOP",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  }
+}

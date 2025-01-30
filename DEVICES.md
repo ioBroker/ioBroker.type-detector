@@ -505,8 +505,7 @@ In [brackets] is given the class name of device.
 |   | BRIGHTNESS      |                               |      | number  | W  |     |      | `/^level\.brightness$/`                                                      |
 |   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
-|   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |
+|   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch(\.light)?$｜^state$/`                                               |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |      | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
 |   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |      | `/^time(\.span｜\.interval)$/`                                                |
 |   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |      | `/^value\.power$/`                                                           |

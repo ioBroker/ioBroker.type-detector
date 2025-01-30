@@ -1,0 +1,426 @@
+{
+    "hue.0.Büro": {
+        "_id": "hue.0.Büro",
+        "type": "channel",
+        "common": {
+            "name": "Büro",
+            "role": "Room",
+            "enums": [
+                {
+                    "_id": "enum.functions.Hue",
+                    "common": {
+                        "name": "Hue",
+                        "color": "",
+                        "desc": ""
+                    },
+                    "native": {},
+                    "type": "enum"
+                }
+            ]
+        },
+        "native": {
+            "id": "6",
+            "type": "Room",
+            "name": "Büro",
+            "lights": [
+                "5",
+                "4"
+            ]
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718078,
+        "acl": {
+            "object": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        }
+    },
+    "hue.0.Büro.alert": {
+        "_id": "hue.0.Büro.alert",
+        "type": "state",
+        "common": {
+            "type": "string",
+            "name": "Büro.alert",
+            "read": true,
+            "write": true,
+            "role": "switch",
+            "def": "select"
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718052,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": "select",
+        "ack": true
+    },
+    "hue.0.Büro.allOn": {
+        "_id": "hue.0.Büro.allOn",
+        "type": "state",
+        "common": {
+            "name": "Büro.allOn",
+            "type": "boolean",
+            "role": "indicator.switch",
+            "read": true,
+            "write": true,
+            "def": false
+        },
+        "native": {},
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718073,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": false,
+        "ack": true
+    },
+    "hue.0.Büro.anyOn": {
+        "_id": "hue.0.Büro.anyOn",
+        "type": "state",
+        "common": {
+            "name": "Büro.anyOn",
+            "type": "boolean",
+            "role": "indicator.switch",
+            "read": true,
+            "write": true,
+            "def": false
+        },
+        "native": {},
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718070,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": false,
+        "ack": true
+    },
+    "hue.0.Büro.b": {
+        "_id": "hue.0.Büro.b",
+        "type": "state",
+        "common": {
+            "type": "number",
+            "name": "Büro.b",
+            "read": true,
+            "write": true,
+            "role": "level.color.blue",
+            "min": 0,
+            "max": 255,
+            "def": 0
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718063,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hue.0.Büro.bri": {
+        "_id": "hue.0.Büro.bri",
+        "type": "state",
+        "common": {
+            "type": "number",
+            "name": "Büro.bri",
+            "read": true,
+            "write": true,
+            "role": "level.dimmer",
+            "min": 0,
+            "max": 254,
+            "def": 254,
+            "enums": [
+                {
+                    "_id": "enum.rooms.Office",
+                    "common": {
+                        "name": {
+                            "en": "Office",
+                            "de": "Büro",
+                            "ru": "Офис",
+                            "fr": "Bureau",
+                            "nl": "Kantoor"
+                        },
+                        "desc": ""
+                    },
+                    "native": {
+                        "Name": "roomOffice",
+                        "TypeName": "ENUM",
+                        "EnumInfo": ""
+                    },
+                    "type": "enum"
+                }
+            ]
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718047,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hue.0.Büro.class": {
+        "_id": "hue.0.Büro.class",
+        "type": "state",
+        "common": {
+            "type": "string",
+            "name": "Büro.class",
+            "role": "indicator",
+            "read": true,
+            "write": false,
+            "def": "Office"
+        },
+        "native": {},
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718075,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": "Office",
+        "ack": true
+    },
+    "hue.0.Büro.colormode": {
+        "_id": "hue.0.Büro.colormode",
+        "type": "state",
+        "common": {
+            "type": "string",
+            "name": "Büro.colormode",
+            "read": true,
+            "write": false,
+            "role": "sensor.colormode",
+            "def": "ct"
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718054,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": "ct",
+        "ack": true
+    },
+    "hue.0.Büro.command": {
+        "_id": "hue.0.Büro.command",
+        "type": "state",
+        "common": {
+            "type": "string",
+            "name": "Büro.command",
+            "read": true,
+            "write": true,
+            "role": "command",
+            "def": "{}"
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718066,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": "{}",
+        "ack": true
+    },
+    "hue.0.Büro.ct": {
+        "_id": "hue.0.Büro.ct",
+        "type": "state",
+        "common": {
+            "type": "number",
+            "name": "Büro.ct",
+            "read": true,
+            "write": true,
+            "role": "level.color.temperature",
+            "unit": "°K",
+            "min": 1802,
+            "max": 6536,
+            "def": 2915
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718050,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 2257,
+        "ack": true
+    },
+    "hue.0.Büro.g": {
+        "_id": "hue.0.Büro.g",
+        "type": "state",
+        "common": {
+            "type": "number",
+            "name": "Büro.g",
+            "read": true,
+            "write": true,
+            "role": "level.color.green",
+            "min": 0,
+            "max": 255,
+            "def": 0
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718059,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hue.0.Büro.level": {
+        "_id": "hue.0.Büro.level",
+        "type": "state",
+        "common": {
+            "type": "number",
+            "name": "Büro.level",
+            "read": true,
+            "write": true,
+            "role": "level.dimmer",
+            "min": 0,
+            "max": 100,
+            "def": 0
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718068,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    },
+    "hue.0.Büro.on": {
+        "_id": "hue.0.Büro.on",
+        "type": "state",
+        "common": {
+            "type": "boolean",
+            "name": "Büro.on",
+            "read": true,
+            "write": true,
+            "role": "switch",
+            "def": false,
+            "enums": [
+                {
+                    "_id": "enum.rooms.Office",
+                    "common": {
+                        "name": {
+                            "en": "Office",
+                            "de": "Büro",
+                            "ru": "Офис",
+                            "fr": "Bureau",
+                            "nl": "Kantoor"
+                        },
+                        "desc": ""
+                    },
+                    "native": {
+                        "Name": "roomOffice",
+                        "TypeName": "ENUM",
+                        "EnumInfo": ""
+                    },
+                    "type": "enum"
+                }
+            ]
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718042,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": false,
+        "ack": true
+    },
+    "hue.0.Büro.r": {
+        "_id": "hue.0.Büro.r",
+        "type": "state",
+        "common": {
+            "type": "number",
+            "name": "Büro.r",
+            "read": true,
+            "write": true,
+            "role": "level.color.red",
+            "min": 0,
+            "max": 255,
+            "def": 0
+        },
+        "native": {
+            "id": "6"
+        },
+        "from": "system.adapter.hue.0",
+        "user": "system.user.admin",
+        "ts": 1737527718057,
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 0,
+        "ack": true
+    }
+}

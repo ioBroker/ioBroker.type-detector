@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- **/
+ */
 
 // Make sure when you add a new entry here to also add in lib/types with the
 // end user facing name for documentation
@@ -75,32 +75,88 @@ export enum StateType {
 }
 
 export interface InternalDetectorState {
-    role?: RegExp; // RegEx to detect role
-    channelRole?: RegExp; // RegEx to detect a channel role of state
-    ignoreRole?: RegExp; // RegEx to ignore some specific roles
-    indicator?: boolean; // is it will be shown like a small icon or as a value
-    type?: StateType | StateType[]; // state type: 'number', 'string' or 'boolean' or array of possible values
-    name: string; // own TAG of the state to process it in the logic
-    write?: boolean; // if set to true or false, it will be checked the write attribute, if no attribute, so "false" will be assumed
-    read?: boolean; // if set to true or false, it will be checked the write attribute, if no attribute, so "true" will be assumed
-    min?: StateType; // type of attribute: number', 'string' or 'boolean'. This attribute must exist in common
-    max?: StateType; // type of attribute: number', 'string' or 'boolean'. This attribute must exist in common
-    required?: boolean; // if required to detect the pattern as valid
-    noSubscribe?: boolean; // no automatic subscription for this state (e.g., if write-only)
-    searchInParent?: boolean; // if this pattern should be searched in a device too and not only in channel
-    enums?: (obj: ioBroker.Object, enums: string[]) => boolean; // function to execute custom category detection
-    multiple?: boolean; // if more than one state may have this pattern in channel
-    noDeviceDetection?: boolean; // do not search indicators in a parent device
-    notSingle?: boolean; // this state may belong to more than one tile simultaneously (e.g., volume tile and media with volume)
-    inverted?: boolean; // if the state of indicator must be inverted
-    stateName?: RegExp; // regex for state names (IDs). Not suggested
-    defaultStates?: { [key: string]: string }; // is for detection irrelevant, but will be used by iobroker.devices.
-    defaultRole?: string; // is for detection irrelevant, but will be used by iobroker.devices - only states WITH defaultRole will show up in UI.
-    defaultUnit?: string; // is for detection irrelevant, but will be used by iobroker.devices.
-    defaultType?: StateType; // is for detection irrelevant, but will be used by iobroker.devices.
-    defaultChannelRole?: string; // is for detection irrelevant, but will be used by iobroker.devices.
+    /** RegEx to detect role */
+    role?: RegExp;
+
+    /** RegEx to detect channel role of state */
+    channelRole?: RegExp;
+
+    /** RegEx to ignore some specific roles */
+    ignoreRole?: RegExp;
+
+    /** Is it will be shown like a small icon or as a value */
+    indicator?: boolean;
+
+    /** State type: 'number', 'string' or 'boolean' or array of possible values */
+    type?: StateType | StateType[];
+
+    /** Own TAG of the state to process it in the logic */
+    name: string;
+
+    /** If set to true or false, it will be checked the write attribute, if no attribute, so "false" will be assumed */
+    write?: boolean;
+
+    /** If set to true or false, it will be checked the write attribute, if no attribute, so "true" will be assumed */
+    read?: boolean;
+
+    /** Type of attribute: number', 'string' or 'boolean'. This attribute must exist in common */
+    min?: StateType;
+
+    /** Type of attribute: number', 'string' or 'boolean'. This attribute must exist in common */
+    max?: StateType;
+
+    /** If required to detect the pattern as valid */
+    required?: boolean;
+
+    /** No automatic subscription for this state (e.g., if write-only) */
+    noSubscribe?: boolean;
+
+    /** If this pattern should be searched in a device too and not only in channel */
+    searchInParent?: boolean;
+
+    /** Function to execute custom category detection */
+    enums?: (obj: ioBroker.Object, enums: string[]) => boolean;
+
+    /** If more than one state may have this pattern in channel */
+    multiple?: boolean;
+
+    /** Do not search indicators in a parent device */
+    noDeviceDetection?: boolean;
+
+    /** This state may belong to more than one tile simultaneously (e.g., volume tile and media with volume) */
+    notSingle?: boolean;
+
+    /** If the state of indicator must be inverted */
+    inverted?: boolean;
+
+    /** Regex for state names (IDs). Not suggested */
+    stateName?: RegExp;
+
+    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    defaultStates?: { [key: string]: string };
+
+    /**
+     * Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter
+     * Only states WITH defaultRole will show up in UI.
+     */
+    defaultRole?: string;
+
+    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    defaultUnit?: string;
+
+    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    defaultType?: StateType;
+
+    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    defaultChannelRole?: string;
+
+    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
     unit?: string;
+
+    /** ?? */
     objectType?: string;
+
+    /** ?? */
     state?: RegExp;
 }
 
@@ -114,13 +170,45 @@ export interface ExternalDetectorState extends Omit<InternalDetectorState, 'enum
 }
 
 export interface DetectOptions {
-    objects: Record<string, ioBroker.Object>; // all objects
+    /** All objects */
+    objects: Record<string, ioBroker.Object>;
+
+    /** ID to detect of state, device or channel */
     id: string;
-    _keysOptional?: string[]; // For optimization, it is Object.keys(objects)
-    _usedIdsOptional?: string[]; // For optimization, initially it is empty array
-    ignoreIndicators?: string[]; // List of state names, that will be ignored. E.g., ['UNREACH_STICKY']
-    allowedTypes?: Types[]; // List of allowed types. E.g., ['channel', 'device', 'state']
-    excludedTypes?: Types[]; // List of excluded types. E.g., ['channel', 'device', 'state']
+
+    /** List of state names, that will be ignored. E.g., ['UNREACH_STICKY'] */
+    ignoreIndicators?: string[];
+
+    /** List of allowed types. E.g., ['channel', 'device', 'state'] */
+    allowedTypes?: Types[];
+
+    /** List of excluded types. E.g., ['channel', 'device', 'state'] */
+    excludedTypes?: Types[];
+
+    /** If true, the cache will be ignored */
+    ignoreCache?: boolean;
+
+    /**
+     * If true, the enums will be ignored. Will be set to true automatically if allowedTypes has exactly 1 entry
+     */
+    ignoreEnums?: boolean;
+
+    /**
+     * If true, the usedIds will be ignored and all wanted types are detected with all available states. Only use for
+     * limited object cases. It automatically excludes "info" type
+     */
+    detectAllPossibleDevices?: boolean;
+
+    // Internally used infos and caches
+
+    /** For optimization, it is Object.keys(objects) */
+    _keysOptional?: string[];
+
+    /** For optimization, initially it is empty array */
+    _usedIdsOptional?: string[];
+
+    /** For optimization, initially it is empty array */
+    _checkedPatterns?: Types[];
 }
 
 export interface DetectorContext {
@@ -132,6 +220,7 @@ export interface DetectorContext {
     result: PatternControl | null;
     pattern: Types;
     state: InternalDetectorState;
+    ignoreEnums: boolean;
 }
 
 export interface InternalPatternControl {
