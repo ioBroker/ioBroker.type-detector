@@ -845,21 +845,13 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultUnit: '°K',
             },
             {
-                role: /^switch\.light$/,
+                role: /^switch(\.light)?$|^state$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
                 name: 'ON',
                 required: false,
                 defaultRole: 'switch.light',
-            },
-            {
-                role: /^switch$/,
-                indicator: false,
-                type: StateType.Boolean,
-                write: true,
-                name: 'ON',
-                required: false,
             },
             {
                 role: /^(state|switch|sensor)\.light|switch$/,
