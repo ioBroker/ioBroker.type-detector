@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- **/
+ */
 
 import {
     type DetectOptions,
@@ -48,6 +48,7 @@ export class ChannelDetector {
         objects: Record<string, ioBroker.Object>,
         id: string,
         statePattern: InternalDetectorState,
+        ignoreEnums: boolean,
     ): boolean {
         if (objects[id] && objects[id].common) {
             let role = null;
@@ -141,7 +142,7 @@ export class ChannelDetector {
 
             if (statePattern.enums && typeof statePattern.enums === 'function') {
                 const enums = this._getEnumsForId(objects, id);
-                if (!statePattern.enums(objects[id], enums || [])) {
+                if (!ignoreEnums && !statePattern.enums(objects[id], enums || [])) {
                     return false;
                 }
             }
@@ -190,19 +191,20 @@ export class ChannelDetector {
     }
 
     private _testOneState(context: DetectorContext): boolean {
-        const objects: Record<string, ioBroker.Object> = context.objects;
-        const pattern: Types = context.pattern;
-        const state: InternalDetectorState = context.state;
-        const channelStates: string[] = context.channelStates;
-        const usedIds: string[] = context.usedIds;
-        const usedInCurrentDevice: string[] = context.usedInCurrentDevice;
-        const ignoreIndicators: string[] = context.ignoreIndicators;
+        const objects = context.objects;
+        const pattern = context.pattern;
+        const state = context.state;
+        const channelStates = context.channelStates;
+        const usedIds = context.usedIds;
+        const usedInCurrentDevice = context.usedInCurrentDevice;
+        const ignoreIndicators = context.ignoreIndicators;
+        const ignoreEnums = context.ignoreEnums;
         let result: PatternControl | null = context.result;
         let found = false;
         // let count = 0;
 
         // check every state in channel
-        channelStates.forEach(_id => {
+        for (const _id of channelStates) {
             // this is only valid if no one state could be multiple
             // if (result && count >= result.states.length) {
             //     // do not look for more states as all possible found
@@ -211,7 +213,7 @@ export class ChannelDetector {
 
             // one exception: if we already found a state with name COVER, so ignore the second one
             if (state.name === 'COVER' && result?.states.find(e => e.id && e.name === 'COVER')) {
-                return;
+                continue;
             }
 
             if (state.indicator && ignoreIndicators) {
@@ -220,7 +222,7 @@ export class ChannelDetector {
 
                 if (lastStateName && ignoreIndicators.includes(lastStateName)) {
                     // console.log(`${_id} ignored`);
-                    return;
+                    continue;
                 }
             }
 
@@ -228,7 +230,7 @@ export class ChannelDetector {
                 (state.indicator ||
                     (!usedInCurrentDevice.includes(_id) && // not used in a current device and pattern
                         (state.notSingle || !usedIds.includes(_id)))) && // or not used globally
-                this._applyPattern(objects, _id, state)
+                this._applyPattern(objects, _id, state, ignoreEnums)
             ) {
                 if (!state.indicator) {
                     usedInCurrentDevice.push(_id);
@@ -269,7 +271,7 @@ export class ChannelDetector {
                                 (state.indicator ||
                                     (!usedInCurrentDevice.includes(cid) &&
                                         (state.notSingle || !usedIds.includes(cid)))) &&
-                                this._applyPattern(objects, cid, state)
+                                this._applyPattern(objects, cid, state, ignoreEnums)
                             ) {
                                 if (!state.indicator) {
                                     usedInCurrentDevice.push(cid);
@@ -290,7 +292,7 @@ export class ChannelDetector {
                     }
                 }
             }
-        });
+        }
         return found;
     }
 
@@ -377,10 +379,10 @@ export class ChannelDetector {
 
     private _detectNext(options: DetectOptions): PatternControl | null {
         const objects = options.objects;
-        const id: string = options.id;
-        const keys: string[] = options._keysOptional || [];
-        let usedIds: string[] = options._usedIdsOptional || [];
-        const ignoreIndicators: string[] | undefined = options.ignoreIndicators;
+        const id = options.id;
+        const keys = options._keysOptional || [];
+        let usedIds = options._usedIdsOptional || [];
+        const ignoreIndicators = options.ignoreIndicators;
 
         if (!usedIds) {
             usedIds = [];
@@ -389,6 +391,9 @@ export class ChannelDetector {
 
         if (!objects[id] || !objects[id].common) {
             return null;
+        }
+        if (options._checkedPatterns === undefined) {
+            options._checkedPatterns = [];
         }
 
         const context: DetectorContext = {
@@ -400,30 +405,36 @@ export class ChannelDetector {
             pattern: Types.unknown,
             usedInCurrentDevice: [],
             state: {} as InternalDetectorState,
+            ignoreEnums: !!options.ignoreEnums,
         };
 
         for (const pattern in patterns) {
-            if (!ChannelDetector.patternIsAllowed(patterns[pattern], options.allowedTypes, options.excludedTypes)) {
+            if (
+                options._checkedPatterns.includes(pattern as Types) ||
+                !ChannelDetector.patternIsAllowed(patterns[pattern], options.allowedTypes, options.excludedTypes)
+            ) {
                 continue;
             }
+            options._checkedPatterns.push(pattern as Types);
 
             context.result = null;
 
             context.pattern = pattern as Types;
             context.usedInCurrentDevice = [];
-            patterns[pattern].states.forEach(state => {
+            for (const state of patterns[pattern].states) {
                 let found = false;
 
                 // one of the following
                 context.state = state;
                 if (this._testOneState(context)) {
+                    console.log(state.name, 'used in current device', context.usedInCurrentDevice);
                     found = true;
                 }
                 if (state.required && !found) {
                     context.result = null;
-                    return false;
+                    break;
                 }
-            });
+            }
 
             if (!ChannelDetector.allRequiredStatesFound(context)) {
                 continue;
@@ -446,7 +457,12 @@ export class ChannelDetector {
                         context.result?.states.forEach((state, i) => {
                             if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
                                 if (
-                                    this._applyPattern(objects, _id, state.original as InternalDetectorState) &&
+                                    this._applyPattern(
+                                        objects,
+                                        _id,
+                                        state.original as InternalDetectorState,
+                                        !!options.ignoreEnums,
+                                    ) &&
                                     context.result
                                 ) {
                                     context.result.states[i].id = _id;
@@ -491,8 +507,19 @@ export class ChannelDetector {
         let _usedIdsOptional = options._usedIdsOptional;
         // let ignoreIndicators  = options.ignoreIndicators;
 
-        if (this.cache[id] !== undefined) {
-            return this.cache[id];
+        if (!options.ignoreCache && this.cache[id]) {
+            // We validate if the cache matches the requirements and if not skip the cache
+            if (!options.allowedTypes && !options.excludedTypes) {
+                return this.cache[id];
+            }
+            const allowedTypes = options.allowedTypes ?? [];
+            const excludedTypes = options.excludedTypes ?? [];
+            const result = this.cache[id].filter(
+                ({ type }) => allowedTypes.includes(type) && !excludedTypes.includes(type),
+            );
+            if (result.length) {
+                return result;
+            }
         }
 
         if (!_keysOptional) {
@@ -506,11 +533,26 @@ export class ChannelDetector {
             options._usedIdsOptional = _usedIdsOptional;
         }
 
+        // When we do want to detect a special device type we can ignore enums
+        if (options.ignoreEnums === undefined && options.allowedTypes && options.allowedTypes.length === 1) {
+            options.ignoreEnums = true;
+        }
+        if (options.detectAllPossibleDevices) {
+            options.excludedTypes = options.excludedTypes || [];
+            if (!options.excludedTypes.includes(Types.info)) {
+                options.excludedTypes.push(Types.info);
+            }
+        }
+        options._checkedPatterns = [];
+
         const result = [];
         let detected;
 
         while ((detected = this._detectNext(options))) {
             result.push(detected);
+            if (options.detectAllPossibleDevices) {
+                options._usedIdsOptional = [];
+            }
         }
 
         this.cache[id] = result.length ? result : null;
