@@ -102,6 +102,7 @@ if (controls) {
 -   (@Apollon77) Added default unit for volume states
 -   (@Apollon77) Added new option ignoreEnums to execute the detection without enums-matching logic
 -   (@Apollon77) Added new option detectAllPossibleDevices to detect multiple devices in one run without checking for already used IDs
+-   (@Garfonso) Added missing default roles and units for saturation
 
 ### 4.1.1 (2024-12-15)
 -   (@Apollon77) Fixed default unit for Illuminance to "lux"
