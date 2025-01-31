@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.2.0 (2025-01-31)
 -   (@GermanBluefox) Added detection of `level.direction`
 -   (@Apollon77) Added door state for device type "lock"
 -   (@Apollon77) Added default unit for volume states
