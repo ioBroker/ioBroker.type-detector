@@ -216,6 +216,7 @@ In [brackets] is given the class name of device.
 | * | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |      | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               |      | number  | W  |     |      | `/^level\.brightness$/`                                                      |
+|   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |      | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
