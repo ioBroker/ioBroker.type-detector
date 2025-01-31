@@ -427,7 +427,6 @@ export class ChannelDetector {
                 // one of the following
                 context.state = state;
                 if (this._testOneState(context)) {
-                    console.log(state.name, 'used in current device', context.usedInCurrentDevice);
                     found = true;
                 }
                 if (state.required && !found) {
