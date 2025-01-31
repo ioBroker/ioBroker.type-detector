@@ -1305,6 +1305,14 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
             },
             {
+                role: /^level\.color\.saturation$/,
+                indicator: false,
+                type: StateType.Number,
+                write: true,
+                name: 'SATURATION',
+                required: false,
+            },
+            {
                 role: /^switch\.light$/,
                 indicator: false,
                 type: StateType.Boolean,
