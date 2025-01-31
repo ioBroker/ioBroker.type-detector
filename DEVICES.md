@@ -432,19 +432,20 @@ In [brackets] is given the class name of device.
 
 
 ### Lock [lock]
-| R | Name      | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                        |
-|---|-----------|-------------------------------|------|---------|----|-----|------|------------------------------------------------------------------------------|
-| * | SET       | switch.lock                   |      | boolean | W  |     |      | `/^switch\.lock$/`                                                           |
-|   | ACTUAL    | state                         |      | boolean | -  |     |      | `/^state$/`                                                                  |
-|   | OPEN      | button                        |      | boolean | W  |     |      |                                                                              |
-|   | DIRECTION | indicator.direction           |      | boolean |    | X   |      | `/^indicator\.direction$/`                                                   |
-|   | DIRECTION | value.direction               |      | number  |    |     |      | `/^(indicator｜value)\.direction$/`                                           |
-|   | WORKING   | indicator.working             |      |         |    | X   |      | `/^indicator\.working$/`                                                     |
-|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN  | indicator.maintenance         |      | boolean |    | X   |      | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR     | indicator.error               |      |         |    | X   |      | `/^indicator\.error$/`                                                       |
-|   | BATTERY   | value.battery                 | %    | number  | -  |     |      | `/^value\.battery$/`                                                         |
+| R | Name       | Role                          | Unit | Type    | Wr | Ind | Mult | Regex                                                                        |
+|---|------------|-------------------------------|------|---------|----|-----|------|------------------------------------------------------------------------------|
+| * | SET        | switch.lock                   |      | boolean | W  |     |      | `/^switch\.lock$/`                                                           |
+|   | ACTUAL     | state                         |      | boolean | -  |     |      | `/^state$/`                                                                  |
+|   | OPEN       | button                        |      | boolean | W  |     |      |                                                                              |
+|   | DOOR_STATE | sensor.door                   |      | boolean | -  |     |      | `/^state?$｜^state(\.door)?$｜^sensor(\.door)?/`                               |
+|   | DIRECTION  | indicator.direction           |      | boolean |    | X   |      | `/^indicator\.direction$/`                                                   |
+|   | DIRECTION  | value.direction               |      | number  |    |     |      | `/^(indicator｜value)\.direction$/`                                           |
+|   | WORKING    | indicator.working             |      |         |    | X   |      | `/^indicator\.working$/`                                                     |
+|   | UNREACH    | indicator.maintenance.unreach |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |
+|   | LOWBAT     | indicator.maintenance.lowbat  |      | boolean |    | X   |      | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
+|   | MAINTAIN   | indicator.maintenance         |      | boolean |    | X   |      | `/^indicator\.maintenance$/`                                                 |
+|   | ERROR      | indicator.error               |      |         |    | X   |      | `/^indicator\.error$/`                                                       |
+|   | BATTERY    | value.battery                 | %    | number  | -  |     |      | `/^value\.battery$/`                                                         |
 
 
 ### Media [mediaPlayer]
@@ -503,8 +504,7 @@ In [brackets] is given the class name of device.
 |   | BRIGHTNESS      |                               |      | number  | W  |     |      | `/^level\.brightness$/`                                                      |
 |   | SATURATION      | level.color.saturation        | %    | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
-|   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |
+|   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch(\.light)?$｜^state$/`                                               |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |      | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
 |   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |      | `/^time(\.span｜\.interval)$/`                                                |
 |   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |      | `/^value\.power$/`                                                           |
@@ -647,8 +647,8 @@ In [brackets] is given the class name of device.
 ### Volume [volume]
 | R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Mult | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-----|-----|------|------------------------------------------------------------------------------|
-| * | SET      | level.volume                  |      | number  | W  | m   | M   |     |      | `/^level\.volume$/`                                                          |
-|   | ACTUAL   | value.volume                  |      | number  | -  | m   | M   |     |      | `/^value\.volume$/`                                                          |
+| * | SET      | level.volume                  | %    | number  | W  | m   | M   |     |      | `/^level\.volume$/`                                                          |
+|   | ACTUAL   | value.volume                  | %    | number  | -  | m   | M   |     |      | `/^value\.volume$/`                                                          |
 |   | MUTE     | media.mute                    |      | boolean | W  |     |     |     |      | `/^media\.mute$/`                                                            |
 |   | WORKING  | indicator.working             |      |         |    |     |     | X   |      | `/^indicator\.working$/`                                                     |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |      | `/^indicator(\.maintenance)?\.unreach$/`                                     |

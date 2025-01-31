@@ -3,8 +3,8 @@ const expect = require('chai').expect;
 
 function expectStateToHaveId(states, name, id, alternativeId) {
     const control = states.find(s => s.name === name);
-    expect(control).to.be.ok;
-    expect(control).to.have.property('id');
+    expect(control, `Failed checking ${name}`).to.be.ok;
+    expect(control, `Failed checking ${name}`).to.have.property('id');
     if (control.id !== id && control.id !== alternativeId) {
         expect(control.id).to.be.equal(id);
     }
@@ -530,6 +530,108 @@ function createTests(name, ChannelDetector, Types) {
             done();
         });
 
+        it(`${name} Must detect light correctly with allowedTypes`, done => {
+            const detector = new ChannelDetector();
+
+            const objects = require('./huergb.json');
+            Object.keys(objects).forEach(id => (objects[id]._id = id));
+
+            const options = {
+                objects,
+                id: 'hue.0.Büro',
+                _keysOptional: Object.keys(objects),
+                _usedIdsOptional: [],
+                allowedTypes: [Types.dimmer],
+            };
+
+            const controls = detector.detect(options);
+            console.dir(controls, { depth: null});
+            for (const types of controls) {
+                console.log(`Found ${types.type}`);
+            }
+            expect(controls[0].type).to.be.equal(Types.dimmer);
+            const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
+            expectMyStateToHaveId('ON_SET', 'hue.0.Büro.on');
+            expectMyStateToHaveId('SET', 'hue.0.Büro.level');
+
+            done();
+        });
+
+        it(`${name} Must detect multiple types`, done => {
+            const detector = new ChannelDetector();
+
+            const objects = require('./multi-detect.json');
+            Object.keys(objects).forEach(id => (objects[id]._id = id));
+
+            const options = {
+                objects,
+                id: 'hm-rpc.0.001658A99FD264.2',
+                _keysOptional: Object.keys(objects),
+                _usedIdsOptional: [],
+                ignoreEnums: true,
+                detectAllPossibleDevices: true,
+            };
+
+            const controls = detector.detect(options);
+            console.dir(controls, { depth: null});
+            for (const types of controls) {
+                console.log(`Found ${types.type}`);
+            }
+            expect(controls[0].type).to.be.equal(Types.blind);
+            const expectMyStateToHaveId0 = expectStateToHaveId.bind(null, controls[0].states);
+            expect(controls[0].states.filter(({id}) => !!id).length).to.be.equal(2);
+            expectMyStateToHaveId0('SET', 'hm-rpc.0.001658A99FD264.2.LEVEL');
+            expectMyStateToHaveId0('STOP', 'hm-rpc.0.001658A99FD264.2.STOP');
+
+            expect(controls[1].type).to.be.equal(Types.dimmer);
+            const expectMyStateToHaveId1 = expectStateToHaveId.bind(null, controls[1].states);
+            expect(controls[1].states.filter(({id}) => !!id).length).to.be.equal(1);
+            expectMyStateToHaveId1('SET', 'hm-rpc.0.001658A99FD264.2.LEVEL');
+
+            expect(controls[2].type).to.be.equal(Types.slider);
+            const expectMyStateToHaveId2 = expectStateToHaveId.bind(null, controls[2].states);
+            expect(controls[2].states.filter(({id}) => !!id).length).to.be.equal(1);
+            expectMyStateToHaveId2('SET', 'hm-rpc.0.001658A99FD264.2.LEVEL');
+
+            expect(controls[3].type).to.be.equal(Types.button);
+            const expectMyStateToHaveId3 = expectStateToHaveId.bind(null, controls[3].states);
+            expect(controls[3].states.filter(({id}) => !!id).length).to.be.equal(1);
+            expectMyStateToHaveId3('SET', 'hm-rpc.0.001658A99FD264.2.STOP');
+
+            done();
+        });
+
+        it(`${name} Must detect rgb correctly`, done => {
+            const detector = new ChannelDetector();
+
+            const objects = require('./huergb.json');
+            Object.keys(objects).forEach(id => (objects[id]._id = id));
+
+            const options = {
+                objects,
+                id: 'hue.0.Büro',
+                _keysOptional: Object.keys(objects),
+                _usedIdsOptional: [],
+            };
+
+            const controls = detector.detect(options);
+            //console.dir(controls, { depth: null});
+            for (const types of controls) {
+                console.log(`Found ${types.type}`);
+            }
+            expect(controls[0].type).to.be.equal(Types.rgb);
+            const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
+            expectMyStateToHaveId('ON', 'hue.0.Büro.on');
+            expectMyStateToHaveId('DIMMER', 'hue.0.Büro.level');
+            expectMyStateToHaveId('RED', 'hue.0.Büro.r');
+            expectMyStateToHaveId('GREEN', 'hue.0.Büro.g');
+            expectMyStateToHaveId('BLUE', 'hue.0.Büro.b');
+            expectMyStateToHaveId('TEMPERATURE', 'hue.0.Büro.ct');
+            expectMyStateToHaveId('DIMMER', 'hue.0.Büro.level');
+
+            done();
+        });
+
         it(`${name} Must detect lock correctly`, done => {
             const detector = new ChannelDetector();
 
@@ -544,13 +646,14 @@ function createTests(name, ChannelDetector, Types) {
             };
 
             const controls = detector.detect(options);
-            // console.dir(controls, { depth: null});
+            //console.dir(controls, { depth: null});
             for (const types of controls) {
                 console.log(`Found ${types.type}`);
             }
             expect(controls[0].type).to.be.equal(Types.lock);
             const expectMyStateToHaveId = expectStateToHaveId.bind(null, controls[0].states);
             expectMyStateToHaveId('SET', 'hm-rpc.0.LEQ090XYZ.1.STATE');
+            expectMyStateToHaveId('DOOR_STATE', 'hm-rpc.0.LEQ090XYZ.1.DOOR_STATE');
 
             done();
         });

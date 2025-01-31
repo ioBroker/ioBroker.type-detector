@@ -847,21 +847,13 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultUnit: '°K',
             },
             {
-                role: /^switch\.light$/,
+                role: /^switch(\.light)?$|^state$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
                 name: 'ON',
                 required: false,
                 defaultRole: 'switch.light',
-            },
-            {
-                role: /^switch$/,
-                indicator: false,
-                type: StateType.Boolean,
-                write: true,
-                name: 'ON',
-                required: false,
             },
             {
                 role: /^(state|switch|sensor)\.light|switch$/,
@@ -2319,6 +2311,15 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
                 defaultRole: 'button',
             },
+            {
+                role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,
+                indicator: false,
+                type: StateType.Boolean,
+                write: false,
+                name: 'DOOR_STATE',
+                required: false,
+                defaultRole: 'sensor.door',
+            },
             SharedPatterns.direction,
             SharedPatterns.direction_enum,
             SharedPatterns.working,
@@ -2572,6 +2573,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'SET',
                 required: true,
                 defaultRole: 'level.volume',
+                defaultUnit: '%',
             },
             // optional
             {
@@ -2584,6 +2586,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'ACTUAL',
                 required: false,
                 defaultRole: 'value.volume',
+                defaultUnit: '%',
             },
             {
                 role: /^media\.mute$/,
