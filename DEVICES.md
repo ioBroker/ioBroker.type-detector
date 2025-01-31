@@ -192,7 +192,7 @@ In [brackets] is given the class name of device.
 | * | CIE             | level.color.cie               |      | string  | W  |     |      | `/^level\.color\.cie$/`                                                      |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |      | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |      | `/^level\.brightness$/`                                                      |
-|   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
+|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch(\.light)?$/`                                                       |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |      | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
@@ -216,7 +216,6 @@ In [brackets] is given the class name of device.
 | * | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |      | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               |      | number  | W  |     |      | `/^level\.brightness$/`                                                      |
-|   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |      | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
@@ -308,7 +307,7 @@ In [brackets] is given the class name of device.
 | * | HUE             | level.color.hue               | °    | number  | W  |     |      | `/^level\.color\.hue$/`                                                      |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |      | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               |      | number  | W  |     |      | `/^level\.brightness$/`                                                      |
-|   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
+|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |
@@ -502,7 +501,7 @@ In [brackets] is given the class name of device.
 |   | WHITE           | level.color.white             |      | number  | W  |     |      | `/^level\.color\.white$/`                                                    |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |      | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               |      | number  | W  |     |      | `/^level\.brightness$/`                                                      |
-|   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
+|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |
@@ -527,7 +526,7 @@ In [brackets] is given the class name of device.
 | * | RGB             | level.color.rgb               |      | string  | W  |     |      | `/^level\.color\.rgb$/`                                                      |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |      | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |      | `/^level\.brightness$/`                                                      |
-|   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
+|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |
@@ -552,7 +551,7 @@ In [brackets] is given the class name of device.
 | * | RGBW            | level.color.rgbw              |      | string  | W  |     |      | `/^level\.color\.rgbw$/`                                                     |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |      | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |      | `/^level\.brightness$/`                                                      |
-|   | SATURATION      |                               |      | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
+|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |      | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |      | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |      | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |      | `/^switch$/`                                                                 |

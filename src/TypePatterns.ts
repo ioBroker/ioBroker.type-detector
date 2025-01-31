@@ -833,6 +833,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 name: 'SATURATION',
                 required: false,
+                defaultRole: 'level.color.saturation',
+                defaultUnit: '%',
             },
             {
                 role: /^level\.color\.temperature$/,
@@ -928,6 +930,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 name: 'SATURATION',
                 required: false,
+                defaultRole: 'level.color.saturation',
+                defaultUnit: '%',
             },
             {
                 role: /^level\.color\.temperature$/,
@@ -1023,6 +1027,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 name: 'SATURATION',
                 required: false,
+                defaultRole: 'level.color.saturation',
+                defaultUnit: '%',
             },
             {
                 role: /^level\.color\.temperature$/,
@@ -1118,6 +1124,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 name: 'SATURATION',
                 required: false,
+                defaultRole: 'level.color.saturation',
+                defaultUnit: '%',
             },
             {
                 role: /^level\.color\.temperature$/,
@@ -1206,6 +1214,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 name: 'SATURATION',
                 required: false,
+                defaultRole: 'level.color.saturation',
+                defaultUnit: '%',
             },
             {
                 role: /^level\.color\.temperature$/,
