@@ -96,6 +96,10 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added exported type `ExternalPatternControl` 
+-   (@GermanBluefox) Updated packages
+
 ### 4.2.0 (2025-01-31)
 -   (@GermanBluefox) Added detection of `level.direction`
 -   (@Apollon77) Added door state for device type "lock"
