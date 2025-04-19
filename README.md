@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.2.1 (2025-04-19)
 -   (@GermanBluefox) Added exported type `ExternalPatternControl` 
 -   (@GermanBluefox) Updated packages
 
