@@ -2950,6 +2950,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: false,
                 type: StateType.String,
                 name: 'URL',
+                defaultRole: 'icon',
                 required: true,
             },
             SharedPatterns.unreach,
