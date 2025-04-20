@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import type { PatternWords } from './types';
+import type { PatternLanguages, PatternWords } from './types';
 
 export function checkEnum(enums: string[], words: PatternWords): boolean {
     let found = false;
@@ -34,7 +34,7 @@ export function checkEnum(enums: string[], words: PatternWords): boolean {
             }
             for (const lang in words) {
                 if (Object.prototype.hasOwnProperty.call(words, lang)) {
-                    if (words[lang as 'en' | 'ru' | 'de'].find(reg => reg.test(en))) {
+                    if (words[lang as PatternLanguages].find(reg => reg.test(en))) {
                         found = true;
                         return false;
                     }
@@ -46,7 +46,7 @@ export function checkEnum(enums: string[], words: PatternWords): boolean {
 }
 
 export function roleOrEnum(obj: ioBroker.Object, enums: string[], roles: string[], words: PatternWords): boolean {
-    if (roles && obj.common.role && roles.includes(obj.common.role)) {
+    if (obj.common.role && roles?.includes(obj.common.role)) {
         return true;
     }
     return checkEnum(enums, words);
@@ -121,7 +121,7 @@ export function roleOrEnumDoor(obj: ioBroker.Object, enums: string[]): boolean {
 
 export function getEnums(): Record<
     'door' | 'window' | 'blind' | 'gate' | 'light',
-    { roles: string[]; words: { [lang: string]: RegExp[] } }
+    { roles: string[]; words: PatternWords }
 > {
     return {
         door: {

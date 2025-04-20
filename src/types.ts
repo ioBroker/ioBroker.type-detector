@@ -267,4 +267,5 @@ export interface ExternalPatternControl {
     enumRequired?: boolean;
 }
 
-export type PatternWords = Record<'en' | 'de' | 'ru', RegExp[]>;
+export type PatternLanguages = 'en' | 'de' | 'ru';
+export type PatternWords = Record<PatternLanguages, RegExp[]>;
