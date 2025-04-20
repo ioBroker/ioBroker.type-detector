@@ -96,6 +96,10 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added default role for `image`
+-   (@GermanBluefox) Added exported type `ExternalDetectorState`
+
 ### 4.2.1 (2025-04-19)
 -   (@GermanBluefox) Added exported type `ExternalPatternControl` 
 -   (@GermanBluefox) Updated packages
