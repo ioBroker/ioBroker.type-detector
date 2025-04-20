@@ -523,19 +523,15 @@ export class ChannelDetector {
      *                  excludedTypes - array with names of device types, that must be ignored. The listed device types will be ignored.
      */
     public detect(options: DetectOptions): PatternControl[] | null {
-        const objects = options.objects;
-        const id = options.id;
-        let _keysOptional = options._keysOptional;
-        let _usedIdsOptional = options._usedIdsOptional;
-        // let ignoreIndicators  = options.ignoreIndicators;
+        const { objects, id, ignoreCache, detectAllPossibleDevices } = options;
+        let { _keysOptional, _usedIdsOptional } = options;
 
-        if (!options.ignoreCache && this.cache[id]) {
+        if (!ignoreCache && this.cache[id]) {
             // We validate if the cache matches the requirements and if not skip the cache
-            if (!options.allowedTypes && !options.excludedTypes) {
+            const { allowedTypes = [], excludedTypes = [] } = options;
+            if (!allowedTypes.length && !excludedTypes.length) {
                 return this.cache[id];
             }
-            const allowedTypes = options.allowedTypes ?? [];
-            const excludedTypes = options.excludedTypes ?? [];
             const result = this.cache[id].filter(
                 ({ type }) => allowedTypes.includes(type) && !excludedTypes.includes(type),
             );
