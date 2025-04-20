@@ -33,7 +33,7 @@ export function getObjectsBelowIdSimple(keys, startId) {
 describe(`Unit tests`, () => {
     it(`getObjectsBelowId`, done => {
         const gStart = Date.now();
-        console.log('Generate Test data...')
+        console.log('Generate Test data...');
         const data = getData(5, 20);
         console.log(`Generated in ${Date.now() - gStart}ms`);
         // find brunch with most objects
