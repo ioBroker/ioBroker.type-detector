@@ -1557,7 +1557,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.mode.boost',
             },
             {
-                role: /^switch\.power$/,
+                role: /^switch(\.power)?$/,
                 indicator: false,
                 write: true,
                 type: [StateType.Boolean, StateType.Number],
@@ -1575,15 +1575,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'PARTY',
                 required: false,
                 defaultRole: 'switch.mode.party',
-            },
-            {
-                role: /^switch$/,
-                indicator: false,
-                write: true,
-                type: StateType.Boolean,
-                searchInParent: true,
-                name: 'POWER',
-                required: false,
             },
             {
                 role: /^level(\.mode)?\.thermostat$/,
@@ -2266,7 +2257,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button',
             },
             {
-                role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,
+                role: /^state(\.door)?$|^sensor(\.door)?/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2288,7 +2279,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     motion: {
         states: [
             {
-                role: /^state\.motion$|^sensor\.motion$/,
+                role: /^state$|^sensor\.motion$/,
                 indicator: false,
                 type: StateType.Boolean,
                 name: 'ACTUAL',
@@ -2336,7 +2327,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     windowTilt: {
         states: [
             {
-                role: /^state?$|^value(\.window)?$/,
+                role: /^state$|^value(\.window)?$/,
                 indicator: false,
                 type: StateType.Number,
                 enums: roleOrEnumWindow,
@@ -2397,7 +2388,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     door: {
         states: [
             {
-                role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,
+                role: /^state(\.door)?$|^sensor(\.door)?/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2759,7 +2750,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^state$|^state\.active$/,
+                role: /^state(\.active)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
