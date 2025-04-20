@@ -487,20 +487,19 @@ export class ChannelDetector {
         const {
             objects,
             id,
-            _keysOptional: sortedKeys = [],
             _usedIdsOptional: usedIds = [],
             ignoreIndicators,
             prioritizedTypes,
             detectParent,
             allowedTypes,
             excludedTypes,
-            _keysOptional,
+            _keysOptional, // sorted keys
         } = options;
         let { _patternList } = options;
 
         options._usedIdsOptional = usedIds;
 
-        const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, sortedKeys || [], detectParent);
+        const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, _keysOptional || [], detectParent);
         // We have no ID for that object and also no objects below, so skip it
         if (!objects[id]?.common && !channelStates.length) {
             return null;
@@ -572,7 +571,7 @@ export class ChannelDetector {
                     (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device') &&
                     context.result
                 ) {
-                    deviceStates = getObjectsBelowId(sortedKeys, deviceId);
+                    deviceStates = getObjectsBelowId(_keysOptional!, deviceId);
                     deviceStates.forEach(_id => {
                         context.result!.states.forEach((state, i) => {
                             if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
