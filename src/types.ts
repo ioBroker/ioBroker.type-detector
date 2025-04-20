@@ -192,8 +192,11 @@ export interface DetectOptions {
     /** List of excluded types. E.g., ['rgb', 'rgbSingle'] */
     excludedTypes?: Types[];
 
-    /** List of Types to prioritize before the others. */
-    prioritizedTypes?: Types[];
+    /**
+     * List of Types to prioritize before the others.
+     * Example: [[Types.hue, Types.rgb], [Types.RgbSingle, Types.RGB]] moves Hue before RGB and RGBSingle also before RGB
+     */
+    prioritizedTypes?: [moveThisType: Types, beforeThatType: Types][];
 
     /**
       If true, the cache will be ignored

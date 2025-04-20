@@ -461,6 +461,20 @@ export class ChannelDetector {
         }
     }
 
+    /** Sorts the list of Type patterns using the definition of the prioritized ones */
+    private sortTypes(typeList: Types[], prioritizedTypes: [moveThisType: Types, beforeThatType: Types][]): Types[] {
+        prioritizedTypes.forEach(([moveThisType, beforeThatType]) => {
+            const fromIndex = typeList.indexOf(moveThisType);
+            const toIndex = typeList.indexOf(beforeThatType);
+            if (fromIndex === -1 || toIndex === -1) {
+                return;
+            }
+            const fromType = typeList.splice(fromIndex, 1);
+            typeList.splice(toIndex, 0, ...fromType);
+        });
+        return typeList;
+    }
+
     private _detectNext(options: DetectOptions): PatternControl | null {
         const {
             objects,
@@ -485,18 +499,10 @@ export class ChannelDetector {
         options._checkedPatterns = options._checkedPatterns ?? [];
 
         if (!_patternList) {
-            const patternsToCheck = new Array<string>();
-            if (prioritizedTypes) {
-                patternsToCheck.push(...prioritizedTypes);
-            }
-            patternsToCheck.push(
-                ...Object.keys(patterns).filter(
-                    pattern => !prioritizedTypes || !prioritizedTypes.includes(pattern as Types),
-                ),
-            );
-            _patternList = patternsToCheck.filter(pattern =>
+            const allPatterns = Object.keys(patterns).filter(pattern =>
                 ChannelDetector.patternIsAllowed(patterns[pattern], allowedTypes, excludedTypes),
             ) as Types[];
+            _patternList = prioritizedTypes ? this.sortTypes(allPatterns, prioritizedTypes) : allPatterns;
             options._patternList = _patternList;
         }
 

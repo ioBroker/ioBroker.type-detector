@@ -1,8 +1,6 @@
-const objects = require('./light.json');
 const expect = require('chai').expect;
 
 const ChannelDetectorImport = require('../build/index');
-const createTests = require('./detector.typescript.test');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
 const name = "TS";
@@ -701,7 +699,7 @@ describe(`${name} Test Detector`, () => {
     it(`${name} Must detect hue light correctly when device is used with adjusted prioritization`, done => {
         const controls = detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA',
-            prioritizedTypes: [Types.hue],
+            prioritizedTypes: [[Types.hue, Types.rgb]],
         });
 
         validate(controls[0], Types.hue, {
