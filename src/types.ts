@@ -136,12 +136,16 @@ export interface InternalDetectorState {
     defaultStates?: { [key: string]: string };
 
     /**
-     * Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter
+     * It is used to enhance detection by laxing some rules if matching, else will be used by
+     * iobroker.devices and iobroker.matter
      * Only states WITH defaultRole will show up in UI.
      */
     defaultRole?: string;
 
-    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    /**
+     * It is used to enhance detection by laxing some rules if matching, else will be used by
+     * iobroker.devices and iobroker.matter.
+     */
     defaultUnit?: string;
 
     /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
@@ -150,13 +154,16 @@ export interface InternalDetectorState {
     /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
     defaultChannelRole?: string;
 
-    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    /** If set then the unit needs to match. */
     unit?: string;
 
-    /** ?? */
+    /** If set then the object type needs to match. */
     objectType?: string;
 
-    /** ?? */
+    /**
+     * If set then the regex needs to match with the last-level-state-name (the one after the
+     * last ".")
+     */
     state?: RegExp;
 }
 
@@ -179,13 +186,18 @@ export interface DetectOptions {
     /** List of state names, that will be ignored. E.g., ['UNREACH_STICKY'] */
     ignoreIndicators?: string[];
 
-    /** List of allowed types. E.g., ['channel', 'device', 'state'] */
+    /** List of allowed types. E.g., ['slider', 'rgbSingle'] */
     allowedTypes?: Types[];
 
-    /** List of excluded types. E.g., ['channel', 'device', 'state'] */
+    /** List of excluded types. E.g., ['rgb', 'rgbSingle'] */
     excludedTypes?: Types[];
 
-    /** If true, the cache will be ignored */
+    /** List of Types to prioritize before the others. */
+    prioritizedTypes?: Types[];
+
+    /**
+      If true, the cache will be ignored
+     */
     ignoreCache?: boolean;
 
     /**
@@ -214,6 +226,9 @@ export interface DetectOptions {
 
     /** For optimization, initially it is empty array */
     _checkedPatterns?: Types[];
+
+    /** For optimization, internal list of patterns order to process */
+    _patternList?: Types[];
 }
 
 export interface DetectorContext {

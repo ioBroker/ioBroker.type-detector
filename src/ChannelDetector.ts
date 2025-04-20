@@ -475,18 +475,29 @@ export class ChannelDetector {
         } = options;
         let { _patternList } = options;
 
-        if (!usedIds) {
-            usedIds = [];
-            options._usedIdsOptional = usedIds;
-        }
+        options._usedIdsOptional = usedIds;
 
         const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, keys || [], detectParent);
         // We have no ID for that object and also no objects below, so skip it
         if ((!objects[id] || !objects[id].common) && !channelStates.length) {
             return null;
         }
-        if (options._checkedPatterns === undefined) {
-            options._checkedPatterns = [];
+        options._checkedPatterns = options._checkedPatterns ?? [];
+
+        if (!_patternList) {
+            const patternsToCheck = new Array<string>();
+            if (prioritizedTypes) {
+                patternsToCheck.push(...prioritizedTypes);
+            }
+            patternsToCheck.push(
+                ...Object.keys(patterns).filter(
+                    pattern => !prioritizedTypes || !prioritizedTypes.includes(pattern as Types),
+                ),
+            );
+            _patternList = patternsToCheck.filter(pattern =>
+                ChannelDetector.patternIsAllowed(patterns[pattern], allowedTypes, excludedTypes),
+            ) as Types[];
+            options._patternList = _patternList;
         }
 
         const context: DetectorContext = {
@@ -501,18 +512,16 @@ export class ChannelDetector {
             ignoreEnums: !!options.ignoreEnums,
         };
 
-        for (const pattern in patterns) {
-            if (
-                options._checkedPatterns.includes(pattern as Types) ||
-                !ChannelDetector.patternIsAllowed(patterns[pattern], options.allowedTypes, options.excludedTypes)
-            ) {
+        const currentType = objects[id]?.type;
+        for (const pattern of _patternList) {
+            if (options._checkedPatterns.includes(pattern)) {
                 continue;
             }
-            options._checkedPatterns.push(pattern as Types);
+            options._checkedPatterns.push(pattern);
 
             context.result = null;
 
-            context.pattern = pattern as Types;
+            context.pattern = pattern;
             context.usedInCurrentDevice = [];
             for (const state of patterns[pattern].states) {
                 let found = false;
@@ -537,7 +546,7 @@ export class ChannelDetector {
             let deviceStates;
 
             // looking for indicators and special states
-            if (objects[id].type !== 'device') {
+            if (currentType !== 'device') {
                 // get device name
                 const deviceId = getParentId(id);
                 if (
