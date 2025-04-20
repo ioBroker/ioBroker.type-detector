@@ -887,7 +887,13 @@ Window tilt sensor: closed - 0, opened - 1, tiled - 2.
 
 
 ## Categories
-### door
+
+While many devices have similar states (e.g., only one boolean state like by a door and window sensors), the following categories (enumerations) and roles are used to distinguish one type from another.
+E.g., if state has role `"door"` and type `boolean`, it is a door sensor. If it has role `"window"` and type `boolean`, it is a window sensor.
+If the role is not provided, the type detector tries to use categories to detect the type. The state or the parent channel/device could belong to one of the categories, so the type detector can decide what the device is that.
+First, the role will be used for detection and then the categories.
+
+### Door sensor [door]
 To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: `/doors?/i`, `/gates?/i`, `/wickets?/i`, `/entry|entries/i`
 - **de**: `/^türe?/i`, `/^tuere?/i`, `/^tore?$/i`, `/einfahrt(en)?/i`, `/pforten?/i`
@@ -896,7 +902,7 @@ To detect these devices, it must belong to one of the following categories (any 
 Or has one of the roles: 
 `door`, `state.door`, `sensor.door`
 
-### window
+### Window sensor [window]
 To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: `/blinds?/i`, `/windows?/i`, `/shutters?/i`
 - **de**: `/rollladen?/i`, `/fenstern?/i`, `/beschattung(en)?/i`, `/jalousien?/i`
@@ -905,7 +911,7 @@ To detect these devices, it must belong to one of the following categories (any 
 Or has one of the roles: 
 `window`, `state.window`, `sensor.window`, `value.window`
 
-### blind
+### Blinds or Shutter [blind]
 To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: `/blinds?/i`, `/windows?/i`, `/shutters?/i`
 - **de**: `/rollladen?/i`, `/fenstern?/i`, `/beschattung(en)?/i`, `/jalousien?/i`
@@ -914,7 +920,7 @@ To detect these devices, it must belong to one of the following categories (any 
 Or has one of the roles: 
 `blind`, `level.blind`, `value.blind`, `action.stop`, `button.stop`, `button.stop.blind`, `button.open.blind`, `button.close.blind`, `level.tilt`, `value.tilt`, `button.tilt.open`, `button.tilt.close`, `button.tilt.stop`
 
-### gate
+### Gate [gate]
 To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: `/gates?/i`
 - **de**: `/^toren$/i`, `/^tor$/i`
@@ -923,7 +929,7 @@ To detect these devices, it must belong to one of the following categories (any 
 Or has one of the roles: 
 `gate`, `value.gate`, `switch.gate`, `action.stop`, `button.stop`
 
-### light
+### Light switch [light]
 To detect these devices, it must belong to one of the following categories (any regex in any language):
 - **en**: `/lights?/i`, `/lamps?/i`, `/ceilings?/i`
 - **de**: `/licht(er)?/i`, `/lampen?/i`, `/beleuchtung(en)?/i`
