@@ -462,18 +462,27 @@ export class ChannelDetector {
     }
 
     private _detectNext(options: DetectOptions): PatternControl | null {
-        const objects = options.objects;
-        const id = options.id;
-        const keys = options._keysOptional || [];
-        let usedIds = options._usedIdsOptional || [];
-        const ignoreIndicators = options.ignoreIndicators;
+        const {
+            objects,
+            id,
+            _keysOptional: keys = [],
+            _usedIdsOptional: usedIds = [],
+            ignoreIndicators,
+            prioritizedTypes,
+            detectParent,
+            allowedTypes,
+            excludedTypes,
+        } = options;
+        let { _patternList } = options;
 
         if (!usedIds) {
             usedIds = [];
             options._usedIdsOptional = usedIds;
         }
 
-        if (!objects[id] || !objects[id].common) {
+        const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, keys || [], detectParent);
+        // We have no ID for that object and also no objects below, so skip it
+        if ((!objects[id] || !objects[id].common) && !channelStates.length) {
             return null;
         }
         if (options._checkedPatterns === undefined) {
@@ -482,7 +491,7 @@ export class ChannelDetector {
 
         const context: DetectorContext = {
             objects,
-            channelStates: ChannelDetector.getChannelStates(objects, id, keys || []),
+            channelStates,
             usedIds,
             ignoreIndicators: ignoreIndicators || [],
             result: null,
