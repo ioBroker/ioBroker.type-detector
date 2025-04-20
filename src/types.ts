@@ -224,6 +224,9 @@ export interface DetectOptions {
     /** For optimization, it is Object.keys(objects) */
     _keysOptional?: string[];
 
+    /** For optimization, if the provided _keysOptional are sorted */
+    _keysOptionalSorted?: boolean;
+
     /** For optimization, initially it is empty array */
     _usedIdsOptional?: string[];
 
@@ -244,6 +247,7 @@ export interface DetectorContext {
     pattern: Types;
     state: InternalDetectorState;
     ignoreEnums: boolean;
+    sortedKeys: string[];
 }
 
 export interface InternalPatternControl {
@@ -263,6 +267,4 @@ export interface ExternalPatternControl {
     enumRequired?: boolean;
 }
 
-export interface PatternWords {
-    [lang: string]: RegExp[];
-}
+export type PatternWords = Record<'en' | 'de' | 'ru', RegExp[]>;

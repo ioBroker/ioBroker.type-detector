@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2024 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2025 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -37,7 +37,6 @@ import {
 import { getFunctionEnums, getParentId, getEnums, getObjectsBelowId } from './RoleEnumUtils';
 import { patterns } from './TypePatterns';
 
-// Version 2.0.0, 2023.10.23
 export class ChannelDetector {
     private enums: string[] | null = null;
     private readonly cache: Record<string, PatternControl[] | null> = {};
@@ -49,8 +48,9 @@ export class ChannelDetector {
         id: string,
         statePattern: InternalDetectorState,
         ignoreEnums: boolean,
+        sortedKeys: string[],
     ): boolean {
-        if (objects[id] && objects[id].common) {
+        if (objects[id]?.common) {
             let role = null;
             if (statePattern.role) {
                 role = statePattern.role.test(objects[id].common.role || '');
@@ -144,12 +144,12 @@ export class ChannelDetector {
                 }
             }
 
-            // When the default role is assigned then the users should know how to handle it,
+            // When the default role is assigned, then the users should know how to handle it,
             // so we can be a bit more laxe if read/write is not set correctly because user
             // created it manually. Additionally, enum check should be not needed with default role because the role already
             // includes that.
 
-            // But otherwise check more detailed and also the enums
+            // But otherwise, check more detailed and also the enums
             if (!defaultRoleAssigned) {
                 if (statePattern.write !== undefined && statePattern.write !== !!objects[id].common.write) {
                     return false;
@@ -163,7 +163,7 @@ export class ChannelDetector {
                 }
 
                 if (statePattern.enums && typeof statePattern.enums === 'function') {
-                    const enums = this._getEnumsForId(objects, id);
+                    const enums = this._getEnumsForId(objects, id, sortedKeys);
                     if (!ignoreEnums && !statePattern.enums(objects[id], enums || [])) {
                         return false;
                     }
@@ -175,15 +175,21 @@ export class ChannelDetector {
         return false;
     }
 
-    private _getEnumsForId(objects: Record<string, ioBroker.Object>, id: string): string[] | null {
-        this.enums = this.enums || getFunctionEnums(objects);
+    private _getEnumsForId(
+        objects: Record<string, ioBroker.Object>,
+        id: string,
+        sortedKeys: string[],
+    ): string[] | null {
+        this.enums ||= getFunctionEnums(objects, sortedKeys);
         const result: string[] = [];
+
         this.enums.forEach(e => {
             if (objects[e].common.members.includes(id)) {
                 result.push(e);
             }
         });
-        if (!result.length && objects[id] && objects[id].type === 'state') {
+
+        if (!result.length && objects[id]?.type === 'state') {
             const channel = getParentId(id);
             if (objects[channel] && (objects[channel].type === 'channel' || objects[channel].type === 'device')) {
                 this.enums.forEach(e => {
@@ -222,11 +228,12 @@ export class ChannelDetector {
         const usedInCurrentDevice = context.usedInCurrentDevice;
         const ignoreIndicators = context.ignoreIndicators;
         const ignoreEnums = context.ignoreEnums;
+        const sortedKeys = context.sortedKeys;
         let result: PatternControl | null = context.result;
         let found = false;
         // let count = 0;
 
-        // check every state in channel
+        // check every state in a channel
         for (const _id of channelStates) {
             // this is only valid if no one state could be multiple
             // if (result && count >= result.states.length) {
@@ -253,7 +260,7 @@ export class ChannelDetector {
                 (state.indicator ||
                     (!usedInCurrentDevice.includes(_id) && // not used in a current device and pattern
                         (state.notSingle || !usedIds.includes(_id)))) && // or not used globally
-                this._applyPattern(objects, _id, state, ignoreEnums)
+                this._applyPattern(objects, _id, state, ignoreEnums, sortedKeys)
             ) {
                 if (!state.indicator) {
                     usedInCurrentDevice.push(_id);
@@ -294,7 +301,7 @@ export class ChannelDetector {
                                 (state.indicator ||
                                     (!usedInCurrentDevice.includes(cid) &&
                                         (state.notSingle || !usedIds.includes(cid)))) &&
-                                this._applyPattern(objects, cid, state, ignoreEnums)
+                                this._applyPattern(objects, cid, state, ignoreEnums, sortedKeys)
                             ) {
                                 if (!state.indicator) {
                                     usedInCurrentDevice.push(cid);
@@ -360,7 +367,7 @@ export class ChannelDetector {
             return id;
         }
 
-        // When we come here the state.parent or state.parent.parent is no device or channel and we are not already on top
+        // When we come here the state.parent or state.parent.parent is no device or channel, and we are not already on top
         // So lets gibe it one more last chance to find something
         parts.pop();
         const secondUpperLevelObjectId = parts.join('.');
@@ -472,6 +479,7 @@ export class ChannelDetector {
             const fromType = typeList.splice(fromIndex, 1);
             typeList.splice(toIndex, 0, ...fromType);
         });
+
         return typeList;
     }
 
@@ -479,19 +487,20 @@ export class ChannelDetector {
         const {
             objects,
             id,
-            _keysOptional: keys = [],
+            _keysOptional: sortedKeys = [],
             _usedIdsOptional: usedIds = [],
             ignoreIndicators,
             prioritizedTypes,
             detectParent,
             allowedTypes,
             excludedTypes,
+            _keysOptional,
         } = options;
         let { _patternList } = options;
 
         options._usedIdsOptional = usedIds;
 
-        const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, keys || [], detectParent);
+        const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, sortedKeys || [], detectParent);
         // We have no ID for that object and also no objects below, so skip it
         if ((!objects[id] || !objects[id].common) && !channelStates.length) {
             return null;
@@ -516,6 +525,7 @@ export class ChannelDetector {
             usedInCurrentDevice: [],
             state: {} as InternalDetectorState,
             ignoreEnums: !!options.ignoreEnums,
+            sortedKeys: _keysOptional!,
         };
 
         const currentType = objects[id]?.type;
@@ -525,6 +535,7 @@ export class ChannelDetector {
             }
             options._checkedPatterns.push(pattern);
 
+            // reset the result
             context.result = null;
 
             context.pattern = pattern;
@@ -547,9 +558,10 @@ export class ChannelDetector {
                 continue;
             }
 
+            // Store all used IDs in the array
             context.usedInCurrentDevice.forEach(id => usedIds.push(id));
 
-            let deviceStates;
+            let deviceStates: string[];
 
             // looking for indicators and special states
             if (currentType !== 'device') {
@@ -557,11 +569,12 @@ export class ChannelDetector {
                 const deviceId = getParentId(id);
                 if (
                     objects[deviceId] &&
-                    (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')
+                    (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device') &&
+                    context.result
                 ) {
-                    deviceStates = getObjectsBelowId(keys, deviceId);
-                    deviceStates?.forEach(_id => {
-                        context.result?.states.forEach((state, i) => {
+                    deviceStates = getObjectsBelowId(sortedKeys, deviceId);
+                    deviceStates.forEach(_id => {
+                        context.result!.states.forEach((state, i) => {
                             if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
                                 if (
                                     this._applyPattern(
@@ -569,6 +582,7 @@ export class ChannelDetector {
                                         _id,
                                         state.original as InternalDetectorState,
                                         !!options.ignoreEnums,
+                                        context.sortedKeys,
                                     ) &&
                                     context.result
                                 ) {
@@ -582,9 +596,7 @@ export class ChannelDetector {
 
             if (context.result) {
                 const result = context.result as PatternControl;
-                if (result) {
-                    result.states.forEach((state: DetectorState) => ChannelDetector.cleanState(state, context.objects));
-                }
+                result?.states.forEach((state: DetectorState) => ChannelDetector.cleanState(state, context.objects));
             }
 
             return context.result;
@@ -594,18 +606,17 @@ export class ChannelDetector {
     }
 
     /**
-     * detect
-     *
      * Detect devices in some given path. Path can show to state, channel or device.
      *
      * @param options - parameters with following fields
      *                  objects - Object, that has all objects in form {'id1': {obj1params...}, 'id2': {obj2params...}}
      *                  id - Root ID from which the detection must start
-     *                  _keysOptional - Array with keys from `options.objects` for optimization
+     *                  _keysOptional - Array with sorted keys from `options.objects` for optimization
      *                  _usedIdsOptional - Array with yet detected devices to do not similar device under different types
      *                  ignoreIndicators - If simple indicators like "low battery", "not reachable" must be detected as device or only as a part of other device.
-     *                  allowedTypes - array with names of device types, that can be detected. Not listed device types will be ignored.
-     *                  excludedTypes - array with names of device types, that must be ignored. The listed device types will be ignored.
+     *                  allowedTypes - array with names of device types that can be detected. Not listed device types will be ignored.
+     *                  excludedTypes - array with names of device types that must be ignored. The listed device types will be ignored.
+     *                  prioritizedTypes - List of Types to prioritize before the others.
      */
     public detect(options: DetectOptions): PatternControl[] | null {
         const { objects, id, ignoreCache, detectAllPossibleDevices } = options;
@@ -626,7 +637,7 @@ export class ChannelDetector {
         }
 
         if (!_keysOptional) {
-            // Sort the objects, but process all devices first, then channels, then folders then the rest
+            // Sort the objects, but process all devices first, then channels, then folders, then the rest
             // This should try to optimize the order best possible
             const deviceObjs = new Set<string>();
             const channelObjs = new Set<string>();
@@ -645,35 +656,40 @@ export class ChannelDetector {
             });
 
             _keysOptional = [
-                ...Array.from(deviceObjs.values()).sort(),
-                ...Array.from(channelObjs.values()).sort(),
-                ...Array.from(folderObjs.values()).sort(),
-                ...Array.from(otherObjs.values()).sort(),
+                ...Array.from(deviceObjs.values()),
+                ...Array.from(channelObjs.values()),
+                ...Array.from(folderObjs.values()),
+                ...Array.from(otherObjs.values()),
             ];
+
+            _keysOptional.sort();
+
             options._keysOptional = _keysOptional;
+        } else if (!options._keysOptionalSorted) {
+            _keysOptional.sort();
         }
 
         // We reset the already used IDs normally for better detection but not when we used parent to detect
-        // because then we have already checked a whole "sub tree" for the best matching results and so can exclude the
+        // because then we have already checked a whole "subtree" for the best matching results and so can exclude the
         // matched ids
         if (_usedIdsOptional && !options.detectParent) {
             _usedIdsOptional = [];
             options._usedIdsOptional = _usedIdsOptional;
         }
 
-        // When we do want to detect a special device type we can ignore enums
-        if (options.ignoreEnums === undefined && options.allowedTypes && options.allowedTypes.length === 1) {
+        // When we do want to detect a special device type, we can ignore enums
+        if (options.ignoreEnums === undefined && options.allowedTypes?.length === 1) {
             options.ignoreEnums = true;
         }
         if (detectAllPossibleDevices) {
-            options.excludedTypes = options.excludedTypes || [];
+            options.excludedTypes ||= [];
             if (!options.excludedTypes.includes(Types.info)) {
                 options.excludedTypes.push(Types.info);
             }
         }
         options._checkedPatterns = [];
 
-        const result = [];
+        const result: PatternControl[] = [];
         let detected;
 
         while ((detected = this._detectNext(options))) {
@@ -688,6 +704,9 @@ export class ChannelDetector {
         return this.cache[id];
     }
 
+    /**
+     * Returns all the known by type-detector type patterns
+     */
     public static getPatterns(): { [type: string]: ExternalPatternControl } {
         const copyPatterns: { [type: string]: ExternalPatternControl } = {};
 
@@ -706,6 +725,7 @@ export class ChannelDetector {
 
             copyPatterns[type] = item;
         });
+
         return copyPatterns;
     }
 }
