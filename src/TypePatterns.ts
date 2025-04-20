@@ -1391,7 +1391,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
             {
-                role: /airconditioner$/,
+                role: /(level\.mode\.)?airconditioner$/,
                 indicator: false,
                 write: true,
                 type: StateType.Number,
@@ -1400,13 +1400,13 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: true,
                 defaultRole: 'level.mode.airconditioner',
                 defaultStates: {
-                    0: 'OFF',
-                    1: 'AUTO',
-                    2: 'COOL',
-                    3: 'HEAT',
-                    4: 'ECO',
-                    5: 'FAN_ONLY',
-                    6: 'DRY',
+                    0: 'AUTO',
+                    3: 'COOL',
+                    4: 'DRY',
+                    5: 'ECO',
+                    6: 'FAN_ONLY',
+                    7: 'HEAT',
+                    8: 'OFF',
                 },
             },
             // optional
