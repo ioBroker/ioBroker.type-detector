@@ -1,6 +1,6 @@
 # ioBroker device types
 
-**Note:** Do not copy regex with '|' from tables. It contains unicode replacement of '|', because of markdown's table rendering. 
+**Note:** Do not copy regex with '|' from tables. It contains Unicode replacement of '|', because of markdown's table rendering. 
 
 Fields:
 - **R** - (required) If the state is mandatory and must be in the channel/device.
@@ -13,9 +13,9 @@ Fields:
 - **Wr** - (writable) Is the state must be writable or not. 'W' - must be writable, '-' - must be not writeable.
 - **Min** - State must have min attribute.
 - **Max** - State must have max attribute.
-- **Enum** - State must belong to specific category
+- **Enum** - State must belong to a specific category
 - **Ind** - Is the state is an indicator. Indicators will be shown as a small icon in material.
-- **Mult** - (multiple) the state with given parameters can appear more than one time in device. E.g. weather day 1, weather day 1, and so on.
+- **Multi** - (multiple) the state with given parameters can appear more than one time in a device. E.g., weather day 1, weather day 1, and so on.
 - **Regex** - Role regex
 
 Restrictions:
@@ -24,7 +24,7 @@ Restrictions:
 
 What is not important for detection:
 - Name - name of functionality in the device 
-- noSubscribe - says to material, that there is no need to monitor its value. E.g. it is button. 
+- noSubscribe - says to `material` adapter, that there is no need to monitor its value. E.g., it is button. 
 - inverted - says to material, that indicator must be shown only if the value is `false`.
 - defaultStates - Used for `devices` to set the default `common.states`.
 - defaultRole - Used for `devices` to set the `common.role` by creation.
