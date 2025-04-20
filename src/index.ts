@@ -30,6 +30,7 @@ export {
     type DetectOptions,
     type PatternControl,
     type ExternalPatternControl,
+    type ExternalDetectorState,
     Types,
     StateType,
 } from './types';
