@@ -638,33 +638,8 @@ export class ChannelDetector {
         }
 
         if (!_keysOptional) {
-            // Sort the objects, but process all devices first, then channels, then folders, then the rest
-            // This should try to optimize the order best possible
-            const deviceObjs = new Set<string>();
-            const channelObjs = new Set<string>();
-            const folderObjs = new Set<string>();
-            const otherObjs = new Set<string>();
-            Object.keys(objects).forEach(key => {
-                if (objects[key].type === 'device') {
-                    deviceObjs.add(key);
-                } else if (objects[key].type === 'channel') {
-                    channelObjs.add(key);
-                } else if (objects[key].type === 'folder') {
-                    folderObjs.add(key);
-                } else {
-                    otherObjs.add(key);
-                }
-            });
-
-            _keysOptional = [
-                ...Array.from(deviceObjs.values()),
-                ...Array.from(channelObjs.values()),
-                ...Array.from(folderObjs.values()),
-                ...Array.from(otherObjs.values()),
-            ];
-
+            _keysOptional = Object.keys(objects);
             _keysOptional.sort();
-
             options._keysOptional = _keysOptional;
         } else if (!options._keysOptionalSorted) {
             _keysOptional.sort();
