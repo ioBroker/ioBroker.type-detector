@@ -541,8 +541,30 @@ export class ChannelDetector {
         }
 
         if (!_keysOptional) {
-            _keysOptional = Object.keys(objects);
-            _keysOptional.sort();
+            // Sort the objects, but process all devices first, then channels, then folders then the rest
+            // This should try to optimize the order best possible
+            const deviceObjs = new Set<string>();
+            const channelObjs = new Set<string>();
+            const folderObjs = new Set<string>();
+            const otherObjs = new Set<string>();
+            Object.keys(objects).forEach(key => {
+                if (objects[key].type === 'device') {
+                    deviceObjs.add(key);
+                } else if (objects[key].type === 'channel') {
+                    channelObjs.add(key);
+                } else if (objects[key].type === 'folder') {
+                    folderObjs.add(key);
+                } else {
+                    otherObjs.add(key);
+                }
+            });
+
+            _keysOptional = [
+                ...Array.from(deviceObjs.values()).sort(),
+                ...Array.from(channelObjs.values()).sort(),
+                ...Array.from(folderObjs.values()).sort(),
+                ...Array.from(otherObjs.values()).sort(),
+            ];
             options._keysOptional = _keysOptional;
         }
 
@@ -555,7 +577,7 @@ export class ChannelDetector {
         if (options.ignoreEnums === undefined && options.allowedTypes && options.allowedTypes.length === 1) {
             options.ignoreEnums = true;
         }
-        if (options.detectAllPossibleDevices) {
+        if (detectAllPossibleDevices) {
             options.excludedTypes = options.excludedTypes || [];
             if (!options.excludedTypes.includes(Types.info)) {
                 options.excludedTypes.push(Types.info);
