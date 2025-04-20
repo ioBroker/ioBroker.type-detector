@@ -160,6 +160,16 @@ export function getAllStatesInDevice(keys: string[], channelId: string): string[
     return list;
 }
 
+/**
+ * Finds all objects "below" a certain ID and the ID itself. It is irrelevant how many levels deep these are
+ */
+export function getObjectsBelowId(keys: string[], startId: string): string[] {
+    const list: string[] = [];
+    startId += '.';
+    keys.forEach(id => (id === startId || id.startsWith(startId)) && list.push(id));
+    return list;
+}
+
 export function getFunctionEnums(objects: Record<string, ioBroker.Object>): string[] {
     const enums: string[] = [];
     const reg = /^enum\.functions\./;
