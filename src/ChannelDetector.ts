@@ -502,7 +502,7 @@ export class ChannelDetector {
 
         const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, sortedKeys || [], detectParent);
         // We have no ID for that object and also no objects below, so skip it
-        if ((!objects[id] || !objects[id].common) && !channelStates.length) {
+        if (!objects[id]?.common && !channelStates.length) {
             return null;
         }
         options._checkedPatterns = options._checkedPatterns ?? [];
@@ -611,7 +611,8 @@ export class ChannelDetector {
      * @param options - parameters with following fields
      *                  objects - Object, that has all objects in form {'id1': {obj1params...}, 'id2': {obj2params...}}
      *                  id - Root ID from which the detection must start
-     *                  _keysOptional - Array with sorted keys from `options.objects` for optimization
+     *                  _keysOptional - Array with (sorted) keys from `options.objects` for optimization
+     *                  _keysOptionalSorted - indicates if `_keysOptional` is sorted (for optimization)
      *                  _usedIdsOptional - Array with yet detected devices to do not similar device under different types
      *                  ignoreIndicators - If simple indicators like "low battery", "not reachable" must be detected as device or only as a part of other device.
      *                  allowedTypes - array with names of device types that can be detected. Not listed device types will be ignored.
