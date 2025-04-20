@@ -72,6 +72,25 @@ export class ChannelDetector {
                 return false;
             }
 
+            if (statePattern.type) {
+                if (typeof statePattern.type === 'string') {
+                    if (statePattern.type !== objects[id].common.type) {
+                        return false;
+                    }
+                } else if (Array.isArray(statePattern.type)) {
+                    let oneMatched = false;
+                    for (let t = 0; t < statePattern.type.length; t++) {
+                        if (statePattern.type[t] === objects[id].common.type) {
+                            oneMatched = true;
+                            break;
+                        }
+                    }
+                    if (!oneMatched) {
+                        return false;
+                    }
+                }
+            }
+
             if (statePattern.objectType && objects[id].type !== statePattern.objectType) {
                 return false;
             }
@@ -102,48 +121,52 @@ export class ChannelDetector {
                 }
             }
 
-            if (statePattern.write !== undefined && statePattern.write !== !!objects[id].common.write) {
-                return false;
-            }
+            const defaultRoleAssigned =
+                statePattern.defaultRole && objects[id].common.role === statePattern.defaultRole;
+
+            const defaultUnitAssigned = statePattern.defaultUnit
+                ? objects[id].common.unit === statePattern.defaultUnit
+                : false;
 
             if (statePattern.min === StateType.Number && typeof objects[id].common.min !== StateType.Number) {
-                return false;
-            }
-
-            if (statePattern.max === StateType.Number && typeof objects[id].common.max !== StateType.Number) {
-                return false;
-            }
-
-            if (
-                statePattern.read !== undefined &&
-                statePattern.read !== (objects[id].common.read === undefined ? true : objects[id].common.read)
-            ) {
-                return false;
-            }
-
-            if (statePattern.type) {
-                if (typeof statePattern.type === StateType.String) {
-                    if (statePattern.type !== objects[id].common.type) {
-                        return false;
-                    }
-                } else {
-                    let noOneOk = true;
-                    for (let t = 0; t < statePattern.type.length; t++) {
-                        if (statePattern.type[t] === objects[id].common.type) {
-                            noOneOk = false;
-                            break;
-                        }
-                    }
-                    if (noOneOk) {
-                        return false;
-                    }
+                // If we have a default unit, and it matches and is % allow bypassing min/max because
+                // defined as 0..100 anyway
+                if (!defaultUnitAssigned || objects[id].common.unit !== '%') {
+                    return false;
                 }
             }
 
-            if (statePattern.enums && typeof statePattern.enums === 'function') {
-                const enums = this._getEnumsForId(objects, id);
-                if (!ignoreEnums && !statePattern.enums(objects[id], enums || [])) {
+            if (statePattern.max === StateType.Number && typeof objects[id].common.max !== StateType.Number) {
+                // If we have a default unit, and it matches and is % allow bypassing min/max because
+                // defined as 0..100 anyway
+                if (!defaultUnitAssigned || objects[id].common.unit !== '%') {
                     return false;
+                }
+            }
+
+            // When the default role is assigned then the users should know how to handle it,
+            // so we can be a bit more laxe if read/write is not set correctly because user
+            // created it manually. Additionally, enum check should be not needed with default role because the role already
+            // includes that.
+
+            // But otherwise check more detailed and also the enums
+            if (!defaultRoleAssigned) {
+                if (statePattern.write !== undefined && statePattern.write !== !!objects[id].common.write) {
+                    return false;
+                }
+
+                if (
+                    statePattern.read !== undefined &&
+                    statePattern.read !== (objects[id].common.read === undefined ? true : objects[id].common.read)
+                ) {
+                    return false;
+                }
+
+                if (statePattern.enums && typeof statePattern.enums === 'function') {
+                    const enums = this._getEnumsForId(objects, id);
+                    if (!ignoreEnums && !statePattern.enums(objects[id], enums || [])) {
+                        return false;
+                    }
                 }
             }
 
