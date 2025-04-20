@@ -379,6 +379,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 notSingle: true,
                 noSubscribe: true,
                 defaultRole: 'level.volume',
+                defaultUnit: '%',
             },
             {
                 role: /^value.volume?$/,
@@ -392,6 +393,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 notSingle: true,
                 noSubscribe: true,
                 defaultRole: 'value.volume',
+                defaultUnit: '%',
             },
             {
                 role: /^media.mute?$/,
@@ -2675,6 +2677,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'SET',
                 required: true,
                 defaultRole: 'level.volume.group',
+                defaultUnit: '%',
             },
             // optional
             {
@@ -2687,6 +2690,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'ACTUAL',
                 required: false,
                 defaultRole: 'value.volume.group',
+                defaultUnit: '%',
             },
             {
                 role: /^media\.mute\.group$/,
@@ -2731,6 +2735,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'ACTUAL',
                 required: false,
                 defaultRole: 'value',
+                defaultUnit: '%',
             },
             SharedPatterns.working,
             SharedPatterns.unreach,
