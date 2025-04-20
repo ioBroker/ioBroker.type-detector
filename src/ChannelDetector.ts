@@ -34,7 +34,7 @@ import {
     StateType,
     Types,
 } from './types';
-import { getAllStatesInChannel, getAllStatesInDevice, getFunctionEnums, getParentId, getEnums } from './RoleEnumUtils';
+import { getFunctionEnums, getParentId, getEnums, getObjectsBelowId } from './RoleEnumUtils';
 import { patterns } from './TypePatterns';
 
 // Version 2.0.0, 2023.10.23
@@ -319,23 +319,84 @@ export class ChannelDetector {
         return found;
     }
 
-    private static getChannelStates(objects: Record<string, ioBroker.Object>, id: string, keys: string[]): string[] {
-        switch (objects[id].type) {
-            case 'chart':
+    /**
+     * Tries to find a device or channel (as fallback) where the state is in
+     */
+    private static findParentChannelOrDevice(objects: Record<string, ioBroker.Object>, id: string): string | null {
+        if (!objects[id]) {
+            // Object does not exist
+            return null;
+        }
+        const parts = id.split('.');
+
+        if (objects[id].type === 'state') {
+            // a state needs to be in a channel, device, folder or such, so check the level above
+            parts.pop();
+            id = parts.join('.');
+        }
+        if (parts.length <= 2) {
+            // Ok, we already reached the instance level, no need to search higher, then we go with this id
+            return id;
+        }
+
+        const obj = objects[id];
+        if (obj.type === 'device') {
+            // We found a device object, use this
+            return id;
+        }
+        parts.pop();
+        const upperLevelObjectId = parts.join('.');
+        const upperObj = objects[upperLevelObjectId];
+        if (!upperObj) {
+            // Ok not existing object, so we use the existing object from before
+            return id;
+        }
+        if (upperObj.type === 'device' || parts.length <= 2) {
+            // We found a device object, or ended already on instance level, use this
+            return upperLevelObjectId;
+        }
+        if (obj.type === 'channel') {
+            // The object is (or inside) a channel, but above is no device, so lets better use the channel
+            return id;
+        }
+
+        // When we come here the state.parent or state.parent.parent is no device or channel and we are not already on top
+        // So lets gibe it one more last chance to find something
+        parts.pop();
+        const secondUpperLevelObjectId = parts.join('.');
+        const secondUpperObj = objects[upperLevelObjectId];
+        if (!secondUpperObj || (secondUpperObj.type !== 'device' && secondUpperObj.type !== 'channel')) {
+            // Ok not existing object or no channel/device, so we use the existing object from before
+            return upperLevelObjectId;
+        }
+        return secondUpperLevelObjectId;
+    }
+
+    private static getChannelOrDeviceStates(
+        objects: Record<string, ioBroker.Object>,
+        id: string,
+        keys: string[],
+        checkParent = false,
+    ): string[] {
+        const type = objects[id]?.type;
+        switch (type) {
+            case undefined:
+                return [...getObjectsBelowId(keys, id)];
             case 'state':
+            case 'channel':
+            case 'device':
+            case 'folder':
+                if (checkParent && type !== 'device') {
+                    const foundId = ChannelDetector.findParentChannelOrDevice(objects, id);
+                    return foundId ? [...getObjectsBelowId(keys, foundId)] : [id];
+                }
+                if (type !== 'state') {
+                    return [...getObjectsBelowId(keys, id)];
+                }
                 return [id];
 
-            case 'device': {
-                // get states device->channel->state
-                const deviceStates = getAllStatesInDevice(keys, id);
-                // get states device->state
-                const channelStates = getAllStatesInChannel(keys, id);
-                return deviceStates.concat(channelStates);
-            }
-
             default:
-                // channel
-                return getAllStatesInChannel(keys, id);
+                return [id];
         }
     }
 
@@ -474,7 +535,7 @@ export class ChannelDetector {
                     objects[deviceId] &&
                     (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')
                 ) {
-                    deviceStates = getAllStatesInDevice(keys, deviceId);
+                    deviceStates = getObjectsBelowId(keys, deviceId);
                     deviceStates?.forEach(_id => {
                         context.result?.states.forEach((state, i) => {
                             if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
@@ -568,7 +629,10 @@ export class ChannelDetector {
             options._keysOptional = _keysOptional;
         }
 
-        if (_usedIdsOptional) {
+        // We reset the already used IDs normally for better detection but not when we used parent to detect
+        // because then we have already checked a whole "sub tree" for the best matching results and so can exclude the
+        // matched ids
+        if (_usedIdsOptional && !options.detectParent) {
             _usedIdsOptional = [];
             options._usedIdsOptional = _usedIdsOptional;
         }

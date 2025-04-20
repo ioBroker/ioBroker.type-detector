@@ -199,6 +199,11 @@ export interface DetectOptions {
      */
     detectAllPossibleDevices?: boolean;
 
+    /**
+     * Adjusts the logic to try to find a device object and consider all state in there, else a channel
+     */
+    detectParent?: boolean;
+
     // Internally used infos and caches
 
     /** For optimization, it is Object.keys(objects) */
