@@ -364,7 +364,7 @@ export class ChannelDetector {
         // So lets gibe it one more last chance to find something
         parts.pop();
         const secondUpperLevelObjectId = parts.join('.');
-        const secondUpperObj = objects[upperLevelObjectId];
+        const secondUpperObj = objects[secondUpperLevelObjectId];
         if (!secondUpperObj || (secondUpperObj.type !== 'device' && secondUpperObj.type !== 'channel')) {
             // Ok not existing object or no channel/device, so we use the existing object from before
             return upperLevelObjectId;
