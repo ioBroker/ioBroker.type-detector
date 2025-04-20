@@ -2651,7 +2651,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.error,
             SharedPatterns.battery,
         ],
-        type: Types.location,
+        type: Types.location_one,
     },
     location: {
         states: [
