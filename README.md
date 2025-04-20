@@ -99,14 +99,15 @@ if (controls) {
 ### **WORK IN PROGRESS**
 -   (@GermanBluefox) Added default role for `image`
 -   (@GermanBluefox) Added exported type `ExternalDetectorState`
--   (@Apollon77) Removed "Saturation" states from non Hue light device types to not block that state for detection
+-   (@Apollon77) Removed "Saturation" states from non-Hue light device types to not block that state for detection
 -   (@Apollon77) Added default unit "%" to volume definitions
 -   (@Apollon77) Combined some duplicate state definitions
 -   (@Apollon77) Adjusted Airconditioner Mode definition
 -   (@Apollon77) Optimized Detection logic in several places
--   (@Apollon77) Considers allowed/excluded types when returning cached results
+-   (@Apollon77) Consider allowed/excluded types when returning cached results
 -   (@Apollon77) Added "detectParent" mode to always search up in the objects to a device or channel when detecting
 -   (@Apollon77) Added "prioritizedTypes" property for options to allow type detection prioritization
+-   (@GermanBluefox) Improved documentation
 
 ### 4.2.1 (2025-04-19)
 -   (@GermanBluefox) Added exported type `ExternalPatternControl` 
