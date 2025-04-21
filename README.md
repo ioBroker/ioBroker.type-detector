@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.3.0 (2025-04-21)
 -   (@GermanBluefox) Added default role for `image`
 -   (@GermanBluefox) Added exported type `ExternalDetectorState`
 -   (@Apollon77) Removed "Saturation" states from non-Hue light device types to not block that state for detection
