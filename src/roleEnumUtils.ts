@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2024 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2025 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import type { PatternWords } from './types';
+import type { PatternLanguages, PatternWords } from './types';
 
 export function checkEnum(enums: string[], words: PatternWords): boolean {
     let found = false;
@@ -34,7 +34,7 @@ export function checkEnum(enums: string[], words: PatternWords): boolean {
             }
             for (const lang in words) {
                 if (Object.prototype.hasOwnProperty.call(words, lang)) {
-                    if (words[lang].find(reg => reg.test(en))) {
+                    if (words[lang as PatternLanguages].find(reg => reg.test(en))) {
                         found = true;
                         return false;
                     }
@@ -46,7 +46,7 @@ export function checkEnum(enums: string[], words: PatternWords): boolean {
 }
 
 export function roleOrEnum(obj: ioBroker.Object, enums: string[], roles: string[], words: PatternWords): boolean {
-    if (roles && obj.common.role && roles.includes(obj.common.role)) {
+    if (obj.common.role && roles?.includes(obj.common.role)) {
         return true;
     }
     return checkEnum(enums, words);
@@ -64,7 +64,7 @@ export function roleOrEnumLight(obj: ioBroker.Object, enums: string[]): boolean 
 }
 
 // -------------- BLINDS -----------------------------------------
-const blindWords: { [lang: string]: RegExp[] } = {
+const blindWords: PatternWords = {
     en: [/blinds?/i, /windows?/i, /shutters?/i],
     de: [/rollladen?/i, /fenstern?/i, /beschattung(en)?/i, /jalousien?/i],
     ru: [/ставни/i, /рольставни/i, /окна|окно/, /жалюзи/i],
@@ -90,7 +90,7 @@ export function roleOrEnumBlind(obj: ioBroker.Object, enums: string[]): boolean 
 }
 
 // -------------- GATES ------------------------------------------
-const gateWords: { [lang: string]: RegExp[] } = {
+const gateWords: PatternWords = {
     en: [/gates?/i],
     de: [/^toren$/i, /^tor$/i], // "^" because of Actor
     ru: [/ворота/i],
@@ -108,7 +108,7 @@ export function roleOrEnumWindow(obj: ioBroker.Object, enums: string[]): boolean
 }
 
 // -------------- DOORS -----------------------------------------
-const doorsWords: { [lang: string]: RegExp[] } = {
+const doorsWords: PatternWords = {
     en: [/doors?/i, /gates?/i, /wickets?/i, /entry|entries/i],
     de: [/^türe?/i, /^tuere?/i, /^tore?$/i, /einfahrt(en)?/i, /pforten?/i], // "^" because of Actor
     ru: [/двери|дверь/i, /ворота/i, /калитка|калитки/, /въезды?/i, /входы?/i],
@@ -119,9 +119,10 @@ export function roleOrEnumDoor(obj: ioBroker.Object, enums: string[]): boolean {
     return roleOrEnum(obj, enums, doorsRoles, doorsWords);
 }
 
-export function getEnums(): {
-    [id: string]: { roles: string[]; words: { [lang: string]: RegExp[] } };
-} {
+export function getEnums(): Record<
+    'door' | 'window' | 'blind' | 'gate' | 'light',
+    { roles: string[]; words: PatternWords }
+> {
     return {
         door: {
             roles: doorsRoles,
@@ -160,22 +161,63 @@ export function getAllStatesInDevice(keys: string[], channelId: string): string[
     return list;
 }
 
-export function getFunctionEnums(objects: Record<string, ioBroker.Object>): string[] {
+/**
+ * Finds all objects "below" a certain ID and the ID itself. It is irrelevant how many levels deep these are
+ */
+export function getObjectsBelowId(sortedKeys: string[], startId: string): string[] {
+    const list: string[] = [];
+    startId += '.';
+
+    // Find the starting index using binary search
+    let left = 0;
+    let right = sortedKeys.length - 1;
+    let startIndex = -1;
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        if (sortedKeys[mid] < startId) {
+            left = mid + 1;
+        } else {
+            startIndex = mid;
+            right = mid - 1;
+        }
+    }
+
+    // If no keys are >= startId, return empty array
+    if (startIndex === -1 || startIndex >= sortedKeys.length) {
+        return list;
+    }
+
+    // Iterate from startIndex, collecting keys that match or start with startId
+    for (let i = startIndex; i < sortedKeys.length; i++) {
+        const id = sortedKeys[i];
+        if (id === startId || id.startsWith(startId)) {
+            list.push(id);
+        } else {
+            // Since the keys are sorted, we can break early
+            break;
+        }
+    }
+
+    return list;
+}
+
+export function getFunctionEnums(objects: Record<string, ioBroker.Object>, sortedKeys: string[]): string[] {
     const enums: string[] = [];
     const reg = /^enum\.functions\./;
-    for (const id in objects) {
+    const enumKeys = getObjectsBelowId(sortedKeys, 'enum');
+
+    for (const id of enumKeys) {
         if (
             Object.prototype.hasOwnProperty.call(objects, id) &&
             reg.test(id) &&
-            objects[id] &&
-            objects[id].type === 'enum' &&
-            objects[id].common &&
-            objects[id].common.members &&
-            objects[id].common.members.length
+            objects[id]?.type === 'enum' &&
+            objects[id].common?.members?.length
         ) {
             enums.push(id);
         }
     }
+
     return enums;
 }
 
@@ -184,5 +226,6 @@ export function getParentId(id: string): string {
     if (pos !== -1) {
         return id.substring(0, pos);
     }
+
     return id;
 }

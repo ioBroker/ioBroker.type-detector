@@ -137,12 +137,16 @@ export interface InternalDetectorState {
     defaultStates?: { [key: string]: string };
 
     /**
-     * Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter
+     * It is used to enhance detection by laxing some rules if matching, else will be used by
+     * iobroker.devices and iobroker.matter
      * Only states WITH defaultRole will show up in UI.
      */
     defaultRole?: string;
 
-    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    /**
+     * It is used to enhance detection by laxing some rules if matching, else will be used by
+     * iobroker.devices and iobroker.matter.
+     */
     defaultUnit?: string;
 
     /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
@@ -151,13 +155,16 @@ export interface InternalDetectorState {
     /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
     defaultChannelRole?: string;
 
-    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    /** If set then the unit needs to match. */
     unit?: string;
 
-    /** ?? */
+    /** If set then the object type needs to match. */
     objectType?: string;
 
-    /** ?? */
+    /**
+     * If set then the regex needs to match with the last-level-state-name (the one after the
+     * last ".")
+     */
     state?: RegExp;
 }
 
@@ -180,13 +187,21 @@ export interface DetectOptions {
     /** List of state names, that will be ignored. E.g., ['UNREACH_STICKY'] */
     ignoreIndicators?: string[];
 
-    /** List of allowed types. E.g., ['channel', 'device', 'state'] */
+    /** List of allowed types. E.g., ['slider', 'rgbSingle'] */
     allowedTypes?: Types[];
 
-    /** List of excluded types. E.g., ['channel', 'device', 'state'] */
+    /** List of excluded types. E.g., ['rgb', 'rgbSingle'] */
     excludedTypes?: Types[];
 
-    /** If true, the cache will be ignored */
+    /**
+     * List of Types to prioritize before the others.
+     * Example: [[Types.hue, Types.rgb], [Types.RgbSingle, Types.RGB]] moves Hue before RGB and RGBSingle also before RGB
+     */
+    prioritizedTypes?: [moveThisType: Types, beforeThatType: Types][];
+
+    /**
+      If true, the cache will be ignored
+     */
     ignoreCache?: boolean;
 
     /**
@@ -200,16 +215,27 @@ export interface DetectOptions {
      */
     detectAllPossibleDevices?: boolean;
 
+    /**
+     * Adjusts the logic to try to find a device object and consider all state in there, else a channel
+     */
+    detectParent?: boolean;
+
     // Internally used infos and caches
 
     /** For optimization, it is Object.keys(objects) */
     _keysOptional?: string[];
+
+    /** For optimization, if the provided _keysOptional are sorted */
+    _keysOptionalSorted?: boolean;
 
     /** For optimization, initially it is empty array */
     _usedIdsOptional?: string[];
 
     /** For optimization, initially it is empty array */
     _checkedPatterns?: Types[];
+
+    /** For optimization, internal list of patterns order to process */
+    _patternList?: Types[];
 }
 
 export interface DetectorContext {
@@ -222,6 +248,7 @@ export interface DetectorContext {
     pattern: Types;
     state: InternalDetectorState;
     ignoreEnums: boolean;
+    sortedKeys: string[];
 }
 
 export interface InternalPatternControl {
@@ -241,6 +268,5 @@ export interface ExternalPatternControl {
     enumRequired?: boolean;
 }
 
-export interface PatternWords {
-    [lang: string]: RegExp[];
-}
+export type PatternLanguages = 'en' | 'de' | 'ru';
+export type PatternWords = Record<PatternLanguages, RegExp[]>;

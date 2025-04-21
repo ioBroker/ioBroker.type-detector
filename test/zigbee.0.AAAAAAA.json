@@ -1,0 +1,654 @@
+{
+  "zigbee.0.AAAAAAA": {
+    "type": "device",
+    "common": {
+      "name": "BR Ceiling",
+      "type": "9290012573A",
+      "icon": "img/9290012573A.png",
+      "statusStates": {
+        "onlineId": "zigbee.0.AAAAAAA.available"
+      },
+      "modelIcon": "https://www.zigbee2mqtt.io/images/devices/9290012573A.png"
+    },
+    "native": {
+      "id": "0017880103124d6d"
+    },
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1744482697125,
+    "_id": "zigbee.0.AAAAAAA",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.available": {
+    "type": "state",
+    "common": {
+      "name": "Available",
+      "type": "boolean",
+      "read": true,
+      "write": false,
+      "role": "state"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179947560,
+    "_id": "zigbee.0.AAAAAAA.available",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.brightness": {
+    "type": "state",
+    "common": {
+      "name": "Brightness",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.dimmer",
+      "min": 0,
+      "max": 100
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.brightness",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 100,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.brightness_move": {
+    "type": "state",
+    "common": {
+      "name": "Dimming",
+      "type": "number",
+      "read": false,
+      "write": true,
+      "role": "state",
+      "min": -50,
+      "max": 50
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.brightness_move",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.color": {
+    "type": "state",
+    "common": {
+      "name": "Color",
+      "type": "string",
+      "read": true,
+      "write": true,
+      "role": "level.color.rgb"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.color",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "{\"r\":40,\"g\":30,\"b\":20}",
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.color_hs": {
+    "type": "channel",
+    "common": {
+      "name": "color_hs"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1740212611238,
+    "_id": "zigbee.0.AAAAAAA.color_hs",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.color_hs.hue": {
+    "type": "state",
+    "common": {
+      "name": "Hue",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.hue",
+      "min": 0,
+      "max": 360
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1740212611371,
+    "_id": "zigbee.0.AAAAAAA.color_hs.hue",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 250,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.color_hs.saturation": {
+    "type": "state",
+    "common": {
+      "name": "Saturation",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.saturation",
+      "min": 0,
+      "max": 100
+    },
+    "native": {},
+    "_id": "zigbee.0.AAAAAAA.color_hs.saturation",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1743365092395,
+    "val": 100,
+    "ack": false
+  },
+  "zigbee.0.AAAAAAA.color_rgb": {
+    "type": "channel",
+    "common": {
+      "name": "color_rgb"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1740212611238,
+    "_id": "zigbee.0.AAAAAAA.color_rgb",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.color_rgb.b": {
+    "type": "state",
+    "common": {
+      "name": "Blue",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.blue",
+      "min": 0,
+      "max": 255
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1740212611371,
+    "_id": "zigbee.0.AAAAAAA.color_rgb.b",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 20,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.color_rgb.g": {
+    "type": "state",
+    "common": {
+      "name": "Green",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.green",
+      "min": 0,
+      "max": 255
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1740212611371,
+    "_id": "zigbee.0.AAAAAAA.color_rgb.g",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 30,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.color_rgb.r": {
+    "type": "state",
+    "common": {
+      "name": "Red",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.red",
+      "min": 0,
+      "max": 255
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1740212611371,
+    "_id": "zigbee.0.AAAAAAA.color_rgb.r",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 40,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.color_temp_startup": {
+    "type": "state",
+    "common": {
+      "name": "Color temperature after cold power on of this light",
+      "type": "number",
+      "unit": "mired",
+      "read": true,
+      "write": true,
+      "role": "state",
+      "min": 153,
+      "max": 500
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.color_temp_startup",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 366,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.color_xy": {
+    "type": "channel",
+    "common": {
+      "name": "color_xy"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1740212611238,
+    "_id": "zigbee.0.AAAAAAA.color_xy",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.color_xy.x": {
+    "type": "state",
+    "common": {
+      "name": "X",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.x",
+      "min": 0,
+      "max": 1
+    },
+    "native": {},
+    "_id": "zigbee.0.AAAAAAA.color_xy.x",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1743030676303
+  },
+  "zigbee.0.AAAAAAA.color_xy.y": {
+    "type": "state",
+    "common": {
+      "name": "Y",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.y",
+      "min": 0,
+      "max": 1
+    },
+    "native": {},
+    "_id": "zigbee.0.AAAAAAA.color_xy.y",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1743030688014
+  },
+  "zigbee.0.AAAAAAA.colortemp": {
+    "type": "state",
+    "common": {
+      "name": "Color temperature",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "role": "level.color.temperature"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.colortemp",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 303,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.colortemp_move": {
+    "type": "state",
+    "common": {
+      "name": "Colortemp change",
+      "type": "number",
+      "read": false,
+      "write": true,
+      "role": "state",
+      "min": -50,
+      "max": 50
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.colortemp_move",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.device_query": {
+    "type": "state",
+    "common": {
+      "name": "Trigger device query",
+      "type": "boolean",
+      "read": false,
+      "write": true,
+      "role": "button"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.device_query",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.effect": {
+    "type": "state",
+    "common": {
+      "name": "effect",
+      "type": "string",
+      "states": {
+        "blink": "blink",
+        "breathe": "breathe",
+        "okay": "okay",
+        "channel_change": "channel_change",
+        "candle": "candle",
+        "fireplace": "fireplace",
+        "colorloop": "colorloop",
+        "finish_effect": "finish_effect",
+        "stop_effect": "stop_effect",
+        "stop_hue_effect": "stop_hue_effect"
+      },
+      "read": true,
+      "write": true,
+      "role": "state"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1744482697353,
+    "_id": "zigbee.0.AAAAAAA.effect",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.hue_move": {
+    "type": "state",
+    "common": {
+      "name": "Hue change",
+      "type": "number",
+      "read": false,
+      "write": true,
+      "role": "state",
+      "min": -50,
+      "max": 50
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.hue_move",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.link_quality": {
+    "type": "state",
+    "common": {
+      "name": "Link quality",
+      "type": "number",
+      "read": true,
+      "write": false,
+      "role": "state",
+      "min": 0,
+      "max": 255
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1742901756436,
+    "_id": "zigbee.0.AAAAAAA.link_quality",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 84,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.msg_from_zigbee": {
+    "type": "state",
+    "common": {
+      "name": "Message from Zigbee",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "state"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.msg_from_zigbee",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "{\"type\":\"readResponse\",\"data\":{\"zclVersion\":1},\"linkquality\":84,\"groupID\":0,\"cluster\":\"genBasic\",\"meta\":{\"zclTransactionSequenceNumber\":122,\"frameControl\":{\"frameType\":0,\"manufacturerSpecific\":false,\"direction\":1,\"disableDefaultResponse\":true,\"reservedBits\":0}},\"endpoint_id\":11}",
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.power_on_behavior": {
+    "type": "state",
+    "common": {
+      "name": "Controls the behavior when the device is powered on after power loss. If you get an `UNSUPPORTED_ATTRIBUTE` error, the device does not support it.",
+      "type": "string",
+      "states": {
+        "off": "off",
+        "on": "on",
+        "toggle": "toggle",
+        "previous": "previous"
+      },
+      "read": true,
+      "write": true,
+      "role": "state"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1744482697353,
+    "_id": "zigbee.0.AAAAAAA.power_on_behavior",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.saturation_move": {
+    "type": "state",
+    "common": {
+      "name": "Saturation change",
+      "type": "number",
+      "read": false,
+      "write": true,
+      "role": "state",
+      "min": -50,
+      "max": 50
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.saturation_move",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.send_payload": {
+    "type": "state",
+    "common": {
+      "name": "Send to Device",
+      "type": "string",
+      "read": true,
+      "write": true,
+      "role": "state"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.send_payload",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "zigbee.0.AAAAAAA.state": {
+    "type": "state",
+    "common": {
+      "name": "Switch state",
+      "type": "boolean",
+      "read": true,
+      "write": true,
+      "role": "switch"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.state",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "zigbee.0.AAAAAAA.transition_time": {
+    "type": "state",
+    "common": {
+      "name": "Transition time",
+      "type": "number",
+      "unit": "sec",
+      "read": false,
+      "write": true,
+      "role": "state"
+    },
+    "native": {},
+    "from": "system.adapter.zigbee.0",
+    "user": "system.user.admin",
+    "ts": 1717179959160,
+    "_id": "zigbee.0.AAAAAAA.transition_time",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  }
+}

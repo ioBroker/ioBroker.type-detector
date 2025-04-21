@@ -83,7 +83,7 @@ Air conditioner with warming and cooling functions.
 | R | Name           | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                    |
 |---|----------------|-------------------------------|------|----------------|----|-----|-------|------------------------------------------|
 | * | SET            | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                  |
-| * | MODE           | level.mode.airconditioner     |      | number         | W  |     |       | `/airconditioner$/`                      |
+| * | MODE           | level.mode.airconditioner     |      | number         | W  |     |       | `/(level\.mode\.)?airconditioner$/`      |
 |   | SPEED          | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                   |
 |   | POWER          | switch.power                  |      | boolean/number | W  |     |       | `/^switch\.power$/`                      |
 |   | POWER          |                               |      | boolean        | W  |     |       | `/^switch$/`                             |
@@ -218,7 +218,6 @@ Light with CIE (International Commission on Illumination) color space (XY).
 | * | CIE             | level.color.cie               |      | string  | W  |     |       | `/^level\.color\.cie$/`                                                      |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |       | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
@@ -245,7 +244,6 @@ Light, where the color is set by color temperature (normally from 2700°K (warm-
 | * | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | SATURATION      |                               |      | number  | W  |     |       | `/^level\.color\.saturation$/`                                               |
 |   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |       | `/^switch$/`                                                                 |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
@@ -293,7 +291,7 @@ Sensor if the door opened (true) or closed (false).
 
 | R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.door                   |      | boolean | -  | E    |     |       | `/^state?$｜^state(\.door)?$｜^sensor(\.door)?/`                               |
+| * | ACTUAL   | sensor.door                   |      | boolean | -  | E    |     |       | `/^state(\.door)?$｜^sensor(\.door)?/`                                        |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
@@ -438,7 +436,7 @@ Slider with position set by number. Could be used for any device that is control
 | R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|------------------------------------------------------------------------------|
 | * | SET      | level                         | %    | number  | W  | m   | M   |     |       | `/^level(\..*)?$/`                                                           |
-|   | ACTUAL   | value                         |      | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                                           |
+|   | ACTUAL   | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                                           |
 |   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                                                     |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
@@ -512,7 +510,7 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 | * | SET        | switch.lock                   |      | boolean | W  |     |       | `/^switch\.lock$/`                                                           |
 |   | ACTUAL     | state                         |      | boolean | -  |     |       | `/^state$/`                                                                  |
 |   | OPEN       | button                        |      | boolean | W  |     |       |                                                                              |
-|   | DOOR_STATE | sensor.door                   |      | boolean | -  |     |       | `/^state?$｜^state(\.door)?$｜^sensor(\.door)?/`                               |
+|   | DOOR_STATE | sensor.door                   |      | boolean | -  |     |       | `/^state(\.door)?$｜^sensor(\.door)?/`                                        |
 |   | DIRECTION  | indicator.direction           |      | boolean |    | X   |       | `/^indicator\.direction$/`                                                   |
 |   | DIRECTION  | value.direction               |      | number  |    |     |       | `/^(indicator｜value)\.direction$/`                                           |
 |   | WORKING    | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
@@ -546,8 +544,8 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | TRACK         | media.track                  |      | string         |    |     |     |     |       | `/^media.track(\..*)?$/`                                                     |
 |   | EPISODE       | media.episode                |      | string         |    |     |     |     |       | `/^media.episode(\..*)?$/`                                                   |
 |   | SEASON        | media.season                 |      | string         |    |     |     |     |       | `/^media.season(\..*)?$/`                                                    |
-|   | VOLUME        | level.volume                 |      | number         | W  | m   | M   |     |       | `/^level.volume?$/`                                                          |
-|   | VOLUME_ACTUAL | value.volume                 |      | number         | -  | m   | M   |     |       | `/^value.volume?$/`                                                          |
+|   | VOLUME        | level.volume                 | %    | number         | W  | m   | M   |     |       | `/^level.volume?$/`                                                          |
+|   | VOLUME_ACTUAL | value.volume                 | %    | number         | -  | m   | M   |     |       | `/^value.volume?$/`                                                          |
 |   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |       | `/^media.mute?$/`                                                            |
 |   | IGNORE        |                              |      |                |    |     |     |     | x     |                                                                              |
 |   | CONNECTED     | indicator.reachable          |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                                                   |
@@ -561,7 +559,7 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.motion                 |      | boolean |    |     |       | `/^state\.motion$｜^sensor\.motion$/`                                         |
+| * | ACTUAL   | sensor.motion                 |      | boolean |    |     |       | `/^(state\.)?motion$｜^sensor\.motion$/`                                      |
 |   | SECOND   | value.brightness              | lux  | number  |    |     |       | `/brightness$/`                                                              |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
@@ -582,7 +580,6 @@ RGB(W) light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0
 |   | WHITE           | level.color.white             |      | number  | W  |     |       | `/^level\.color\.white$/`                                                    |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |       | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$｜^state$/`                                               |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
@@ -609,7 +606,6 @@ RGB light with different states for every color. The value is from 0 to 255.
 | * | RGB             | level.color.rgb               |      | string  | W  |     |       | `/^level\.color\.rgb$/`                                                      |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |       | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |       | `/^switch$/`                                                                 |
@@ -637,7 +633,6 @@ RGBW light with different states for every color. The value is from 0 to 255 for
 | * | RGBW            | level.color.rgbw              |      | string  | W  |     |       | `/^level\.color\.rgbw$/`                                                     |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |       | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
 |   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch\.light$/`                                                          |
 |   | ON              |                               |      | boolean | W  |     |       | `/^switch$/`                                                                 |
@@ -663,7 +658,7 @@ Socket with an ON/OFF option. Could have information about current, amperage, en
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
 |---|----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
 | * | SET            | switch                        |      | boolean | W  |     |       | `/^switch$｜^state$｜^switch\.active$/`                                        |
-|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state$｜^state\.active$/`                                                  |
+|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$/`                                                       |
 |   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
 |   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
 |   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
@@ -701,9 +696,8 @@ Thermostat to be controlled by the desired temperature. Could have mode.
 |   | ACTUAL   | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                                                      |
 |   | HUMIDITY | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                                                         |
 |   | BOOST    | switch.mode.boost             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.boost(\..*)?$/`                                          |
-|   | POWER    | switch.power                  |      | boolean/number | W  |     |       | `/^switch\.power$/`                                                          |
+|   | POWER    | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                                                       |
 |   | PARTY    | switch.mode.party             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.party$/`                                                 |
-|   | POWER    |                               |      | boolean        | W  |     |       | `/^switch$/`                                                                 |
 |   | MODE     | level.mode.thermostat         |      | number         | W  |     |       | `/^level(\.mode)?\.thermostat$/`                                             |
 |   | WORKING  | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                                                     |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
@@ -763,8 +757,8 @@ Group of volumes.
 
 | R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|------------------------------------------------------------------------------|
-| * | SET      | level.volume.group            |      | number  | W  | m   | M   |     |       | `/^level\.volume\.group?$/`                                                  |
-|   | ACTUAL   | value.volume.group            |      | number  | -  | m   | M   |     |       | `/^value\.volume\.group$/`                                                   |
+| * | SET      | level.volume.group            | %    | number  | W  | m   | M   |     |       | `/^level\.volume\.group?$/`                                                  |
+|   | ACTUAL   | value.volume.group            | %    | number  | -  | m   | M   |     |       | `/^value\.volume\.group$/`                                                   |
 |   | MUTE     | media.mute.group              |      | boolean | W  |     |     |     |       | `/^media\.mute\.group$/`                                                     |
 |   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                                                     |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
@@ -877,7 +871,7 @@ Window tilt sensor: closed - 0, opened - 1, tiled - 2.
 
 | R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.window                  |      | number  |    | E    |     |       | `/^state?$｜^value(\.window)?$/`                                              |
+| * | ACTUAL   | value.window                  |      | number  |    | E    |     |       | `/^state$｜^value(\.window)?$/`                                               |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |

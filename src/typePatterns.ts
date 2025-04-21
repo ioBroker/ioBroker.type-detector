@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2024 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2025 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -23,7 +23,7 @@
  */
 
 import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types';
-import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './RoleEnumUtils';
+import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './roleEnumUtils';
 
 const SharedPatterns: {
     working: InternalDetectorState;
@@ -379,6 +379,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 notSingle: true,
                 noSubscribe: true,
                 defaultRole: 'level.volume',
+                defaultUnit: '%',
             },
             {
                 role: /^value.volume?$/,
@@ -392,6 +393,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 notSingle: true,
                 noSubscribe: true,
                 defaultRole: 'value.volume',
+                defaultUnit: '%',
             },
             {
                 role: /^media.mute?$/,
@@ -827,16 +829,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
             },
             {
-                role: /^level\.color\.saturation$/,
-                indicator: false,
-                type: StateType.Number,
-                write: true,
-                name: 'SATURATION',
-                required: false,
-                defaultRole: 'level.color.saturation',
-                defaultUnit: '%',
-            },
-            {
                 role: /^level\.color\.temperature$/,
                 indicator: false,
                 type: StateType.Number,
@@ -913,16 +905,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 name: 'BRIGHTNESS',
                 required: false,
-                defaultUnit: '%',
-            },
-            {
-                role: /^level\.color\.saturation$/,
-                indicator: false,
-                type: StateType.Number,
-                write: true,
-                name: 'SATURATION',
-                required: false,
-                defaultRole: 'level.color.saturation',
                 defaultUnit: '%',
             },
             {
@@ -1013,16 +995,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultUnit: '%',
             },
             {
-                role: /^level\.color\.saturation$/,
-                indicator: false,
-                type: StateType.Number,
-                write: true,
-                name: 'SATURATION',
-                required: false,
-                defaultRole: 'level.color.saturation',
-                defaultUnit: '%',
-            },
-            {
                 role: /^level\.color\.temperature$/,
                 indicator: false,
                 type: StateType.Number,
@@ -1107,16 +1079,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 name: 'BRIGHTNESS',
                 required: false,
-                defaultUnit: '%',
-            },
-            {
-                role: /^level\.color\.saturation$/,
-                indicator: false,
-                type: StateType.Number,
-                write: true,
-                name: 'SATURATION',
-                required: false,
-                defaultRole: 'level.color.saturation',
                 defaultUnit: '%',
             },
             {
@@ -1297,14 +1259,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
             },
             {
-                role: /^level\.color\.saturation$/,
-                indicator: false,
-                type: StateType.Number,
-                write: true,
-                name: 'SATURATION',
-                required: false,
-            },
-            {
                 role: /^switch\.light$/,
                 indicator: false,
                 type: StateType.Boolean,
@@ -1437,7 +1391,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
             {
-                role: /airconditioner$/,
+                role: /(level\.mode\.)?airconditioner$/,
                 indicator: false,
                 write: true,
                 type: StateType.Number,
@@ -1446,13 +1400,13 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: true,
                 defaultRole: 'level.mode.airconditioner',
                 defaultStates: {
-                    0: 'OFF',
-                    1: 'AUTO',
-                    2: 'COOL',
-                    3: 'HEAT',
-                    4: 'ECO',
-                    5: 'FAN_ONLY',
-                    6: 'DRY',
+                    0: 'AUTO',
+                    3: 'COOL',
+                    4: 'DRY',
+                    5: 'ECO',
+                    6: 'FAN_ONLY',
+                    7: 'HEAT',
+                    8: 'OFF',
                 },
             },
             // optional
@@ -1603,7 +1557,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.mode.boost',
             },
             {
-                role: /^switch\.power$/,
+                role: /^switch(\.power)?$/,
                 indicator: false,
                 write: true,
                 type: [StateType.Boolean, StateType.Number],
@@ -1621,15 +1575,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'PARTY',
                 required: false,
                 defaultRole: 'switch.mode.party',
-            },
-            {
-                role: /^switch$/,
-                indicator: false,
-                write: true,
-                type: StateType.Boolean,
-                searchInParent: true,
-                name: 'POWER',
-                required: false,
             },
             {
                 role: /^level(\.mode)?\.thermostat$/,
@@ -2312,7 +2257,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button',
             },
             {
-                role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
+                role: /^state(\.door)?$|^sensor(\.door)?/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2334,7 +2280,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     motion: {
         states: [
             {
-                role: /^state\.motion$|^sensor\.motion$/,
+                role: /^(state\.)?motion$|^sensor\.motion$/,
                 indicator: false,
                 type: StateType.Boolean,
                 name: 'ACTUAL',
@@ -2362,6 +2308,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     window: {
         states: [
             {
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
                 role: /^state(\.window)?$|^sensor(\.window)?/,
                 indicator: false,
                 type: StateType.Boolean,
@@ -2382,7 +2329,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     windowTilt: {
         states: [
             {
-                role: /^state?$|^value(\.window)?$/,
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
+                role: /^state$|^value(\.window)?$/,
                 indicator: false,
                 type: StateType.Number,
                 enums: roleOrEnumWindow,
@@ -2443,7 +2391,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     door: {
         states: [
             {
-                role: /^state?$|^state(\.door)?$|^sensor(\.door)?/,
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
+                role: /^state(\.door)?$|^sensor(\.door)?/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2723,6 +2672,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'SET',
                 required: true,
                 defaultRole: 'level.volume.group',
+                defaultUnit: '%',
             },
             // optional
             {
@@ -2735,6 +2685,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'ACTUAL',
                 required: false,
                 defaultRole: 'value.volume.group',
+                defaultUnit: '%',
             },
             {
                 role: /^media\.mute\.group$/,
@@ -2779,6 +2730,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'ACTUAL',
                 required: false,
                 defaultRole: 'value',
+                defaultUnit: '%',
             },
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -2802,7 +2754,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^state$|^state\.active$/,
+                role: /^state(\.active)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,

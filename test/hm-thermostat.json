@@ -1,0 +1,798 @@
+{
+  "hm-rpc.1.JEQ0XXXXXX": {
+    "_id": "hm-rpc.1.JEQ0XXXXXX",
+    "type": "device",
+    "common": {
+      "name": "Thermo SZ",
+      "icon": "/icons/42_hm-cc-tc_thumb.png"
+    },
+    "native": {
+      "ADDRESS": "JEQ0XXXXXX",
+      "CHILDREN": [
+        "JEQ0XXXXXX:0",
+        "JEQ0XXXXXX:1",
+        "JEQ0XXXXXX:2",
+        "JEQ0XXXXXX:3"
+      ],
+      "FIRMWARE": "2.1",
+      "FLAGS": 1,
+      "INTERFACE": "PEQ1101194",
+      "PARAMSETS": [
+        "MASTER"
+      ],
+      "PARENT": "",
+      "RF_ADDRESS": 1937058,
+      "ROAMING": 0,
+      "RX_MODE": 12,
+      "TYPE": "HM-CC-TC",
+      "UPDATABLE": 0,
+      "VERSION": 15
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694294,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0": {
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0",
+    "type": "channel",
+    "common": {
+      "name": "Thermo SZ:0"
+    },
+    "native": {
+      "ADDRESS": "JEQ0XXXXXX:0",
+      "AES_ACTIVE": 0,
+      "DIRECTION": 0,
+      "FLAGS": 3,
+      "INDEX": 0,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES"
+      ],
+      "PARENT": "JEQ0XXXXXX",
+      "PARENT_TYPE": "HM-CC-TC",
+      "TYPE": "MAINTENANCE",
+      "VERSION": 15
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694296,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.CONFIG_PENDING": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.CONFIG_PENDING",
+      "role": "indicator",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "DEFAULT": false,
+      "FLAGS": 9,
+      "ID": "CONFIG_PENDING",
+      "MAX": true,
+      "MIN": false,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 2,
+      "TYPE": "BOOL",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694297,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.CONFIG_PENDING",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.CONFIG_PENDING_ALARM": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.CONFIG_PENDING_ALARM",
+      "type": "number",
+      "role": "indicator.alarm",
+      "read": true,
+      "write": true,
+      "def": 0,
+      "states": {
+        "0": "NO ALARM",
+        "1": "ALARM",
+        "2": "ACKNOWLEDGED"
+      }
+    },
+    "native": {
+      "Name": "Thermo SZ:0.CONFIG_PENDING_ALARM",
+      "TypeName": "ALARM",
+      "DP": "7580"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1735028666107,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.CONFIG_PENDING_ALARM",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.LOWBAT": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.LOWBAT",
+      "role": "indicator.lowbat",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "DEFAULT": false,
+      "FLAGS": 9,
+      "ID": "LOWBAT",
+      "MAX": true,
+      "MIN": false,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 3,
+      "TYPE": "BOOL",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694339,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.LOWBAT",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.LOWBAT_ALARM": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.LOWBAT_ALARM",
+      "type": "number",
+      "role": "indicator.alarm",
+      "read": true,
+      "write": true,
+      "def": 0,
+      "states": {
+        "0": "NO ALARM",
+        "1": "ALARM",
+        "2": "ACKNOWLEDGED"
+      }
+    },
+    "native": {
+      "Name": "Thermo SZ:0.LOWBAT_ALARM",
+      "TypeName": "ALARM",
+      "DP": "7584"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1735028666112,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.LOWBAT_ALARM",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.RSSI_DEVICE": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.RSSI_DEVICE",
+      "role": "value.rssi",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -2147483648,
+      "max": 128,
+      "unit": "dBm"
+    },
+    "native": {
+      "DEFAULT": 0,
+      "FLAGS": 1,
+      "ID": "RSSI_DEVICE",
+      "MAX": 128,
+      "MIN": -2147483648,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 4,
+      "TYPE": "INTEGER",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694382,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.RSSI_DEVICE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": -72,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.RSSI_PEER",
+      "role": "value.rssi",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -2147483648,
+      "max": 2147483647,
+      "unit": "dBm"
+    },
+    "native": {
+      "DEFAULT": 0,
+      "FLAGS": 1,
+      "ID": "RSSI_PEER",
+      "MAX": 2147483647,
+      "MIN": -2147483648,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 5,
+      "TYPE": "INTEGER",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694425,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": -78,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.STICKY_UNREACH": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.STICKY_UNREACH",
+      "role": "indicator.unreach",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": true
+    },
+    "native": {
+      "DEFAULT": false,
+      "FLAGS": 25,
+      "ID": "STICKY_UNREACH",
+      "MAX": true,
+      "MIN": false,
+      "OPERATIONS": 7,
+      "TAB_ORDER": 1,
+      "TYPE": "BOOL",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694495,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.STICKY_UNREACH",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.STICKY_UNREACH_ALARM": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.STICKY_UNREACH_ALARM",
+      "type": "number",
+      "role": "indicator.alarm",
+      "read": true,
+      "write": true,
+      "def": 0,
+      "states": {
+        "0": "NO ALARM",
+        "1": "ALARM",
+        "2": "ACKNOWLEDGED"
+      }
+    },
+    "native": {
+      "Name": "Thermo SZ:0.STICKY_UNREACH_ALARM",
+      "TypeName": "ALARM",
+      "DP": "7590"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1735028666115,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.STICKY_UNREACH_ALARM",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.UNREACH": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.UNREACH",
+      "role": "indicator.unreach",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "DEFAULT": false,
+      "FLAGS": 9,
+      "ID": "UNREACH",
+      "MAX": true,
+      "MIN": false,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 0,
+      "TYPE": "BOOL",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694538,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.UNREACH",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.0.UNREACH_ALARM": {
+    "type": "state",
+    "common": {
+      "name": "Thermo SZ:0.UNREACH_ALARM",
+      "type": "number",
+      "role": "indicator.alarm",
+      "read": true,
+      "write": true,
+      "def": 0,
+      "states": {
+        "0": "NO ALARM",
+        "1": "ALARM",
+        "2": "ACKNOWLEDGED"
+      }
+    },
+    "native": {
+      "Name": "Thermo SZ:0.UNREACH_ALARM",
+      "TypeName": "ALARM",
+      "DP": "7594"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1735028666118,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.0.UNREACH_ALARM",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.1": {
+    "_id": "hm-rpc.1.JEQ0XXXXXX.1",
+    "type": "channel",
+    "common": {
+      "name": "Heizung SZ IST",
+      "enums": [
+        {
+          "_id": "enum.rooms.Schlafzimmer",
+          "common": {
+            "name": "Schlafzimmer",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ4MCA0ODAiPgogICAgPGcgZmlsbD0iY3VycmVudENvbG9yIj4KICAgICAgICA8cGF0aCBkPSJNNDU2LDIyNGMtMTQuMTMzLDAtMjQsNi4zMDEtMjQsMTUuMzJ2MjcuNTA1QzQxOS4zMzMsMjQxLjc5MywzOTkuODUsMjI0LDM3NiwyMjRIMTUyYy00LjQxNy0wLjAwMS03Ljk5OSwzLjU3OS04LDcuOTk2CgkJCWMwLDAuMDAxLDAsMC4wMDMsMCwwLjAwNHY0OC4wNjdjMC4wNDUtMTMuMDUyLTUuMjAxLTI2LjA3NS0xNS41ODYtMzUuNTgzYy0xOS41NTItMTcuOTAyLTQ5LjkxNS0xNi41NjQtNjcuODE2LDIuOTg5CgkJCWMtMTYuNzY0LDE4LjMwOS0xNi44MDEsNDYuMzgtMC4wODYsNjQuNzM0Yy00LjYxMiwwLjUwOC04Ljk2OCwyLjM4LTEyLjUxMiw1LjM3NVYxMTUuMTk5QzQ4LDEwNC40MzQsMzcuNDYxLDk2LDI0LDk2CgkJCXMtMjQsOC40MzQtMjQsMTkuMTk5djM0NS42MDJDMCw0NzEuNTY2LDEwLjUzOSw0ODAsMjQsNDgwczI0LTguNDM0LDI0LTE5LjE5OVY0MDhoMzg0djU2LjY4YzAsOS4wMTksOS44NjcsMTUuMzIsMjQsMTUuMzIKCQkJczI0LTYuMzAxLDI0LTE1LjMyVjIzOS4zMkM0ODAsMjMwLjMwMSw0NzAuMTMzLDIyNCw0NTYsMjI0eiBNMzIsNDYwLjgwMWMtMC4wODYsMC42NTYtMi43NzMsMy4xOTktOCwzLjE5OQoJCQljLTUuMjUsMC03LjkyMi0yLjU0My04LTMuMTk5VjExNS4xOTljMC4wNzgtMC42NTYsMi43NS0zLjE5OSw4LTMuMTk5YzUuMjI3LDAsNy45MTQsMi41NDMsOCwzLjE5OVY0NjAuODAxeiBNMTYwLDI0MGgyMTYKCQkJYzMwLjE3MiwwLDUzLjE3Miw0NC45MjYsNTUuNzU4LDg4SDE2MFYyNDB6IE0xNDQsMjgwLjA4M3YzOC41NmMtMy40NTItMy4zNTMtNy44NDgtNS41NjYtMTIuNTk3LTYuMzQyCgkJCUMxMzkuNzkzLDMwMy4xMzcsMTQzLjk1NiwyOTEuNiwxNDQsMjgwLjA4M3ogTTk2LDI0OGMxNy42NzMsMCwzMiwxNC4zMjcsMzIsMzJjMCwxNy42NzMtMTQuMzI3LDMyLTMyLDMycy0zMi0xNC4zMjctMzItMzIKCQkJQzY0LjAxOSwyNjIuMzM1LDc4LjMzNSwyNDguMDE5LDk2LDI0OHogTTQzMiwzOTJINDh2LTQ4LjAyM2M0LjE2My0wLjMyOCw3LjM3NC0zLjgwMSw3LjM3NS03Ljk3NwoJCQljLTAuMDc3LTQuMzMxLDMuMzY0LTcuOTA5LDcuNjk1LThoNjQuNjFjNC4zMzEsMC4wOTEsNy43NzIsMy42NjksNy42OTUsOGMtMC4wMDEsNC40MTcsMy41NzksNy45OTksNy45OTYsOAoJCQljMC4wMDEsMCwwLjAwMywwLDAuMDA0LDBINDMyVjM5MnogTTQ2NCw0NjIuNTk0Yy01LjE2OSwxLjg3NS0xMC44MzEsMS44NzUtMTYsMFYyNDEuNDA2YzUuMTY5LTEuODc1LDEwLjgzMS0xLjg3NSwxNiwwVjQ2Mi41OTR6IgogICAgICAgIC8+CiAgICAgICAgPHBhdGggZD0iTTEzNy4wNzgsMTc2bDI5LjA3LTM0Ljg3OWMxLjk4Ni0yLjM4NiwyLjQxMy01LjcwNSwxLjA5NC04LjUxNmMtMS4zMTYtMi44MS00LjEzOS00LjYwNS03LjI0Mi00LjYwNWgtNDh2MTZoMzAuOTIyCgkJCWwtMjkuMDcsMzQuODc5Yy0yLjgyNywzLjM5OC0yLjM2NCw4LjQ0NCwxLjAzNCwxMS4yN2MxLjQzNywxLjE5NSwzLjI0NiwxLjg1LDUuMTE0LDEuODUxaDQ4di0xNkgxMzcuMDc4eiIvPgogICAgICAgIDxwYXRoIGQ9Ik0yMjQuMzU5LDEzNmw0NS45NTMtNTkuMDljMS44NzctMi40MTEsMi4yMTctNS42ODEsMC44NzUtOC40MjZjLTEuMzQ0LTIuNzQzLTQuMTMyLTQuNDgzLTcuMTg4LTQuNDg0aC02NHYxNmg0Ny42NDEKCQkJbC00NS45NTMsNTkuMDljLTIuNzE0LDMuNDg0LTIuMDg5LDguNTA5LDEuMzk2LDExLjIyM2MxLjQwNSwxLjA5NCwzLjEzNiwxLjY4OCw0LjkxNywxLjY4OGg2NHYtMTZIMjI0LjM1OXoiLz4KICAgICAgICA8cGF0aCBkPSJNMzI4LDk2bDYyLjM5OC04My4xOTljMi42NTItMy41MzMsMS45MzktOC41NDYtMS41OTQtMTEuMTk5QzM4Ny40MTksMC41NjIsMzg1LjczMywwLDM4NCwwaC03MnYxNmg1NmwtNjIuMzk4LDgzLjE5OQoJCQljLTEuODE4LDIuNDI0LTIuMTEyLDUuNjY4LTAuNzU4LDguMzc5QzMwNi4yLDExMC4yODgsMzA4Ljk3LDExMiwzMTIsMTEyaDgwVjk2SDMyOHoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Schlafzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "ADDRESS": "JEQ0XXXXXX:1",
+      "AES_ACTIVE": 0,
+      "DIRECTION": 1,
+      "FLAGS": 1,
+      "INDEX": 1,
+      "LINK_SOURCE_ROLES": "WEATHER_TH",
+      "LINK_TARGET_ROLES": "",
+      "PARAMSETS": [
+        "LINK",
+        "MASTER",
+        "VALUES"
+      ],
+      "PARENT": "JEQ0XXXXXX",
+      "PARENT_TYPE": "HM-CC-TC",
+      "TYPE": "WEATHER",
+      "VERSION": 15
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694590,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY": {
+    "type": "state",
+    "common": {
+      "name": "Heizung SZ IST.HUMIDITY",
+      "role": "value.humidity",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 99,
+      "unit": "%"
+    },
+    "native": {
+      "AutoconfRoles": "WEATHER",
+      "DEFAULT": 0,
+      "FLAGS": 1,
+      "ID": "HUMIDITY",
+      "MAX": 99,
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 1,
+      "TYPE": "INTEGER",
+      "UNIT": "%"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694640,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 51,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE": {
+    "type": "state",
+    "common": {
+      "name": "Heizung SZ IST.TEMPERATURE",
+      "role": "value.temperature",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -40,
+      "max": 80,
+      "unit": "°C"
+    },
+    "native": {
+      "AutoconfRoles": "WEATHER",
+      "DEFAULT": 0,
+      "FLAGS": 1,
+      "ID": "TEMPERATURE",
+      "MAX": 80,
+      "MIN": -40,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 0,
+      "TYPE": "FLOAT",
+      "UNIT": " C"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694696,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 17.5,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.2": {
+    "_id": "hm-rpc.1.JEQ0XXXXXX.2",
+    "type": "channel",
+    "common": {
+      "name": "Heizung SZ",
+      "enums": [
+        {
+          "_id": "enum.rooms.Schlafzimmer",
+          "common": {
+            "name": "Schlafzimmer",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ4MCA0ODAiPgogICAgPGcgZmlsbD0iY3VycmVudENvbG9yIj4KICAgICAgICA8cGF0aCBkPSJNNDU2LDIyNGMtMTQuMTMzLDAtMjQsNi4zMDEtMjQsMTUuMzJ2MjcuNTA1QzQxOS4zMzMsMjQxLjc5MywzOTkuODUsMjI0LDM3NiwyMjRIMTUyYy00LjQxNy0wLjAwMS03Ljk5OSwzLjU3OS04LDcuOTk2CgkJCWMwLDAuMDAxLDAsMC4wMDMsMCwwLjAwNHY0OC4wNjdjMC4wNDUtMTMuMDUyLTUuMjAxLTI2LjA3NS0xNS41ODYtMzUuNTgzYy0xOS41NTItMTcuOTAyLTQ5LjkxNS0xNi41NjQtNjcuODE2LDIuOTg5CgkJCWMtMTYuNzY0LDE4LjMwOS0xNi44MDEsNDYuMzgtMC4wODYsNjQuNzM0Yy00LjYxMiwwLjUwOC04Ljk2OCwyLjM4LTEyLjUxMiw1LjM3NVYxMTUuMTk5QzQ4LDEwNC40MzQsMzcuNDYxLDk2LDI0LDk2CgkJCXMtMjQsOC40MzQtMjQsMTkuMTk5djM0NS42MDJDMCw0NzEuNTY2LDEwLjUzOSw0ODAsMjQsNDgwczI0LTguNDM0LDI0LTE5LjE5OVY0MDhoMzg0djU2LjY4YzAsOS4wMTksOS44NjcsMTUuMzIsMjQsMTUuMzIKCQkJczI0LTYuMzAxLDI0LTE1LjMyVjIzOS4zMkM0ODAsMjMwLjMwMSw0NzAuMTMzLDIyNCw0NTYsMjI0eiBNMzIsNDYwLjgwMWMtMC4wODYsMC42NTYtMi43NzMsMy4xOTktOCwzLjE5OQoJCQljLTUuMjUsMC03LjkyMi0yLjU0My04LTMuMTk5VjExNS4xOTljMC4wNzgtMC42NTYsMi43NS0zLjE5OSw4LTMuMTk5YzUuMjI3LDAsNy45MTQsMi41NDMsOCwzLjE5OVY0NjAuODAxeiBNMTYwLDI0MGgyMTYKCQkJYzMwLjE3MiwwLDUzLjE3Miw0NC45MjYsNTUuNzU4LDg4SDE2MFYyNDB6IE0xNDQsMjgwLjA4M3YzOC41NmMtMy40NTItMy4zNTMtNy44NDgtNS41NjYtMTIuNTk3LTYuMzQyCgkJCUMxMzkuNzkzLDMwMy4xMzcsMTQzLjk1NiwyOTEuNiwxNDQsMjgwLjA4M3ogTTk2LDI0OGMxNy42NzMsMCwzMiwxNC4zMjcsMzIsMzJjMCwxNy42NzMtMTQuMzI3LDMyLTMyLDMycy0zMi0xNC4zMjctMzItMzIKCQkJQzY0LjAxOSwyNjIuMzM1LDc4LjMzNSwyNDguMDE5LDk2LDI0OHogTTQzMiwzOTJINDh2LTQ4LjAyM2M0LjE2My0wLjMyOCw3LjM3NC0zLjgwMSw3LjM3NS03Ljk3NwoJCQljLTAuMDc3LTQuMzMxLDMuMzY0LTcuOTA5LDcuNjk1LThoNjQuNjFjNC4zMzEsMC4wOTEsNy43NzIsMy42NjksNy42OTUsOGMtMC4wMDEsNC40MTcsMy41NzksNy45OTksNy45OTYsOAoJCQljMC4wMDEsMCwwLjAwMywwLDAuMDA0LDBINDMyVjM5MnogTTQ2NCw0NjIuNTk0Yy01LjE2OSwxLjg3NS0xMC44MzEsMS44NzUtMTYsMFYyNDEuNDA2YzUuMTY5LTEuODc1LDEwLjgzMS0xLjg3NSwxNiwwVjQ2Mi41OTR6IgogICAgICAgIC8+CiAgICAgICAgPHBhdGggZD0iTTEzNy4wNzgsMTc2bDI5LjA3LTM0Ljg3OWMxLjk4Ni0yLjM4NiwyLjQxMy01LjcwNSwxLjA5NC04LjUxNmMtMS4zMTYtMi44MS00LjEzOS00LjYwNS03LjI0Mi00LjYwNWgtNDh2MTZoMzAuOTIyCgkJCWwtMjkuMDcsMzQuODc5Yy0yLjgyNywzLjM5OC0yLjM2NCw4LjQ0NCwxLjAzNCwxMS4yN2MxLjQzNywxLjE5NSwzLjI0NiwxLjg1LDUuMTE0LDEuODUxaDQ4di0xNkgxMzcuMDc4eiIvPgogICAgICAgIDxwYXRoIGQ9Ik0yMjQuMzU5LDEzNmw0NS45NTMtNTkuMDljMS44NzctMi40MTEsMi4yMTctNS42ODEsMC44NzUtOC40MjZjLTEuMzQ0LTIuNzQzLTQuMTMyLTQuNDgzLTcuMTg4LTQuNDg0aC02NHYxNmg0Ny42NDEKCQkJbC00NS45NTMsNTkuMDljLTIuNzE0LDMuNDg0LTIuMDg5LDguNTA5LDEuMzk2LDExLjIyM2MxLjQwNSwxLjA5NCwzLjEzNiwxLjY4OCw0LjkxNywxLjY4OGg2NHYtMTZIMjI0LjM1OXoiLz4KICAgICAgICA8cGF0aCBkPSJNMzI4LDk2bDYyLjM5OC04My4xOTljMi42NTItMy41MzMsMS45MzktOC41NDYtMS41OTQtMTEuMTk5QzM4Ny40MTksMC41NjIsMzg1LjczMywwLDM4NCwwaC03MnYxNmg1NmwtNjIuMzk4LDgzLjE5OQoJCQljLTEuODE4LDIuNDI0LTIuMTEyLDUuNjY4LTAuNzU4LDguMzc5QzMwNi4yLDExMC4yODgsMzA4Ljk3LDExMiwzMTIsMTEyaDgwVjk2SDMyOHoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Schlafzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "ADDRESS": "JEQ0XXXXXX:2",
+      "AES_ACTIVE": 0,
+      "DIRECTION": 1,
+      "FLAGS": 1,
+      "INDEX": 2,
+      "LINK_SOURCE_ROLES": "CLIMATECONTROL_TC",
+      "LINK_TARGET_ROLES": "",
+      "PARAMSETS": [
+        "LINK",
+        "MASTER",
+        "VALUES"
+      ],
+      "PARENT": "JEQ0XXXXXX",
+      "PARENT_TYPE": "HM-CC-TC",
+      "TYPE": "CLIMATECONTROL_REGULATOR",
+      "VERSION": 15
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694739,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.JEQ0XXXXXX.2.ADJUSTING_COMMAND": {
+    "type": "state",
+    "common": {
+      "name": "Heizung SZ.ADJUSTING_COMMAND",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4
+    },
+    "native": {
+      "CONTROL": "NONE",
+      "DEFAULT": 0,
+      "FLAGS": 1,
+      "ID": "ADJUSTING_COMMAND",
+      "MAX": 4,
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 1,
+      "TYPE": "INTEGER",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694741,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.2.ADJUSTING_COMMAND",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.2.ADJUSTING_DATA": {
+    "type": "state",
+    "common": {
+      "name": "Heizung SZ.ADJUSTING_DATA",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 250
+    },
+    "native": {
+      "CONTROL": "NONE",
+      "DEFAULT": 0,
+      "FLAGS": 1,
+      "ID": "ADJUSTING_DATA",
+      "MAX": 250,
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "TAB_ORDER": 2,
+      "TYPE": "INTEGER",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694784,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.2.ADJUSTING_DATA",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.2.SETPOINT": {
+    "type": "state",
+    "common": {
+      "name": "Heizung SZ.SETPOINT",
+      "role": "level.temperature",
+      "def": 21,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "states": {
+        "0": "VENT_CLOSED",
+        "100": "VENT_OPEN"
+      },
+      "unit": "°C"
+    },
+    "native": {
+      "CONTROL": "TEMP.SETPOINT",
+      "DEFAULT": 21,
+      "FLAGS": 1,
+      "ID": "SETPOINT",
+      "MAX": 30,
+      "MIN": 6,
+      "OPERATIONS": 7,
+      "SPECIAL": [
+        {
+          "ID": "VENT_CLOSED",
+          "VALUE": 0
+        },
+        {
+          "ID": "VENT_OPEN",
+          "VALUE": 100
+        }
+      ],
+      "TAB_ORDER": 0,
+      "TYPE": "FLOAT",
+      "UNIT": " C"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694826,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.2.SETPOINT",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 16,
+    "ack": false
+  },
+  "hm-rpc.1.JEQ0XXXXXX.2.STATE": {
+    "type": "state",
+    "common": {
+      "name": "Heizung SZ.STATE",
+      "role": "switch",
+      "def": false,
+      "type": "boolean",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "CONTROL": "SWITCH.STATE",
+      "DEFAULT": false,
+      "FLAGS": 3,
+      "ID": "STATE",
+      "MAX": true,
+      "MIN": false,
+      "OPERATIONS": 2,
+      "TAB_ORDER": 3,
+      "TYPE": "BOOL",
+      "UNIT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694870,
+    "_id": "hm-rpc.1.JEQ0XXXXXX.2.STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.JEQ0XXXXXX.3": {
+    "_id": "hm-rpc.1.JEQ0XXXXXX.3",
+    "type": "channel",
+    "common": {
+      "name": "Thermo SZ:3",
+      "enums": [
+        {
+          "_id": "enum.rooms.Schlafzimmer",
+          "common": {
+            "name": "Schlafzimmer",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ4MCA0ODAiPgogICAgPGcgZmlsbD0iY3VycmVudENvbG9yIj4KICAgICAgICA8cGF0aCBkPSJNNDU2LDIyNGMtMTQuMTMzLDAtMjQsNi4zMDEtMjQsMTUuMzJ2MjcuNTA1QzQxOS4zMzMsMjQxLjc5MywzOTkuODUsMjI0LDM3NiwyMjRIMTUyYy00LjQxNy0wLjAwMS03Ljk5OSwzLjU3OS04LDcuOTk2CgkJCWMwLDAuMDAxLDAsMC4wMDMsMCwwLjAwNHY0OC4wNjdjMC4wNDUtMTMuMDUyLTUuMjAxLTI2LjA3NS0xNS41ODYtMzUuNTgzYy0xOS41NTItMTcuOTAyLTQ5LjkxNS0xNi41NjQtNjcuODE2LDIuOTg5CgkJCWMtMTYuNzY0LDE4LjMwOS0xNi44MDEsNDYuMzgtMC4wODYsNjQuNzM0Yy00LjYxMiwwLjUwOC04Ljk2OCwyLjM4LTEyLjUxMiw1LjM3NVYxMTUuMTk5QzQ4LDEwNC40MzQsMzcuNDYxLDk2LDI0LDk2CgkJCXMtMjQsOC40MzQtMjQsMTkuMTk5djM0NS42MDJDMCw0NzEuNTY2LDEwLjUzOSw0ODAsMjQsNDgwczI0LTguNDM0LDI0LTE5LjE5OVY0MDhoMzg0djU2LjY4YzAsOS4wMTksOS44NjcsMTUuMzIsMjQsMTUuMzIKCQkJczI0LTYuMzAxLDI0LTE1LjMyVjIzOS4zMkM0ODAsMjMwLjMwMSw0NzAuMTMzLDIyNCw0NTYsMjI0eiBNMzIsNDYwLjgwMWMtMC4wODYsMC42NTYtMi43NzMsMy4xOTktOCwzLjE5OQoJCQljLTUuMjUsMC03LjkyMi0yLjU0My04LTMuMTk5VjExNS4xOTljMC4wNzgtMC42NTYsMi43NS0zLjE5OSw4LTMuMTk5YzUuMjI3LDAsNy45MTQsMi41NDMsOCwzLjE5OVY0NjAuODAxeiBNMTYwLDI0MGgyMTYKCQkJYzMwLjE3MiwwLDUzLjE3Miw0NC45MjYsNTUuNzU4LDg4SDE2MFYyNDB6IE0xNDQsMjgwLjA4M3YzOC41NmMtMy40NTItMy4zNTMtNy44NDgtNS41NjYtMTIuNTk3LTYuMzQyCgkJCUMxMzkuNzkzLDMwMy4xMzcsMTQzLjk1NiwyOTEuNiwxNDQsMjgwLjA4M3ogTTk2LDI0OGMxNy42NzMsMCwzMiwxNC4zMjcsMzIsMzJjMCwxNy42NzMtMTQuMzI3LDMyLTMyLDMycy0zMi0xNC4zMjctMzItMzIKCQkJQzY0LjAxOSwyNjIuMzM1LDc4LjMzNSwyNDguMDE5LDk2LDI0OHogTTQzMiwzOTJINDh2LTQ4LjAyM2M0LjE2My0wLjMyOCw3LjM3NC0zLjgwMSw3LjM3NS03Ljk3NwoJCQljLTAuMDc3LTQuMzMxLDMuMzY0LTcuOTA5LDcuNjk1LThoNjQuNjFjNC4zMzEsMC4wOTEsNy43NzIsMy42NjksNy42OTUsOGMtMC4wMDEsNC40MTcsMy41NzksNy45OTksNy45OTYsOAoJCQljMC4wMDEsMCwwLjAwMywwLDAuMDA0LDBINDMyVjM5MnogTTQ2NCw0NjIuNTk0Yy01LjE2OSwxLjg3NS0xMC44MzEsMS44NzUtMTYsMFYyNDEuNDA2YzUuMTY5LTEuODc1LDEwLjgzMS0xLjg3NSwxNiwwVjQ2Mi41OTR6IgogICAgICAgIC8+CiAgICAgICAgPHBhdGggZD0iTTEzNy4wNzgsMTc2bDI5LjA3LTM0Ljg3OWMxLjk4Ni0yLjM4NiwyLjQxMy01LjcwNSwxLjA5NC04LjUxNmMtMS4zMTYtMi44MS00LjEzOS00LjYwNS03LjI0Mi00LjYwNWgtNDh2MTZoMzAuOTIyCgkJCWwtMjkuMDcsMzQuODc5Yy0yLjgyNywzLjM5OC0yLjM2NCw4LjQ0NCwxLjAzNCwxMS4yN2MxLjQzNywxLjE5NSwzLjI0NiwxLjg1LDUuMTE0LDEuODUxaDQ4di0xNkgxMzcuMDc4eiIvPgogICAgICAgIDxwYXRoIGQ9Ik0yMjQuMzU5LDEzNmw0NS45NTMtNTkuMDljMS44NzctMi40MTEsMi4yMTctNS42ODEsMC44NzUtOC40MjZjLTEuMzQ0LTIuNzQzLTQuMTMyLTQuNDgzLTcuMTg4LTQuNDg0aC02NHYxNmg0Ny42NDEKCQkJbC00NS45NTMsNTkuMDljLTIuNzE0LDMuNDg0LTIuMDg5LDguNTA5LDEuMzk2LDExLjIyM2MxLjQwNSwxLjA5NCwzLjEzNiwxLjY4OCw0LjkxNywxLjY4OGg2NHYtMTZIMjI0LjM1OXoiLz4KICAgICAgICA8cGF0aCBkPSJNMzI4LDk2bDYyLjM5OC04My4xOTljMi42NTItMy41MzMsMS45MzktOC41NDYtMS41OTQtMTEuMTk5QzM4Ny40MTksMC41NjIsMzg1LjczMywwLDM4NCwwaC03MnYxNmg1NmwtNjIuMzk4LDgzLjE5OQoJCQljLTEuODE4LDIuNDI0LTIuMTEyLDUuNjY4LTAuNzU4LDguMzc5QzMwNi4yLDExMC4yODgsMzA4Ljk3LDExMiwzMTIsMTEyaDgwVjk2SDMyOHoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+          },
+          "native": {
+            "Name": "Schlafzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "ADDRESS": "JEQ0XXXXXX:3",
+      "AES_ACTIVE": 0,
+      "DIRECTION": 2,
+      "FLAGS": 1,
+      "INDEX": 3,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "WCS_TIPTRONIC_SENSOR WINDOW_SWITCH_RECEIVER WINDOW_SWITCH_RECEIVER_V2",
+      "PARAMSETS": [
+        "LINK",
+        "MASTER",
+        "VALUES"
+      ],
+      "PARENT": "JEQ0XXXXXX",
+      "PARENT_TYPE": "HM-CC-TC",
+      "TYPE": "WINDOW_SWITCH_RECEIVER",
+      "VERSION": 15
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1734772694913,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  }
+}
