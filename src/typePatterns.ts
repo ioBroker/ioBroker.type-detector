@@ -23,7 +23,7 @@
  */
 
 import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types';
-import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './RoleEnumUtils';
+import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './roleEnumUtils';
 
 const SharedPatterns: {
     working: InternalDetectorState;
@@ -2257,6 +2257,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button',
             },
             {
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
                 role: /^state(\.door)?$|^sensor(\.door)?/,
                 indicator: false,
                 type: StateType.Boolean,
@@ -2279,7 +2280,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     motion: {
         states: [
             {
-                role: /^state$|^sensor\.motion$/,
+                role: /^(state\.)?motion$|^sensor\.motion$/,
                 indicator: false,
                 type: StateType.Boolean,
                 name: 'ACTUAL',
@@ -2307,6 +2308,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     window: {
         states: [
             {
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
                 role: /^state(\.window)?$|^sensor(\.window)?/,
                 indicator: false,
                 type: StateType.Boolean,
@@ -2327,6 +2329,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     windowTilt: {
         states: [
             {
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
                 role: /^state$|^value(\.window)?$/,
                 indicator: false,
                 type: StateType.Number,
@@ -2388,6 +2391,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     door: {
         states: [
             {
+                // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
                 role: /^state(\.door)?$|^sensor(\.door)?/,
                 indicator: false,
                 type: StateType.Boolean,

@@ -34,8 +34,8 @@ import {
     StateType,
     Types,
 } from './types';
-import { getFunctionEnums, getParentId, getEnums, getObjectsBelowId } from './RoleEnumUtils';
-import { patterns } from './TypePatterns';
+import { getFunctionEnums, getParentId, getEnums, getObjectsBelowId } from './roleEnumUtils';
+import { patterns } from './typePatterns';
 
 export class ChannelDetector {
     private enums: string[] | null = null;
