@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const ChannelDetectorImport = require('../build/index');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
-const name = "TS";
+const name = 'TS';
 
 function expectStateToHaveId(states, name, id, alternativeId) {
     const control = states.find(s => s.name === name);
@@ -19,7 +19,6 @@ function expectStateToHaveId(states, name, id, alternativeId) {
 }
 
 function detect(objectDef, options = {}) {
-
     const detector = new ChannelDetector();
 
     if (!options.objects) {
@@ -58,7 +57,10 @@ function validate(data, detectedType, detectedFields, ignoreAdditionalDetectedSt
     }
     if (!ignoreAdditionalDetectedStates) {
         const allMatchedStates = data.states.filter(({ id }) => !!id).length;
-        expect(allMatchedStates).to.be.equal(statesChecked, `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`);
+        expect(allMatchedStates).to.be.equal(
+            statesChecked,
+            `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`,
+        );
     }
 }
 
@@ -149,7 +151,7 @@ describe(`${name} Test Detector`, () => {
 
         validate(controls[0], Types.humidity, {
             ACTUAL: 'ham.0.TemperatureAndHumidity.Current-Relative-Humidity',
-        })
+        });
 
         done();
     });
@@ -177,7 +179,7 @@ describe(`${name} Test Detector`, () => {
 
         validate(controls[0], Types.humidity, {
             ACTUAL: 'ham.0.TemperatureAndHumidity.Current-Relative-Humidity',
-        })
+        });
 
         done();
     });
@@ -256,7 +258,7 @@ describe(`${name} Test Detector`, () => {
             POWER: 'alias.0.Hauptzimmer.AC.POWER',
             SET: 'alias.0.Hauptzimmer.AC.SET',
             MODE: 'alias.0.Hauptzimmer.AC.MODE',
-        })
+        });
 
         done();
     });
@@ -334,7 +336,7 @@ describe(`${name} Test Detector`, () => {
 
     it('Must detect forecast from accuweather and assign days correctly', done => {
         const controls = detect('./weather_accuweather.json', {
-            id:'accuweather.0.Summary',
+            id: 'accuweather.0.Summary',
         });
 
         const detectionDef = {
@@ -344,10 +346,7 @@ describe(`${name} Test Detector`, () => {
             FEELS_LIKE: 'accuweather.0.Summary.RealFeelTemperature',
             WIND_SPEED: ['accuweather.0.Summary.WindSpeed_d1', 'accuweather.0.Summary.WindSpeed'],
             WIND_DIRECTION: ['accuweather.0.Summary.WindDirection', 'accuweather.0.Summary.WindDirection_d1'],
-            WIND_DIRECTION_STR: [
-                'accuweather.0.Summary.WindDirectionStr',
-                'accuweather.0.Summary.WindDirectionStr_d1',
-            ],
+            WIND_DIRECTION_STR: ['accuweather.0.Summary.WindDirectionStr', 'accuweather.0.Summary.WindDirectionStr_d1'],
             HUMIDITY: 'accuweather.0.Summary.RelativeHumidity',
             PRESSURE: 'accuweather.0.Summary.Pressure',
             DOW: ['accuweather.0.Summary.DayOfWeek', 'accuweather.0.Summary.DayOfWeek_d1'],
@@ -365,10 +364,8 @@ describe(`${name} Test Detector`, () => {
             detectionDef[`WIND_DIRECTION${day}`] = `accuweather.0.Summary.WindDirection_d${day + 1}`;
             detectionDef[`WIND_DIRECTION_STR${day}`] = `accuweather.0.Summary.WindDirectionStr_d${day + 1}`;
             detectionDef[`DOW${day}`] = `accuweather.0.Summary.DayOfWeek_d${day + 1}`;
-            detectionDef[`PRECIPITATION_CHANCE${day}`] =
-                `accuweather.0.Summary.PrecipitationProbability_d${day + 1}`;
-            detectionDef[`PRECIPITATION${day}`] =
-                `accuweather.0.Summary.TotalLiquidVolume_d${day + 1}`;
+            detectionDef[`PRECIPITATION_CHANCE${day}`] = `accuweather.0.Summary.PrecipitationProbability_d${day + 1}`;
+            detectionDef[`PRECIPITATION${day}`] = `accuweather.0.Summary.TotalLiquidVolume_d${day + 1}`;
         }
 
         validate(controls[0], Types.weatherForecast, detectionDef, true);
@@ -377,14 +374,14 @@ describe(`${name} Test Detector`, () => {
     });
 
     it('Must detect forecast from dasWetter and assign days correctly', done => {
-        const controls = detect('./weather_daswetter.json',{
+        const controls = detect('./weather_daswetter.json', {
             id: 'daswetter.0.NextDays.Location_1',
         });
 
         const detectionDef = {
             ICON: 'daswetter.0.NextDays.Location_1.Day_1.iconURL',
             TEMP_MIN: 'daswetter.0.NextDays.Location_1.Day_1.Minimale_Temperatur_value',
-            TEMP_MAX: 'daswetter.0.NextDays.Location_1.Day_1.Maximale_Temperatur_value'
+            TEMP_MAX: 'daswetter.0.NextDays.Location_1.Day_1.Maximale_Temperatur_value',
         };
         const days = [1, 2, 3, 4, 5, 6];
         for (const day of days) {
@@ -400,7 +397,7 @@ describe(`${name} Test Detector`, () => {
     });
 
     it('Must detect forecast from weatherunderground and assign days correctly', done => {
-        const controls = detect('./weather_weatherunderground.json',{
+        const controls = detect('./weather_weatherunderground.json', {
             id: 'weatherunderground.0.forecast',
         });
 
@@ -415,8 +412,7 @@ describe(`${name} Test Detector`, () => {
             PRESSURE: 'weatherunderground.0.forecast.current.pressure',
             HUMIDITY: 'weatherunderground.0.forecast.current.relativeHumidity',
             WIND_CHILL: 'weatherunderground.0.forecast.current.windChill',
-
-        }
+        };
         const days = [1, 2, 3];
         for (const day of days) {
             detectionDef[`ICON${day}`] = `weatherunderground.0.forecast.${day}d.iconURL`;
@@ -425,13 +421,13 @@ describe(`${name} Test Detector`, () => {
             detectionDef[`DATE${day}`] = `weatherunderground.0.forecast.${day}d.date`;
         }
 
-        validate(controls[0], Types.weatherForecast, detectionDef, true)
+        validate(controls[0], Types.weatherForecast, detectionDef, true);
 
         done();
     });
 
     it('Must detect blinds correctly', done => {
-        const controls = detect('./blinds.json',{
+        const controls = detect('./blinds.json', {
             id: 'hm-rpc.1.00AAABBBA74CCC.4',
         });
 
@@ -439,7 +435,7 @@ describe(`${name} Test Detector`, () => {
             SET: 'hm-rpc.1.00AAABBBA74CCC.4.LEVEL',
             STOP: 'hm-rpc.1.00AAABBBA74CCC.4.STOP',
             UNREACH: 'hm-rpc.1.00AAABBBA74CCC.0.UNREACH',
-        })
+        });
 
         done();
     });
@@ -451,13 +447,13 @@ describe(`${name} Test Detector`, () => {
 
         validate(controls[0], Types.light, {
             SET: 'alias.0.Schlafzimmer.Licht.SET',
-        })
+        });
 
         done();
     });
 
     it(`${name} Must detect light correctly with allowedTypes`, done => {
-        const controls = detect('./huergb.json',{
+        const controls = detect('./huergb.json', {
             id: 'hue.0.Büro',
             allowedTypes: [Types.dimmer],
         });
@@ -471,7 +467,7 @@ describe(`${name} Test Detector`, () => {
     });
 
     it(`${name} Must detect multiple types`, done => {
-        const controls = detect('./multi-detect.json',{
+        const controls = detect('./multi-detect.json', {
             id: 'hm-rpc.0.001658A99FD264.2',
             ignoreEnums: true,
             detectAllPossibleDevices: true,
@@ -481,22 +477,22 @@ describe(`${name} Test Detector`, () => {
             SET: 'hm-rpc.0.001658A99FD264.2.LEVEL',
             STOP: 'hm-rpc.0.001658A99FD264.2.STOP',
         });
-        expect(controls[0].states.filter(({id}) => !!id).length).to.be.equal(2);
+        expect(controls[0].states.filter(({ id }) => !!id).length).to.be.equal(2);
 
         validate(controls[1], Types.dimmer, {
             SET: 'hm-rpc.0.001658A99FD264.2.LEVEL',
         });
-        expect(controls[1].states.filter(({id}) => !!id).length).to.be.equal(1);
+        expect(controls[1].states.filter(({ id }) => !!id).length).to.be.equal(1);
 
         validate(controls[2], Types.slider, {
             SET: 'hm-rpc.0.001658A99FD264.2.LEVEL',
         });
-        expect(controls[2].states.filter(({id}) => !!id).length).to.be.equal(1);
+        expect(controls[2].states.filter(({ id }) => !!id).length).to.be.equal(1);
 
         validate(controls[3], Types.button, {
             SET: 'hm-rpc.0.001658A99FD264.2.STOP',
         });
-        expect(controls[3].states.filter(({id}) => !!id).length).to.be.equal(1);
+        expect(controls[3].states.filter(({ id }) => !!id).length).to.be.equal(1);
 
         done();
     });
@@ -528,7 +524,7 @@ describe(`${name} Test Detector`, () => {
             OPEN: 'hm-rpc.0.LEQ090XYZ.1.OPEN',
             DOOR_STATE: 'hm-rpc.0.LEQ090XYZ.1.DOOR_STATE',
             DIRECTION: 'hm-rpc.0.LEQ090XYZ.1.DIRECTION',
-            ERROR: 'hm-rpc.0.LEQ090XYZ.1.ERROR'
+            ERROR: 'hm-rpc.0.LEQ090XYZ.1.ERROR',
         });
 
         done();
@@ -584,7 +580,7 @@ describe(`${name} Test Detector`, () => {
     it(`${name} Must detect one device only also when starting on channel when using checkParent option`, done => {
         const options = {
             id: 'hm-rpc.1.JEQ0XXXXXX.1',
-            detectParent: true
+            detectParent: true,
         };
 
         const controls = detect('./hm-thermostat.json', options);
@@ -614,14 +610,19 @@ describe(`${name} Test Detector`, () => {
     it(`${name} Must detect one device only still when starting on channel when using checkParent option`, done => {
         const controls = detect('./hm-thermostat.json', {
             id: 'hm-rpc.1.JEQ0XXXXXX',
-            detectParent: true
+            detectParent: true,
         });
 
-        validate(controls[0], Types.thermostat, {
-            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
-            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
-            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
-        }, true)
+        validate(
+            controls[0],
+            Types.thermostat,
+            {
+                SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+                ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+                HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            },
+            true,
+        );
 
         done();
     });
@@ -646,7 +647,7 @@ describe(`${name} Test Detector`, () => {
     it(`${name} Must detect rgb light correctly when state in device is and device detected with normal prioritization`, done => {
         const controls = detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA',
-            detectParent: true
+            detectParent: true,
         });
 
         validate(controls[0], Types.rgb, {
@@ -681,7 +682,7 @@ describe(`${name} Test Detector`, () => {
     it(`${name} Must detect rgb light correctly when state in channel below device is and device detected with normal prioritization`, done => {
         const controls = detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA.color_rgb.r',
-            detectParent: true
+            detectParent: true,
         });
 
         validate(controls[0], Types.rgb, {
@@ -713,4 +714,3 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 });
-

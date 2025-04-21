@@ -559,7 +559,7 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.motion                 |      | boolean |    |     |       | `/^state$｜^sensor\.motion$/`                                                 |
+| * | ACTUAL   | sensor.motion                 |      | boolean |    |     |       | `/^(state\.)?motion$｜^sensor\.motion$/`                                      |
 |   | SECOND   | value.brightness              | lux  | number  |    |     |       | `/brightness$/`                                                              |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |

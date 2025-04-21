@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getObjectsBelowId } from '../build/RoleEnumUtils.js';
+import { getObjectsBelowId } from '../build/roleEnumUtils.js';
 
 // generate test data of 10000 objects like `attr0.9.param2.param3.param4.param5`, where random is from 0-9
 function getData(size = 5, random = 9) {
@@ -14,8 +14,8 @@ function getData(size = 5, random = 9) {
                 item.push(`attr${Math.floor(Math.random() * random)}`);
             }
             const id = item.join('.');
-            found = data.includes(id)
-        } while (found)
+            found = data.includes(id);
+        } while (found);
 
         data.push(item.join('.'));
     }
@@ -75,7 +75,9 @@ describe(`Unit tests`, () => {
             lengths.push(list.length);
         }
         const simpledDuration = Date.now() - start;
-        console.log(`Simple time for ${lengths.length} attempts: ${Date.now() - startSimple}. Optimization is x${Math.floor((simpledDuration * 10) / optimizedDuration)}`);
+        console.log(
+            `Simple time for ${lengths.length} attempts: ${Date.now() - startSimple}. Optimization is x${Math.floor((simpledDuration * 10) / optimizedDuration)}`,
+        );
 
         done();
     }).timeout(50000);
