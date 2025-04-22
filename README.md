@@ -96,6 +96,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Rename type `location_one` to `locationOne`
+
 ### 4.3.0 (2025-04-21)
 -   (@GermanBluefox) Added default role for `image`
 -   (@GermanBluefox) Added exported type `ExternalDetectorState`

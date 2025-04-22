@@ -57,7 +57,7 @@ In [brackets] is given the class name of a device.
 * [Slider [levelSlider]](#slider-levelslider)
 * [Light switch [light]](#light-switch-light)
 * [GPS Location (longitude, latitude) [location]](#gps-location--longitude--latitude--location)
-* [GPS Location in single state [location_one]](#gps-location-in-single-state-location_one)
+* [GPS Location in single state [locationOne]](#gps-location-in-single-state-locationone)
 * [Lock [lock]](#lock-lock)
 * [Media player [mediaPlayer]](#media-player-mediaplayer)
 * [Motion sensor [motion]](#motion-sensor-motion)
@@ -484,7 +484,7 @@ GPS location, where longitude and latitude are stored in two different states.
 |   | BATTERY   | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
 
 
-### GPS Location in single state [location_one]
+### GPS Location in single state [locationOne]
 
 GPS location, where longitude and latitude are stored in one state, like `longitude;latitude` - `8.40435;49.013506`.
 

@@ -2555,7 +2555,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.volume,
     },
-    location_one: {
+    locationOne: {
         states: [
             {
                 role: /^value\.gps$/,
@@ -2600,7 +2600,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.error,
             SharedPatterns.battery,
         ],
-        type: Types.location_one,
+        type: Types.locationOne,
     },
     location: {
         states: [

@@ -48,7 +48,7 @@ export enum Types {
     instance = 'instance',
     light = 'light',
     location = 'location',
-    location_one = 'location_one',
+    locationOne = 'locationOne',
     lock = 'lock',
     media = 'media',
     motion = 'motion',
