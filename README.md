@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.3.1 (2025-04-22)
 -   (@GermanBluefox) Rename type `location_one` to `locationOne`
 
 ### 4.3.0 (2025-04-21)
