@@ -330,12 +330,13 @@ export class ChannelDetector {
     /**
      * Tries to find a device or channel (as fallback) where the state is in
      */
-    private static findParentChannelOrDevice(objects: Record<string, ioBroker.Object>, id: string): string | null {
+    private static findParentChannelOrDevice(objects: Record<string, ioBroker.Object>, id: string): string | undefined {
         if (!objects[id]) {
             // Object does not exist
-            return null;
+            return;
         }
         const parts = id.split('.');
+        const origId = id;
 
         if (objects[id].type === 'state') {
             // a state needs to be in a channel, device, folder or such, so check the level above
@@ -348,7 +349,7 @@ export class ChannelDetector {
         }
 
         const obj = objects[id];
-        if (obj.type === 'device') {
+        if (obj?.type === 'device') {
             // We found a device object, use this
             return id;
         }
@@ -357,7 +358,7 @@ export class ChannelDetector {
         const upperObj = objects[upperLevelObjectId];
         if (!upperObj) {
             // Ok not existing object, so we use the existing object from before
-            return id;
+            return obj ? id : origId;
         }
         if (upperObj.type === 'device' || parts.length <= 2) {
             // We found a device object, or ended already on instance level, use this
@@ -565,7 +566,7 @@ export class ChannelDetector {
             // looking for indicators and special states
             if (currentType !== 'device') {
                 // get device name
-                const deviceId = getParentId(id);
+                const deviceId = ChannelDetector.findParentChannelOrDevice(objects, id) ?? id;
                 if (
                     objects[deviceId] &&
                     (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')
