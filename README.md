@@ -96,8 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-
-### __WORK IN PROGRESS__
+### 4.4.0 (2025-04-27)
 -   (@Apollon77) Added detection option `limitTypesToOneOf` to define limiting sets of detected types
 
 ### 4.3.1 (2025-04-22)
