@@ -184,14 +184,20 @@ export interface DetectOptions {
     /** ID to detect of state, device or channel */
     id: string;
 
-    /** List of state names, that will be ignored. E.g., ['UNREACH_STICKY'] */
+    /** List of state names, that will be ignored. e.g., ['UNREACH_STICKY'] */
     ignoreIndicators?: string[];
 
-    /** List of allowed types. E.g., ['slider', 'rgbSingle'] */
+    /** List of allowed types. e.g., ['slider', 'rgbSingle'] */
     allowedTypes?: Types[];
 
-    /** List of excluded types. E.g., ['rgb', 'rgbSingle'] */
+    /** List of excluded types. e.g., ['rgb', 'rgbSingle'] */
     excludedTypes?: Types[];
+
+    /**
+     * List of types that when detected also limit other types,
+     * e.g. [[Types.light, Types.ct, Types.rgb, Types.rgbSingle, Types.rgbwSingle, Types.hue, Types.cie]] limits detection to one lighting type.
+     */
+    limitTypesToOneOf?: Types[][];
 
     /**
      * List of Types to prioritize before the others.
@@ -244,11 +250,15 @@ export interface DetectorContext {
     usedIds: string[];
     usedInCurrentDevice: string[];
     ignoreIndicators: string[];
-    result: PatternControl | null;
+    result?: PatternControl;
     pattern: Types;
     state: InternalDetectorState;
     ignoreEnums: boolean;
     sortedKeys: string[];
+}
+
+export interface MatchedDetectorContext extends Omit<DetectorContext, 'result'> {
+    result: PatternControl;
 }
 
 export interface InternalPatternControl {

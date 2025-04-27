@@ -31,6 +31,7 @@ import {
     type InternalDetectorState,
     type InternalPatternControl,
     type PatternControl,
+    type MatchedDetectorContext,
     StateType,
     Types,
 } from './types';
@@ -229,7 +230,7 @@ export class ChannelDetector {
         const ignoreIndicators = context.ignoreIndicators;
         const ignoreEnums = context.ignoreEnums;
         const sortedKeys = context.sortedKeys;
-        let result: PatternControl | null = context.result;
+        let result = context.result;
         let found = false;
         // let count = 0;
 
@@ -433,7 +434,7 @@ export class ChannelDetector {
         return !excludedTypes || !excludedTypes.includes(pattern.type);
     }
 
-    private static allRequiredStatesFound(context: DetectorContext): boolean {
+    private static allRequiredStatesFound(context: DetectorContext): context is MatchedDetectorContext {
         if (!context.result) {
             return false;
         }
@@ -519,7 +520,6 @@ export class ChannelDetector {
             channelStates,
             usedIds,
             ignoreIndicators: ignoreIndicators || [],
-            result: null,
             pattern: Types.unknown,
             usedInCurrentDevice: [],
             state: {} as InternalDetectorState,
@@ -535,7 +535,7 @@ export class ChannelDetector {
             options._checkedPatterns.push(pattern);
 
             // reset the result
-            context.result = null;
+            delete context.result;
 
             context.pattern = pattern;
             context.usedInCurrentDevice = [];
@@ -548,7 +548,7 @@ export class ChannelDetector {
                     found = true;
                 }
                 if (state.required && !found) {
-                    context.result = null;
+                    delete context.result;
                     break;
                 }
             }
@@ -568,12 +568,11 @@ export class ChannelDetector {
                 const deviceId = getParentId(id);
                 if (
                     objects[deviceId] &&
-                    (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device') &&
-                    context.result
+                    (objects[deviceId].type === 'channel' || objects[deviceId].type === 'device')
                 ) {
                     deviceStates = getObjectsBelowId(_keysOptional!, deviceId);
-                    deviceStates.forEach(_id => {
-                        context.result!.states.forEach((state, i) => {
+                    for (const _id of deviceStates) {
+                        context.result.states.forEach((state, i) => {
                             if (!state.id && (state.indicator || state.searchInParent) && !state.noDeviceDetection) {
                                 if (
                                     this._applyPattern(
@@ -589,13 +588,24 @@ export class ChannelDetector {
                                 }
                             }
                         });
-                    });
+                    }
                 }
             }
 
-            if (context.result) {
-                const result = context.result as PatternControl;
-                result?.states.forEach((state: DetectorState) => ChannelDetector.cleanState(state, context.objects));
+            context.result.states.forEach((state: DetectorState) => ChannelDetector.cleanState(state, context.objects));
+
+            // Check if the detected type should be limited to a set of types and also declare the others as checked
+            if (options.limitTypesToOneOf) {
+                for (const types of options.limitTypesToOneOf) {
+                    if (types.includes(pattern)) {
+                        for (const type of types) {
+                            if (type === pattern || options._checkedPatterns.includes(type)) {
+                                continue;
+                            }
+                            options._checkedPatterns.push(type);
+                        }
+                    }
+                }
             }
 
             return context.result;

@@ -711,6 +711,39 @@ describe(`${name} Test Detector`, () => {
             ON: 'zigbee.0.AAAAAAA.state',
         });
 
+        // We still secondary detect other types, but only the minimal states
+        validate(controls[1], Types.rgb, {
+            RED: 'zigbee.0.AAAAAAA.color_rgb.r',
+            GREEN: 'zigbee.0.AAAAAAA.color_rgb.g',
+            BLUE: 'zigbee.0.AAAAAAA.color_rgb.b',
+        });
+
+        // We still secondary detect other types, but only the minimal states
+        validate(controls[2], Types.rgbSingle, {
+            RGB: 'zigbee.0.AAAAAAA.color',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect hue light only when device is used with adjusted prioritization and limitation`, done => {
+        const controls = detect('./zigbee.0.AAAAAAA.json', {
+            id: 'zigbee.0.AAAAAAA',
+            prioritizedTypes: [[Types.hue, Types.rgb]],
+            limitTypesToOneOf: [[Types.rgb, Types.rgbSingle, Types.rgbwSingle, Types.hue]]
+        });
+
+        validate(controls[0], Types.hue, {
+            HUE: 'zigbee.0.AAAAAAA.color_hs.hue',
+            SATURATION: 'zigbee.0.AAAAAAA.color_hs.saturation',
+            DIMMER: 'zigbee.0.AAAAAAA.brightness',
+            TEMPERATURE: 'zigbee.0.AAAAAAA.colortemp',
+            ON: 'zigbee.0.AAAAAAA.state',
+        });
+
+        expect(controls[1].type === Types.rgb).to.be.false;
+        expect(controls[2].type === Types.rgbSingle).to.be.false;
+
         done();
     });
 });
