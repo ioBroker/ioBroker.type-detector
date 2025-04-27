@@ -96,6 +96,10 @@ if (controls) {
 -->
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+-   (@Apollon77) Added detection option `limitTypesToOneOf` to define limiting sets of detected types
+
 ### 4.3.1 (2025-04-22)
 -   (@GermanBluefox) Rename type `location_one` to `locationOne`
 
