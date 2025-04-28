@@ -821,7 +821,7 @@ Just sensor if alarm should be shown.
 |   | DOW                    | dayofweek.forecast.0                   |       | string |     |       | `/^dayofweek$｜^dayofweek.forecast.0$/`                                     |
 |   | STATE                  | weather.state.forecast.0               |       | string |     |       | `/^weather.state$｜^weather.state.forecast.0$/`                             |
 |   | TEMP                   | value.temperature.forecast.0           |       | number |     |       | `/^value.temperature$｜^value.temperature.forecast.0$/`                     |
-|   | PRESSURE               | weather.icon.forecast.0                |       | number |     |       | `/^value.pressure$/`                                                       |
+|   | PRESSURE               | value.pressure.forecast.0              |       | number |     |       | `/^value.pressure$/`                                                       |
 |   | HUMIDITY               | value.humidity.forecast.0              |       | number |     |       | `/^value.humidity$｜value.humidity.forecast.0$/`                            |
 |   | TIME_SUNRISE           | date.sunrise                           |       | string |     |       | `/^(?:date｜time).sunrise(?:.forecast\.0)?$/`                               |
 |   | TIME_SUNSET            | date.sunset                            |       | string |     |       | `/^(?:date｜time).sunset(?:.forecast\.0)?$/`                                |

@@ -506,7 +506,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.Number,
                 name: 'PRESSURE',
                 required: false,
-                defaultRole: 'weather.icon.forecast.0',
+                defaultRole: 'value.pressure.forecast.0',
             },
             {
                 role: /^value.humidity$|value.humidity.forecast.0$/,
