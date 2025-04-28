@@ -265,116 +265,112 @@ export class ChannelDetector {
             ) {
                 // we detected a state, copy InternalPatternControl
                 if (!result) {
-                    result = JSON.parse(JSON.stringify(patterns[pattern]));
+                    result = JSON.parse(JSON.stringify(patterns[pattern])) as PatternControl; // can not be undefined here
                     context.result = result;
                     result?.states.forEach((state, j) => ChannelDetector.copyState(patterns[pattern].states[j], state));
                 }
 
-                if (result) {
-                    // map the detected ID to the relevant state in result - if allowed
-                    if (!result.states.find(({ id }) => id === stateId)) {
-                        for (const checkState of result.states) {
-                            if (checkState.name === state.name) {
-                                // If we already have a mapped ID we need to decide if we keep this ID or overrule it
-                                if (checkState.id) {
-                                    let useThisMapping: boolean | undefined; // three-state flag
+                // map the detected ID to the relevant state in result - if allowed
+                if (!result.states.find(({ id }) => id === stateId)) {
+                    for (const checkState of result.states) {
+                        if (checkState.name === state.name) {
+                            // If we already have a mapped ID we need to decide if we keep this ID or overrule it
+                            if (checkState.id) {
+                                let useThisMapping: boolean | undefined; // three-state flag
 
-                                    // Check if the favored state ID matches one of the available states, then this wins
-                                    if (context.favorId) {
-                                        if (stateId === context.favorId) {
-                                            useThisMapping = true;
-                                        } else if (checkState.id === context.favorId) {
-                                            useThisMapping = false;
-                                        }
-                                    }
-
-                                    const existingIdRole = objects[checkState.id]?.common?.role ?? '';
-                                    const stateIdRole = objects[stateId]?.common?.role ?? '';
-                                    const defaultRole = checkState.defaultRole;
-                                    if (defaultRole && useThisMapping === undefined) {
-                                        // Check if the defaultRole is matching to any of the available states, then this wins
-                                        if (stateIdRole === defaultRole) {
-                                            useThisMapping = true;
-                                        } else if (existingIdRole === defaultRole) {
-                                            useThisMapping = false;
-                                        }
-                                    }
-                                    if (useThisMapping === undefined) {
-                                        // If one of the roles uses state as first level or is empty, then the other one is better.
-                                        // If both are not "state" then check how many levels the roles have, the more the better.
-                                        // If same then not having "state" as first level will override the id, else not
-                                        const stateIdRoleLevels = stateIdRole.split('.');
-                                        const stateIdRoleLevelsCount = stateIdRoleLevels.length;
-                                        const existingIdRoleLevels = existingIdRole.split('.');
-                                        const existingIdRoleLevelsCount = existingIdRoleLevels.length;
-                                        if (stateIdRole === '') {
-                                            useThisMapping = false;
-                                        } else if (
-                                            stateIdRoleLevels[0] === 'state' &&
-                                            existingIdRoleLevels[0] !== 'state'
-                                        ) {
-                                            useThisMapping = false;
-                                        } else if (
-                                            stateIdRoleLevels[0] !== 'state' &&
-                                            existingIdRoleLevels[0] === 'state'
-                                        ) {
-                                            useThisMapping = true;
-                                        } else if (stateIdRoleLevelsCount > existingIdRoleLevelsCount) {
-                                            useThisMapping = true;
-                                        } else if (stateIdRoleLevelsCount < existingIdRoleLevelsCount) {
-                                            useThisMapping = false;
-                                        } else {
-                                            useThisMapping = stateIdRoleLevels[0] !== 'state';
-                                        }
-                                    }
-
-                                    // We ignore the found mapping, because it's better than the current one
-                                    if (!useThisMapping) {
-                                        break;
+                                // Check if the favored state ID matches one of the available states, then this wins
+                                if (context.favorId) {
+                                    if (stateId === context.favorId) {
+                                        useThisMapping = true;
+                                    } else if (checkState.id === context.favorId) {
+                                        useThisMapping = false;
                                     }
                                 }
 
-                                // count++;
-                                checkState.id = stateId;
-                                found = true;
-                                break;
+                                const existingIdRole = objects[checkState.id]?.common?.role ?? '';
+                                const stateIdRole = objects[stateId]?.common?.role ?? '';
+                                const defaultRole = checkState.defaultRole;
+                                if (defaultRole && useThisMapping === undefined) {
+                                    // Check if the defaultRole is matching to any of the available states, then this wins
+                                    if (stateIdRole === defaultRole) {
+                                        useThisMapping = true;
+                                    } else if (existingIdRole === defaultRole) {
+                                        useThisMapping = false;
+                                    }
+                                }
+                                if (useThisMapping === undefined) {
+                                    // If one of the roles uses state as first level or is empty, then the other one is better.
+                                    // If both are not "state" then check how many levels the roles have, the more the better.
+                                    // If same then not having "state" as first level will override the id, else not
+                                    const stateIdRoleLevels = stateIdRole.split('.');
+                                    const stateIdRoleLevelsCount = stateIdRoleLevels.length;
+                                    const existingIdRoleLevels = existingIdRole.split('.');
+                                    const existingIdRoleLevelsCount = existingIdRoleLevels.length;
+                                    if (stateIdRole === '') {
+                                        useThisMapping = false;
+                                    } else if (
+                                        stateIdRoleLevels[0] === 'state' &&
+                                        existingIdRoleLevels[0] !== 'state'
+                                    ) {
+                                        useThisMapping = false;
+                                    } else if (
+                                        stateIdRoleLevels[0] !== 'state' &&
+                                        existingIdRoleLevels[0] === 'state'
+                                    ) {
+                                        useThisMapping = true;
+                                    } else if (stateIdRoleLevelsCount > existingIdRoleLevelsCount) {
+                                        useThisMapping = true;
+                                    } else if (stateIdRoleLevelsCount < existingIdRoleLevelsCount) {
+                                        useThisMapping = false;
+                                    } else {
+                                        useThisMapping = stateIdRoleLevels[0] !== 'state';
+                                    }
+                                }
+
+                                // We ignore the found mapping, because it's better than the current one
+                                if (!useThisMapping) {
+                                    break;
+                                }
                             }
+
+                            // count++;
+                            checkState.id = stateId;
+                            found = true;
+                            break;
                         }
-                    } else {
-                        found = true; // Was there before already?
+                    }
+                } else {
+                    found = true; // Was there before already?
+                }
+
+                if (found) {
+                    if (!state.indicator) {
+                        usedInCurrentDevice.push(stateId);
                     }
 
-                    if (found) {
-                        if (!state.indicator) {
-                            usedInCurrentDevice.push(stateId);
-                        }
-
-                        if (state.multiple && channelStates.length > 1) {
-                            // execute this rule for every state in this channel
-                            for (const cid of channelStates) {
-                                if (cid === stateId) {
-                                    continue;
+                    if (state.multiple && channelStates.length > 1) {
+                        // execute this rule for every state in this channel
+                        for (const cid of channelStates) {
+                            if (cid === stateId) {
+                                continue;
+                            }
+                            if (
+                                (state.indicator ||
+                                    (!usedInCurrentDevice.includes(cid) &&
+                                        (state.notSingle || !usedIds.includes(cid)))) &&
+                                this._applyPattern(objects, cid, state, ignoreEnums, sortedKeys)
+                            ) {
+                                if (!state.indicator) {
+                                    usedInCurrentDevice.push(cid);
                                 }
-                                if (
-                                    (state.indicator ||
-                                        (!usedInCurrentDevice.includes(cid) &&
-                                            (state.notSingle || !usedIds.includes(cid)))) &&
-                                    this._applyPattern(objects, cid, state, ignoreEnums, sortedKeys)
-                                ) {
-                                    if (!state.indicator) {
-                                        usedInCurrentDevice.push(cid);
-                                    }
-                                    if (result) {
-                                        if (Array.isArray(state)) {
-                                            const newState: DetectorState = ChannelDetector.copyState(state[0]);
-                                            newState.id = cid;
-                                            result.states.push(newState);
-                                        } else {
-                                            const newState: DetectorState = ChannelDetector.copyState(state);
-                                            newState.id = cid;
-                                            result.states.push(newState);
-                                        }
-                                    }
+                                if (Array.isArray(state)) {
+                                    const newState: DetectorState = ChannelDetector.copyState(state[0]);
+                                    newState.id = cid;
+                                    result.states.push(newState);
+                                } else {
+                                    const newState: DetectorState = ChannelDetector.copyState(state);
+                                    newState.id = cid;
+                                    result.states.push(newState);
                                 }
                             }
                         }
