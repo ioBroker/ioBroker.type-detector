@@ -96,6 +96,9 @@ if (controls) {
 -->
 
 ## Changelog
+### __WORK IN PROGRESS__
+-   (@Apollon77) Enhance detection logic when multiple states are detected on same pattern-state to favor ID, default-role and number-of-role-levels and not "state" roles
+
 ### 4.4.0 (2025-04-27)
 -   (@Apollon77) Added detection option `limitTypesToOneOf` to define limiting sets of detected types
 

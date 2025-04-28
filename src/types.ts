@@ -255,6 +255,7 @@ export interface DetectorContext {
     state: InternalDetectorState;
     ignoreEnums: boolean;
     sortedKeys: string[];
+    favorId?: string;
 }
 
 export interface MatchedDetectorContext extends Omit<DetectorContext, 'result'> {
