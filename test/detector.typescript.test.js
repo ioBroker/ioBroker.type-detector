@@ -277,8 +277,9 @@ describe(`${name} Test Detector`, () => {
             STATE: 'mihome-vacuum.0.info.state',
             PAUSE: 'mihome-vacuum.0.control.pauseResume',
             FILTER: 'mihome-vacuum.0.consumable.filter',
-            BRUSH: 'mihome-vacuum.0.consumable.side_brush',
+            BRUSH: 'mihome-vacuum.0.consumable.main_brush',
             SENSORS: 'mihome-vacuum.0.consumable.sensors',
+            SIDE_BRUSH: 'mihome-vacuum.0.consumable.side_brush',
         });
 
         done();
@@ -407,10 +408,10 @@ describe(`${name} Test Detector`, () => {
             TEMP_MIN: 'weatherunderground.0.forecast.0d.tempMin',
             TEMP_MAX: 'weatherunderground.0.forecast.0d.tempMax',
             PRECIPITATION_CHANCE: 'weatherunderground.0.forecast.0d.precipitationChance',
-            DATE: 'weatherunderground.0.forecast.current.observationTime',
-            STATE: 'weatherunderground.0.forecast.current.weather',
+            DATE: 'weatherunderground.0.forecast.0d.date',
+            STATE: 'weatherunderground.0.forecast.0d.state',
             PRESSURE: 'weatherunderground.0.forecast.current.pressure',
-            HUMIDITY: 'weatherunderground.0.forecast.current.relativeHumidity',
+            HUMIDITY: 'weatherunderground.0.forecast.0d.humidity',
             WIND_CHILL: 'weatherunderground.0.forecast.current.windChill',
         };
         const days = [1, 2, 3];
@@ -743,6 +744,259 @@ describe(`${name} Test Detector`, () => {
 
         expect(controls[1].type === Types.rgb).to.be.false;
         expect(controls[2].type === Types.rgbSingle).to.be.false;
+
+        done();
+    });
+
+    it('Must detect the window state with the role with more sublevels also when alphabetically comes first', done => {
+        const objects = {
+            'test.0.window': {
+                common: {
+                    name: 'window',
+                },
+                type: 'device',
+            },
+            'test.0.window.x-contact': {
+                common: {
+                    name: 'contact',
+                    type: 'boolean',
+                    role: 'state',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'test.0.window.a-opened': {
+                common: {
+                    name: 'opened',
+                    type: 'boolean',
+                    role: 'sensor.window',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'test.0.window',
+            ignoreEnums: true
+        });
+
+        validate(controls[0], Types.window, {
+            ACTUAL: 'test.0.window.a-opened',
+        });
+
+        done();
+    });
+
+    it('Must detect the window state with the role without overwriting with more sublevels also when alphabetically comes last', done => {
+        const objects = {
+            'test.0.window': {
+                common: {
+                    name: 'window',
+                },
+                type: 'device',
+            },
+            'test.0.window.a-opened': {
+                common: {
+                    name: 'opened',
+                    type: 'boolean',
+                    role: 'sensor.window',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'test.0.window.x-contact': {
+                common: {
+                    name: 'contact',
+                    type: 'boolean',
+                    role: 'state',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'test.0.window',
+            ignoreEnums: true
+        });
+
+        validate(controls[0], Types.window, {
+            ACTUAL: 'test.0.window.a-opened',
+        });
+
+        done();
+    });
+
+    it('Must detect the window state with the role other than state also when alphabetically comes first', done => {
+        const objects = {
+            'test.0.window': {
+                common: {
+                    name: 'window',
+                },
+                type: 'device',
+            },
+            'test.0.window.x-contact': {
+                common: {
+                    name: 'contact',
+                    type: 'boolean',
+                    role: 'sensor',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'test.0.window.a-opened': {
+                common: {
+                    name: 'opened',
+                    type: 'boolean',
+                    role: 'state',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'test.0.window',
+            ignoreEnums: true
+        });
+
+        validate(controls[0], Types.window, {
+            ACTUAL: 'test.0.window.x-contact',
+        });
+
+        done();
+    });
+
+    it('Must detect the window state with last entry when same role', done => {
+        const objects = {
+            'test.0.window': {
+                common: {
+                    name: 'window',
+                },
+                type: 'device',
+            },
+            'test.0.window.a-opened': {
+                common: {
+                    name: 'opened',
+                    type: 'boolean',
+                    role: 'sensor',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'test.0.window.x-contact': {
+                common: {
+                    name: 'contact',
+                    type: 'boolean',
+                    role: 'sensor',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'test.0.window',
+            ignoreEnums: true
+        });
+
+        validate(controls[0], Types.window, {
+            ACTUAL: 'test.0.window.x-contact',
+        });
+
+        done();
+    });
+
+    it('Must detect the favored state even with role not matching', done => {
+        const objects = {
+            'test.0.window': {
+                common: {
+                    name: 'window',
+                },
+                type: 'device',
+            },
+            'test.0.window.x-contact': {
+                common: {
+                    name: 'contact',
+                    type: 'boolean',
+                    role: 'state',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'test.0.window.a-opened': {
+                common: {
+                    name: 'opened',
+                    type: 'boolean',
+                    role: 'sensor.window',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'test.0.window.x-contact',
+            ignoreEnums: true
+        });
+
+        validate(controls[0], Types.window, {
+            ACTUAL: 'test.0.window.x-contact',
+        });
+
+        done();
+    });
+
+    it('Must inore favored id when detecting via parent', done => {
+        const objects = {
+            'test.0.window': {
+                common: {
+                    name: 'window',
+                },
+                type: 'device',
+            },
+            'test.0.window.x-contact': {
+                common: {
+                    name: 'contact',
+                    type: 'boolean',
+                    role: 'state',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'test.0.window.a-opened': {
+                common: {
+                    name: 'opened',
+                    type: 'boolean',
+                    role: 'sensor.window',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'test.0.window.x-contact',
+            detectParent: true,
+            ignoreEnums: true
+        });
+
+        validate(controls[0], Types.window, {
+            ACTUAL: 'test.0.window.a-opened',
+        });
 
         done();
     });
