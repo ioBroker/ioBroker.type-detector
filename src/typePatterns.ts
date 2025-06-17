@@ -195,7 +195,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^button\.play(\..*)?$|^action\.play(\..*)?$/,
+                role: /^(button|action)\.play(\..*)?$/,
                 indicator: false,
                 write: true,
                 type: StateType.Boolean,
@@ -205,7 +205,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.play',
             },
             {
-                role: /^button\.pause(\..*)?$|^action\.pause(\..*)?$/,
+                role: /^(button|action)\.pause(\..*)?$/,
                 indicator: false,
                 write: true,
                 type: StateType.Boolean,
@@ -215,7 +215,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.pause',
             },
             {
-                role: /^button\.stop(\..*)?$|^action\.stop(\..*)?$/,
+                role: /^(button|action)\.stop(\..*)?$/,
                 indicator: false,
                 write: true,
                 type: StateType.Boolean,
@@ -225,7 +225,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.stop',
             },
             {
-                role: /^button\.next(\..*)?$|^action\.next(\..*)?$/,
+                role: /^(button|action)\.next(\..*)?$/,
                 indicator: false,
                 write: true,
                 type: StateType.Boolean,
@@ -235,7 +235,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.next',
             },
             {
-                role: /^button\.prev(\..*)?$|^action\.prev(\..*)?$/,
+                role: /^(button|action)\.prev(\..*)?$/,
                 indicator: false,
                 write: true,
                 type: StateType.Boolean,
@@ -428,7 +428,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     weatherForecast: {
         states: [
             {
-                role: /^weather\.icon$|^weather\.icon\.forecast\.0$/,
+                role: /^weather\.icon(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'ICON',
@@ -453,7 +453,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^value\.precipitation$|^value\.precipitation\.forecast\.0$/,
+                role: /^value\.precipitation(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'PRECIPITATION_CHANCE',
@@ -462,7 +462,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.precipitation.forecast.0',
             },
             {
-                role: /^value\.precipitation$|^value\.precipitation\.forecast\.0$/,
+                role: /^value\.precipitation(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'PRECIPITATION',
@@ -471,7 +471,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.precipitation.forecast.0',
             },
             {
-                role: /^date$|^date\.forecast.0$/,
+                role: /^date(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'DATE',
@@ -479,7 +479,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'date.forecast.0',
             },
             {
-                role: /^dayofweek$|^dayofweek\.forecast.0$/,
+                role: /^dayofweek(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'DOW',
@@ -487,7 +487,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'dayofweek.forecast.0',
             },
             {
-                role: /^weather\.state$|^weather\.state\.forecast\.0$/,
+                role: /^weather\.state(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'STATE',
@@ -495,7 +495,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'weather.state.forecast.0',
             },
             {
-                role: /^value\.temperature$|^value\.temperature\.forecast\.0$/,
+                role: /^value\.temperature(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'TEMP',
@@ -503,7 +503,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.temperature.forecast.0',
             },
             {
-                role: /^value\.pressure$/,
+                role: /^value\.pressure(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'PRESSURE',
@@ -511,7 +511,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.pressure.forecast.0',
             },
             {
-                role: /^value\.humidity$|value\.humidity\.forecast\.0$/,
+                role: /^value\.humidity(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'HUMIDITY',
@@ -537,7 +537,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
 
             {
-                role: /^value\.temperature\.windchill$|^value\.temperature\.windchill\.forecast\.0$/,
+                role: /^value\.temperature\.windchill(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'WIND_CHILL',
@@ -545,7 +545,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.temperature.windchill.forecast.0',
             },
             {
-                role: /^value\.temperature\.feelslike$|^value\.temperature\.feelslike\.forecast\.0$/,
+                role: /^value\.temperature\.feelslike(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'FEELS_LIKE',
@@ -553,7 +553,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.temperature.feelslike.forecast.0',
             },
             {
-                role: /^value\.speed\.wind$|^value\.speed\.wind\.forecast\.0$/,
+                role: /^value\.speed\.wind(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'WIND_SPEED',
@@ -561,7 +561,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.speed.wind.forecast.0',
             },
             {
-                role: /^value\.direction\.wind$|^value\.direction\.wind\.forecast\.0$/,
+                role: /^value\.direction\.wind(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'WIND_DIRECTION',
@@ -569,7 +569,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.direction.wind.forecast.0',
             },
             {
-                role: /^weather\.direction\.wind$|^weather\.direction\.wind\.forecast\.0$/,
+                role: /^weather\.direction\.wind(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'WIND_DIRECTION_STR',
@@ -577,7 +577,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'weather.direction.wind.forecast.0',
             },
             {
-                role: /^weather\.icon\.wind$|^weather\.icon\.wind\.forecast\.0$/,
+                role: /^weather\.icon\.wind(\.forecast\.0)?$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'WIND_ICON',
