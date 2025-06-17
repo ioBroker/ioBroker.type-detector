@@ -2241,7 +2241,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             {
                 // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
-                role: /^(state|sensor)(\.door)$/,
+                role: /^(state|sensor)(\.door)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
