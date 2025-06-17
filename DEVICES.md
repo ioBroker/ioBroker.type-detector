@@ -244,8 +244,7 @@ Light, where the color is set by color temperature (normally from 2700°K (warm-
 | * | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch\.light$/`                                                          |
-|   | ON              |                               |      | boolean | W  |     |       | `/^switch$/`                                                                 |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
 |   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
 |   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
@@ -355,8 +354,7 @@ HUE light from 0° to 360°.
 |   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                                                      |
 |   | SATURATION      | level.color.saturation        | %    | number  | W  |     |       | `/^level\.color\.saturation$/`                                               |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch\.light$/`                                                          |
-|   | ON              |                               |      | boolean | W  |     |       | `/^switch$/`                                                                 |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
 |   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
 |   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
@@ -378,7 +376,7 @@ Air humidity in %.
 
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.humidity                | %    | number  | -  |     |       | `/humidity$/`                                                                |
+| * | ACTUAL   | value.humidity                | %    | number  | -  |     |       | `/\.humidity$/`                                                              |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
@@ -392,7 +390,7 @@ Illuminance sensor (normally in lux).
 
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.brightness              | lux  | number  | -  |     |       | `/brightness$/`                                                              |
+| * | ACTUAL   | value.brightness              | lux  | number  | -  |     |       | `/\.brightness$/`                                                            |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
@@ -525,28 +523,28 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 
 | R | Name          | Role                         | Unit | Type           | Wr | Min | Max | Ind | Multi | Regex                                                                        |
 |---|---------------|------------------------------|------|----------------|----|-----|-----|-----|-------|------------------------------------------------------------------------------|
-| * | STATE         | media.state                  |      | boolean/number |    |     |     |     |       | `/^media.state(\..*)?$/`                                                     |
-|   | PLAY          | button.play                  |      | boolean        | W  |     |     |     |       | `/^button.play(\..*)?$｜^action.play(\..*)?$/`                                |
-|   | PAUSE         | button.pause                 |      | boolean        | W  |     |     |     |       | `/^button.pause(\..*)?$｜^action.pause(\..*)?$/`                              |
-|   | STOP          | button.stop                  |      | boolean        | W  |     |     |     |       | `/^button.stop(\..*)?$｜^action.stop(\..*)?$/`                                |
-|   | NEXT          | button.next                  |      | boolean        | W  |     |     |     |       | `/^button.next(\..*)?$｜^action.next(\..*)?$/`                                |
-|   | PREV          | button.prev                  |      | boolean        | W  |     |     |     |       | `/^button.prev(\..*)?$｜^action.prev(\..*)?$/`                                |
-|   | SHUFFLE       | media.mode.shuffle           |      | boolean        | W  |     |     |     |       | `/^media.mode.shuffle(\..*)?$/`                                              |
-|   | REPEAT        | media.mode.repeat            |      | number         | W  |     |     |     |       | `/^media.mode.repeat(\..*)?$/`                                               |
-|   | ARTIST        | media.artist                 |      | string         | -  |     |     |     |       | `/^media.artist(\..*)?$/`                                                    |
-|   | ALBUM         | media.album                  |      | string         | -  |     |     |     |       | `/^media.album(\..*)?$/`                                                     |
-|   | TITLE         | media.title                  |      | string         | -  |     |     |     |       | `/^media.title(\..*)?$/`                                                     |
-|   | COVER         | media.cover                  |      | string         | -  |     |     |     |       | `/^media.cover$｜^media.cover.big$/`                                          |
-|   | COVER         |                              |      | string         | -  |     |     |     |       | `/^media.cover(\..*)$/`                                                      |
-|   | DURATION      | media.duration               | sec  | number         | -  |     |     |     |       | `/^media.duration(\..*)?$/`                                                  |
-|   | ELAPSED       | media.elapsed                | sec  | number         |    |     |     |     |       | `/^media.elapsed(\..*)?$/`                                                   |
-|   | SEEK          | media.seek                   |      | number         | W  |     |     |     |       | `/^media.seek(\..*)?$/`                                                      |
-|   | TRACK         | media.track                  |      | string         |    |     |     |     |       | `/^media.track(\..*)?$/`                                                     |
-|   | EPISODE       | media.episode                |      | string         |    |     |     |     |       | `/^media.episode(\..*)?$/`                                                   |
-|   | SEASON        | media.season                 |      | string         |    |     |     |     |       | `/^media.season(\..*)?$/`                                                    |
-|   | VOLUME        | level.volume                 | %    | number         | W  | m   | M   |     |       | `/^level.volume?$/`                                                          |
-|   | VOLUME_ACTUAL | value.volume                 | %    | number         | -  | m   | M   |     |       | `/^value.volume?$/`                                                          |
-|   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |       | `/^media.mute?$/`                                                            |
+| * | STATE         | media.state                  |      | boolean/number |    |     |     |     |       | `/^media\.state(\..*)?$/`                                                    |
+|   | PLAY          | button.play                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.play(\..*)?$/`                                           |
+|   | PAUSE         | button.pause                 |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.pause(\..*)?$/`                                          |
+|   | STOP          | button.stop                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.stop(\..*)?$/`                                           |
+|   | NEXT          | button.next                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.next(\..*)?$/`                                           |
+|   | PREV          | button.prev                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.prev(\..*)?$/`                                           |
+|   | SHUFFLE       | media.mode.shuffle           |      | boolean        | W  |     |     |     |       | `/^media\.mode\.shuffle(\..*)?$/`                                            |
+|   | REPEAT        | media.mode.repeat            |      | number         | W  |     |     |     |       | `/^media\.mode\.repeat(\..*)?$/`                                             |
+|   | ARTIST        | media.artist                 |      | string         | -  |     |     |     |       | `/^media\.artist(\..*)?$/`                                                   |
+|   | ALBUM         | media.album                  |      | string         | -  |     |     |     |       | `/^media\.album(\..*)?$/`                                                    |
+|   | TITLE         | media.title                  |      | string         | -  |     |     |     |       | `/^media\.title(\..*)?$/`                                                    |
+|   | COVER         | media.cover                  |      | string         | -  |     |     |     |       | `/^media\.cover(\.big)?$/`                                                   |
+|   | COVER         |                              |      | string         | -  |     |     |     |       | `/^media\.cover(\..*)$/`                                                     |
+|   | DURATION      | media.duration               | sec  | number         | -  |     |     |     |       | `/^media\.duration(\..*)?$/`                                                 |
+|   | ELAPSED       | media.elapsed                | sec  | number         |    |     |     |     |       | `/^media\.elapsed(\..*)?$/`                                                  |
+|   | SEEK          | media.seek                   |      | number         | W  |     |     |     |       | `/^media\.seek(\..*)?$/`                                                     |
+|   | TRACK         | media.track                  |      | string         |    |     |     |     |       | `/^media\.track(\..*)?$/`                                                    |
+|   | EPISODE       | media.episode                |      | string         |    |     |     |     |       | `/^media\.episode(\..*)?$/`                                                  |
+|   | SEASON        | media.season                 |      | string         |    |     |     |     |       | `/^media\.season(\..*)?$/`                                                   |
+|   | VOLUME        | level.volume                 | %    | number         | W  | m   | M   |     |       | `/^level(\.volume)?$/`                                                       |
+|   | VOLUME_ACTUAL | value.volume                 | %    | number         | -  | m   | M   |     |       | `/^value(\.volume)?$/`                                                       |
+|   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                                                         |
 |   | IGNORE        |                              |      |                |    |     |     |     | x     |                                                                              |
 |   | CONNECTED     | indicator.reachable          |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                                                   |
 |   | LOWBAT        | indicator.maintenance.lowbat |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
@@ -607,8 +605,7 @@ RGB light with different states for every color. The value is from 0 to 255.
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch\.light$/`                                                          |
-|   | ON              |                               |      | boolean | W  |     |       | `/^switch$/`                                                                 |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
 |   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
 |   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
@@ -634,8 +631,7 @@ RGBW light with different states for every color. The value is from 0 to 255 for
 |   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
 |   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
 |   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch\.light$/`                                                          |
-|   | ON              |                               |      | boolean | W  |     |       | `/^switch$/`                                                                 |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
 |   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
 |   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
@@ -677,8 +673,8 @@ Combined temperature and humidity sensor. Humidity is optional.
 
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
 |---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.temperature             | °C   | number  | -  |     |       | `/temperature$/`                                                             |
-|   | SECOND   | value.humidity                | %    | number  | -  |     |       | `/humidity$/`                                                                |
+| * | ACTUAL   | value.temperature             | °C   | number  | -  |     |       | `/\.temperature$/`                                                           |
+|   | SECOND   | value.humidity                | %    | number  | -  |     |       | `/\.humidity$/`                                                              |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
@@ -795,8 +791,8 @@ Just sensor if alarm should be shown.
 |   | PRESSURE              | value.pressure                | mbar | number  |    |     |       | `/^value\.pressure$/`                                                        |
 |   | PRESSURE_TENDENCY     | value.pressure.tendency       |      | string  |    |     |       | `/^value\.pressure\.tendency$/`                                              |
 |   | REAL_FEEL_TEMPERATURE | value.temperature.windchill   | °C   | number  |    |     |       | `/^value\.temperature\.windchill$/`                                          |
-|   | HUMIDITY              | value.humidity                | %    | number  |    |     |       | `/^value.humidity$/`                                                         |
-|   | UV                    | value.uv                      |      | number  |    |     |       | `/^value.uv$/`                                                               |
+|   | HUMIDITY              | value.humidity                | %    | number  |    |     |       | `/^value\.humidity$/`                                                        |
+|   | UV                    | value.uv                      |      | number  |    |     |       | `/^value\.uv$/`                                                              |
 |   | WEATHER               | weather.state                 |      | string  |    |     |       | `/^weather\.state$/`                                                         |
 |   | WIND_DIRECTION        | value.direction.wind          | °    | string  |    |     |       | `/^value\.direction\.wind$/`                                                 |
 |   | WIND_GUST             | value.speed.wind.gust         | km/h | number  |    |     |       | `/^value\.speed\.wind\.gust$/`                                               |
@@ -810,45 +806,45 @@ Just sensor if alarm should be shown.
 
 ### Weather forecast [weatherForecast]
 
-| R | Name                   | Role                                   | Unit  | Type   | Ind | Multi | Regex                                                                      |
-|---|------------------------|----------------------------------------|-------|--------|-----|-------|----------------------------------------------------------------------------|
-| * | ICON                   | weather.icon.forecast.0                |       | string |     |       | `/^weather.icon$｜^weather.icon.forecast.0$/`                               |
-| * | TEMP_MIN               | value.temperature.min.forecast.0       |       | number |     |       | `/^value.temperature.min.forecast.0$/`                                     |
-| * | TEMP_MAX               | value.temperature.max.forecast.0       |       | number |     |       | `/^value.temperature.max.forecast.0$/`                                     |
-|   | PRECIPITATION_CHANCE   | value.precipitation.forecast.0         |  / %  | number |     |       | `/^value.precipitation$｜^value.precipitation.forecast.0$/`                 |
-|   | PRECIPITATION          | value.precipitation.forecast.0         |  / mm | number |     |       | `/^value.precipitation$｜^value.precipitation.forecast.0$/`                 |
-|   | DATE                   | date.forecast.0                        |       | string |     |       | `/^date$｜^date.forecast.0$/`                                               |
-|   | DOW                    | dayofweek.forecast.0                   |       | string |     |       | `/^dayofweek$｜^dayofweek.forecast.0$/`                                     |
-|   | STATE                  | weather.state.forecast.0               |       | string |     |       | `/^weather.state$｜^weather.state.forecast.0$/`                             |
-|   | TEMP                   | value.temperature.forecast.0           |       | number |     |       | `/^value.temperature$｜^value.temperature.forecast.0$/`                     |
-|   | PRESSURE               | value.pressure.forecast.0              |       | number |     |       | `/^value.pressure$/`                                                       |
-|   | HUMIDITY               | value.humidity.forecast.0              |       | number |     |       | `/^value.humidity$｜value.humidity.forecast.0$/`                            |
-|   | TIME_SUNRISE           | date.sunrise                           |       | string |     |       | `/^(?:date｜time).sunrise(?:.forecast\.0)?$/`                               |
-|   | TIME_SUNSET            | date.sunset                            |       | string |     |       | `/^(?:date｜time).sunset(?:.forecast\.0)?$/`                                |
-|   | WIND_CHILL             | value.temperature.windchill.forecast.0 |       | number |     |       | `/^value.temperature.windchill$｜^value.temperature.windchill.forecast.0$/` |
-|   | FEELS_LIKE             | value.temperature.feelslike.forecast.0 |       | number |     |       | `/^value.temperature.feelslike$｜^value.temperature.feelslike.forecast.0$/` |
-|   | WIND_SPEED             | value.speed.wind.forecast.0            |       | number |     |       | `/^value.speed.wind$｜^value.speed.wind.forecast.0$/`                       |
-|   | WIND_DIRECTION         | value.direction.wind.forecast.0        |       | number |     |       | `/^value.direction.wind$｜^value.direction.wind.forecast.0$/`               |
-|   | WIND_DIRECTION_STR     | weather.direction.wind.forecast.0      |       | string |     |       | `/^weather.direction.wind$｜^weather.direction.wind.forecast.0$/`           |
-|   | WIND_ICON              | weather.icon.wind.forecast.0           |       | string |     |       | `/^weather.icon.wind$｜^weather.icon.wind.forecast.0$/`                     |
-|   | HISTORY_CHART          | weather.chart.url                      |       | string |     |       | `/^weather.chart.url$/`                                                    |
-|   | FORECAST_CHART         | weather.chart.url.forecast             |       | string |     |       | `/^weather.chart.url.forecast$/`                                           |
-|   | LOCATION               | location                               |       | string |     |       | `/^location$/`                                                             |
-|   | ICON%d                 |                                        |       | string |     | x     | `/^weather.icon.forecast.(\d)$/`                                           |
-|   | TEMP_MIN%d             |                                        |       | number |     | x     | `/^value.temperature.min.forecast.(\d)$/`                                  |
-|   | TEMP_MAX%d             |                                        |       | number |     | x     | `/^value.temperature.max.forecast.(\d)$/`                                  |
-|   | DATE%d                 |                                        |       | string |     | x     | `/^date.forecast.(\d)$/`                                                   |
-|   | DOW%d                  |                                        |       | string |     | x     | `/^dayofweek.forecast.(\d)$/`                                              |
-|   | STATE%d                |                                        |       | string |     | x     | `/^weather.state.forecast.(\d)$/`                                          |
-|   | TEMP%d                 |                                        |       | number |     | x     | `/^value.temperature.forecast.(\d)$/`                                      |
-|   | HUMIDITY%d             |                                        |       | number |     | x     | `/^value.humidity.forecast.(\d)$/`                                         |
-|   | HUMIDITY_MAX%d         |                                        |       | number |     | x     | `/^value.humidity.max.forecast.(\d)$/`                                     |
-|   | PRECIPITATION_CHANCE%d |                                        |  / %  | number |     | x     | `/^value.precipitation.forecast.(\d)$/`                                    |
-|   | PRECIPITATION%d        |                                        |  / mm | number |     | x     | `/^value.precipitation.forecast.(\d)$/`                                    |
-|   | WIND_SPEED%d           |                                        |       | number |     | x     | `/^value.speed.wind.forecast.(\d)$/`                                       |
-|   | WIND_DIRECTION%d       |                                        |       | number |     | x     | `/^value.direction.wind.forecast.(\d)$/`                                   |
-|   | WIND_DIRECTION_STR%d   |                                        |       | string |     | x     | `/^weather.direction.wind.forecast.(\d)$/`                                 |
-|   | WIND_ICON%d            |                                        |       | string |     | x     | `/^weather.icon.wind.forecast.(\d)$/`                                      |
+| R | Name                   | Role                                   | Unit  | Type   | Ind | Multi | Regex                                               |
+|---|------------------------|----------------------------------------|-------|--------|-----|-------|-----------------------------------------------------|
+| * | ICON                   | weather.icon.forecast.0                |       | string |     |       | `/^weather\.icon(\.forecast\.0)?$/`                 |
+| * | TEMP_MIN               | value.temperature.min.forecast.0       |       | number |     |       | `/^value\.temperature\.min\.forecast\.0$/`          |
+| * | TEMP_MAX               | value.temperature.max.forecast.0       |       | number |     |       | `/^value\.temperature\.max\.forecast\.0$/`          |
+|   | PRECIPITATION_CHANCE   | value.precipitation.forecast.0         |  / %  | number |     |       | `/^value\.precipitation(\.forecast\.0)?$/`          |
+|   | PRECIPITATION          | value.precipitation.forecast.0         |  / mm | number |     |       | `/^value\.precipitation(\.forecast\.0)?$/`          |
+|   | DATE                   | date.forecast.0                        |       | string |     |       | `/^date(\.forecast\.0)?$/`                          |
+|   | DOW                    | dayofweek.forecast.0                   |       | string |     |       | `/^dayofweek(\.forecast\.0)?$/`                     |
+|   | STATE                  | weather.state.forecast.0               |       | string |     |       | `/^weather\.state(\.forecast\.0)?$/`                |
+|   | TEMP                   | value.temperature.forecast.0           |       | number |     |       | `/^value\.temperature(\.forecast\.0)?$/`            |
+|   | PRESSURE               | value.pressure.forecast.0              |       | number |     |       | `/^value\.pressure(\.forecast\.0)?$/`               |
+|   | HUMIDITY               | value.humidity.forecast.0              |       | number |     |       | `/^value\.humidity(\.forecast\.0)?$/`               |
+|   | TIME_SUNRISE           | date.sunrise                           |       | string |     |       | `/^(?:date｜time)\.sunrise(?:\.forecast\.0)?$/`      |
+|   | TIME_SUNSET            | date.sunset                            |       | string |     |       | `/^(?:date｜time)\.sunset(?:\.forecast\.0)?$/`       |
+|   | WIND_CHILL             | value.temperature.windchill.forecast.0 |       | number |     |       | `/^value\.temperature\.windchill(\.forecast\.0)?$/` |
+|   | FEELS_LIKE             | value.temperature.feelslike.forecast.0 |       | number |     |       | `/^value\.temperature\.feelslike(\.forecast\.0)?$/` |
+|   | WIND_SPEED             | value.speed.wind.forecast.0            |       | number |     |       | `/^value\.speed\.wind(\.forecast\.0)?$/`            |
+|   | WIND_DIRECTION         | value.direction.wind.forecast.0        |       | number |     |       | `/^value\.direction\.wind(\.forecast\.0)?$/`        |
+|   | WIND_DIRECTION_STR     | weather.direction.wind.forecast.0      |       | string |     |       | `/^weather\.direction\.wind(\.forecast\.0)?$/`      |
+|   | WIND_ICON              | weather.icon.wind.forecast.0           |       | string |     |       | `/^weather\.icon\.wind(\.forecast\.0)?$/`           |
+|   | HISTORY_CHART          | weather.chart.url                      |       | string |     |       | `/^weather\.chart\.url$/`                           |
+|   | FORECAST_CHART         | weather.chart.url.forecast             |       | string |     |       | `/^weather\.chart\.url\.forecast$/`                 |
+|   | LOCATION               | location                               |       | string |     |       | `/^location$/`                                      |
+|   | ICON%d                 |                                        |       | string |     | x     | `/^weather\.icon\.forecast.(\d)$/`                  |
+|   | TEMP_MIN%d             |                                        |       | number |     | x     | `/^value\.temperature\.min\.forecast\.(\d)$/`       |
+|   | TEMP_MAX%d             |                                        |       | number |     | x     | `/^value\.temperature\.max\.forecast\.(\d)$/`       |
+|   | DATE%d                 |                                        |       | string |     | x     | `/^date\.forecast\.(\d)$/`                          |
+|   | DOW%d                  |                                        |       | string |     | x     | `/^dayofweek\.forecast\.(\d)$/`                     |
+|   | STATE%d                |                                        |       | string |     | x     | `/^weather\.state\.forecast\.(\d)$/`                |
+|   | TEMP%d                 |                                        |       | number |     | x     | `/^value\.temperature\.forecast\.(\d)$/`            |
+|   | HUMIDITY%d             |                                        |       | number |     | x     | `/^value\.humidity\.forecast\.(\d)$/`               |
+|   | HUMIDITY_MAX%d         |                                        |       | number |     | x     | `/^value\.humidity\.max\.forecast\.(\d)$/`          |
+|   | PRECIPITATION_CHANCE%d |                                        |  / %  | number |     | x     | `/^value\.precipitation\.forecast\.(\d)$/`          |
+|   | PRECIPITATION%d        |                                        |  / mm | number |     | x     | `/^value\.precipitation\.forecast\.(\d)$/`          |
+|   | WIND_SPEED%d           |                                        |       | number |     | x     | `/^value\.speed\.wind\.forecast\.(\d)$/`            |
+|   | WIND_DIRECTION%d       |                                        |       | number |     | x     | `/^value\.direction\.wind\.forecast\.(\d)$/`        |
+|   | WIND_DIRECTION_STR%d   |                                        |       | string |     | x     | `/^weather\.direction\.wind\.forecast\.(\d)$/`      |
+|   | WIND_ICON%d            |                                        |       | string |     | x     | `/^weather\.icon\.wind\.forecast\.(\d)$/`           |
 
 
 ### Window sensor [window]
