@@ -57,7 +57,7 @@ const SharedPatterns: {
         defaultRole: 'indicator.maintenance.unreach',
     },
     lowbat: {
-        role: /^indicator(\.maintenance)?\.lowbat$|^indicator(\.maintenance)?\.battery$/,
+        role: /^indicator(\.maintenance)?\.(lowbat|battery)$/,
         indicator: true,
         type: StateType.Boolean,
         notSingle: true,
@@ -410,7 +410,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // Ignore the following states of chromecast
             {
-                stateName: /\.paused$|\.playerState$/,
+                stateName: /\.(paused|playerState)$/,
                 indicator: false,
                 name: 'IGNORE',
                 required: false,
@@ -613,7 +613,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
 
             // other days
             {
-                role: /^weather\.icon\.forecast.(\d)$/,
+                role: /^weather\.icon\.forecast.(\d+)$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'ICON%d',
@@ -625,7 +625,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
 
             {
-                role: /^value\.temperature\.min\.forecast\.(\d)$/,
+                role: /^value\.temperature\.min\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'TEMP_MIN%d',
@@ -635,7 +635,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^value\.temperature\.max\.forecast\.(\d)$/,
+                role: /^value\.temperature\.max\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'TEMP_MAX%d',
@@ -646,7 +646,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
 
             {
-                role: /^date\.forecast\.(\d)$/,
+                role: /^date\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'DATE%d',
@@ -656,7 +656,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^dayofweek\.forecast\.(\d)$/,
+                role: /^dayofweek\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'DOW%d',
@@ -666,7 +666,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^weather\.state\.forecast\.(\d)$/,
+                role: /^weather\.state\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'STATE%d',
@@ -676,7 +676,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^value\.temperature\.forecast\.(\d)$/,
+                role: /^value\.temperature\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'TEMP%d',
@@ -687,7 +687,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
 
             {
-                role: /^value\.humidity\.forecast\.(\d)$/,
+                role: /^value\.humidity\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'HUMIDITY%d',
@@ -697,7 +697,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^value\.humidity\.max\.forecast\.(\d)$/,
+                role: /^value\.humidity\.max\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'HUMIDITY_MAX%d',
@@ -708,7 +708,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
 
             {
-                role: /^value\.precipitation\.forecast\.(\d)$/,
+                role: /^value\.precipitation\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 unit: '%',
@@ -719,7 +719,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^value\.precipitation\.forecast\.(\d)$/,
+                role: /^value\.precipitation\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 unit: 'mm',
@@ -731,7 +731,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
 
             {
-                role: /^value\.speed\.wind\.forecast\.(\d)$/,
+                role: /^value\.speed\.wind\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'WIND_SPEED%d',
@@ -741,7 +741,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^value\.direction\.wind\.forecast\.(\d)$/,
+                role: /^value\.direction\.wind\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.Number,
                 name: 'WIND_DIRECTION%d',
@@ -751,7 +751,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^weather\.direction\.wind\.forecast\.(\d)$/,
+                role: /^weather\.direction\.wind\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'WIND_DIRECTION_STR%d',
@@ -761,7 +761,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             {
-                role: /^weather\.icon\.wind\.forecast\.(\d)$/,
+                role: /^weather\.icon\.wind\.forecast\.(\d+)$/,
                 indicator: false,
                 type: StateType.String,
                 name: 'WIND_ICON%d',
@@ -860,7 +860,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^time(\.span|\.interval)$/,
+                role: /^time\.(span|interval)$/,
                 indicator: false,
                 type: StateType.Number,
                 write: true,
@@ -940,7 +940,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^time(\.span|\.interval)$/,
+                role: /^time\.(span|interval)$/,
                 indicator: false,
                 type: StateType.Number,
                 write: true,
@@ -1020,7 +1020,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^time(\.span|\.interval)$/,
+                role: /^time\.(span|interval)$/,
                 indicator: false,
                 type: StateType.Number,
                 write: true,
@@ -1100,7 +1100,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^time(\.span|\.interval)$/,
+                role: /^time\.(span|interval)$/,
                 indicator: false,
                 type: StateType.Number,
                 write: true,
@@ -1191,7 +1191,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^time(\.span|\.interval)$/,
+                role: /^time\.(span|interval)$/,
                 indicator: false,
                 type: StateType.Number,
                 write: true,
@@ -1261,7 +1261,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^time(\.span|\.interval)$/,
+                role: /^time\.(span|interval)$/,
                 indicator: false,
                 type: StateType.Number,
                 write: true,
@@ -1407,7 +1407,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^switch\.power$/,
+                role: /^switch(\.power)?$/,
                 indicator: false,
                 write: true,
                 type: [StateType.Boolean, StateType.Number],
@@ -1415,15 +1415,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'POWER',
                 required: false,
                 defaultRole: 'switch.power',
-            },
-            {
-                role: /^switch$/,
-                indicator: false,
-                write: true,
-                type: StateType.Boolean,
-                searchInParent: true,
-                name: 'POWER',
-                required: false,
             },
             {
                 role: /temperature(\..*)?$/,
@@ -1800,7 +1791,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultUnit: '%',
             },
             {
-                role: /^button\.stop(\.blind)?$|^action\.stop$/,
+                role: /^(button|action)\.stop(\.blind)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1811,7 +1802,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.stop.blind',
             },
             {
-                role: /^button\.open(\.blind)?$/,
+                role: /^(button|action)\.open(\.blind)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1822,7 +1813,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.open.blind',
             },
             {
-                role: /^button\.close(\.blind)?$/,
+                role: /^(button|action)\.close(\.blind)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1852,7 +1843,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.tilt',
             },
             {
-                role: /^button\.stop\.tilt$/,
+                role: /^(button|action)\.stop\.tilt$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1863,7 +1854,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.stop.tilt',
             },
             {
-                role: /^button\.open\.tilt$/,
+                role: /^(button|action)\.open\.tilt$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1874,7 +1865,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.open.tilt',
             },
             {
-                role: /^button\.close\.tilt$/,
+                role: /^(button|action)\.close\.tilt$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1899,7 +1890,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         states: [
             // blinds with no percentage setting / reading but buttons for up/down and stop:
             {
-                role: /^button\.stop(\.blind)?$|^action\.stop$/,
+                role: /^(button|action)\.stop(\.blind)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1910,7 +1901,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.stop.blind',
             },
             {
-                role: /^button\.open(\.blind)?$/,
+                role: /^(button|action)\.open(\.blind)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1921,7 +1912,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.open.blind',
             },
             {
-                role: /^button\.close(\.blind)?$/,
+                role: /^(button|action)\.close(\.blind)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1952,7 +1943,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.tilt',
             },
             {
-                role: /^button\.stop\.tilt$/,
+                role: /^(button|action)\.stop\.tilt$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1963,7 +1954,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.stop.tilt',
             },
             {
-                role: /^button\.open\.tilt$/,
+                role: /^(button|action)\.open\.tilt$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -1974,7 +1965,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'button.open.tilt',
             },
             {
-                role: /^button\.close\.tilt$/,
+                role: /^(button|action)\.close\.tilt$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -2009,7 +2000,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^value(\.position)?|^value(\.gate)?$/,
+                role: /^value(\.(position|gate))?$/,
                 indicator: false,
                 type: StateType.Number,
                 enums: roleOrEnumGate,
@@ -2020,7 +2011,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^button\.stop$|^action\.stop$/,
+                role: /^(button|action)\.stop$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -2250,7 +2241,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             {
                 // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
-                role: /^state(\.door)?$|^sensor(\.door)?/,
+                role: /^(state|sensor)(\.door)$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2304,7 +2295,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         states: [
             {
                 // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
-                role: /^state(\.window)?$|^sensor(\.window)?/,
+                role: /^(state|sensor)(\.window)?/,
                 indicator: false,
                 type: StateType.Boolean,
                 enums: roleOrEnumWindow,
@@ -2388,7 +2379,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         states: [
             {
                 // as the door/window sensors additionally will be detected by enumeration, we can use here just `state`
-                role: /^state(\.door)?$|^sensor(\.door)?/,
+                role: /^(state|sensor)(\.door)?/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2454,7 +2445,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             {
-                role: /^time(\.span|\.interval)$/,
+                role: /^time\.(span|interval)$/,
                 indicator: false,
                 type: StateType.Number,
                 write: true,
@@ -2575,7 +2566,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.gps.elevation',
             },
             {
-                role: /^value\.radius$|value\.gps\.radius$/,
+                role: /^value(\.gps)?\.radius$/,
                 indicator: false,
                 type: StateType.Number,
                 write: false,
@@ -2584,7 +2575,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.gps.radius',
             },
             {
-                role: /^value\.accuracy$|^value\.gps\.accuracy$/,
+                role: /^value(\.gps)?\.accuracy$/,
                 indicator: false,
                 type: StateType.Number,
                 write: false,
@@ -2603,7 +2594,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     location: {
         states: [
             {
-                role: /^value\.gps\.longitude$/,
+                role: /^value(\.gps)?\.longitude$/,
                 indicator: false,
                 type: StateType.Number,
                 write: false,
@@ -2613,7 +2604,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultUnit: '°',
             },
             {
-                role: /^value\.gps\.latitude$/,
+                role: /^value(\.gps)?\.latitude$/,
                 indicator: false,
                 type: StateType.Number,
                 write: false,
@@ -2624,7 +2615,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^value\.gps\.elevation$/,
+                role: /^value(\.gps)?\.elevation$/,
                 indicator: false,
                 type: StateType.Number,
                 write: false,
@@ -2633,7 +2624,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.gps.elevation',
             },
             {
-                role: /^value\.radius$|value\.gps\.radius$/,
+                role: /^value(\.gps)?\.radius$/,
                 indicator: false,
                 type: StateType.Number,
                 write: false,
@@ -2642,7 +2633,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'value.gps.radius',
             },
             {
-                role: /^value\.accuracy$|^value\.gps\.accuracy$/,
+                role: /^value(\.gps)?\.accuracy$/,
                 indicator: false,
                 type: StateType.Number,
                 write: false,
@@ -2744,7 +2735,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     socket: {
         states: [
             {
-                role: /^switch$|^state$|^switch\.active$/,
+                role: /^switch(\.active)?$|^state$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: true,
@@ -2774,7 +2765,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     button: {
         states: [
             {
-                role: /^button(\.[.\w]+)?$|^action(\.[.\w]+)?$/,
+                role: /^(button|action)(\.[.\w]+)?$/,
                 indicator: false,
                 type: StateType.Boolean,
                 read: false,
