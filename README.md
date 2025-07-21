@@ -98,7 +98,7 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@Apollon77) ignore "setting" roles in some cases to ensure correct detection
--   (@GermanBluefox) added potentially error handling for detection
+-   (@GermanBluefox) added potential error handling for detection
 
 ### 4.5.0 (2025-04-29)
 -   (@Apollon77) Enhance detection logic when multiple states are detected in the same pattern-state to favor ID, default-role and number-of-role-levels and not "state" roles
