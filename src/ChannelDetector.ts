@@ -418,7 +418,7 @@ export class ChannelDetector {
             // We found a device object, or ended already on instance level, use this
             return upperLevelObjectId;
         }
-        if (obj.type === 'channel') {
+        if (obj?.type === 'channel') {
             // The object is (or inside) a channel, but above is no device, so lets better use the channel
             return id;
         }
