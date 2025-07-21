@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.5.1 (2025-07-21)
 -   (@Apollon77) ignore "setting" roles in some cases to ensure correct detection
 -   (@GermanBluefox) added potential error handling for detection
 
