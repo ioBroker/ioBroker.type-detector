@@ -85,8 +85,7 @@ Air conditioner with warming and cooling functions.
 | * | SET            | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                  |
 | * | MODE           | level.mode.airconditioner     |      | number         | W  |     |       | `/(level\.mode\.)?airconditioner$/`      |
 |   | SPEED          | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                   |
-|   | POWER          | switch.power                  |      | boolean/number | W  |     |       | `/^switch\.power$/`                      |
-|   | POWER          |                               |      | boolean        | W  |     |       | `/^switch$/`                             |
+|   | POWER          | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                   |
 |   | ACTUAL         | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                  |
 |   | HUMIDITY       | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                     |
 |   | BOOST          | switch.boost                  |      | boolean/number | W  |     |       | `/^switch\.boost(\..*)?$/`               |
@@ -106,98 +105,98 @@ Air conditioner with warming and cooling functions.
 
 Blinds, Shutter, Jalousie controlled by stop, up, down buttons. Position is unknown.
 
-| R | Name        | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
-|---|-------------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | STOP        | button.stop.blind             |      | boolean | W  | E    |     |       | `/^button\.stop(\.blind)?$｜^action\.stop$/`                                  |
-| * | OPEN        | button.open.blind             |      | boolean | W  | E    |     |       | `/^button\.open(\.blind)?$/`                                                 |
-| * | CLOSE       | button.close.blind            |      | boolean | W  | E    |     |       | `/^button\.close(\.blind)?$/`                                                |
-|   | TILT_SET    | level.tilt                    |      | number  | W  | E    |     |       | `/^level\.tilt$/`                                                            |
-|   | TILT_ACTUAL | value.tilt                    |      | number  |    | E    |     |       | `/^value\.tilt$/`                                                            |
-|   | TILT_STOP   | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^button\.stop\.tilt$/`                                                     |
-|   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |       | `/^button\.open\.tilt$/`                                                     |
-|   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |       | `/^button\.close\.tilt$/`                                                    |
-|   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                                                   |
-|   | DIRECTION   | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                                           |
-|   | WORKING     | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN    | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR       | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY     | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                                                         |
+| R | Name        | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|-------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | STOP        | button.stop.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop(\.blind)?$/`             |
+| * | OPEN        | button.open.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.open(\.blind)?$/`             |
+| * | CLOSE       | button.close.blind            |      | boolean | W  | E    |     |       | `/^(button｜action)\.close(\.blind)?$/`            |
+|   | TILT_SET    | level.tilt                    |      | number  | W  | E    |     |       | `/^level\.tilt$/`                                 |
+|   | TILT_ACTUAL | value.tilt                    |      | number  |    | E    |     |       | `/^value\.tilt$/`                                 |
+|   | TILT_STOP   | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop\.tilt$/`                 |
+|   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.open\.tilt$/`                 |
+|   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |       | `/^(button｜action)\.close\.tilt$/`                |
+|   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                        |
+|   | DIRECTION   | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                |
+|   | WORKING     | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN    | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR       | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY     | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### Blinds or Shutter [blinds]
 
 Blinds, Shutter, Jalousie controlled by state with percent.
 
-| R | Name        | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
-|---|-------------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | SET         | level.blind                   | %    | number  | W  | E    |     |       | `/^level(\.blind)?$/`                                                        |
-|   | ACTUAL      | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.blind)?$/`                                                        |
-|   | STOP        | button.stop.blind             |      | boolean | W  | E    |     |       | `/^button\.stop(\.blind)?$｜^action\.stop$/`                                  |
-|   | OPEN        | button.open.blind             |      | boolean | W  | E    |     |       | `/^button\.open(\.blind)?$/`                                                 |
-|   | CLOSE       | button.close.blind            |      | boolean | W  | E    |     |       | `/^button\.close(\.blind)?$/`                                                |
-|   | TILT_SET    | level.tilt                    |      | number  | W  | E    |     |       | `/^level(\.open)?\.tilt$/`                                                   |
-|   | TILT_ACTUAL | value.tilt                    |      | number  |    | E    |     |       | `/^value(\.open)?\.tilt$/`                                                   |
-|   | TILT_STOP   | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^button\.stop\.tilt$/`                                                     |
-|   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |       | `/^button\.open\.tilt$/`                                                     |
-|   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |       | `/^button\.close\.tilt$/`                                                    |
-|   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                                                   |
-|   | DIRECTION   | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                                           |
-|   | WORKING     | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN    | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR       | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY     | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                                                         |
+| R | Name        | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|-------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | SET         | level.blind                   | %    | number  | W  | E    |     |       | `/^level(\.blind)?$/`                             |
+|   | ACTUAL      | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.blind)?$/`                             |
+|   | STOP        | button.stop.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop(\.blind)?$/`             |
+|   | OPEN        | button.open.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.open(\.blind)?$/`             |
+|   | CLOSE       | button.close.blind            |      | boolean | W  | E    |     |       | `/^(button｜action)\.close(\.blind)?$/`            |
+|   | TILT_SET    | level.tilt                    |      | number  | W  | E    |     |       | `/^level(\.open)?\.tilt$/`                        |
+|   | TILT_ACTUAL | value.tilt                    |      | number  |    | E    |     |       | `/^value(\.open)?\.tilt$/`                        |
+|   | TILT_STOP   | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop\.tilt$/`                 |
+|   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.open\.tilt$/`                 |
+|   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |       | `/^(button｜action)\.close\.tilt$/`                |
+|   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                        |
+|   | DIRECTION   | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                |
+|   | WORKING     | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN    | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR       | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY     | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### Button [button]
 
 Button that could be only pressed (command). It has no feedback, you can write only `true`.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | SET      | button                        |      | boolean | W  |     |       | `/^button(\.[.\w]+)?$｜^action(\.[.\w]+)?$/`                                  |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | SET      | button                        |      | boolean | W  |     |       | `/^(button｜action)(\.[.\w]+)?$/`                  |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Contact or button with feedback [buttonSensor]
 
 Button with feedback. It is known if the button pressed or not.
 
-| R | Name       | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | PRESS      | button.press                  |      | boolean | -  |     |       | `/^button(\.[.\w]+)?$/`                                                      |
-|   | PRESS_LONG | button.long                   |      | boolean | -  |     |       | `/^button\.long/`                                                            |
-|   | UNREACH    | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT     | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN   | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR      | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY    | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name       | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | PRESS      | button.press                  |      | boolean | -  |     |       | `/^button(\.[.\w]+)?$/`                           |
+|   | PRESS_LONG | button.long                   |      | boolean | -  |     |       | `/^button\.long/`                                 |
+|   | UNREACH    | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT     | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN   | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR      | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY    | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### IP Camera [camera]
 
 IP/Web Camera.
 
-| R | Name             | Role                           | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|------------------|--------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | URL              | link.camera                    |      | string  |    |     |       | `/^link\.camera(\.\w+)?$/`                                                   |
-|   | AUTOFOCUS        | switch.camera.autofocus        |      | boolean | W  |     |       | `/^switch(\.camera)?\.autofocus$/`                                           |
-|   | AUTOWHITEBALANCE | switch.camera.autowhitebalance |      | boolean | W  |     |       | `/^switch(\.camera)?\.autowhitebalance$/`                                    |
-|   | BRIGHTNESS       | switch.camera.brightness       |      | boolean | W  |     |       | `/^switch(\.camera)?\.brightness$/`                                          |
-|   | NIGHTMODE        | switch.camera.nightmode        |      | boolean | W  |     |       | `/^switch(\.camera)?\.nightmode$/`                                           |
-|   | PTZ              | level.camera.position          |      | number  | W  |     |       | `/^level(\.camera)?\.position$｜^level(\.camera)?(\.ptz)$/`                   |
-|   | UNREACH          | indicator.maintenance.unreach  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT           | indicator.maintenance.lowbat   |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN         | indicator.maintenance          |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR            | indicator.error                |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY          | value.battery                  | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name             | Role                           | Unit | Type    | Wr | Ind | Multi | Regex                                                      |
+|---|------------------|--------------------------------|------|---------|----|-----|-------|------------------------------------------------------------|
+| * | URL              | link.camera                    |      | string  |    |     |       | `/^link\.camera(\.\w+)?$/`                                 |
+|   | AUTOFOCUS        | switch.camera.autofocus        |      | boolean | W  |     |       | `/^switch(\.camera)?\.autofocus$/`                         |
+|   | AUTOWHITEBALANCE | switch.camera.autowhitebalance |      | boolean | W  |     |       | `/^switch(\.camera)?\.autowhitebalance$/`                  |
+|   | BRIGHTNESS       | switch.camera.brightness       |      | boolean | W  |     |       | `/^switch(\.camera)?\.brightness$/`                        |
+|   | NIGHTMODE        | switch.camera.nightmode        |      | boolean | W  |     |       | `/^switch(\.camera)?\.nightmode$/`                         |
+|   | PTZ              | level.camera.position          |      | number  | W  |     |       | `/^level(\.camera)?\.position$｜^level(\.camera)?(\.ptz)$/` |
+|   | UNREACH          | indicator.maintenance.unreach  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                   |
+|   | LOWBAT           | indicator.maintenance.lowbat   |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/`          |
+|   | MAINTAIN         | indicator.maintenance          |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                               |
+|   | ERROR            | indicator.error                |      |         |    | X   |       | `/^indicator\.error$/`                                     |
+|   | BATTERY          | value.battery                  | %    | number  | -  |     |       | `/^value\.battery$/`                                       |
 
 
 ### Chart [chart]
@@ -213,117 +212,117 @@ Chart with e-charts template.
 
 Light with CIE (International Commission on Illumination) color space (XY).
 
-| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | CIE             | level.color.cie               |      | string  | W  |     |       | `/^level\.color\.cie$/`                                                      |
-|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
-|   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
-|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | CIE             | level.color.cie               |      | string  | W  |     |       | `/^level\.color\.cie$/`                           |
+|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                               |
+|   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                           |
+|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                   |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                            |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Light with color temperature [ct]
 
 Light, where the color is set by color temperature (normally from 2700°K (warm-white) to 6000°K (cold-white)).
 
-| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
-|   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
-|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                   |
+|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                               |
+|   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                           |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                            |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Light dimmer [dimmer]
 
 Dimmer, that is controlled by state (normally from 0 to 100 %, but it could be any limits).
 
-| R | Name            | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
-|---|-----------------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | SET             | level.dimmer                  | %    | number  | W  | E    |     |       | `/^level(\.dimmer)?$｜^level\.brightness$/`                                   |
-|   | ACTUAL          | value.dimmer                  | %    | number  | -  | E    |     |       | `/^value(\.dimmer)?$/`                                                       |
-|   | ON_SET          | switch.light                  |      | boolean | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                                               |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | TRANSITION_TIME | time.span                     | ms   | number  | W  | E    |     |       | `/^time(\.span｜\.interval)$/`                                                |
-|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |      |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT         | value.current                 | mA   | number  | -  |      |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE         | value.voltage                 | V    | number  | -  |      |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |      |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |      |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING         | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN        | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR           | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY         | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                                                         |
+| R | Name            | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|-----------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | SET             | level.dimmer                  | %    | number  | W  | E    |     |       | `/^level(\.dimmer)?$｜^level\.brightness$/`        |
+|   | ACTUAL          | value.dimmer                  | %    | number  | -  | E    |     |       | `/^value(\.dimmer)?$/`                            |
+|   | ON_SET          | switch.light                  |      | boolean | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                    |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | TRANSITION_TIME | time.span                     | ms   | number  | W  | E    |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |      |     |       | `/^value\.power$/`                                |
+|   | CURRENT         | value.current                 | mA   | number  | -  |      |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE         | value.voltage                 | V    | number  | -  |      |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |      |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |      |     |       | `/^value\.frequency$/`                            |
+|   | WORKING         | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN        | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR           | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY         | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### Door sensor [door]
 
 Sensor if the door opened (true) or closed (false).
 
-| R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.door                   |      | boolean | -  | E    |     |       | `/^state(\.door)?$｜^sensor(\.door)?/`                                        |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.door                   |      | boolean | -  | E    |     |       | `/^(state｜sensor)(\.door)?/`                      |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### Fire alarm sensor [fireAlarm]
 
 If smoke/fire sensor is alarmed (true) or not (false).
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.alarm.fire             |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.fire$/`                               |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.alarm.fire             |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.fire$/`    |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Flood alarm sensor [floodAlarm]
 
 If water sensor senses water (true) or not (false).
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.alarm.flood            |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.flood$/`                              |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.alarm.flood            |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.flood$/`   |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Gate [gate]
@@ -333,8 +332,8 @@ Control of the gates. You can open (true) or close (false) the gate. Optionally,
 | R | Name      | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                    |
 |---|-----------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------|
 | * | SET       | switch.gate                   |      | boolean | W  | E    |     |       | `/^switch(\.gate)?$/`                    |
-|   | ACTUAL    | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.position)?｜^value(\.gate)?$/` |
-|   | STOP      | button.stop                   |      | boolean | W  | E    |     |       | `/^button\.stop$｜^action\.stop$/`        |
+|   | ACTUAL    | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.(position｜gate))?$/`          |
+|   | STOP      | button.stop                   |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop$/`              |
 |   | DIRECTION | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`               |
 |   | DIRECTION | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`       |
 |   | WORKING   | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                 |
@@ -347,421 +346,421 @@ Control of the gates. You can open (true) or close (false) the gate. Optionally,
 
 HUE light from 0° to 360°.
 
-| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | HUE             | level.color.hue               | °    | number  | W  |     |       | `/^level\.color\.hue$/`                                                      |
-|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
-|   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |       | `/^level\.color\.saturation$/`                                               |
-|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
-|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | HUE             | level.color.hue               | °    | number  | W  |     |       | `/^level\.color\.hue$/`                           |
+|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                               |
+|   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                           |
+|   | SATURATION      | level.color.saturation        | %    | number  | W  |     |       | `/^level\.color\.saturation$/`                    |
+|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                   |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                            |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Humidity [humidity]
 
 Air humidity in %.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.humidity                | %    | number  | -  |     |       | `/\.humidity$/`                                                              |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | value.humidity                | %    | number  | -  |     |       | `/\.humidity$/`                                   |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Illuminance sensor [illuminance]
 
 Illuminance sensor (normally in lux).
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.brightness              | lux  | number  | -  |     |       | `/\.brightness$/`                                                            |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | value.brightness              | lux  | number  | -  |     |       | `/\.brightness$/`                                 |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Image [image]
 
 URL for image.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | URL      | icon                          |      | string  | -  |     |       | `/\.icon$｜^icon$｜^icon\.｜\.icon\.｜\.chart\.url\.｜\.chart\.url$｜^url.icon$/`  |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                       |
+|---|----------|-------------------------------|------|---------|----|-----|-------|-----------------------------------------------------------------------------|
+| * | URL      | icon                          |      | string  | -  |     |       | `/\.icon$｜^icon$｜^icon\.｜\.icon\.｜\.chart\.url\.｜\.chart\.url$｜^url.icon$/` |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                    |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/`                           |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                      |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                        |
 
 
 ### Information device (very simple) [info]
 
 Many information states could be combined under this device, e.g., current, amperage, power in one device.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | state                         |      |         |    |     | x     |                                                                              |
-|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | state                         |      |         |    |     | x     |                                                   |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Slider [levelSlider]
 
 Slider with position set by number. Could be used for any device that is controlled by numeric value. Limits could be defined by `min`, `max` attributes. Normally from 0 (off) to 100 (full power).
 
-| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|------------------------------------------------------------------------------|
-| * | SET      | level                         | %    | number  | W  | m   | M   |     |       | `/^level(\..*)?$/`                                                           |
-|   | ACTUAL   | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                                           |
-|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | SET      | level                         | %    | number  | W  | m   | M   |     |       | `/^level(\..*)?$/`                                |
+|   | ACTUAL   | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                |
+|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
 
 
 ### Light switch [light]
 
 Light with only ON/OFF options. Could have information about current, amperage, energy and power.
 
-| R | Name           | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
-|---|----------------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | SET            | switch.light                  |      | boolean | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                                               |
-|   | ON_ACTUAL      | sensor.light                  |      | boolean | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |      |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT        | value.current                 | mA   | number  | -  |      |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE        | value.voltage                 | V    | number  | -  |      |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION    | value.power.consumption       | Wh   | number  | -  |      |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |      |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING        | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY        | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                                                         |
+| R | Name           | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|----------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | SET            | switch.light                  |      | boolean | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                    |
+|   | ON_ACTUAL      | sensor.light                  |      | boolean | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |      |     |       | `/^value\.power$/`                                |
+|   | CURRENT        | value.current                 | mA   | number  | -  |      |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE        | value.voltage                 | V    | number  | -  |      |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION    | value.power.consumption       | Wh   | number  | -  |      |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |      |     |       | `/^value\.frequency$/`                            |
+|   | WORKING        | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY        | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### GPS Location (longitude, latitude) [location]
 
 GPS location, where longitude and latitude are stored in two different states.
 
-| R | Name      | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | LONGITUDE | value.gps.longitude           | °    | number  | -  |     |       | `/^value\.gps\.longitude$/`                                                  |
-| * | LATITUDE  | value.gps.latitude            | °    | number  | -  |     |       | `/^value\.gps\.latitude$/`                                                   |
-|   | ELEVATION | value.gps.elevation           |      | number  | -  |     |       | `/^value\.gps\.elevation$/`                                                  |
-|   | RADIUS    | value.gps.radius              |      | number  | -  |     |       | `/^value\.radius$｜value\.gps\.radius$/`                                      |
-|   | ACCURACY  | value.gps.accuracy            |      | number  | -  |     |       | `/^value\.accuracy$｜^value\.gps\.accuracy$/`                                 |
-|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN  | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR     | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY   | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name      | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | LONGITUDE | value.gps.longitude           | °    | number  | -  |     |       | `/^value(\.gps)?\.longitude$/`                    |
+| * | LATITUDE  | value.gps.latitude            | °    | number  | -  |     |       | `/^value(\.gps)?\.latitude$/`                     |
+|   | ELEVATION | value.gps.elevation           |      | number  | -  |     |       | `/^value(\.gps)?\.elevation$/`                    |
+|   | RADIUS    | value.gps.radius              |      | number  | -  |     |       | `/^value(\.gps)?\.radius$/`                       |
+|   | ACCURACY  | value.gps.accuracy            |      | number  | -  |     |       | `/^value(\.gps)?\.accuracy$/`                     |
+|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN  | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR     | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY   | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### GPS Location in single state [locationOne]
 
 GPS location, where longitude and latitude are stored in one state, like `longitude;latitude` - `8.40435;49.013506`.
 
-| R | Name      | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | GPS       | value.gps                     |      | string  | -  |     |       | `/^value\.gps$/`                                                             |
-|   | ELEVATION | value.gps.elevation           |      | number  | -  |     |       | `/^value\.gps\.elevation$/`                                                  |
-|   | RADIUS    | value.gps.radius              |      | number  | -  |     |       | `/^value\.radius$｜value\.gps\.radius$/`                                      |
-|   | ACCURACY  | value.gps.accuracy            |      | number  | -  |     |       | `/^value\.accuracy$｜^value\.gps\.accuracy$/`                                 |
-|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN  | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR     | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY   | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name      | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | GPS       | value.gps                     |      | string  | -  |     |       | `/^value\.gps$/`                                  |
+|   | ELEVATION | value.gps.elevation           |      | number  | -  |     |       | `/^value\.gps\.elevation$/`                       |
+|   | RADIUS    | value.gps.radius              |      | number  | -  |     |       | `/^value(\.gps)?\.radius$/`                       |
+|   | ACCURACY  | value.gps.accuracy            |      | number  | -  |     |       | `/^value(\.gps)?\.accuracy$/`                     |
+|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN  | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR     | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY   | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Lock [lock]
 
 Lock. Could be opened (true), closed (false) or opened completely by `OPEN` state.
 
-| R | Name       | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | SET        | switch.lock                   |      | boolean | W  |     |       | `/^switch\.lock$/`                                                           |
-|   | ACTUAL     | state                         |      | boolean | -  |     |       | `/^state$/`                                                                  |
-|   | OPEN       | button                        |      | boolean | W  |     |       |                                                                              |
-|   | DOOR_STATE | sensor.door                   |      | boolean | -  |     |       | `/^state(\.door)?$｜^sensor(\.door)?/`                                        |
-|   | DIRECTION  | indicator.direction           |      | boolean |    | X   |       | `/^indicator\.direction$/`                                                   |
-|   | DIRECTION  | value.direction               |      | number  |    |     |       | `/^(indicator｜value)\.direction$/`                                           |
-|   | WORKING    | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH    | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT     | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN   | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR      | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY    | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name       | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | SET        | switch.lock                   |      | boolean | W  |     |       | `/^switch\.lock$/`                                |
+|   | ACTUAL     | state                         |      | boolean | -  |     |       | `/^state$/`                                       |
+|   | OPEN       | button                        |      | boolean | W  |     |       |                                                   |
+|   | DOOR_STATE | sensor.door                   |      | boolean | -  |     |       | `/^(state｜sensor)(\.door)?$/`                     |
+|   | DIRECTION  | indicator.direction           |      | boolean |    | X   |       | `/^indicator\.direction$/`                        |
+|   | DIRECTION  | value.direction               |      | number  |    |     |       | `/^(indicator｜value)\.direction$/`                |
+|   | WORKING    | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH    | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT     | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN   | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR      | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY    | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Media player [mediaPlayer]
 
-| R | Name          | Role                         | Unit | Type           | Wr | Min | Max | Ind | Multi | Regex                                                                        |
-|---|---------------|------------------------------|------|----------------|----|-----|-----|-----|-------|------------------------------------------------------------------------------|
-| * | STATE         | media.state                  |      | boolean/number |    |     |     |     |       | `/^media\.state(\..*)?$/`                                                    |
-|   | PLAY          | button.play                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.play(\..*)?$/`                                           |
-|   | PAUSE         | button.pause                 |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.pause(\..*)?$/`                                          |
-|   | STOP          | button.stop                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.stop(\..*)?$/`                                           |
-|   | NEXT          | button.next                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.next(\..*)?$/`                                           |
-|   | PREV          | button.prev                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.prev(\..*)?$/`                                           |
-|   | SHUFFLE       | media.mode.shuffle           |      | boolean        | W  |     |     |     |       | `/^media\.mode\.shuffle(\..*)?$/`                                            |
-|   | REPEAT        | media.mode.repeat            |      | number         | W  |     |     |     |       | `/^media\.mode\.repeat(\..*)?$/`                                             |
-|   | ARTIST        | media.artist                 |      | string         | -  |     |     |     |       | `/^media\.artist(\..*)?$/`                                                   |
-|   | ALBUM         | media.album                  |      | string         | -  |     |     |     |       | `/^media\.album(\..*)?$/`                                                    |
-|   | TITLE         | media.title                  |      | string         | -  |     |     |     |       | `/^media\.title(\..*)?$/`                                                    |
-|   | COVER         | media.cover                  |      | string         | -  |     |     |     |       | `/^media\.cover(\.big)?$/`                                                   |
-|   | COVER         |                              |      | string         | -  |     |     |     |       | `/^media\.cover(\..*)$/`                                                     |
-|   | DURATION      | media.duration               | sec  | number         | -  |     |     |     |       | `/^media\.duration(\..*)?$/`                                                 |
-|   | ELAPSED       | media.elapsed                | sec  | number         |    |     |     |     |       | `/^media\.elapsed(\..*)?$/`                                                  |
-|   | SEEK          | media.seek                   |      | number         | W  |     |     |     |       | `/^media\.seek(\..*)?$/`                                                     |
-|   | TRACK         | media.track                  |      | string         |    |     |     |     |       | `/^media\.track(\..*)?$/`                                                    |
-|   | EPISODE       | media.episode                |      | string         |    |     |     |     |       | `/^media\.episode(\..*)?$/`                                                  |
-|   | SEASON        | media.season                 |      | string         |    |     |     |     |       | `/^media\.season(\..*)?$/`                                                   |
-|   | VOLUME        | level.volume                 | %    | number         | W  | m   | M   |     |       | `/^level(\.volume)?$/`                                                       |
-|   | VOLUME_ACTUAL | value.volume                 | %    | number         | -  | m   | M   |     |       | `/^value(\.volume)?$/`                                                       |
-|   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                                                         |
-|   | IGNORE        |                              |      |                |    |     |     |     | x     |                                                                              |
-|   | CONNECTED     | indicator.reachable          |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                                                   |
-|   | LOWBAT        | indicator.maintenance.lowbat |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN      | indicator.maintenance        |      | boolean        |    |     |     | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR         | indicator.error              |      |                |    |     |     | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY       | value.battery                | %    | number         | -  |     |     |     |       | `/^value\.battery$/`                                                         |
+| R | Name          | Role                         | Unit | Type           | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|---------------|------------------------------|------|----------------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | STATE         | media.state                  |      | boolean/number |    |     |     |     |       | `/^media\.state(\..*)?$/`                         |
+|   | PLAY          | button.play                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.play(\..*)?$/`                |
+|   | PAUSE         | button.pause                 |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.pause(\..*)?$/`               |
+|   | STOP          | button.stop                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.stop(\..*)?$/`                |
+|   | NEXT          | button.next                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.next(\..*)?$/`                |
+|   | PREV          | button.prev                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.prev(\..*)?$/`                |
+|   | SHUFFLE       | media.mode.shuffle           |      | boolean        | W  |     |     |     |       | `/^media\.mode\.shuffle(\..*)?$/`                 |
+|   | REPEAT        | media.mode.repeat            |      | number         | W  |     |     |     |       | `/^media\.mode\.repeat(\..*)?$/`                  |
+|   | ARTIST        | media.artist                 |      | string         | -  |     |     |     |       | `/^media\.artist(\..*)?$/`                        |
+|   | ALBUM         | media.album                  |      | string         | -  |     |     |     |       | `/^media\.album(\..*)?$/`                         |
+|   | TITLE         | media.title                  |      | string         | -  |     |     |     |       | `/^media\.title(\..*)?$/`                         |
+|   | COVER         | media.cover                  |      | string         | -  |     |     |     |       | `/^media\.cover(\.big)?$/`                        |
+|   | COVER         |                              |      | string         | -  |     |     |     |       | `/^media\.cover(\..*)$/`                          |
+|   | DURATION      | media.duration               | sec  | number         | -  |     |     |     |       | `/^media\.duration(\..*)?$/`                      |
+|   | ELAPSED       | media.elapsed                | sec  | number         |    |     |     |     |       | `/^media\.elapsed(\..*)?$/`                       |
+|   | SEEK          | media.seek                   |      | number         | W  |     |     |     |       | `/^media\.seek(\..*)?$/`                          |
+|   | TRACK         | media.track                  |      | string         |    |     |     |     |       | `/^media\.track(\..*)?$/`                         |
+|   | EPISODE       | media.episode                |      | string         |    |     |     |     |       | `/^media\.episode(\..*)?$/`                       |
+|   | SEASON        | media.season                 |      | string         |    |     |     |     |       | `/^media\.season(\..*)?$/`                        |
+|   | VOLUME        | level.volume                 | %    | number         | W  | m   | M   |     |       | `/^level(\.volume)?$/`                            |
+|   | VOLUME_ACTUAL | value.volume                 | %    | number         | -  | m   | M   |     |       | `/^value(\.volume)?$/`                            |
+|   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                              |
+|   | IGNORE        |                              |      |                |    |     |     |     | x     |                                                   |
+|   | CONNECTED     | indicator.reachable          |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                        |
+|   | LOWBAT        | indicator.maintenance.lowbat |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN      | indicator.maintenance        |      | boolean        |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR         | indicator.error              |      |                |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY       | value.battery                | %    | number         | -  |     |     |     |       | `/^value\.battery$/`                              |
 
 
 ### Motion sensor [motion]
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.motion                 |      | boolean |    |     |       | `/^(state\.)?motion$｜^sensor\.motion$/`                                      |
-|   | SECOND   | value.brightness              | lux  | number  |    |     |       | `/brightness$/`                                                              |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.motion                 |      | boolean |    |     |       | `/^(state\.)?motion$｜^sensor\.motion$/`           |
+|   | SECOND   | value.brightness              | lux  | number  |    |     |       | `/brightness$/`                                   |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### RGB Light [rgb]
 
 RGB(W) light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-255).
 
-| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | RED             | level.color.red               |      | number  | W  |     |       | `/^level\.color\.red$/`                                                      |
-| * | GREEN           | level.color.green             |      | number  | W  |     |       | `/^level\.color\.green$/`                                                    |
-| * | BLUE            | level.color.blue              |      | number  | W  |     |       | `/^level\.color\.blue$/`                                                     |
-|   | WHITE           | level.color.white             |      | number  | W  |     |       | `/^level\.color\.white$/`                                                    |
-|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
-|   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$｜^state$/`                                               |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
-|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | RED             | level.color.red               |      | number  | W  |     |       | `/^level\.color\.red$/`                           |
+| * | GREEN           | level.color.green             |      | number  | W  |     |       | `/^level\.color\.green$/`                         |
+| * | BLUE            | level.color.blue              |      | number  | W  |     |       | `/^level\.color\.blue$/`                          |
+|   | WHITE           | level.color.white             |      | number  | W  |     |       | `/^level\.color\.white$/`                         |
+|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                               |
+|   | BRIGHTNESS      |                               |      | number  | W  |     |       | `/^level\.brightness$/`                           |
+|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                   |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$｜^state$/`                    |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### R,G,B Light with different states [rgbSingle]
 
 RGB light with different states for every color. The value is from 0 to 255.
 
-| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | RGB             | level.color.rgb               |      | string  | W  |     |       | `/^level\.color\.rgb$/`                                                      |
-|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
-|   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
-|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | RGB             | level.color.rgb               |      | string  | W  |     |       | `/^level\.color\.rgb$/`                           |
+|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                               |
+|   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                           |
+|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                   |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                            |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### R,G,B,W Light  with different states [rgbwSingle]
 
 RGBW light with different states for every color. The value is from 0 to 255 for red, green, blue and white.
 
-| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | RGBW            | level.color.rgbw              |      | string  | W  |     |       | `/^level\.color\.rgbw$/`                                                     |
-|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                                                          |
-|   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                                                      |
-|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                                              |
-|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                                                       |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`                                    |
-|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time(\.span｜\.interval)$/`                                                |
-|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | RGBW            | level.color.rgbw              |      | string  | W  |     |       | `/^level\.color\.rgbw$/`                          |
+|   | DIMMER          | level.dimmer                  | %    | number  | W  |     |       | `/^level\.dimmer$/`                               |
+|   | BRIGHTNESS      |                               | %    | number  | W  |     |       | `/^level\.brightness$/`                           |
+|   | TEMPERATURE     | level.color.temperature       | °K   | number  | W  |     |       | `/^level\.color\.temperature$/`                   |
+|   | ON              | switch.light                  |      | boolean | W  |     |       | `/^switch(\.light)?$/`                            |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | TRANSITION_TIME | time.span                     | ms   | number  | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ELECTRIC_POWER  | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT         | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE         | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION     | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY       | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING         | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH         | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT          | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN        | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR           | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Socket [socket]
 
 Socket with an ON/OFF option. Could have information about current, amperage, energy and power.
 
-| R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | SET            | switch                        |      | boolean | W  |     |       | `/^switch$｜^state$｜^switch\.active$/`                                        |
-|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$/`                                                       |
-|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                                           |
-|   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                                         |
-|   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                                         |
-|   | CONSUMPTION    | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                                              |
-|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                                                       |
-|   | WORKING        | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
+| R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | SET            | switch                        |      | boolean | W  |     |       | `/^switch(\.active)?$｜^state$/`                   |
+|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$/`                            |
+|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION    | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING        | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 
 
 ### Temperature [temperature]
 
 Combined temperature and humidity sensor. Humidity is optional.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.temperature             | °C   | number  | -  |     |       | `/\.temperature$/`                                                           |
-|   | SECOND   | value.humidity                | %    | number  | -  |     |       | `/\.humidity$/`                                                              |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | value.temperature             | °C   | number  | -  |     |       | `/\.temperature$/`                                |
+|   | SECOND   | value.humidity                | %    | number  | -  |     |       | `/\.humidity$/`                                   |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Thermostat [thermostat]
 
 Thermostat to be controlled by the desired temperature. Could have mode.
 
-| R | Name     | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|----------------|----|-----|-------|------------------------------------------------------------------------------|
-| * | SET      | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                                                      |
-|   | ACTUAL   | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                                                      |
-|   | HUMIDITY | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                                                         |
-|   | BOOST    | switch.mode.boost             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.boost(\..*)?$/`                                          |
-|   | POWER    | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                                                       |
-|   | PARTY    | switch.mode.party             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.party$/`                                                 |
-|   | MODE     | level.mode.thermostat         |      | number         | W  |     |       | `/^level(\.mode)?\.thermostat$/`                                             |
-|   | WORKING  | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| * | SET      | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                           |
+|   | ACTUAL   | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                           |
+|   | HUMIDITY | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                              |
+|   | BOOST    | switch.mode.boost             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.boost(\..*)?$/`               |
+|   | POWER    | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
+|   | PARTY    | switch.mode.party             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.party$/`                      |
+|   | MODE     | level.mode.thermostat         |      | number         | W  |     |       | `/^level(\.mode)?\.thermostat$/`                  |
+|   | WORKING  | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Vacuum cleaner (robot) [vacuumCleaner]
 
-| R | Name        | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                                                        |
-|---|-------------|-------------------------------|------|----------------|----|-----|-------|------------------------------------------------------------------------------|
-| * | POWER       | switch.power                  |      | boolean/number | W  |     |       | `/^switch\.power$/`                                                          |
-| * | MODE        | level.mode.cleanup            |      | number         | W  |     |       | `/mode\.cleanup$/`                                                           |
-|   | MAP_BASE64  | vacuum.map.base64             |      | string         | -  |     |       | `/vacuum\.map\.base64$/`                                                     |
-|   | MAP_URL     |                               |      | string         | -  |     |       | `/vacuum\.map\.url$/`                                                        |
-|   | WORK_MODE   | level.mode.work               |      | number         | W  |     |       | `/mode\.work$/`                                                              |
-|   | WATER       | value.water                   | %    | number         | -  |     |       | `/^value\.water$/`                                                           |
-|   | WASTE       | value.waste                   | %    | number         | -  |     |       | `/^value\.waste$/`                                                           |
-|   | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                                         |
-|   | STATE       | value.state                   |      | number/string  | -  |     |       | `/^value\.state$/`                                                           |
-|   | PAUSE       | switch.pause                  |      | boolean        | W  |     |       | `/^switch\.pause$/`                                                          |
-|   | WASTE_ALARM | indicator.maintenance.waste   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.waste$｜^indicator(\.alarm)?\.waste/`           |
-|   | WATER_ALARM | indicator.maintenance.water   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.water$｜^indicator(\.alarm)?\.water/`           |
-|   | FILTER      | value.usage.filter            | %    | number         |    | X   |       | `/^value(\.usage)?\.filter/`                                                 |
-|   | BRUSH       | value.usage.brush             | %    | number         |    | X   |       | `/^value(\.usage)?\.brush/`                                                  |
-|   | SENSORS     | value.usage.sensors           | %    | number         |    | X   |       | `/^value(\.usage)?\.sensors/`                                                |
-|   | SIDE_BRUSH  | value.usage.brush.side        | %    | number         |    | X   |       | `/^value(\.usage)?\.brush\.side/`                                            |
-|   | UNREACH     | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN    | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR       | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name        | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                                              |
+|---|-------------|-------------------------------|------|----------------|----|-----|-------|--------------------------------------------------------------------|
+| * | POWER       | switch.power                  |      | boolean/number | W  |     |       | `/^switch\.power$/`                                                |
+| * | MODE        | level.mode.cleanup            |      | number         | W  |     |       | `/mode\.cleanup$/`                                                 |
+|   | MAP_BASE64  | vacuum.map.base64             |      | string         | -  |     |       | `/vacuum\.map\.base64$/`                                           |
+|   | MAP_URL     |                               |      | string         | -  |     |       | `/vacuum\.map\.url$/`                                              |
+|   | WORK_MODE   | level.mode.work               |      | number         | W  |     |       | `/mode\.work$/`                                                    |
+|   | WATER       | value.water                   | %    | number         | -  |     |       | `/^value\.water$/`                                                 |
+|   | WASTE       | value.waste                   | %    | number         | -  |     |       | `/^value\.waste$/`                                                 |
+|   | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                               |
+|   | STATE       | value.state                   |      | number/string  | -  |     |       | `/^value\.state$/`                                                 |
+|   | PAUSE       | switch.pause                  |      | boolean        | W  |     |       | `/^switch\.pause$/`                                                |
+|   | WASTE_ALARM | indicator.maintenance.waste   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.waste$｜^indicator(\.alarm)?\.waste/` |
+|   | WATER_ALARM | indicator.maintenance.water   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.water$｜^indicator(\.alarm)?\.water/` |
+|   | FILTER      | value.usage.filter            | %    | number         |    | X   |       | `/^value(\.usage)?\.filter/`                                       |
+|   | BRUSH       | value.usage.brush             | %    | number         |    | X   |       | `/^value(\.usage)?\.brush/`                                        |
+|   | SENSORS     | value.usage.sensors           | %    | number         |    | X   |       | `/^value(\.usage)?\.sensors/`                                      |
+|   | SIDE_BRUSH  | value.usage.brush.side        | %    | number         |    | X   |       | `/^value(\.usage)?\.brush\.side/`                                  |
+|   | UNREACH     | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                           |
+|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/`                  |
+|   | MAINTAIN    | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                                       |
+|   | ERROR       | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                                             |
+|   | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                               |
 
 
 ### Volume [volume]
 
 Sound volume.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|------------------------------------------------------------------------------|
-| * | SET      | level.volume                  | %    | number  | W  | m   | M   |     |       | `/^level\.volume$/`                                                          |
-|   | ACTUAL   | value.volume                  | %    | number  | -  | m   | M   |     |       | `/^value\.volume$/`                                                          |
-|   | MUTE     | media.mute                    |      | boolean | W  |     |     |     |       | `/^media\.mute$/`                                                            |
-|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | SET      | level.volume                  | %    | number  | W  | m   | M   |     |       | `/^level\.volume$/`                               |
+|   | ACTUAL   | value.volume                  | %    | number  | -  | m   | M   |     |       | `/^value\.volume$/`                               |
+|   | MUTE     | media.mute                    |      | boolean | W  |     |     |     |       | `/^media\.mute$/`                                 |
+|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
 
 
 ### Volume group [volumeGroup]
 
 Group of volumes.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|------------------------------------------------------------------------------|
-| * | SET      | level.volume.group            | %    | number  | W  | m   | M   |     |       | `/^level\.volume\.group?$/`                                                  |
-|   | ACTUAL   | value.volume.group            | %    | number  | -  | m   | M   |     |       | `/^value\.volume\.group$/`                                                   |
-|   | MUTE     | media.mute.group              |      | boolean | W  |     |     |     |       | `/^media\.mute\.group$/`                                                     |
-|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                                                     |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | SET      | level.volume.group            | %    | number  | W  | m   | M   |     |       | `/^level\.volume\.group?$/`                       |
+|   | ACTUAL   | value.volume.group            | %    | number  | -  | m   | M   |     |       | `/^value\.volume\.group$/`                        |
+|   | MUTE     | media.mute.group              |      | boolean | W  |     |     |     |       | `/^media\.mute\.group$/`                          |
+|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
 
 
 ### Warning [warning]
@@ -782,26 +781,26 @@ Just sensor if alarm should be shown.
 
 ### Current weather [weatherCurrent]
 
-| R | Name                  | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                                                        |
-|---|-----------------------|-------------------------------|------|---------|----|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL                | value.temperature             | °C   | number  |    |     |       | `/^value(\.temperature)?$/`                                                  |
-| * | ICON                  | weather.icon                  |      |         |    |     |       | `/^weather\.icon$/`                                                          |
-|   | PRECIPITATION_CHANCE  | value.precipitation.chance    | %    | number  |    |     |       | `/^value\.precipitation\.chance$/`                                           |
-|   | PRECIPITATION_TYPE    | value.precipitation.type      |      | number  |    |     |       | `/^value\.precipitation\.type$/`                                             |
-|   | PRESSURE              | value.pressure                | mbar | number  |    |     |       | `/^value\.pressure$/`                                                        |
-|   | PRESSURE_TENDENCY     | value.pressure.tendency       |      | string  |    |     |       | `/^value\.pressure\.tendency$/`                                              |
-|   | REAL_FEEL_TEMPERATURE | value.temperature.windchill   | °C   | number  |    |     |       | `/^value\.temperature\.windchill$/`                                          |
-|   | HUMIDITY              | value.humidity                | %    | number  |    |     |       | `/^value\.humidity$/`                                                        |
-|   | UV                    | value.uv                      |      | number  |    |     |       | `/^value\.uv$/`                                                              |
-|   | WEATHER               | weather.state                 |      | string  |    |     |       | `/^weather\.state$/`                                                         |
-|   | WIND_DIRECTION        | value.direction.wind          | °    | string  |    |     |       | `/^value\.direction\.wind$/`                                                 |
-|   | WIND_GUST             | value.speed.wind.gust         | km/h | number  |    |     |       | `/^value\.speed\.wind\.gust$/`                                               |
-|   | WIND_SPEED            | value.speed.wind$             | km/h | number  |    |     |       | `/^value\.speed\.wind$/`                                                     |
-|   | LOWBAT                | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | UNREACH               | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | MAINTAIN              | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR                 | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY               | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                                                         |
+| R | Name                  | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|-----------------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL                | value.temperature             | °C   | number  |    |     |       | `/^value(\.temperature)?$/`                       |
+| * | ICON                  | weather.icon                  |      |         |    |     |       | `/^weather\.icon$/`                               |
+|   | PRECIPITATION_CHANCE  | value.precipitation.chance    | %    | number  |    |     |       | `/^value\.precipitation\.chance$/`                |
+|   | PRECIPITATION_TYPE    | value.precipitation.type      |      | number  |    |     |       | `/^value\.precipitation\.type$/`                  |
+|   | PRESSURE              | value.pressure                | mbar | number  |    |     |       | `/^value\.pressure$/`                             |
+|   | PRESSURE_TENDENCY     | value.pressure.tendency       |      | string  |    |     |       | `/^value\.pressure\.tendency$/`                   |
+|   | REAL_FEEL_TEMPERATURE | value.temperature.windchill   | °C   | number  |    |     |       | `/^value\.temperature\.windchill$/`               |
+|   | HUMIDITY              | value.humidity                | %    | number  |    |     |       | `/^value\.humidity$/`                             |
+|   | UV                    | value.uv                      |      | number  |    |     |       | `/^value\.uv$/`                                   |
+|   | WEATHER               | weather.state                 |      | string  |    |     |       | `/^weather\.state$/`                              |
+|   | WIND_DIRECTION        | value.direction.wind          | °    | string  |    |     |       | `/^value\.direction\.wind$/`                      |
+|   | WIND_GUST             | value.speed.wind.gust         | km/h | number  |    |     |       | `/^value\.speed\.wind\.gust$/`                    |
+|   | WIND_SPEED            | value.speed.wind$             | km/h | number  |    |     |       | `/^value\.speed\.wind$/`                          |
+|   | LOWBAT                | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | UNREACH               | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | MAINTAIN              | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR                 | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY               | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Weather forecast [weatherForecast]
@@ -830,49 +829,49 @@ Just sensor if alarm should be shown.
 |   | HISTORY_CHART          | weather.chart.url                      |       | string |     |       | `/^weather\.chart\.url$/`                           |
 |   | FORECAST_CHART         | weather.chart.url.forecast             |       | string |     |       | `/^weather\.chart\.url\.forecast$/`                 |
 |   | LOCATION               | location                               |       | string |     |       | `/^location$/`                                      |
-|   | ICON%d                 |                                        |       | string |     | x     | `/^weather\.icon\.forecast.(\d)$/`                  |
-|   | TEMP_MIN%d             |                                        |       | number |     | x     | `/^value\.temperature\.min\.forecast\.(\d)$/`       |
-|   | TEMP_MAX%d             |                                        |       | number |     | x     | `/^value\.temperature\.max\.forecast\.(\d)$/`       |
-|   | DATE%d                 |                                        |       | string |     | x     | `/^date\.forecast\.(\d)$/`                          |
-|   | DOW%d                  |                                        |       | string |     | x     | `/^dayofweek\.forecast\.(\d)$/`                     |
-|   | STATE%d                |                                        |       | string |     | x     | `/^weather\.state\.forecast\.(\d)$/`                |
-|   | TEMP%d                 |                                        |       | number |     | x     | `/^value\.temperature\.forecast\.(\d)$/`            |
-|   | HUMIDITY%d             |                                        |       | number |     | x     | `/^value\.humidity\.forecast\.(\d)$/`               |
-|   | HUMIDITY_MAX%d         |                                        |       | number |     | x     | `/^value\.humidity\.max\.forecast\.(\d)$/`          |
-|   | PRECIPITATION_CHANCE%d |                                        |  / %  | number |     | x     | `/^value\.precipitation\.forecast\.(\d)$/`          |
-|   | PRECIPITATION%d        |                                        |  / mm | number |     | x     | `/^value\.precipitation\.forecast\.(\d)$/`          |
-|   | WIND_SPEED%d           |                                        |       | number |     | x     | `/^value\.speed\.wind\.forecast\.(\d)$/`            |
-|   | WIND_DIRECTION%d       |                                        |       | number |     | x     | `/^value\.direction\.wind\.forecast\.(\d)$/`        |
-|   | WIND_DIRECTION_STR%d   |                                        |       | string |     | x     | `/^weather\.direction\.wind\.forecast\.(\d)$/`      |
-|   | WIND_ICON%d            |                                        |       | string |     | x     | `/^weather\.icon\.wind\.forecast\.(\d)$/`           |
+|   | ICON%d                 |                                        |       | string |     | x     | `/^weather\.icon\.forecast.(\d+)$/`                 |
+|   | TEMP_MIN%d             |                                        |       | number |     | x     | `/^value\.temperature\.min\.forecast\.(\d+)$/`      |
+|   | TEMP_MAX%d             |                                        |       | number |     | x     | `/^value\.temperature\.max\.forecast\.(\d+)$/`      |
+|   | DATE%d                 |                                        |       | string |     | x     | `/^date\.forecast\.(\d+)$/`                         |
+|   | DOW%d                  |                                        |       | string |     | x     | `/^dayofweek\.forecast\.(\d+)$/`                    |
+|   | STATE%d                |                                        |       | string |     | x     | `/^weather\.state\.forecast\.(\d+)$/`               |
+|   | TEMP%d                 |                                        |       | number |     | x     | `/^value\.temperature\.forecast\.(\d+)$/`           |
+|   | HUMIDITY%d             |                                        |       | number |     | x     | `/^value\.humidity\.forecast\.(\d+)$/`              |
+|   | HUMIDITY_MAX%d         |                                        |       | number |     | x     | `/^value\.humidity\.max\.forecast\.(\d+)$/`         |
+|   | PRECIPITATION_CHANCE%d |                                        |  / %  | number |     | x     | `/^value\.precipitation\.forecast\.(\d+)$/`         |
+|   | PRECIPITATION%d        |                                        |  / mm | number |     | x     | `/^value\.precipitation\.forecast\.(\d+)$/`         |
+|   | WIND_SPEED%d           |                                        |       | number |     | x     | `/^value\.speed\.wind\.forecast\.(\d+)$/`           |
+|   | WIND_DIRECTION%d       |                                        |       | number |     | x     | `/^value\.direction\.wind\.forecast\.(\d+)$/`       |
+|   | WIND_DIRECTION_STR%d   |                                        |       | string |     | x     | `/^weather\.direction\.wind\.forecast\.(\d+)$/`     |
+|   | WIND_ICON%d            |                                        |       | string |     | x     | `/^weather\.icon\.wind\.forecast\.(\d+)$/`          |
 
 
 ### Window sensor [window]
 
 Window sensor: opened - true, closed - false.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | sensor.window                 |      | boolean |    | E    |     |       | `/^state(\.window)?$｜^sensor(\.window)?/`                                    |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.window                 |      | boolean |    | E    |     |       | `/^(state｜sensor)(\.window)?/`                    |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### Window that could be in tilted state [windowTilt]
 
 Window tilt sensor: closed - 0, opened - 1, tiled - 2.
 
-| R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                                                        |
-|---|----------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------------------------------------------|
-| * | ACTUAL   | value.window                  |      | number  |    | E    |     |       | `/^state$｜^value(\.window)?$/`                                               |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                                     |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.lowbat$｜^indicator(\.maintenance)?\.battery$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                                                 |
-|   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                                                       |
-|   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                                                         |
+| R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | value.window                  |      | number  |    | E    |     |       | `/^state$｜^value(\.window)?$/`                    |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 
