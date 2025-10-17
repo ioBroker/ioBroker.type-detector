@@ -1,6 +1,6 @@
 # ioBroker device types
 
-**Note:** Do not copy regex with '|' from tables. It contains Unicode replacement of '|', because of markdown's table rendering. 
+**Note:** Do not copy regex with '|' from tables. It contains Unicode replacement of '|', because of Markdown's table rendering. 
 
 Fields:
 - **R** - (required) If the state is mandatory and must be in the channel/device.
