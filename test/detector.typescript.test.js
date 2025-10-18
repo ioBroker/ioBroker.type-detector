@@ -958,7 +958,7 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it('Must inore favored id when detecting via parent', done => {
+    it('Must ignore favored ID when detecting via parent', done => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -996,6 +996,31 @@ describe(`${name} Test Detector`, () => {
 
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.a-opened',
+        });
+
+        done();
+    });
+
+    it('Must detect dimmer with power switch', done => {
+        const objects = require('./dimmer.json');
+
+        const controls = detect(objects, {
+            id: 'alias.0.Test-Devices.Dimmer.SET',
+            ignoreEnums: true,
+            detectParent: true
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(8, 'Should detect 8 states for dimmer with power switch');
+
+        validate(controls[0], Types.dimmer, {
+            SET: 'alias.0.Test-Devices.Dimmer.SET',
+            ON_SET: 'alias.0.Test-Devices.Dimmer.ON_SET',
+            ACTUAL: 'alias.0.Test-Devices.Dimmer.ACTUAL',
+            WORKING: 'alias.0.Test-Devices.Dimmer.WORKING',
+            UNREACH: 'alias.0.Test-Devices.Dimmer.UNREACH',
+            LOWBAT: 'alias.0.Test-Devices.Dimmer.LOWBAT',
+            MAINTAIN: 'alias.0.Test-Devices.Dimmer.MAINTAIN',
+            ERROR: 'alias.0.Test-Devices.Dimmer.ERROR',
         });
 
         done();
