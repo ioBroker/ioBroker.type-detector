@@ -622,7 +622,7 @@ RGB light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-25
 
 ### RGBW Light Single [rgbwSingle]
 
-RGBW light one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,0-255,0-1).
+RGBW light with one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,0-255,0-1).
 
 | R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
