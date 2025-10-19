@@ -96,6 +96,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Correcting detection of states consists only of one state
+
 ### 4.5.1 (2025-07-21)
 -   (@Apollon77) ignore "setting" roles in some cases to ensure correct detection
 -   (@GermanBluefox) added potential error handling for detection

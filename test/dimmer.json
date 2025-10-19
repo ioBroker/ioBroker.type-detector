@@ -1,0 +1,247 @@
+{
+  "alias.0.Test-Devices.Dimmer": {
+    "_id": "alias.0.Test-Devices.Dimmer",
+    "common": {
+      "name": {
+        "en": "Dimmer"
+      },
+      "role": "dimmer",
+      "enums": [
+        {
+          "_id": "enum.functions.people",
+          "common": {
+            "name": {
+              "en": "People",
+              "ru": "Люди",
+              "de": "Personen",
+              "fr": "Gens",
+              "it": "Persone",
+              "nl": "Mensen",
+              "pl": "Ludzie",
+              "pt": "Pessoas",
+              "es": "Personas",
+              "zh-cn": "人们"
+            },
+            "color": "",
+            "desc": "",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUwNS40IDUwNS40Ij4KICAgIDxnIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgICAgICAgPHBhdGggZD0iTTQzNy4xLDIzMy40NWMxNC44LTEwLjQsMjQuNi0yNy43LDI0LjYtNDcuMmMwLTMxLjktMjUuOC01Ny43LTU3LjctNTcuN2MtMzEuOSwwLTU3LjcsMjUuOC01Ny43LDU3LjcKCQkJYzAsMTkuNSw5LjcsMzYuOCwyNC42LDQ3LjJjLTEyLjcsNC40LTI0LjMsMTEuMi0zNC4xLDIwYy0xMy41LTExLjUtMjkuNC0yMC4zLTQ2LjgtMjUuNWMyMS4xLTEyLjgsMzUuMy0zNi4xLDM1LjMtNjIuNgoJCQljMC00MC40LTMyLjctNzMuMS03My4xLTczLjFjLTQwLjQsMC03My4xLDMyLjgtNzMuMSw3My4xYzAsMjYuNSwxNC4xLDQ5LjgsMzUuMyw2Mi42Yy0xNy4yLDUuMi0zMi45LDEzLjktNDYuMywyNS4yCgkJCWMtOS44LTguNi0yMS4yLTE1LjMtMzMuNy0xOS42YzE0LjgtMTAuNCwyNC42LTI3LjcsMjQuNi00Ny4yYzAtMzEuOS0yNS44LTU3LjctNTcuNy01Ny43cy01Ny43LDI1LjgtNTcuNyw1Ny43CgkJCWMwLDE5LjUsOS43LDM2LjgsMjQuNiw0Ny4yQzI4LjUsMjQ3LjI1LDAsMjg0Ljk1LDAsMzI5LjI1djYuNmMwLDAuMiwwLjIsMC40LDAuNCwwLjRoMTIyLjNjLTAuNyw1LjUtMS4xLDExLjItMS4xLDE2Ljl2Ni44CgkJCWMwLDI5LjQsMjMuOCw1My4yLDUzLjIsNTMuMmgxNTVjMjkuNCwwLDUzLjItMjMuOCw1My4yLTUzLjJ2LTYuOGMwLTUuNy0wLjQtMTEuNC0xLjEtMTYuOUg1MDVjMC4yLDAsMC40LTAuMiwwLjQtMC40di02LjYKCQkJQzUwNS4yLDI4NC44NSw0NzYuOCwyNDcuMTUsNDM3LjEsMjMzLjQ1eiBNMzYyLjMsMTg2LjE1YzAtMjMsMTguNy00MS43LDQxLjctNDEuN3M0MS43LDE4LjcsNDEuNyw0MS43CgkJCWMwLDIyLjctMTguMyw0MS4yLTQwLjksNDEuN2MtMC4zLDAtMC41LDAtMC44LDBzLTAuNSwwLTAuOCwwQzM4MC41LDIyNy40NSwzNjIuMywyMDguOTUsMzYyLjMsMTg2LjE1eiBNMTk0LjksMTY1LjM1CgkJCWMwLTMxLjUsMjUuNi01Ny4xLDU3LjEtNTcuMXM1Ny4xLDI1LjYsNTcuMSw1Ny4xYzAsMzAuNC0yMy45LDU1LjMtNTMuOCw1N2MtMS4xLDAtMi4yLDAtMy4zLDBjLTEuMSwwLTIuMiwwLTMuMywwCgkJCUMyMTguOCwyMjAuNjUsMTk0LjksMTk1Ljc1LDE5NC45LDE2NS4zNXogTTU5LjMsMTg2LjE1YzAtMjMsMTguNy00MS43LDQxLjctNDEuN3M0MS43LDE4LjcsNDEuNyw0MS43YzAsMjIuNy0xOC4zLDQxLjItNDAuOSw0MS43CgkJCWMtMC4zLDAtMC41LDAtMC44LDBzLTAuNSwwLTAuOCwwQzc3LjYsMjI3LjQ1LDU5LjMsMjA4Ljk1LDU5LjMsMTg2LjE1eiBNMTI1LjUsMzIwLjE1SDE2LjJjNC41LTQyLjYsNDAuNS03Niw4NC4yLTc2LjMKCQkJYzAuMiwwLDAuNCwwLDAuNiwwczAuNCwwLDAuNiwwYzIwLjgsMC4xLDM5LjgsNy44LDU0LjUsMjAuM0MxNDEuNywyNzkuNzUsMTMxLDI5OC45NSwxMjUuNSwzMjAuMTV6IE0zNjYuOCwzNTkuOTUKCQkJYzAsMjAuNS0xNi43LDM3LjItMzcuMiwzNy4yaC0xNTVjLTIwLjUsMC0zNy4yLTE2LjctMzcuMi0zNy4ydi02LjhjMC02Mi4xLDQ5LjYtMTEyLjksMTExLjMtMTE0LjdjMS4xLDAuMSwyLjMsMC4xLDMuNCwwLjEKCQkJczIuMywwLDMuNC0wLjFjNjEuNywxLjgsMTExLjMsNTIuNiwxMTEuMywxMTQuN1YzNTkuOTV6IE0zNzguNywzMjAuMTVjLTUuNS0yMS4xLTE2LTQwLTMwLjMtNTUuNmMxNC44LTEyLjgsMzQtMjAuNSw1NS0yMC43CgkJCWMwLjIsMCwwLjQsMCwwLjYsMHMwLjQsMCwwLjYsMGM0My43LDAuMyw3OS43LDMzLjcsODQuMiw3Ni4zSDM3OC43eiIvPgogICAgPC9nPgo8L3N2Zz4K"
+          },
+          "native": {},
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {},
+    "type": "channel",
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980155,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "alias.0.Test-Devices.Dimmer.ACTUAL": {
+    "_id": "alias.0.Test-Devices.Dimmer.ACTUAL",
+    "native": {},
+    "type": "state",
+    "common": {
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.Dimmer-Value"
+      },
+      "name": "ACTUAL",
+      "role": "value.dimmer",
+      "write": false,
+      "type": "number",
+      "unit": "%"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980168,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "alias.0.Test-Devices.Dimmer.ERROR": {
+    "_id": "alias.0.Test-Devices.Dimmer.ERROR",
+    "native": {},
+    "type": "state",
+    "common": {
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.Error-Indicator"
+      },
+      "name": "ERROR",
+      "role": "indicator.error",
+      "type": "boolean"
+    },
+    "val": false,
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980176,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "ack": true
+  },
+  "alias.0.Test-Devices.Dimmer.LOWBAT": {
+    "_id": "alias.0.Test-Devices.Dimmer.LOWBAT",
+    "native": {},
+    "type": "state",
+    "common": {
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.LowBat-Indicator"
+      },
+      "name": "LOWBAT",
+      "role": "indicator.maintenance.lowbat",
+      "type": "boolean"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980184,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "alias.0.Test-Devices.Dimmer.MAINTAIN": {
+    "_id": "alias.0.Test-Devices.Dimmer.MAINTAIN",
+    "native": {},
+    "type": "state",
+    "common": {
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.Maintenance-Indicator"
+      },
+      "name": "MAINTAIN",
+      "role": "indicator.maintenance",
+      "type": "boolean"
+    },
+    "val": false,
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980190,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "ack": true
+  },
+  "alias.0.Test-Devices.Dimmer.ON_SET": {
+    "_id": "alias.0.Test-Devices.Dimmer.ON_SET",
+    "native": {},
+    "type": "state",
+    "common": {
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.Switch"
+      },
+      "name": "ON_SET",
+      "role": "switch.light",
+      "write": true,
+      "type": "boolean"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980196,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": false
+  },
+  "alias.0.Test-Devices.Dimmer.SET": {
+    "_id": "alias.0.Test-Devices.Dimmer.SET",
+    "common": {
+      "name": "SET",
+      "role": "level.dimmer",
+      "type": "number",
+      "read": true,
+      "write": true,
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.Dimmer-Level"
+      },
+      "unit": "%",
+      "smartName": {
+        "de": "Dimmer",
+        "byON": "stored"
+      }
+    },
+    "native": {},
+    "type": "state",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760816826391,
+    "val": 56.99999999999999,
+    "ack": false
+  },
+  "alias.0.Test-Devices.Dimmer.UNREACH": {
+    "_id": "alias.0.Test-Devices.Dimmer.UNREACH",
+    "native": {},
+    "type": "state",
+    "common": {
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.Unreach-Indicator"
+      },
+      "name": "UNREACH",
+      "role": "indicator.maintenance.unreach",
+      "type": "boolean"
+    },
+    "val": false,
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980214,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "ack": true
+  },
+  "alias.0.Test-Devices.Dimmer.WORKING": {
+    "_id": "alias.0.Test-Devices.Dimmer.WORKING",
+    "native": {},
+    "type": "state",
+    "common": {
+      "alias": {
+        "id": "0_userdata.0.States-For-Devices.Working-Indicator"
+      },
+      "name": "WORKING",
+      "role": "indicator.working",
+      "type": "boolean"
+    },
+    "val": false,
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760199980220,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "ack": true
+  }
+}
