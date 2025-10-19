@@ -1,0 +1,33 @@
+{
+    "mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent": {
+        "common": {
+            "name": "vantage/obergeschoss/büro/blind/rollos/percent",
+            "role": "level.blind",
+            "desc": "mqtt server variable",
+            "type": "number",
+            "write": true,
+            "read": true,
+            "smartName": {
+                "de": "Rollos",
+                "byON": "100",
+                "smartType": "blinds"
+            },
+            "min": 0,
+            "max": 100
+        },
+        "native": {
+            "topic": "vantage/obergeschoss/büro/blind/rollos/percent"
+        },
+        "type": "state",
+        "_id": "mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent",
+        "acl": {
+            "object": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator",
+            "state": 1636
+        },
+        "from": "system.adapter.admin.0",
+        "user": "system.user.admin",
+        "ts": 1760688430971
+    }
+}

@@ -1027,7 +1027,7 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it.only('Must detect RGB color with power switch', done => {
+    it('Must detect RGB color with power switch', done => {
         const objects = require('./nanoleaf-lightpanels.3.json');
 
         const controls = detect(objects, {
@@ -1036,13 +1036,31 @@ describe(`${name} Test Detector`, () => {
             detectParent: true
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(4, 'Should detect 8 states for dimmer with power switch');
+        expect(states.length).to.be.equal(4, 'Should detect 4 states for dimmer with power switch');
 
         validate(controls[0], Types.rgbSingle, {
             RGB: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
             DIMMER: 'nanoleaf-lightpanels.3.Shapes.brightness',
             TEMPERATURE: 'nanoleaf-lightpanels.3.Shapes.colorTemp',
             ON: 'nanoleaf-lightpanels.3.Shapes.state',
+        });
+
+        done();
+    });
+
+    it('Must detect Blinds from just one state', done => {
+        const objects = require('./simpleBlind.json');
+
+        const controls = detect(objects, {
+            id: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
+            ignoreEnums: true,
+            detectParent: true
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(1, 'Should detect 1 state for dimmer with power switch');
+
+        validate(controls[0], Types.blind, {
+            SET: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
         });
 
         done();
