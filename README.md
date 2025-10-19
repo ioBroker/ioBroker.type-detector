@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.6.0 (2025-10-19)
 -   (@GermanBluefox) Correcting detection of states consists only of one state
 
 ### 4.5.1 (2025-07-21)
