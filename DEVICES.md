@@ -1,6 +1,6 @@
 # ioBroker device types
 
-**Note:** Do not copy regex with '|' from tables. It contains Unicode replacement of '|', because of markdown's table rendering. 
+**Note:** Do not copy regex with '|' from tables. It contains Unicode replacement of '|', because of Markdown's table rendering. 
 
 Fields:
 - **R** - (required) If the state is mandatory and must be in the channel/device.
@@ -61,9 +61,9 @@ In [brackets] is given the class name of a device.
 * [Lock [lock]](#lock-lock)
 * [Media player [mediaPlayer]](#media-player-mediaplayer)
 * [Motion sensor [motion]](#motion-sensor-motion)
-* [RGB Light [rgb]](#rgb-light-rgb)
-* [R,G,B Light with different states [rgbSingle]](#r-g-b-light-with-different-states-rgbsingle)
-* [R,G,B,W Light  with different states [rgbwSingle]](#r-g-b-w-light--with-different-states-rgbwsingle)
+* [RGB(W) Light with different states for every color [rgb]](#rgb-w--light-with-different-states-for-every-color-rgb)
+* [RGB Light Single [rgbSingle]](#rgb-light-single-rgbsingle)
+* [RGBW Light Single [rgbwSingle]](#rgbw-light-single-rgbwsingle)
 * [Socket [socket]](#socket-socket)
 * [Temperature [temperature]](#temperature-temperature)
 * [Thermostat [thermostat]](#thermostat-thermostat)
@@ -565,9 +565,9 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
-### RGB Light [rgb]
+### RGB(W) Light with different states for every color [rgb]
 
-RGB(W) light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-255).
+R,G,B(,W) Light with different states for every color. The value is from 0 to 255.
 
 | R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
@@ -594,9 +594,9 @@ RGB(W) light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0
 |   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
-### R,G,B Light with different states [rgbSingle]
+### RGB Light Single [rgbSingle]
 
-RGB light with different states for every color. The value is from 0 to 255.
+RGB light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-255).
 
 | R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
@@ -620,9 +620,9 @@ RGB light with different states for every color. The value is from 0 to 255.
 |   | BATTERY         | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
-### R,G,B,W Light  with different states [rgbwSingle]
+### RGBW Light Single [rgbwSingle]
 
-RGBW light with different states for every color. The value is from 0 to 255 for red, green, blue and white.
+RGBW light one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,0-255,0-1).
 
 | R | Name            | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|-----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
