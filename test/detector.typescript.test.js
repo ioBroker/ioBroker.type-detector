@@ -958,7 +958,7 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it('Must inore favored id when detecting via parent', done => {
+    it('Must ignore favored ID when detecting via parent', done => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -996,6 +996,70 @@ describe(`${name} Test Detector`, () => {
 
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.a-opened',
+        });
+
+        done();
+    });
+
+    it('Must detect dimmer with power switch', done => {
+        const objects = require('./dimmer.json');
+
+        const controls = detect(objects, {
+            id: 'alias.0.Test-Devices.Dimmer.SET',
+            ignoreEnums: true,
+            detectParent: true
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(8, 'Should detect 8 states for dimmer with power switch');
+
+        validate(controls[0], Types.dimmer, {
+            SET: 'alias.0.Test-Devices.Dimmer.SET',
+            ON_SET: 'alias.0.Test-Devices.Dimmer.ON_SET',
+            ACTUAL: 'alias.0.Test-Devices.Dimmer.ACTUAL',
+            WORKING: 'alias.0.Test-Devices.Dimmer.WORKING',
+            UNREACH: 'alias.0.Test-Devices.Dimmer.UNREACH',
+            LOWBAT: 'alias.0.Test-Devices.Dimmer.LOWBAT',
+            MAINTAIN: 'alias.0.Test-Devices.Dimmer.MAINTAIN',
+            ERROR: 'alias.0.Test-Devices.Dimmer.ERROR',
+        });
+
+        done();
+    });
+
+    it('Must detect RGB color with power switch', done => {
+        const objects = require('./nanoleaf-lightpanels.3.json');
+
+        const controls = detect(objects, {
+            id: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
+            ignoreEnums: true,
+            detectParent: true
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(4, 'Should detect 4 states for dimmer with power switch');
+
+        validate(controls[0], Types.rgbSingle, {
+            RGB: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
+            DIMMER: 'nanoleaf-lightpanels.3.Shapes.brightness',
+            TEMPERATURE: 'nanoleaf-lightpanels.3.Shapes.colorTemp',
+            ON: 'nanoleaf-lightpanels.3.Shapes.state',
+        });
+
+        done();
+    });
+
+    it('Must detect Blinds from just one state', done => {
+        const objects = require('./simpleBlind.json');
+
+        const controls = detect(objects, {
+            id: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
+            ignoreEnums: true,
+            detectParent: true
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(1, 'Should detect 1 state for dimmer with power switch');
+
+        validate(controls[0], Types.blind, {
+            SET: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
         });
 
         done();

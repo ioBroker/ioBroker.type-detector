@@ -451,7 +451,8 @@ export class ChannelDetector {
             case 'folder':
                 if (checkParent && type !== 'device') {
                     const foundId = ChannelDetector.findParentChannelOrDevice(objects, id);
-                    return foundId ? [...getObjectsBelowId(keys, foundId)] : [id];
+
+                    return foundId && foundId !== id ? [...getObjectsBelowId(keys, foundId)] : [id];
                 }
                 if (type !== 'state') {
                     return [...getObjectsBelowId(keys, id)];
