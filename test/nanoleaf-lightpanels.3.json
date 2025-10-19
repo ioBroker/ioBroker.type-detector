@@ -1,0 +1,565 @@
+{
+  "nanoleaf-lightpanels.3.Shapes": {
+    "type": "device",
+    "common": {
+      "name": "Shapes Device",
+      "icon": "/icons/shapes.png"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048114,
+    "_id": "nanoleaf-lightpanels.3.Shapes",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "nanoleaf-lightpanels.3.Shapes.brightness": {
+    "type": "state",
+    "common": {
+      "name": "Brightness level",
+      "type": "number",
+      "unit": "%",
+      "def": 100,
+      "min": 0,
+      "max": 100,
+      "read": true,
+      "write": true,
+      "role": "level.dimmer",
+      "desc": "Brightness level in %",
+      "smartName": {
+        "de": "Sandy",
+        "smartType": "dimmer"
+      }
+    },
+    "native": {},
+    "_id": "nanoleaf-lightpanels.3.Shapes.brightness",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760796327733,
+    "val": 0,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.brightness_duration": {
+    "type": "state",
+    "common": {
+      "name": "Brightness duration",
+      "type": "number",
+      "unit": "sec",
+      "def": 0,
+      "min": 0,
+      "max": 60,
+      "read": true,
+      "write": true,
+      "role": "level.interval",
+      "desc": "Brightness transition duration in seconds"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048115,
+    "_id": "nanoleaf-lightpanels.3.Shapes.brightness_duration",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.colorMode": {
+    "type": "state",
+    "common": {
+      "name": "Color Mode",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "value.color.mode",
+      "desc": "Color Mode"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048115,
+    "_id": "nanoleaf-lightpanels.3.Shapes.colorMode",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "hs",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.colorRGB": {
+    "type": "state",
+    "common": {
+      "name": "RGB Color",
+      "type": "string",
+      "read": true,
+      "write": true,
+      "role": "level.color.rgb",
+      "desc": "Color in RGB hex format (#000000 to #FFFFFF)",
+      "smartName": {
+        "de": "Sandy",
+        "smartType": "rgbSingle"
+      }
+    },
+    "native": {},
+    "_id": "nanoleaf-lightpanels.3.Shapes.colorRGB",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760795527796,
+    "val": "#000000",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.colorTemp": {
+    "type": "state",
+    "common": {
+      "name": "Color Temperature",
+      "type": "number",
+      "unit": "K",
+      "def": 4000,
+      "min": 1200,
+      "max": 6500,
+      "read": true,
+      "write": true,
+      "role": "level.color.temperature",
+      "desc": "Color Temperature"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048115,
+    "_id": "nanoleaf-lightpanels.3.Shapes.colorTemp",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 6500,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.effect": {
+    "type": "state",
+    "common": {
+      "name": "Current effect",
+      "type": "string",
+      "read": true,
+      "write": true,
+      "role": "text",
+      "states": {
+        "Morning Sky": "Morning Sky"
+      },
+      "desc": "Current effect"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048115,
+    "_id": "nanoleaf-lightpanels.3.Shapes.effect",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "*Solid*",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.effectWrite": {
+    "type": "state",
+    "common": {
+      "name": "Write effect",
+      "type": "string",
+      "read": true,
+      "write": true,
+      "role": "text",
+      "desc": "Writes a user defined effect to the device"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048133,
+    "_id": "nanoleaf-lightpanels.3.Shapes.effectWrite",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "nanoleaf-lightpanels.3.Shapes.effectWriteResponse": {
+    "type": "state",
+    "common": {
+      "name": "Response of write effect request",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "text",
+      "desc": "Response of the write request for user defined effect"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048133,
+    "_id": "nanoleaf-lightpanels.3.Shapes.effectWriteResponse",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "nanoleaf-lightpanels.3.Shapes.effectsList": {
+    "type": "state",
+    "common": {
+      "name": "Effects list",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "text",
+      "desc": "List of available effects"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048115,
+    "_id": "nanoleaf-lightpanels.3.Shapes.effectsList",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "Morning Sky",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.hue": {
+    "type": "state",
+    "common": {
+      "name": "Hue value",
+      "type": "number",
+      "unit": "°",
+      "def": 100,
+      "min": 0,
+      "max": 360,
+      "read": true,
+      "write": true,
+      "role": "level.color.hue",
+      "desc": "Hue value"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048115,
+    "_id": "nanoleaf-lightpanels.3.Shapes.hue",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 127,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.identify": {
+    "type": "state",
+    "common": {
+      "name": "Identify panels",
+      "type": "boolean",
+      "read": false,
+      "write": true,
+      "role": "button",
+      "desc": "Causes the panels to flash in unison"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048133,
+    "_id": "nanoleaf-lightpanels.3.Shapes.identify",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "nanoleaf-lightpanels.3.Shapes.info": {
+    "type": "channel",
+    "common": {
+      "name": "Shapes Device Information",
+      "icon": "/icons/shapes.png"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048114,
+    "_id": "nanoleaf-lightpanels.3.Shapes.info",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "nanoleaf-lightpanels.3.Shapes.info.firmwareVersion": {
+    "type": "state",
+    "common": {
+      "name": "Firmware Version of nanoleaf device",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "info.version"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048114,
+    "_id": "nanoleaf-lightpanels.3.Shapes.info.firmwareVersion",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "12.0.3",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.info.model": {
+    "type": "state",
+    "common": {
+      "name": "Model of nanoleaf device",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "info.model"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048114,
+    "_id": "nanoleaf-lightpanels.3.Shapes.info.model",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "NL42",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.info.name": {
+    "type": "state",
+    "common": {
+      "name": "Name of nanoleaf device",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "info.name"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048114,
+    "_id": "nanoleaf-lightpanels.3.Shapes.info.name",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "Shapes 4018",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.info.serialNo": {
+    "type": "state",
+    "common": {
+      "name": "Serial No. of nanoleaf device",
+      "type": "string",
+      "read": true,
+      "write": false,
+      "role": "info.serial"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048114,
+    "_id": "nanoleaf-lightpanels.3.Shapes.info.serialNo",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "S22370H0663",
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.saturation": {
+    "type": "state",
+    "common": {
+      "name": "Saturation value",
+      "type": "number",
+      "unit": "%",
+      "def": 100,
+      "min": 0,
+      "max": 100,
+      "read": true,
+      "write": true,
+      "role": "level.color.saturation",
+      "desc": "Saturation value"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048115,
+    "_id": "nanoleaf-lightpanels.3.Shapes.saturation",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 2,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.state": {
+    "type": "state",
+    "common": {
+      "name": "Power State",
+      "type": "boolean",
+      "def": false,
+      "read": true,
+      "write": true,
+      "role": "switch.light",
+      "desc": "Switch on/off",
+      "smartName": {
+        "de": "Sandy",
+        "smartType": "light",
+        "byON": "stored"
+      }
+    },
+    "native": {},
+    "_id": "nanoleaf-lightpanels.3.Shapes.state",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760796316317,
+    "val": false,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.touch": {
+    "type": "channel",
+    "common": {
+      "name": "Shapes Touch event"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048133,
+    "_id": "nanoleaf-lightpanels.3.Shapes.touch",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "nanoleaf-lightpanels.3.Shapes.touch.gesture": {
+    "type": "state",
+    "common": {
+      "name": "Gesture of touch event",
+      "type": "number",
+      "read": true,
+      "write": false,
+      "role": "value",
+      "states": {
+        "0": "Single Tap",
+        "1": "Double Tap",
+        "2": "Swipe Up",
+        "3": "Swipe Down",
+        "4": "Swipe Left",
+        "5": "Swipe Right"
+      }
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048133,
+    "_id": "nanoleaf-lightpanels.3.Shapes.touch.gesture",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.Shapes.touch.panelID": {
+    "type": "state",
+    "common": {
+      "name": "Panel ID of touch event",
+      "type": "number",
+      "read": true,
+      "write": false,
+      "role": "value"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "user": "system.user.admin",
+    "ts": 1713441048133,
+    "_id": "nanoleaf-lightpanels.3.Shapes.touch.panelID",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 31439,
+    "ack": true
+  },
+  "nanoleaf-lightpanels.3.info.connection": {
+    "_id": "nanoleaf-lightpanels.3.info.connection",
+    "type": "state",
+    "common": {
+      "name": "If connected to nanoleaf device",
+      "type": "boolean",
+      "read": true,
+      "write": false,
+      "def": false,
+      "role": "indicator.connected"
+    },
+    "native": {},
+    "from": "system.adapter.nanoleaf-lightpanels.3",
+    "ts": 1760457442510,
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "user": "system.user.admin",
+    "val": true,
+    "ack": true
+  }
+}
