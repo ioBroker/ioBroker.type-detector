@@ -1094,7 +1094,7 @@ describe(`${name} Test Detector`, () => {
             detectOnlyChannel: true
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(5, 'Should detect 4 states: hue, dimmer, saturation, temperature, on');
+        expect(states.length).to.be.equal(5, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
 
         validate(controls[0], Types.hue, {
             HUE: 'hue.0.Hue_Küche_Küchezeile.hue',
