@@ -603,19 +603,6 @@ export class ChannelDetector {
             favorId: options.detectParent ? undefined : id,
         };
 
-        // We have a problem that if the device has RGB and HUE, the RGB wins.
-        // Detect if the favorId object is hue, prefer hue before RGB
-        if (context.favorId && context.objects[context.favorId]?.common?.role?.includes('.hue')) {
-            _patternList = [..._patternList];
-            const posHue = _patternList.indexOf(Types.hue);
-            const posRgb = _patternList.indexOf(Types.rgb);
-            if (posHue !== -1 && posRgb !== -1 && posRgb < posHue) {
-                // place hue before rgb
-                _patternList.splice(posHue, 1);
-                _patternList.splice(posRgb, 0, Types.hue);
-            }
-        }
-
         const currentType = objects[id]?.type;
         for (const pattern of _patternList) {
             if (options._checkedPatterns.includes(pattern)) {

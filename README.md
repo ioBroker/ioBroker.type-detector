@@ -98,7 +98,6 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@GermanBluefox) Added new flag to detect only in the current channel (one level)
--   (@GermanBluefox) Handle HUE as first if the initial ID has role hue
 
 ### 4.6.0 (2025-10-19)
 -   (@GermanBluefox) Correcting detection of states consists only of one state
