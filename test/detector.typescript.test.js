@@ -1,7 +1,6 @@
 const expect = require('chai').expect;
 
 const ChannelDetectorImport = require('../build/index');
-const objects = require('./simpleBlind.json');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
 const name = 'TS';
