@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 
 const ChannelDetectorImport = require('../build/index');
+const objects = require('./simpleBlind.json');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
 const name = 'TS';
@@ -1060,6 +1061,47 @@ describe(`${name} Test Detector`, () => {
 
         validate(controls[0], Types.blind, {
             SET: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
+        });
+
+        done();
+    });
+
+    it('Must detect Dimmer from Homematic', done => {
+        const objects = require('./hm-rpc.dimmer.json');
+
+        const controls = detect(objects, {
+            id: 'hm-rpc.1.00123456789077.2.LEVEL',
+            ignoreEnums: true,
+            //detectParent: true
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(2, 'Should detect 2 states for dimmer with voltage and unreach');
+
+        validate(controls[0], Types.dimmer, {
+            SET: 'hm-rpc.1.00123456789077.2.LEVEL',
+            UNREACH: 'hm-rpc.1.00123456789077.0.UNREACH',
+        });
+
+        done();
+    });
+
+    it('Must detect HUE from hue adapter', done => {
+        const objects = require('./hue-combined.json');
+
+        const controls = detect(objects, {
+            id: 'hue.0.Hue_Küche_Küchezeile.hue',
+            ignoreEnums: true,
+            detectOnlyChannel: true
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(5, 'Should detect 4 states: hue, dimmer, saturation, temperature, on');
+
+        validate(controls[0], Types.hue, {
+            HUE: 'hue.0.Hue_Küche_Küchezeile.hue',
+            DIMMER: 'hue.0.Hue_Küche_Küchezeile.level',
+            SATURATION: 'hue.0.Hue_Küche_Küchezeile.sat',
+            TEMPERATURE: 'hue.0.Hue_Küche_Küchezeile.ct',
+            ON: 'hue.0.Hue_Küche_Küchezeile.on',
         });
 
         done();

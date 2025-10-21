@@ -1,0 +1,2360 @@
+{
+  "hm-rpc.1.00123456789077": {
+    "_id": "hm-rpc.1.00123456789077",
+    "type": "device",
+    "common": {
+      "name": "Dimmaktor WZ Sofa",
+      "icon": "/icons/134_hmip-fsm_thumb.png"
+    },
+    "native": {
+      "TYPE": "HmIP-FDT",
+      "SUBTYPE": "FDT",
+      "ADDRESS": "00123456789077",
+      "RF_ADDRESS": 8072872,
+      "CHILDREN": [
+        "00123456789077:0",
+        "00123456789077:1",
+        "00123456789077:2",
+        "00123456789077:3",
+        "00123456789077:4",
+        "00123456789077:5"
+      ],
+      "PARENT": "",
+      "PARENT_TYPE": "",
+      "INDEX": 0,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "SERVICE"
+      ],
+      "FIRMWARE": "1.4.8",
+      "AVAILABLE_FIRMWARE": "0.0.0",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "UP_TO_DATE",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261325,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00123456789077.0": {
+    "_id": "hm-rpc.1.00123456789077.0",
+    "type": "channel",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0",
+      "enums": [
+        {
+          "_id": "enum.functions.Licht",
+          "common": {
+            "name": "Licht",
+            "smartName": false
+          },
+          "native": {
+            "Name": "Licht",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        },
+        {
+          "_id": "enum.rooms.Wohnzimmer",
+          "common": {
+            "name": "Wohnzimmer",
+            "desc": "",
+            "smartName": false
+          },
+          "native": {
+            "Name": "Wohnzimmer",
+            "TypeName": "ENUM",
+            "EnumInfo": ""
+          },
+          "type": "enum"
+        }
+      ]
+    },
+    "native": {
+      "TYPE": "MAINTENANCE",
+      "SUBTYPE": "",
+      "ADDRESS": "00123456789077:0",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00123456789077",
+      "PARENT_TYPE": "HmIP-FDT",
+      "INDEX": 0,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261330,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00123456789077.0.ACTUAL_TEMPERATURE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.ACTUAL_TEMPERATURE",
+      "role": "value.temperature",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -3276.8,
+      "max": 3276.7,
+      "unit": "°C"
+    },
+    "native": {
+      "MIN": -3276.8,
+      "UNIT": "�C",
+      "OPERATIONS": 5,
+      "MAX": 3276.7,
+      "FLAGS": 1,
+      "ID": "ACTUAL_TEMPERATURE",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "MAINTENANCE.ACTUAL_TEMPERATURE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261417,
+    "_id": "hm-rpc.1.00123456789077.0.ACTUAL_TEMPERATURE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.ACTUAL_TEMPERATURE_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.ACTUAL_TEMPERATURE_STATUS",
+      "role": "value.status",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNDERFLOW",
+      "FLAGS": 1,
+      "ID": "ACTUAL_TEMPERATURE_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261376,
+    "_id": "hm-rpc.1.00123456789077.0.ACTUAL_TEMPERATURE_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.CONFIG_PENDING": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.CONFIG_PENDING",
+      "role": "indicator",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "CONFIG_PENDING",
+      "TYPE": "BOOL",
+      "DEFAULT": false,
+      "CONTROL": "MAINTENANCE.CONFIG_PENDING"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261336,
+    "_id": "hm-rpc.1.00123456789077.0.CONFIG_PENDING",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.DUTY_CYCLE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.DUTY_CYCLE",
+      "role": "value.dutycycle",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 1,
+      "ID": "DUTY_CYCLE",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261342,
+    "_id": "hm-rpc.1.00123456789077.0.DUTY_CYCLE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.ERROR_CODE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.ERROR_CODE",
+      "role": "value.error",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 255
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 255,
+      "FLAGS": 9,
+      "ID": "ERROR_CODE",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0,
+      "CONTROL": "MAINTENANCE.ERROR_CODE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261394,
+    "_id": "hm-rpc.1.00123456789077.0.ERROR_CODE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.ERROR_OVERHEAT": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.ERROR_OVERHEAT",
+      "role": "indicator.error.overheat",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "ERROR_OVERHEAT",
+      "TYPE": "BOOL",
+      "DEFAULT": false,
+      "CONTROL": "MAINTENANCE.ERROR_OVERHEAT"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261354,
+    "_id": "hm-rpc.1.00123456789077.0.ERROR_OVERHEAT",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.ERROR_OVERLOAD": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.ERROR_OVERLOAD",
+      "role": "indicator.error.overload",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "ERROR_OVERLOAD",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261388,
+    "_id": "hm-rpc.1.00123456789077.0.ERROR_OVERLOAD",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.ERROR_UPDATE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.ERROR_UPDATE",
+      "role": "",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "ERROR_UPDATE",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261370,
+    "_id": "hm-rpc.1.00123456789077.0.ERROR_UPDATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.INSTALL_TEST": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.INSTALL_TEST",
+      "role": "indicator",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": true
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 3,
+      "MAX": true,
+      "FLAGS": 2,
+      "ID": "INSTALL_TEST",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261348,
+    "_id": "hm-rpc.1.00123456789077.0.INSTALL_TEST",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.OPERATING_VOLTAGE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.OPERATING_VOLTAGE",
+      "role": "value.voltage",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 25.2,
+      "unit": "V"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "V",
+      "OPERATIONS": 5,
+      "MAX": 25.2,
+      "FLAGS": 1,
+      "ID": "OPERATING_VOLTAGE",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "MAINTENANCE.OPERATING_VOLTAGE"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261431,
+    "_id": "hm-rpc.1.00123456789077.0.OPERATING_VOLTAGE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.OPERATING_VOLTAGE_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.OPERATING_VOLTAGE_STATUS",
+      "role": "value.voltage.status",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "EXTERNAL"
+      },
+      "smartName": false
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "EXTERNAL",
+      "FLAGS": 1,
+      "ID": "OPERATING_VOLTAGE_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "EXTERNAL"
+      ],
+      "CONTROL": "MAINTENANCE.OPERATING_VOLTAGE_STATUS"
+    },
+    "_id": "hm-rpc.1.00123456789077.0.OPERATING_VOLTAGE_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1761029895324,
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.RSSI_DEVICE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.RSSI_DEVICE",
+      "role": "value.rssi",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -128,
+      "max": 128,
+      "unit": "dBm"
+    },
+    "native": {
+      "MIN": -128,
+      "OPERATIONS": 5,
+      "MAX": 128,
+      "FLAGS": 1,
+      "ID": "RSSI_DEVICE",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261411,
+    "_id": "hm-rpc.1.00123456789077.0.RSSI_DEVICE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": -65,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.RSSI_PEER": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.RSSI_PEER",
+      "role": "value.rssi",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": -128,
+      "max": 127,
+      "unit": "dBm"
+    },
+    "native": {
+      "MIN": -128,
+      "OPERATIONS": 5,
+      "MAX": 127,
+      "FLAGS": 1,
+      "ID": "RSSI_PEER",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261381,
+    "_id": "hm-rpc.1.00123456789077.0.RSSI_PEER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": -63,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.UNREACH": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.UNREACH",
+      "role": "indicator.unreach",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 25,
+      "ID": "UNREACH",
+      "TYPE": "BOOL",
+      "DEFAULT": false,
+      "CONTROL": "MAINTENANCE.UNREACH"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261406,
+    "_id": "hm-rpc.1.00123456789077.0.UNREACH",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.0.UPDATE_PENDING": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:0.UPDATE_PENDING",
+      "role": "indicator",
+      "def": false,
+      "type": "boolean",
+      "read": true,
+      "write": false
+    },
+    "native": {
+      "MIN": false,
+      "OPERATIONS": 5,
+      "MAX": true,
+      "FLAGS": 9,
+      "ID": "UPDATE_PENDING",
+      "TYPE": "BOOL",
+      "DEFAULT": false
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261400,
+    "_id": "hm-rpc.1.00123456789077.0.UPDATE_PENDING",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.1": {
+    "_id": "hm-rpc.1.00123456789077.1",
+    "type": "channel",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:1"
+    },
+    "native": {
+      "TYPE": "DIMMER_TRANSMITTER",
+      "SUBTYPE": "",
+      "ADDRESS": "00123456789077:1",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00123456789077",
+      "PARENT_TYPE": "HmIP-FDT",
+      "INDEX": 1,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261437,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00123456789077.1.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:1.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261483,
+    "_id": "hm-rpc.1.00123456789077.1.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.1.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:1.LEVEL",
+      "role": "level",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 100,
+      "unit": "%"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 5,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "DIMMER_REAL.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261468,
+    "_id": "hm-rpc.1.00123456789077.1.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.1.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:1.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261458,
+    "_id": "hm-rpc.1.00123456789077.1.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.1.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:1.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261463,
+    "_id": "hm-rpc.1.00123456789077.1.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.1.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:1.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261477,
+    "_id": "hm-rpc.1.00123456789077.1.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.1.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:1.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261441,
+    "_id": "hm-rpc.1.00123456789077.1.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 1,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2": {
+    "_id": "hm-rpc.1.00123456789077.2",
+    "type": "channel",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2"
+    },
+    "native": {
+      "TYPE": "DIMMER_VIRTUAL_RECEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00123456789077:2",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00123456789077",
+      "PARENT_TYPE": "HmIP-FDT",
+      "INDEX": 2,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "REMOTE_CONTROL CONDITIONAL_SWITCH SWITCH LEVEL",
+      "DIRECTION": 2,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261489,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00123456789077.2.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261538,
+    "_id": "hm-rpc.1.00123456789077.2.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 3,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.COMBINED_PARAMETER": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.COMBINED_PARAMETER",
+      "role": "",
+      "def": "",
+      "type": "string",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": "",
+      "OPERATIONS": 2,
+      "MAX": "",
+      "FLAGS": 1,
+      "ID": "COMBINED_PARAMETER",
+      "TYPE": "STRING",
+      "DEFAULT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261503,
+    "_id": "hm-rpc.1.00123456789077.2.COMBINED_PARAMETER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.LEVEL",
+      "role": "level.dimmer",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "smartName": {
+        "de": "Licht Sofa"
+      }
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "DIMMER.LEVEL"
+    },
+    "_id": "hm-rpc.1.00123456789077.2.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1761029807544,
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261508,
+    "_id": "hm-rpc.1.00123456789077.2.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.ON_TIME": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.ON_TIME",
+      "role": "timer.off",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 8580000,
+      "unit": "s"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "s",
+      "OPERATIONS": 2,
+      "MAX": 8580000,
+      "FLAGS": 1,
+      "ID": "ON_TIME",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261512,
+    "_id": "hm-rpc.1.00123456789077.2.ON_TIME",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261517,
+    "_id": "hm-rpc.1.00123456789077.2.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.RAMP_TIME": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.RAMP_TIME",
+      "role": "timer.ramp",
+      "def": 0.5,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 8580000,
+      "unit": "s"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "s",
+      "OPERATIONS": 2,
+      "MAX": 8580000,
+      "FLAGS": 1,
+      "ID": "RAMP_TIME",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0.5
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261522,
+    "_id": "hm-rpc.1.00123456789077.2.RAMP_TIME",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0.5,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261532,
+    "_id": "hm-rpc.1.00123456789077.2.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.2.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:2.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261494,
+    "_id": "hm-rpc.1.00123456789077.2.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3": {
+    "_id": "hm-rpc.1.00123456789077.3",
+    "type": "channel",
+    "common": {
+      "name": "00123456789077:3"
+    },
+    "native": {
+      "TYPE": "DIMMER_VIRTUAL_RECEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00123456789077:3",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00123456789077",
+      "PARENT_TYPE": "HmIP-FDT",
+      "INDEX": 3,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "REMOTE_CONTROL CONDITIONAL_SWITCH SWITCH LEVEL",
+      "DIRECTION": 2,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rpc.1",
+    "user": "system.user.admin",
+    "ts": 1760966259337,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00123456789077.3.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261582,
+    "_id": "hm-rpc.1.00123456789077.3.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 3,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.COMBINED_PARAMETER": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.COMBINED_PARAMETER",
+      "role": "",
+      "def": "",
+      "type": "string",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": "",
+      "OPERATIONS": 2,
+      "MAX": "",
+      "FLAGS": 1,
+      "ID": "COMBINED_PARAMETER",
+      "TYPE": "STRING",
+      "DEFAULT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261549,
+    "_id": "hm-rpc.1.00123456789077.3.COMBINED_PARAMETER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.LEVEL",
+      "role": "level.dimmer",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "DIMMER.LEVEL"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261573,
+    "_id": "hm-rpc.1.00123456789077.3.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261553,
+    "_id": "hm-rpc.1.00123456789077.3.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.ON_TIME": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.ON_TIME",
+      "role": "timer.off",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 8580000,
+      "unit": "s"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "s",
+      "OPERATIONS": 2,
+      "MAX": 8580000,
+      "FLAGS": 1,
+      "ID": "ON_TIME",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261558,
+    "_id": "hm-rpc.1.00123456789077.3.ON_TIME",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261564,
+    "_id": "hm-rpc.1.00123456789077.3.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.RAMP_TIME": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.RAMP_TIME",
+      "role": "timer.ramp",
+      "def": 0.5,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 8580000,
+      "unit": "s"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "s",
+      "OPERATIONS": 2,
+      "MAX": 8580000,
+      "FLAGS": 1,
+      "ID": "RAMP_TIME",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0.5
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261568,
+    "_id": "hm-rpc.1.00123456789077.3.RAMP_TIME",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0.5,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261578,
+    "_id": "hm-rpc.1.00123456789077.3.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.3.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:3.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261543,
+    "_id": "hm-rpc.1.00123456789077.3.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4": {
+    "_id": "hm-rpc.1.00123456789077.4",
+    "type": "channel",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4"
+    },
+    "native": {
+      "TYPE": "DIMMER_VIRTUAL_RECEIVER",
+      "SUBTYPE": "",
+      "ADDRESS": "00123456789077:4",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00123456789077",
+      "PARENT_TYPE": "HmIP-FDT",
+      "INDEX": 4,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "REMOTE_CONTROL CONDITIONAL_SWITCH SWITCH LEVEL",
+      "DIRECTION": 2,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261587,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00123456789077.4.ACTIVITY_STATE": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.ACTIVITY_STATE",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 3,
+      "states": {
+        "0": "UNKNOWN",
+        "1": "UP",
+        "2": "DOWN",
+        "3": "STABLE"
+      }
+    },
+    "native": {
+      "MIN": "UNKNOWN",
+      "OPERATIONS": 5,
+      "MAX": "STABLE",
+      "FLAGS": 1,
+      "ID": "ACTIVITY_STATE",
+      "TYPE": "ENUM",
+      "DEFAULT": "UNKNOWN",
+      "VALUE_LIST": [
+        "UNKNOWN",
+        "UP",
+        "DOWN",
+        "STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261635,
+    "_id": "hm-rpc.1.00123456789077.4.ACTIVITY_STATE",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 3,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.COMBINED_PARAMETER": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.COMBINED_PARAMETER",
+      "role": "",
+      "def": "",
+      "type": "string",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": "",
+      "OPERATIONS": 2,
+      "MAX": "",
+      "FLAGS": 1,
+      "ID": "COMBINED_PARAMETER",
+      "TYPE": "STRING",
+      "DEFAULT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261597,
+    "_id": "hm-rpc.1.00123456789077.4.COMBINED_PARAMETER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.LEVEL": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.LEVEL",
+      "role": "level.dimmer",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "smartName": false
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "100%",
+      "OPERATIONS": 7,
+      "MAX": 1.01,
+      "FLAGS": 1,
+      "ID": "LEVEL",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0,
+      "CONTROL": "DIMMER.LEVEL"
+    },
+    "_id": "hm-rpc.1.00123456789077.4.LEVEL",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1760968474119,
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.LEVEL_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.LEVEL_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 4,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN",
+        "2": "OVERFLOW",
+        "3": "UNDERFLOW",
+        "4": "ERROR"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "ERROR",
+      "FLAGS": 1,
+      "ID": "LEVEL_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN",
+        "OVERFLOW",
+        "UNDERFLOW",
+        "ERROR"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261601,
+    "_id": "hm-rpc.1.00123456789077.4.LEVEL_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.ON_TIME": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.ON_TIME",
+      "role": "timer.off",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 8580000,
+      "unit": "s"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "s",
+      "OPERATIONS": 2,
+      "MAX": 8580000,
+      "FLAGS": 1,
+      "ID": "ON_TIME",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261606,
+    "_id": "hm-rpc.1.00123456789077.4.ON_TIME",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.PROCESS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.PROCESS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "STABLE",
+        "1": "NOT_STABLE"
+      }
+    },
+    "native": {
+      "MIN": "STABLE",
+      "OPERATIONS": 5,
+      "MAX": "NOT_STABLE",
+      "FLAGS": 1,
+      "ID": "PROCESS",
+      "TYPE": "ENUM",
+      "DEFAULT": "STABLE",
+      "VALUE_LIST": [
+        "STABLE",
+        "NOT_STABLE"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261612,
+    "_id": "hm-rpc.1.00123456789077.4.PROCESS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.RAMP_TIME": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.RAMP_TIME",
+      "role": "timer.ramp",
+      "def": 0.5,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 8580000,
+      "unit": "s"
+    },
+    "native": {
+      "MIN": 0,
+      "UNIT": "s",
+      "OPERATIONS": 2,
+      "MAX": 8580000,
+      "FLAGS": 1,
+      "ID": "RAMP_TIME",
+      "TYPE": "FLOAT",
+      "DEFAULT": 0.5
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261617,
+    "_id": "hm-rpc.1.00123456789077.4.RAMP_TIME",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0.5,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.SECTION": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.SECTION",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 15
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 15,
+      "FLAGS": 1,
+      "ID": "SECTION",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261629,
+    "_id": "hm-rpc.1.00123456789077.4.SECTION",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.4.SECTION_STATUS": {
+    "type": "state",
+    "common": {
+      "name": "Dimmaktor WZ Sofa:4.SECTION_STATUS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 1,
+      "states": {
+        "0": "NORMAL",
+        "1": "UNKNOWN"
+      }
+    },
+    "native": {
+      "MIN": "NORMAL",
+      "OPERATIONS": 5,
+      "MAX": "UNKNOWN",
+      "FLAGS": 1,
+      "ID": "SECTION_STATUS",
+      "TYPE": "ENUM",
+      "DEFAULT": "NORMAL",
+      "VALUE_LIST": [
+        "NORMAL",
+        "UNKNOWN"
+      ]
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261591,
+    "_id": "hm-rpc.1.00123456789077.4.SECTION_STATUS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.5": {
+    "_id": "hm-rpc.1.00123456789077.5",
+    "type": "channel",
+    "common": {
+      "name": "00123456789077:5"
+    },
+    "native": {
+      "TYPE": "DIMMER_WEEK_PROFILE",
+      "SUBTYPE": "",
+      "ADDRESS": "00123456789077:5",
+      "RF_ADDRESS": 0,
+      "CHILDREN": [],
+      "PARENT": "00123456789077",
+      "PARENT_TYPE": "HmIP-FDT",
+      "INDEX": 5,
+      "AES_ACTIVE": 1,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "SERVICE"
+      ],
+      "FIRMWARE": "",
+      "AVAILABLE_FIRMWARE": "",
+      "UPDATABLE": true,
+      "FIRMWARE_UPDATE_STATE": "",
+      "VERSION": 2,
+      "FLAGS": 1,
+      "LINK_SOURCE_ROLES": "",
+      "LINK_TARGET_ROLES": "",
+      "DIRECTION": 0,
+      "GROUP": "",
+      "TEAM": "",
+      "TEAM_TAG": "",
+      "TEAM_CHANNELS": [],
+      "INTERFACE": "",
+      "ROAMING": 0,
+      "RX_MODE": 0
+    },
+    "from": "system.adapter.hm-rpc.1",
+    "user": "system.user.admin",
+    "ts": 1760966259344,
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "hm-rpc.1.00123456789077.5.COMBINED_PARAMETER": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:5.COMBINED_PARAMETER",
+      "role": "",
+      "def": "",
+      "type": "string",
+      "read": false,
+      "write": true
+    },
+    "native": {
+      "MIN": "",
+      "OPERATIONS": 2,
+      "MAX": "",
+      "FLAGS": 1,
+      "ID": "COMBINED_PARAMETER",
+      "TYPE": "STRING",
+      "DEFAULT": ""
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261643,
+    "_id": "hm-rpc.1.00123456789077.5.COMBINED_PARAMETER",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.5.WEEK_PROGRAM_CHANNEL_LOCKS": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:5.WEEK_PROGRAM_CHANNEL_LOCKS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 16777215
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 5,
+      "MAX": 16777215,
+      "FLAGS": 1,
+      "ID": "WEEK_PROGRAM_CHANNEL_LOCKS",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0,
+      "CONTROL": "WEEK_PROFILE.CHANNEL_LOCKS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261660,
+    "_id": "hm-rpc.1.00123456789077.5.WEEK_PROGRAM_CHANNEL_LOCKS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.5.WEEK_PROGRAM_TARGET_CHANNEL_LOCK": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:5.WEEK_PROGRAM_TARGET_CHANNEL_LOCK",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 2,
+      "states": {
+        "0": "MANU_MODE",
+        "1": "AUTO_MODE_WITH_RESET",
+        "2": "AUTO_MODE_WITHOUT_RESET"
+      }
+    },
+    "native": {
+      "MIN": "MANU_MODE",
+      "OPERATIONS": 2,
+      "MAX": "AUTO_MODE_WITHOUT_RESET",
+      "FLAGS": 1,
+      "ID": "WEEK_PROGRAM_TARGET_CHANNEL_LOCK",
+      "TYPE": "ENUM",
+      "DEFAULT": "MANU_MODE",
+      "VALUE_LIST": [
+        "MANU_MODE",
+        "AUTO_MODE_WITH_RESET",
+        "AUTO_MODE_WITHOUT_RESET"
+      ],
+      "CONTROL": "WEEK_PROFILE.TARGET_CHANNEL_LOCK"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261650,
+    "_id": "hm-rpc.1.00123456789077.5.WEEK_PROGRAM_TARGET_CHANNEL_LOCK",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "hm-rpc.1.00123456789077.5.WEEK_PROGRAM_TARGET_CHANNEL_LOCKS": {
+    "type": "state",
+    "common": {
+      "name": "00123456789077:5.WEEK_PROGRAM_TARGET_CHANNEL_LOCKS",
+      "role": "",
+      "def": 0,
+      "type": "number",
+      "read": false,
+      "write": true,
+      "min": 0,
+      "max": 16777215
+    },
+    "native": {
+      "MIN": 0,
+      "OPERATIONS": 2,
+      "MAX": 16777215,
+      "FLAGS": 1,
+      "ID": "WEEK_PROGRAM_TARGET_CHANNEL_LOCKS",
+      "TYPE": "INTEGER",
+      "DEFAULT": 0,
+      "CONTROL": "WEEK_PROFILE.TARGET_CHANNEL_LOCKS"
+    },
+    "from": "system.adapter.hm-rega.0",
+    "user": "system.user.admin",
+    "ts": 1760966261655,
+    "_id": "hm-rpc.1.00123456789077.5.WEEK_PROGRAM_TARGET_CHANNEL_LOCKS",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  }
+}

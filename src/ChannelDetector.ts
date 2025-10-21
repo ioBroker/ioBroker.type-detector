@@ -384,7 +384,11 @@ export class ChannelDetector {
     /**
      * Tries to find a device or channel (as fallback) where the state is in
      */
-    private static findParentChannelOrDevice(objects: Record<string, ioBroker.Object>, id: string): string | undefined {
+    private static findParentChannelOrDevice(
+        objects: Record<string, ioBroker.Object>,
+        id: string,
+        onlyChannel?: boolean,
+    ): string | undefined {
         if (!objects[id]) {
             // Object does not exist
             return;
@@ -403,9 +407,12 @@ export class ChannelDetector {
         }
 
         const obj = objects[id];
-        if (obj?.type === 'device') {
+        if (obj?.type === 'device' || (onlyChannel && obj?.type === 'channel')) {
             // We found a device object, use this
             return id;
+        }
+        if (onlyChannel) {
+            return undefined;
         }
         parts.pop();
         const upperLevelObjectId = parts.join('.');
@@ -440,6 +447,7 @@ export class ChannelDetector {
         id: string,
         keys: string[],
         checkParent = false,
+        checkOnlyInSameChannel = false,
     ): string[] {
         const type = objects[id]?.type;
         switch (type) {
@@ -456,6 +464,9 @@ export class ChannelDetector {
                 }
                 if (type !== 'state') {
                     return [...getObjectsBelowId(keys, id)];
+                } else if (checkOnlyInSameChannel) {
+                    const foundId = ChannelDetector.findParentChannelOrDevice(objects, id, true);
+                    return foundId && foundId !== id ? [...getObjectsBelowId(keys, foundId)] : [id];
                 }
                 return [id];
 
@@ -548,6 +559,7 @@ export class ChannelDetector {
             ignoreIndicators,
             prioritizedTypes,
             detectParent,
+            detectOnlyChannel,
             allowedTypes,
             excludedTypes,
             _keysOptional, // sorted keys
@@ -556,7 +568,13 @@ export class ChannelDetector {
 
         options._usedIdsOptional = usedIds;
 
-        const channelStates = ChannelDetector.getChannelOrDeviceStates(objects, id, _keysOptional || [], detectParent);
+        const channelStates = ChannelDetector.getChannelOrDeviceStates(
+            objects,
+            id,
+            _keysOptional || [],
+            detectParent,
+            detectOnlyChannel,
+        );
 
         // We have no ID for that object and also no objects below, so skip it
         if (!objects[id]?.common && !channelStates.length) {
@@ -584,6 +602,19 @@ export class ChannelDetector {
             sortedKeys: _keysOptional!,
             favorId: options.detectParent ? undefined : id,
         };
+
+        // We have a problem that if the device has RGB and HUE, the RGB wins.
+        // Detect if the favorId object is hue, prefer hue before RGB
+        if (context.favorId && context.objects[context.favorId]?.common?.role?.includes('.hue')) {
+            _patternList = [..._patternList];
+            const posHue = _patternList.indexOf(Types.hue);
+            const posRgb = _patternList.indexOf(Types.rgb);
+            if (posHue !== -1 && posRgb !== -1 && posRgb < posHue) {
+                // place hue before rgb
+                _patternList.splice(posHue, 1);
+                _patternList.splice(posRgb, 0, Types.hue);
+            }
+        }
 
         const currentType = objects[id]?.type;
         for (const pattern of _patternList) {
