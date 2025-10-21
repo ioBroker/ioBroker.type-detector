@@ -1090,7 +1090,8 @@ describe(`${name} Test Detector`, () => {
         const controls = detect(objects, {
             id: 'hue.0.Hue_Küche_Küchezeile.hue',
             ignoreEnums: true,
-            detectOnlyChannel: true
+            detectOnlyChannel: true,
+            prioritizedTypes: [[Types.hue, Types.rgb]],
         });
         const states = controls[0].states.filter(s => !!s.id);
         expect(states.length).to.be.equal(5, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
