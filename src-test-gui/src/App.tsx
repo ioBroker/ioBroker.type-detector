@@ -48,11 +48,24 @@ const getTheme = (mode: 'light' | 'dark'): Theme =>
         },
     });
 
+const getSystemTheme = (): 'light' | 'dark' =>
+    typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+
+function getParent(id: string): string {
+    const parts = id.split('.');
+    parts.pop();
+    return parts.join('.');
+}
+
 export default class App extends Component<object, AppState> {
     constructor(props: any) {
         super(props);
 
-        const initialMode: 'light' | 'dark' = 'light';
+        const savedTheme = window.localStorage.getItem('themeType') as 'light' | 'dark' | null;
+        const initialMode: 'light' | 'dark' =
+            savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : getSystemTheme();
 
         this.state = {
             json: window.localStorage.getItem('json') || '',
@@ -106,12 +119,22 @@ export default class App extends Component<object, AppState> {
                 this.setState({ error: 'Invalid JSON structure' });
                 return;
             }
-            this.setState({ ids: Object.keys(objects), objects }, () => {
+            this.setState({ ids: Object.keys(objects), objects, error: '' }, () => {
                 if (this.state.selectedId && objects[this.state.selectedId]) {
+                    // If upper Device is not a channel remove detectOnlyChannel flag
+                    const options: DetectOptions = JSON.parse(JSON.stringify(this.state.options));
+                    if (
+                        this.state.objects[getParent(this.state.selectedId)]?.type !== 'channel' &&
+                        this.state.objects[getParent(this.state.selectedId)]?.type !== 'device'
+                    ) {
+                        options.detectOnlyChannel = false;
+                    } else {
+                        options.detectOnlyChannel = true;
+                    }
+
                     try {
                         const detector = new ChannelDetector();
 
-                        const options: DetectOptions = JSON.parse(JSON.stringify(this.state.options));
                         options.objects = objects;
                         options.id = this.state.selectedId;
 
@@ -145,12 +168,14 @@ export default class App extends Component<object, AppState> {
                 key={index}
                 style={{ marginBottom: '1rem' }}
             >
-                <div style={{ background: '#ccc', padding: '0.5rem', fontWeight: 'bold' }}>
+                <div
+                    style={{ background: this.state.theme.palette.primary.main, padding: '0.5rem', fontWeight: 'bold' }}
+                >
                     <strong>Type:</strong> {control.type}
                 </div>
                 <div>
                     <Table size="small">
-                        <TableHead style={{ background: '#eee' }}>
+                        <TableHead style={{ background: this.state.theme.palette.action.hover }}>
                             <TableRow>
                                 <TableCell>Name</TableCell>
                                 <TableCell>ID</TableCell>
@@ -211,7 +236,7 @@ export default class App extends Component<object, AppState> {
                         </AppBar>
                         <div
                             style={{
-                                padding: 10,
+                                padding: '0 10px 10px 10px',
                                 height: 'calc(100% - 48px)',
                                 overflow: 'auto',
                                 background: this.state.theme.palette.background.default,
