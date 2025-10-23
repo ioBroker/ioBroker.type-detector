@@ -1106,4 +1106,26 @@ describe(`${name} Test Detector`, () => {
 
         done();
     });
+
+    it.only('Must detect Shelly Dimmer as dimmer', done => {
+        const objects = require('./shelly-dimmer.json');
+
+        const controls = detect(objects, {
+            id: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
+            ignoreEnums: true,
+            detectOnlyChannel: true,
+            detectAllPossibleDevices: true,
+        });
+        const states = controls[0].states.filter(s => !!s.id);
+        expect(states.length).to.be.equal(4, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
+
+        validate(controls[0], Types.dimmer, {
+            SET: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
+            ON_SET: 'shelly.0.SHDM-2#081234567896#1.lights.Switch',
+            ELECTRIC_POWER: 'shelly.0.SHDM-2#081234567896#1.lights.Power',
+            CONSUMPTION: 'shelly.0.SHDM-2#081234567896#1.lights.Energy',
+        });
+
+        done();
+    });
 });

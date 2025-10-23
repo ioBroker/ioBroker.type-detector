@@ -10,7 +10,6 @@ export default [
                 },
                 tsconfigRootDir: import.meta.dirname,
                 project: './tsconfig.json',
-                // projectService: true,
             },
         },
     },
@@ -19,14 +18,10 @@ export default [
         rules: {
             'jsdoc/require-jsdoc': 'off',
             'jsdoc/require-param': 'off',
+            'jsdoc/check-param-names': 'off',
         },
     },
     {
-        ignores: [
-            'build/**/*',
-            'src-test-gui/build/**/*',
-            'src-test-gui/node_modules/**/*',
-            '**/*.mjs',
-        ],
+        ignores: ['build/**/*', 'node_modules/**/*', '**/*.mjs', '**/*.jsx'],
     },
 ];

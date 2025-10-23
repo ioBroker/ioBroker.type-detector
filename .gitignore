@@ -2,3 +2,4 @@
 /node_modules
 /.idea
 build/
+src-test-gui/node_modules/

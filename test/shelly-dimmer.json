@@ -1,0 +1,1693 @@
+{
+  "shelly.0.SHDM-2#081234567896#1": {
+    "type": "device",
+    "common": {
+      "name": "DimmerKueche",
+      "statusStates": {
+        "onlineId": "shelly.0.SHDM-2#081234567896#1.online"
+      },
+      "read": true,
+      "desc": "Gen 1"
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790236,
+    "_id": "shelly.0.SHDM-2#081234567896#1",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.Cloud": {
+    "type": "channel",
+    "common": {
+      "name": "Channel Cloud",
+      "read": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789985,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Cloud",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.Cloud.enabled": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Cloud Connection",
+        "de": "Cloud-Verbindung",
+        "ru": "Облачное соединение",
+        "pt": "Conexão de nuvem",
+        "nl": "Cloud Connection",
+        "fr": "Cloud Connection",
+        "it": "Connessione cloud",
+        "es": "Cloud Connection",
+        "pl": "Cloud Connection",
+        "uk": "Хмарне підключення",
+        "zh-cn": "Cloud Connection"
+      },
+      "type": "boolean",
+      "role": "switch.enable",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790482,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Cloud.enabled",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Mqtt": {
+    "type": "channel",
+    "common": {
+      "name": "Channel Mqtt",
+      "read": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789970,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Mqtt",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.Mqtt.clientId": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Client ID",
+        "de": "Client-ID",
+        "ru": "ID клиента",
+        "pt": "ID do cliente",
+        "nl": "Cliënt ID",
+        "fr": "ID client",
+        "it": "ID cliente",
+        "es": "ID de cliente",
+        "pl": "Klient Ident",
+        "uk": "Клієнт",
+        "zh-cn": "客户"
+      },
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790722,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Mqtt.clientId",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "shellydimmer2-081234567896",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Mqtt.topicPrefix": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Topic prefix",
+        "de": "Thema Präfix",
+        "ru": "Тема префикса",
+        "pt": "Prefixo de tópico",
+        "nl": "Onderwerp voorvoegsel",
+        "fr": "Préfixe du sujet",
+        "it": "Prefisso tematico",
+        "es": "Prefijo temático",
+        "pl": "Przedrostek",
+        "uk": "Тема префікса",
+        "zh-cn": "主题前"
+      },
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790714,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Mqtt.topicPrefix",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "shellydimmer2-081234567896",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Sys": {
+    "type": "channel",
+    "common": {
+      "name": "Channel Sys",
+      "read": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789993,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Sys",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.Sys.deviceMode": {
+    "type": "state",
+    "common": {
+      "name": "Mode",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "states": {
+        "color": "color",
+        "white": "white"
+      }
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790722,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Sys.deviceMode",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "white",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Sys.eco": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Eco Mode",
+        "de": "Eco-Modus",
+        "ru": "Эко режим",
+        "pt": "Modo Eco",
+        "nl": "Eco Mode",
+        "fr": "Eco Mode",
+        "it": "Modalità Eco",
+        "es": "Eco Mode",
+        "pl": "Eko",
+        "uk": "Еко режим",
+        "zh-cn": "Eco Mode"
+      },
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790693,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Sys.eco",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Sys.lat": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Latitude",
+        "de": "Breite",
+        "ru": "Широта",
+        "pt": "Latitude",
+        "nl": "Latitude",
+        "fr": "Latitude",
+        "it": "Latitudine",
+        "es": "Latitud",
+        "pl": "Latitudes",
+        "uk": "Прованс",
+        "zh-cn": "学历"
+      },
+      "type": "number",
+      "role": "value.gps.latitude",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790705,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Sys.lat",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 51.546299,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Sys.lon": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Longitude",
+        "de": "Länge",
+        "ru": "Долгота",
+        "pt": "Longitude",
+        "nl": "Longit",
+        "fr": "Longitude",
+        "it": "Longitudine",
+        "es": "Longitud",
+        "pl": "Długość",
+        "uk": "Довгий",
+        "zh-cn": "长 度"
+      },
+      "type": "number",
+      "role": "value.gps.longitude",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790713,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Sys.lon",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 6.596,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Sys.sntp": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "SNTP Server",
+        "de": "SNTP Server",
+        "ru": "SNTP сервер",
+        "pt": "Servidor SNTP",
+        "nl": "SNTP",
+        "fr": "SNTP Server",
+        "it": "Server SNTP",
+        "es": "SNTP Server",
+        "pl": "SNTP Server",
+        "uk": "Статус на сервери",
+        "zh-cn": "SNTP Server"
+      },
+      "type": "string",
+      "role": "text.url",
+      "read": true,
+      "write": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790694,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Sys.sntp",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "time.google.com",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.Sys.timezone": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Timezone",
+        "de": "Zeitzone",
+        "ru": "Часовой пояс",
+        "pt": "Fuso horário",
+        "nl": "Tijdzone",
+        "fr": "Timezone",
+        "it": "Tempo",
+        "es": "Zona horaria",
+        "pl": "Timezone",
+        "uk": "Часовий пояс",
+        "zh-cn": "时间区"
+      },
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790704,
+    "_id": "shelly.0.SHDM-2#081234567896#1.Sys.timezone",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "Europe/Berlin",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.authEnabled": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Authentication enabled",
+        "de": "Authentication aktiviert",
+        "ru": "Аутентификация включена",
+        "pt": "Autenticação activada",
+        "nl": "Authenticatie in staat",
+        "fr": "Authentification activée",
+        "it": "Autenticazione abilitata",
+        "es": "Autenticación habilitada",
+        "pl": "Authenticacja umożliwiła",
+        "uk": "Увімкнення аутентифікації",
+        "zh-cn": "逮捕使"
+      },
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTQ0IDE0NGMwLTQ0LjIgMzUuOC04MCA4MC04MGMzMS45IDAgNTkuNCAxOC42IDcyLjMgNDUuN2M3LjYgMTYgMjYuNyAyMi44IDQyLjYgMTUuMnMyMi44LTI2LjcgMTUuMi00Mi42QzMzMSAzMy43IDI4MS41IDAgMjI0IDBDMTQ0LjUgMCA4MCA2NC41IDgwIDE0NHY0OEg2NGMtMzUuMyAwLTY0IDI4LjctNjQgNjRWNDQ4YzAgMzUuMyAyOC43IDY0IDY0IDY0SDM4NGMzNS4zIDAgNjQtMjguNyA2NC02NFYyNTZjMC0zNS4zLTI4LjctNjQtNjQtNjRIMTQ0VjE0NHoiLz48L3N2Zz4="
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790635,
+    "_id": "shelly.0.SHDM-2#081234567896#1.authEnabled",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.class": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device class",
+        "de": "Geräteklasse",
+        "ru": "Класс устройства",
+        "pt": "Classe de dispositivo",
+        "nl": "Device klas",
+        "fr": "Classe d' appareil",
+        "it": "Classe di dispositivo",
+        "es": "Clase de dispositivo",
+        "pl": "Klasa Device",
+        "uk": "Клас пристрою",
+        "zh-cn": "证人阶级"
+      },
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789817,
+    "_id": "shelly.0.SHDM-2#081234567896#1.class",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "shellydimmer2",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.factoryResetFromSwitch": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Factory reset by switch",
+        "de": "Werkseinstellungen durch Schalter",
+        "ru": "Сброс завода с помощью переключателя",
+        "pt": "Restauração de fábrica por interruptor",
+        "nl": "Factorie reset",
+        "fr": "Réinitialisation en usine par interrupteur",
+        "it": "Ripristino della fabbrica tramite interruttore",
+        "es": "Ajuste de fábrica por interruptor",
+        "pl": "Powstań zakładowa",
+        "zh-cn": "转换引起的因素"
+      },
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.factoryResetFromSwitch",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.firmware": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "New firmware available",
+        "de": "Neue Firmware verfügbar",
+        "ru": "Новая прошивка доступна",
+        "pt": "Novo firmware disponível",
+        "nl": "Nieuwe firmaware",
+        "fr": "Nouveau firmware disponible",
+        "it": "Nuovo firmware disponibile",
+        "es": "Nuevo firmware disponible",
+        "pl": "Nowy sprzęt",
+        "uk": "Нова прошивка доступна",
+        "zh-cn": "新的警觉"
+      },
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790457,
+    "_id": "shelly.0.SHDM-2#081234567896#1.firmware",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.firmwareupdate": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Update firmware version",
+        "de": "Firmware-Version aktualisieren",
+        "ru": "Обновление версии прошивки",
+        "pt": "Atualizar versão de firmware",
+        "nl": "Update firmaware",
+        "fr": "Update firmware version",
+        "it": "Versione firmware di aggiornamento",
+        "es": "Actualizar la versión de firmware",
+        "pl": "Oficjalna strona",
+        "uk": "Оновлення версії прошивки",
+        "zh-cn": "最新软件版本"
+      },
+      "type": "boolean",
+      "role": "button",
+      "read": false,
+      "write": true,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTA1LjEgMjAyLjZjNy43LTIxLjggMjAuMi00Mi4zIDM3LjgtNTkuOGM2Mi41LTYyLjUgMTYzLjgtNjIuNSAyMjYuMyAwTDM4Ni4zIDE2MEgzMzZjLTE3LjcgMC0zMiAxNC4zLTMyIDMyczE0LjMgMzIgMzIgMzJINDYzLjVjMCAwIDAgMCAwIDBoLjRjMTcuNyAwIDMyLTE0LjMgMzItMzJWNjRjMC0xNy43LTE0LjMtMzItMzItMzJzLTMyIDE0LjMtMzIgMzJ2NTEuMkw0MTQuNCA5Ny42Yy04Ny41LTg3LjUtMjI5LjMtODcuNS0zMTYuOCAwQzczLjIgMTIyIDU1LjYgMTUwLjcgNDQuOCAxODEuNGMtNS45IDE2LjcgMi45IDM0LjkgMTkuNSA0MC44czM0LjktMi45IDQwLjgtMTkuNXpNMzkgMjg5LjNjLTUgMS41LTkuOCA0LjItMTMuNyA4LjJjLTQgNC02LjcgOC44LTguMSAxNGMtLjMgMS4yLS42IDIuNS0uOCAzLjhjLS4zIDEuNy0uNCAzLjQtLjQgNS4xVjQ0OGMwIDE3LjcgMTQuMyAzMiAzMiAzMnMzMi0xNC4zIDMyLTMyVjM5Ni45bDE3LjYgMTcuNSAwIDBjODcuNSA4Ny40IDIyOS4zIDg3LjQgMzE2LjcgMGMyNC40LTI0LjQgNDIuMS01My4xIDUyLjktODMuN2M1LjktMTYuNy0yLjktMzQuOS0xOS41LTQwLjhzLTM0LjkgMi45LTQwLjggMTkuNWMtNy43IDIxLjgtMjAuMiA0Mi4zLTM3LjggNTkuOGMtNjIuNSA2Mi41LTE2My44IDYyLjUtMjI2LjMgMGwtLjEtLjFMMTI1LjYgMzUySDE3NmMxNy43IDAgMzItMTQuMyAzMi0zMnMtMTQuMy0zMi0zMi0zMkg0OC40Yy0xLjYgMC0zLjIgLjEtNC44IC4zcy0zLjEgLjUtNC42IDF6Ii8+PC9zdmc+"
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789763,
+    "_id": "shelly.0.SHDM-2#081234567896#1.firmwareupdate",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.gen": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device generation",
+        "de": "Gerätegeneration",
+        "ru": "Генерация устройства",
+        "pt": "Geração de dispositivos",
+        "nl": "Vernietigingsgeneratie",
+        "fr": "Production d'appareils",
+        "it": "Generazione di dispositivi",
+        "es": "Generación de dispositivos",
+        "pl": "Pokolenie Device",
+        "uk": "Виробництво",
+        "zh-cn": "代 人"
+      },
+      "type": "number",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "states": {
+        "1": "Generation 1",
+        "2": "Generation 2",
+        "3": "Generation 3",
+        "4": "Generation 4"
+      }
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789707,
+    "_id": "shelly.0.SHDM-2#081234567896#1.gen",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 1,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.hostname": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device IP address or hostname",
+        "de": "Geräte-IP-Adresse oder Hostname",
+        "ru": "IP-адрес устройства или имя хоста",
+        "pt": "Endereço IP do dispositivo ou nome de host",
+        "nl": "IP-adres of gastnaam",
+        "fr": "Adresse IP ou nom d'hôte",
+        "it": "Indirizzo IP del dispositivo o nome host",
+        "es": "Dirección IP o nombre de host",
+        "pl": "Adres IP lub hostname",
+        "uk": "Пристрої IP адреси або ім'я користувача",
+        "zh-cn": "設備 IP 地址或主機名"
+      },
+      "type": "string",
+      "role": "info.ip",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789792,
+    "_id": "shelly.0.SHDM-2#081234567896#1.hostname",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "192.168.2.201",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.id": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device ID",
+        "de": "Gerätekennung",
+        "ru": "ID устройства",
+        "pt": "ID do dispositivo",
+        "nl": "Device ID",
+        "fr": "ID",
+        "it": "ID dispositivo",
+        "es": "ID de dispositivo",
+        "pl": "ID",
+        "uk": "Ідентифікатор пристрою",
+        "zh-cn": "設備ID"
+      },
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789807,
+    "_id": "shelly.0.SHDM-2#081234567896#1.id",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "SHDM-2#081234567896#1",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.knowledgeBaseUrl": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Knowledge base",
+        "de": "Wissensdatenbank",
+        "ru": "База знаний",
+        "pt": "Base de conhecimento",
+        "nl": "Kennisbasis",
+        "fr": "Base de connaissances",
+        "it": "Base di conoscenza",
+        "es": "Base de conocimientos",
+        "pl": "Baza wiedzy",
+        "uk": "База знань",
+        "zh-cn": "知识基础"
+      },
+      "type": "string",
+      "role": "url.blank",
+      "read": true,
+      "write": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMjU2IDUxMmMxNDEuNCAwIDI1Ni0xMTQuNiAyNTYtMjU2UzM5Ny40IDAgMjU2IDBTMCAxMTQuNiAwIDI1NlMxMTQuNiA1MTIgMjU2IDUxMnpNMTY5LjggMTY1LjNjNy45LTIyLjMgMjkuMS0zNy4zIDUyLjgtMzcuM2g1OC4zYzM0LjkgMCA2My4xIDI4LjMgNjMuMSA2My4xYzAgMjIuNi0xMi4xIDQzLjUtMzEuNyA1NC44TDI4MCAyNjQuNGMtLjIgMTMtMTAuOSAyMy42LTI0IDIzLjZjLTEzLjMgMC0yNC0xMC43LTI0LTI0VjI1MC41YzAtOC42IDQuNi0xNi41IDEyLjEtMjAuOGw0NC4zLTI1LjRjNC43LTIuNyA3LjYtNy43IDcuNi0xMy4xYzAtOC40LTYuOC0xNS4xLTE1LjEtMTUuMUgyMjIuNmMtMy40IDAtNi40IDIuMS03LjUgNS4zbC0uNCAxLjJjLTQuNCAxMi41LTE4LjIgMTktMzAuNiAxNC42cy0xOS0xOC4yLTE0LjYtMzAuNmwuNC0xLjJ6TTI4OCAzNTJjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzJzMTQuMy0zMiAzMi0zMnMzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg=="
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789848,
+    "_id": "shelly.0.SHDM-2#081234567896#1.knowledgeBaseUrl",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer-2",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights": {
+    "type": "channel",
+    "common": {
+      "name": "Channel lights",
+      "read": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790208,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights",
+    "acl": {
+      "object": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.AutoTimerOff": {
+    "type": "state",
+    "common": {
+      "name": "Auto Timer Off",
+      "type": "number",
+      "role": "level.timer",
+      "def": 0,
+      "unit": "s",
+      "read": true,
+      "write": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790739,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.AutoTimerOff",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.AutoTimerOn": {
+    "type": "state",
+    "common": {
+      "name": "Auto Timer On",
+      "type": "number",
+      "role": "level.timer",
+      "def": 0,
+      "unit": "s",
+      "read": true,
+      "write": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790739,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.AutoTimerOn",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.ButtonType": {
+    "type": "state",
+    "common": {
+      "name": "Button Type",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": true,
+      "states": {
+        "one_button": "one_button",
+        "dual_button": "dual_button",
+        "toggle": "toggle",
+        "edge": "edge",
+        "detached": "detached",
+        "action": "action"
+      }
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790741,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.ButtonType",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "one_button",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.ChannelName": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Channel name",
+        "de": "Kanalname",
+        "ru": "Имя канала",
+        "pt": "Nome do canal",
+        "nl": "Kanaalnaam",
+        "fr": "Nom du canal",
+        "it": "Nome del canale",
+        "es": "Nombre del canal",
+        "pl": "Channel imię",
+        "zh-cn": "姓名"
+      },
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": true,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNNjQgMEMyOC43IDAgMCAyOC43IDAgNjRWNDQ4YzAgMzUuMyAyOC43IDY0IDY0IDY0SDMyMGMzNS4zIDAgNjQtMjguNyA2NC02NFY0MjguN2MtMi43IDEuMS01LjQgMi04LjIgMi43bC02MC4xIDE1Yy0zIC43LTYgMS4yLTkgMS40Yy0uOSAuMS0xLjggLjItMi43IC4ySDI0MGMtNi4xIDAtMTEuNi0zLjQtMTQuMy04LjhsLTguOC0xNy43Yy0xLjctMy40LTUuMS01LjUtOC44LTUuNXMtNy4yIDIuMS04LjggNS41bC04LjggMTcuN2MtMi45IDUuOS05LjIgOS40LTE1LjcgOC44cy0xMi4xLTUuMS0xMy45LTExLjNMMTQ0IDM4MWwtOS44IDMyLjhjLTYuMSAyMC4zLTI0LjggMzQuMi00NiAzNC4ySDgwYy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2aDguMmM3LjEgMCAxMy4zLTQuNiAxNS4zLTExLjRsMTQuOS00OS41YzMuNC0xMS4zIDEzLjgtMTkuMSAyNS42LTE5LjFzMjIuMiA3LjggMjUuNiAxOS4xbDExLjYgMzguNmM3LjQtNi4yIDE2LjgtOS43IDI2LjgtOS43YzE1LjkgMCAzMC40IDkgMzcuNSAyMy4ybDQuNCA4LjhoOC45Yy0zLjEtOC44LTMuNy0xOC40LTEuNC0yNy44bDE1LTYwLjFjMi44LTExLjMgOC42LTIxLjUgMTYuOC0yOS43TDM4NCAyMDMuNlYxNjBIMjU2Yy0xNy43IDAtMzItMTQuMy0zMi0zMlYwSDY0ek0yNTYgMFYxMjhIMzg0TDI1NiAwek01NDkuOCAxMzkuN2MtMTUuNi0xNS42LTQwLjktMTUuNi01Ni42IDBsLTI5LjQgMjkuNCA3MSA3MSAyOS40LTI5LjRjMTUuNi0xNS42IDE1LjYtNDAuOSAwLTU2LjZsLTE0LjQtMTQuNHpNMzExLjkgMzIxYy00LjEgNC4xLTcgOS4yLTguNCAxNC45bC0xNSA2MC4xYy0xLjQgNS41IC4yIDExLjIgNC4yIDE1LjJzOS43IDUuNiAxNS4yIDQuMmw2MC4xLTE1YzUuNi0xLjQgMTAuOC00LjMgMTQuOS04LjRMNTEyLjEgMjYyLjdsLTcxLTcxTDMxMS45IDMyMXoiLz48L3N2Zz4="
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.ChannelName",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Energy": {
+    "type": "state",
+    "common": {
+      "name": "Energy",
+      "type": "number",
+      "role": "value.power.consumption",
+      "read": true,
+      "write": false,
+      "def": 0,
+      "unit": "Wh"
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790115,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Energy",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 51.67,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Event1": {
+    "type": "state",
+    "common": {
+      "name": "Event",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "states": {
+        "S": "1xShort",
+        "L": "Long"
+      }
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Event1",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Event2": {
+    "type": "state",
+    "common": {
+      "name": "Event",
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "states": {
+        "S": "1xShort",
+        "L": "Long"
+      }
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790784,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Event2",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.EventCount1": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Event count",
+        "de": "Anzahl Ereignisse",
+        "ru": "Количество событий",
+        "pt": "Contagem de eventos",
+        "nl": "De gebeurtenissen tellen",
+        "fr": "Compte de l'événement",
+        "it": "Conteggio eventi",
+        "es": "Conteo de eventos",
+        "pl": "Event",
+        "zh-cn": "活动"
+      },
+      "type": "number",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.EventCount1",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.EventCount2": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Event count",
+        "de": "Anzahl Ereignisse",
+        "ru": "Количество событий",
+        "pt": "Contagem de eventos",
+        "nl": "De gebeurtenissen tellen",
+        "fr": "Compte de l'événement",
+        "it": "Conteggio eventi",
+        "es": "Conteo de eventos",
+        "pl": "Event",
+        "zh-cn": "活动"
+      },
+      "type": "number",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "smartName": {
+        "de": "Anzahl Ereignisse"
+      }
+    },
+    "native": {},
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.EventCount2",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790784,
+    "val": 0,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.FadeRate": {
+    "type": "state",
+    "common": {
+      "name": "Fade Rate",
+      "type": "number",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.FadeRate",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 3,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Input1": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Input mode",
+        "de": "Eingangsmodus",
+        "ru": "Входной режим",
+        "pt": "Modo de entrada",
+        "nl": "Input modus",
+        "fr": "Mode d ' entrée",
+        "it": "Modalità di ingresso",
+        "es": "Modo de entrada",
+        "pl": "Tryb gry",
+        "zh-cn": "投入模式"
+      },
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Input1",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Input2": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Input mode",
+        "de": "Eingangsmodus",
+        "ru": "Входной режим",
+        "pt": "Modo de entrada",
+        "nl": "Input modus",
+        "fr": "Mode d ' entrée",
+        "it": "Modalità di ingresso",
+        "es": "Modo de entrada",
+        "pl": "Tryb gry",
+        "zh-cn": "投入模式"
+      },
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Input2",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.MinBrightness": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Minimum Brightness",
+        "de": "Mindesthelligkeit",
+        "ru": "Минимальная яркость",
+        "pt": "Brilho mínimo",
+        "nl": "Minimale helderheid",
+        "fr": "Luminosité minimale",
+        "it": "Minimo splendore",
+        "es": "Brillo mínimo",
+        "pl": "Minimalna jasność",
+        "uk": "Мінімальна яскравість",
+        "zh-cn": "最小亮度"
+      },
+      "type": "number",
+      "role": "level.brightness",
+      "read": true,
+      "write": false,
+      "min": 0,
+      "max": 100,
+      "unit": "%"
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790739,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.MinBrightness",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 0,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Power": {
+    "type": "state",
+    "common": {
+      "name": "Power",
+      "type": "number",
+      "role": "value.power",
+      "read": true,
+      "write": false,
+      "def": 0,
+      "unit": "W",
+      "smartName": {
+        "de": "Power"
+      }
+    },
+    "native": {},
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Power",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1761135407578,
+    "val": 2.57,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Source": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Source of last command",
+        "de": "Quelle des letzten Befehls",
+        "ru": "Источник последней команды",
+        "pt": "Fonte do último comando",
+        "nl": "Vertaling:",
+        "fr": "Source de la dernière commande",
+        "it": "Fonte dell'ultimo comando",
+        "es": "Fuente del último comando",
+        "pl": "Źródło ostatniego dowództwa",
+        "zh-cn": "最后一次指挥的来源"
+      },
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790038,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Source",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Switch": {
+    "type": "state",
+    "common": {
+      "type": "boolean",
+      "read": true,
+      "write": true,
+      "name": {
+        "en": "Switch",
+        "de": "Schalter",
+        "ru": "Переключить",
+        "pt": "Interruptor",
+        "nl": "Vertaling:",
+        "fr": "Interrupteur",
+        "it": "Interruttore",
+        "es": "Interruptor",
+        "pl": "Switch",
+        "zh-cn": "目 录"
+      },
+      "role": "switch",
+      "def": false,
+      "smartName": {
+        "de": "Licht Esstisch"
+      }
+    },
+    "native": {},
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Switch",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1761136350850,
+    "val": true,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.Transiton": {
+    "type": "state",
+    "common": {
+      "name": "Transitions Time",
+      "type": "number",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "unit": "ms",
+      "min": 0,
+      "max": 5000
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790745,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.Transiton",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 2000,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.brightness": {
+    "type": "state",
+    "common": {
+      "name": "Brightness",
+      "type": "number",
+      "role": "level.brightness",
+      "read": true,
+      "write": true,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "smartName": false
+    },
+    "native": {},
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.brightness",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "from": "system.adapter.admin.0",
+    "user": "system.user.admin",
+    "ts": 1761135418194,
+    "val": 10,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.longpush1": {
+    "type": "state",
+    "common": {
+      "name": "Longpush",
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790154,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.longpush1",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.lights.longpush2": {
+    "type": "state",
+    "common": {
+      "name": "Longpush",
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "def": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790192,
+    "_id": "shelly.0.SHDM-2#081234567896#1.lights.longpush2",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.name": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device name",
+        "de": "Bezeichnung des Geräts",
+        "ru": "Наименование устройства",
+        "pt": "Nome do dispositivo",
+        "nl": "Devicenaam",
+        "fr": "Nom du dispositif",
+        "it": "Nome del dispositivo",
+        "es": "Nombre del dispositivo",
+        "pl": "Device name",
+        "uk": "Назва пристрою",
+        "zh-cn": "证人姓名"
+      },
+      "type": "string",
+      "role": "info.name",
+      "read": true,
+      "write": true,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNNjQgMEMyOC43IDAgMCAyOC43IDAgNjRWNDQ4YzAgMzUuMyAyOC43IDY0IDY0IDY0SDMyMGMzNS4zIDAgNjQtMjguNyA2NC02NFY0MjguN2MtMi43IDEuMS01LjQgMi04LjIgMi43bC02MC4xIDE1Yy0zIC43LTYgMS4yLTkgMS40Yy0uOSAuMS0xLjggLjItMi43IC4ySDI0MGMtNi4xIDAtMTEuNi0zLjQtMTQuMy04LjhsLTguOC0xNy43Yy0xLjctMy40LTUuMS01LjUtOC44LTUuNXMtNy4yIDIuMS04LjggNS41bC04LjggMTcuN2MtMi45IDUuOS05LjIgOS40LTE1LjcgOC44cy0xMi4xLTUuMS0xMy45LTExLjNMMTQ0IDM4MWwtOS44IDMyLjhjLTYuMSAyMC4zLTI0LjggMzQuMi00NiAzNC4ySDgwYy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2aDguMmM3LjEgMCAxMy4zLTQuNiAxNS4zLTExLjRsMTQuOS00OS41YzMuNC0xMS4zIDEzLjgtMTkuMSAyNS42LTE5LjFzMjIuMiA3LjggMjUuNiAxOS4xbDExLjYgMzguNmM3LjQtNi4yIDE2LjgtOS43IDI2LjgtOS43YzE1LjkgMCAzMC40IDkgMzcuNSAyMy4ybDQuNCA4LjhoOC45Yy0zLjEtOC44LTMuNy0xOC40LTEuNC0yNy44bDE1LTYwLjFjMi44LTExLjMgOC42LTIxLjUgMTYuOC0yOS43TDM4NCAyMDMuNlYxNjBIMjU2Yy0xNy43IDAtMzItMTQuMy0zMi0zMlYwSDY0ek0yNTYgMFYxMjhIMzg0TDI1NiAwek01NDkuOCAxMzkuN2MtMTUuNi0xNS42LTQwLjktMTUuNi01Ni42IDBsLTI5LjQgMjkuNCA3MSA3MSAyOS40LTI5LjRjMTUuNi0xNS42IDE1LjYtNDAuOSAwLTU2LjZsLTE0LjQtMTQuNHpNMzExLjkgMzIxYy00LjEgNC4xLTcgOS4yLTguNCAxNC45bC0xNSA2MC4xYy0xLjQgNS41IC4yIDExLjIgNC4yIDE1LjJzOS43IDUuNiAxNS4yIDQuMmw2MC4xLTE1YzUuNi0xLjQgMTAuOC00LjMgMTQuOS04LjRMNTEyLjEgMjYyLjdsLTcxLTcxTDMxMS45IDMyMXoiLz48L3N2Zz4="
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790645,
+    "_id": "shelly.0.SHDM-2#081234567896#1.name",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "DimmerKueche",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.online": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device online",
+        "de": "Gerät online",
+        "ru": "Устройство онлайн",
+        "pt": "Dispositivo online",
+        "nl": "Device online",
+        "fr": "Appareil en ligne",
+        "it": "Dispositivo online",
+        "es": "Dispositivo en línea",
+        "pl": "Device online",
+        "uk": "Пристрої онлайн",
+        "zh-cn": "网上证人"
+      },
+      "type": "boolean",
+      "role": "indicator.reachable",
+      "read": true,
+      "write": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNNTQuMiAyMDIuOUMxMjMuMiAxMzYuNyAyMTYuOCA5NiAzMjAgOTZzMTk2LjggNDAuNyAyNjUuOCAxMDYuOWMxMi44IDEyLjIgMzMgMTEuOCA0NS4yLS45czExLjgtMzMtLjktNDUuMkM1NDkuNyA3OS41IDQ0MC40IDMyIDMyMCAzMlM5MC4zIDc5LjUgOS44IDE1Ni43Qy0yLjkgMTY5LTMuMyAxODkuMiA4LjkgMjAyczMyLjUgMTMuMiA0NS4yIC45ek0zMjAgMjU2YzU2LjggMCAxMDguNiAyMS4xIDE0OC4yIDU2YzEzLjMgMTEuNyAzMy41IDEwLjQgNDUuMi0yLjhzMTAuNC0zMy41LTIuOC00NS4yQzQ1OS44IDIxOS4yIDM5MyAxOTIgMzIwIDE5MnMtMTM5LjggMjcuMi0xOTAuNSA3MmMtMTMuMyAxMS43LTE0LjUgMzEuOS0yLjggNDUuMnMzMS45IDE0LjUgNDUuMiAyLjhjMzkuNS0zNC45IDkxLjMtNTYgMTQ4LjItNTZ6bTY0IDE2MGMwLTM1LjMtMjguNy02NC02NC02NHMtNjQgMjguNy02NCA2NHMyOC43IDY0IDY0IDY0czY0LTI4LjcgNjQtNjR6Ii8+PC9zdmc+"
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789730,
+    "_id": "shelly.0.SHDM-2#081234567896#1.online",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": true,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.overtemperature": {
+    "type": "state",
+    "common": {
+      "name": "Over Temperature",
+      "type": "boolean",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.overtemperature",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": false,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.protocol": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Protocol",
+        "de": "Protokoll",
+        "ru": "Протокол",
+        "pt": "Protocolo",
+        "nl": "Protocol",
+        "fr": "Protocole",
+        "it": "Protocollo",
+        "es": "Protocolo",
+        "pl": "Protokół",
+        "uk": "Протокол",
+        "zh-cn": "议定书"
+      },
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789884,
+    "_id": "shelly.0.SHDM-2#081234567896#1.protocol",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "mqtt",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.reboot": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Reboot",
+        "de": "Neustart",
+        "ru": "Перезагрузка",
+        "pt": "Reiniciar",
+        "nl": "Reboot",
+        "fr": "Reboot",
+        "it": "Reboot",
+        "es": "Reboot",
+        "pl": "Reboot",
+        "uk": "Перезавантаження",
+        "zh-cn": "Reboot"
+      },
+      "type": "boolean",
+      "role": "button",
+      "read": false,
+      "write": true
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789876,
+    "_id": "shelly.0.SHDM-2#081234567896#1.reboot",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    }
+  },
+  "shelly.0.SHDM-2#081234567896#1.rssi": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Received Signal Strength Indication",
+        "de": "Empfangene Signalstärkeanzeige",
+        "ru": "Получена индикация силы сигнала",
+        "pt": "Indicação de Força de Sinal Recebida",
+        "nl": "Vervangde Signal Strength Indicatie",
+        "fr": "Indication de force de signal reçue",
+        "it": "Indicazione di forza segnale ricevuta",
+        "es": "Indicación de fuerza de la señal recibida",
+        "pl": "Received Signal Strength (ang.)",
+        "uk": "Отриманий показ сигналу",
+        "zh-cn": "接受签字国制"
+      },
+      "type": "number",
+      "role": "value",
+      "unit": "dBm",
+      "read": true,
+      "write": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNNTQ0IDBjMTcuNyAwIDMyIDE0LjMgMzIgMzJWNDgwYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyVjMyYzAtMTcuNyAxNC4zLTMyIDMyLTMyek00MTYgOTZjMTcuNyAwIDMyIDE0LjMgMzIgMzJWNDgwYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyVjEyOGMwLTE3LjcgMTQuMy0zMiAzMi0zMnpNMzIwIDIyNFY0ODBjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzJWMjI0YzAtMTcuNyAxNC4zLTMyIDMyLTMyczMyIDE0LjMgMzIgMzJ6TTE2MCAyODhjMTcuNyAwIDMyIDE0LjMgMzIgMzJWNDgwYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyVjMyMGMwLTE3LjcgMTQuMy0zMiAzMi0zMnpNNjQgNDE2djY0YzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyVjQxNmMwLTE3LjcgMTQuMy0zMiAzMi0zMnMzMiAxNC4zIDMyIDMyeiIvPjwvc3ZnPg=="
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790474,
+    "_id": "shelly.0.SHDM-2#081234567896#1.rssi",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": -60,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.temperatureC": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Temperature",
+        "de": "Temperatur",
+        "ru": "Температура",
+        "pt": "Temperatura",
+        "nl": "Temperatuur",
+        "fr": "Température",
+        "it": "Temperatura",
+        "es": "Temperatura",
+        "pl": "Temperatura",
+        "zh-cn": "模范"
+      },
+      "type": "number",
+      "role": "value.temperature",
+      "read": true,
+      "write": false,
+      "unit": "°C"
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.temperatureC",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 43.74,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.temperatureF": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Temperature",
+        "de": "Temperatur",
+        "ru": "Температура",
+        "pt": "Temperatura",
+        "nl": "Temperatuur",
+        "fr": "Température",
+        "it": "Temperatura",
+        "es": "Temperatura",
+        "pl": "Temperatura",
+        "zh-cn": "模范"
+      },
+      "type": "number",
+      "role": "value.temperature",
+      "read": true,
+      "write": false,
+      "unit": "°F"
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790778,
+    "_id": "shelly.0.SHDM-2#081234567896#1.temperatureF",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 110.74,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.type": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device type",
+        "de": "Gerätetyp",
+        "ru": "Тип устройства",
+        "pt": "Tipo de dispositivo",
+        "nl": "Device type",
+        "fr": "Type de dispositif",
+        "it": "Tipo di dispositivo",
+        "es": "Tipo de dispositivo",
+        "pl": "Device type",
+        "uk": "Тип пристрою",
+        "zh-cn": "設備類型"
+      },
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058789829,
+    "_id": "shelly.0.SHDM-2#081234567896#1.type",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "SHDM-2",
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.uptime": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Device running since",
+        "de": "Gerät läuft seit",
+        "ru": "Устройство работает с",
+        "pt": "Dispositivo em execução desde",
+        "nl": "Device vlucht sinds",
+        "fr": "Appareils fonctionnant depuis",
+        "it": "Dispositivo in esecuzione da",
+        "es": "Dispositivo funcionando desde",
+        "pl": "Device biegnie od czasu do czasu",
+        "uk": "Пристрої, що працюють з",
+        "zh-cn": "自那时以来丧失能力"
+      },
+      "type": "number",
+      "role": "value.interval",
+      "unit": "sec",
+      "read": true,
+      "write": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMjU2IDUxMkMxMTQuNiA1MTIgMCAzOTcuNCAwIDI1NlMxMTQuNiAwIDI1NiAwUzUxMiAxMTQuNiA1MTIgMjU2cy0xMTQuNiAyNTYtMjU2IDI1NnpNMjMyIDEyMFYyNTZjMCA4IDQgMTUuNSAxMC43IDIwbDk2IDY0YzExIDcuNCAyNS45IDQuNCAzMy4zLTYuN3M0LjQtMjUuOS02LjctMzMuM0wyODAgMjQzLjJWMTIwYzAtMTMuMy0xMC43LTI0LTI0LTI0cy0yNCAxMC43LTI0IDI0eiIvPjwvc3ZnPg=="
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790465,
+    "_id": "shelly.0.SHDM-2#081234567896#1.uptime",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": 1049744,
+    "ack": true
+  },
+  "shelly.0.SHDM-2#081234567896#1.version": {
+    "type": "state",
+    "common": {
+      "name": {
+        "en": "Firmware version",
+        "de": "Firmware-Version",
+        "ru": "Версия прошивки",
+        "pt": "Versão de firmware",
+        "nl": "Firmware",
+        "fr": "Firmware version",
+        "it": "Versione firmware",
+        "es": "Versión de firmware",
+        "pl": "Okładka",
+        "uk": "Версія прошивки",
+        "zh-cn": "导 言"
+      },
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTc2IDI0YzAtMTMuMy0xMC43LTI0LTI0LTI0cy0yNCAxMC43LTI0IDI0VjY0Yy0zNS4zIDAtNjQgMjguNy02NCA2NEgyNGMtMTMuMyAwLTI0IDEwLjctMjQgMjRzMTAuNyAyNCAyNCAyNEg2NHY1NkgyNGMtMTMuMyAwLTI0IDEwLjctMjQgMjRzMTAuNyAyNCAyNCAyNEg2NHY1NkgyNGMtMTMuMyAwLTI0IDEwLjctMjQgMjRzMTAuNyAyNCAyNCAyNEg2NGMwIDM1LjMgMjguNyA2NCA2NCA2NHY0MGMwIDEzLjMgMTAuNyAyNCAyNCAyNHMyNC0xMC43IDI0LTI0VjQ0OGg1NnY0MGMwIDEzLjMgMTAuNyAyNCAyNCAyNHMyNC0xMC43IDI0LTI0VjQ0OGg1NnY0MGMwIDEzLjMgMTAuNyAyNCAyNCAyNHMyNC0xMC43IDI0LTI0VjQ0OGMzNS4zIDAgNjQtMjguNyA2NC02NGg0MGMxMy4zIDAgMjQtMTAuNyAyNC0yNHMtMTAuNy0yNC0yNC0yNEg0NDhWMjgwaDQwYzEzLjMgMCAyNC0xMC43IDI0LTI0cy0xMC43LTI0LTI0LTI0SDQ0OFYxNzZoNDBjMTMuMyAwIDI0LTEwLjcgMjQtMjRzLTEwLjctMjQtMjQtMjRINDQ4YzAtMzUuMy0yOC43LTY0LTY0LTY0VjI0YzAtMTMuMy0xMC43LTI0LTI0LTI0cy0yNCAxMC43LTI0IDI0VjY0SDI4MFYyNGMwLTEzLjMtMTAuNy0yNC0yNC0yNHMtMjQgMTAuNy0yNCAyNFY2NEgxNzZWMjR6TTE2MCAxMjhIMzUyYzE3LjcgMCAzMiAxNC4zIDMyIDMyVjM1MmMwIDE3LjctMTQuMyAzMi0zMiAzMkgxNjBjLTE3LjcgMC0zMi0xNC4zLTMyLTMyVjE2MGMwLTE3LjcgMTQuMy0zMiAzMi0zMnptMTkyIDMySDE2MFYzNTJIMzUyVjE2MHoiLz48L3N2Zz4="
+    },
+    "native": {},
+    "from": "system.adapter.shelly.0",
+    "user": "system.user.admin",
+    "ts": 1761058790627,
+    "_id": "shelly.0.SHDM-2#081234567896#1.version",
+    "acl": {
+      "object": 1636,
+      "state": 1636,
+      "owner": "system.user.admin",
+      "ownerGroup": "system.group.administrator"
+    },
+    "val": "20230913-114008/v1.14.0-gcb84623",
+    "ack": true
+  }
+}

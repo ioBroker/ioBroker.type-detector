@@ -259,6 +259,7 @@ export interface DetectorContext {
     ignoreEnums: boolean;
     sortedKeys: string[];
     favorId?: string;
+    detectAllPossibleDevices?: boolean;
 }
 
 export interface MatchedDetectorContext extends Omit<DetectorContext, 'result'> {
