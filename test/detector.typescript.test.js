@@ -1112,7 +1112,7 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, {
             id: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
-            //ignoreEnums: true,
+            ignoreEnums: true,
             detectOnlyChannel: true,
             detectAllPossibleDevices: true,
         });
