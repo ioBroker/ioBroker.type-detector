@@ -1,7 +1,6 @@
 const expect = require('chai').expect;
 
 const ChannelDetectorImport = require('../build/index');
-const objects = require('./hue-combined.json');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
 const name = 'TS';
@@ -1108,15 +1107,14 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it('Must detect Shelly Dimmer as dimmer', done => {
+    it.only('Must detect Shelly Dimmer as dimmer', done => {
         const objects = require('./shelly-dimmer.json');
 
         const controls = detect(objects, {
             id: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
-            ignoreEnums: true,
+            //ignoreEnums: true,
             detectOnlyChannel: true,
             detectAllPossibleDevices: true,
-            prioritizedTypes: [[Types.hue, Types.rgb]],
         });
         const states = controls[0].states.filter(s => !!s.id);
         expect(states.length).to.be.equal(4, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');

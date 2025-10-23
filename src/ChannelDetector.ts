@@ -163,7 +163,7 @@ export class ChannelDetector {
                     return false;
                 }
 
-                if (statePattern.enums && typeof statePattern.enums === 'function') {
+                if (typeof statePattern.enums === 'function') {
                     const enums = this._getEnumsForId(objects, id, sortedKeys);
                     if (!ignoreEnums && !statePattern.enums(objects[id], enums || [])) {
                         return false;

@@ -21,4 +21,12 @@ export default [
             'jsdoc/require-param': 'off',
         },
     },
+    {
+        ignores: [
+            'build/**/*',
+            'src-test-gui/build/**/*',
+            'src-test-gui/node_modules/**/*',
+            '**/*.mjs',
+        ],
+    },
 ];
