@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.6.2 (2025-10-23)
 -   (@GermanBluefox) Improved detection of devices if the structure has more than one control inside
 
 ### 4.6.1 (2025-10-21)
