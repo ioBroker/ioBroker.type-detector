@@ -1108,13 +1108,14 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it.only('Must detect Shelly Dimmer as dimmer', done => {
+    it('Must detect Shelly Dimmer as dimmer', done => {
         const objects = require('./shelly-dimmer.json');
 
         const controls = detect(objects, {
             id: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
             ignoreEnums: true,
             detectOnlyChannel: true,
+            detectAllPossibleDevices: true,
             prioritizedTypes: [[Types.hue, Types.rgb]],
         });
         const states = controls[0].states.filter(s => !!s.id);
@@ -1124,7 +1125,7 @@ describe(`${name} Test Detector`, () => {
             SET: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
             ON_SET: 'shelly.0.SHDM-2#081234567896#1.lights.Switch',
             ELECTRIC_POWER: 'shelly.0.SHDM-2#081234567896#1.lights.Power',
-            CONSUMPTION: 'helly.0.SHDM-2#081234567896#1.lights.Energy',
+            CONSUMPTION: 'shelly.0.SHDM-2#081234567896#1.lights.Energy',
         });
 
         done();
