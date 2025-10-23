@@ -257,27 +257,21 @@ export class ChannelDetector {
                 }
             }
 
-            let isApplicable: boolean;
-            // We always detect indicators even if one used for multiple devices
             if (state.indicator) {
-                isApplicable = true;
+                // We always detect indicators even if one used for multiple devices
             } else if (usedInCurrentDevice.includes(stateId)) {
                 // we already used this state in the current device
-                isApplicable = false;
+                continue;
             } else if (state.notSingle) {
-                // we already used this state in another device and notSingle is set
-                isApplicable = true;
+                // we already used this state in another device but notSingle is set
             } else if (context.detectAllPossibleDevices) {
                 // No matter if used before, we want all possible devices
-                isApplicable = true;
             } else if (usedIds.includes(stateId)) {
                 // we already used this state in another device
-                isApplicable = false;
-            } else {
-                isApplicable = true;
+                continue;
             }
 
-            if (isApplicable && this._applyPattern(objects, stateId, state, ignoreEnums, sortedKeys)) {
+            if (this._applyPattern(objects, stateId, state, ignoreEnums, sortedKeys)) {
                 // we detected a state, copy InternalPatternControl
                 if (!result) {
                     result = JSON.parse(JSON.stringify(patterns[pattern])) as PatternControl; // can not be undefined here
