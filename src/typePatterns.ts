@@ -2299,6 +2299,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 indicator: false,
                 type: StateType.Boolean,
                 enums: roleOrEnumWindow,
+                // write: false, ??
                 name: 'ACTUAL',
                 required: true,
                 defaultRole: 'sensor.window',
@@ -2320,6 +2321,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 role: /^state$|^value(\.window)?$/,
                 indicator: false,
                 type: StateType.Number,
+                // write: false, ??
                 enums: roleOrEnumWindow,
                 name: 'ACTUAL',
                 required: true,

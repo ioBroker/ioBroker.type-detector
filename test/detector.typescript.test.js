@@ -1107,7 +1107,7 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it.only('Must detect Shelly Dimmer as dimmer', done => {
+    it('Must detect Shelly Dimmer as dimmer', done => {
         const objects = require('./shelly-dimmer.json');
 
         const controls = detect(objects, {
