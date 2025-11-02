@@ -3,3 +3,4 @@
 /.idea
 build/
 src-test-gui/node_modules/
+src-test-gui/build/
