@@ -522,7 +522,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             {
                 role: /^(?:date|time)\.sunrise(?:\.forecast\.0)?$/,
                 indicator: false,
-                type: StateType.String,
+                type: [StateType.String, StateType.Number],
                 name: 'TIME_SUNRISE',
                 required: false,
                 defaultRole: 'date.sunrise',
@@ -530,7 +530,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             {
                 role: /^(?:date|time)\.sunset(?:\.forecast\.0)?$/,
                 indicator: false,
-                type: StateType.String,
+                type: [StateType.String, StateType.Number],
                 name: 'TIME_SUNSET',
                 required: false,
                 defaultRole: 'date.sunset',
