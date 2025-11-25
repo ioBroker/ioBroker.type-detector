@@ -452,11 +452,11 @@ describe(`${name} Test Detector`, () => {
             detectionDef[`WIND_DIRECTION${day}`] = `pirate-weather.0.weather.daily.0${day}.windBearing`;
             detectionDef[`WIND_DIRECTION_STR${day}`] = `pirate-weather.0.weather.daily.0${day}.windBearingText`;
             detectionDef[`HUMIDITY${day}`] = `pirate-weather.0.weather.daily.0${day}.humidity`;
-            //detectionDef[`PRESSURE${day}`] = `pirate-weather.0.weather.daily.0${day}.pressure`;
+            detectionDef[`PRESSURE${day}`] = `pirate-weather.0.weather.daily.0${day}.pressure`;
             detectionDef[`TEMP_MIN${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMin`, `pirate-weather.0.weather.daily.0${day}.temperatureLow`];
             detectionDef[`TEMP_MAX${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMax`, `pirate-weather.0.weather.daily.0${day}.temperatureHigh`];
-            //detectionDef[`TIME_SUNRISE${day}`] = `pirate-weather.0.weather.daily.0${day}.sunriseTime`;
-            //detectionDef[`TIME_SUNSET${day}`] = `pirate-weather.0.weather.daily.0${day}.sunsetTime`;
+            detectionDef[`TIME_SUNRISE${day}`] = `pirate-weather.0.weather.daily.0${day}.sunriseTime`;
+            detectionDef[`TIME_SUNSET${day}`] = `pirate-weather.0.weather.daily.0${day}.sunsetTime`;
         }
 
         validate(controls[0], Types.weatherForecast, detectionDef, true);
