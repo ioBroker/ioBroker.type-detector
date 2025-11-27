@@ -18,8 +18,7 @@ import {
     FormControlLabel,
     Checkbox,
 } from '@mui/material';
-import { type DetectOptions, type PatternControl, Types } from '@iobroker/type-detector';
-import ChannelDetector from '@iobroker/type-detector';
+import ChannelDetector, { type DetectOptions, type PatternControl, Types } from '../../src';
 import { Brightness1 } from '@mui/icons-material';
 
 interface AppState {
