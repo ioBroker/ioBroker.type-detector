@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### 4.6.3 (2025-11-28)
+### **WORK IN PROGRESS**
 -   (@GermanBluefox) Added GUI to test the objects
 -   (@GermanBluefox) windowTilt and window requires now to have "write"=false explicitly to be detected
 
