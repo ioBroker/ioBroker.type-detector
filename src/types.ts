@@ -22,8 +22,52 @@
  * THE SOFTWARE.
  */
 
+/** These are the names of the patterns as used internally */
+export type PatternName =
+    | 'chart'
+    | 'mediaPlayer'
+    | 'weatherForecast'
+    | 'rgb'
+    | 'rgbwSingle'
+    | 'rgbSingle'
+    | 'cie'
+    | 'hue'
+    | 'ct'
+    | 'warning'
+    | 'airCondition'
+    | 'thermostat'
+    | 'vacuumCleaner'
+    | 'blinds'
+    | 'blindButtons'
+    | 'gate'
+    | 'weatherCurrent'
+    | 'camera'
+    | 'lock'
+    | 'motion'
+    | 'window'
+    | 'windowTilt'
+    | 'fireAlarm'
+    | 'floodAlarm'
+    | 'door'
+    | 'dimmer'
+    | 'light'
+    | 'volume'
+    | 'locationOne'
+    | 'location'
+    | 'volumeGroup'
+    | 'levelSlider'
+    | 'socket'
+    | 'button'
+    | 'buttonSensor'
+    | 'temperature'
+    | 'humidity'
+    | 'illuminance'
+    | 'image'
+    | 'unknown';
+
 // Make sure when you add a new entry here to also add in lib/types with the
 // end user facing name for documentation
+/** These are the types of patterns as used externally and internally */
 export enum Types {
     unknown = 'unknown',
     airCondition = 'airCondition',
@@ -133,32 +177,32 @@ export interface InternalDetectorState {
     /** Regex for state names (IDs). Not suggested */
     stateName?: RegExp;
 
-    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    /** Is irrelevant for detection, but will be used by `ioBroker.devices` and `ioBroker.matter`. */
     defaultStates?: { [key: string]: string };
 
     /**
      * It is used to enhance detection by laxing some rules if matching, else will be used by
-     * iobroker.devices and iobroker.matter
-     * Only states WITH defaultRole will show up in UI.
+     * `ioBroker.devices` and `ioBroker.matter`
+     * Only states WITH defaultRole will show up in the UI.
      */
     defaultRole?: string;
 
     /**
      * It is used to enhance detection by laxing some rules if matching, else will be used by
-     * iobroker.devices and iobroker.matter.
+     * `ioBroker.devices` and `ioBroker.matter`.
      */
     defaultUnit?: string;
 
-    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    /** Is irrelevant for detection, but will be used by `ioBroker.devices` and `ioBroker.matter`. */
     defaultType?: StateType;
 
-    /** Is irrelevant for detection, but will be used by iobroker.devices and iobroker.matter. */
+    /** Is irrelevant for detection, but will be used by `ioBroker.devices` and `ioBroker.matter`. */
     defaultChannelRole?: string;
 
-    /** If set then the unit needs to match. */
+    /** If set, then the unit needs to match. */
     unit?: string;
 
-    /** If set then the object type needs to match. */
+    /** If set, then the object type needs to match. */
     objectType?: string;
 
     /**
@@ -197,13 +241,13 @@ export interface DetectOptions {
      * List of types that when detected also limit other types,
      * e.g. [[Types.light, Types.ct, Types.rgb, Types.rgbSingle, Types.rgbwSingle, Types.hue, Types.cie]] limits detection to one lighting type.
      */
-    limitTypesToOneOf?: Types[][];
+    limitTypesToOneOf?: PatternName[][];
 
     /**
      * List of Types to prioritize before the others.
      * Example: [[Types.hue, Types.rgb], [Types.RgbSingle, Types.RGB]] moves Hue before RGB and RGBSingle also before RGB
      */
-    prioritizedTypes?: [moveThisType: Types, beforeThatType: Types][];
+    prioritizedTypes?: [moveThisType: PatternName, beforeThatType: PatternName][];
 
     /**
       If true, the cache will be ignored
@@ -241,10 +285,10 @@ export interface DetectOptions {
     _usedIdsOptional?: string[];
 
     /** For optimization, initially it is empty array */
-    _checkedPatterns?: Types[];
+    _checkedPatterns?: PatternName[];
 
     /** For optimization, internal list of patterns order to process */
-    _patternList?: Types[];
+    _patternList?: PatternName[];
 }
 
 export interface DetectorContext {
@@ -254,7 +298,7 @@ export interface DetectorContext {
     usedInCurrentDevice: string[];
     ignoreIndicators: string[];
     result?: PatternControl;
-    pattern: Types;
+    pattern: PatternName;
     state: InternalDetectorState;
     ignoreEnums: boolean;
     sortedKeys: string[];

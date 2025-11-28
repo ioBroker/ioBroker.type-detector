@@ -1,6 +1,6 @@
 {
   "name": "iobroker.type-detector",
-  "version": "4.6.2",
+  "version": "4.6.3",
   "description": "Detects devices in ioBroker for Material, Google home, Homekit, ...",
   "author": {
     "name": "bluefox",
@@ -47,7 +47,7 @@
     "build:doc": "node lib/createMd",
     "build": "npm run build:ts && npm run build:doc",
     "release": "release-script --noPush -y",
-    "npm": "npm i -f"
+    "npm": "npm i -f && cd src-test-gui && npm i -f"
   },
   "license": "MIT",
   "readmeFilename": "README.md"

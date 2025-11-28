@@ -852,7 +852,7 @@ Window sensor: opened - true, closed - false.
 
 | R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
-| * | ACTUAL   | sensor.window                 |      | boolean |    | E    |     |       | `/^(state｜sensor)(\.window)?/`                    |
+| * | ACTUAL   | sensor.window                 |      | boolean | -  | E    |     |       | `/^(state｜sensor)(\.window)?/`                    |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
@@ -866,7 +866,7 @@ Window tilt sensor: closed - 0, opened - 1, tiled - 2.
 
 | R | Name     | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
-| * | ACTUAL   | value.window                  |      | number  |    | E    |     |       | `/^state$｜^value(\.window)?$/`                    |
+| * | ACTUAL   | value.window                  |      | number  | -  | E    |     |       | `/^state$｜^value(\.window)?$/`                    |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
