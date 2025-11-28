@@ -31,6 +31,7 @@ export {
     type PatternControl,
     type ExternalPatternControl,
     type ExternalDetectorState,
+    type PatternName,
     Types,
     StateType,
 } from './types';

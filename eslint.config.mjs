@@ -27,6 +27,10 @@ export default [
             'src-test-gui/build/**/*',
             'src-test-gui/node_modules/**/*',
             '**/*.mjs',
+            'build.js',
+            'lib/createMd.js',
+            'lib/nameOfTypes.js',
+            'test/**/*',
         ],
     },
 ];

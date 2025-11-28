@@ -47,7 +47,7 @@
     "build:doc": "node lib/createMd",
     "build": "npm run build:ts && npm run build:doc",
     "release": "release-script --noPush -y",
-    "npm": "npm i -f"
+    "npm": "npm i -f && cd src-test-gui && npm i -f"
   },
   "license": "MIT",
   "readmeFilename": "README.md"

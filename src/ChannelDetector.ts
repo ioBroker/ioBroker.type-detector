@@ -32,6 +32,7 @@ import {
     type InternalPatternControl,
     type PatternControl,
     type MatchedDetectorContext,
+    type PatternName,
     StateType,
     Types,
 } from './types';
@@ -545,8 +546,16 @@ export class ChannelDetector {
         }
     }
 
-    /** Sorts the list of Type patterns using the definition of the prioritized ones */
-    private sortTypes(typeList: Types[], prioritizedTypes: [moveThisType: Types, beforeThatType: Types][]): Types[] {
+    /**
+     * Sorts the list of Type patterns using the definition of the prioritized ones
+     *
+     * @param typeList Types list
+     * @param prioritizedTypes Array of pairs with changed priority
+     */
+    private sortTypes(
+        typeList: PatternName[],
+        prioritizedTypes: [moveThisType: PatternName, beforeThatType: PatternName][],
+    ): PatternName[] {
         prioritizedTypes.forEach(([moveThisType, beforeThatType]) => {
             const fromIndex = typeList.indexOf(moveThisType);
             const toIndex = typeList.indexOf(beforeThatType);
@@ -593,9 +602,9 @@ export class ChannelDetector {
         options._checkedPatterns ??= [];
 
         if (!_patternList) {
-            const allPatterns = Object.keys(patterns).filter(pattern =>
-                ChannelDetector.patternIsAllowed(patterns[pattern], allowedTypes, excludedTypes),
-            ) as Types[];
+            const allPatterns: PatternName[] = Object.keys(patterns).filter(pattern =>
+                ChannelDetector.patternIsAllowed(patterns[pattern as PatternName], allowedTypes, excludedTypes),
+            ) as PatternName[];
             _patternList = prioritizedTypes ? this.sortTypes(allPatterns, prioritizedTypes) : allPatterns;
             options._patternList = _patternList;
         }
@@ -605,7 +614,7 @@ export class ChannelDetector {
             channelStates,
             usedIds,
             ignoreIndicators: ignoreIndicators || [],
-            pattern: Types.unknown,
+            pattern: 'unknown',
             usedInCurrentDevice: [],
             state: {} as InternalDetectorState,
             ignoreEnums: !!options.ignoreEnums,
