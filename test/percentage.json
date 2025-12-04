@@ -87,7 +87,7 @@
         "from": "system.adapter.hm-rega.0",
         "user": "system.user.admin",
         "ts": 1675547772931,
-        "_id": "hm-rpc.0.001658A99FD264.2.LEVEL",
+        "_id": "hm-rpc.0.001658A99FD264.2.PERCENTAGE",
         "acl": {
             "object": 1636,
             "state": 1636,
