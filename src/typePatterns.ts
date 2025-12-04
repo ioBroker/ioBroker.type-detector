@@ -2696,6 +2696,41 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.volumeGroup,
     },
+    percentage: {
+        states: [
+            {
+                role: /^level(\..*)?$/,
+                indicator: false,
+                type: StateType.Number,
+                write: true,
+                unit: '%',
+                name: 'SET',
+                required: true,
+                defaultRole: 'level',
+                defaultUnit: '%',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            // optional
+            {
+                role: /^value(\..*)?$/,
+                indicator: false,
+                type: StateType.Number,
+                write: false,
+                name: 'ACTUAL',
+                required: false,
+                defaultRole: 'value',
+                defaultUnit: '%',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.percentage,
+    },
     levelSlider: {
         states: [
             {

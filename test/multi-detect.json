@@ -150,8 +150,8 @@
       "read": true,
       "write": true,
       "min": 0,
-      "max": 100,
-      "unit": "%",
+      "max": 200,
+      "unit": "°C",
       "role": "level"
     },
     "native": {

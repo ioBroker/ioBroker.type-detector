@@ -498,6 +498,18 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect percentage correctly`, done => {
+        const controls = detect('./percentage.json', {
+            id: 'hm-rpc.0.001658A99FD264.2.PERCENTAGE',
+        });
+
+        validate(controls[0], Types.percentage, {
+            SET: 'hm-rpc.0.001658A99FD264.2.PERCENTAGE',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect rgb correctly`, done => {
         const controls = detect('./huergb.json', {
             id: 'hue.0.Büro',
@@ -731,7 +743,7 @@ describe(`${name} Test Detector`, () => {
         const controls = detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA',
             prioritizedTypes: [[Types.hue, Types.rgb]],
-            limitTypesToOneOf: [[Types.rgb, Types.rgbSingle, Types.rgbwSingle, Types.hue]]
+            limitTypesToOneOf: [[Types.rgb, Types.rgbSingle, Types.rgbwSingle, Types.hue]],
         });
 
         validate(controls[0], Types.hue, {
@@ -780,7 +792,7 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, {
             id: 'test.0.window',
-            ignoreEnums: true
+            ignoreEnums: true,
         });
 
         validate(controls[0], Types.window, {
@@ -822,7 +834,7 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, {
             id: 'test.0.window',
-            ignoreEnums: true
+            ignoreEnums: true,
         });
 
         validate(controls[0], Types.window, {
@@ -864,7 +876,7 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, {
             id: 'test.0.window',
-            ignoreEnums: true
+            ignoreEnums: true,
         });
 
         validate(controls[0], Types.window, {
@@ -906,7 +918,7 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, {
             id: 'test.0.window',
-            ignoreEnums: true
+            ignoreEnums: true,
         });
 
         validate(controls[0], Types.window, {
@@ -948,7 +960,7 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, {
             id: 'test.0.window.x-contact',
-            ignoreEnums: true
+            ignoreEnums: true,
         });
 
         validate(controls[0], Types.window, {
@@ -991,7 +1003,7 @@ describe(`${name} Test Detector`, () => {
         const controls = detect(objects, {
             id: 'test.0.window.x-contact',
             detectParent: true,
-            ignoreEnums: true
+            ignoreEnums: true,
         });
 
         validate(controls[0], Types.window, {
@@ -1007,7 +1019,7 @@ describe(`${name} Test Detector`, () => {
         const controls = detect(objects, {
             id: 'alias.0.Test-Devices.Dimmer.SET',
             ignoreEnums: true,
-            detectParent: true
+            detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
         expect(states.length).to.be.equal(8, 'Should detect 8 states for dimmer with power switch');
@@ -1032,7 +1044,7 @@ describe(`${name} Test Detector`, () => {
         const controls = detect(objects, {
             id: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
             ignoreEnums: true,
-            detectParent: true
+            detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
         expect(states.length).to.be.equal(4, 'Should detect 4 states for dimmer with power switch');
@@ -1053,7 +1065,7 @@ describe(`${name} Test Detector`, () => {
         const controls = detect(objects, {
             id: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
             ignoreEnums: true,
-            detectParent: true
+            detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
         expect(states.length).to.be.equal(1, 'Should detect 1 state for dimmer with power switch');

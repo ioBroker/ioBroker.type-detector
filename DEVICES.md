@@ -61,6 +61,7 @@ In [brackets] is given the class name of a device.
 * [Lock [lock]](#lock-lock)
 * [Media player [mediaPlayer]](#media-player-mediaplayer)
 * [Motion sensor [motion]](#motion-sensor-motion)
+* [Percentage slider [percentage]](#percentage-slider-percentage)
 * [RGB(W) Light with different states for every color [rgb]](#rgb-w--light-with-different-states-for-every-color-rgb)
 * [RGB Light Single [rgbSingle]](#rgb-light-single-rgbsingle)
 * [RGBW Light Single [rgbwSingle]](#rgbw-light-single-rgbwsingle)
@@ -563,6 +564,22 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
+### Percentage slider [percentage]
+
+Same as slider, but from 0 to 100%
+
+| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | SET      | level                         | %    | number  | W  |     |     |     |       | `/^level(\..*)?$/`                                |
+|   | ACTUAL   | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                |
+|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
 
 
 ### RGB(W) Light with different states for every color [rgb]
