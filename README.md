@@ -96,6 +96,14 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Breaking change: added new type percentage
+    The device with unit=% was detected as `slider`, now it will be detected as `percentage`. Developers must implement a new type!
+
+### 4.6.4 (2025-11-28)
+-   (@GermanBluefox) Added GUI to test the objects
+-   (@GermanBluefox) windowTilt and window requires now to have "write"=false explicitly to be detected
+
 ### 4.6.2 (2025-10-23)
 -   (@GermanBluefox) Improved detection of devices if the structure has more than one control inside
 
