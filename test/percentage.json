@@ -1,0 +1,100 @@
+{
+    "hm-rpc.0.001658A99FD264.2": {
+        "_id": "hm-rpc.0.001658A99FD264.2",
+        "type": "channel",
+        "common": {
+            "name": "HmIPW-DRBL4_RA2:2",
+            "enums": [
+                {
+                    "_id": "enum.rooms.Hauswirtschaftsraum",
+                    "common": {
+                        "name": "Hauswirtschaftsraum",
+                        "desc": ""
+                    },
+                    "native": {
+                        "Name": "Hauswirtschaftsraum",
+                        "TypeName": "ENUM",
+                        "EnumInfo": ""
+                    },
+                    "type": "enum"
+                }
+            ]
+        },
+        "native": {
+            "TYPE": "BLIND_VIRTUAL_RECEIVER",
+            "SUBTYPE": "",
+            "ADDRESS": "001658A99FD264:2",
+            "RF_ADDRESS": 0,
+            "CHILDREN": [],
+            "PARENT": "001658A99FD264",
+            "PARENT_TYPE": "HmIPW-DRBL4",
+            "INDEX": 2,
+            "AES_ACTIVE": 1,
+            "PARAMSETS": [
+                "MASTER",
+                "VALUES",
+                "LINK",
+                "SERVICE"
+            ],
+            "FIRMWARE": "",
+            "AVAILABLE_FIRMWARE": "",
+            "UPDATABLE": true,
+            "FIRMWARE_UPDATE_STATE": "",
+            "VERSION": 2,
+            "FLAGS": 1,
+            "LINK_SOURCE_ROLES": "",
+            "LINK_TARGET_ROLES": "CONDITIONAL_SWITCH SWITCH LEVEL REMOTE_CONTROL",
+            "DIRECTION": 2,
+            "GROUP": "",
+            "TEAM": "",
+            "TEAM_TAG": "",
+            "TEAM_CHANNELS": [],
+            "INTERFACE": "",
+            "ROAMING": 0,
+            "RX_MODE": 0
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1675547772731,
+        "acl": {
+            "object": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        }
+    },
+    "hm-rpc.0.001658A99FD264.2.PERCENTAGE": {
+        "type": "state",
+        "common": {
+            "name": "HmIPW-DRBL4_RA2:2.PERCENTAGE",
+            "def": 0,
+            "type": "number",
+            "read": true,
+            "write": true,
+            "unit": "%",
+            "role": "level"
+        },
+        "native": {
+            "MIN": 0,
+            "UNIT": "100%",
+            "OPERATIONS": 7,
+            "MAX": 1.01,
+            "FLAGS": 1,
+            "ID": "LEVEL",
+            "TYPE": "FLOAT",
+            "DEFAULT": 0,
+            "CONTROL": "BLIND_VIRTUAL_RECEIVER.LEVEL"
+        },
+        "from": "system.adapter.hm-rega.0",
+        "user": "system.user.admin",
+        "ts": 1675547772931,
+        "_id": "hm-rpc.0.001658A99FD264.2.PERCENTAGE",
+        "acl": {
+            "object": 1636,
+            "state": 1636,
+            "owner": "system.user.admin",
+            "ownerGroup": "system.group.administrator"
+        },
+        "val": 100,
+        "ack": true
+    }
+}

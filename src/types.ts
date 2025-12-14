@@ -24,46 +24,47 @@
 
 /** These are the names of the patterns as used internally */
 export type PatternName =
-    | 'chart'
-    | 'mediaPlayer'
-    | 'weatherForecast'
-    | 'rgb'
-    | 'rgbwSingle'
-    | 'rgbSingle'
-    | 'cie'
-    | 'hue'
-    | 'ct'
-    | 'warning'
     | 'airCondition'
-    | 'thermostat'
-    | 'vacuumCleaner'
-    | 'blinds'
     | 'blindButtons'
-    | 'gate'
-    | 'weatherCurrent'
-    | 'camera'
-    | 'lock'
-    | 'motion'
-    | 'window'
-    | 'windowTilt'
-    | 'fireAlarm'
-    | 'floodAlarm'
-    | 'door'
-    | 'dimmer'
-    | 'light'
-    | 'volume'
-    | 'locationOne'
-    | 'location'
-    | 'volumeGroup'
-    | 'levelSlider'
-    | 'socket'
+    | 'blinds'
     | 'button'
     | 'buttonSensor'
-    | 'temperature'
+    | 'camera'
+    | 'chart'
+    | 'cie'
+    | 'ct'
+    | 'dimmer'
+    | 'door'
+    | 'fireAlarm'
+    | 'floodAlarm'
+    | 'gate'
+    | 'hue'
     | 'humidity'
     | 'illuminance'
     | 'image'
-    | 'unknown';
+    | 'levelSlider'
+    | 'light'
+    | 'location'
+    | 'locationOne'
+    | 'lock'
+    | 'mediaPlayer'
+    | 'motion'
+    | 'percentage'
+    | 'rgb'
+    | 'rgbSingle'
+    | 'rgbwSingle'
+    | 'socket'
+    | 'temperature'
+    | 'thermostat'
+    | 'unknown'
+    | 'vacuumCleaner'
+    | 'volume'
+    | 'volumeGroup'
+    | 'warning'
+    | 'weatherCurrent'
+    | 'weatherForecast'
+    | 'window'
+    | 'windowTilt';
 
 // Make sure when you add a new entry here to also add in lib/types with the
 // end user facing name for documentation
@@ -96,6 +97,7 @@ export enum Types {
     lock = 'lock',
     media = 'media',
     motion = 'motion',
+    percentage = 'percentage',
     rgb = 'rgb',
     rgbSingle = 'rgbSingle',
     rgbwSingle = 'rgbwSingle',
