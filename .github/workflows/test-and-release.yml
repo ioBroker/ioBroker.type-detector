@@ -117,6 +117,9 @@ jobs:
                   script: |
                       return require('./package.json').version;
 
+            - name: Update npm to latest version
+              run: npm install -g npm@latest
+
             - name: Install dependencies
               if: steps.automerge.outputs.mergeResult == 'merged'
               run: npm ci
@@ -139,10 +142,7 @@ jobs:
             - name: Publish types package to npm
               if: steps.automerge.outputs.mergeResult == 'merged'
               working-directory: build
-              run: |
-                  npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-                  npm whoami
-                  npm publish
+              run: npm publish
 
             - name: Create Github Release
               if: steps.automerge.outputs.mergeResult == 'merged'
