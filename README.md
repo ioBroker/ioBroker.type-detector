@@ -96,7 +96,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 5.0.0 (2025-12-14)
 -   (@GermanBluefox) Breaking change: added new type percentage
     The device with unit=% was detected as `slider`, now it will be detected as `percentage`. Developers must implement a new type!
 
