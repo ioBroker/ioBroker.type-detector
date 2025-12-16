@@ -42,6 +42,7 @@
     "scripts": {
         "test": "mocha --exit",
         "test:integration": "mocha --exit",
+        "test:package": "node -e \"console.log('Not applicable')\"",
         "lint": "eslint -c eslint.config.mjs",
         "watch": "mocha --watch",
         "build:ts": "tsc -p tsconfig.build.json && node build",
