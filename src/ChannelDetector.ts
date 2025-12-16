@@ -146,6 +146,14 @@ export class ChannelDetector {
                 }
             }
 
+            if (statePattern.statesDefined === true && typeof objects[id].common.states !== 'object') {
+                // common states must be defined and object or array.
+                console.log('Nay, no statesDefined');
+                return false;
+            } else if (statePattern.statesDefined) {
+                console.log('Yay, got statesDefined');
+            }
+
             // When the default role is assigned, then the users should know how to handle it,
             // so we can be a bit more laxe if read/write is not set correctly because the user
             // created it manually. Additionally, enum check should be not needed with default role because the role already
