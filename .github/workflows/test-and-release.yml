@@ -73,10 +73,20 @@ jobs:
                   MERGE_RETRIES: '20'
                   MERGE_RETRY_SLEEP: 10000
 
+            - name: Determine version
+              if: steps.automerge.outputs.mergeResult == 'merged'
+              id: version
+              uses: actions/github-script@v8
+              with:
+                  result-encoding: string
+                  script: |
+                      return require('./package.json').version;
+
             - name: Publish to NPM
               if: steps.automerge.outputs.mergeResult == 'merged'
-              uses: ioBroker/testing-action-deploy@v1.3.1
+              uses: ioBroker/testing-action-deploy@v1.4.0
               with:
                   node-version: '22.x'
                   build: true
                   github-token: ${{ secrets.GITHUB_TOKEN }}
+                  tag: ${{ steps.version.outputs.result }}
