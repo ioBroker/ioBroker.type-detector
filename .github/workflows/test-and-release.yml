@@ -70,6 +70,8 @@ jobs:
                   UPDATE_LABELS: 'automated pr 🔧'
                   MERGE_METHOD: 'squash'
                   MERGE_COMMIT_MESSAGE: 'pull-request-title-and-description'
+                  MERGE_RETRIES: '20'
+                  MERGE_RETRY_SLEEP: 10000
 
             - name: Publish to NPM
               if: steps.automerge.outputs.mergeResult == 'merged'
