@@ -28,26 +28,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v6
-            - name: Use Node.js 20.x
-              uses: actions/setup-node@v6
+            - uses: ioBroker/testing-action-check@v1
               with:
-                  node-version: 20.x
-
-            - name: Install Dependencies
-              run: npm ci
-
-            - name: Build
-              run: npm run build:ts
-
-    #      - name: Perform a type check
-    #        run: npm run check:ts
-    #        env:
-    #          CI: true
-    # - name: Lint TypeScript code
-    #   run: npm run lint
-    #      - name: Test package files
-    #        run: npm run test:package
+                  node-version: '22.x'
+                  lint: true
 
     # Runs adapter tests on all supported node versions and OSes
     adapter-tests:
@@ -55,27 +39,15 @@ jobs:
 
         needs: [check-and-lint]
 
-        runs-on: ${{ matrix.os }}
+        runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-version: [18.x, 20.x, 22.x]
-                os: [ubuntu-latest]
+                node-version: [18.x, 20.x, 22.x, 24.x]
 
         steps:
-            - uses: actions/checkout@v6
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v6
+            - uses: ioBroker/testing-action-adapter@v1
               with:
-                  node-version: ${{ matrix.node-version }}
-
-            - name: Install Dependencies
-              run: npm ci
-
-            - name: Build
-              run: npm run build:ts
-
-            - name: Run local tests
-              run: npm test
+                  build: true
 
     # Deploys the final package to NPM
     auto-merge:
@@ -99,64 +71,10 @@ jobs:
                   MERGE_METHOD: 'squash'
                   MERGE_COMMIT_MESSAGE: 'pull-request-title-and-description'
 
-            - name: Checkout repository
+            - name: Publish to NPM
               if: steps.automerge.outputs.mergeResult == 'merged'
-              uses: actions/checkout@v6
+              uses: ioBroker/testing-action-deploy@v1
               with:
-                  fetch-depth: 0 # Fetch the history, or this action won't work
-                  ref: 'master'
-
-            - name: Use Node.js 18
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              uses: actions/setup-node@v6
-              with:
-                  node-version: 18
-
-            - name: Determine version
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              id: version
-              uses: actions/github-script@v8
-              with:
-                  result-encoding: string
-                  script: |
-                      return require('./package.json').version;
-
-            - name: Install dependencies
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              run: npm ci
-
-            - name: Build
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              run: npm run build
-
-            - name: Extract the commit body
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              id: extract_release
-              # The body may be multiline, therefore we need to escape some characters
-              run: |
-                  BODY=$(git show -s --format=%b)
-                  BODY="${BODY//'%'/'%25'}"
-                  BODY="${BODY//$'\n'/'%0A'}"
-                  BODY="${BODY//$'\r'/'%0D'}"
-                  echo "::set-output name=BODY::$BODY"
-
-            - name: Update npm to latest version
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              run: npm install -g npm@latest
-
-            - name: Publish types package to npm
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              working-directory: build
-              run: npm publish
-
-            - name: Create Github Release
-              if: steps.automerge.outputs.mergeResult == 'merged'
-              uses: ncipollo/release-action@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  tag: v${{ steps.version.outputs.result }}
-                  name: Release v${{ steps.version.outputs.result }}
-                  draft: false
-                  prerelease: ${{ contains(steps.version.outputs.result, '-') }}
-                  body: ${{ steps.extract_release.outputs.BODY }}
+                  node-version: '22.x'
+                  build: true
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
