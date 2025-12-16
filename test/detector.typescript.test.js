@@ -1,20 +1,24 @@
-const expect = require('chai').expect;
-
 const ChannelDetectorImport = require('../build/index');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
 const name = 'TS';
 
+function expect(condition, message) {
+    if (!condition) {
+        throw new Error(message);
+    }
+}
+
 function expectStateToHaveId(states, name, id, alternativeId) {
     const control = states.find(s => s.name === name);
-    expect(control, `Failed checking ${name}`).to.be.ok;
+    expect(!!control, `Failed checking ${name}`);
     if (id !== undefined) {
-        expect(control, `Failed checking ${name}`).to.have.property('id');
+        expect(Object.prototype.hasOwnProperty.call(control, 'id'), `Failed checking ${name}`);
         if (control.id !== id && control.id !== alternativeId) {
-            expect(control.id).to.be.equal(id);
+            expect(control.id === 'id', 'unexpected ID'); // will always fail
         }
     } else {
-        expect(control, `Failed checking ${name}`).to.not.have.property('id');
+        expect(!Object.prototype.hasOwnProperty.call(control, 'id'), `Failed checking ${name}`);
     }
 }
 
@@ -38,7 +42,7 @@ function detect(objectDef, options = {}) {
 }
 
 function validate(data, detectedType, detectedFields, ignoreAdditionalDetectedStates = false) {
-    expect(data.type).to.be.equal(detectedType);
+    expect(data.type === detectedType, `Expected type ${detectedType} but found ${data.type}`);
     const expectMyStateToHaveId = expectStateToHaveId.bind(null, data.states);
     let statesChecked = 0;
     for (const [name, ids] of Object.entries(detectedFields)) {
@@ -57,10 +61,7 @@ function validate(data, detectedType, detectedFields, ignoreAdditionalDetectedSt
     }
     if (!ignoreAdditionalDetectedStates) {
         const allMatchedStates = data.states.filter(({ id }) => !!id).length;
-        expect(allMatchedStates).to.be.equal(
-            statesChecked,
-            `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`,
-        );
+        expect(allMatchedStates === statesChecked,  `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`);
     }
 }
 
@@ -123,7 +124,7 @@ describe(`${name} Test Detector`, () => {
             id: 'something.0.channel',
         });
 
-        expect(controls).to.be.null;
+        expect(controls === null, 'No controls expected');
 
         done();
     });
@@ -478,22 +479,22 @@ describe(`${name} Test Detector`, () => {
             SET: 'hm-rpc.0.001658A99FD264.2.LEVEL',
             STOP: 'hm-rpc.0.001658A99FD264.2.STOP',
         });
-        expect(controls[0].states.filter(({ id }) => !!id).length).to.be.equal(2);
+        expect(controls[0].states.filter(({ id }) => !!id).length === 2, 'Blind should have 2 states detected');
 
         validate(controls[1], Types.dimmer, {
             SET: 'hm-rpc.0.001658A99FD264.2.LEVEL',
         });
-        expect(controls[1].states.filter(({ id }) => !!id).length).to.be.equal(1);
+        expect(controls[1].states.filter(({ id }) => !!id).length === 1, 'Dimmer should have 1 state detected');
 
         validate(controls[2], Types.slider, {
             SET: 'hm-rpc.0.001658A99FD264.2.LEVEL',
         });
-        expect(controls[2].states.filter(({ id }) => !!id).length).to.be.equal(1);
+        expect(controls[2].states.filter(({ id }) => !!id).length === 1, 'Slider should have 1 state detected');
 
         validate(controls[3], Types.button, {
             SET: 'hm-rpc.0.001658A99FD264.2.STOP',
         });
-        expect(controls[3].states.filter(({ id }) => !!id).length).to.be.equal(1);
+        expect(controls[3].states.filter(({ id }) => !!id).length === 1, 'Button should have 1 state detected');
 
         done();
     });
@@ -610,12 +611,12 @@ describe(`${name} Test Detector`, () => {
         options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
 
         const controls2 = detect('./hm-thermostat.json', options);
-        expect(controls2).to.be.null;
+        expect(controls2 === null, 'No controls expected');
 
         options.id = 'hm-rpc.1.JEQ0XXXXXX';
 
         const controls3 = detect('./hm-thermostat.json', options);
-        expect(controls3).to.be.null;
+        expect(controls3 === null, 'No controls expected');
 
         done();
     });
@@ -754,8 +755,8 @@ describe(`${name} Test Detector`, () => {
             ON: 'zigbee.0.AAAAAAA.state',
         });
 
-        expect(controls[1].type === Types.rgb).to.be.false;
-        expect(controls[2].type === Types.rgbSingle).to.be.false;
+        expect(controls[1].type !== Types.rgb, 'type rgb should not be detected');
+        expect(controls[2].type !== Types.rgbSingle, 'type rgbSingle should not be detected');
 
         done();
     });
@@ -1022,7 +1023,7 @@ describe(`${name} Test Detector`, () => {
             detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(8, 'Should detect 8 states for dimmer with power switch');
+        expect(states.length === 8, 'Should detect 8 states for dimmer with power switch');
 
         validate(controls[0], Types.dimmer, {
             SET: 'alias.0.Test-Devices.Dimmer.SET',
@@ -1047,7 +1048,7 @@ describe(`${name} Test Detector`, () => {
             detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(4, 'Should detect 4 states for dimmer with power switch');
+        expect(states.length === 4, 'Should detect 4 states for dimmer with power switch');
 
         validate(controls[0], Types.rgbSingle, {
             RGB: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
@@ -1068,7 +1069,7 @@ describe(`${name} Test Detector`, () => {
             detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(1, 'Should detect 1 state for dimmer with power switch');
+        expect(states.length=== 1, 'Should detect 1 state for dimmer with power switch');
 
         validate(controls[0], Types.blind, {
             SET: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
@@ -1086,7 +1087,7 @@ describe(`${name} Test Detector`, () => {
             //detectParent: true
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(2, 'Should detect 2 states for dimmer with voltage and unreach');
+        expect(states.length === 2, 'Should detect 2 states for dimmer with voltage and unreach');
 
         validate(controls[0], Types.dimmer, {
             SET: 'hm-rpc.1.00123456789077.2.LEVEL',
@@ -1106,7 +1107,7 @@ describe(`${name} Test Detector`, () => {
             prioritizedTypes: [[Types.hue, Types.rgb]],
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(5, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
+        expect(states.length === 5, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
 
         validate(controls[0], Types.hue, {
             HUE: 'hue.0.Hue_Küche_Küchezeile.hue',
@@ -1129,7 +1130,7 @@ describe(`${name} Test Detector`, () => {
             detectAllPossibleDevices: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length).to.be.equal(4, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
+        expect(states.length === 4, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
 
         validate(controls[0], Types.dimmer, {
             SET: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
