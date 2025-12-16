@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { getObjectsBelowId } from '../build/roleEnumUtils.js';
 
 // generate test data of 10000 objects like `attr0.9.param2.param3.param4.param5`, where random is from 0-9
@@ -52,7 +51,16 @@ describe(`Unit tests`, () => {
 
         const originalList = getObjectsBelowIdSimple(data, branch);
         const optimizedList = getObjectsBelowId(data, branch);
-        expect(JSON.stringify(optimizedList)).to.be.equal(JSON.stringify(originalList));
+        if (JSON.stringify(optimizedList) !== JSON.stringify(originalList)) {
+            console.error(
+                'optimizedList',
+                JSON.stringify(optimizedList, null, 2),
+                ' <> ',
+                'originalList',
+                JSON.stringify(originalList, null, 2),
+            );
+            throw new Error(`optimizedList is not equal to originalList`);
+        }
 
         // Calculate the time with optimized function
         const start = Date.now();
