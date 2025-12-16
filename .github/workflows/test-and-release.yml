@@ -73,6 +73,19 @@ jobs:
                   MERGE_RETRIES: '20'
                   MERGE_RETRY_SLEEP: 10000
 
+            - name: Checkout repository
+              if: steps.automerge.outputs.mergeResult == 'merged'
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0 # Fetch the history, or this action won't work
+                  ref: 'master'
+
+            - name: Use Node.js 18
+              if: steps.automerge.outputs.mergeResult == 'merged'
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 18
+
             - name: Determine version
               if: steps.automerge.outputs.mergeResult == 'merged'
               id: version
