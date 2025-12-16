@@ -1048,13 +1048,14 @@ describe(`${name} Test Detector`, () => {
             detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length === 4, 'Should detect 4 states for dimmer with power switch');
+        expect(states.length === 5, 'Should detect 5 states for dimmer with power switch');
 
         validate(controls[0], Types.rgbSingle, {
             RGB: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
             DIMMER: 'nanoleaf-lightpanels.3.Shapes.brightness',
             TEMPERATURE: 'nanoleaf-lightpanels.3.Shapes.colorTemp',
             ON: 'nanoleaf-lightpanels.3.Shapes.state',
+            EFFECT: 'nanoleaf-lightpanels.3.Shapes.effect',
         });
 
         done();
@@ -1115,6 +1116,7 @@ describe(`${name} Test Detector`, () => {
             SATURATION: 'hue.0.Hue_Küche_Küchezeile.sat',
             TEMPERATURE: 'hue.0.Hue_Küche_Küchezeile.ct',
             ON: 'hue.0.Hue_Küche_Küchezeile.on',
+            EFFECT: undefined, //since state does not have common.states defined
         });
 
         done();
