@@ -5,6 +5,8 @@ This is help function to detect devices from ioBroker states and channels.
 
 You can find the description of devices in [DEVICES.md](DEVICES.md).
 
+[Test website](https://iobroker.github.io/type-detector/) to test the detection of devices.
+
 ## How to use
 
 You can use this module in Browser and in Node.js projects.
