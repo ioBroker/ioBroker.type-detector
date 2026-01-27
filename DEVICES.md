@@ -670,7 +670,7 @@ Socket with an ON/OFF option. Could have information about current, amperage, en
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | SET            | switch                        |      | boolean | W  |     |       | `/^switch(\.active)?$｜^state$/`                   |
-|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$/`                            |
+|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$｜^sensor.switch$/`            |
 |   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
