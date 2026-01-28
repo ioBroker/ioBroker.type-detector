@@ -2782,7 +2782,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^state(\.active)?$/,
+                role: /^state(\.active)?$|^sensor.switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
