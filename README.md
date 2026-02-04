@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@Garfonso) Corrected `ACTUAL` state for the socket device
+
 ### 5.0.9 (2025-12-16)
 -   (@GermanBluefox) Breaking change: added new type percentage
     The device with unit=% was detected as `slider`, now it will be detected as `percentage`. Developers must implement a new type!
