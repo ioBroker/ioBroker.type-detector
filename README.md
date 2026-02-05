@@ -318,6 +318,6 @@ if (controls) {
 
 ## License
 
-Copyright (c) 2018-2025 Denis Haev <dogafox@gmail.com>
+Copyright (c) 2018-2026 Denis Haev <dogafox@gmail.com>
 
 MIT License
