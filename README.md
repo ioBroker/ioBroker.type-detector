@@ -100,6 +100,8 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@Garfonso) Corrected `ACTUAL` state for the socket device
+-   (@Garfonso) Allowed timestamp for TIME_SUNRISE
+-   (@Garfonso) Light effect state for lamps
 
 ### 5.0.9 (2025-12-16)
 -   (@GermanBluefox) Breaking change: added new type percentage
