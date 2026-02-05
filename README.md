@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 5.0.10 (2026-02-05)
 -   (@Garfonso) Corrected `ACTUAL` state for the socket device
 -   (@Garfonso) Allowed timestamp for TIME_SUNRISE
 -   (@Garfonso) Light effect state for lamps
