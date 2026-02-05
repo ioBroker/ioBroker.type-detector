@@ -152,6 +152,9 @@ export interface InternalDetectorState {
     /** Type of attribute: number', 'string' or 'boolean'. This attribute must exist in common */
     max?: StateType;
 
+    /** If true, the State object has to have common.states defined */
+    statesDefined?: boolean;
+
     /** If required to detect the pattern as valid */
     required?: boolean;
 

@@ -163,7 +163,7 @@
       "type": "string",
       "read": true,
       "write": true,
-      "role": "text",
+      "role": "level.effect",
       "states": {
         "Morning Sky": "Morning Sky"
       },

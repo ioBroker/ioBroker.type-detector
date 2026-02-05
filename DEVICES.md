@@ -822,45 +822,48 @@ Just sensor if alarm should be shown.
 
 ### Weather forecast [weatherForecast]
 
-| R | Name                   | Role                                   | Unit  | Type   | Ind | Multi | Regex                                               |
-|---|------------------------|----------------------------------------|-------|--------|-----|-------|-----------------------------------------------------|
-| * | ICON                   | weather.icon.forecast.0                |       | string |     |       | `/^weather\.icon(\.forecast\.0)?$/`                 |
-| * | TEMP_MIN               | value.temperature.min.forecast.0       |       | number |     |       | `/^value\.temperature\.min\.forecast\.0$/`          |
-| * | TEMP_MAX               | value.temperature.max.forecast.0       |       | number |     |       | `/^value\.temperature\.max\.forecast\.0$/`          |
-|   | PRECIPITATION_CHANCE   | value.precipitation.forecast.0         |  / %  | number |     |       | `/^value\.precipitation(\.forecast\.0)?$/`          |
-|   | PRECIPITATION          | value.precipitation.forecast.0         |  / mm | number |     |       | `/^value\.precipitation(\.forecast\.0)?$/`          |
-|   | DATE                   | date.forecast.0                        |       | string |     |       | `/^date(\.forecast\.0)?$/`                          |
-|   | DOW                    | dayofweek.forecast.0                   |       | string |     |       | `/^dayofweek(\.forecast\.0)?$/`                     |
-|   | STATE                  | weather.state.forecast.0               |       | string |     |       | `/^weather\.state(\.forecast\.0)?$/`                |
-|   | TEMP                   | value.temperature.forecast.0           |       | number |     |       | `/^value\.temperature(\.forecast\.0)?$/`            |
-|   | PRESSURE               | value.pressure.forecast.0              |       | number |     |       | `/^value\.pressure(\.forecast\.0)?$/`               |
-|   | HUMIDITY               | value.humidity.forecast.0              |       | number |     |       | `/^value\.humidity(\.forecast\.0)?$/`               |
-|   | TIME_SUNRISE           | date.sunrise                           |       | string |     |       | `/^(?:date｜time)\.sunrise(?:\.forecast\.0)?$/`      |
-|   | TIME_SUNSET            | date.sunset                            |       | string |     |       | `/^(?:date｜time)\.sunset(?:\.forecast\.0)?$/`       |
-|   | WIND_CHILL             | value.temperature.windchill.forecast.0 |       | number |     |       | `/^value\.temperature\.windchill(\.forecast\.0)?$/` |
-|   | FEELS_LIKE             | value.temperature.feelslike.forecast.0 |       | number |     |       | `/^value\.temperature\.feelslike(\.forecast\.0)?$/` |
-|   | WIND_SPEED             | value.speed.wind.forecast.0            |       | number |     |       | `/^value\.speed\.wind(\.forecast\.0)?$/`            |
-|   | WIND_DIRECTION         | value.direction.wind.forecast.0        |       | number |     |       | `/^value\.direction\.wind(\.forecast\.0)?$/`        |
-|   | WIND_DIRECTION_STR     | weather.direction.wind.forecast.0      |       | string |     |       | `/^weather\.direction\.wind(\.forecast\.0)?$/`      |
-|   | WIND_ICON              | weather.icon.wind.forecast.0           |       | string |     |       | `/^weather\.icon\.wind(\.forecast\.0)?$/`           |
-|   | HISTORY_CHART          | weather.chart.url                      |       | string |     |       | `/^weather\.chart\.url$/`                           |
-|   | FORECAST_CHART         | weather.chart.url.forecast             |       | string |     |       | `/^weather\.chart\.url\.forecast$/`                 |
-|   | LOCATION               | location                               |       | string |     |       | `/^location$/`                                      |
-|   | ICON%d                 |                                        |       | string |     | x     | `/^weather\.icon\.forecast.(\d+)$/`                 |
-|   | TEMP_MIN%d             |                                        |       | number |     | x     | `/^value\.temperature\.min\.forecast\.(\d+)$/`      |
-|   | TEMP_MAX%d             |                                        |       | number |     | x     | `/^value\.temperature\.max\.forecast\.(\d+)$/`      |
-|   | DATE%d                 |                                        |       | string |     | x     | `/^date\.forecast\.(\d+)$/`                         |
-|   | DOW%d                  |                                        |       | string |     | x     | `/^dayofweek\.forecast\.(\d+)$/`                    |
-|   | STATE%d                |                                        |       | string |     | x     | `/^weather\.state\.forecast\.(\d+)$/`               |
-|   | TEMP%d                 |                                        |       | number |     | x     | `/^value\.temperature\.forecast\.(\d+)$/`           |
-|   | HUMIDITY%d             |                                        |       | number |     | x     | `/^value\.humidity\.forecast\.(\d+)$/`              |
-|   | HUMIDITY_MAX%d         |                                        |       | number |     | x     | `/^value\.humidity\.max\.forecast\.(\d+)$/`         |
-|   | PRECIPITATION_CHANCE%d |                                        |  / %  | number |     | x     | `/^value\.precipitation\.forecast\.(\d+)$/`         |
-|   | PRECIPITATION%d        |                                        |  / mm | number |     | x     | `/^value\.precipitation\.forecast\.(\d+)$/`         |
-|   | WIND_SPEED%d           |                                        |       | number |     | x     | `/^value\.speed\.wind\.forecast\.(\d+)$/`           |
-|   | WIND_DIRECTION%d       |                                        |       | number |     | x     | `/^value\.direction\.wind\.forecast\.(\d+)$/`       |
-|   | WIND_DIRECTION_STR%d   |                                        |       | string |     | x     | `/^weather\.direction\.wind\.forecast\.(\d+)$/`     |
-|   | WIND_ICON%d            |                                        |       | string |     | x     | `/^weather\.icon\.wind\.forecast\.(\d+)$/`          |
+| R | Name                   | Role                                   | Unit  | Type          | Ind | Multi | Regex                                               |
+|---|------------------------|----------------------------------------|-------|---------------|-----|-------|-----------------------------------------------------|
+| * | ICON                   | weather.icon.forecast.0                |       | string        |     |       | `/^weather\.icon(\.forecast\.0)?$/`                 |
+| * | TEMP_MIN               | value.temperature.min.forecast.0       |       | number        |     |       | `/^value\.temperature\.min\.forecast\.0$/`          |
+| * | TEMP_MAX               | value.temperature.max.forecast.0       |       | number        |     |       | `/^value\.temperature\.max\.forecast\.0$/`          |
+|   | PRECIPITATION_CHANCE   | value.precipitation.forecast.0         |  / %  | number        |     |       | `/^value\.precipitation(\.forecast\.0)?$/`          |
+|   | PRECIPITATION          | value.precipitation.forecast.0         |  / mm | number        |     |       | `/^value\.precipitation(\.forecast\.0)?$/`          |
+|   | DATE                   | date.forecast.0                        |       | string        |     |       | `/^date(\.forecast\.0)?$/`                          |
+|   | DOW                    | dayofweek.forecast.0                   |       | string        |     |       | `/^dayofweek(\.forecast\.0)?$/`                     |
+|   | STATE                  | weather.state.forecast.0               |       | string        |     |       | `/^weather\.state(\.forecast\.0)?$/`                |
+|   | TEMP                   | value.temperature.forecast.0           |       | number        |     |       | `/^value\.temperature(\.forecast\.0)?$/`            |
+|   | PRESSURE               | value.pressure.forecast.0              |       | number        |     |       | `/^value\.pressure(\.forecast\.0)?$/`               |
+|   | HUMIDITY               | value.humidity.forecast.0              |       | number        |     |       | `/^value\.humidity(\.forecast\.0)?$/`               |
+|   | TIME_SUNRISE           | date.sunrise                           |       | string/number |     |       | `/^(?:date｜time)\.sunrise(?:\.forecast\.0)?$/`      |
+|   | TIME_SUNSET            | date.sunset                            |       | string/number |     |       | `/^(?:date｜time)\.sunset(?:\.forecast\.0)?$/`       |
+|   | WIND_CHILL             | value.temperature.windchill.forecast.0 |       | number        |     |       | `/^value\.temperature\.windchill(\.forecast\.0)?$/` |
+|   | FEELS_LIKE             | value.temperature.feelslike.forecast.0 |       | number        |     |       | `/^value\.temperature\.feelslike(\.forecast\.0)?$/` |
+|   | WIND_SPEED             | value.speed.wind.forecast.0            |       | number        |     |       | `/^value\.speed\.wind(\.forecast\.0)?$/`            |
+|   | WIND_DIRECTION         | value.direction.wind.forecast.0        |       | number        |     |       | `/^value\.direction\.wind(\.forecast\.0)?$/`        |
+|   | WIND_DIRECTION_STR     | weather.direction.wind.forecast.0      |       | string        |     |       | `/^weather\.direction\.wind(\.forecast\.0)?$/`      |
+|   | WIND_ICON              | weather.icon.wind.forecast.0           |       | string        |     |       | `/^weather\.icon\.wind(\.forecast\.0)?$/`           |
+|   | HISTORY_CHART          | weather.chart.url                      |       | string        |     |       | `/^weather\.chart\.url$/`                           |
+|   | FORECAST_CHART         | weather.chart.url.forecast             |       | string        |     |       | `/^weather\.chart\.url\.forecast$/`                 |
+|   | LOCATION               | location                               |       | string        |     |       | `/^location$/`                                      |
+|   | ICON%d                 |                                        |       | string        |     | x     | `/^weather\.icon\.forecast.(\d+)$/`                 |
+|   | TEMP_MIN%d             |                                        |       | number        |     | x     | `/^value\.temperature\.min\.forecast\.(\d+)$/`      |
+|   | TEMP_MAX%d             |                                        |       | number        |     | x     | `/^value\.temperature\.max\.forecast\.(\d+)$/`      |
+|   | DATE%d                 |                                        |       | string        |     | x     | `/^date\.forecast\.(\d+)$/`                         |
+|   | DOW%d                  |                                        |       | string        |     | x     | `/^dayofweek\.forecast\.(\d+)$/`                    |
+|   | STATE%d                |                                        |       | string        |     | x     | `/^weather\.state\.forecast\.(\d+)$/`               |
+|   | TEMP%d                 |                                        |       | number        |     | x     | `/^value\.temperature\.forecast\.(\d+)$/`           |
+|   | PRESSURE%d             |                                        |       | number        |     | x     | `/^value\.pressure\.forecast\.(\d+)?$/`             |
+|   | HUMIDITY%d             |                                        |       | number        |     | x     | `/^value\.humidity\.forecast\.(\d+)$/`              |
+|   | HUMIDITY_MAX%d         |                                        |       | number        |     | x     | `/^value\.humidity\.max\.forecast\.(\d+)$/`         |
+|   | PRECIPITATION_CHANCE%d |                                        |  / %  | number        |     | x     | `/^value\.precipitation\.forecast\.(\d+)$/`         |
+|   | PRECIPITATION%d        |                                        |  / mm | number        |     | x     | `/^value\.precipitation\.forecast\.(\d+)$/`         |
+|   | WIND_SPEED%d           |                                        |       | number        |     | x     | `/^value\.speed\.wind\.forecast\.(\d+)$/`           |
+|   | WIND_DIRECTION%d       |                                        |       | number        |     | x     | `/^value\.direction\.wind\.forecast\.(\d+)$/`       |
+|   | WIND_DIRECTION_STR%d   |                                        |       | string        |     | x     | `/^weather\.direction\.wind\.forecast\.(\d+)$/`     |
+|   | WIND_ICON%d            |                                        |       | string        |     | x     | `/^weather\.icon\.wind\.forecast\.(\d+)$/`          |
+|   | TIME_SUNRISE%d         |                                        |       | string/number |     | x     | `/^(?:date｜time)\.sunrise(?:\.forecast\.(\d+))?$/`  |
+|   | TIME_SUNSET%d          |                                        |       | string/number |     | x     | `/^(?:date｜time)\.sunset(?:\.forecast\.(\d+))?$/`   |
 
 
 ### Window sensor [window]

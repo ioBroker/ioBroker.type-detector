@@ -428,6 +428,42 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it('Must detect forecast from pirate-weather including sunrise', done => {
+        const controls = detect('./weather_pirate-weather.json', {
+            id: 'pirate-weather.0.weather.daily',
+        });
+
+        const detectionDef = {
+            ICON: 'pirate-weather.0.weather.daily.00.iconUrl',
+            WIND_SPEED: 'pirate-weather.0.weather.daily.00.windSpeed',
+            WIND_DIRECTION: 'pirate-weather.0.weather.daily.00.windBearing',
+            WIND_DIRECTION_STR: 'pirate-weather.0.weather.daily.00.windBearingText',
+            HUMIDITY: 'pirate-weather.0.weather.daily.00.humidity',
+            PRESSURE: 'pirate-weather.0.weather.daily.00.pressure',
+            TEMP_MIN: ['pirate-weather.0.weather.daily.00.temperatureMin', 'pirate-weather.0.weather.daily.00.temperatureLow'],
+            TEMP_MAX: ['pirate-weather.0.weather.daily.00.temperatureMax', 'pirate-weather.0.weather.daily.00.temperatureHigh'],
+            TIME_SUNRISE: 'pirate-weather.0.weather.daily.00.sunriseTime',
+            TIME_SUNSET: 'pirate-weather.0.weather.daily.00.sunsetTime',
+        };
+        const days = [1, 2, 3, 4];
+        for (const day of days) {
+            detectionDef[`ICON${day}`] = `pirate-weather.0.weather.daily.0${day}.iconUrl`;
+            detectionDef[`WIND_SPEED${day}`] = `pirate-weather.0.weather.daily.0${day}.windSpeed`;
+            detectionDef[`WIND_DIRECTION${day}`] = `pirate-weather.0.weather.daily.0${day}.windBearing`;
+            detectionDef[`WIND_DIRECTION_STR${day}`] = `pirate-weather.0.weather.daily.0${day}.windBearingText`;
+            detectionDef[`HUMIDITY${day}`] = `pirate-weather.0.weather.daily.0${day}.humidity`;
+            detectionDef[`PRESSURE${day}`] = `pirate-weather.0.weather.daily.0${day}.pressure`;
+            detectionDef[`TEMP_MIN${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMin`, `pirate-weather.0.weather.daily.0${day}.temperatureLow`];
+            detectionDef[`TEMP_MAX${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMax`, `pirate-weather.0.weather.daily.0${day}.temperatureHigh`];
+            detectionDef[`TIME_SUNRISE${day}`] = `pirate-weather.0.weather.daily.0${day}.sunriseTime`;
+            detectionDef[`TIME_SUNSET${day}`] = `pirate-weather.0.weather.daily.0${day}.sunsetTime`;
+        }
+
+        validate(controls[0], Types.weatherForecast, detectionDef, true);
+
+        done();
+    });
+
     it('Must detect blinds correctly', done => {
         const controls = detect('./blinds.json', {
             id: 'hm-rpc.1.00AAABBBA74CCC.4',
@@ -1048,13 +1084,14 @@ describe(`${name} Test Detector`, () => {
             detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length === 4, 'Should detect 4 states for dimmer with power switch');
+        expect(states.length === 5, 'Should detect 5 states for dimmer with power switch');
 
         validate(controls[0], Types.rgbSingle, {
             RGB: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
             DIMMER: 'nanoleaf-lightpanels.3.Shapes.brightness',
             TEMPERATURE: 'nanoleaf-lightpanels.3.Shapes.colorTemp',
             ON: 'nanoleaf-lightpanels.3.Shapes.state',
+            EFFECT: 'nanoleaf-lightpanels.3.Shapes.effect',
         });
 
         done();
@@ -1115,6 +1152,7 @@ describe(`${name} Test Detector`, () => {
             SATURATION: 'hue.0.Hue_Küche_Küchezeile.sat',
             TEMPERATURE: 'hue.0.Hue_Küche_Küchezeile.ct',
             ON: 'hue.0.Hue_Küche_Küchezeile.on',
+            EFFECT: undefined, //since state does not have common.states defined
         });
 
         done();
