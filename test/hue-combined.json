@@ -173,7 +173,7 @@
       "name": "Hue Küche Küchezeile.effect",
       "read": true,
       "write": true,
-      "role": "text",
+      "role": "level.effect",
       "def": "none"
     },
     "native": {
