@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Media player was extended with player's name and type
+
 ### 5.0.10 (2026-02-05)
 -   (@Garfonso) Corrected `ACTUAL` state for the socket device
 -   (@Garfonso) Allowed timestamp for TIME_SUNRISE
