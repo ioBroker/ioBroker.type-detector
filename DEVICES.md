@@ -550,6 +550,8 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | VOLUME        | level.volume                 | %    | number         | W  | m   | M   |     |       | `/^level(\.volume)?$/`                            |
 |   | VOLUME_ACTUAL | value.volume                 | %    | number         | -  | m   | M   |     |       | `/^value(\.volume)?$/`                            |
 |   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                              |
+|   | PLAYER_NAME   | media.player.name            |      | string         |    |     |     |     |       | `/^media\.player\.name$/ `                        |
+|   | PLAYER_TYPE   | media.player.type            |      | string         |    |     |     |     |       | `/^media\.player\.type/ `                         |
 |   | IGNORE        |                              |      |                |    |     |     |     | x     |                                                   |
 |   | CONNECTED     | indicator.reachable          |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                        |
 |   | LOWBAT        | indicator.maintenance.lowbat |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
