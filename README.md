@@ -1,7 +1,7 @@
 # ioBroker.type-detector
 
 This is not the adapter.
-This is help function to detect devices from ioBroker states and channels.
+This is a help function to detect devices from ioBroker states and channels.
 
 You can find the description of devices in [DEVICES.md](DEVICES.md).
 
@@ -11,7 +11,7 @@ You can find the description of devices in [DEVICES.md](DEVICES.md).
 
 You can use this module in Browser and in Node.js projects.
 
-Just now this module used in material adapter to detect devices and to visualize them.
+Just now this module is used in material adapter to detect devices and to visualize them.
 
 The following code detects devices in some state's tree:
 
