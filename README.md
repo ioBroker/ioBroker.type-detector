@@ -121,7 +121,7 @@ if (controls) {
 -   (@GermanBluefox) Improved detection of devices if the structure has more than one control inside
 
 ### 4.6.1 (2025-10-21)
--   (@GermanBluefox) Added new flag to detect only in the current channel (one level)
+-   (@GermanBluefox) Added a new flag to detect only in the current channel (one level)
 
 ### 4.6.0 (2025-10-19)
 -   (@GermanBluefox) Correcting detection of states consists only of one state
@@ -160,12 +160,12 @@ if (controls) {
 -   (@GermanBluefox) Added detection of `level.direction`
 -   (@Apollon77) Added door state for device type "lock"
 -   (@Apollon77) Added default unit for volume states
--   (@Apollon77) Added new option ignoreEnums to execute the detection without enums-matching logic
--   (@Apollon77) Added new option detectAllPossibleDevices to detect multiple devices in one run without checking for already used IDs
+-   (@Apollon77) Added a new option ignoreEnums to execute the detection without enums-matching logic
+-   (@Apollon77) Added a new option detectAllPossibleDevices to detect multiple devices in one run without checking for already used IDs
 -   (@Garfonso) Added missing default roles and units for saturation
 
 ### 4.1.1 (2024-12-15)
--   (@Apollon77) Fixed default unit for Illuminance to "lux"
+-   (@Apollon77) Fixed the default unit for Illuminance to "lux"
 -   (@Apollon77) Added Low-Battery state for switch to be consistent with other devices
 
 ### 4.1.0 (2024-12-06)
@@ -176,7 +176,7 @@ if (controls) {
 -   (@Garfonso) Allowed the mixed `device->state` and `device->channel->state` structures
 -   (@GermanBluefox) Used a new eslint config library
 -   (@GermanBluefox) Types were slightly changed
--   (Apollon77) Removed File state type
+-   (Apollon77) Removed a file state type
 -   (Apollon77) Adjusted Camera states to remove Binary state and replace by link
 -   (Apollon77) Fixed role for ACTUAL state for socket
 
@@ -311,7 +311,7 @@ if (controls) {
 
 ### 0.1.1 (2019-06-29)
 
--   (kirovilya) In some cases, devices may not have channels, but immediately have a states. For example, in the zigbee-adapter.
+-   (kirovilya) In some cases, devices may not have channels but immediately have a state. For example, in the zigbee-adapter.
 
 ### 0.1.1 (2019-05-24)
 
