@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### 5.0.11 (2026-03-26)
+### **WORK IN PROGRESS**
 -   (@GermanBluefox) Media player was extended with player's name and type
 
 ### 5.0.10 (2026-02-05)

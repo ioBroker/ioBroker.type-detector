@@ -401,7 +401,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 role: /^media\.player\.name$/,
                 indicator: false,
                 type: StateType.String,
-                write: false,
                 name: 'PLAYER_NAME',
                 required: false,
                 notSingle: true,
@@ -417,7 +416,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 notSingle: true,
                 defaultRole: 'media.player.type',
             },
-            // Ignore the following states of chromecast
+            // Ignore the following states of Chromecast
             {
                 stateName: /\.(paused|playerState)$/,
                 indicator: false,
