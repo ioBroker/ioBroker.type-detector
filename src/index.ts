@@ -23,6 +23,7 @@
  */
 
 import { ChannelDetector } from './ChannelDetector';
+export { roleOrEnumLight, roleOrEnumBlind, roleOrEnumWindow, roleOrEnumDoor, roleOrEnumGate } from './roleEnumUtils';
 
 export default ChannelDetector;
 export {

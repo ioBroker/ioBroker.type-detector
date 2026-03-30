@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added to export the detection function from roleEnumUtils (used in iot)
+
 ### 5.0.11 (2026-03-26)
 -   (@GermanBluefox) Media player was extended with player's name and type
 
