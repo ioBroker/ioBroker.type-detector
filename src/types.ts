@@ -125,13 +125,13 @@ export interface InternalDetectorState {
     /** RegEx to detect role */
     role?: RegExp;
 
-    /** RegEx to detect channel role of state */
+    /** RegEx to detect a channel role of state */
     channelRole?: RegExp;
 
     /** RegEx to ignore some specific roles */
     ignoreRole?: RegExp;
 
-    /** Is it will be shown like a small icon or as a value */
+    /** If it will be shown like a small icon or as a value */
     indicator?: boolean;
 
     /** State type: 'number', 'string' or 'boolean' or array of possible values */
@@ -140,10 +140,10 @@ export interface InternalDetectorState {
     /** Own TAG of the state to process it in the logic */
     name: string;
 
-    /** If set to true or false, it will be checked the write attribute, if no attribute, so "false" will be assumed */
+    /** If set to true or false, it will be checked the writing attribute, if no attribute, so "false" will be assumed */
     write?: boolean;
 
-    /** If set to true or false, it will be checked the write attribute, if no attribute, so "true" will be assumed */
+    /** If set to true or false, it will be checked the writing attribute, if no attribute, so "true" will be assumed */
     read?: boolean;
 
     /** Type of attribute: number', 'string' or 'boolean'. This attribute must exist in common */
@@ -152,7 +152,7 @@ export interface InternalDetectorState {
     /** Type of attribute: number', 'string' or 'boolean'. This attribute must exist in common */
     max?: StateType;
 
-    /** If true, the State object has to have common.states defined */
+    /** If true, the State object has to have "common.states" defined */
     statesDefined?: boolean;
 
     /** If required to detect the pattern as valid */
@@ -167,7 +167,7 @@ export interface InternalDetectorState {
     /** Function to execute custom category detection */
     enums?: (obj: ioBroker.Object, enums: string[]) => boolean;
 
-    /** If more than one state may have this pattern in channel */
+    /** If more than one state may have this pattern in a channel */
     multiple?: boolean;
 
     /** Do not search indicators in a parent device */
@@ -176,7 +176,7 @@ export interface InternalDetectorState {
     /** This state may belong to more than one tile simultaneously (e.g., volume tile and media with volume) */
     notSingle?: boolean;
 
-    /** If the state of indicator must be inverted */
+    /** If the state of the indicator must be inverted */
     inverted?: boolean;
 
     /** Regex for state names (IDs). Not suggested */
@@ -211,7 +211,7 @@ export interface InternalDetectorState {
     objectType?: string;
 
     /**
-     * If set then the regex needs to match with the last-level-state-name (the one after the
+     * If set, then the regex needs to match with the last-level-state-name (the one after the
      * last ".")
      */
     state?: RegExp;
@@ -233,7 +233,7 @@ export interface DetectOptions {
     /** ID to detect of state, device or channel */
     id: string;
 
-    /** List of state names, that will be ignored. e.g., ['UNREACH_STICKY'] */
+    /** List of state names that will be ignored. e.g., ['UNREACH_STICKY'] */
     ignoreIndicators?: string[];
 
     /** List of allowed types. e.g., ['slider', 'rgbSingle'] */
@@ -265,8 +265,8 @@ export interface DetectOptions {
     ignoreEnums?: boolean;
 
     /**
-     * If true, the usedIds will be ignored and all wanted types are detected with all available states. Only use for
-     * limited object cases. It automatically excludes "info" type
+     * If true, the usedIds will be ignored and all wanted types are detected with all available states. Only used for
+     * limited object cases. It automatically excludes the "info" type
      */
     detectAllPossibleDevices?: boolean;
 
@@ -278,7 +278,7 @@ export interface DetectOptions {
     /** Look only in one level above. The flag will be ignored if detectParent is set */
     detectOnlyChannel?: boolean;
 
-    // Internally used infos and caches
+    // Internally used info and caches
 
     /** For optimization, it is Object.keys(objects) */
     _keysOptional?: string[];
@@ -286,10 +286,10 @@ export interface DetectOptions {
     /** For optimization, if the provided _keysOptional are sorted */
     _keysOptionalSorted?: boolean;
 
-    /** For optimization, initially it is empty array */
+    /** For optimization, initially it is an empty array */
     _usedIdsOptional?: string[];
 
-    /** For optimization, initially it is empty array */
+    /** For optimization, initially it is an empty array */
     _checkedPatterns?: PatternName[];
 
     /** For optimization, internal list of patterns order to process */

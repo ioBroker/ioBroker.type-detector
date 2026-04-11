@@ -251,7 +251,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.Boolean,
                 name: 'SHUFFLE',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.mode.shuffle',
             },
             {
@@ -261,7 +260,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.Number,
                 name: 'REPEAT',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.mode.repeat',
             },
             {
@@ -318,7 +316,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.Number,
                 name: 'DURATION',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.duration',
                 defaultUnit: 'sec',
             },
@@ -328,7 +325,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.Number,
                 name: 'ELAPSED',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.elapsed',
                 defaultUnit: 'sec',
             },
@@ -339,7 +335,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.Number,
                 name: 'SEEK',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.seek',
             },
             {
@@ -348,7 +343,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.String,
                 name: 'TRACK',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.track',
             },
             {
@@ -357,7 +351,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.String,
                 name: 'EPISODE',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.episode',
             },
             {
@@ -366,7 +359,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 type: StateType.String,
                 name: 'SEASON',
                 required: false,
-                noSubscribe: true,
                 defaultRole: 'media.season',
             },
             {
@@ -379,7 +371,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'VOLUME',
                 required: false,
                 notSingle: true,
-                noSubscribe: true,
                 defaultRole: 'level.volume',
                 defaultUnit: '%',
             },
@@ -393,7 +384,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'VOLUME_ACTUAL',
                 required: false,
                 notSingle: true,
-                noSubscribe: true,
                 defaultRole: 'value.volume',
                 defaultUnit: '%',
             },
@@ -405,10 +395,28 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'MUTE',
                 required: false,
                 notSingle: true,
-                noSubscribe: true,
                 defaultRole: 'media.mute',
             },
-            // Ignore the following states of chromecast
+            {
+                role: /^media\.player\.name$/,
+                indicator: false,
+                type: StateType.String,
+                name: 'PLAYER_NAME',
+                required: false,
+                notSingle: true,
+                defaultRole: 'media.player.name',
+            },
+            {
+                role: /^media\.player\.type/,
+                indicator: false,
+                type: StateType.String,
+                write: false,
+                name: 'PLAYER_TYPE',
+                required: false,
+                notSingle: true,
+                defaultRole: 'media.player.type',
+            },
+            // Ignore the following states of Chromecast
             {
                 stateName: /\.(paused|playerState)$/,
                 indicator: false,
