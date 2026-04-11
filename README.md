@@ -1,7 +1,7 @@
 # ioBroker.type-detector
 
 This is not the adapter.
-This is help function to detect devices from ioBroker states and channels.
+This is a help function to detect devices from ioBroker states and channels.
 
 You can find the description of devices in [DEVICES.md](DEVICES.md).
 
@@ -11,7 +11,7 @@ You can find the description of devices in [DEVICES.md](DEVICES.md).
 
 You can use this module in Browser and in Node.js projects.
 
-Just now this module used in material adapter to detect devices and to visualize them.
+Just now this module is used in material adapter to detect devices and to visualize them.
 
 The following code detects devices in some state's tree:
 
@@ -99,6 +99,9 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added to export the detection function from roleEnumUtils (used in iot)
+
+### 5.0.11 (2026-03-26)
 -   (@GermanBluefox) Media player was extended with player's name and type
 
 ### 5.0.10 (2026-02-05)
@@ -118,7 +121,7 @@ if (controls) {
 -   (@GermanBluefox) Improved detection of devices if the structure has more than one control inside
 
 ### 4.6.1 (2025-10-21)
--   (@GermanBluefox) Added new flag to detect only in the current channel (one level)
+-   (@GermanBluefox) Added a new flag to detect only in the current channel (one level)
 
 ### 4.6.0 (2025-10-19)
 -   (@GermanBluefox) Correcting detection of states consists only of one state
@@ -157,12 +160,12 @@ if (controls) {
 -   (@GermanBluefox) Added detection of `level.direction`
 -   (@Apollon77) Added door state for device type "lock"
 -   (@Apollon77) Added default unit for volume states
--   (@Apollon77) Added new option ignoreEnums to execute the detection without enums-matching logic
--   (@Apollon77) Added new option detectAllPossibleDevices to detect multiple devices in one run without checking for already used IDs
+-   (@Apollon77) Added a new option ignoreEnums to execute the detection without enums-matching logic
+-   (@Apollon77) Added a new option detectAllPossibleDevices to detect multiple devices in one run without checking for already used IDs
 -   (@Garfonso) Added missing default roles and units for saturation
 
 ### 4.1.1 (2024-12-15)
--   (@Apollon77) Fixed default unit for Illuminance to "lux"
+-   (@Apollon77) Fixed the default unit for Illuminance to "lux"
 -   (@Apollon77) Added Low-Battery state for switch to be consistent with other devices
 
 ### 4.1.0 (2024-12-06)
@@ -173,7 +176,7 @@ if (controls) {
 -   (@Garfonso) Allowed the mixed `device->state` and `device->channel->state` structures
 -   (@GermanBluefox) Used a new eslint config library
 -   (@GermanBluefox) Types were slightly changed
--   (Apollon77) Removed File state type
+-   (Apollon77) Removed a file state type
 -   (Apollon77) Adjusted Camera states to remove Binary state and replace by link
 -   (Apollon77) Fixed role for ACTUAL state for socket
 
@@ -308,7 +311,7 @@ if (controls) {
 
 ### 0.1.1 (2019-06-29)
 
--   (kirovilya) In some cases, devices may not have channels, but immediately have a states. For example, in the zigbee-adapter.
+-   (kirovilya) In some cases, devices may not have channels but immediately have a state. For example, in the zigbee-adapter.
 
 ### 0.1.1 (2019-05-24)
 

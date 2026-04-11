@@ -122,7 +122,7 @@ export enum StateType {
 }
 
 export interface InternalDetectorState {
-    /** RegEx to detect role */
+    /** RegEx to detect a role */
     role?: RegExp;
 
     /** RegEx to detect a channel role of state */
@@ -131,7 +131,7 @@ export interface InternalDetectorState {
     /** RegEx to ignore some specific roles */
     ignoreRole?: RegExp;
 
-    /** If it will be shown like a small icon or as a value */
+    /** If it is shown like a small icon or as a value */
     indicator?: boolean;
 
     /** State type: 'number', 'string' or 'boolean' or array of possible values */
@@ -243,7 +243,7 @@ export interface DetectOptions {
     excludedTypes?: Types[];
 
     /**
-     * List of types that when detected also limit other types,
+     * List of types that when detected also limit other types
      * e.g. [[Types.light, Types.ct, Types.rgb, Types.rgbSingle, Types.rgbwSingle, Types.hue, Types.cie]] limits detection to one lighting type.
      */
     limitTypesToOneOf?: PatternName[][];
