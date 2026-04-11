@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2025 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2026 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import type { PatternLanguages, PatternWords } from './types';
+import type { PatternLanguages, PatternWords } from './types.js';
 
 export function checkEnum(enums: string[], words: PatternWords): boolean {
     let found = false;

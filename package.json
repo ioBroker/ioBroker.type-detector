@@ -6,6 +6,7 @@
     "name": "bluefox",
     "email": "dogafox@gmail.com"
   },
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
@@ -31,7 +32,13 @@
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.type-detector/issues"
   },
-  "main": "build/index.js",
+  "main": "build/index.cjs",
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js",
+      "require": "./build/index.cjs"
+    }
+  },
   "files": [
     "LICENSE",
     "build/"
@@ -43,8 +50,9 @@
     "lint": "eslint -c eslint.config.mjs",
     "watch": "mocha --watch",
     "build:ts": "tsc -p tsconfig.build.json",
+    "build:cjs": "tsc -p tsconfig.build.cjs.json && mv build/index.js build/index.cjs",
     "build:doc": "node lib/createMd",
-    "build": "npm run build:ts && npm run build:doc",
+    "build": "npm run build:ts && npm run build:cjs && npm run build:doc",
     "release": "release-script --noPush -y",
     "npm": "npm i -f && cd src-test-gui && npm i -f"
   },

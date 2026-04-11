@@ -1,6 +1,6 @@
-const ChannelDetectorImport = require('../build/index');
-const ChannelDetector = ChannelDetectorImport.default;
-const Types = ChannelDetectorImport.Types;
+import ChannelDetector from '../build/index.js';
+import { Types } from '../build/index.js';
+
 const name = 'TS';
 
 function expect(condition, message) {
@@ -22,11 +22,11 @@ function expectStateToHaveId(states, name, id, alternativeId) {
     }
 }
 
-function detect(objectDef, options = {}) {
+async function detect(objectDef, options = {}) {
     const detector = new ChannelDetector();
 
     if (!options.objects) {
-        const objects = typeof objectDef === 'string' ? require(objectDef) : objectDef;
+        const objects = typeof objectDef === 'string' ? (await import(objectDef, { with: { type: 'json' } })).default : objectDef;
         Object.keys(objects).forEach(id => (objects[id]._id = id));
 
         options.objects = objects;
@@ -66,7 +66,7 @@ function validate(data, detectedType, detectedFields, ignoreAdditionalDetectedSt
 }
 
 describe(`${name} Test Detector`, () => {
-    it(`${name} Must detect humidity sensor from channel`, done => {
+    it(`${name} Must detect humidity sensor from channel`, async () => {
         const objects = {
             'ham.0.TemperatureAndHumidity': {
                 common: {
@@ -89,18 +89,16 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'ham.0.TemperatureAndHumidity',
         });
 
         validate(controls[0], Types.humidity, {
             ACTUAL: 'ham.0.TemperatureAndHumidity.Current-Relative-Humidity',
         });
-
-        done();
     });
 
-    it('Must detect nothing if not all required states are defined', done => {
+    it('Must detect nothing if not all required states are defined', async () => {
         const objects = {
             'something.0.channel': {
                 common: {
@@ -120,16 +118,14 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'something.0.channel',
         });
 
         expect(controls === null, 'No controls expected');
-
-        done();
     });
 
-    it('Must detect humidity sensor from state', done => {
+    it('Must detect humidity sensor from state', async () => {
         const objects = {
             'ham.0.TemperatureAndHumidity.Current-Relative-Humidity': {
                 common: {
@@ -146,18 +142,16 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'ham.0.TemperatureAndHumidity.Current-Relative-Humidity',
         });
 
         validate(controls[0], Types.humidity, {
             ACTUAL: 'ham.0.TemperatureAndHumidity.Current-Relative-Humidity',
         });
-
-        done();
     });
 
-    it('Must detect humidity sensor from state when searching non existent parent', done => {
+    it('Must detect humidity sensor from state when searching non existent parent', async () => {
         const objects = {
             'ham.0.TemperatureAndHumidity.Current-Relative-Humidity': {
                 common: {
@@ -174,18 +168,16 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'ham.0.TemperatureAndHumidity',
         });
 
         validate(controls[0], Types.humidity, {
             ACTUAL: 'ham.0.TemperatureAndHumidity.Current-Relative-Humidity',
         });
-
-        done();
     });
 
-    it('Must detect air conditioner sensor from channel', done => {
+    it('Must detect air conditioner sensor from channel', async () => {
         const objects = {
             'alias.0.Hauptzimmer.AC': {
                 common: {
@@ -250,7 +242,7 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'alias.0.Hauptzimmer.AC',
             //allowedTypes:       [Types.airCondition], // for tests
         });
@@ -260,12 +252,10 @@ describe(`${name} Test Detector`, () => {
             SET: 'alias.0.Hauptzimmer.AC.SET',
             MODE: 'alias.0.Hauptzimmer.AC.MODE',
         });
-
-        done();
     });
 
-    it('Must detect vacuum mihome from states', done => {
-        const controls = detect('./mihome-vacuum.0.json', {
+    it('Must detect vacuum mihome from states', async () => {
+        const controls = await detect('./mihome-vacuum.0.json', {
             id: 'mihome-vacuum.0',
         });
 
@@ -282,23 +272,19 @@ describe(`${name} Test Detector`, () => {
             SENSORS: 'mihome-vacuum.0.consumable.sensors',
             SIDE_BRUSH: 'mihome-vacuum.0.consumable.side_brush',
         });
-
-        done();
     });
 
-    it('Must detect cameras from states', done => {
-        const controls = detect('./cameras.0.cameras.json', {
+    it('Must detect cameras from states', async () => {
+        const controls = await detect('./cameras.0.cameras.json', {
             id: 'cameras.0.cameras',
         });
 
         validate(controls[0], Types.camera, {
             URL: 'cameras.0.cameras.cam1',
         });
-
-        done();
     });
 
-    it('Must detect charts from states', done => {
+    it('Must detect charts from states', async () => {
         const objects = {
             'echarts.0.Place.PresetMy': {
                 common: {
@@ -313,31 +299,27 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'echarts.0.Place.PresetMy',
         });
 
         validate(controls[0], Types.chart, {
             CHART: 'echarts.0.Place.PresetMy',
         });
-
-        done();
     });
 
-    it('Must detect fire sensor from states', done => {
-        const controls = detect('./fireSensor.json', {
+    it('Must detect fire sensor from states', async () => {
+        const controls = await detect('./fireSensor.json', {
             id: 'alias.0.MyFolder.Gerät_1',
         });
 
         validate(controls[0], Types.fireAlarm, {
             ACTUAL: 'alias.0.MyFolder.Gerät_1.ACTUAL',
         });
-
-        done();
     });
 
-    it('Must detect forecast from accuweather and assign days correctly', done => {
-        const controls = detect('./weather_accuweather.json', {
+    it('Must detect forecast from accuweather and assign days correctly', async () => {
+        const controls = await detect('./weather_accuweather.json', {
             id: 'accuweather.0.Summary',
         });
 
@@ -371,12 +353,10 @@ describe(`${name} Test Detector`, () => {
         }
 
         validate(controls[0], Types.weatherForecast, detectionDef, true);
-
-        done();
     });
 
-    it('Must detect forecast from dasWetter and assign days correctly', done => {
-        const controls = detect('./weather_daswetter.json', {
+    it('Must detect forecast from dasWetter and assign days correctly', async () => {
+        const controls = await detect('./weather_daswetter.json', {
             id: 'daswetter.0.NextDays.Location_1',
         });
 
@@ -394,12 +374,10 @@ describe(`${name} Test Detector`, () => {
         }
 
         validate(controls[0], Types.weatherForecast, detectionDef, true);
-
-        done();
     });
 
-    it('Must detect forecast from weatherunderground and assign days correctly', done => {
-        const controls = detect('./weather_weatherunderground.json', {
+    it('Must detect forecast from weatherunderground and assign days correctly', async () => {
+        const controls = await detect('./weather_weatherunderground.json', {
             id: 'weatherunderground.0.forecast',
         });
 
@@ -424,12 +402,10 @@ describe(`${name} Test Detector`, () => {
         }
 
         validate(controls[0], Types.weatherForecast, detectionDef, true);
-
-        done();
     });
 
-    it('Must detect forecast from pirate-weather including sunrise', done => {
-        const controls = detect('./weather_pirate-weather.json', {
+    it('Must detect forecast from pirate-weather including sunrise', async () => {
+        const controls = await detect('./weather_pirate-weather.json', {
             id: 'pirate-weather.0.weather.daily',
         });
 
@@ -460,12 +436,10 @@ describe(`${name} Test Detector`, () => {
         }
 
         validate(controls[0], Types.weatherForecast, detectionDef, true);
-
-        done();
     });
 
-    it('Must detect blinds correctly', done => {
-        const controls = detect('./blinds.json', {
+    it('Must detect blinds correctly', async () => {
+        const controls = await detect('./blinds.json', {
             id: 'hm-rpc.1.00AAABBBA74CCC.4',
         });
 
@@ -474,24 +448,20 @@ describe(`${name} Test Detector`, () => {
             STOP: 'hm-rpc.1.00AAABBBA74CCC.4.STOP',
             UNREACH: 'hm-rpc.1.00AAABBBA74CCC.0.UNREACH',
         });
-
-        done();
     });
 
-    it(`${name} Must detect light correctly`, done => {
-        const controls = detect('./light.json', {
+    it(`${name} Must detect light correctly`, async () => {
+        const controls = await detect('./light.json', {
             id: 'alias.0.Schlafzimmer.Licht.SET',
         });
 
         validate(controls[0], Types.light, {
             SET: 'alias.0.Schlafzimmer.Licht.SET',
         });
-
-        done();
     });
 
-    it(`${name} Must detect light correctly with allowedTypes`, done => {
-        const controls = detect('./huergb.json', {
+    it(`${name} Must detect light correctly with allowedTypes`, async () => {
+        const controls = await detect('./huergb.json', {
             id: 'hue.0.Büro',
             allowedTypes: [Types.dimmer],
         });
@@ -500,12 +470,10 @@ describe(`${name} Test Detector`, () => {
             ON_SET: 'hue.0.Büro.on',
             SET: 'hue.0.Büro.level',
         });
-
-        done();
     });
 
-    it(`${name} Must detect multiple types`, done => {
-        const controls = detect('./multi-detect.json', {
+    it(`${name} Must detect multiple types`, async () => {
+        const controls = await detect('./multi-detect.json', {
             id: 'hm-rpc.0.001658A99FD264.2',
             ignoreEnums: true,
             detectAllPossibleDevices: true,
@@ -531,24 +499,20 @@ describe(`${name} Test Detector`, () => {
             SET: 'hm-rpc.0.001658A99FD264.2.STOP',
         });
         expect(controls[3].states.filter(({ id }) => !!id).length === 1, 'Button should have 1 state detected');
-
-        done();
     });
 
-    it(`${name} Must detect percentage correctly`, done => {
-        const controls = detect('./percentage.json', {
+    it(`${name} Must detect percentage correctly`, async () => {
+        const controls = await detect('./percentage.json', {
             id: 'hm-rpc.0.001658A99FD264.2.PERCENTAGE',
         });
 
         validate(controls[0], Types.percentage, {
             SET: 'hm-rpc.0.001658A99FD264.2.PERCENTAGE',
         });
-
-        done();
     });
 
-    it(`${name} Must detect rgb correctly`, done => {
-        const controls = detect('./huergb.json', {
+    it(`${name} Must detect rgb correctly`, async () => {
+        const controls = await detect('./huergb.json', {
             id: 'hue.0.Büro',
         });
 
@@ -560,12 +524,10 @@ describe(`${name} Test Detector`, () => {
             BLUE: 'hue.0.Büro.b',
             TEMPERATURE: 'hue.0.Büro.ct',
         });
-
-        done();
     });
 
-    it(`${name} Must detect lock correctly`, done => {
-        const controls = detect('./lock.json', {
+    it(`${name} Must detect lock correctly`, async () => {
+        const controls = await detect('./lock.json', {
             id: 'hm-rpc.0.LEQ090XYZ.1',
         });
 
@@ -576,12 +538,10 @@ describe(`${name} Test Detector`, () => {
             DIRECTION: 'hm-rpc.0.LEQ090XYZ.1.DIRECTION',
             ERROR: 'hm-rpc.0.LEQ090XYZ.1.ERROR',
         });
-
-        done();
     });
 
-    it(`${name} Must detect thermostat correctly when device is used`, done => {
-        const controls = detect('./hm-thermostat.json', {
+    it(`${name} Must detect thermostat correctly when device is used`, async () => {
+        const controls = await detect('./hm-thermostat.json', {
             id: 'hm-rpc.1.JEQ0XXXXXX',
         });
 
@@ -593,16 +553,14 @@ describe(`${name} Test Detector`, () => {
             UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
             LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
         });
-
-        done();
     });
 
-    it(`${name} Must detect sub channels directly when executed by channel`, done => {
+    it(`${name} Must detect sub channels directly when executed by channel`, async () => {
         const options = {
             id: 'hm-rpc.1.JEQ0XXXXXX.1',
         };
 
-        const controls = detect('./hm-thermostat.json', options);
+        const controls = await detect('./hm-thermostat.json', options);
 
         validate(controls[0], Types.temperature, {
             ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
@@ -613,7 +571,7 @@ describe(`${name} Test Detector`, () => {
 
         options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
 
-        const controls2 = detect('./hm-thermostat.json', options);
+        const controls2 = await detect('./hm-thermostat.json', options);
 
         validate(controls2[0], Types.thermostat, {
             SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
@@ -623,17 +581,15 @@ describe(`${name} Test Detector`, () => {
             UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.STICKY_UNREACH',
             LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
         });
-
-        done();
     });
 
-    it(`${name} Must detect one device only also when starting on channel when using checkParent option`, done => {
+    it(`${name} Must detect one device only also when starting on channel when using checkParent option`, async () => {
         const options = {
             id: 'hm-rpc.1.JEQ0XXXXXX.1',
             detectParent: true,
         };
 
-        const controls = detect('./hm-thermostat.json', options);
+        const controls = await detect('./hm-thermostat.json', options);
 
         validate(controls[0], Types.thermostat, {
             SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
@@ -646,19 +602,17 @@ describe(`${name} Test Detector`, () => {
 
         options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
 
-        const controls2 = detect('./hm-thermostat.json', options);
+        const controls2 = await detect('./hm-thermostat.json', options);
         expect(controls2 === null, 'No controls expected');
 
         options.id = 'hm-rpc.1.JEQ0XXXXXX';
 
-        const controls3 = detect('./hm-thermostat.json', options);
+        const controls3 = await detect('./hm-thermostat.json', options);
         expect(controls3 === null, 'No controls expected');
-
-        done();
     });
 
-    it(`${name} Must detect one device only still when starting on channel when using checkParent option`, done => {
-        const controls = detect('./hm-thermostat.json', {
+    it(`${name} Must detect one device only still when starting on channel when using checkParent option`, async () => {
+        const controls = await detect('./hm-thermostat.json', {
             id: 'hm-rpc.1.JEQ0XXXXXX',
             detectParent: true,
         });
@@ -673,12 +627,10 @@ describe(`${name} Test Detector`, () => {
             },
             true,
         );
-
-        done();
     });
 
-    it(`${name} Must detect rgb light correctly when device is used with normal prioritization`, done => {
-        const controls = detect('./zigbee.0.AAAAAAA.json', {
+    it(`${name} Must detect rgb light correctly when device is used with normal prioritization`, async () => {
+        const controls = await detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA',
         });
 
@@ -690,12 +642,10 @@ describe(`${name} Test Detector`, () => {
             TEMPERATURE: 'zigbee.0.AAAAAAA.colortemp',
             ON: 'zigbee.0.AAAAAAA.state',
         });
-
-        done();
     });
 
-    it(`${name} Must detect rgb light correctly when state in device is and device detected with normal prioritization`, done => {
-        const controls = detect('./zigbee.0.AAAAAAA.json', {
+    it(`${name} Must detect rgb light correctly when state in device is and device detected with normal prioritization`, async () => {
+        const controls = await detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA',
             detectParent: true,
         });
@@ -708,12 +658,10 @@ describe(`${name} Test Detector`, () => {
             TEMPERATURE: 'zigbee.0.AAAAAAA.colortemp',
             ON: 'zigbee.0.AAAAAAA.state',
         });
-
-        done();
     });
 
-    it(`${name} Must detect rgb light correctly when state in channel is used`, done => {
-        const controls = detect('./zigbee.0.AAAAAAA.json', {
+    it(`${name} Must detect rgb light correctly when state in channel is used`, async () => {
+        const controls = await detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA.color_rgb',
         });
 
@@ -725,12 +673,10 @@ describe(`${name} Test Detector`, () => {
             TEMPERATURE: undefined,
             ON: undefined,
         });
-
-        done();
     });
 
-    it(`${name} Must detect rgb light correctly when state in channel below device is and device detected with normal prioritization`, done => {
-        const controls = detect('./zigbee.0.AAAAAAA.json', {
+    it(`${name} Must detect rgb light correctly when state in channel below device is and device detected with normal prioritization`, async () => {
+        const controls = await detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA.color_rgb.r',
             detectParent: true,
         });
@@ -743,12 +689,10 @@ describe(`${name} Test Detector`, () => {
             TEMPERATURE: 'zigbee.0.AAAAAAA.colortemp',
             ON: 'zigbee.0.AAAAAAA.state',
         });
-
-        done();
     });
 
-    it(`${name} Must detect hue light correctly when device is used with adjusted prioritization`, done => {
-        const controls = detect('./zigbee.0.AAAAAAA.json', {
+    it(`${name} Must detect hue light correctly when device is used with adjusted prioritization`, async () => {
+        const controls = await detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA',
             prioritizedTypes: [[Types.hue, Types.rgb]],
         });
@@ -772,12 +716,10 @@ describe(`${name} Test Detector`, () => {
         validate(controls[2], Types.rgbSingle, {
             RGB: 'zigbee.0.AAAAAAA.color',
         });
-
-        done();
     });
 
-    it(`${name} Must detect hue light only when device is used with adjusted prioritization and limitation`, done => {
-        const controls = detect('./zigbee.0.AAAAAAA.json', {
+    it(`${name} Must detect hue light only when device is used with adjusted prioritization and limitation`, async () => {
+        const controls = await detect('./zigbee.0.AAAAAAA.json', {
             id: 'zigbee.0.AAAAAAA',
             prioritizedTypes: [[Types.hue, Types.rgb]],
             limitTypesToOneOf: [[Types.rgb, Types.rgbSingle, Types.rgbwSingle, Types.hue]],
@@ -793,11 +735,9 @@ describe(`${name} Test Detector`, () => {
 
         expect(controls[1].type !== Types.rgb, 'type rgb should not be detected');
         expect(controls[2].type !== Types.rgbSingle, 'type rgbSingle should not be detected');
-
-        done();
     });
 
-    it('Must detect the window state with the role with more sublevels also when alphabetically comes first', done => {
+    it('Must detect the window state with the role with more sublevels also when alphabetically comes first', async () => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -827,7 +767,7 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'test.0.window',
             ignoreEnums: true,
         });
@@ -835,11 +775,9 @@ describe(`${name} Test Detector`, () => {
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.a-opened',
         });
-
-        done();
     });
 
-    it('Must detect the window state with the role without overwriting with more sublevels also when alphabetically comes last', done => {
+    it('Must detect the window state with the role without overwriting with more sublevels also when alphabetically comes last', async () => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -869,7 +807,7 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'test.0.window',
             ignoreEnums: true,
         });
@@ -877,11 +815,9 @@ describe(`${name} Test Detector`, () => {
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.a-opened',
         });
-
-        done();
     });
 
-    it('Must detect the window state with the role other than state also when alphabetically comes first', done => {
+    it('Must detect the window state with the role other than state also when alphabetically comes first', async () => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -911,7 +847,7 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'test.0.window',
             ignoreEnums: true,
         });
@@ -919,11 +855,9 @@ describe(`${name} Test Detector`, () => {
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.x-contact',
         });
-
-        done();
     });
 
-    it('Must detect the window state with last entry when same role', done => {
+    it('Must detect the window state with last entry when same role', async () => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -953,7 +887,7 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'test.0.window',
             ignoreEnums: true,
         });
@@ -961,11 +895,9 @@ describe(`${name} Test Detector`, () => {
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.x-contact',
         });
-
-        done();
     });
 
-    it('Must detect the favored state even with role not matching', done => {
+    it('Must detect the favored state even with role not matching', async () => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -995,7 +927,7 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'test.0.window.x-contact',
             ignoreEnums: true,
         });
@@ -1003,11 +935,9 @@ describe(`${name} Test Detector`, () => {
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.x-contact',
         });
-
-        done();
     });
 
-    it('Must ignore favored ID when detecting via parent', done => {
+    it('Must ignore favored ID when detecting via parent', async () => {
         const objects = {
             'test.0.window': {
                 common: {
@@ -1037,7 +967,7 @@ describe(`${name} Test Detector`, () => {
             },
         };
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'test.0.window.x-contact',
             detectParent: true,
             ignoreEnums: true,
@@ -1046,14 +976,12 @@ describe(`${name} Test Detector`, () => {
         validate(controls[0], Types.window, {
             ACTUAL: 'test.0.window.a-opened',
         });
-
-        done();
     });
 
-    it('Must detect dimmer with power switch', done => {
-        const objects = require('./dimmer.json');
-
-        const controls = detect(objects, {
+    it('Must detect dimmer with power switch', async () => {
+        const objects = (await import('./dimmer.json', { with: { type: 'json' } })).default;
+        
+        const controls = await detect(objects, {
             id: 'alias.0.Test-Devices.Dimmer.SET',
             ignoreEnums: true,
             detectParent: true,
@@ -1071,14 +999,12 @@ describe(`${name} Test Detector`, () => {
             MAINTAIN: 'alias.0.Test-Devices.Dimmer.MAINTAIN',
             ERROR: 'alias.0.Test-Devices.Dimmer.ERROR',
         });
-
-        done();
     });
 
-    it('Must detect RGB color with power switch', done => {
-        const objects = require('./nanoleaf-lightpanels.3.json');
+    it('Must detect RGB color with power switch', async () => {
+        const objects = (await import('./nanoleaf-lightpanels.3.json', { with: { type: 'json' } })).default;
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'nanoleaf-lightpanels.3.Shapes.colorRGB',
             ignoreEnums: true,
             detectParent: true,
@@ -1093,14 +1019,12 @@ describe(`${name} Test Detector`, () => {
             ON: 'nanoleaf-lightpanels.3.Shapes.state',
             EFFECT: 'nanoleaf-lightpanels.3.Shapes.effect',
         });
-
-        done();
     });
 
-    it('Must detect Blinds from just one state', done => {
-        const objects = require('./simpleBlind.json');
+    it('Must detect Blinds from just one state', async () => {
+        const objects = (await import('./simpleBlind.json', { with: { type: 'json' } })).default;
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
             ignoreEnums: true,
             detectParent: true,
@@ -1111,14 +1035,12 @@ describe(`${name} Test Detector`, () => {
         validate(controls[0], Types.blind, {
             SET: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
         });
-
-        done();
     });
 
-    it('Must detect Dimmer from Homematic', done => {
-        const objects = require('./hm-rpc.dimmer.json');
+    it('Must detect Dimmer from Homematic', async () => {
+        const objects = (await import('./hm-rpc.dimmer.json', { with: { type: 'json' } })).default;
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'hm-rpc.1.00123456789077.2.LEVEL',
             ignoreEnums: true,
             //detectParent: true
@@ -1130,14 +1052,12 @@ describe(`${name} Test Detector`, () => {
             SET: 'hm-rpc.1.00123456789077.2.LEVEL',
             UNREACH: 'hm-rpc.1.00123456789077.0.UNREACH',
         });
-
-        done();
     });
 
-    it('Must detect HUE from hue adapter', done => {
-        const objects = require('./hue-combined.json');
+    it('Must detect HUE from hue adapter', async () => {
+        const objects = (await import ('./hue-combined.json', { with: { type: 'json' } })).default;
 
-        const controls = detect(objects, {
+        const controls = await detect(objects, {
             id: 'hue.0.Hue_Küche_Küchezeile.hue',
             ignoreEnums: true,
             detectOnlyChannel: true,
@@ -1154,14 +1074,11 @@ describe(`${name} Test Detector`, () => {
             ON: 'hue.0.Hue_Küche_Küchezeile.on',
             EFFECT: undefined, //since state does not have common.states defined
         });
-
-        done();
     });
 
-    it('Must detect Shelly Dimmer as dimmer', done => {
-        const objects = require('./shelly-dimmer.json');
-
-        const controls = detect(objects, {
+    it('Must detect Shelly Dimmer as dimmer', async () => {
+        const objects = (await import('./shelly-dimmer.json', { with: { type: 'json' } })).default;
+        const controls = await detect(objects, {
             id: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
             ignoreEnums: true,
             detectOnlyChannel: true,
@@ -1176,7 +1093,5 @@ describe(`${name} Test Detector`, () => {
             ELECTRIC_POWER: 'shelly.0.SHDM-2#081234567896#1.lights.Power',
             CONSUMPTION: 'shelly.0.SHDM-2#081234567896#1.lights.Energy',
         });
-
-        done();
     });
 });

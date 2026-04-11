@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2025 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2026 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types';
-import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './roleEnumUtils';
+import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types.js';
+import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './roleEnumUtils.js';
 
 const IGNORE_SETTINGS_REGEX = /^[^.]+\.setting\./;
 

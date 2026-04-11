@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2025 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2026 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -22,9 +22,10 @@
  * THE SOFTWARE.
  */
 
-import { ChannelDetector } from './ChannelDetector';
+import { ChannelDetector } from './ChannelDetector.js';
 
 export default ChannelDetector;
+export { ChannelDetector };
 export {
     type DetectorState,
     type DetectOptions,
@@ -34,4 +35,4 @@ export {
     type PatternName,
     Types,
     StateType,
-} from './types';
+} from './types.js';

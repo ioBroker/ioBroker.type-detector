@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2025 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2026 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -35,9 +35,9 @@ import {
     type PatternName,
     StateType,
     Types,
-} from './types';
-import { getFunctionEnums, getParentId, getEnums, getObjectsBelowId } from './roleEnumUtils';
-import { patterns } from './typePatterns';
+} from './types.js';
+import { getFunctionEnums, getParentId, getEnums, getObjectsBelowId } from './roleEnumUtils.js';
+import { patterns } from './typePatterns.js';
 
 export class ChannelDetector {
     private enums: string[] | null = null;

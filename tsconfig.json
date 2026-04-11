@@ -12,10 +12,10 @@
 
         "skipLibCheck": true, // Don't report errors in 3rd party definitions
         "noEmitOnError": true,
-        "outDir": "./build/",
+        "outDir": "./build/esm/",
         "removeComments": false,
-        "module": "Node16",
-        "moduleResolution": "node16",
+        "module": "esnext",
+        "moduleResolution": "node",
         "esModuleInterop": true,
         // this is necessary for the automatic typing of the adapter config
         "resolveJsonModule": true,
@@ -31,7 +31,7 @@
         // "noUnusedParameters": true,
 
         // Consider targeting es2019 or higher if you only support Node.js 12+
-        "target": "es2019",
+        "target": "es2022",
 
         "sourceMap": true,
         "inlineSources": true,
