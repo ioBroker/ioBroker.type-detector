@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 5.0.13 (2026-04-12)
 -   (@GermanBluefox) Added to export the detection function from roleEnumUtils (used in iot)
 
 ### 5.0.11 (2026-03-26)
