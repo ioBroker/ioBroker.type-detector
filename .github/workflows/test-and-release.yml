@@ -99,7 +99,7 @@ jobs:
               if: steps.automerge.outputs.mergeResult == 'merged'
               uses: ioBroker/testing-action-deploy@v1.4.3
               with:
-                  node-version: '22.x'
+                  node-version: '24.x'
                   build: true
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   tag: ${{ steps.version.outputs.result }}
