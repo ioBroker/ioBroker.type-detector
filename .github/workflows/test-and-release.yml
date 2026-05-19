@@ -97,7 +97,7 @@ jobs:
 
             - name: Publish to NPM
               if: steps.automerge.outputs.mergeResult == 'merged'
-              uses: ioBroker/testing-action-deploy@v1.4.3
+              uses: ioBroker/testing-action-deploy@v1.5.0
               with:
                   node-version: '24.x'
                   build: true
