@@ -66,6 +66,7 @@ In [brackets] is given the class name of a device.
 * [RGB Light Single [rgbSingle]](#rgb-light-single-rgbsingle)
 * [RGBW Light Single [rgbwSingle]](#rgbw-light-single-rgbwsingle)
 * [Socket [socket]](#socket-socket)
+* [Tank level [tankLevel]](#tank-level-tanklevel)
 * [Temperature [temperature]](#temperature-temperature)
 * [Thermostat [thermostat]](#thermostat-thermostat)
 * [Vacuum cleaner (robot) [vacuumCleaner]](#vacuum-cleaner--robot--vacuumcleaner)
@@ -691,6 +692,20 @@ Socket with an ON/OFF option. Could have information about current, amperage, en
 |   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+
+
+### Tank level [tankLevel]
+
+Fill level of a tank (read-only). Value in `%` or in an absolute unit like liters; if `min`/`max` (or only `max`) are defined, both units can be calculated.
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | value.fill                    | %    | number  | -  |     |       | `/\.fill$｜\.tank$/`                               |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Temperature [temperature]

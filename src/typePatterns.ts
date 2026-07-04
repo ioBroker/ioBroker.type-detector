@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2025 bluefox <dogafox@gmail.com>
+ * Copyright 2018-2026 bluefox <dogafox@gmail.com>
  *
  * The MIT License (MIT)
  *
@@ -3047,6 +3047,26 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.battery,
         ],
         type: Types.illuminance,
+    },
+    tankLevel: {
+        states: [
+            {
+                role: /\.fill$|\.tank$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'value.fill',
+                defaultUnit: '%',
+            },
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.tankLevel,
     },
     image: {
         states: [

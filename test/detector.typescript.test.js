@@ -100,6 +100,68 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect tank level (percent) from channel`, done => {
+        const objects = {
+            'cistern.0.Tank': {
+                common: {
+                    name: 'Rain water cistern',
+                },
+                type: 'channel',
+            },
+            'cistern.0.Tank.Level': {
+                common: {
+                    name: 'Fill level',
+                    type: 'number',
+                    unit: '%',
+                    role: 'value.fill',
+                    min: 0,
+                    max: 100,
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'cistern.0.Tank',
+        });
+
+        validate(controls[0], Types.tankLevel, {
+            ACTUAL: 'cistern.0.Tank.Level',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect tank level (liters) from state`, done => {
+        const objects = {
+            'cistern.0.Tank.Volume': {
+                common: {
+                    name: 'Fill level',
+                    type: 'number',
+                    unit: 'l',
+                    role: 'value.tank',
+                    min: 0,
+                    max: 5000,
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'cistern.0.Tank.Volume',
+        });
+
+        validate(controls[0], Types.tankLevel, {
+            ACTUAL: 'cistern.0.Tank.Volume',
+        });
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {

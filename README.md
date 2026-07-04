@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added tank level to devices
+
 ### 5.0.13 (2026-04-12)
 -   (@GermanBluefox) Added to export the detection function from roleEnumUtils (used in iot)
 
