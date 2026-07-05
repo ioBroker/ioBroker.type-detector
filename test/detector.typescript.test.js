@@ -127,7 +127,7 @@ describe(`${name} Test Detector`, () => {
             id: 'cistern.0.Tank',
         });
 
-        validate(controls[0], Types.tankLevel, {
+        validate(controls[0], Types.fillLevel, {
             ACTUAL: 'cistern.0.Tank.Level',
         });
 
@@ -155,7 +155,7 @@ describe(`${name} Test Detector`, () => {
             id: 'cistern.0.Tank.Volume',
         });
 
-        validate(controls[0], Types.tankLevel, {
+        validate(controls[0], Types.fillLevel, {
             ACTUAL: 'cistern.0.Tank.Volume',
         });
 

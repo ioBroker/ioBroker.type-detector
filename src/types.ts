@@ -55,7 +55,7 @@ export type PatternName =
     | 'rgbwSingle'
     | 'socket'
     | 'temperature'
-    | 'tankLevel'
+    | 'fillLevel'
     | 'thermostat'
     | 'unknown'
     | 'vacuumCleaner'
@@ -105,7 +105,7 @@ export enum Types {
     slider = 'slider',
     socket = 'socket',
     temperature = 'temperature',
-    tankLevel = 'tankLevel',
+    fillLevel = 'fillLevel',
     thermostat = 'thermostat',
     vacuumCleaner = 'vacuumCleaner',
     volume = 'volume',

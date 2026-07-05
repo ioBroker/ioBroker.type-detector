@@ -3048,10 +3048,10 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.illuminance,
     },
-    tankLevel: {
+    fillLevel: {
         states: [
             {
-                role: /\.fill$|\.tank$/,
+                role: /\.fill(\.[-.\w])$/,
                 indicator: false,
                 write: false,
                 type: StateType.Number,
@@ -3066,7 +3066,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.error,
             SharedPatterns.battery,
         ],
-        type: Types.tankLevel,
+        type: Types.fillLevel,
     },
     image: {
         states: [
