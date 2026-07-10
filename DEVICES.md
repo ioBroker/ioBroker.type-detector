@@ -308,7 +308,7 @@ Fill level of something (read-only). Value in `%` or in an absolute unit like li
 
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
-| * | ACTUAL   | value.fill                    | %    | number  | -  |     |       | `/\.fill(\.[-.\w])$/`                             |
+| * | ACTUAL   | value.fill                    | %    | number  | -  |     |       | `/^value\.fill(\.[-.\w]+)?$/`                     |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |

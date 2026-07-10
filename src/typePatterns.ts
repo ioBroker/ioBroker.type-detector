@@ -3051,7 +3051,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     fillLevel: {
         states: [
             {
-                role: /^value\.fill(\.[-.\w])$/,
+                role: /^value\.fill(\.[-.\w]+)?$/,
                 indicator: false,
                 write: false,
                 type: StateType.Number,
