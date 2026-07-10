@@ -75,7 +75,7 @@ jobs:
 
             - name: Checkout repository
               if: steps.automerge.outputs.mergeResult == 'merged'
-              uses: actions/checkout@v6
+              uses: actions/checkout@v7
               with:
                   fetch-depth: 0 # Fetch the history, or this action won't work
                   ref: 'master'
