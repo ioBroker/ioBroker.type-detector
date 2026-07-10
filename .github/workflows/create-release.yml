@@ -19,7 +19,7 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v6
+              uses: actions/checkout@v7
               with:
                   fetch-depth: 0 # Fetch the history, or this action won't work
 
@@ -48,7 +48,7 @@ jobs:
 
             - name: Determine the version bump
               id: version
-              uses: actions/github-script@v8
+              uses: actions/github-script@v9
               with:
                   result-encoding: string
                   script: |
