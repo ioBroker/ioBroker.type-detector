@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 5.0.15 (2026-07-10)
 -   (@GermanBluefox) Added tank level to devices
 
 ### 5.0.13 (2026-04-12)
