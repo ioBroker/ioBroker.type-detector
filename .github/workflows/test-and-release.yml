@@ -28,9 +28,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: ioBroker/testing-action-check@v1
+            - uses: ioBroker/testing-action-check@v2
               with:
-                  node-version: '22.x'
+                  node-version: '24.x'
                   lint: true
 
     # Runs adapter tests on all supported node versions and OSes
@@ -80,11 +80,11 @@ jobs:
                   fetch-depth: 0 # Fetch the history, or this action won't work
                   ref: 'master'
 
-            - name: Use Node.js 18
+            - name: Use Node.js 24
               if: steps.automerge.outputs.mergeResult == 'merged'
               uses: actions/setup-node@v6
               with:
-                  node-version: 18
+                  node-version: 24
 
             - name: Determine version
               if: steps.automerge.outputs.mergeResult == 'merged'
@@ -97,7 +97,7 @@ jobs:
 
             - name: Publish to NPM
               if: steps.automerge.outputs.mergeResult == 'merged'
-              uses: ioBroker/testing-action-deploy@v1.4.3
+              uses: ioBroker/testing-action-deploy@v1.5.2
               with:
                   node-version: '24.x'
                   build: true
