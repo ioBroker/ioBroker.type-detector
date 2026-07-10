@@ -141,7 +141,7 @@ describe(`${name} Test Detector`, () => {
                     name: 'Fill level',
                     type: 'number',
                     unit: 'l',
-                    role: 'value.tank',
+                    role: 'value.fill.tank',
                     min: 0,
                     max: 5000,
                     read: true,
