@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@Apollon77) Fixed states that lost a pattern slot to a better candidate being marked as used, which hid them from the remaining states of the same pattern
+
 ### 5.0.15 (2026-07-10)
 -   (@GermanBluefox) Added tank level to devices
 

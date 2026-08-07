@@ -303,6 +303,9 @@ export interface DetectorContext {
     channelStates: string[];
     usedIds: string[];
     usedInCurrentDevice: string[];
+
+    /** States that matched a pattern state but lost its slot to a better candidate */
+    rejectedInCurrentDevice: string[];
     ignoreIndicators: string[];
     result?: PatternControl;
     pattern: PatternName;

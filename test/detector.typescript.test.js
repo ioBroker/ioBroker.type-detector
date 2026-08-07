@@ -1112,6 +1112,74 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it('Must map a state that lost a slot to a later state of the same pattern', done => {
+        const button = (name, role) => ({
+            common: { name, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'hm-rpc.0.Button': { common: { name: 'Button' }, type: 'channel' },
+            'hm-rpc.0.Button.press': button('Press', 'button.press'),
+            'hm-rpc.0.Button.long': button('Long press', 'button.long'),
+        };
+
+        const controls = detect(objects, { id: 'hm-rpc.0.Button' });
+
+        validate(controls[0], Types.buttonSensor, {
+            PRESS: 'hm-rpc.0.Button.press',
+            PRESS_LONG: 'hm-rpc.0.Button.long',
+        });
+
+        done();
+    });
+
+    it('Must map a state that was rejected from an already filled slot', done => {
+        const button = (name, role) => ({
+            common: { name, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'hm-rpc.0.Button2': { common: { name: 'Button' }, type: 'channel' },
+            'hm-rpc.0.Button2.a-press': button('Press', 'button.press'),
+            'hm-rpc.0.Button2.b-long': button('Long press', 'button.long'),
+        };
+
+        const controls = detect(objects, { id: 'hm-rpc.0.Button2' });
+
+        validate(controls[0], Types.buttonSensor, {
+            PRESS: 'hm-rpc.0.Button2.a-press',
+            PRESS_LONG: 'hm-rpc.0.Button2.b-long',
+        });
+
+        done();
+    });
+
+    it('Must not offer a state that lost a slot to another device type', done => {
+        const objects = {
+            'test.0.window2': { common: { name: 'window' }, type: 'device' },
+            'test.0.window2.x-contact': {
+                common: { name: 'contact', type: 'boolean', role: 'state', read: true, write: false },
+                type: 'state',
+            },
+            'test.0.window2.a-opened': {
+                common: { name: 'opened', type: 'boolean', role: 'sensor.window', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'test.0.window2',
+            ignoreEnums: true,
+        });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.window, {
+            ACTUAL: 'test.0.window2.a-opened',
+        });
+
+        done();
+    });
+
     it('Must detect dimmer with power switch', done => {
         const objects = require('./dimmer.json');
 
