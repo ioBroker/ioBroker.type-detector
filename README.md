@@ -98,6 +98,10 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@Apollon77) Added new device type `airPurifier` for air purifiers (Matter Air Purifier device)
+-   (@Apollon77) Combined the fan states shared by `airCondition`, `fan` and `airPurifier` into one definition
+
 ### 5.0.15 (2026-07-10)
 -   (@GermanBluefox) Added tank level to devices
 

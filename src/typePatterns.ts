@@ -176,6 +176,102 @@ const ElectricityPatterns: { [id: string]: InternalDetectorState } = {
     },
 };
 
+/**
+ * States shared by the device types that drive a fan. They must stay identical across those types so
+ * consumers can handle them with one implementation.
+ * Types where the speed is the only mandatory control override `required` on `speed`.
+ */
+const FanPatterns: {
+    speed: InternalDetectorState;
+    power: InternalDetectorState;
+    speedLevel: InternalDetectorState;
+    swing: InternalDetectorState;
+    swingBoolean: InternalDetectorState;
+    airflowDirection: InternalDetectorState;
+} = {
+    speed: {
+        role: /(speed|mode)\.fan$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'SPEED',
+        required: false,
+        defaultRole: 'level.mode.fan',
+        defaultStates: {
+            0: 'AUTO',
+            1: 'HIGH',
+            2: 'LOW',
+            3: 'MEDIUM',
+            4: 'QUIET',
+            5: 'TURBO',
+        },
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+    power: {
+        role: /^switch(\.power)?$/,
+        indicator: false,
+        write: true,
+        type: [StateType.Boolean, StateType.Number],
+        searchInParent: true,
+        name: 'POWER',
+        required: false,
+        defaultRole: 'switch.power',
+    },
+    speedLevel: {
+        role: /^level\.fan$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'SPEED_LEVEL',
+        required: false,
+        defaultRole: 'level.fan',
+        defaultUnit: '%',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+    swing: {
+        role: /swing$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        searchInParent: true,
+        name: 'SWING',
+        required: false,
+        defaultRole: 'level.mode.swing',
+        defaultStates: {
+            0: 'AUTO',
+            1: 'HORIZONTAL',
+            2: 'STATIONARY',
+            3: 'VERTICAL',
+        },
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+    swingBoolean: {
+        role: /swing$/,
+        indicator: false,
+        write: true,
+        type: StateType.Boolean,
+        searchInParent: true,
+        name: 'SWING',
+        required: false,
+        defaultRole: 'switch.mode.swing',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+    airflowDirection: {
+        role: /^level\.mode\.airflow$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'AIRFLOW_DIRECTION',
+        required: false,
+        defaultRole: 'level.mode.airflow',
+        defaultStates: {
+            0: 'FORWARD',
+            1: 'REVERSE',
+        },
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+};
+
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
         states: [{ objectType: 'chart', name: 'CHART' }],
@@ -1492,34 +1588,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             // optional
-            {
-                role: /(speed|mode)\.fan$/,
-                indicator: false,
-                write: true,
-                type: StateType.Number,
-                name: 'SPEED',
-                required: false,
-                defaultRole: 'level.mode.fan',
-                defaultStates: {
-                    0: 'AUTO',
-                    1: 'HIGH',
-                    2: 'LOW',
-                    3: 'MEDIUM',
-                    4: 'QUIET',
-                    5: 'TURBO',
-                },
-                ignoreRole: IGNORE_SETTINGS_REGEX,
-            },
-            {
-                role: /^switch(\.power)?$/,
-                indicator: false,
-                write: true,
-                type: [StateType.Boolean, StateType.Number],
-                searchInParent: true,
-                name: 'POWER',
-                required: false,
-                defaultRole: 'switch.power',
-            },
+            FanPatterns.speed,
+            FanPatterns.power,
             {
                 role: /temperature(\..*)?$/,
                 indicator: false,
@@ -1554,40 +1624,60 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
                 defaultRole: 'switch.boost',
             },
-            {
-                role: /swing$/,
-                indicator: false,
-                write: true,
-                type: StateType.Number,
-                searchInParent: true,
-                name: 'SWING',
-                required: false,
-                defaultRole: 'level.mode.swing',
-                defaultStates: {
-                    0: 'AUTO',
-                    1: 'HORIZONTAL',
-                    2: 'STATIONARY',
-                    3: 'VERTICAL',
-                },
-                ignoreRole: IGNORE_SETTINGS_REGEX,
-            },
-            {
-                role: /swing$/,
-                indicator: false,
-                write: true,
-                type: StateType.Boolean,
-                searchInParent: true,
-                name: 'SWING',
-                required: false,
-                defaultRole: 'switch.mode.swing',
-                ignoreRole: IGNORE_SETTINGS_REGEX,
-            },
+            FanPatterns.swing,
+            FanPatterns.swingBoolean,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.unreach,
             SharedPatterns.maintain,
             SharedPatterns.error,
         ],
         type: Types.airCondition,
+    },
+    airPurifier: {
+        states: [
+            { ...FanPatterns.speed, required: true },
+            // optional
+            FanPatterns.power,
+            FanPatterns.speedLevel,
+            FanPatterns.swing,
+            FanPatterns.swingBoolean,
+            FanPatterns.airflowDirection,
+            {
+                role: /^value\.filter$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'FILTER_CONDITION',
+                required: false,
+                defaultRole: 'value.filter',
+                defaultUnit: '%',
+            },
+            {
+                role: /^value\.filter\.carbon$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'FILTER_CONDITION_CARBON',
+                required: false,
+                defaultRole: 'value.filter.carbon',
+                defaultUnit: '%',
+            },
+            {
+                role: /^indicator\.maintenance\.filter$/,
+                indicator: true,
+                type: StateType.Boolean,
+                name: 'FILTER_CHANGE',
+                required: false,
+                defaultRole: 'indicator.maintenance.filter',
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.airPurifier,
     },
     thermostat: {
         states: [
