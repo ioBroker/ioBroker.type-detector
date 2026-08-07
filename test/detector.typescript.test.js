@@ -326,6 +326,117 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect fan with all optional states`, done => {
+        const writableNumber = (name, role, states, unit) => ({
+            common: { name, type: 'number', role, states, unit, read: true, write: true },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Fan': { common: { name: 'Fan' }, type: 'device' },
+            'matter.0.Fan.fanMode': writableNumber('Fan mode', 'level.mode.fan', {
+                0: 'AUTO',
+                1: 'HIGH',
+                2: 'LOW',
+                3: 'MEDIUM',
+            }),
+            'matter.0.Fan.percent': writableNumber('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Fan.rock': writableNumber('Rocking', 'level.mode.swing', {
+                0: 'AUTO',
+                1: 'HORIZONTAL',
+                2: 'STATIONARY',
+                3: 'VERTICAL',
+            }),
+            'matter.0.Fan.airflow': writableNumber('Airflow direction', 'level.mode.airflow', {
+                0: 'FORWARD',
+                1: 'REVERSE',
+            }),
+            'matter.0.Fan.onOff': {
+                common: { name: 'On/Off', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Fan' });
+
+        validate(controls[0], Types.fan, {
+            SPEED: 'matter.0.Fan.fanMode',
+            SPEED_LEVEL: 'matter.0.Fan.percent',
+            SWING: 'matter.0.Fan.rock',
+            AIRFLOW_DIRECTION: 'matter.0.Fan.airflow',
+            POWER: 'matter.0.Fan.onOff',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect fan without the optional OnOff cluster`, done => {
+        const objects = {
+            'matter.0.SimpleFan': { common: { name: 'Fan' }, type: 'device' },
+            'matter.0.SimpleFan.fanMode': {
+                common: {
+                    name: 'Fan mode',
+                    type: 'number',
+                    role: 'level.mode.fan',
+                    states: { 0: 'OFF', 1: 'LOW', 2: 'MEDIUM', 3: 'HIGH' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.SimpleFan' });
+
+        validate(controls[0], Types.fan, {
+            SPEED: 'matter.0.SimpleFan.fanMode',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep the fan speed on an air conditioner`, done => {
+        const objects = {
+            'alias.0.AC': { common: { name: 'AC', role: 'airCondition' }, type: 'channel' },
+            'alias.0.AC.SET': {
+                common: { name: 'SET', role: 'level.temperature', type: 'number', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'alias.0.AC.MODE': {
+                common: {
+                    name: 'MODE',
+                    role: 'level.mode.airconditioner',
+                    type: 'number',
+                    states: { 0: 'AUTO', 3: 'COOL', 7: 'HEAT' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'alias.0.AC.SPEED': {
+                common: {
+                    name: 'SPEED',
+                    role: 'level.mode.fan',
+                    type: 'number',
+                    states: { 0: 'AUTO', 1: 'HIGH', 2: 'LOW' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'alias.0.AC' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.airCondition, {
+            SET: 'alias.0.AC.SET',
+            MODE: 'alias.0.AC.MODE',
+            SPEED: 'alias.0.AC.SPEED',
+        });
+
+        done();
+    });
+
     it('Must detect vacuum mihome from states', done => {
         const controls = detect('./mihome-vacuum.0.json', {
             id: 'mihome-vacuum.0',

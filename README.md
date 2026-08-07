@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@Apollon77) Added new device type `fan` for fans (Matter Fan device)
+
 ### 5.0.15 (2026-07-10)
 -   (@GermanBluefox) Added tank level to devices
 

@@ -35,6 +35,7 @@ export type PatternName =
     | 'ct'
     | 'dimmer'
     | 'door'
+    | 'fan'
     | 'fireAlarm'
     | 'floodAlarm'
     | 'gate'
@@ -83,6 +84,7 @@ export enum Types {
     ct = 'ct',
     dimmer = 'dimmer',
     door = 'door',
+    fan = 'fan',
     fireAlarm = 'fireAlarm',
     floodAlarm = 'floodAlarm',
     gate = 'gate',
