@@ -1154,6 +1154,59 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it('Must keep a state that no slot of the pattern could take', done => {
+        const objects = {
+            'ac.0.AC': { common: { name: 'AC' }, type: 'device' },
+            'ac.0.AC.SET': {
+                common: { name: 'SET', role: 'level.temperature', type: 'number', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'ac.0.AC.MODE': {
+                common: {
+                    name: 'MODE',
+                    role: 'level.mode.airconditioner',
+                    type: 'number',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'ac.0.AC.swingNum': {
+                common: {
+                    name: 'swingNum',
+                    role: 'level.mode.swing',
+                    type: 'number',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'ac.0.AC.swingBool': {
+                common: { name: 'swingBool', role: 'switch.mode.swing', type: 'boolean', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'ac.0.AC' });
+
+        validate(controls[0], Types.airCondition, {
+            SET: 'ac.0.AC.SET',
+            MODE: 'ac.0.AC.MODE',
+            SWING: 'ac.0.AC.swingNum',
+        });
+
+        // The boolean SWING definition can never fill the slot the numeric one already took, so the state
+        // must stay available to other device types instead of vanishing
+        expect(
+            controls.some(control => control.states.some(({ id }) => id === 'ac.0.AC.swingBool')),
+            'Expected ac.0.AC.swingBool to still be detected',
+        );
+
+        done();
+    });
+
     it('Must not offer a state that lost a slot to another device type', done => {
         const objects = {
             'test.0.window2': { common: { name: 'window' }, type: 'device' },

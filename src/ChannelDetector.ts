@@ -355,9 +355,11 @@ export class ChannelDetector {
                             checkState.id = stateId;
                             mapped = true;
                             if (displacedId && !state.indicator) {
-                                const usedIndex = usedInCurrentDevice.indexOf(displacedId);
-                                if (usedIndex !== -1) {
-                                    usedInCurrentDevice.splice(usedIndex, 1);
+                                // A `notSingle` state can have been added more than once, so drop every entry
+                                for (let u = usedInCurrentDevice.length - 1; u >= 0; u--) {
+                                    if (usedInCurrentDevice[u] === displacedId) {
+                                        usedInCurrentDevice.splice(u, 1);
+                                    }
                                 }
                                 context.rejectedInCurrentDevice.push(displacedId);
                             }
@@ -369,8 +371,9 @@ export class ChannelDetector {
                 }
 
                 if (!mapped) {
-                    if (!state.indicator) {
-                        // Still available to the remaining states of this pattern, but not to another device type
+                    // Only when another candidate took the slot. Without `found` the slot is unfillable for this
+                    // state definition (a second definition of the same name), and the state stays free as before.
+                    if (found && !state.indicator) {
                         context.rejectedInCurrentDevice.push(stateId);
                     }
                 } else {
@@ -388,6 +391,7 @@ export class ChannelDetector {
                             if (
                                 (state.indicator ||
                                     (!usedInCurrentDevice.includes(cid) &&
+                                        !context.rejectedInCurrentDevice.includes(cid) &&
                                         (state.notSingle || !usedIds.includes(cid)))) &&
                                 this._applyPattern(objects, cid, state, ignoreEnums, sortedKeys)
                             ) {
