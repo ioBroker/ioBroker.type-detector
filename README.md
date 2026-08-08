@@ -100,6 +100,8 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@Apollon77) Added new device type `fan` for fans (Matter Fan device)
+-   (@Apollon77) Added new device type `airQuality` for air quality sensors (Matter Air Quality Sensor / Air Purifier)
+-   (@Apollon77) BREAKING: Renamed the detected state name of the `direction_enum` shared pattern from `DIRECTION` to `DIRECTION_ENUM` to make it distinguishable from the boolean `direction` pattern. Affects the device types `blind`, `blindButtons`, `gate` and `lock`.
 
 ### 5.0.15 (2026-07-10)
 -   (@GermanBluefox) Added tank level to devices

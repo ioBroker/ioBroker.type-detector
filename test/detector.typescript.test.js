@@ -134,6 +134,108 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect air quality sensor with concentrations and levels`, done => {
+        const numberState = (name, role, unit) => ({
+            common: { name, type: 'number', unit, role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.AirQuality': {
+                common: { name: 'IKEA ALPSTUGA' },
+                type: 'device',
+            },
+            'matter.0.AirQuality.airQuality': numberState('Air quality index', 'value.airquality'),
+            'matter.0.AirQuality.co2': numberState('CO2', 'value.co2', 'ppm'),
+            'matter.0.AirQuality.co2Level': numberState('CO2 level', 'value.co2.level'),
+            'matter.0.AirQuality.pm25': numberState('PM2.5', 'value.pm25', 'µg/m³'),
+            'matter.0.AirQuality.pm25Level': numberState('PM2.5 level', 'value.pm25.level'),
+            'matter.0.AirQuality.tvoc': numberState('TVOC', 'value.tvoc', 'ppb'),
+            'matter.0.AirQuality.pressure': numberState('Pressure', 'value.pressure', 'hPa'),
+            'matter.0.AirQuality.temperature': numberState('Temperature', 'value.temperature', '°C'),
+            'matter.0.AirQuality.humidity': numberState('Humidity', 'value.humidity', '%'),
+            'matter.0.AirQuality.power': {
+                common: { name: 'Power', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.AirQuality.battery': numberState('Battery', 'value.battery', '%'),
+        };
+
+        const controls = detect(objects, {
+            id: 'matter.0.AirQuality',
+        });
+
+        validate(controls[0], Types.airQuality, {
+            AQI: 'matter.0.AirQuality.airQuality',
+            CO2: 'matter.0.AirQuality.co2',
+            CO2_LEVEL: 'matter.0.AirQuality.co2Level',
+            PM25: 'matter.0.AirQuality.pm25',
+            PM25_LEVEL: 'matter.0.AirQuality.pm25Level',
+            TVOC: 'matter.0.AirQuality.tvoc',
+            PRESSURE: 'matter.0.AirQuality.pressure',
+            ACTUAL: 'matter.0.AirQuality.temperature',
+            HUMIDITY: 'matter.0.AirQuality.humidity',
+            POWER: 'matter.0.AirQuality.power',
+            BATTERY: 'matter.0.AirQuality.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect air quality sensor when the clusters are separate channels`, done => {
+        const numberState = (name, role, unit) => ({
+            common: { name, type: 'number', unit, role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Endpoint1': { common: { name: 'Air quality sensor' }, type: 'device' },
+            'matter.0.Endpoint1.airQuality': { common: { name: 'Air quality cluster' }, type: 'channel' },
+            'matter.0.Endpoint1.airQuality.airQuality': numberState('Air quality index', 'value.airquality'),
+            'matter.0.Endpoint1.co2': { common: { name: 'CO2 cluster' }, type: 'channel' },
+            'matter.0.Endpoint1.co2.measuredValue': numberState('CO2', 'value.co2', 'ppm'),
+            'matter.0.Endpoint1.co2.levelValue': numberState('CO2 level', 'value.co2.level'),
+            'matter.0.Endpoint1.temperature': { common: { name: 'Temperature cluster' }, type: 'channel' },
+            'matter.0.Endpoint1.temperature.measuredValue': numberState('Temperature', 'value.temperature', '°C'),
+        };
+
+        const controls = detect(objects, {
+            id: 'matter.0.Endpoint1.airQuality',
+        });
+
+        validate(controls[0], Types.airQuality, {
+            AQI: 'matter.0.Endpoint1.airQuality.airQuality',
+            CO2: 'matter.0.Endpoint1.co2.measuredValue',
+            CO2_LEVEL: 'matter.0.Endpoint1.co2.levelValue',
+            ACTUAL: 'matter.0.Endpoint1.temperature.measuredValue',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect air quality sensor from the index state alone`, done => {
+        const objects = {
+            'matter.0.AirSensor.airQuality': {
+                common: {
+                    name: 'Air quality index',
+                    type: 'number',
+                    role: 'value.airquality',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, {
+            id: 'matter.0.AirSensor.airQuality',
+        });
+
+        validate(controls[0], Types.airQuality, {
+            AQI: 'matter.0.AirSensor.airQuality',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect tank level (liters) from state`, done => {
         const objects = {
             'cistern.0.Tank.Volume': {
@@ -746,8 +848,46 @@ describe(`${name} Test Detector`, () => {
             SET: 'hm-rpc.0.LEQ090XYZ.1.STATE',
             OPEN: 'hm-rpc.0.LEQ090XYZ.1.OPEN',
             DOOR_STATE: 'hm-rpc.0.LEQ090XYZ.1.DOOR_STATE',
-            DIRECTION: 'hm-rpc.0.LEQ090XYZ.1.DIRECTION',
+            DIRECTION_ENUM: 'hm-rpc.0.LEQ090XYZ.1.DIRECTION',
             ERROR: 'hm-rpc.0.LEQ090XYZ.1.ERROR',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect boolean and enum direction as separate states`, done => {
+        const objects = {
+            'test.0.Blind': {
+                common: { name: 'Blind' },
+                type: 'channel',
+            },
+            'test.0.Blind.level': {
+                common: { name: 'Level', type: 'number', read: true, write: true, role: 'level.blind' },
+                type: 'state',
+            },
+            'test.0.Blind.moving': {
+                common: { name: 'Moving', type: 'boolean', read: true, write: false, role: 'indicator.direction' },
+                type: 'state',
+            },
+            'test.0.Blind.direction': {
+                common: {
+                    name: 'Direction',
+                    type: 'number',
+                    read: true,
+                    write: false,
+                    role: 'value.direction',
+                    states: { 0: 'None', 1: 'Up', 2: 'Down', 3: 'Unknown' },
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Blind' });
+
+        validate(controls[0], Types.blind, {
+            SET: 'test.0.Blind.level',
+            DIRECTION: 'test.0.Blind.moving',
+            DIRECTION_ENUM: 'test.0.Blind.direction',
         });
 
         done();

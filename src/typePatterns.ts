@@ -96,7 +96,7 @@ const SharedPatterns: {
         role: /^(indicator|value)\.direction$/, // some old adapters implement `indicator.direction` even for number types. So try to detect it too
         type: StateType.Number,
         notSingle: true,
-        name: 'DIRECTION',
+        name: 'DIRECTION_ENUM',
         required: false,
         defaultStates: { 0: 'None', 1: 'Up/Open', 2: 'Down/Close', 3: 'Unknown' },
         defaultRole: 'value.direction',
@@ -175,6 +175,43 @@ const ElectricityPatterns: { [id: string]: InternalDetectorState } = {
         defaultUnit: 'Hz',
     },
 };
+
+const AIR_QUALITY_LEVEL_STATES = { 0: 'UNKNOWN', 1: 'LOW', 2: 'MEDIUM', 3: 'HIGH', 4: 'CRITICAL' };
+
+/**
+ * Builds the two optional states a pollutant can expose: the measured concentration and the qualitative level
+ * (Matter concentration-measurement clusters report `levelValue` next to `measuredValue`).
+ *
+ * @param name Emitted state name of the concentration, e.g. `PM25`. The level state is emitted as `<name>_LEVEL`.
+ * @param roleId Role id below `value.`, e.g. `pm25`, matching the ids of https://github.com/ioBroker/ioBroker.docs/pull/643
+ * @param defaultUnit Omitted where devices legitimately use more than one unit, so consumers keep the unit of the object
+ */
+function concentrationPatterns(name: string, roleId: string, defaultUnit?: string): InternalDetectorState[] {
+    return [
+        {
+            role: new RegExp(`^value\\.${roleId}$`),
+            indicator: false,
+            write: false,
+            type: StateType.Number,
+            searchInParent: true,
+            name,
+            required: false,
+            defaultRole: `value.${roleId}`,
+            defaultUnit,
+        },
+        {
+            role: new RegExp(`^value\\.${roleId}\\.level$`),
+            indicator: false,
+            write: false,
+            type: StateType.Number,
+            searchInParent: true,
+            name: `${name}_LEVEL`,
+            required: false,
+            defaultRole: `value.${roleId}.level`,
+            defaultStates: AIR_QUALITY_LEVEL_STATES,
+        },
+    ];
+}
 
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
@@ -3070,6 +3107,92 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.battery,
         ],
         type: Types.buttonSensor,
+    },
+    airQuality: {
+        states: [
+            {
+                role: /^value\.airquality$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'AQI',
+                required: true,
+                defaultRole: 'value.airquality',
+                defaultStates: {
+                    0: 'UNKNOWN',
+                    1: 'GOOD',
+                    2: 'FAIR',
+                    3: 'MODERATE',
+                    4: 'POOR',
+                    5: 'VERY_POOR',
+                    6: 'EXTREMELY_POOR',
+                },
+            },
+            // optional
+            {
+                role: /^switch(\.power)?$/,
+                indicator: false,
+                write: true,
+                type: StateType.Boolean,
+                searchInParent: true,
+                name: 'POWER',
+                required: false,
+                defaultRole: 'switch.power',
+            },
+            ...concentrationPatterns('CO2', 'co2', 'ppm'),
+            ...concentrationPatterns('TVOC', 'tvoc'),
+            ...concentrationPatterns('PM1', 'pm1', 'µg/m³'),
+            ...concentrationPatterns('PM25', 'pm25', 'µg/m³'),
+            ...concentrationPatterns('PM10', 'pm10', 'µg/m³'),
+            ...concentrationPatterns('CO', 'co', 'ppm'),
+            ...concentrationPatterns('NO2', 'no2'),
+            ...concentrationPatterns('O3', 'o3'),
+            ...concentrationPatterns('CH2O', 'ch2o', 'µg/m³'),
+            ...concentrationPatterns('RN', 'rn', 'Bq/m³'),
+            ...concentrationPatterns('SO2', 'so2'),
+            {
+                role: /^value\.pressure$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'PRESSURE',
+                required: false,
+                defaultRole: 'value.pressure',
+                defaultUnit: 'mbar',
+            },
+            {
+                role: /temperature(\..*)?$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'ACTUAL',
+                required: false,
+                defaultRole: 'value.temperature',
+                defaultUnit: '°C',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            {
+                role: /humidity(\..*)?$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'HUMIDITY',
+                required: false,
+                defaultRole: 'value.humidity',
+                defaultUnit: '%',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.airQuality,
     },
     temperature: {
         states: [

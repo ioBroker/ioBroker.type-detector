@@ -25,6 +25,7 @@
 /** These are the names of the patterns as used internally */
 export type PatternName =
     | 'airCondition'
+    | 'airQuality'
     | 'blindButtons'
     | 'blinds'
     | 'button'
@@ -74,6 +75,7 @@ export type PatternName =
 export enum Types {
     unknown = 'unknown',
     airCondition = 'airCondition',
+    airQuality = 'airQuality',
     blind = 'blind',
     blindButtons = 'blindButtons',
     button = 'button',
