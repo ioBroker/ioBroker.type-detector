@@ -285,6 +285,8 @@ export class ChannelDetector {
                     result?.states.forEach((state, j) => ChannelDetector.copyState(patterns[pattern].states[j], state));
                 }
 
+                let mapped = false;
+
                 // map the detected ID to the relevant state in result - if allowed
                 if (!result.states.find(({ id }) => id === stateId)) {
                     for (const checkState of result.states) {
@@ -349,16 +351,33 @@ export class ChannelDetector {
                             }
 
                             // count++;
+                            const displacedId = checkState.id;
                             checkState.id = stateId;
-                            found = true;
+                            mapped = true;
+                            if (displacedId && !state.indicator) {
+                                // A `notSingle` state can have been added more than once, so drop every entry
+                                for (let u = usedInCurrentDevice.length - 1; u >= 0; u--) {
+                                    if (usedInCurrentDevice[u] === displacedId) {
+                                        usedInCurrentDevice.splice(u, 1);
+                                    }
+                                }
+                                context.rejectedInCurrentDevice.push(displacedId);
+                            }
                             break;
                         }
                     }
                 } else {
-                    found = true; // Was there before already?
+                    mapped = true; // Was there before already?
                 }
 
-                if (found) {
+                if (!mapped) {
+                    // Only when another candidate took the slot. Without `found` the slot is unfillable for this
+                    // state definition (a second definition of the same name), and the state stays free as before.
+                    if (found && !state.indicator) {
+                        context.rejectedInCurrentDevice.push(stateId);
+                    }
+                } else {
+                    found = true;
                     if (!state.indicator) {
                         usedInCurrentDevice.push(stateId);
                     }
@@ -372,6 +391,7 @@ export class ChannelDetector {
                             if (
                                 (state.indicator ||
                                     (!usedInCurrentDevice.includes(cid) &&
+                                        !context.rejectedInCurrentDevice.includes(cid) &&
                                         (state.notSingle || !usedIds.includes(cid)))) &&
                                 this._applyPattern(objects, cid, state, ignoreEnums, sortedKeys)
                             ) {
@@ -621,6 +641,7 @@ export class ChannelDetector {
             ignoreIndicators: ignoreIndicators || [],
             pattern: 'unknown',
             usedInCurrentDevice: [],
+            rejectedInCurrentDevice: [],
             state: {} as InternalDetectorState,
             ignoreEnums: !!options.ignoreEnums,
             sortedKeys: _keysOptional!,
@@ -640,6 +661,7 @@ export class ChannelDetector {
 
             context.pattern = pattern;
             context.usedInCurrentDevice = [];
+            context.rejectedInCurrentDevice = [];
             for (const state of patterns[pattern].states) {
                 let found = false;
 
@@ -660,6 +682,7 @@ export class ChannelDetector {
 
             // Store all used IDs in the array
             context.usedInCurrentDevice.forEach(id => usedIds.push(id));
+            context.rejectedInCurrentDevice.forEach(id => !usedIds.includes(id) && usedIds.push(id));
 
             let deviceStates: string[];
 
