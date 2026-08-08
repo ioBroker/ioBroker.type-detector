@@ -1671,20 +1671,21 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     },
     airPurifier: {
         states: [
-            { ...FanPatterns.speed, required: true },
-            // optional
+            // optional fan controls
+            FanPatterns.speed,
             FanPatterns.power,
             FanPatterns.speedLevel,
             FanPatterns.swing,
             FanPatterns.swingBoolean,
             FanPatterns.airflowDirection,
+            // required: at least one filter state must be present
             {
                 role: /^value\.filter$/,
                 indicator: false,
                 write: false,
                 type: StateType.Number,
                 name: 'FILTER_CONDITION',
-                required: false,
+                required: true,
                 defaultRole: 'value.filter',
                 defaultUnit: '%',
             },
@@ -1714,6 +1715,24 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.battery,
         ],
         type: Types.airPurifier,
+    },
+    fan: {
+        states: [
+            { ...FanPatterns.speed, required: true },
+            // optional
+            FanPatterns.power,
+            FanPatterns.speedLevel,
+            FanPatterns.swing,
+            FanPatterns.swingBoolean,
+            FanPatterns.airflowDirection,
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.fan,
     },
     thermostat: {
         states: [

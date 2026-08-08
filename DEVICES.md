@@ -48,6 +48,7 @@ In [brackets] is given the class name of a device.
 * [Light with color temperature [ct]](#light-with-color-temperature-ct)
 * [Light dimmer [dimmer]](#light-dimmer-dimmer)
 * [Door sensor [door]](#door-sensor-door)
+* [Fan [fan]](#fan-fan)
 * [Fill level [fillLevel]](#fill-level-filllevel)
 * [Fire alarm sensor [fireAlarm]](#fire-alarm-sensor-firealarm)
 * [Flood alarm sensor [floodAlarm]](#flood-alarm-sensor-floodalarm)
@@ -111,13 +112,13 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 
 | R | Name                    | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
 |---|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
-| * | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
+|   | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |   | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
 |   | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
 |   | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |   | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |   | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
-|   | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
+| * | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
 |   | FILTER_CONDITION_CARBON | value.filter.carbon           | %    | number         | -  |     |       | `/^value\.filter\.carbon$/`                       |
 |   | FILTER_CHANGE           | indicator.maintenance.filter  |      | boolean        |    | X   |       | `/^indicator\.maintenance\.filter$/`              |
 |   | WORKING                 | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
@@ -126,6 +127,7 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 |   | MAINTAIN                | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR                   | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY                 | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+
 
 ### Air quality sensor [airQuality]
 
@@ -365,6 +367,26 @@ Sensor if the door opened (true) or closed (false).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+
+
+### Fan [fan]
+
+Fan controlled by a speed mode. Could optionally have a continuous speed level, swing, airflow direction and an ON/OFF switch.
+
+| R | Name              | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|---|-------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| * | SPEED             | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
+|   | POWER             | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
+|   | SPEED_LEVEL       | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|   | SWING             | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
+|   | SWING             | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
+|   | AIRFLOW_DIRECTION | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
+|   | WORKING           | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH           | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT            | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN          | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR             | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY           | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Fill level [fillLevel]
