@@ -1671,8 +1671,9 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     },
     airPurifier: {
         states: [
-            // optional fan controls
-            FanPatterns.speed,
+            // `FanControl` is mandatory for the Matter device, and the filter separates it from a plain `fan`
+            { ...FanPatterns.speed, required: true },
+            // optional
             FanPatterns.power,
             FanPatterns.speedLevel,
             FanPatterns.swing,

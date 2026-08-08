@@ -112,7 +112,7 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 
 | R | Name                    | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
 |---|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
-|   | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
+| * | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |   | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
 |   | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
 |   | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |

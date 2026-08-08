@@ -550,6 +550,25 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must not detect a lone filter state as an air purifier`, done => {
+        const objects = {
+            'matter.0.FilterOnly': { common: { name: 'Filter' }, type: 'device' },
+            'matter.0.FilterOnly.hepa': {
+                common: { name: 'Hepa filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.FilterOnly' });
+
+        expect(
+            !(controls || []).some(({ type }) => type === Types.airPurifier),
+            'A device without any fan control must not be an air purifier',
+        );
+
+        done();
+    });
+
     it(`${name} Must detect fan without the optional OnOff cluster`, done => {
         const objects = {
             'matter.0.SimpleFan': { common: { name: 'Fan' }, type: 'device' },
