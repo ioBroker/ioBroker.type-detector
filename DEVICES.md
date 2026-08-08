@@ -36,6 +36,7 @@ In [brackets] is given the class name of a device.
 
 ### Content
 * [Air conditioner [airCondition]](#air-conditioner-aircondition)
+* [Air purifier [airPurifier]](#air-purifier-airpurifier)
 * [Air quality sensor [airQuality]](#air-quality-sensor-airquality)
 * [Blinds controlled only by buttons [blindButtons]](#blinds-controlled-only-by-buttons-blindbuttons)
 * [Blinds or Shutter [blinds]](#blinds-or-shutter-blinds)
@@ -103,6 +104,29 @@ Air conditioner with warming and cooling functions.
 |   | UNREACH        | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/` |
 |   | MAINTAIN       | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`             |
 |   | ERROR          | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                   |
+
+
+### Air purifier [airPurifier]
+
+Air purifier controlled by a speed mode. Could optionally have a continuous speed level, swing, airflow direction, an ON/OFF switch and filter monitoring.
+
+| R | Name                    | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|---|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| * | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
+|   | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
+|   | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|   | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
+|   | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
+|   | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
+| * | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
+|   | FILTER_CONDITION_CARBON | value.filter.carbon           | %    | number         | -  |     |       | `/^value\.filter\.carbon$/`                       |
+|   | FILTER_CHANGE           | indicator.maintenance.filter  |      | boolean        |    | X   |       | `/^indicator\.maintenance\.filter$/`              |
+|   | WORKING                 | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH                 | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT                  | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN                | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR                   | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY                 | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Air quality sensor [airQuality]

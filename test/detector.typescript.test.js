@@ -428,6 +428,55 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect air purifier with both filters`, done => {
+        const writable = (name, role, states, unit) => ({
+            common: { name, type: 'number', role, states, unit, read: true, write: true },
+            type: 'state',
+        });
+        const readOnly = (name, role, unit) => ({
+            common: { name, type: 'number', role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Purifier': { common: { name: 'Dyson Purifier' }, type: 'device' },
+            'matter.0.Purifier.fanMode': writable('Fan mode', 'level.mode.fan', { 0: 'AUTO', 1: 'HIGH' }),
+            'matter.0.Purifier.percent': writable('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Purifier.rock': writable('Rocking', 'level.mode.swing', { 0: 'AUTO', 2: 'STATIONARY' }),
+            'matter.0.Purifier.airflow': writable('Airflow', 'level.mode.airflow', { 0: 'FORWARD', 1: 'REVERSE' }),
+            'matter.0.Purifier.onOff': {
+                common: { name: 'On/Off', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Purifier.hepa': readOnly('Hepa filter', 'value.filter', '%'),
+            'matter.0.Purifier.carbon': readOnly('Carbon filter', 'value.filter.carbon', '%'),
+            'matter.0.Purifier.change': {
+                common: {
+                    name: 'Change filter',
+                    type: 'boolean',
+                    role: 'indicator.maintenance.filter',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Purifier' });
+
+        validate(controls[0], Types.airPurifier, {
+            SPEED: 'matter.0.Purifier.fanMode',
+            SPEED_LEVEL: 'matter.0.Purifier.percent',
+            SWING: 'matter.0.Purifier.rock',
+            AIRFLOW_DIRECTION: 'matter.0.Purifier.airflow',
+            POWER: 'matter.0.Purifier.onOff',
+            FILTER_CONDITION: 'matter.0.Purifier.hepa',
+            FILTER_CONDITION_CARBON: 'matter.0.Purifier.carbon',
+            FILTER_CHANGE: 'matter.0.Purifier.change',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect fan with all optional states`, done => {
         const writableNumber = (name, role, states, unit) => ({
             common: { name, type: 'number', role, states, unit, read: true, write: true },
@@ -471,6 +520,55 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect air purifier with only a filter state`, done => {
+        const objects = {
+            'matter.0.SimplePurifier': { common: { name: 'Purifier' }, type: 'device' },
+            'matter.0.SimplePurifier.fanMode': {
+                common: {
+                    name: 'Fan mode',
+                    type: 'number',
+                    role: 'level.mode.fan',
+                    states: { 0: 'OFF', 1: 'LOW', 3: 'HIGH' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.SimplePurifier.hepa': {
+                common: { name: 'Hepa filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.SimplePurifier' });
+
+        validate(controls[0], Types.airPurifier, {
+            SPEED: 'matter.0.SimplePurifier.fanMode',
+            FILTER_CONDITION: 'matter.0.SimplePurifier.hepa',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not detect a lone filter state as an air purifier`, done => {
+        const objects = {
+            'matter.0.FilterOnly': { common: { name: 'Filter' }, type: 'device' },
+            'matter.0.FilterOnly.hepa': {
+                common: { name: 'Hepa filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.FilterOnly' });
+
+        expect(
+            !(controls || []).some(({ type }) => type === Types.airPurifier),
+            'A device without any fan control must not be an air purifier',
+        );
+
+        done();
+    });
+
     it(`${name} Must detect fan without the optional OnOff cluster`, done => {
         const objects = {
             'matter.0.SimpleFan': { common: { name: 'Fan' }, type: 'device' },
@@ -491,6 +589,49 @@ describe(`${name} Test Detector`, () => {
 
         validate(controls[0], Types.fan, {
             SPEED: 'matter.0.SimpleFan.fanMode',
+        });
+
+        done();
+    });
+
+    it(`${name} Must still detect an air conditioner as airCondition`, done => {
+        const objects = {
+            'alias.0.AC2': { common: { name: 'AC' }, type: 'channel' },
+            'alias.0.AC2.SET': {
+                common: { name: 'SET', role: 'level.temperature', type: 'number', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'alias.0.AC2.MODE': {
+                common: {
+                    name: 'MODE',
+                    role: 'level.mode.airconditioner',
+                    type: 'number',
+                    states: { 0: 'AUTO', 3: 'COOL' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'alias.0.AC2.SPEED': {
+                common: {
+                    name: 'SPEED',
+                    role: 'level.mode.fan',
+                    type: 'number',
+                    states: { 0: 'AUTO', 1: 'HIGH' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'alias.0.AC2' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.airCondition, {
+            SET: 'alias.0.AC2.SET',
+            MODE: 'alias.0.AC2.MODE',
+            SPEED: 'alias.0.AC2.SPEED',
         });
 
         done();
