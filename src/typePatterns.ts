@@ -96,7 +96,7 @@ const SharedPatterns: {
         role: /^(indicator|value)\.direction$/, // some old adapters implement `indicator.direction` even for number types. So try to detect it too
         type: StateType.Number,
         notSingle: true,
-        name: 'DIRECTION',
+        name: 'DIRECTION_ENUM',
         required: false,
         defaultStates: { 0: 'None', 1: 'Up/Open', 2: 'Down/Close', 3: 'Unknown' },
         defaultRole: 'value.direction',
