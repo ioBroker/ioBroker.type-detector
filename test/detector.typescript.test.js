@@ -737,8 +737,46 @@ describe(`${name} Test Detector`, () => {
             SET: 'hm-rpc.0.LEQ090XYZ.1.STATE',
             OPEN: 'hm-rpc.0.LEQ090XYZ.1.OPEN',
             DOOR_STATE: 'hm-rpc.0.LEQ090XYZ.1.DOOR_STATE',
-            DIRECTION: 'hm-rpc.0.LEQ090XYZ.1.DIRECTION',
+            DIRECTION_ENUM: 'hm-rpc.0.LEQ090XYZ.1.DIRECTION',
             ERROR: 'hm-rpc.0.LEQ090XYZ.1.ERROR',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect boolean and enum direction as separate states`, done => {
+        const objects = {
+            'test.0.Blind': {
+                common: { name: 'Blind' },
+                type: 'channel',
+            },
+            'test.0.Blind.level': {
+                common: { name: 'Level', type: 'number', read: true, write: true, role: 'level.blind' },
+                type: 'state',
+            },
+            'test.0.Blind.moving': {
+                common: { name: 'Moving', type: 'boolean', read: true, write: false, role: 'indicator.direction' },
+                type: 'state',
+            },
+            'test.0.Blind.direction': {
+                common: {
+                    name: 'Direction',
+                    type: 'number',
+                    read: true,
+                    write: false,
+                    role: 'value.direction',
+                    states: { 0: 'None', 1: 'Up', 2: 'Down', 3: 'Unknown' },
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Blind' });
+
+        validate(controls[0], Types.blind, {
+            SET: 'test.0.Blind.level',
+            DIRECTION: 'test.0.Blind.moving',
+            DIRECTION_ENUM: 'test.0.Blind.direction',
         });
 
         done();

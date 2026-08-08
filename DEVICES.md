@@ -149,50 +149,50 @@ Air quality sensor with an overall index and optionally single pollutant concent
 
 Blinds, Shutter, Jalousie controlled by stop, up, down buttons. Position is unknown.
 
-| R | Name        | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
-|---|-------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
-| * | STOP        | button.stop.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop(\.blind)?$/`             |
-| * | OPEN        | button.open.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.open(\.blind)?$/`             |
-| * | CLOSE       | button.close.blind            |      | boolean | W  | E    |     |       | `/^(button｜action)\.close(\.blind)?$/`            |
-|   | TILT_SET    | level.tilt                    |      | number  | W  | E    |     |       | `/^level\.tilt$/`                                 |
-|   | TILT_ACTUAL | value.tilt                    |      | number  |    | E    |     |       | `/^value\.tilt$/`                                 |
-|   | TILT_STOP   | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop\.tilt$/`                 |
-|   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.open\.tilt$/`                 |
-|   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |       | `/^(button｜action)\.close\.tilt$/`                |
-|   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                        |
-|   | DIRECTION   | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                |
-|   | WORKING     | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
-|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
-|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN    | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR       | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY     | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+| R | Name           | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|----------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | STOP           | button.stop.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop(\.blind)?$/`             |
+| * | OPEN           | button.open.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.open(\.blind)?$/`             |
+| * | CLOSE          | button.close.blind            |      | boolean | W  | E    |     |       | `/^(button｜action)\.close(\.blind)?$/`            |
+|   | TILT_SET       | level.tilt                    |      | number  | W  | E    |     |       | `/^level\.tilt$/`                                 |
+|   | TILT_ACTUAL    | value.tilt                    |      | number  |    | E    |     |       | `/^value\.tilt$/`                                 |
+|   | TILT_STOP      | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop\.tilt$/`                 |
+|   | TILT_OPEN      | button.open.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.open\.tilt$/`                 |
+|   | TILT_CLOSE     | button.close.tilt             |      | boolean | W  | E    |     |       | `/^(button｜action)\.close\.tilt$/`                |
+|   | DIRECTION      | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                        |
+|   | DIRECTION_ENUM | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                |
+|   | WORKING        | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY        | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### Blinds or Shutter [blinds]
 
 Blinds, Shutter, Jalousie controlled by state with percent.
 
-| R | Name        | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
-|---|-------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
-| * | SET         | level.blind                   | %    | number  | W  | E    |     |       | `/^level(\.blind)?$/`                             |
-|   | ACTUAL      | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.blind)?$/`                             |
-|   | STOP        | button.stop.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop(\.blind)?$/`             |
-|   | OPEN        | button.open.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.open(\.blind)?$/`             |
-|   | CLOSE       | button.close.blind            |      | boolean | W  | E    |     |       | `/^(button｜action)\.close(\.blind)?$/`            |
-|   | TILT_SET    | level.tilt                    |      | number  | W  | E    |     |       | `/^level(\.open)?\.tilt$/`                        |
-|   | TILT_ACTUAL | value.tilt                    |      | number  |    | E    |     |       | `/^value(\.open)?\.tilt$/`                        |
-|   | TILT_STOP   | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop\.tilt$/`                 |
-|   | TILT_OPEN   | button.open.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.open\.tilt$/`                 |
-|   | TILT_CLOSE  | button.close.tilt             |      | boolean | W  | E    |     |       | `/^(button｜action)\.close\.tilt$/`                |
-|   | DIRECTION   | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                        |
-|   | DIRECTION   | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                |
-|   | WORKING     | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
-|   | UNREACH     | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
-|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN    | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR       | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY     | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+| R | Name           | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                             |
+|---|----------------|-------------------------------|------|---------|----|------|-----|-------|---------------------------------------------------|
+| * | SET            | level.blind                   | %    | number  | W  | E    |     |       | `/^level(\.blind)?$/`                             |
+|   | ACTUAL         | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.blind)?$/`                             |
+|   | STOP           | button.stop.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop(\.blind)?$/`             |
+|   | OPEN           | button.open.blind             |      | boolean | W  | E    |     |       | `/^(button｜action)\.open(\.blind)?$/`             |
+|   | CLOSE          | button.close.blind            |      | boolean | W  | E    |     |       | `/^(button｜action)\.close(\.blind)?$/`            |
+|   | TILT_SET       | level.tilt                    |      | number  | W  | E    |     |       | `/^level(\.open)?\.tilt$/`                        |
+|   | TILT_ACTUAL    | value.tilt                    |      | number  |    | E    |     |       | `/^value(\.open)?\.tilt$/`                        |
+|   | TILT_STOP      | button.stop.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop\.tilt$/`                 |
+|   | TILT_OPEN      | button.open.tilt              |      | boolean | W  | E    |     |       | `/^(button｜action)\.open\.tilt$/`                 |
+|   | TILT_CLOSE     | button.close.tilt             |      | boolean | W  | E    |     |       | `/^(button｜action)\.close\.tilt$/`                |
+|   | DIRECTION      | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`                        |
+|   | DIRECTION_ENUM | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`                |
+|   | WORKING        | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY        | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
 
 
 ### Button [button]
@@ -390,17 +390,17 @@ If water sensor senses water (true) or not (false).
 
 Control of the gates. You can open (true) or close (false) the gate. Optionally, the exact position could exist.
 
-| R | Name      | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                    |
-|---|-----------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------|
-| * | SET       | switch.gate                   |      | boolean | W  | E    |     |       | `/^switch(\.gate)?$/`                    |
-|   | ACTUAL    | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.(position｜gate))?$/`          |
-|   | STOP      | button.stop                   |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop$/`              |
-|   | DIRECTION | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`               |
-|   | DIRECTION | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`       |
-|   | WORKING   | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                 |
-|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/` |
-|   | MAINTAIN  | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`             |
-|   | ERROR     | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                   |
+| R | Name           | Role                          | Unit | Type    | Wr | Enum | Ind | Multi | Regex                                    |
+|---|----------------|-------------------------------|------|---------|----|------|-----|-------|------------------------------------------|
+| * | SET            | switch.gate                   |      | boolean | W  | E    |     |       | `/^switch(\.gate)?$/`                    |
+|   | ACTUAL         | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.(position｜gate))?$/`          |
+|   | STOP           | button.stop                   |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop$/`              |
+|   | DIRECTION      | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`               |
+|   | DIRECTION_ENUM | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`       |
+|   | WORKING        | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                 |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`             |
+|   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                   |
 
 
 ### Light with HUE color [hue]
@@ -565,20 +565,20 @@ GPS location, where longitude and latitude are stored in one state, like `longit
 
 Lock. Could be opened (true), closed (false) or opened completely by `OPEN` state.
 
-| R | Name       | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
-|---|------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
-| * | SET        | switch.lock                   |      | boolean | W  |     |       | `/^switch\.lock$/`                                |
-|   | ACTUAL     | state                         |      | boolean | -  |     |       | `/^state$/`                                       |
-|   | OPEN       | button                        |      | boolean | W  |     |       |                                                   |
-|   | DOOR_STATE | sensor.door                   |      | boolean | -  |     |       | `/^(state｜sensor)(\.door)?$/`                     |
-|   | DIRECTION  | indicator.direction           |      | boolean |    | X   |       | `/^indicator\.direction$/`                        |
-|   | DIRECTION  | value.direction               |      | number  |    |     |       | `/^(indicator｜value)\.direction$/`                |
-|   | WORKING    | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
-|   | UNREACH    | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
-|   | LOWBAT     | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN   | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR      | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY    | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+| R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | SET            | switch.lock                   |      | boolean | W  |     |       | `/^switch\.lock$/`                                |
+|   | ACTUAL         | state                         |      | boolean | -  |     |       | `/^state$/`                                       |
+|   | OPEN           | button                        |      | boolean | W  |     |       |                                                   |
+|   | DOOR_STATE     | sensor.door                   |      | boolean | -  |     |       | `/^(state｜sensor)(\.door)?$/`                     |
+|   | DIRECTION      | indicator.direction           |      | boolean |    | X   |       | `/^indicator\.direction$/`                        |
+|   | DIRECTION_ENUM | value.direction               |      | number  |    |     |       | `/^(indicator｜value)\.direction$/`                |
+|   | WORKING        | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY        | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Media player [mediaPlayer]
