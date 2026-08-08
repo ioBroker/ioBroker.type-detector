@@ -550,6 +550,27 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must not have a requiredOneOf group with a single member`, done => {
+        const patterns = ChannelDetector.getPatterns();
+
+        for (const [type, control] of Object.entries(patterns)) {
+            const members = {};
+            for (const state of control.states || []) {
+                for (const entry of Array.isArray(state) ? state : [state]) {
+                    if (entry?.requiredOneOf) {
+                        members[entry.requiredOneOf] = (members[entry.requiredOneOf] || 0) + 1;
+                    }
+                }
+            }
+            for (const [group, count] of Object.entries(members)) {
+                // A lone member is a plain `required` state, so it is almost certainly a typo in the group name
+                expect(count > 1, `Group "${group}" of ${type} has only ${count} member`);
+            }
+        }
+
+        done();
+    });
+
     it(`${name} Must detect air purifier with only the carbon filter`, done => {
         const objects = {
             'matter.0.CarbonPurifier': { common: { name: 'Purifier' }, type: 'device' },
