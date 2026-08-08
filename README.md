@@ -100,6 +100,7 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@Apollon77) Added new device type `airPurifier` for air purifiers (Matter Air Purifier device)
+-   (@Apollon77) Fixed states that lost a pattern slot to a better candidate being marked as used, which hid them from the remaining states of the same pattern
 -   (@Apollon77) Added new device type `fan` for fans (Matter Fan device)
 -   (@Apollon77) Combined the fan states shared by `airCondition`, `fan` and `airPurifier` into one definition
 -   (@Apollon77) Added new device type `airQuality` for air quality sensors (Matter Air Quality Sensor / Air Purifier)
