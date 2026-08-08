@@ -1679,14 +1679,14 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             FanPatterns.swing,
             FanPatterns.swingBoolean,
             FanPatterns.airflowDirection,
-            // required: at least one filter state must be present
+            // A purifier reports either of its filters, and the filter is what separates it from a plain `fan`
             {
                 role: /^value\.filter$/,
                 indicator: false,
                 write: false,
                 type: StateType.Number,
                 name: 'FILTER_CONDITION',
-                required: true,
+                requiredOneOf: 'filter',
                 defaultRole: 'value.filter',
                 defaultUnit: '%',
             },
@@ -1696,7 +1696,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: false,
                 type: StateType.Number,
                 name: 'FILTER_CONDITION_CARBON',
-                required: false,
+                requiredOneOf: 'filter',
                 defaultRole: 'value.filter.carbon',
                 defaultUnit: '%',
             },

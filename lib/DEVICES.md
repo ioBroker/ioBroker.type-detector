@@ -3,7 +3,9 @@
 **Note:** Do not copy regex with '|' from tables. It contains Unicode replacement of '|', because of Markdown's table rendering. 
 
 Fields:
-- **R** - (required) If the state is mandatory and must be in the channel/device.
+- **R** - (required) `*` if the state is mandatory and must be in the channel/device. `1:name` if it belongs to a
+  group of which at least one state must be in the channel/device, e.g. `1:filter` on several states means that any
+  one of them is enough.
 - **Name** - Name describes the function of a state in a channel or in a device and is not 
   connected to the name of the ioBroker state. 
   Important is that role, enum, type, and write attribute are the same as in the table.

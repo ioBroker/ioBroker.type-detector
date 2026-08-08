@@ -542,9 +542,20 @@ export class ChannelDetector {
         }
 
         const states = context.result.states;
+        const satisfiedGroups = new Map<string, boolean>();
 
         for (let a = 0; a < states.length; a++) {
             if (states[a].required && !states[a].id) {
+                return false;
+            }
+            const group = states[a].requiredOneOf;
+            if (group) {
+                satisfiedGroups.set(group, satisfiedGroups.get(group) || !!states[a].id);
+            }
+        }
+
+        for (const satisfied of satisfiedGroups.values()) {
+            if (!satisfied) {
                 return false;
             }
         }

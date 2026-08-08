@@ -166,6 +166,14 @@ export interface InternalDetectorState {
     /** If required to detect the pattern as valid */
     required?: boolean;
 
+    /**
+     * Name of a group of states of which at least one must be found to detect the pattern as valid.
+     * A pattern may use several independent groups; every group it uses must be satisfied.
+     * Use it instead of `required` where a device can express the same capability through different states,
+     * e.g. an air purifier that reports either of its filters.
+     */
+    requiredOneOf?: string;
+
     /** No automatic subscription for this state (e.g., if write-only) */
     noSubscribe?: boolean;
 

@@ -3,7 +3,9 @@
 **Note:** Do not copy regex with '|' from tables. It contains Unicode replacement of '|', because of Markdown's table rendering. 
 
 Fields:
-- **R** - (required) If the state is mandatory and must be in the channel/device.
+- **R** - (required) `*` if the state is mandatory and must be in the channel/device. `1:name` if it belongs to a
+  group of which at least one state must be in the channel/device, e.g. `1:filter` on several states means that any
+  one of them is enough.
 - **Name** - Name describes the function of a state in a channel or in a device and is not 
   connected to the name of the ioBroker state. 
   Important is that role, enum, type, and write attribute are the same as in the table.
@@ -110,23 +112,23 @@ Air conditioner with warming and cooling functions.
 
 Air purifier controlled by a speed mode. Could optionally have a continuous speed level, swing, airflow direction, an ON/OFF switch and filter monitoring.
 
-| R | Name                    | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
-|---|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
-| * | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
-|   | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|   | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
-|   | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
-|   | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
-|   | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
-| * | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
-|   | FILTER_CONDITION_CARBON | value.filter.carbon           | %    | number         | -  |     |       | `/^value\.filter\.carbon$/`                       |
-|   | FILTER_CHANGE           | indicator.maintenance.filter  |      | boolean        |    | X   |       | `/^indicator\.maintenance\.filter$/`              |
-|   | WORKING                 | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
-|   | UNREACH                 | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
-|   | LOWBAT                  | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN                | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR                   | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY                 | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+| R        | Name                    | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|----------|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| *        | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
+|          | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
+|          | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|          | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
+|          | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
+|          | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
+| 1:filter | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
+| 1:filter | FILTER_CONDITION_CARBON | value.filter.carbon           | %    | number         | -  |     |       | `/^value\.filter\.carbon$/`                       |
+|          | FILTER_CHANGE           | indicator.maintenance.filter  |      | boolean        |    | X   |       | `/^indicator\.maintenance\.filter$/`              |
+|          | WORKING                 | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|          | UNREACH                 | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|          | LOWBAT                  | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|          | MAINTAIN                | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|          | ERROR                   | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|          | BATTERY                 | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Air quality sensor [airQuality]
