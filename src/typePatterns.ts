@@ -1604,7 +1604,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
                 defaultRole: 'weather.state',
             },
-            SharedPatterns.rssi,
         ],
         type: Types.warning,
     },

@@ -305,7 +305,7 @@ describe(`${name} Test Detector`, () => {
         const patterns = ChannelDetector.getPatterns();
         const hasRssi = type => (patterns[type]?.states || []).some(state => state?.name === 'RSSI');
 
-        for (const type of ['chart', 'image', 'location', 'locationOne', 'weatherCurrent', 'weatherForecast']) {
+        for (const type of ['chart', 'image', 'location', 'locationOne', 'warning', 'weatherCurrent', 'weatherForecast']) {
             expect(!hasRssi(type), `${type} must not have an RSSI state`);
         }
         for (const type of ['light', 'socket', 'thermostat', 'motion', 'blinds', 'temperature']) {

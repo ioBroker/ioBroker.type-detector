@@ -934,17 +934,16 @@ Group of volumes.
 
 Just sensor if alarm should be shown.
 
-| R | Name  | Role                | Unit | Type   | Wr | Ind | Multi | Regex                       |
-|---|-------|---------------------|------|--------|----|-----|-------|-----------------------------|
-| * | LEVEL | value.warning       |      |        |    |     |       | `/^value\.warning$/`        |
-|   | TITLE | weather.title.short |      | string |    |     |       | `/^weather\.title\.short$/` |
-|   | INFO  | weather.title       |      | string |    |     |       | `/^weather\.title$/`        |
-|   | START | date.start          |      | string |    |     |       | `/^date\.start$/`           |
-|   | END   | date.end            |      | string |    |     |       | `/^date\.end$/`             |
-|   | START |                     |      | string |    |     |       | `/^date$/`                  |
-|   | ICON  | weather.chart.url   |      | string |    |     |       | `/^weather\.chart\.url/`    |
-|   | DESC  | weather.state       |      | string |    |     |       | `/^weather\.state$/`        |
-|   | RSSI  | value.rssi          | dBm  | number | -  |     |       | `/^value\.rssi$/`           |
+| R | Name  | Role                | Type   | Ind | Multi | Regex                       |
+|---|-------|---------------------|--------|-----|-------|-----------------------------|
+| * | LEVEL | value.warning       |        |     |       | `/^value\.warning$/`        |
+|   | TITLE | weather.title.short | string |     |       | `/^weather\.title\.short$/` |
+|   | INFO  | weather.title       | string |     |       | `/^weather\.title$/`        |
+|   | START | date.start          | string |     |       | `/^date\.start$/`           |
+|   | END   | date.end            | string |     |       | `/^date\.end$/`             |
+|   | START |                     | string |     |       | `/^date$/`                  |
+|   | ICON  | weather.chart.url   | string |     |       | `/^weather\.chart\.url/`    |
+|   | DESC  | weather.state       | string |     |       | `/^weather\.state$/`        |
 
 
 ### Current weather [weatherCurrent]
