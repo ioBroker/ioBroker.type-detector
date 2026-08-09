@@ -310,15 +310,28 @@ describe(`${name} Test Detector`, () => {
             'matter.0.Combined': { common: { name: 'Smoke CO alarm' }, type: 'device' },
             'matter.0.Combined.smoke': bool('sensor.alarm.fire'),
             'matter.0.Combined.co': bool('sensor.alarm.co'),
+            'matter.0.Combined.severity': {
+                common: {
+                    name: 'Severity',
+                    type: 'number',
+                    role: 'value.severity',
+                    states: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
         };
 
         const controls = detect(objects, { id: 'matter.0.Combined' });
 
-        // The Matter SmokeCoAlarm is one device, so it must not be split into two controls
+        // The Matter SmokeCoAlarm is one device, so it must not be split into two controls and the single
+        // severity it reports stays with it
         expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
         validate(controls[0], Types.fireAlarm, {
             ACTUAL: 'matter.0.Combined.smoke',
             CO: 'matter.0.Combined.co',
+            SEVERITY: 'matter.0.Combined.severity',
         });
 
         done();
