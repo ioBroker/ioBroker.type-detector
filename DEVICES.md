@@ -91,6 +91,7 @@ Air conditioner with warming and cooling functions.
 |---|----------------|-------------------------------|------|----------------|----|-----|-------|------------------------------------------|
 | * | SET            | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                  |
 | * | MODE           | level.mode.airconditioner     |      | number         | W  |     |       | `/(level\.mode\.)?airconditioner$/`      |
+|   | WORKING_MODE   | value.mode.thermostat         |      | number         | -  |     |       | `/^value\.mode\.thermostat$/`            |
 |   | SPEED          | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                   |
 |   | POWER          | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                   |
 |   | ACTUAL         | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                  |
@@ -816,21 +817,23 @@ Combined temperature and humidity sensor. Humidity is optional.
 
 Thermostat to be controlled by the desired temperature. Could have mode.
 
-| R | Name     | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
-|---|----------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
-| * | SET      | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                           |
-|   | ACTUAL   | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                           |
-|   | HUMIDITY | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                              |
-|   | BOOST    | switch.mode.boost             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.boost(\..*)?$/`               |
-|   | POWER    | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|   | PARTY    | switch.mode.party             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.party$/`                      |
-|   | MODE     | level.mode.thermostat         |      | number         | W  |     |       | `/^level(\.mode)?\.thermostat$/`                  |
-|   | WORKING  | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR    | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY  | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+| R | Name         | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|---|--------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| * | SET          | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                           |
+|   | ACTUAL       | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                           |
+|   | HUMIDITY     | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                              |
+|   | BOOST        | switch.mode.boost             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.boost(\..*)?$/`               |
+|   | POWER        | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
+|   | PARTY        | switch.mode.party             |      | boolean/number | W  |     |       | `/^switch(\.mode)?\.party$/`                      |
+|   | MODE         | level.mode.thermostat         |      | number         | W  |     |       | `/^level(\.mode)?\.thermostat$/`                  |
+|   | VALVE        | value.valve                   | %    | number         |    |     |       | `/^(value｜level)\.valve$/`                        |
+|   | WORKING_MODE | value.mode.thermostat         |      | number         | -  |     |       | `/^value\.mode\.thermostat$/`                     |
+|   | WORKING      | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH      | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT       | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN     | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR        | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY      | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Vacuum cleaner (robot) [vacuumCleaner]

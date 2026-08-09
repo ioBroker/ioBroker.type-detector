@@ -308,6 +308,21 @@ function concentrationPatterns(name: string, roleId: string, defaultUnit?: strin
     ];
 }
 
+/**
+ * What a climate device is actually doing, as opposed to what it was told to do.
+ * The writable counterparts are `level.mode.thermostat` and `level.mode.airconditioner`.
+ */
+const runningMode: InternalDetectorState = {
+    role: /^value\.mode\.thermostat$/,
+    indicator: false,
+    write: false,
+    type: StateType.Number,
+    name: 'WORKING_MODE',
+    required: false,
+    defaultRole: 'value.mode.thermostat',
+    defaultStates: { 0: 'OFF', 1: 'HEAT', 2: 'COOL' },
+};
+
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
         states: [{ objectType: 'chart', name: 'CHART' }],
@@ -1624,6 +1639,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             // optional
+            runningMode,
             FanPatterns.speed,
             FanPatterns.power,
             {
@@ -1814,6 +1830,17 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'level.mode.thermostat',
                 defaultStates: { 0: 'AUTO', 1: 'MANUAL' },
             },
+            {
+                role: /^(value|level)\.valve$/,
+                indicator: false,
+                type: StateType.Number,
+                name: 'VALVE',
+                required: false,
+                defaultRole: 'value.valve',
+                defaultUnit: '%',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            runningMode,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
