@@ -344,8 +344,8 @@ describe(`${name} Test Detector`, () => {
                 common: {
                     name: 'Running mode',
                     type: 'number',
-                    role: 'value.mode.thermostat',
-                    states: { 0: 'OFF', 1: 'HEAT', 2: 'COOL' },
+                    role: 'value.mode.airconditioner',
+                    states: { 0: 'IDLE', 1: 'HEAT', 2: 'COOL' },
                     read: true,
                     write: false,
                 },

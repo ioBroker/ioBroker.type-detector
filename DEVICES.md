@@ -91,7 +91,7 @@ Air conditioner with warming and cooling functions.
 |---|----------------|-------------------------------|------|----------------|----|-----|-------|------------------------------------------|
 | * | SET            | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                  |
 | * | MODE           | level.mode.airconditioner     |      | number         | W  |     |       | `/(level\.mode\.)?airconditioner$/`      |
-|   | WORKING_MODE   | value.mode.thermostat         |      | number         | -  |     |       | `/^value\.mode\.thermostat$/`            |
+|   | WORKING_MODE   | value.mode.airconditioner     |      | number         | -  |     |       | `/^value\.mode\.airconditioner$/`        |
 |   | SPEED          | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                   |
 |   | POWER          | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                   |
 |   | ACTUAL         | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                  |

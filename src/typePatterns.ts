@@ -310,17 +310,30 @@ function concentrationPatterns(name: string, roleId: string, defaultUnit?: strin
 
 /**
  * What a climate device is actually doing, as opposed to what it was told to do.
- * The writable counterparts are `level.mode.thermostat` and `level.mode.airconditioner`.
+ * Each type keeps the role of its own writable mode, so the air conditioner reuses the documented
+ * `value.mode.airconditioner` instead of the thermostat role.
  */
-const runningMode: InternalDetectorState = {
-    role: /^value\.mode\.thermostat$/,
-    indicator: false,
-    write: false,
-    type: StateType.Number,
-    name: 'WORKING_MODE',
-    required: false,
-    defaultRole: 'value.mode.thermostat',
-    defaultStates: { 0: 'OFF', 1: 'HEAT', 2: 'COOL' },
+const RunningModePatterns: { thermostat: InternalDetectorState; airCondition: InternalDetectorState } = {
+    thermostat: {
+        role: /^value\.mode\.thermostat$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'WORKING_MODE',
+        required: false,
+        defaultRole: 'value.mode.thermostat',
+        defaultStates: { 0: 'OFF', 1: 'HEAT', 2: 'COOL' },
+    },
+    airCondition: {
+        role: /^value\.mode\.airconditioner$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'WORKING_MODE',
+        required: false,
+        defaultRole: 'value.mode.airconditioner',
+        defaultStates: { 0: 'IDLE', 1: 'HEAT', 2: 'COOL' },
+    },
 };
 
 export const patterns: { [key: string]: InternalPatternControl } = {
@@ -1639,7 +1652,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             // optional
-            runningMode,
+            RunningModePatterns.airCondition,
             FanPatterns.speed,
             FanPatterns.power,
             {
@@ -1840,7 +1853,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultUnit: '%',
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
-            runningMode,
+            RunningModePatterns.thermostat,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
