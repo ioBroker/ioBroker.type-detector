@@ -99,6 +99,7 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) The feedback state `ACTUAL` of `socket` no longer matches the generic role `state`, and `ON_ACTUAL` no longer matches any role that merely ends in `switch`
 -   (@Apollon77) Added the state flag `requiredOneOf` to require at least one state out of a group instead of one specific state
 -   (@Apollon77) An `airPurifier` is now also detected when it reports only the activated carbon filter
 -   (@Apollon77) Added new device type `airPurifier` for air purifiers (Matter Air Purifier device)

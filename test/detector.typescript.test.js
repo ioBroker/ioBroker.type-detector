@@ -264,6 +264,80 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must not use a generic state role as the feedback of a socket`, done => {
+        const objects = {
+            'zigbee.0.Plug': { common: { name: 'Plug' }, type: 'device' },
+            'zigbee.0.Plug.state': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            // Reachability of the device, exposed by the zigbee adapter for every device
+            'zigbee.0.Plug.available': {
+                common: { name: 'Available', type: 'boolean', role: 'state', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'zigbee.0.Plug' });
+
+        const socket = controls.find(({ type }) => type === Types.socket);
+        expect(!!socket, 'The plug must still be detected as a socket');
+        expect(
+            !socket.states.some(({ name, id }) => name === 'ACTUAL' && id === 'zigbee.0.Plug.available'),
+            'A generic state role must not become the feedback of the socket',
+        );
+
+        done();
+    });
+
+    it(`${name} Must still use a dedicated feedback role of a socket`, done => {
+        const objects = {
+            'shelly.0.Relay': { common: { name: 'Relay' }, type: 'device' },
+            'shelly.0.Relay.set': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'shelly.0.Relay.actual': {
+                common: { name: 'Actual', type: 'boolean', role: 'state.active', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Relay' });
+
+        validate(controls[0], Types.socket, {
+            SET: 'shelly.0.Relay.set',
+            ACTUAL: 'shelly.0.Relay.actual',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not use an arbitrary role ending in switch as ON_ACTUAL`, done => {
+        const objects = {
+            'test.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
+            'test.0.Lamp.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.light', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Lamp.someSwitch': {
+                common: { name: 'Some switch', type: 'boolean', role: 'info.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Lamp', ignoreEnums: true });
+
+        const light = controls.find(({ type }) => type === Types.light);
+        expect(!!light, 'The lamp must still be detected as a light');
+        expect(
+            !light.states.some(({ name, id }) => name === 'ON_ACTUAL' && id),
+            'A role that merely ends in "switch" must not become ON_ACTUAL',
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {

@@ -291,7 +291,7 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | TEMPERATURE     | level.color.temperature       | °K   | number        | W  |     |       | `/^level\.color\.temperature$/`                   |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
@@ -316,7 +316,7 @@ Light, where the color is set by color temperature (normally from 2700°K (warm-
 |   | DIMMER          | level.dimmer                  | %    | number        | W  |     |       | `/^level\.dimmer$/`                               |
 |   | BRIGHTNESS      |                               |      | number        | W  |     |       | `/^level\.brightness$/`                           |
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
@@ -342,7 +342,7 @@ Dimmer, that is controlled by state (normally from 0 to 100 %, but it could be a
 |   | ACTUAL          | value.dimmer                  | %    | number        | -  | E    |     |       | `/^value(\.dimmer)?$/`                            |
 |   | ON_SET          | switch.light                  |      | boolean       | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                    |
 |   | EFFECT          | level.effect                  |      | number/string | W  |      |     |       | `/^level\.effect$/`                               |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  | E    |     |       | `/^time\.(span｜interval)$/`                       |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |      |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |      |     |       | `/^value\.current$/`                              |
@@ -463,7 +463,7 @@ HUE light from 0° to 360°.
 |   | TEMPERATURE     | level.color.temperature       | °K   | number        | W  |     |       | `/^level\.color\.temperature$/`                   |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
@@ -558,7 +558,7 @@ Light with only ON/OFF options. Could have information about current, amperage, 
 | R | Name           | Role                          | Unit | Type          | Wr | Enum | Ind | Multi | Regex                                             |
 |---|----------------|-------------------------------|------|---------------|----|------|-----|-------|---------------------------------------------------|
 | * | SET            | switch.light                  |      | boolean       | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                    |
-|   | ON_ACTUAL      | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL      | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | EFFECT         | level.effect                  |      | number/string | W  |      |     |       | `/^level\.effect$/`                               |
 |   | ELECTRIC_POWER | value.power                   | W    | number        | -  |      |     |       | `/^value\.power$/`                                |
 |   | CURRENT        | value.current                 | mA   | number        | -  |      |     |       | `/^value\.current$/`                              |
@@ -708,7 +708,7 @@ R,G,B(,W) Light with different states for every color. The value is from 0 to 25
 |   | TEMPERATURE     | level.color.temperature       | °K   | number        | W  |     |       | `/^level\.color\.temperature$/`                   |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$｜^state$/`                    |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
@@ -735,7 +735,7 @@ RGB light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-25
 |   | TEMPERATURE     | level.color.temperature       | °K   | number        | W  |     |       | `/^level\.color\.temperature$/`                   |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
@@ -762,7 +762,7 @@ RGBW light with one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,
 |   | TEMPERATURE     | level.color.temperature       | °K   | number        | W  |     |       | `/^level\.color\.temperature$/`                   |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
-|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
+|   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light$｜^switch$/`       |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
@@ -784,7 +784,7 @@ Socket with an ON/OFF option. Could have information about current, amperage, en
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | SET            | switch                        |      | boolean | W  |     |       | `/^switch(\.active)?$｜^state$/`                   |
-|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$｜^sensor.switch$/`            |
+|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state\.active$｜^sensor\.switch$/`              |
 |   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |

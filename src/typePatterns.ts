@@ -1031,7 +1031,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1122,7 +1122,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1213,7 +1213,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1304,7 +1304,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1406,7 +1406,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1476,7 +1476,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2697,7 +2697,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultStates: { 0: 'None' },
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2742,7 +2742,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -3054,7 +3054,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^state(\.active)?$|^sensor.switch$/,
+                role: /^state\.active$|^sensor\.switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
