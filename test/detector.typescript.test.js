@@ -264,6 +264,78 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect pressure sensor`, done => {
+        const objects = {
+            'matter.0.Baro': { common: { name: 'Barometer' }, type: 'device' },
+            'matter.0.Baro.pressure': {
+                common: { name: 'Pressure', type: 'number', role: 'value.pressure', unit: 'mbar', read: true, write: false },
+                type: 'state',
+            },
+            'matter.0.Baro.battery': {
+                common: { name: 'Battery', type: 'number', role: 'value.battery', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Baro' });
+
+        validate(controls[0], Types.pressure, {
+            PRESSURE: 'matter.0.Baro.pressure',
+            BATTERY: 'matter.0.Baro.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect flow sensor`, done => {
+        const objects = {
+            'matter.0.Flow': { common: { name: 'Flow sensor' }, type: 'device' },
+            'matter.0.Flow.flow': {
+                common: { name: 'Flow', type: 'number', role: 'value.flow', unit: 'm³/h', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Flow' });
+
+        validate(controls[0], Types.flow, {
+            FLOW: 'matter.0.Flow.flow',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep the pressure of a weather station with the weather station`, done => {
+        const objects = {
+            'weather.0.Current': { common: { name: 'Current weather' }, type: 'device' },
+            'weather.0.Current.temp': {
+                common: { name: 'Temperature', type: 'number', role: 'value.temperature', unit: '°C', read: true, write: false },
+                type: 'state',
+            },
+            'weather.0.Current.icon': {
+                common: { name: 'Icon', type: 'string', role: 'weather.icon', read: true, write: false },
+                type: 'state',
+            },
+            'weather.0.Current.pressure': {
+                common: { name: 'Pressure', type: 'number', role: 'value.pressure', unit: 'mbar', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'weather.0.Current' });
+
+        expect(
+            controls.some(({ type }) => type === Types.weatherCurrent),
+            'A weather station must still be detected as weatherCurrent',
+        );
+        expect(
+            !controls.some(({ type }) => type === Types.pressure),
+            'The pressure of a weather station must stay with the weather station',
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {

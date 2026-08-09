@@ -3280,6 +3280,48 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.illuminance,
     },
+    pressure: {
+        states: [
+            {
+                role: /^value\.pressure$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'PRESSURE',
+                required: true,
+                defaultRole: 'value.pressure',
+                defaultUnit: 'mbar',
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.pressure,
+    },
+    flow: {
+        states: [
+            {
+                role: /^value\.flow$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'FLOW',
+                required: true,
+                defaultRole: 'value.flow',
+                defaultUnit: 'm³/h',
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.flow,
+    },
     fillLevel: {
         states: [
             {

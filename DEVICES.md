@@ -54,6 +54,7 @@ In [brackets] is given the class name of a device.
 * [Fill level [fillLevel]](#fill-level-filllevel)
 * [Fire alarm sensor [fireAlarm]](#fire-alarm-sensor-firealarm)
 * [Flood alarm sensor [floodAlarm]](#flood-alarm-sensor-floodalarm)
+* [Flow sensor [flow]](#flow-sensor-flow)
 * [Gate [gate]](#gate-gate)
 * [Light with HUE color [hue]](#light-with-hue-color-hue)
 * [Humidity [humidity]](#humidity-humidity)
@@ -68,6 +69,7 @@ In [brackets] is given the class name of a device.
 * [Media player [mediaPlayer]](#media-player-mediaplayer)
 * [Motion sensor [motion]](#motion-sensor-motion)
 * [Percentage slider [percentage]](#percentage-slider-percentage)
+* [Pressure sensor [pressure]](#pressure-sensor-pressure)
 * [RGB(W) Light with different states for every color [rgb]](#rgb-w--light-with-different-states-for-every-color-rgb)
 * [RGB Light Single [rgbSingle]](#rgb-light-single-rgbsingle)
 * [RGBW Light Single [rgbwSingle]](#rgbw-light-single-rgbwsingle)
@@ -433,6 +435,21 @@ If water sensor senses water (true) or not (false).
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
+### Flow sensor [flow]
+
+Flow sensor, e.g. of water or gas, normally in m³/h.
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | FLOW     | value.flow                    | m³/h | number  | -  |     |       | `/^value\.flow$/`                                 |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
 ### Gate [gate]
 
 Control of the gates. You can open (true) or close (false) the gate. Optionally, the exact position could exist.
@@ -685,6 +702,21 @@ Same as slider, but from 0 to 100%
 |---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | SET      | level                         | %    | number  | W  |     |       | `/^level(\..*)?$/`                                |
 |   | ACTUAL   | value                         | %    | number  | -  |     |       | `/^value(\..*)?$/`                                |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
+### Pressure sensor [pressure]
+
+Pressure sensor for air or liquid pressure, normally in mbar (identical to hPa).
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | PRESSURE | value.pressure                | mbar | number  | -  |     |       | `/^value\.pressure$/`                             |
 |   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |

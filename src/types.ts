@@ -44,6 +44,7 @@ export type PatternName =
     | 'hue'
     | 'humidity'
     | 'illuminance'
+    | 'pressure'
     | 'image'
     | 'levelSlider'
     | 'light'
@@ -59,6 +60,7 @@ export type PatternName =
     | 'socket'
     | 'temperature'
     | 'fillLevel'
+    | 'flow'
     | 'thermostat'
     | 'unknown'
     | 'vacuumCleaner'
@@ -112,6 +114,8 @@ export enum Types {
     socket = 'socket',
     temperature = 'temperature',
     fillLevel = 'fillLevel',
+    flow = 'flow',
+    pressure = 'pressure',
     thermostat = 'thermostat',
     vacuumCleaner = 'vacuumCleaner',
     volume = 'volume',
