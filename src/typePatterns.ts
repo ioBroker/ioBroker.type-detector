@@ -27,6 +27,39 @@ import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleO
 
 const IGNORE_SETTINGS_REGEX = /^[^.]+\.setting\./;
 
+/** The role of the primary setpoint matches any `*.temperature`, so it has to leave the two dual setpoints alone */
+const IGNORE_SETTINGS_OR_DUAL_SETPOINT_REGEX = /^[^.]+\.setting\.|^level\.temperature\.(heating|cooling)$/;
+
+/**
+ * Heating and cooling setpoint of a device that holds both at once, as a Matter thermostat does in Auto mode.
+ * Together with the primary `SET` they form the group `setpoint`, so a device is detected when it exposes the
+ * single setpoint, either of these, or all of them.
+ */
+const DualSetpointPatterns: { heating: InternalDetectorState; cooling: InternalDetectorState } = {
+    heating: {
+        role: /^level\.temperature\.heating$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'SET_HEATING',
+        requiredOneOf: 'setpoint',
+        defaultRole: 'level.temperature.heating',
+        defaultUnit: '°C',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+    cooling: {
+        role: /^level\.temperature\.cooling$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'SET_COOLING',
+        requiredOneOf: 'setpoint',
+        defaultRole: 'level.temperature.cooling',
+        defaultUnit: '°C',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+};
+
 const SharedPatterns: {
     working: InternalDetectorState;
     unreach: InternalDetectorState;
@@ -1597,11 +1630,13 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 type: StateType.Number,
                 name: 'SET',
-                required: true,
+                requiredOneOf: 'setpoint',
                 defaultRole: 'level.temperature',
                 defaultUnit: '°C',
-                ignoreRole: IGNORE_SETTINGS_REGEX,
+                ignoreRole: IGNORE_SETTINGS_OR_DUAL_SETPOINT_REGEX,
             },
+            DualSetpointPatterns.heating,
+            DualSetpointPatterns.cooling,
             // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
             {
                 role: /(level\.mode\.)?airconditioner$/,
@@ -1743,12 +1778,14 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 type: StateType.Number,
                 name: 'SET',
-                required: true,
+                requiredOneOf: 'setpoint',
                 defaultRole: 'level.temperature',
                 defaultUnit: '°C',
-                ignoreRole: IGNORE_SETTINGS_REGEX,
+                ignoreRole: IGNORE_SETTINGS_OR_DUAL_SETPOINT_REGEX,
             },
             // optional
+            DualSetpointPatterns.heating,
+            DualSetpointPatterns.cooling,
             {
                 role: /temperature(\..*)?$/,
                 indicator: false,

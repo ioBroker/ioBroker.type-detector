@@ -764,6 +764,141 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a thermostat with all three setpoints`, done => {
+        const setpoint = role => ({
+            common: { name: role, type: 'number', role, unit: '°C', read: true, write: true },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Th1': { common: { name: 'Thermostat' }, type: 'device' },
+            'matter.0.Th1.set': setpoint('level.temperature'),
+            'matter.0.Th1.heating': setpoint('level.temperature.heating'),
+            'matter.0.Th1.cooling': setpoint('level.temperature.cooling'),
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Th1' });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'matter.0.Th1.set',
+            SET_HEATING: 'matter.0.Th1.heating',
+            SET_COOLING: 'matter.0.Th1.cooling',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a thermostat that has only the two dual setpoints`, done => {
+        const setpoint = role => ({
+            common: { name: role, type: 'number', role, unit: '°C', read: true, write: true },
+            type: 'state',
+        });
+
+        // The mapping must not depend on the order of the object IDs
+        for (const [heatingId, coolingId] of [
+            ['a-heating', 'b-cooling'],
+            ['b-heating', 'a-cooling'],
+        ]) {
+            const objects = {
+                'matter.0.Th2': { common: { name: 'Thermostat' }, type: 'device' },
+                [`matter.0.Th2.${heatingId}`]: setpoint('level.temperature.heating'),
+                [`matter.0.Th2.${coolingId}`]: setpoint('level.temperature.cooling'),
+            };
+
+            const controls = detect(objects, { id: 'matter.0.Th2' });
+
+            validate(controls[0], Types.thermostat, {
+                SET_HEATING: `matter.0.Th2.${heatingId}`,
+                SET_COOLING: `matter.0.Th2.${coolingId}`,
+            });
+        }
+
+        done();
+    });
+
+    it(`${name} Must map a lone heating setpoint to SET_HEATING`, done => {
+        const objects = {
+            'matter.0.Th3': { common: { name: 'Thermostat' }, type: 'device' },
+            'matter.0.Th3.heating': {
+                common: {
+                    name: 'Heating setpoint',
+                    type: 'number',
+                    role: 'level.temperature.heating',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Th3' });
+
+        validate(controls[0], Types.thermostat, {
+            SET_HEATING: 'matter.0.Th3.heating',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect an air conditioner with the dual setpoints`, done => {
+        const setpoint = role => ({
+            common: { name: role, type: 'number', role, unit: '°C', read: true, write: true },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.RoomAC2': { common: { name: 'Room AC' }, type: 'device' },
+            'matter.0.RoomAC2.heating': setpoint('level.temperature.heating'),
+            'matter.0.RoomAC2.cooling': setpoint('level.temperature.cooling'),
+            'matter.0.RoomAC2.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO', 3: 'COOL', 7: 'HEAT' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.RoomAC2' });
+
+        validate(controls[0], Types.airCondition, {
+            SET_HEATING: 'matter.0.RoomAC2.heating',
+            SET_COOLING: 'matter.0.RoomAC2.cooling',
+            MODE: 'matter.0.RoomAC2.mode',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not detect a thermostat without any setpoint`, done => {
+        const objects = {
+            'matter.0.NoSet': { common: { name: 'Device' }, type: 'device' },
+            'matter.0.NoSet.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.NoSet' });
+
+        expect(
+            !(controls || []).some(({ type }) => type === Types.thermostat || type === Types.airCondition),
+            'A device without any setpoint must be neither a thermostat nor an air conditioner',
+        );
+
+        done();
+    });
+
     it('Must detect vacuum mihome from states', done => {
         const controls = detect('./mihome-vacuum.0.json', {
             id: 'mihome-vacuum.0',
