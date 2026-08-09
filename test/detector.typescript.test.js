@@ -440,7 +440,7 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Purifier': { common: { name: 'Dyson Purifier' }, type: 'device' },
             'matter.0.Purifier.fanMode': writable('Fan mode', 'level.mode.fan', { 0: 'AUTO', 1: 'HIGH' }),
-            'matter.0.Purifier.percent': writable('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Purifier.percent': writable('Percent setting', 'level.speed', undefined, '%'),
             'matter.0.Purifier.rock': writable('Rocking', 'level.mode.swing', { 0: 'AUTO', 2: 'STATIONARY' }),
             'matter.0.Purifier.airflow': writable('Airflow', 'level.mode.airflow', { 0: 'FORWARD', 1: 'REVERSE' }),
             'matter.0.Purifier.onOff': {
@@ -490,7 +490,7 @@ describe(`${name} Test Detector`, () => {
                 2: 'LOW',
                 3: 'MEDIUM',
             }),
-            'matter.0.Fan.percent': writableNumber('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Fan.percent': writableNumber('Percent setting', 'level.speed', undefined, '%'),
             'matter.0.Fan.rock': writableNumber('Rocking', 'level.mode.swing', {
                 0: 'AUTO',
                 1: 'HORIZONTAL',
