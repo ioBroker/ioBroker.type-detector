@@ -542,9 +542,19 @@ export class ChannelDetector {
         }
 
         const states = context.result.states;
+        const satisfiedGroups = new Map<string, boolean>();
 
         for (let a = 0; a < states.length; a++) {
-            if (states[a].required && !states[a].id) {
+            const group = states[a].requiredOneOf;
+            if (group) {
+                satisfiedGroups.set(group, satisfiedGroups.get(group) || !!states[a].id);
+            } else if (states[a].required && !states[a].id) {
+                return false;
+            }
+        }
+
+        for (const satisfied of satisfiedGroups.values()) {
+            if (!satisfied) {
                 return false;
             }
         }
@@ -670,7 +680,8 @@ export class ChannelDetector {
                 if (this._testOneState(context)) {
                     found = true;
                 }
-                if (state.required && !found) {
+                // A group member may be missing as long as one of its siblings is found, so it cannot abort here
+                if (state.required && !state.requiredOneOf && !found) {
                     delete context.result;
                     break;
                 }
@@ -819,8 +830,8 @@ export class ChannelDetector {
                 return -1;
             }
 
-            const aHasRequiredId = a.states.find(s => s.id === id && s.required) ? 1 : 0;
-            const bHasRequiredId = b.states.find(s => s.id === id && s.required) ? 1 : 0;
+            const aHasRequiredId = a.states.find(s => s.id === id && (s.required || s.requiredOneOf)) ? 1 : 0;
+            const bHasRequiredId = b.states.find(s => s.id === id && (s.required || s.requiredOneOf)) ? 1 : 0;
             if (aHasRequiredId !== bHasRequiredId) {
                 return bHasRequiredId - aHasRequiredId;
             }
