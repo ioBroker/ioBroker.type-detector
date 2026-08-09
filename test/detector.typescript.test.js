@@ -264,6 +264,57 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect the RSSI of a device`, done => {
+        const objects = {
+            'zigbee.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
+            'zigbee.0.Lamp.state': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.Lamp.rssi': {
+                common: { name: 'RSSI', type: 'number', role: 'value.rssi', unit: 'dBm', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'zigbee.0.Lamp' });
+
+        validate(controls[0], Types.socket, {
+            SET: 'zigbee.0.Lamp.state',
+            RSSI: 'zigbee.0.Lamp.rssi',
+        });
+
+        done();
+    });
+
+    it(`${name} Must offer the RSSI to every control of a device`, done => {
+        const controls = detect('./hm-thermostat.json', {
+            id: 'hm-rpc.1.JEQ0XXXXXX',
+        });
+
+        // The radio quality describes the device, so it is not consumed by the first control that matches
+        const withRssi = controls.filter(control =>
+            control.states.some(({ name, id }) => name === 'RSSI' && id === 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER'),
+        );
+        expect(withRssi.length > 1, `Expected the RSSI in more than one control but found it in ${withRssi.length}`);
+
+        done();
+    });
+
+    it(`${name} Must not offer the RSSI on types that are not radio devices`, done => {
+        const patterns = ChannelDetector.getPatterns();
+        const hasRssi = type => (patterns[type]?.states || []).some(state => state?.name === 'RSSI');
+
+        for (const type of ['chart', 'image', 'location', 'locationOne', 'weatherCurrent', 'weatherForecast']) {
+            expect(!hasRssi(type), `${type} must not have an RSSI state`);
+        }
+        for (const type of ['light', 'socket', 'thermostat', 'motion', 'blinds', 'temperature']) {
+            expect(hasRssi(type), `${type} must have an RSSI state`);
+        }
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
@@ -1130,6 +1181,7 @@ describe(`${name} Test Detector`, () => {
             POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
             UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
             LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
         });
 
         done();
@@ -1180,6 +1232,7 @@ describe(`${name} Test Detector`, () => {
             POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
             UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
             LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
         });
 
         options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
