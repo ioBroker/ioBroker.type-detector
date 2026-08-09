@@ -47,6 +47,7 @@ In [brackets] is given the class name of a device.
 * [IP Camera [camera]](#ip-camera-camera)
 * [Chart [chart]](#chart-chart)
 * [CIE Color space [cie]](#cie-color-space-cie)
+* [CO alarm sensor [coAlarm]](#co-alarm-sensor-coalarm)
 * [Light with color temperature [ct]](#light-with-color-temperature-ct)
 * [Light dimmer [dimmer]](#light-dimmer-dimmer)
 * [Door sensor [door]](#door-sensor-door)
@@ -306,6 +307,23 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
 
 
+### CO alarm sensor [coAlarm]
+
+If the carbon monoxide sensor is alarmed (true) or not (false).
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.co$/`      |
+|   | SEVERITY | value.severity                |      | number  | -  |     |       | `/^value\.severity$/`                             |
+|   | MUTED    | indicator.alarm.muted         |      | boolean |    | X   |       | `/^indicator\.alarm\.muted$/`                     |
+|   | TEST     | indicator.working.test        |      | boolean |    | X   |       | `/^indicator\.working\.test$/`                    |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
 ### Light with color temperature [ct]
 
 Light, where the color is set by color temperature (normally from 2700°K (warm-white) to 6000°K (cold-white)).
@@ -412,6 +430,10 @@ If smoke/fire sensor is alarmed (true) or not (false).
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | ACTUAL   | sensor.alarm.fire             |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.fire$/`    |
+|   | CO       | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.co$/`      |
+|   | SEVERITY | value.severity                |      | number  | -  |     |       | `/^value\.severity$/`                             |
+|   | MUTED    | indicator.alarm.muted         |      | boolean |    | X   |       | `/^indicator\.alarm\.muted$/`                     |
+|   | TEST     | indicator.working.test        |      | boolean |    | X   |       | `/^indicator\.working\.test$/`                    |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |

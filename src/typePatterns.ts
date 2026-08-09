@@ -308,6 +308,39 @@ function concentrationPatterns(name: string, roleId: string, defaultUnit?: strin
     ];
 }
 
+/**
+ * Optional details a smoke or CO alarm can report next to the alarm itself.
+ * Shared by `fireAlarm` and `coAlarm`, which are one device in Matter and differ only in what they sense.
+ */
+const AlarmPatterns: { severity: InternalDetectorState; muted: InternalDetectorState; test: InternalDetectorState } = {
+    severity: {
+        role: /^value\.severity$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'SEVERITY',
+        required: false,
+        defaultRole: 'value.severity',
+        defaultStates: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+    },
+    muted: {
+        role: /^indicator\.alarm\.muted$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'MUTED',
+        required: false,
+        defaultRole: 'indicator.alarm.muted',
+    },
+    test: {
+        role: /^indicator\.working\.test$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'TEST',
+        required: false,
+        defaultRole: 'indicator.working.test',
+    },
+};
+
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
         states: [{ objectType: 'chart', name: 'CHART' }],
@@ -2598,6 +2631,17 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultChannelRole: 'sensor.alarm.fire',
             },
             // optional
+            {
+                role: /^(state|sensor|indicator)(\.alarm)?\.co$/,
+                indicator: false,
+                type: StateType.Boolean,
+                name: 'CO',
+                required: false,
+                defaultRole: 'sensor.alarm.co',
+            },
+            AlarmPatterns.severity,
+            AlarmPatterns.muted,
+            AlarmPatterns.test,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
             SharedPatterns.maintain,
@@ -2605,6 +2649,30 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.battery,
         ],
         type: Types.fireAlarm,
+        enumRequired: false,
+    },
+    coAlarm: {
+        states: [
+            {
+                role: /^(state|sensor|indicator)(\.alarm)?\.co$/,
+                indicator: false,
+                type: StateType.Boolean,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'sensor.alarm.co',
+                defaultChannelRole: 'sensor.alarm.co',
+            },
+            // optional
+            AlarmPatterns.severity,
+            AlarmPatterns.muted,
+            AlarmPatterns.test,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.coAlarm,
         enumRequired: false,
     },
     floodAlarm: {
