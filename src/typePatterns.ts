@@ -308,6 +308,46 @@ function concentrationPatterns(name: string, roleId: string, defaultUnit?: strin
     ];
 }
 
+/**
+ * Filter monitoring shared by the device types that move air through a filter.
+ * `airPurifier` puts the two conditions into a group, because there the filter is what separates it from a `fan`,
+ * while for an air conditioner the filter is just extra information.
+ */
+const FilterPatterns: {
+    condition: InternalDetectorState;
+    conditionCarbon: InternalDetectorState;
+    change: InternalDetectorState;
+} = {
+    condition: {
+        role: /^value\.filter$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'FILTER_CONDITION',
+        required: false,
+        defaultRole: 'value.filter',
+        defaultUnit: '%',
+    },
+    conditionCarbon: {
+        role: /^value\.filter\.carbon$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'FILTER_CONDITION_CARBON',
+        required: false,
+        defaultRole: 'value.filter.carbon',
+        defaultUnit: '%',
+    },
+    change: {
+        role: /^indicator\.maintenance\.filter$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'FILTER_CHANGE',
+        required: false,
+        defaultRole: 'indicator.maintenance.filter',
+    },
+};
+
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
         states: [{ objectType: 'chart', name: 'CHART' }],
@@ -1625,6 +1665,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             FanPatterns.speed,
+            FanPatterns.speedLevel,
             FanPatterns.power,
             {
                 role: /temperature(\..*)?$/,
@@ -1662,10 +1703,17 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             FanPatterns.swing,
             FanPatterns.swingBoolean,
+            FanPatterns.airflowDirection,
+            FilterPatterns.condition,
+            FilterPatterns.conditionCarbon,
+            FilterPatterns.change,
             ...Object.values(ElectricityPatterns),
+            SharedPatterns.working,
             SharedPatterns.unreach,
+            SharedPatterns.lowbat,
             SharedPatterns.maintain,
             SharedPatterns.error,
+            SharedPatterns.battery,
         ],
         type: Types.airCondition,
     },
@@ -1680,34 +1728,9 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             FanPatterns.swingBoolean,
             FanPatterns.airflowDirection,
             // A purifier reports either of its filters, and the filter is what separates it from a plain `fan`
-            {
-                role: /^value\.filter$/,
-                indicator: false,
-                write: false,
-                type: StateType.Number,
-                name: 'FILTER_CONDITION',
-                requiredOneOf: 'filter',
-                defaultRole: 'value.filter',
-                defaultUnit: '%',
-            },
-            {
-                role: /^value\.filter\.carbon$/,
-                indicator: false,
-                write: false,
-                type: StateType.Number,
-                name: 'FILTER_CONDITION_CARBON',
-                requiredOneOf: 'filter',
-                defaultRole: 'value.filter.carbon',
-                defaultUnit: '%',
-            },
-            {
-                role: /^indicator\.maintenance\.filter$/,
-                indicator: true,
-                type: StateType.Boolean,
-                name: 'FILTER_CHANGE',
-                required: false,
-                defaultRole: 'indicator.maintenance.filter',
-            },
+            { ...FilterPatterns.condition, requiredOneOf: 'filter' },
+            { ...FilterPatterns.conditionCarbon, requiredOneOf: 'filter' },
+            FilterPatterns.change,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,

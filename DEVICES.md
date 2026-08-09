@@ -87,25 +87,33 @@ In [brackets] is given the class name of a device.
 
 Air conditioner with warming and cooling functions.
 
-| R | Name           | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                    |
-|---|----------------|-------------------------------|------|----------------|----|-----|-------|------------------------------------------|
-| * | SET            | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                  |
-| * | MODE           | level.mode.airconditioner     |      | number         | W  |     |       | `/(level\.mode\.)?airconditioner$/`      |
-|   | SPEED          | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                   |
-|   | POWER          | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                   |
-|   | ACTUAL         | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                  |
-|   | HUMIDITY       | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                     |
-|   | BOOST          | switch.boost                  |      | boolean/number | W  |     |       | `/^switch\.boost(\..*)?$/`               |
-|   | SWING          | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                               |
-|   | SWING          | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                               |
-|   | ELECTRIC_POWER | value.power                   | W    | number         | -  |     |       | `/^value\.power$/`                       |
-|   | CURRENT        | value.current                 | mA   | number         | -  |     |       | `/^value\.current$/`                     |
-|   | VOLTAGE        | value.voltage                 | V    | number         | -  |     |       | `/^value\.voltage$/`                     |
-|   | CONSUMPTION    | value.power.consumption       | Wh   | number         | -  |     |       | `/^value\.power\.consumption$/`          |
-|   | FREQUENCY      | value.frequency               | Hz   | number         | -  |     |       | `/^value\.frequency$/`                   |
-|   | UNREACH        | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/` |
-|   | MAINTAIN       | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`             |
-|   | ERROR          | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                   |
+| R | Name                    | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|---|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| * | SET                     | level.temperature             | °C   | number         | W  |     |       | `/temperature(\..*)?$/`                           |
+| * | MODE                    | level.mode.airconditioner     |      | number         | W  |     |       | `/(level\.mode\.)?airconditioner$/`               |
+|   | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
+|   | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|   | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
+|   | ACTUAL                  | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                           |
+|   | HUMIDITY                | value.humidity                | %    | number         | -  |     |       | `/humidity(\..*)?$/`                              |
+|   | BOOST                   | switch.boost                  |      | boolean/number | W  |     |       | `/^switch\.boost(\..*)?$/`                        |
+|   | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
+|   | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
+|   | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
+|   | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
+|   | FILTER_CONDITION_CARBON | value.filter.carbon           | %    | number         | -  |     |       | `/^value\.filter\.carbon$/`                       |
+|   | FILTER_CHANGE           | indicator.maintenance.filter  |      | boolean        |    | X   |       | `/^indicator\.maintenance\.filter$/`              |
+|   | ELECTRIC_POWER          | value.power                   | W    | number         | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT                 | value.current                 | mA   | number         | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE                 | value.voltage                 | V    | number         | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION             | value.power.consumption       | Wh   | number         | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY               | value.frequency               | Hz   | number         | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING                 | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH                 | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT                  | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN                | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR                   | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY                 | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Air purifier [airPurifier]
