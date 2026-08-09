@@ -264,6 +264,86 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect pump with all optional states`, done => {
+        const readOnly = (role, unit) => ({
+            common: { name: role, type: 'number', role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Pump': { common: { name: 'Pump' }, type: 'device' },
+            'matter.0.Pump.onOff': {
+                common: { name: 'On/Off', type: 'boolean', role: 'switch.pump', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Pump.level': {
+                common: { name: 'Level', type: 'number', role: 'level.pump', unit: '%', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Pump.temperature': readOnly('value.temperature', '°C'),
+            'matter.0.Pump.pressure': readOnly('value.pressure', 'mbar'),
+            'matter.0.Pump.flow': readOnly('value.flow', 'm³/h'),
+            'matter.0.Pump.running': {
+                common: { name: 'Running', type: 'boolean', role: 'indicator.working', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Pump' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.pump, {
+            POWER: 'matter.0.Pump.onOff',
+            LEVEL: 'matter.0.Pump.level',
+            TEMPERATURE: 'matter.0.Pump.temperature',
+            PRESSURE: 'matter.0.Pump.pressure',
+            FLOW: 'matter.0.Pump.flow',
+            WORKING: 'matter.0.Pump.running',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect pump with only the on/off state`, done => {
+        const objects = {
+            'matter.0.SimplePump': { common: { name: 'Pump' }, type: 'device' },
+            'matter.0.SimplePump.onOff': {
+                common: { name: 'On/Off', type: 'boolean', role: 'switch.pump', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.SimplePump' });
+
+        validate(controls[0], Types.pump, {
+            POWER: 'matter.0.SimplePump.onOff',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not detect a socket as a pump`, done => {
+        const objects = {
+            'shelly.0.Socket': { common: { name: 'Socket' }, type: 'device' },
+            'shelly.0.Socket.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'shelly.0.Socket.level': {
+                common: { name: 'Level', type: 'number', role: 'level.dimmer', unit: '%', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Socket' });
+
+        expect(
+            !(controls || []).some(({ type }) => type === Types.pump),
+            'A device without the pump role must not be a pump',
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {

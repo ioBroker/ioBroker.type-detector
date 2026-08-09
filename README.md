@@ -99,6 +99,7 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) Added new device type `pump` for pumps (Matter Pump device)
 -   (@Apollon77) Added the state flag `requiredOneOf` to require at least one state out of a group instead of one specific state
 -   (@Apollon77) An `airPurifier` is now also detected when it reports only the activated carbon filter
 -   (@Apollon77) Added new device type `airPurifier` for air purifiers (Matter Air Purifier device)

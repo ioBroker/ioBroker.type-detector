@@ -53,6 +53,7 @@ export type PatternName =
     | 'mediaPlayer'
     | 'motion'
     | 'percentage'
+    | 'pump'
     | 'rgb'
     | 'rgbSingle'
     | 'rgbwSingle'
@@ -105,6 +106,7 @@ export enum Types {
     media = 'media',
     motion = 'motion',
     percentage = 'percentage',
+    pump = 'pump',
     rgb = 'rgb',
     rgbSingle = 'rgbSingle',
     rgbwSingle = 'rgbwSingle',
