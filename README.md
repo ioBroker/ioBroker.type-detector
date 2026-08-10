@@ -99,6 +99,7 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) Added the optional state `CONNECTED` (`indicator.reachable`) to every type that has `UNREACH`, and `UNREACH` to `media`. `CONNECTED` is the preferred state when a device offers both
 -   (@Apollon77) Added the optional state `RSSI` to all device types that describe a radio device
 -   (@Apollon77) Added the state flag `requiredOneOf` to require at least one state out of a group instead of one specific state
 -   (@Apollon77) An `airPurifier` is now also detected when it reports only the activated carbon filter

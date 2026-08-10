@@ -315,6 +315,56 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect the reachability of a device`, done => {
+        const objects = {
+            'test.0.Lamp2': { common: { name: 'Lamp' }, type: 'device' },
+            'test.0.Lamp2.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.light', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Lamp2.reachable': {
+                common: { name: 'Reachable', type: 'boolean', role: 'indicator.reachable', read: true, write: false },
+                type: 'state',
+            },
+            'test.0.Lamp2.unreach': {
+                common: {
+                    name: 'Unreachable',
+                    type: 'boolean',
+                    role: 'indicator.maintenance.unreach',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Lamp2', ignoreEnums: true });
+
+        // Both are offered, so a consumer can prefer CONNECTED and fall back to UNREACH
+        validate(controls[0], Types.light, {
+            SET: 'test.0.Lamp2.on',
+            CONNECTED: 'test.0.Lamp2.reachable',
+            UNREACH: 'test.0.Lamp2.unreach',
+        });
+
+        done();
+    });
+
+    it(`${name} Must offer CONNECTED and UNREACH together`, done => {
+        const patterns = ChannelDetector.getPatterns();
+        const names = type => (patterns[type]?.states || []).map(state => state?.name);
+
+        for (const [type, control] of Object.entries(patterns)) {
+            const has = names(type);
+            expect(
+                has.includes('CONNECTED') === has.includes('UNREACH'),
+                `${control.type} must offer CONNECTED and UNREACH together`,
+            );
+        }
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
@@ -1856,7 +1906,7 @@ describe(`${name} Test Detector`, () => {
             prioritizedTypes: [[Types.hue, Types.rgb]],
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length === 5, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
+        expect(states.length === 6, 'Should detect 6 states: hue, dimmer, saturation, temperature, on, connected');
 
         validate(controls[0], Types.hue, {
             HUE: 'hue.0.Hue_Küche_Küchezeile.hue',
@@ -1864,6 +1914,7 @@ describe(`${name} Test Detector`, () => {
             SATURATION: 'hue.0.Hue_Küche_Küchezeile.sat',
             TEMPERATURE: 'hue.0.Hue_Küche_Küchezeile.ct',
             ON: 'hue.0.Hue_Küche_Küchezeile.on',
+            CONNECTED: 'hue.0.Hue_Küche_Küchezeile.reachable',
             EFFECT: undefined, //since state does not have common.states defined
         });
 
@@ -1880,13 +1931,14 @@ describe(`${name} Test Detector`, () => {
             detectAllPossibleDevices: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length === 4, 'Should detect 5 states: hue, dimmer, saturation, temperature, on');
+        expect(states.length === 5, 'Should detect 5 states: brightness, switch, power, energy, connected');
 
         validate(controls[0], Types.dimmer, {
             SET: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
             ON_SET: 'shelly.0.SHDM-2#081234567896#1.lights.Switch',
             ELECTRIC_POWER: 'shelly.0.SHDM-2#081234567896#1.lights.Power',
             CONSUMPTION: 'shelly.0.SHDM-2#081234567896#1.lights.Energy',
+            CONNECTED: 'shelly.0.SHDM-2#081234567896#1.online',
         });
 
         done();
