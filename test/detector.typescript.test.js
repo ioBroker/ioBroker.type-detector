@@ -264,6 +264,92 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect the on time of a light and of a socket`, done => {
+        const onTime = () => ({
+            common: { name: 'On time', type: 'number', role: 'level.timer.off', unit: 's', read: true, write: true },
+            type: 'state',
+        });
+
+        const lamp = {
+            'hm-rpc.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
+            'hm-rpc.0.Lamp.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.light', read: true, write: true },
+                type: 'state',
+            },
+            'hm-rpc.0.Lamp.onTime': onTime(),
+        };
+        validate(detect(lamp, { id: 'hm-rpc.0.Lamp', ignoreEnums: true })[0], Types.light, {
+            SET: 'hm-rpc.0.Lamp.on',
+            ON_TIME: 'hm-rpc.0.Lamp.onTime',
+        });
+
+        const plug = {
+            'hm-rpc.0.Plug': { common: { name: 'Plug' }, type: 'device' },
+            'hm-rpc.0.Plug.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.active', read: true, write: true },
+                type: 'state',
+            },
+            'hm-rpc.0.Plug.onTime': onTime(),
+        };
+        validate(detect(plug, { id: 'hm-rpc.0.Plug', ignoreEnums: true })[0], Types.socket, {
+            SET: 'hm-rpc.0.Plug.on',
+            ON_TIME: 'hm-rpc.0.Plug.onTime',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect the on time of a colour light`, done => {
+        const objects = {
+            'zigbee.0.Ct': { common: { name: 'Lamp' }, type: 'device' },
+            'zigbee.0.Ct.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.light', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.Ct.dimmer': {
+                common: { name: 'Dimmer', type: 'number', role: 'level.dimmer', unit: '%', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.Ct.temperature': {
+                common: {
+                    name: 'Color temperature',
+                    type: 'number',
+                    role: 'level.color.temperature',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'zigbee.0.Ct.onTime': {
+                common: { name: 'On time', type: 'number', role: 'level.timer.off', unit: 's', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        validate(detect(objects, { id: 'zigbee.0.Ct', ignoreEnums: true })[0], Types.ct, {
+            ON: 'zigbee.0.Ct.on',
+            DIMMER: 'zigbee.0.Ct.dimmer',
+            TEMPERATURE: 'zigbee.0.Ct.temperature',
+            ON_TIME: 'zigbee.0.Ct.onTime',
+        });
+
+        done();
+    });
+
+    it(`${name} Must offer the on time only on types that can be switched on`, done => {
+        const patterns = ChannelDetector.getPatterns();
+        const hasOnTime = type => (patterns[type]?.states || []).some(state => state?.name === 'ON_TIME');
+
+        for (const type of ['light', 'socket', 'dimmer', 'ct', 'hue', 'cie', 'rgb', 'rgbSingle', 'rgbwSingle', 'fan', 'airPurifier']) {
+            expect(hasOnTime(type), `${type} must have an ON_TIME state`);
+        }
+        for (const type of ['thermostat', 'window', 'motion', 'temperature', 'lock', 'blinds']) {
+            expect(!hasOnTime(type), `${type} must not have an ON_TIME state`);
+        }
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
