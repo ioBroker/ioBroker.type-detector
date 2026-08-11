@@ -1541,6 +1541,62 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must keep the electricity of a heat pump with the thermostat`, done => {
+        const objects = {
+            'hp.0.HeatPump': { common: { name: 'Heat pump' }, type: 'device' },
+            'hp.0.HeatPump.set': {
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'hp.0.HeatPump.power': {
+                common: { name: 'Power', type: 'number', role: 'value.power', unit: 'W', read: true, write: false },
+                type: 'state',
+            },
+            'hp.0.HeatPump.energy': {
+                common: {
+                    name: 'Energy',
+                    type: 'number',
+                    role: 'value.power.consumption',
+                    unit: 'Wh',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'hp.0.HeatPump' });
+
+        // The readings belong to the thermostat, they must not become a second electricity device
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.thermostat, {
+            SET: 'hp.0.HeatPump.set',
+            ELECTRIC_POWER: 'hp.0.HeatPump.power',
+            CONSUMPTION: 'hp.0.HeatPump.energy',
+        });
+
+        done();
+    });
+
+    it(`${name} Must offer the electricity states on the mains appliances`, done => {
+        const patterns = ChannelDetector.getPatterns();
+        const hasPower = type =>
+            (patterns[type]?.states || []).some(state => state?.name === 'ELECTRIC_POWER');
+
+        for (const type of ['thermostat', 'fan', 'airPurifier', 'airCondition', 'socket', 'light', 'dimmer', 'pump']) {
+            expect(hasPower(type), `${type} must offer the electricity states`);
+        }
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
