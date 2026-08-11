@@ -99,6 +99,8 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) Added new device type `coAlarm` for carbon monoxide alarms
+-   (@Apollon77) Added the optional states `CO`, `SEVERITY`, `MUTED` and `TEST` to `fireAlarm`, so a combined smoke and CO alarm is one device
 -   (@Apollon77) Added new device type `pump` for pumps (Matter Pump device)
 -   (@Apollon77) Added new device types `pressure` and `flow` for pressure and flow sensors
 -   (@Apollon77) Added new device type `contact` for generic contact sensors

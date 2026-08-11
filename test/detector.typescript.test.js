@@ -543,6 +543,102 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect CO alarm with the optional details`, done => {
+        const bool = role => ({
+            common: { name: role, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.CoAlarm': { common: { name: 'CO alarm' }, type: 'device' },
+            'matter.0.CoAlarm.co': bool('sensor.alarm.co'),
+            'matter.0.CoAlarm.severity': {
+                common: {
+                    name: 'Severity',
+                    type: 'number',
+                    role: 'value.severity',
+                    states: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'matter.0.CoAlarm.muted': bool('indicator.alarm.muted'),
+            'matter.0.CoAlarm.test': bool('indicator.working.test'),
+            'matter.0.CoAlarm.lowbat': bool('indicator.maintenance.lowbat'),
+        };
+
+        const controls = detect(objects, { id: 'matter.0.CoAlarm' });
+
+        validate(controls[0], Types.coAlarm, {
+            ACTUAL: 'matter.0.CoAlarm.co',
+            SEVERITY: 'matter.0.CoAlarm.severity',
+            MUTED: 'matter.0.CoAlarm.muted',
+            TEST: 'matter.0.CoAlarm.test',
+            LOWBAT: 'matter.0.CoAlarm.lowbat',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a combined smoke and CO alarm as one fireAlarm`, done => {
+        const bool = role => ({
+            common: { name: role, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Combined': { common: { name: 'Smoke CO alarm' }, type: 'device' },
+            'matter.0.Combined.smoke': bool('sensor.alarm.fire'),
+            'matter.0.Combined.co': bool('sensor.alarm.co'),
+            'matter.0.Combined.severity': {
+                common: {
+                    name: 'Severity',
+                    type: 'number',
+                    role: 'value.severity',
+                    states: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Combined' });
+
+        // The Matter SmokeCoAlarm is one device, so it must not be split into two controls and the single
+        // severity it reports stays with it
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.fireAlarm, {
+            ACTUAL: 'matter.0.Combined.smoke',
+            CO: 'matter.0.Combined.co',
+            SEVERITY: 'matter.0.Combined.severity',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep the test state apart from the working indicator`, done => {
+        const objects = {
+            'matter.0.SmokeTest': { common: { name: 'Smoke alarm' }, type: 'device' },
+            'matter.0.SmokeTest.smoke': {
+                common: { name: 'Smoke', type: 'boolean', role: 'sensor.alarm.fire', read: true, write: false },
+                type: 'state',
+            },
+            'matter.0.SmokeTest.test': {
+                common: { name: 'Test', type: 'boolean', role: 'indicator.working.test', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.SmokeTest' });
+
+        validate(controls[0], Types.fireAlarm, {
+            ACTUAL: 'matter.0.SmokeTest.smoke',
+            TEST: 'matter.0.SmokeTest.test',
+        });
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
