@@ -61,7 +61,10 @@ function validate(data, detectedType, detectedFields, ignoreAdditionalDetectedSt
     }
     if (!ignoreAdditionalDetectedStates) {
         const allMatchedStates = data.states.filter(({ id }) => !!id).length;
-        expect(allMatchedStates === statesChecked,  `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`);
+        expect(
+            allMatchedStates === statesChecked,
+            `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`,
+        );
     }
 }
 
@@ -367,6 +370,99 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect pressure sensor`, done => {
+        const objects = {
+            'matter.0.Baro': { common: { name: 'Barometer' }, type: 'device' },
+            'matter.0.Baro.pressure': {
+                common: {
+                    name: 'Pressure',
+                    type: 'number',
+                    role: 'value.pressure',
+                    unit: 'mbar',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'matter.0.Baro.battery': {
+                common: { name: 'Battery', type: 'number', role: 'value.battery', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Baro' });
+
+        validate(controls[0], Types.pressure, {
+            PRESSURE: 'matter.0.Baro.pressure',
+            BATTERY: 'matter.0.Baro.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect flow sensor`, done => {
+        const objects = {
+            'matter.0.Flow': { common: { name: 'Flow sensor' }, type: 'device' },
+            'matter.0.Flow.flow': {
+                common: { name: 'Flow', type: 'number', role: 'value.flow', unit: 'm³/h', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Flow' });
+
+        validate(controls[0], Types.flow, {
+            FLOW: 'matter.0.Flow.flow',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep the pressure of a weather station with the weather station`, done => {
+        const objects = {
+            'weather.0.Current': { common: { name: 'Current weather' }, type: 'device' },
+            'weather.0.Current.temp': {
+                common: {
+                    name: 'Temperature',
+                    type: 'number',
+                    role: 'value.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'weather.0.Current.icon': {
+                common: { name: 'Icon', type: 'string', role: 'weather.icon', read: true, write: false },
+                type: 'state',
+            },
+            'weather.0.Current.pressure': {
+                common: {
+                    name: 'Pressure',
+                    type: 'number',
+                    role: 'value.pressure',
+                    unit: 'mbar',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'weather.0.Current' });
+
+        expect(
+            controls.some(({ type }) => type === Types.weatherCurrent),
+            'A weather station must still be detected as weatherCurrent',
+        );
+        expect(
+            !controls.some(({ type }) => type === Types.pressure),
+            'The pressure of a weather station must stay with the weather station',
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
@@ -638,7 +734,14 @@ describe(`${name} Test Detector`, () => {
                 type: 'state',
             },
             'matter.0.SimplePurifier.hepa': {
-                common: { name: 'Hepa filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                common: {
+                    name: 'Hepa filter',
+                    type: 'number',
+                    role: 'value.filter',
+                    unit: '%',
+                    read: true,
+                    write: false,
+                },
                 type: 'state',
             },
         };
@@ -741,7 +844,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.FilterOnly': { common: { name: 'Filter' }, type: 'device' },
             'matter.0.FilterOnly.hepa': {
-                common: { name: 'Hepa filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                common: {
+                    name: 'Hepa filter',
+                    type: 'number',
+                    role: 'value.filter',
+                    unit: '%',
+                    read: true,
+                    write: false,
+                },
                 type: 'state',
             },
         };
@@ -1043,8 +1153,14 @@ describe(`${name} Test Detector`, () => {
             WIND_DIRECTION_STR: 'pirate-weather.0.weather.daily.00.windBearingText',
             HUMIDITY: 'pirate-weather.0.weather.daily.00.humidity',
             PRESSURE: 'pirate-weather.0.weather.daily.00.pressure',
-            TEMP_MIN: ['pirate-weather.0.weather.daily.00.temperatureMin', 'pirate-weather.0.weather.daily.00.temperatureLow'],
-            TEMP_MAX: ['pirate-weather.0.weather.daily.00.temperatureMax', 'pirate-weather.0.weather.daily.00.temperatureHigh'],
+            TEMP_MIN: [
+                'pirate-weather.0.weather.daily.00.temperatureMin',
+                'pirate-weather.0.weather.daily.00.temperatureLow',
+            ],
+            TEMP_MAX: [
+                'pirate-weather.0.weather.daily.00.temperatureMax',
+                'pirate-weather.0.weather.daily.00.temperatureHigh',
+            ],
             TIME_SUNRISE: 'pirate-weather.0.weather.daily.00.sunriseTime',
             TIME_SUNSET: 'pirate-weather.0.weather.daily.00.sunsetTime',
         };
@@ -1056,8 +1172,14 @@ describe(`${name} Test Detector`, () => {
             detectionDef[`WIND_DIRECTION_STR${day}`] = `pirate-weather.0.weather.daily.0${day}.windBearingText`;
             detectionDef[`HUMIDITY${day}`] = `pirate-weather.0.weather.daily.0${day}.humidity`;
             detectionDef[`PRESSURE${day}`] = `pirate-weather.0.weather.daily.0${day}.pressure`;
-            detectionDef[`TEMP_MIN${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMin`, `pirate-weather.0.weather.daily.0${day}.temperatureLow`];
-            detectionDef[`TEMP_MAX${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMax`, `pirate-weather.0.weather.daily.0${day}.temperatureHigh`];
+            detectionDef[`TEMP_MIN${day}`] = [
+                `pirate-weather.0.weather.daily.0${day}.temperatureMin`,
+                `pirate-weather.0.weather.daily.0${day}.temperatureLow`,
+            ];
+            detectionDef[`TEMP_MAX${day}`] = [
+                `pirate-weather.0.weather.daily.0${day}.temperatureMax`,
+                `pirate-weather.0.weather.daily.0${day}.temperatureHigh`,
+            ];
             detectionDef[`TIME_SUNRISE${day}`] = `pirate-weather.0.weather.daily.0${day}.sunriseTime`;
             detectionDef[`TIME_SUNSET${day}`] = `pirate-weather.0.weather.daily.0${day}.sunsetTime`;
         }
@@ -1868,7 +1990,7 @@ describe(`${name} Test Detector`, () => {
             detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length=== 1, 'Should detect 1 state for dimmer with power switch');
+        expect(states.length === 1, 'Should detect 1 state for dimmer with power switch');
 
         validate(controls[0], Types.blind, {
             SET: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',
