@@ -71,6 +71,7 @@ In [brackets] is given the class name of a device.
 * [Motion sensor [motion]](#motion-sensor-motion)
 * [Percentage slider [percentage]](#percentage-slider-percentage)
 * [Pressure sensor [pressure]](#pressure-sensor-pressure)
+* [Pump [pump]](#pump-pump)
 * [RGB(W) Light with different states for every color [rgb]](#rgb-w--light-with-different-states-for-every-color-rgb)
 * [RGB Light Single [rgbSingle]](#rgb-light-single-rgbsingle)
 * [RGBW Light Single [rgbwSingle]](#rgbw-light-single-rgbwsingle)
@@ -741,6 +742,30 @@ Pressure sensor for air or liquid pressure, normally in mbar (identical to hPa).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
+### Pump [pump]
+
+Pump that can be switched on and off. Could optionally report its level, temperature, pressure and flow.
+
+| R | Name           | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|---|----------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| * | POWER          | switch.pump                   |      | boolean/number | W  |     |       | `/^switch\.pump$/`                                |
+|   | LEVEL          | level.pump                    | %    | number         | W  |     |       | `/^level\.pump$/`                                 |
+|   | TEMPERATURE    | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                           |
+|   | PRESSURE       | value.pressure                | mbar | number         | -  |     |       | `/^value\.pressure$/`                             |
+|   | FLOW           | value.flow                    | m³/h | number         | -  |     |       | `/^value\.flow$/`                                 |
+|   | ELECTRIC_POWER | value.power                   | W    | number         | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT        | value.current                 | mA   | number         | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE        | value.voltage                 | V    | number         | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION    | value.power.consumption       | Wh   | number         | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY      | value.frequency               | Hz   | number         | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING        | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR          | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY        | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### RGB(W) Light with different states for every color [rgb]
