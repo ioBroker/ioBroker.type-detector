@@ -313,7 +313,7 @@ If the carbon monoxide sensor is alarmed (true) or not (false).
 
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
-| * | ACTUAL   | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.co$/`      |
+| * | ACTUAL   | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor)(\.alarm)?\.co$/`                |
 |   | SEVERITY | value.severity                |      | number  | -  |     |       | `/^value\.severity$/`                             |
 |   | MUTED    | indicator.alarm.muted         |      | boolean |    | X   |       | `/^indicator\.alarm\.muted$/`                     |
 |   | TEST     | indicator.working.test        |      | boolean |    | X   |       | `/^indicator\.working\.test$/`                    |
@@ -430,7 +430,7 @@ If smoke/fire sensor is alarmed (true) or not (false).
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | ACTUAL   | sensor.alarm.fire             |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.fire$/`    |
-|   | CO       | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.co$/`      |
+|   | CO       | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor)(\.alarm)?\.co$/`                |
 |   | SEVERITY | value.severity                |      | number  | -  |     |       | `/^value\.severity$/`                             |
 |   | MUTED    | indicator.alarm.muted         |      | boolean |    | X   |       | `/^indicator\.alarm\.muted$/`                     |
 |   | TEST     | indicator.working.test        |      | boolean |    | X   |       | `/^indicator\.working\.test$/`                    |

@@ -2632,7 +2632,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^(state|sensor|indicator)(\.alarm)?\.co$/,
+                role: /^(state|sensor)(\.alarm)?\.co$/,
                 indicator: false,
                 type: StateType.Boolean,
                 name: 'CO',
@@ -2654,7 +2654,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
     coAlarm: {
         states: [
             {
-                role: /^(state|sensor|indicator)(\.alarm)?\.co$/,
+                role: /^(state|sensor)(\.alarm)?\.co$/,
                 indicator: false,
                 type: StateType.Boolean,
                 name: 'ACTUAL',
