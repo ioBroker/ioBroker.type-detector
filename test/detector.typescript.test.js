@@ -895,6 +895,31 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must treat regular expression characters in an object ID as literals`, done => {
+        const { getAllStatesInChannel, getAllStatesInDevice } = require('../build/roleEnumUtils');
+
+        for (const channel of ['a.b', 'a\\b', 'a+b', 'a|b', 'a*b', 'a(b']) {
+            const keys = [`${channel}.x`, `${channel}.y`, 'other.x'];
+            const found = getAllStatesInChannel(keys, channel);
+            expect(
+                found.length === 2 && found[0] === `${channel}.x` && found[1] === `${channel}.y`,
+                `Expected both states of "${channel}" but found ${JSON.stringify(found)}`,
+            );
+        }
+
+        // The dot must stay escaped, so a channel must not match an ID with any character in its place
+        expect(
+            getAllStatesInChannel(['aXb.x'], 'a.b').length === 0,
+            'A dot in the channel ID must not match an arbitrary character',
+        );
+        expect(
+            getAllStatesInDevice(['a+b.c.d', 'a+b.c', 'zz.c.d'], 'a+b').join(',') === 'a+b.c.d',
+            'The device lookup must escape the ID as well',
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
