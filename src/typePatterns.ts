@@ -3320,6 +3320,19 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.image,
     },
+    electricity: {
+        states: [
+            // Any one of the readings is enough, so a device that only measures is detected as well
+            ...Object.values(ElectricityPatterns).map(state => ({ ...state, requiredOneOf: 'electricity' })),
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.electricity,
+    },
     info: {
         states: [
             {
