@@ -325,6 +325,48 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a generic contact sensor`, done => {
+        const objects = {
+            'matter.0.Contact': { common: { name: 'Contact sensor' }, type: 'device' },
+            'matter.0.Contact.state': {
+                common: { name: 'Contact', type: 'boolean', role: 'sensor.contact', read: true, write: false },
+                type: 'state',
+            },
+            'matter.0.Contact.battery': {
+                common: { name: 'Battery', type: 'number', role: 'value.battery', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Contact' });
+
+        validate(controls[0], Types.contact, {
+            ACTUAL: 'matter.0.Contact.state',
+            BATTERY: 'matter.0.Contact.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep window and door sensors out of the contact type`, done => {
+        const sensor = role => ({
+            'test.0.Sensor': { common: { name: 'Sensor' }, type: 'device' },
+            'test.0.Sensor.state': {
+                common: { name: 'State', type: 'boolean', role, read: true, write: false },
+                type: 'state',
+            },
+        });
+
+        validate(detect(sensor('sensor.window'), { id: 'test.0.Sensor' })[0], Types.window, {
+            ACTUAL: 'test.0.Sensor.state',
+        });
+        validate(detect(sensor('sensor.door'), { id: 'test.0.Sensor' })[0], Types.door, {
+            ACTUAL: 'test.0.Sensor.state',
+        });
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {

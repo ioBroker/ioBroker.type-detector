@@ -2541,6 +2541,29 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.motion,
     },
+    contact: {
+        states: [
+            {
+                role: /^sensor\.contact$/,
+                indicator: false,
+                type: StateType.Boolean,
+                write: false,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'sensor.contact',
+                defaultChannelRole: 'sensor.contact',
+            },
+            // optional
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.contact,
+        enumRequired: false,
+    },
     window: {
         states: [
             {
