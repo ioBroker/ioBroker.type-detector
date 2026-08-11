@@ -759,7 +759,7 @@ describe(`${name} Test Detector`, () => {
             'matter.0.RoomAC3': { common: { name: 'Room AC' }, type: 'device' },
             'matter.0.RoomAC3.set': writable('level.temperature', undefined, '°C'),
             'matter.0.RoomAC3.mode': writable('level.mode.airconditioner', { 0: 'AUTO', 3: 'COOL' }),
-            'matter.0.RoomAC3.percent': writable('level.fan', undefined, '%'),
+            'matter.0.RoomAC3.percent': writable('level.speed', undefined, '%'),
             'matter.0.RoomAC3.airflow': writable('level.mode.airflow', { 0: 'FORWARD', 1: 'REVERSE' }),
             'matter.0.RoomAC3.filter': readOnly('value.filter', 'number', '%'),
             'matter.0.RoomAC3.carbon': readOnly('value.filter.carbon', 'number', '%'),
