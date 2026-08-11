@@ -994,6 +994,80 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a pure electricity meter`, done => {
+        const value = (role, unit) => ({
+            common: { name: role, type: 'number', role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'shelly.0.Meter': { common: { name: 'Meter' }, type: 'device' },
+            'shelly.0.Meter.power': value('value.power', 'W'),
+            'shelly.0.Meter.current': value('value.current', 'mA'),
+            'shelly.0.Meter.voltage': value('value.voltage', 'V'),
+            'shelly.0.Meter.energy': value('value.power.consumption', 'Wh'),
+            'shelly.0.Meter.frequency': value('value.frequency', 'Hz'),
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Meter' });
+
+        validate(controls[0], Types.electricity, {
+            ELECTRIC_POWER: 'shelly.0.Meter.power',
+            CURRENT: 'shelly.0.Meter.current',
+            VOLTAGE: 'shelly.0.Meter.voltage',
+            CONSUMPTION: 'shelly.0.Meter.energy',
+            FREQUENCY: 'shelly.0.Meter.frequency',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect an electricity meter that reports only one value`, done => {
+        const objects = {
+            'shelly.0.Energy': { common: { name: 'Energy' }, type: 'device' },
+            'shelly.0.Energy.total': {
+                common: {
+                    name: 'Total',
+                    type: 'number',
+                    role: 'value.power.consumption',
+                    unit: 'Wh',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        validate(detect(objects, { id: 'shelly.0.Energy' })[0], Types.electricity, {
+            CONSUMPTION: 'shelly.0.Energy.total',
+        });
+
+        done();
+    });
+
+    it(`${name} Must leave the electricity of a socket with the socket`, done => {
+        const objects = {
+            'shelly.0.Plug3': { common: { name: 'Plug' }, type: 'device' },
+            'shelly.0.Plug3.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.active', read: true, write: true },
+                type: 'state',
+            },
+            'shelly.0.Plug3.power': {
+                common: { name: 'Power', type: 'number', role: 'value.power', unit: 'W', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Plug3' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.socket, {
+            SET: 'shelly.0.Plug3.on',
+            ELECTRIC_POWER: 'shelly.0.Plug3.power',
+        });
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {

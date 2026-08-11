@@ -52,6 +52,7 @@ In [brackets] is given the class name of a device.
 * [Light with color temperature [ct]](#light-with-color-temperature-ct)
 * [Light dimmer [dimmer]](#light-dimmer-dimmer)
 * [Door sensor [door]](#door-sensor-door)
+* [Electricity measurement [electricity]](#electricity-measurement-electricity)
 * [Fan [fan]](#fan-fan)
 * [Fill level [fillLevel]](#fill-level-filllevel)
 * [Fire alarm sensor [fireAlarm]](#fire-alarm-sensor-firealarm)
@@ -420,6 +421,25 @@ Sensor if the door opened (true) or closed (false).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+
+
+### Electricity measurement [electricity]
+
+Device that only measures electricity: power, current, voltage, consumption or frequency. At least one of them must be present.
+
+| R             | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---------------|----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| 1:electricity | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
+| 1:electricity | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
+| 1:electricity | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
+| 1:electricity | CONSUMPTION    | value.power.consumption       | Wh   | number  | -  |     |       | `/^value\.power\.consumption$/`                   |
+| 1:electricity | FREQUENCY      | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                            |
+|               | WORKING        | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|               | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|               | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|               | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|               | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|               | BATTERY        | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Fan [fan]
