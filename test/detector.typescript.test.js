@@ -1072,7 +1072,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Trv': { common: { name: 'Radiator thermostat' }, type: 'device' },
             'matter.0.Trv.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.Trv.valve': {
@@ -1107,7 +1114,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Trv2': { common: { name: 'Radiator thermostat' }, type: 'device' },
             'matter.0.Trv2.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.Trv2.valve': {
@@ -1130,7 +1144,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.AC5': { common: { name: 'Room AC' }, type: 'device' },
             'matter.0.AC5.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.AC5.mode': {
@@ -1315,6 +1336,160 @@ describe(`${name} Test Detector`, () => {
 
         const controls3 = detect('./hm-thermostat.json', options);
         expect(controls3 === null, 'No controls expected');
+
+        done();
+    });
+
+    it(`${name} Must offer UNREACH on every type that describes a device`, done => {
+        const patterns = ChannelDetector.getPatterns();
+
+        // `chart`, `warning` and `weatherForecast` describe a service, not a device that can be unreachable
+        const expected = ['chart', 'warning', 'weatherForecast'];
+        const actual = Object.keys(patterns)
+            .filter(type => !(patterns[type]?.states || []).some(state => state?.name === 'UNREACH'))
+            .sort();
+        expect(
+            actual.join(',') === [...expected].sort().join(','),
+            `Expected only ${expected.join(', ')} without UNREACH but found ${actual.join(', ')}`,
+        );
+
+        // CONNECTED stays on the media player for compatibility and is not spread any further
+        const withConnected = Object.keys(patterns).filter(type =>
+            (patterns[type]?.states || []).some(state => state?.name === 'CONNECTED'),
+        );
+        expect(
+            withConnected.join(',') === 'mediaPlayer',
+            `Expected CONNECTED only on mediaPlayer but found it on ${withConnected.join(', ')}`,
+        );
+
+        done();
+    });
+
+    it(`${name} Must detect the two end contacts of a gate`, done => {
+        const contact = role => ({
+            common: { name: role, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'test.0.Gate': { common: { name: 'Gate', role: 'gate' }, type: 'channel' },
+            'test.0.Gate.set': {
+                common: { name: 'Set', type: 'boolean', role: 'switch.gate', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Gate.opened': contact('indicator.opened'),
+            'test.0.Gate.closed': contact('indicator.closed'),
+        };
+
+        const controls = detect(objects, { id: 'test.0.Gate', ignoreEnums: true });
+
+        validate(controls[0], Types.gate, {
+            SET: 'test.0.Gate.set',
+            OPENED: 'test.0.Gate.opened',
+            CLOSED: 'test.0.Gate.closed',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a gate that reports only one of the contacts`, done => {
+        const objects = {
+            'test.0.Gate2': { common: { name: 'Gate', role: 'gate' }, type: 'channel' },
+            'test.0.Gate2.set': {
+                common: { name: 'Set', type: 'boolean', role: 'switch.gate', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Gate2.closed': {
+                common: { name: 'Closed', type: 'boolean', role: 'indicator.closed', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Gate2', ignoreEnums: true });
+
+        validate(controls[0], Types.gate, {
+            SET: 'test.0.Gate2.set',
+            CLOSED: 'test.0.Gate2.closed',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a robotic vacuum that has only the run mode`, done => {
+        const objects = {
+            'matter.0.Rvc': { common: { name: 'Robot' }, type: 'device' },
+            'matter.0.Rvc.power': {
+                common: { name: 'Power', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Rvc.run': {
+                common: {
+                    name: 'Run mode',
+                    type: 'number',
+                    role: 'level.mode.vacuum',
+                    states: { 0: 'IDLE', 1: 'CLEANING', 2: 'MAPPING' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.Rvc.home': {
+                common: { name: 'Home', type: 'boolean', role: 'button.home', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Rvc.progress': {
+                common: {
+                    name: 'Progress',
+                    type: 'number',
+                    role: 'value.progress',
+                    unit: '%',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'matter.0.Rvc.phase': {
+                common: { name: 'Phase', type: 'string', role: 'value.vacuum.phase', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Rvc' });
+
+        validate(controls[0], Types.vacuumCleaner, {
+            POWER: 'matter.0.Rvc.power',
+            RUN_MODE: 'matter.0.Rvc.run',
+            HOME: 'matter.0.Rvc.home',
+            PROGRESS: 'matter.0.Rvc.progress',
+            PHASE: 'matter.0.Rvc.phase',
+        });
+
+        done();
+    });
+
+    it(`${name} Must still detect a vacuum that has only the cleaning mode`, done => {
+        const objects = {
+            'mihome.0.Vac': { common: { name: 'Vacuum' }, type: 'device' },
+            'mihome.0.Vac.power': {
+                common: { name: 'Power', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'mihome.0.Vac.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'number',
+                    role: 'level.mode.cleanup',
+                    states: { 0: 'AUTO', 1: 'NORMAL' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        validate(detect(objects, { id: 'mihome.0.Vac' })[0], Types.vacuumCleaner, {
+            POWER: 'mihome.0.Vac.power',
+            MODE: 'mihome.0.Vac.mode',
+        });
 
         done();
     });
