@@ -99,6 +99,8 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) Added the optional states `SPEED_LEVEL`, `AIRFLOW_DIRECTION`, `FILTER_CONDITION`, `FILTER_CONDITION_CARBON` and `FILTER_CHANGE` to `airCondition`
+-   (@Apollon77) Added the missing shared states `WORKING`, `LOWBAT` and `BATTERY` to `airCondition`. They were previously reported as a separate `info` device
 -   (@Apollon77) Added the optional states `SET_HEATING` and `SET_COOLING` to `airCondition` and `thermostat` for devices that hold a heating and a cooling setpoint at once. One of `SET`, `SET_HEATING` and `SET_COOLING` is now required instead of `SET` alone. A device whose only setpoint carries the role `level.temperature.heating` or `level.temperature.cooling` is still detected, but that state is now reported as `SET_HEATING` / `SET_COOLING` instead of `SET`
 -   (@Apollon77) Added the optional state `ON_TIME` to the light types, `socket`, `fan` and `airPurifier`
 -   (@Apollon77) Added new device type `coAlarm` for carbon monoxide alarms

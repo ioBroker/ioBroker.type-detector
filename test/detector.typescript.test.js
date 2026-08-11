@@ -746,6 +746,155 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect air conditioner with fan level, airflow, filter and shared states`, done => {
+        const writable = (role, states, unit) => ({
+            common: { name: role, type: 'number', role, states, unit, read: true, write: true },
+            type: 'state',
+        });
+        const readOnly = (role, type, unit) => ({
+            common: { name: role, type, role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.RoomAC3': { common: { name: 'Room AC' }, type: 'device' },
+            'matter.0.RoomAC3.set': writable('level.temperature', undefined, '°C'),
+            'matter.0.RoomAC3.mode': writable('level.mode.airconditioner', { 0: 'AUTO', 3: 'COOL' }),
+            'matter.0.RoomAC3.percent': writable('level.speed', undefined, '%'),
+            'matter.0.RoomAC3.airflow': writable('level.mode.airflow', { 0: 'FORWARD', 1: 'REVERSE' }),
+            'matter.0.RoomAC3.filter': readOnly('value.filter', 'number', '%'),
+            'matter.0.RoomAC3.carbon': readOnly('value.filter.carbon', 'number', '%'),
+            'matter.0.RoomAC3.change': readOnly('indicator.maintenance.filter', 'boolean'),
+            'matter.0.RoomAC3.working': readOnly('indicator.working', 'boolean'),
+            'matter.0.RoomAC3.lowbat': readOnly('indicator.maintenance.lowbat', 'boolean'),
+            'matter.0.RoomAC3.battery': readOnly('value.battery', 'number', '%'),
+        };
+
+        const controls = detect(objects, { id: 'matter.0.RoomAC3' });
+
+        // Everything belongs to the air conditioner, nothing is left over for a second control
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.airCondition, {
+            SET: 'matter.0.RoomAC3.set',
+            MODE: 'matter.0.RoomAC3.mode',
+            SPEED_LEVEL: 'matter.0.RoomAC3.percent',
+            AIRFLOW_DIRECTION: 'matter.0.RoomAC3.airflow',
+            FILTER_CONDITION: 'matter.0.RoomAC3.filter',
+            FILTER_CONDITION_CARBON: 'matter.0.RoomAC3.carbon',
+            FILTER_CHANGE: 'matter.0.RoomAC3.change',
+            WORKING: 'matter.0.RoomAC3.working',
+            LOWBAT: 'matter.0.RoomAC3.lowbat',
+            BATTERY: 'matter.0.RoomAC3.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not detect an air conditioner as an air purifier`, done => {
+        const objects = {
+            'matter.0.RoomAC4': { common: { name: 'Room AC' }, type: 'device' },
+            'matter.0.RoomAC4.set': {
+                common: { name: 'set', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.RoomAC4.mode': {
+                common: {
+                    name: 'mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.RoomAC4.fanMode': {
+                common: {
+                    name: 'fan',
+                    type: 'number',
+                    role: 'level.mode.fan',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.RoomAC4.filter': {
+                common: { name: 'filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.RoomAC4' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.airCondition, {
+            SET: 'matter.0.RoomAC4.set',
+            MODE: 'matter.0.RoomAC4.mode',
+            SPEED: 'matter.0.RoomAC4.fanMode',
+            FILTER_CONDITION: 'matter.0.RoomAC4.filter',
+        });
+
+        done();
+    });
+
+    it(`${name} Must document how an air conditioner next to a purifier is detected`, done => {
+        const objects = {
+            'x.0.Combo': { common: { name: 'Combo' }, type: 'device' },
+            'x.0.Combo.ac': { common: { name: 'ac' }, type: 'channel' },
+            'x.0.Combo.ac.set': {
+                common: { name: 'set', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'x.0.Combo.ac.mode': {
+                common: {
+                    name: 'mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'x.0.Combo.purifier': { common: { name: 'purifier' }, type: 'channel' },
+            'x.0.Combo.purifier.speed': {
+                common: {
+                    name: 'speed',
+                    type: 'number',
+                    role: 'level.mode.fan',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'x.0.Combo.purifier.filter': {
+                common: { name: 'filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'x.0.Combo' });
+
+        expect(
+            !controls.some(({ type }) => type === Types.airPurifier),
+            'The purifier is already swallowed by the air conditioner before this change',
+        );
+        validate(
+            controls[0],
+            Types.airCondition,
+            {
+                SET: 'x.0.Combo.ac.set',
+                MODE: 'x.0.Combo.ac.mode',
+                SPEED: 'x.0.Combo.purifier.speed',
+                FILTER_CONDITION: 'x.0.Combo.purifier.filter',
+            },
+            true,
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
