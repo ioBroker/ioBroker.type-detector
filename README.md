@@ -99,6 +99,7 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) The feedback state `ACTUAL` of `socket` no longer matches the generic role `state`, and `ON_ACTUAL` no longer matches any role that merely ends in `switch`
 -   (@Apollon77) Fixed the escaping of object IDs used to build regular expressions, so IDs containing characters like `\`, `+` or `*` are matched literally
 -   (@Apollon77) Added the optional states `SPEED_LEVEL`, `AIRFLOW_DIRECTION`, `FILTER_CONDITION`, `FILTER_CONDITION_CARBON` and `FILTER_CHANGE` to `airCondition`
 -   (@Apollon77) Added the missing shared states `WORKING`, `LOWBAT` and `BATTERY` to `airCondition`. They were previously reported as a separate `info` device
