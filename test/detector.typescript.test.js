@@ -1437,7 +1437,14 @@ describe(`${name} Test Detector`, () => {
                 type: 'state',
             },
             'matter.0.Rvc.progress': {
-                common: { name: 'Progress', type: 'number', role: 'value.progress', unit: '%', read: true, write: false },
+                common: {
+                    name: 'Progress',
+                    type: 'number',
+                    role: 'value.progress',
+                    unit: '%',
+                    read: true,
+                    write: false,
+                },
                 type: 'state',
             },
             'matter.0.Rvc.phase': {
