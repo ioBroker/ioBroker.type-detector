@@ -696,7 +696,14 @@ describe(`${name} Test Detector`, () => {
                 type: 'state',
             },
             'zigbee.0.Ct.onTime': {
-                common: { name: 'On time', type: 'number', role: 'level.timer.off', unit: 's', read: true, write: true },
+                common: {
+                    name: 'On time',
+                    type: 'number',
+                    role: 'level.timer.off',
+                    unit: 's',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
         };
