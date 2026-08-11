@@ -1319,6 +1319,31 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must offer UNREACH on every type that describes a device`, done => {
+        const patterns = ChannelDetector.getPatterns();
+
+        // `chart`, `warning` and `weatherForecast` describe a service, not a device that can be unreachable
+        const expected = ['chart', 'warning', 'weatherForecast'];
+        const actual = Object.keys(patterns)
+            .filter(type => !(patterns[type]?.states || []).some(state => state?.name === 'UNREACH'))
+            .sort();
+        expect(
+            actual.join(',') === [...expected].sort().join(','),
+            `Expected only ${expected.join(', ')} without UNREACH but found ${actual.join(', ')}`,
+        );
+
+        // CONNECTED stays on the media player for compatibility and is not spread any further
+        const withConnected = Object.keys(patterns).filter(type =>
+            (patterns[type]?.states || []).some(state => state?.name === 'CONNECTED'),
+        );
+        expect(
+            withConnected.join(',') === 'mediaPlayer',
+            `Expected CONNECTED only on mediaPlayer but found it on ${withConnected.join(', ')}`,
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
