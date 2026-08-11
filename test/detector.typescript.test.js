@@ -61,7 +61,10 @@ function validate(data, detectedType, detectedFields, ignoreAdditionalDetectedSt
     }
     if (!ignoreAdditionalDetectedStates) {
         const allMatchedStates = data.states.filter(({ id }) => !!id).length;
-        expect(allMatchedStates === statesChecked,  `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`);
+        expect(
+            allMatchedStates === statesChecked,
+            `Expected ${statesChecked} states to be matched, but ${allMatchedStates} were found`,
+        );
     }
 }
 
@@ -264,6 +267,807 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a slider that can also be switched off`, done => {
+        const objects = {
+            'test.0.Motor': { common: { name: 'Motor' }, type: 'device' },
+            'test.0.Motor.speed': {
+                common: {
+                    name: 'Speed',
+                    type: 'number',
+                    role: 'level.speed.motor',
+                    min: 0,
+                    max: 100,
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'test.0.Motor.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Motor.running': {
+                common: { name: 'Running', type: 'boolean', role: 'sensor.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Motor' });
+
+        // The on/off belongs to the slider, it must not become a separate socket
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.slider, {
+            SET: 'test.0.Motor.speed',
+            ON: 'test.0.Motor.on',
+            ON_ACTUAL: 'test.0.Motor.running',
+        });
+
+        done();
+    });
+
+    it(`${name} Must still detect a plain socket`, done => {
+        const objects = {
+            'test.0.Plug2': { common: { name: 'Plug' }, type: 'device' },
+            'test.0.Plug2.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.active', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Plug2.actual': {
+                common: { name: 'Actual', type: 'boolean', role: 'sensor.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Plug2' });
+
+        validate(controls[0], Types.socket, {
+            SET: 'test.0.Plug2.on',
+            ACTUAL: 'test.0.Plug2.actual',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a generic contact sensor`, done => {
+        const objects = {
+            'matter.0.Contact': { common: { name: 'Contact sensor' }, type: 'device' },
+            'matter.0.Contact.state': {
+                common: { name: 'Contact', type: 'boolean', role: 'sensor.contact', read: true, write: false },
+                type: 'state',
+            },
+            'matter.0.Contact.battery': {
+                common: { name: 'Battery', type: 'number', role: 'value.battery', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Contact' });
+
+        validate(controls[0], Types.contact, {
+            ACTUAL: 'matter.0.Contact.state',
+            BATTERY: 'matter.0.Contact.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep window and door sensors out of the contact type`, done => {
+        const sensor = role => ({
+            'test.0.Sensor': { common: { name: 'Sensor' }, type: 'device' },
+            'test.0.Sensor.state': {
+                common: { name: 'State', type: 'boolean', role, read: true, write: false },
+                type: 'state',
+            },
+        });
+
+        validate(detect(sensor('sensor.window'), { id: 'test.0.Sensor' })[0], Types.window, {
+            ACTUAL: 'test.0.Sensor.state',
+        });
+        validate(detect(sensor('sensor.door'), { id: 'test.0.Sensor' })[0], Types.door, {
+            ACTUAL: 'test.0.Sensor.state',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect pressure sensor`, done => {
+        const objects = {
+            'matter.0.Baro': { common: { name: 'Barometer' }, type: 'device' },
+            'matter.0.Baro.pressure': {
+                common: {
+                    name: 'Pressure',
+                    type: 'number',
+                    role: 'value.pressure',
+                    unit: 'mbar',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'matter.0.Baro.battery': {
+                common: { name: 'Battery', type: 'number', role: 'value.battery', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Baro' });
+
+        validate(controls[0], Types.pressure, {
+            PRESSURE: 'matter.0.Baro.pressure',
+            BATTERY: 'matter.0.Baro.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect flow sensor`, done => {
+        const objects = {
+            'matter.0.Flow': { common: { name: 'Flow sensor' }, type: 'device' },
+            'matter.0.Flow.flow': {
+                common: { name: 'Flow', type: 'number', role: 'value.flow', unit: 'm³/h', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Flow' });
+
+        validate(controls[0], Types.flow, {
+            FLOW: 'matter.0.Flow.flow',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep the pressure of a weather station with the weather station`, done => {
+        const objects = {
+            'weather.0.Current': { common: { name: 'Current weather' }, type: 'device' },
+            'weather.0.Current.temp': {
+                common: {
+                    name: 'Temperature',
+                    type: 'number',
+                    role: 'value.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'weather.0.Current.icon': {
+                common: { name: 'Icon', type: 'string', role: 'weather.icon', read: true, write: false },
+                type: 'state',
+            },
+            'weather.0.Current.pressure': {
+                common: {
+                    name: 'Pressure',
+                    type: 'number',
+                    role: 'value.pressure',
+                    unit: 'mbar',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'weather.0.Current' });
+
+        expect(
+            controls.some(({ type }) => type === Types.weatherCurrent),
+            'A weather station must still be detected as weatherCurrent',
+        );
+        expect(
+            !controls.some(({ type }) => type === Types.pressure),
+            'The pressure of a weather station must stay with the weather station',
+        );
+
+        done();
+    });
+
+    it(`${name} Must detect pump with all optional states`, done => {
+        const readOnly = (role, unit) => ({
+            common: { name: role, type: 'number', role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Pump': { common: { name: 'Pump' }, type: 'device' },
+            'matter.0.Pump.onOff': {
+                common: { name: 'On/Off', type: 'boolean', role: 'switch.pump', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Pump.level': {
+                common: { name: 'Level', type: 'number', role: 'level.pump', unit: '%', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Pump.temperature': readOnly('value.temperature', '°C'),
+            'matter.0.Pump.pressure': readOnly('value.pressure', 'mbar'),
+            'matter.0.Pump.flow': readOnly('value.flow', 'm³/h'),
+            'matter.0.Pump.running': {
+                common: { name: 'Running', type: 'boolean', role: 'indicator.working', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Pump' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.pump, {
+            POWER: 'matter.0.Pump.onOff',
+            LEVEL: 'matter.0.Pump.level',
+            TEMPERATURE: 'matter.0.Pump.temperature',
+            PRESSURE: 'matter.0.Pump.pressure',
+            FLOW: 'matter.0.Pump.flow',
+            WORKING: 'matter.0.Pump.running',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect pump with only the on/off state`, done => {
+        const objects = {
+            'matter.0.SimplePump': { common: { name: 'Pump' }, type: 'device' },
+            'matter.0.SimplePump.onOff': {
+                common: { name: 'On/Off', type: 'boolean', role: 'switch.pump', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.SimplePump' });
+
+        validate(controls[0], Types.pump, {
+            POWER: 'matter.0.SimplePump.onOff',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not detect a socket as a pump`, done => {
+        const objects = {
+            'shelly.0.Socket': { common: { name: 'Socket' }, type: 'device' },
+            'shelly.0.Socket.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'shelly.0.Socket.level': {
+                common: { name: 'Level', type: 'number', role: 'level.dimmer', unit: '%', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Socket' });
+
+        expect(
+            !(controls || []).some(({ type }) => type === Types.pump),
+            'A device without the pump role must not be a pump',
+        );
+
+        done();
+    });
+
+    it(`${name} Must detect CO alarm with the optional details`, done => {
+        const bool = role => ({
+            common: { name: role, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.CoAlarm': { common: { name: 'CO alarm' }, type: 'device' },
+            'matter.0.CoAlarm.co': bool('sensor.alarm.co'),
+            'matter.0.CoAlarm.severity': {
+                common: {
+                    name: 'Severity',
+                    type: 'number',
+                    role: 'value.severity',
+                    states: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'matter.0.CoAlarm.muted': bool('indicator.alarm.muted'),
+            'matter.0.CoAlarm.test': bool('indicator.working.test'),
+            'matter.0.CoAlarm.lowbat': bool('indicator.maintenance.lowbat'),
+        };
+
+        const controls = detect(objects, { id: 'matter.0.CoAlarm' });
+
+        validate(controls[0], Types.coAlarm, {
+            ACTUAL: 'matter.0.CoAlarm.co',
+            SEVERITY: 'matter.0.CoAlarm.severity',
+            MUTED: 'matter.0.CoAlarm.muted',
+            TEST: 'matter.0.CoAlarm.test',
+            LOWBAT: 'matter.0.CoAlarm.lowbat',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a combined smoke and CO alarm as one fireAlarm`, done => {
+        const bool = role => ({
+            common: { name: role, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Combined': { common: { name: 'Smoke CO alarm' }, type: 'device' },
+            'matter.0.Combined.smoke': bool('sensor.alarm.fire'),
+            'matter.0.Combined.co': bool('sensor.alarm.co'),
+            'matter.0.Combined.severity': {
+                common: {
+                    name: 'Severity',
+                    type: 'number',
+                    role: 'value.severity',
+                    states: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Combined' });
+
+        // The Matter SmokeCoAlarm is one device, so it must not be split into two controls and the single
+        // severity it reports stays with it
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.fireAlarm, {
+            ACTUAL: 'matter.0.Combined.smoke',
+            CO: 'matter.0.Combined.co',
+            SEVERITY: 'matter.0.Combined.severity',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep the test state apart from the working indicator`, done => {
+        const objects = {
+            'matter.0.SmokeTest': { common: { name: 'Smoke alarm' }, type: 'device' },
+            'matter.0.SmokeTest.smoke': {
+                common: { name: 'Smoke', type: 'boolean', role: 'sensor.alarm.fire', read: true, write: false },
+                type: 'state',
+            },
+            'matter.0.SmokeTest.test': {
+                common: { name: 'Test', type: 'boolean', role: 'indicator.working.test', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.SmokeTest' });
+
+        validate(controls[0], Types.fireAlarm, {
+            ACTUAL: 'matter.0.SmokeTest.smoke',
+            TEST: 'matter.0.SmokeTest.test',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect the on time of a light and of a socket`, done => {
+        const onTime = () => ({
+            common: { name: 'On time', type: 'number', role: 'level.timer.off', unit: 's', read: true, write: true },
+            type: 'state',
+        });
+
+        const lamp = {
+            'hm-rpc.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
+            'hm-rpc.0.Lamp.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.light', read: true, write: true },
+                type: 'state',
+            },
+            'hm-rpc.0.Lamp.onTime': onTime(),
+        };
+        validate(detect(lamp, { id: 'hm-rpc.0.Lamp', ignoreEnums: true })[0], Types.light, {
+            SET: 'hm-rpc.0.Lamp.on',
+            ON_TIME: 'hm-rpc.0.Lamp.onTime',
+        });
+
+        const plug = {
+            'hm-rpc.0.Plug': { common: { name: 'Plug' }, type: 'device' },
+            'hm-rpc.0.Plug.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.active', read: true, write: true },
+                type: 'state',
+            },
+            'hm-rpc.0.Plug.onTime': onTime(),
+        };
+        validate(detect(plug, { id: 'hm-rpc.0.Plug', ignoreEnums: true })[0], Types.socket, {
+            SET: 'hm-rpc.0.Plug.on',
+            ON_TIME: 'hm-rpc.0.Plug.onTime',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect the on time of a colour light`, done => {
+        const objects = {
+            'zigbee.0.Ct': { common: { name: 'Lamp' }, type: 'device' },
+            'zigbee.0.Ct.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.light', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.Ct.dimmer': {
+                common: { name: 'Dimmer', type: 'number', role: 'level.dimmer', unit: '%', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.Ct.temperature': {
+                common: {
+                    name: 'Color temperature',
+                    type: 'number',
+                    role: 'level.color.temperature',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'zigbee.0.Ct.onTime': {
+                common: {
+                    name: 'On time',
+                    type: 'number',
+                    role: 'level.timer.off',
+                    unit: 's',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        validate(detect(objects, { id: 'zigbee.0.Ct', ignoreEnums: true })[0], Types.ct, {
+            ON: 'zigbee.0.Ct.on',
+            DIMMER: 'zigbee.0.Ct.dimmer',
+            TEMPERATURE: 'zigbee.0.Ct.temperature',
+            ON_TIME: 'zigbee.0.Ct.onTime',
+        });
+
+        done();
+    });
+
+    it(`${name} Must offer the on time only on types that can be switched on`, done => {
+        const expected = [
+            'airPurifier',
+            'cie',
+            'ct',
+            'dimmer',
+            'fan',
+            'hue',
+            'light',
+            'rgb',
+            'rgbSingle',
+            'rgbwSingle',
+            'socket',
+        ];
+        const patterns = ChannelDetector.getPatterns();
+
+        // Compare against every pattern, so a type cannot gain or lose the state unnoticed
+        const actual = Object.keys(patterns)
+            .filter(type => (patterns[type]?.states || []).some(state => state?.name === 'ON_TIME'))
+            .sort();
+        expect(
+            actual.join(',') === expected.join(','),
+            `Expected ON_TIME on ${expected.join(', ')} but found it on ${actual.join(', ')}`,
+        );
+
+        done();
+    });
+
+    it(`${name} Must detect air conditioner with fan level, airflow, filter and shared states`, done => {
+        const writable = (role, states, unit) => ({
+            common: { name: role, type: 'number', role, states, unit, read: true, write: true },
+            type: 'state',
+        });
+        const readOnly = (role, type, unit) => ({
+            common: { name: role, type, role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.RoomAC3': { common: { name: 'Room AC' }, type: 'device' },
+            'matter.0.RoomAC3.set': writable('level.temperature', undefined, '°C'),
+            'matter.0.RoomAC3.mode': writable('level.mode.airconditioner', { 0: 'AUTO', 3: 'COOL' }),
+            'matter.0.RoomAC3.percent': writable('level.speed', undefined, '%'),
+            'matter.0.RoomAC3.airflow': writable('level.mode.airflow', { 0: 'FORWARD', 1: 'REVERSE' }),
+            'matter.0.RoomAC3.filter': readOnly('value.filter', 'number', '%'),
+            'matter.0.RoomAC3.carbon': readOnly('value.filter.carbon', 'number', '%'),
+            'matter.0.RoomAC3.change': readOnly('indicator.maintenance.filter', 'boolean'),
+            'matter.0.RoomAC3.working': readOnly('indicator.working', 'boolean'),
+            'matter.0.RoomAC3.lowbat': readOnly('indicator.maintenance.lowbat', 'boolean'),
+            'matter.0.RoomAC3.battery': readOnly('value.battery', 'number', '%'),
+        };
+
+        const controls = detect(objects, { id: 'matter.0.RoomAC3' });
+
+        // Everything belongs to the air conditioner, nothing is left over for a second control
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.airCondition, {
+            SET: 'matter.0.RoomAC3.set',
+            MODE: 'matter.0.RoomAC3.mode',
+            SPEED_LEVEL: 'matter.0.RoomAC3.percent',
+            AIRFLOW_DIRECTION: 'matter.0.RoomAC3.airflow',
+            FILTER_CONDITION: 'matter.0.RoomAC3.filter',
+            FILTER_CONDITION_CARBON: 'matter.0.RoomAC3.carbon',
+            FILTER_CHANGE: 'matter.0.RoomAC3.change',
+            WORKING: 'matter.0.RoomAC3.working',
+            LOWBAT: 'matter.0.RoomAC3.lowbat',
+            BATTERY: 'matter.0.RoomAC3.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not detect an air conditioner as an air purifier`, done => {
+        const objects = {
+            'matter.0.RoomAC4': { common: { name: 'Room AC' }, type: 'device' },
+            'matter.0.RoomAC4.set': {
+                common: { name: 'set', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.RoomAC4.mode': {
+                common: {
+                    name: 'mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.RoomAC4.fanMode': {
+                common: {
+                    name: 'fan',
+                    type: 'number',
+                    role: 'level.mode.fan',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.RoomAC4.filter': {
+                common: { name: 'filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.RoomAC4' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.airCondition, {
+            SET: 'matter.0.RoomAC4.set',
+            MODE: 'matter.0.RoomAC4.mode',
+            SPEED: 'matter.0.RoomAC4.fanMode',
+            FILTER_CONDITION: 'matter.0.RoomAC4.filter',
+        });
+
+        done();
+    });
+
+    it(`${name} Must document how an air conditioner next to a purifier is detected`, done => {
+        const objects = {
+            'x.0.Combo': { common: { name: 'Combo' }, type: 'device' },
+            'x.0.Combo.ac': { common: { name: 'ac' }, type: 'channel' },
+            'x.0.Combo.ac.set': {
+                common: { name: 'set', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'x.0.Combo.ac.mode': {
+                common: {
+                    name: 'mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'x.0.Combo.purifier': { common: { name: 'purifier' }, type: 'channel' },
+            'x.0.Combo.purifier.speed': {
+                common: {
+                    name: 'speed',
+                    type: 'number',
+                    role: 'level.mode.fan',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'x.0.Combo.purifier.filter': {
+                common: { name: 'filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'x.0.Combo' });
+
+        expect(
+            !controls.some(({ type }) => type === Types.airPurifier),
+            'The purifier is already swallowed by the air conditioner before this change',
+        );
+        validate(
+            controls[0],
+            Types.airCondition,
+            {
+                SET: 'x.0.Combo.ac.set',
+                MODE: 'x.0.Combo.ac.mode',
+                SPEED: 'x.0.Combo.purifier.speed',
+                FILTER_CONDITION: 'x.0.Combo.purifier.filter',
+            },
+            true,
+        );
+
+        done();
+    });
+
+    it(`${name} Must treat regular expression characters in an object ID as literals`, done => {
+        const { getAllStatesInChannel, getAllStatesInDevice } = require('../build/roleEnumUtils');
+
+        for (const channel of ['a.b', 'a\\b', 'a+b', 'a|b', 'a*b', 'a(b']) {
+            const keys = [`${channel}.x`, `${channel}.y`, 'other.x'];
+            const found = getAllStatesInChannel(keys, channel);
+            expect(
+                found.length === 2 && found[0] === `${channel}.x` && found[1] === `${channel}.y`,
+                `Expected both states of "${channel}" but found ${JSON.stringify(found)}`,
+            );
+        }
+
+        // The dot must stay escaped, so a channel must not match an ID with any character in its place
+        expect(
+            getAllStatesInChannel(['aXb.x'], 'a.b').length === 0,
+            'A dot in the channel ID must not match an arbitrary character',
+        );
+        expect(
+            getAllStatesInDevice(['a+b.c.d', 'a+b.c', 'zz.c.d'], 'a+b').join(',') === 'a+b.c.d',
+            'The device lookup must escape the ID as well',
+        );
+
+        done();
+    });
+
+    it(`${name} Must not use a generic state role as the feedback of a socket`, done => {
+        const objects = {
+            'zigbee.0.Plug': { common: { name: 'Plug' }, type: 'device' },
+            'zigbee.0.Plug.state': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            // Reachability of the device, exposed by the zigbee adapter for every device
+            'zigbee.0.Plug.available': {
+                common: { name: 'Available', type: 'boolean', role: 'state', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'zigbee.0.Plug' });
+
+        const socket = controls.find(({ type }) => type === Types.socket);
+        expect(!!socket, 'The plug must still be detected as a socket');
+        expect(
+            !socket.states.some(({ name, id }) => name === 'ACTUAL' && id === 'zigbee.0.Plug.available'),
+            'A generic state role must not become the feedback of the socket',
+        );
+
+        done();
+    });
+
+    it(`${name} Must still use a dedicated feedback role of a socket`, done => {
+        const objects = {
+            'shelly.0.Relay': { common: { name: 'Relay' }, type: 'device' },
+            'shelly.0.Relay.set': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'shelly.0.Relay.actual': {
+                common: { name: 'Actual', type: 'boolean', role: 'state.active', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Relay' });
+
+        validate(controls[0], Types.socket, {
+            SET: 'shelly.0.Relay.set',
+            ACTUAL: 'shelly.0.Relay.actual',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not use an arbitrary role ending in switch as ON_ACTUAL`, done => {
+        const objects = {
+            'test.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
+            'test.0.Lamp.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.light', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Lamp.someSwitch': {
+                common: { name: 'Some switch', type: 'boolean', role: 'info.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Lamp', ignoreEnums: true });
+
+        const light = controls.find(({ type }) => type === Types.light);
+        expect(!!light, 'The lamp must still be detected as a light');
+        expect(
+            !light.states.some(({ name, id }) => name === 'ON_ACTUAL' && id),
+            'A role that merely ends in "switch" must not become ON_ACTUAL',
+        );
+
+        done();
+    });
+
+    it(`${name} Must detect a pure electricity meter`, done => {
+        const value = (role, unit) => ({
+            common: { name: role, type: 'number', role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'shelly.0.Meter': { common: { name: 'Meter' }, type: 'device' },
+            'shelly.0.Meter.power': value('value.power', 'W'),
+            'shelly.0.Meter.current': value('value.current', 'mA'),
+            'shelly.0.Meter.voltage': value('value.voltage', 'V'),
+            'shelly.0.Meter.energy': value('value.power.consumption', 'Wh'),
+            'shelly.0.Meter.frequency': value('value.frequency', 'Hz'),
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Meter' });
+
+        validate(controls[0], Types.electricity, {
+            ELECTRIC_POWER: 'shelly.0.Meter.power',
+            CURRENT: 'shelly.0.Meter.current',
+            VOLTAGE: 'shelly.0.Meter.voltage',
+            CONSUMPTION: 'shelly.0.Meter.energy',
+            FREQUENCY: 'shelly.0.Meter.frequency',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect an electricity meter that reports only one value`, done => {
+        const objects = {
+            'shelly.0.Energy': { common: { name: 'Energy' }, type: 'device' },
+            'shelly.0.Energy.total': {
+                common: {
+                    name: 'Total',
+                    type: 'number',
+                    role: 'value.power.consumption',
+                    unit: 'Wh',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        validate(detect(objects, { id: 'shelly.0.Energy' })[0], Types.electricity, {
+            CONSUMPTION: 'shelly.0.Energy.total',
+        });
+
+        done();
+    });
+
+    it(`${name} Must leave the electricity of a socket with the socket`, done => {
+        const objects = {
+            'shelly.0.Plug3': { common: { name: 'Plug' }, type: 'device' },
+            'shelly.0.Plug3.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.active', read: true, write: true },
+                type: 'state',
+            },
+            'shelly.0.Plug3.power': {
+                common: { name: 'Power', type: 'number', role: 'value.power', unit: 'W', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.Plug3' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.socket, {
+            SET: 'shelly.0.Plug3.on',
+            ELECTRIC_POWER: 'shelly.0.Plug3.power',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect the RSSI of a device`, done => {
         const objects = {
             'zigbee.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
@@ -313,6 +1117,55 @@ describe(`${name} Test Detector`, () => {
             actual.join(',') === [...excluded].sort().join(','),
             `Expected no RSSI on ${excluded.join(', ')} but found none on ${actual.join(', ')}`,
         );
+
+        done();
+    });
+
+    it(`${name} Must detect thermostat correctly when device is used`, done => {
+        const controls = detect('./hm-thermostat.json', {
+            id: 'hm-rpc.1.JEQ0XXXXXX',
+        });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect one device only also when starting on channel when using checkParent option`, done => {
+        const options = {
+            id: 'hm-rpc.1.JEQ0XXXXXX.1',
+            detectParent: true,
+        };
+
+        const controls = detect('./hm-thermostat.json', options);
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
+
+        const controls2 = detect('./hm-thermostat.json', options);
+        expect(controls2 === null, 'No controls expected');
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX';
+
+        const controls3 = detect('./hm-thermostat.json', options);
+        expect(controls3 === null, 'No controls expected');
 
         done();
     });
@@ -493,7 +1346,7 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Purifier': { common: { name: 'Dyson Purifier' }, type: 'device' },
             'matter.0.Purifier.fanMode': writable('Fan mode', 'level.mode.fan', { 0: 'AUTO', 1: 'HIGH' }),
-            'matter.0.Purifier.percent': writable('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Purifier.percent': writable('Percent setting', 'level.speed', undefined, '%'),
             'matter.0.Purifier.rock': writable('Rocking', 'level.mode.swing', { 0: 'AUTO', 2: 'STATIONARY' }),
             'matter.0.Purifier.airflow': writable('Airflow', 'level.mode.airflow', { 0: 'FORWARD', 1: 'REVERSE' }),
             'matter.0.Purifier.onOff': {
@@ -543,7 +1396,7 @@ describe(`${name} Test Detector`, () => {
                 2: 'LOW',
                 3: 'MEDIUM',
             }),
-            'matter.0.Fan.percent': writableNumber('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Fan.percent': writableNumber('Percent setting', 'level.speed', undefined, '%'),
             'matter.0.Fan.rock': writableNumber('Rocking', 'level.mode.swing', {
                 0: 'AUTO',
                 1: 'HORIZONTAL',
@@ -588,7 +1441,14 @@ describe(`${name} Test Detector`, () => {
                 type: 'state',
             },
             'matter.0.SimplePurifier.hepa': {
-                common: { name: 'Hepa filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                common: {
+                    name: 'Hepa filter',
+                    type: 'number',
+                    role: 'value.filter',
+                    unit: '%',
+                    read: true,
+                    write: false,
+                },
                 type: 'state',
             },
         };
@@ -691,7 +1551,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.FilterOnly': { common: { name: 'Filter' }, type: 'device' },
             'matter.0.FilterOnly.hepa': {
-                common: { name: 'Hepa filter', type: 'number', role: 'value.filter', unit: '%', read: true, write: false },
+                common: {
+                    name: 'Hepa filter',
+                    type: 'number',
+                    role: 'value.filter',
+                    unit: '%',
+                    read: true,
+                    write: false,
+                },
                 type: 'state',
             },
         };
@@ -813,6 +1680,141 @@ describe(`${name} Test Detector`, () => {
             MODE: 'alias.0.AC.MODE',
             SPEED: 'alias.0.AC.SPEED',
         });
+
+        done();
+    });
+
+    it(`${name} Must detect a thermostat with all three setpoints`, done => {
+        const setpoint = role => ({
+            common: { name: role, type: 'number', role, unit: '°C', read: true, write: true },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.Th1': { common: { name: 'Thermostat' }, type: 'device' },
+            'matter.0.Th1.set': setpoint('level.temperature'),
+            'matter.0.Th1.heating': setpoint('level.temperature.heating'),
+            'matter.0.Th1.cooling': setpoint('level.temperature.cooling'),
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Th1' });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'matter.0.Th1.set',
+            SET_HEATING: 'matter.0.Th1.heating',
+            SET_COOLING: 'matter.0.Th1.cooling',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a thermostat that has only the two dual setpoints`, done => {
+        const setpoint = role => ({
+            common: { name: role, type: 'number', role, unit: '°C', read: true, write: true },
+            type: 'state',
+        });
+
+        // The mapping must not depend on the order of the object IDs
+        for (const [heatingId, coolingId] of [
+            ['a-heating', 'b-cooling'],
+            ['b-heating', 'a-cooling'],
+        ]) {
+            const objects = {
+                'matter.0.Th2': { common: { name: 'Thermostat' }, type: 'device' },
+                [`matter.0.Th2.${heatingId}`]: setpoint('level.temperature.heating'),
+                [`matter.0.Th2.${coolingId}`]: setpoint('level.temperature.cooling'),
+            };
+
+            const controls = detect(objects, { id: 'matter.0.Th2' });
+
+            validate(controls[0], Types.thermostat, {
+                SET_HEATING: `matter.0.Th2.${heatingId}`,
+                SET_COOLING: `matter.0.Th2.${coolingId}`,
+            });
+        }
+
+        done();
+    });
+
+    it(`${name} Must map a lone heating setpoint to SET_HEATING`, done => {
+        const objects = {
+            'matter.0.Th3': { common: { name: 'Thermostat' }, type: 'device' },
+            'matter.0.Th3.heating': {
+                common: {
+                    name: 'Heating setpoint',
+                    type: 'number',
+                    role: 'level.temperature.heating',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Th3' });
+
+        validate(controls[0], Types.thermostat, {
+            SET_HEATING: 'matter.0.Th3.heating',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect an air conditioner with the dual setpoints`, done => {
+        const setpoint = role => ({
+            common: { name: role, type: 'number', role, unit: '°C', read: true, write: true },
+            type: 'state',
+        });
+        const objects = {
+            'matter.0.RoomAC2': { common: { name: 'Room AC' }, type: 'device' },
+            'matter.0.RoomAC2.heating': setpoint('level.temperature.heating'),
+            'matter.0.RoomAC2.cooling': setpoint('level.temperature.cooling'),
+            'matter.0.RoomAC2.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO', 3: 'COOL', 7: 'HEAT' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.RoomAC2' });
+
+        validate(controls[0], Types.airCondition, {
+            SET_HEATING: 'matter.0.RoomAC2.heating',
+            SET_COOLING: 'matter.0.RoomAC2.cooling',
+            MODE: 'matter.0.RoomAC2.mode',
+        });
+
+        done();
+    });
+
+    it(`${name} Must not detect a thermostat without any setpoint`, done => {
+        const objects = {
+            'matter.0.NoSet': { common: { name: 'Device' }, type: 'device' },
+            'matter.0.NoSet.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.NoSet' });
+
+        expect(
+            !(controls || []).some(({ type }) => type === Types.thermostat || type === Types.airCondition),
+            'A device without any setpoint must be neither a thermostat nor an air conditioner',
+        );
 
         done();
     });
@@ -993,8 +1995,14 @@ describe(`${name} Test Detector`, () => {
             WIND_DIRECTION_STR: 'pirate-weather.0.weather.daily.00.windBearingText',
             HUMIDITY: 'pirate-weather.0.weather.daily.00.humidity',
             PRESSURE: 'pirate-weather.0.weather.daily.00.pressure',
-            TEMP_MIN: ['pirate-weather.0.weather.daily.00.temperatureMin', 'pirate-weather.0.weather.daily.00.temperatureLow'],
-            TEMP_MAX: ['pirate-weather.0.weather.daily.00.temperatureMax', 'pirate-weather.0.weather.daily.00.temperatureHigh'],
+            TEMP_MIN: [
+                'pirate-weather.0.weather.daily.00.temperatureMin',
+                'pirate-weather.0.weather.daily.00.temperatureLow',
+            ],
+            TEMP_MAX: [
+                'pirate-weather.0.weather.daily.00.temperatureMax',
+                'pirate-weather.0.weather.daily.00.temperatureHigh',
+            ],
             TIME_SUNRISE: 'pirate-weather.0.weather.daily.00.sunriseTime',
             TIME_SUNSET: 'pirate-weather.0.weather.daily.00.sunsetTime',
         };
@@ -1006,8 +2014,14 @@ describe(`${name} Test Detector`, () => {
             detectionDef[`WIND_DIRECTION_STR${day}`] = `pirate-weather.0.weather.daily.0${day}.windBearingText`;
             detectionDef[`HUMIDITY${day}`] = `pirate-weather.0.weather.daily.0${day}.humidity`;
             detectionDef[`PRESSURE${day}`] = `pirate-weather.0.weather.daily.0${day}.pressure`;
-            detectionDef[`TEMP_MIN${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMin`, `pirate-weather.0.weather.daily.0${day}.temperatureLow`];
-            detectionDef[`TEMP_MAX${day}`] = [`pirate-weather.0.weather.daily.0${day}.temperatureMax`, `pirate-weather.0.weather.daily.0${day}.temperatureHigh`];
+            detectionDef[`TEMP_MIN${day}`] = [
+                `pirate-weather.0.weather.daily.0${day}.temperatureMin`,
+                `pirate-weather.0.weather.daily.0${day}.temperatureLow`,
+            ];
+            detectionDef[`TEMP_MAX${day}`] = [
+                `pirate-weather.0.weather.daily.0${day}.temperatureMax`,
+                `pirate-weather.0.weather.daily.0${day}.temperatureHigh`,
+            ];
             detectionDef[`TIME_SUNRISE${day}`] = `pirate-weather.0.weather.daily.0${day}.sunriseTime`;
             detectionDef[`TIME_SUNSET${day}`] = `pirate-weather.0.weather.daily.0${day}.sunsetTime`;
         }
@@ -1820,7 +2834,7 @@ describe(`${name} Test Detector`, () => {
             detectParent: true,
         });
         const states = controls[0].states.filter(s => !!s.id);
-        expect(states.length=== 1, 'Should detect 1 state for dimmer with power switch');
+        expect(states.length === 1, 'Should detect 1 state for dimmer with power switch');
 
         validate(controls[0], Types.blind, {
             SET: 'mqtt.0.vantage.obergeschoss.buro.blind.rollos.percent',

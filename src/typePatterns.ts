@@ -27,6 +27,39 @@ import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleO
 
 const IGNORE_SETTINGS_REGEX = /^[^.]+\.setting\./;
 
+/** The role of the primary setpoint matches any `*.temperature`, so it has to leave the two dual setpoints alone */
+const IGNORE_SETTINGS_OR_DUAL_SETPOINT_REGEX = /^[^.]+\.setting\.|^level\.temperature\.(heating|cooling)$/;
+
+/**
+ * Heating and cooling setpoint of a device that holds both at once, as a Matter thermostat does in Auto mode.
+ * Together with the primary `SET` they form the group `setpoint`, so a device is detected when it exposes the
+ * single setpoint, either of these, or all of them.
+ */
+const DualSetpointPatterns: { heating: InternalDetectorState; cooling: InternalDetectorState } = {
+    heating: {
+        role: /^level\.temperature\.heating$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'SET_HEATING',
+        requiredOneOf: 'setpoint',
+        defaultRole: 'level.temperature.heating',
+        defaultUnit: '°C',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+    cooling: {
+        role: /^level\.temperature\.cooling$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'SET_COOLING',
+        requiredOneOf: 'setpoint',
+        defaultRole: 'level.temperature.cooling',
+        defaultUnit: '°C',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
+    },
+};
+
 const SharedPatterns: {
     working: InternalDetectorState;
     unreach: InternalDetectorState;
@@ -38,6 +71,7 @@ const SharedPatterns: {
     reachable: InternalDetectorState;
     battery: InternalDetectorState;
     rssi: InternalDetectorState;
+    onTime: InternalDetectorState;
 } = {
     working: {
         role: /^indicator\.working$/,
@@ -123,6 +157,17 @@ const SharedPatterns: {
         required: false,
         defaultRole: 'value.rssi',
         defaultUnit: 'dBm',
+    },
+    onTime: {
+        role: /^level\.timer\.off$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'ON_TIME',
+        required: false,
+        defaultRole: 'level.timer.off',
+        defaultUnit: 's',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
     },
     battery: {
         role: /^value\.battery$/,
@@ -231,13 +276,13 @@ const FanPatterns: {
         defaultRole: 'switch.power',
     },
     speedLevel: {
-        role: /^level\.fan$/,
+        role: /^level\.speed$/,
         indicator: false,
         write: true,
         type: StateType.Number,
         name: 'SPEED_LEVEL',
         required: false,
-        defaultRole: 'level.fan',
+        defaultRole: 'level.speed',
         defaultUnit: '%',
         ignoreRole: IGNORE_SETTINGS_REGEX,
     },
@@ -320,6 +365,79 @@ function concentrationPatterns(name: string, roleId: string, defaultUnit?: strin
         },
     ];
 }
+
+/**
+ * Filter monitoring shared by the device types that move air through a filter.
+ * `airPurifier` puts the two conditions into a group, because there the filter is what separates it from a `fan`,
+ * while for an air conditioner the filter is just extra information.
+ */
+const FilterPatterns: {
+    condition: InternalDetectorState;
+    conditionCarbon: InternalDetectorState;
+    change: InternalDetectorState;
+} = {
+    condition: {
+        role: /^value\.filter$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'FILTER_CONDITION',
+        required: false,
+        defaultRole: 'value.filter',
+        defaultUnit: '%',
+    },
+    conditionCarbon: {
+        role: /^value\.filter\.carbon$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'FILTER_CONDITION_CARBON',
+        required: false,
+        defaultRole: 'value.filter.carbon',
+        defaultUnit: '%',
+    },
+    change: {
+        role: /^indicator\.maintenance\.filter$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'FILTER_CHANGE',
+        required: false,
+        defaultRole: 'indicator.maintenance.filter',
+    },
+};
+
+/**
+ * Optional details a smoke or CO alarm can report next to the alarm itself.
+ * Shared by `fireAlarm` and `coAlarm`, which are one device in Matter and differ only in what they sense.
+ */
+const AlarmPatterns: { severity: InternalDetectorState; muted: InternalDetectorState; test: InternalDetectorState } = {
+    severity: {
+        role: /^value\.severity$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'SEVERITY',
+        required: false,
+        defaultRole: 'value.severity',
+        defaultStates: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+    },
+    muted: {
+        role: /^indicator\.alarm\.muted$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'MUTED',
+        required: false,
+        defaultRole: 'indicator.alarm.muted',
+    },
+    test: {
+        role: /^indicator\.working\.test$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'TEST',
+        required: false,
+        defaultRole: 'indicator.working.test',
+    },
+};
 
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
@@ -1045,7 +1163,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1064,6 +1182,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1137,7 +1256,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1156,6 +1275,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1229,7 +1349,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1248,6 +1368,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1321,7 +1442,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1340,6 +1461,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1424,7 +1546,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1443,6 +1565,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1495,7 +1618,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch.light',
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -1525,6 +1648,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1617,11 +1741,13 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 type: StateType.Number,
                 name: 'SET',
-                required: true,
+                requiredOneOf: 'setpoint',
                 defaultRole: 'level.temperature',
                 defaultUnit: '°C',
-                ignoreRole: IGNORE_SETTINGS_REGEX,
+                ignoreRole: IGNORE_SETTINGS_OR_DUAL_SETPOINT_REGEX,
             },
+            DualSetpointPatterns.heating,
+            DualSetpointPatterns.cooling,
             // AUTO, COOL, HEAT, ECO, OFF, DRY, FAN_ONLY
             {
                 role: /(level\.mode\.)?airconditioner$/,
@@ -1645,6 +1771,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             FanPatterns.speed,
+            FanPatterns.speedLevel,
             FanPatterns.power,
             {
                 role: /temperature(\..*)?$/,
@@ -1682,11 +1809,18 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             FanPatterns.swing,
             FanPatterns.swingBoolean,
+            FanPatterns.airflowDirection,
+            FilterPatterns.condition,
+            FilterPatterns.conditionCarbon,
+            FilterPatterns.change,
             ...Object.values(ElectricityPatterns),
+            SharedPatterns.working,
             SharedPatterns.unreach,
+            SharedPatterns.lowbat,
             SharedPatterns.maintain,
             SharedPatterns.error,
             SharedPatterns.rssi,
+            SharedPatterns.battery,
         ],
         type: Types.airCondition,
     },
@@ -1701,34 +1835,10 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             FanPatterns.swingBoolean,
             FanPatterns.airflowDirection,
             // A purifier reports either of its filters, and the filter is what separates it from a plain `fan`
-            {
-                role: /^value\.filter$/,
-                indicator: false,
-                write: false,
-                type: StateType.Number,
-                name: 'FILTER_CONDITION',
-                requiredOneOf: 'filter',
-                defaultRole: 'value.filter',
-                defaultUnit: '%',
-            },
-            {
-                role: /^value\.filter\.carbon$/,
-                indicator: false,
-                write: false,
-                type: StateType.Number,
-                name: 'FILTER_CONDITION_CARBON',
-                requiredOneOf: 'filter',
-                defaultRole: 'value.filter.carbon',
-                defaultUnit: '%',
-            },
-            {
-                role: /^indicator\.maintenance\.filter$/,
-                indicator: true,
-                type: StateType.Boolean,
-                name: 'FILTER_CHANGE',
-                required: false,
-                defaultRole: 'indicator.maintenance.filter',
-            },
+            { ...FilterPatterns.condition, requiredOneOf: 'filter' },
+            { ...FilterPatterns.conditionCarbon, requiredOneOf: 'filter' },
+            FilterPatterns.change,
+            SharedPatterns.onTime,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
@@ -1748,6 +1858,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             FanPatterns.swing,
             FanPatterns.swingBoolean,
             FanPatterns.airflowDirection,
+            SharedPatterns.onTime,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
@@ -1766,12 +1877,14 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 write: true,
                 type: StateType.Number,
                 name: 'SET',
-                required: true,
+                requiredOneOf: 'setpoint',
                 defaultRole: 'level.temperature',
                 defaultUnit: '°C',
-                ignoreRole: IGNORE_SETTINGS_REGEX,
+                ignoreRole: IGNORE_SETTINGS_OR_DUAL_SETPOINT_REGEX,
             },
             // optional
+            DualSetpointPatterns.heating,
+            DualSetpointPatterns.cooling,
             {
                 role: /temperature(\..*)?$/,
                 indicator: false,
@@ -2572,6 +2685,30 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.motion,
     },
+    contact: {
+        states: [
+            {
+                role: /^sensor\.contact$/,
+                indicator: false,
+                type: StateType.Boolean,
+                write: false,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'sensor.contact',
+                defaultChannelRole: 'sensor.contact',
+            },
+            // optional
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+            SharedPatterns.rssi,
+        ],
+        type: Types.contact,
+        enumRequired: false,
+    },
     window: {
         states: [
             {
@@ -2631,6 +2768,17 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultChannelRole: 'sensor.alarm.fire',
             },
             // optional
+            {
+                role: /^(state|sensor)(\.alarm)?\.co$/,
+                indicator: false,
+                type: StateType.Boolean,
+                name: 'CO',
+                required: false,
+                defaultRole: 'sensor.alarm.co',
+            },
+            AlarmPatterns.severity,
+            AlarmPatterns.muted,
+            AlarmPatterns.test,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
             SharedPatterns.maintain,
@@ -2639,6 +2787,31 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.rssi,
         ],
         type: Types.fireAlarm,
+        enumRequired: false,
+    },
+    coAlarm: {
+        states: [
+            {
+                role: /^(state|sensor)(\.alarm)?\.co$/,
+                indicator: false,
+                type: StateType.Boolean,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'sensor.alarm.co',
+                defaultChannelRole: 'sensor.alarm.co',
+            },
+            // optional
+            AlarmPatterns.severity,
+            AlarmPatterns.muted,
+            AlarmPatterns.test,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+            SharedPatterns.rssi,
+        ],
+        type: Types.coAlarm,
         enumRequired: false,
     },
     floodAlarm: {
@@ -2733,7 +2906,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultStates: { 0: 'None' },
             },
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2754,6 +2927,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -2779,7 +2953,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^(state|switch|sensor)\.light|switch$/,
+                role: /^(state|switch|sensor)\.light$|^switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -2800,6 +2974,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'level.effect',
                 defaultStates: { 0: 'None' },
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -3008,6 +3183,75 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.volumeGroup,
     },
+    pump: {
+        states: [
+            {
+                // A dedicated role, because keying on `switch.power` would make every socket a pump
+                role: /^switch\.pump$/,
+                indicator: false,
+                write: true,
+                type: [StateType.Boolean, StateType.Number],
+                name: 'POWER',
+                required: true,
+                defaultRole: 'switch.pump',
+            },
+            // optional
+            {
+                role: /^level\.pump$/,
+                indicator: false,
+                write: true,
+                type: StateType.Number,
+                name: 'LEVEL',
+                required: false,
+                defaultRole: 'level.pump',
+                defaultUnit: '%',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            {
+                role: /temperature(\..*)?$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'TEMPERATURE',
+                required: false,
+                defaultRole: 'value.temperature',
+                defaultUnit: '°C',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            {
+                role: /^value\.pressure$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'PRESSURE',
+                required: false,
+                defaultRole: 'value.pressure',
+                defaultUnit: 'mbar',
+            },
+            {
+                role: /^value\.flow$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'FLOW',
+                required: false,
+                defaultRole: 'value.flow',
+                defaultUnit: 'm³/h',
+            },
+            ...Object.values(ElectricityPatterns),
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+            SharedPatterns.rssi,
+        ],
+        type: Types.pump,
+    },
     percentage: {
         states: [
             {
@@ -3061,6 +3305,25 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
+                role: /^switch(\.active)?$/,
+                indicator: false,
+                write: true,
+                type: StateType.Boolean,
+                name: 'ON',
+                required: false,
+                defaultRole: 'switch',
+            },
+            {
+                role: /^state\.active$|^sensor\.switch$/,
+                indicator: false,
+                write: false,
+                type: StateType.Boolean,
+                name: 'ON_ACTUAL',
+                required: false,
+                defaultRole: 'sensor.switch',
+            },
+            // optional
+            {
                 role: /^value(\..*)?$/,
                 indicator: false,
                 type: StateType.Number,
@@ -3096,7 +3359,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
-                role: /^state(\.active)?$|^sensor.switch$/,
+                role: /^state\.active$|^sensor\.switch$/,
                 indicator: false,
                 type: StateType.Boolean,
                 write: false,
@@ -3104,6 +3367,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
                 defaultRole: 'sensor.switch',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -3329,6 +3593,50 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.illuminance,
     },
+    pressure: {
+        states: [
+            {
+                role: /^value\.pressure$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'PRESSURE',
+                required: true,
+                defaultRole: 'value.pressure',
+                defaultUnit: 'mbar',
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+            SharedPatterns.rssi,
+        ],
+        type: Types.pressure,
+    },
+    flow: {
+        states: [
+            {
+                role: /^value\.flow$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'FLOW',
+                required: true,
+                defaultRole: 'value.flow',
+                defaultUnit: 'm³/h',
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+            SharedPatterns.rssi,
+        ],
+        type: Types.flow,
+    },
     fillLevel: {
         states: [
             {
@@ -3369,6 +3677,20 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.battery,
         ],
         type: Types.image,
+    },
+    electricity: {
+        states: [
+            // Any one of the readings is enough, so a device that only measures is detected as well
+            ...Object.values(ElectricityPatterns).map(state => ({ ...state, requiredOneOf: 'electricity' })),
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+            SharedPatterns.rssi,
+        ],
+        type: Types.electricity,
     },
     info: {
         states: [
