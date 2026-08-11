@@ -1365,6 +1365,55 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect the two end contacts of a gate`, done => {
+        const contact = role => ({
+            common: { name: role, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'test.0.Gate': { common: { name: 'Gate', role: 'gate' }, type: 'channel' },
+            'test.0.Gate.set': {
+                common: { name: 'Set', type: 'boolean', role: 'switch.gate', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Gate.opened': contact('indicator.opened'),
+            'test.0.Gate.closed': contact('indicator.closed'),
+        };
+
+        const controls = detect(objects, { id: 'test.0.Gate', ignoreEnums: true });
+
+        validate(controls[0], Types.gate, {
+            SET: 'test.0.Gate.set',
+            OPENED: 'test.0.Gate.opened',
+            CLOSED: 'test.0.Gate.closed',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a gate that reports only one of the contacts`, done => {
+        const objects = {
+            'test.0.Gate2': { common: { name: 'Gate', role: 'gate' }, type: 'channel' },
+            'test.0.Gate2.set': {
+                common: { name: 'Set', type: 'boolean', role: 'switch.gate', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Gate2.closed': {
+                common: { name: 'Closed', type: 'boolean', role: 'indicator.closed', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Gate2', ignoreEnums: true });
+
+        validate(controls[0], Types.gate, {
+            SET: 'test.0.Gate2.set',
+            CLOSED: 'test.0.Gate2.closed',
+        });
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {

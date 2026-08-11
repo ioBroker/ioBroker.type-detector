@@ -554,6 +554,8 @@ Control of the gates. You can open (true) or close (false) the gate. Optionally,
 | * | SET            | switch.gate                   |      | boolean | W  | E    |     |       | `/^switch(\.gate)?$/`                    |
 |   | ACTUAL         | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.(position｜gate))?$/`          |
 |   | STOP           | button.stop                   |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop$/`              |
+|   | OPENED         | indicator.opened              |      | boolean |    |      | X   |       | `/^indicator\.opened$/`                  |
+|   | CLOSED         | indicator.closed              |      | boolean |    |      | X   |       | `/^indicator\.closed$/`                  |
 |   | DIRECTION      | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`               |
 |   | DIRECTION_ENUM | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`       |
 |   | WORKING        | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                 |
