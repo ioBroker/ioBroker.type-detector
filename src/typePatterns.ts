@@ -1993,6 +1993,17 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             RunningModePatterns.thermostat,
+            {
+                // No `searchInParent`: only the open window detection of the thermostat itself belongs here,
+                // a separate window sensor next to it stays its own device
+                role: /^(state|sensor)\.window$/,
+                indicator: false,
+                write: false,
+                type: StateType.Boolean,
+                name: 'WINDOW',
+                required: false,
+                defaultRole: 'sensor.window',
+            },
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,

@@ -1006,6 +1006,7 @@ Thermostat to be controlled by the desired temperature. Could have mode.
 |            | MODE         | level.mode.thermostat         |      | number         | W  |     |       | `/^level(\.mode)?\.thermostat$/`                  |
 |            | VALVE        | value.valve                   | %    | number         |    |     |       | `/^(value｜level)\.valve$/`                        |
 |            | WORKING_MODE | value.mode.thermostat         |      | number         | -  |     |       | `/^value\.mode\.thermostat$/`                     |
+|            | WINDOW       | sensor.window                 |      | boolean        | -  |     |       | `/^(state｜sensor)\.window$/`                      |
 |            | WORKING      | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
 |            | UNREACH      | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |            | LOWBAT       | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |

@@ -1319,6 +1319,53 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect the open window state of a thermostat`, done => {
+        const objects = {
+            'hm-rpc.0.Trv3': { common: { name: 'Radiator thermostat' }, type: 'device' },
+            'hm-rpc.0.Trv3.set': {
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'hm-rpc.0.Trv3.window': {
+                common: { name: 'Window', type: 'boolean', role: 'sensor.window', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'hm-rpc.0.Trv3' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.0.Trv3.set',
+            WINDOW: 'hm-rpc.0.Trv3.window',
+        });
+
+        done();
+    });
+
+    it(`${name} Must still detect a window sensor of its own`, done => {
+        const objects = {
+            'test.0.Win': { common: { name: 'Window' }, type: 'device' },
+            'test.0.Win.state': {
+                common: { name: 'Window', type: 'boolean', role: 'sensor.window', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        validate(detect(objects, { id: 'test.0.Win' })[0], Types.window, {
+            ACTUAL: 'test.0.Win.state',
+        });
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
