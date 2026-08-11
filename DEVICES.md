@@ -1017,30 +1017,35 @@ Thermostat to be controlled by the desired temperature. Could have mode.
 
 ### Vacuum cleaner (robot) [vacuumCleaner]
 
-| R | Name        | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                                              |
-|---|-------------|-------------------------------|------|----------------|----|-----|-------|--------------------------------------------------------------------|
-| * | POWER       | switch.power                  |      | boolean/number | W  |     |       | `/^switch\.power$/`                                                |
-| * | MODE        | level.mode.cleanup            |      | number         | W  |     |       | `/mode\.cleanup$/`                                                 |
-|   | MAP_BASE64  | vacuum.map.base64             |      | string         | -  |     |       | `/vacuum\.map\.base64$/`                                           |
-|   | MAP_URL     |                               |      | string         | -  |     |       | `/vacuum\.map\.url$/`                                              |
-|   | WORK_MODE   | level.mode.work               |      | number         | W  |     |       | `/mode\.work$/`                                                    |
-|   | WATER       | value.water                   | %    | number         | -  |     |       | `/^value\.water$/`                                                 |
-|   | WASTE       | value.waste                   | %    | number         | -  |     |       | `/^value\.waste$/`                                                 |
-|   | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                               |
-|   | STATE       | value.state                   |      | number/string  | -  |     |       | `/^value\.state$/`                                                 |
-|   | PAUSE       | switch.pause                  |      | boolean        | W  |     |       | `/^switch\.pause$/`                                                |
-|   | WASTE_ALARM | indicator.maintenance.waste   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.waste$｜^indicator(\.alarm)?\.waste/` |
-|   | WATER_ALARM | indicator.maintenance.water   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.water$｜^indicator(\.alarm)?\.water/` |
-|   | FILTER      | value.usage.filter            | %    | number         |    | X   |       | `/^value(\.usage)?\.filter/`                                       |
-|   | BRUSH       | value.usage.brush             | %    | number         |    | X   |       | `/^value(\.usage)?\.brush/`                                        |
-|   | SENSORS     | value.usage.sensors           | %    | number         |    | X   |       | `/^value(\.usage)?\.sensors/`                                      |
-|   | SIDE_BRUSH  | value.usage.brush.side        | %    | number         |    | X   |       | `/^value(\.usage)?\.brush\.side/`                                  |
-|   | UNREACH     | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                           |
-|   | LOWBAT      | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/`                  |
-|   | MAINTAIN    | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                                       |
-|   | ERROR       | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                                             |
-|   | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                               |
-|   | RSSI        | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                                  |
+| R            | Name        | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                                              |
+|--------------|-------------|-------------------------------|------|----------------|----|-----|-------|--------------------------------------------------------------------|
+| *            | POWER       | switch.power                  |      | boolean/number | W  |     |       | `/^switch\.power$/`                                                |
+| 1:vacuumMode | MODE        | level.mode.cleanup            |      | number         | W  |     |       | `/mode\.cleanup$/`                                                 |
+|              | MAP_BASE64  | vacuum.map.base64             |      | string         | -  |     |       | `/vacuum\.map\.base64$/`                                           |
+|              | MAP_URL     |                               |      | string         | -  |     |       | `/vacuum\.map\.url$/`                                              |
+|              | WORK_MODE   | level.mode.work               |      | number         | W  |     |       | `/mode\.work$/`                                                    |
+|              | WATER       | value.water                   | %    | number         | -  |     |       | `/^value\.water$/`                                                 |
+|              | WASTE       | value.waste                   | %    | number         | -  |     |       | `/^value\.waste$/`                                                 |
+|              | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                               |
+|              | STATE       | value.state                   |      | number/string  | -  |     |       | `/^value\.state$/`                                                 |
+|              | PAUSE       | switch.pause                  |      | boolean        | W  |     |       | `/^switch\.pause$/`                                                |
+|              | WASTE_ALARM | indicator.maintenance.waste   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.waste$｜^indicator(\.alarm)?\.waste/` |
+|              | WATER_ALARM | indicator.maintenance.water   |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.water$｜^indicator(\.alarm)?\.water/` |
+|              | FILTER      | value.usage.filter            | %    | number         |    | X   |       | `/^value(\.usage)?\.filter/`                                       |
+|              | BRUSH       | value.usage.brush             | %    | number         |    | X   |       | `/^value(\.usage)?\.brush/`                                        |
+|              | SENSORS     | value.usage.sensors           | %    | number         |    | X   |       | `/^value(\.usage)?\.sensors/`                                      |
+|              | SIDE_BRUSH  | value.usage.brush.side        | %    | number         |    | X   |       | `/^value(\.usage)?\.brush\.side/`                                  |
+|              | HOME        | button.home                   |      | boolean        | W  |     |       | `/^(button｜action)\.home$/`                                        |
+| 1:vacuumMode | RUN_MODE    | level.mode.vacuum             |      | number         | W  |     |       | `/^level\.mode\.vacuum$/`                                          |
+|              | PROGRESS    | value.progress                | %    | number         | -  |     |       | `/^value\.progress$/`                                              |
+|              | PHASE       | value.vacuum.phase            |      | string         | -  |     |       | `/^value\.vacuum\.phase$/`                                         |
+|              | WORKING     | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                                           |
+|              | UNREACH     | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`                           |
+|              | LOWBAT      | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/`                  |
+|              | MAINTAIN    | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                                       |
+|              | ERROR       | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                                             |
+|              | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                               |
+|              | RSSI        | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                                  |
 
 
 ### Volume [volume]
