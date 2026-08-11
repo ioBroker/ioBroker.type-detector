@@ -2454,6 +2454,23 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
                 defaultRole: 'button.stop',
             },
+            // Two separate contacts, because a gate can also stand between fully open and fully closed
+            {
+                role: /^indicator\.opened$/,
+                indicator: true,
+                type: StateType.Boolean,
+                name: 'OPENED',
+                required: false,
+                defaultRole: 'indicator.opened',
+            },
+            {
+                role: /^indicator\.closed$/,
+                indicator: true,
+                type: StateType.Boolean,
+                name: 'CLOSED',
+                required: false,
+                defaultRole: 'indicator.closed',
+            },
             SharedPatterns.direction,
             SharedPatterns.direction_enum,
             SharedPatterns.working,
