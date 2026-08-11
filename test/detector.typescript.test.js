@@ -302,15 +302,17 @@ describe(`${name} Test Detector`, () => {
     });
 
     it(`${name} Must not offer the RSSI on types that are not radio devices`, done => {
+        const excluded = ['chart', 'image', 'location', 'locationOne', 'warning', 'weatherCurrent', 'weatherForecast'];
         const patterns = ChannelDetector.getPatterns();
-        const hasRssi = type => (patterns[type]?.states || []).some(state => state?.name === 'RSSI');
 
-        for (const type of ['chart', 'image', 'location', 'locationOne', 'warning', 'weatherCurrent', 'weatherForecast']) {
-            expect(!hasRssi(type), `${type} must not have an RSSI state`);
-        }
-        for (const type of ['light', 'socket', 'thermostat', 'motion', 'blinds', 'temperature']) {
-            expect(hasRssi(type), `${type} must have an RSSI state`);
-        }
+        // Compare against every pattern, so a type cannot gain or lose the state unnoticed
+        const actual = Object.keys(patterns)
+            .filter(type => !(patterns[type]?.states || []).some(state => state?.name === 'RSSI'))
+            .sort();
+        expect(
+            actual.join(',') === [...excluded].sort().join(','),
+            `Expected no RSSI on ${excluded.join(', ')} but found none on ${actual.join(', ')}`,
+        );
 
         done();
     });
