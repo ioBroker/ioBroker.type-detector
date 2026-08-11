@@ -99,6 +99,7 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) Added the optional state `ON_TIME` to the light types, `socket`, `fan` and `airPurifier`
 -   (@Apollon77) Added new device type `coAlarm` for carbon monoxide alarms
 -   (@Apollon77) Added the optional states `CO`, `SEVERITY`, `MUTED` and `TEST` to `fireAlarm`, so a combined smoke and CO alarm is one device
 -   (@Apollon77) Added new device type `pump` for pumps (Matter Pump device)

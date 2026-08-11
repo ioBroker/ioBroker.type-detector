@@ -128,6 +128,7 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 | 1:filter | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
 | 1:filter | FILTER_CONDITION_CARBON | value.filter.carbon           | %    | number         | -  |     |       | `/^value\.filter\.carbon$/`                       |
 |          | FILTER_CHANGE           | indicator.maintenance.filter  |      | boolean        |    | X   |       | `/^indicator\.maintenance\.filter$/`              |
+|          | ON_TIME                 | level.timer.off               | s    | number         | W  |     |       | `/^level\.timer\.off$/`                           |
 |          | WORKING                 | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
 |          | UNREACH                 | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |          | LOWBAT                  | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
@@ -298,6 +299,7 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -356,6 +358,7 @@ Light, where the color is set by color temperature (normally from 2700°K (warm-
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -381,6 +384,7 @@ Dimmer, that is controlled by state (normally from 0 to 100 %, but it could be a
 |   | EFFECT          | level.effect                  |      | number/string | W  |      |     |       | `/^level\.effect$/`                               |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  | E    |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |      |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |      |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |      |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |      |     |       | `/^value\.voltage$/`                              |
@@ -420,6 +424,7 @@ Fan controlled by a speed mode. Could optionally have a continuous speed level, 
 |   | SWING             | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |   | SWING             | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |   | AIRFLOW_DIRECTION | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
+|   | ON_TIME           | level.timer.off               | s    | number         | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | WORKING           | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
 |   | UNREACH           | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT            | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
@@ -521,6 +526,7 @@ HUE light from 0° to 360°.
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -618,6 +624,7 @@ Light with only ON/OFF options. Could have information about current, amperage, 
 | * | SET            | switch.light                  |      | boolean       | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                    |
 |   | ON_ACTUAL      | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | EFFECT         | level.effect                  |      | number/string | W  |      |     |       | `/^level\.effect$/`                               |
+|   | ON_TIME        | level.timer.off               | s    | number        | W  |      |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER | value.power                   | W    | number        | -  |      |     |       | `/^value\.power$/`                                |
 |   | CURRENT        | value.current                 | mA   | number        | -  |      |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE        | value.voltage                 | V    | number        | -  |      |     |       | `/^value\.voltage$/`                              |
@@ -807,6 +814,7 @@ R,G,B(,W) Light with different states for every color. The value is from 0 to 25
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$｜^state$/`                    |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -834,6 +842,7 @@ RGB light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-25
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -861,6 +870,7 @@ RGBW light with one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -882,6 +892,7 @@ Socket with an ON/OFF option. Could have information about current, amperage, en
 |---|----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | SET            | switch                        |      | boolean | W  |     |       | `/^switch(\.active)?$｜^state$/`                   |
 |   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$｜^sensor.switch$/`            |
+|   | ON_TIME        | level.timer.off               | s    | number  | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |
