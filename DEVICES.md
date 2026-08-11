@@ -47,6 +47,7 @@ In [brackets] is given the class name of a device.
 * [IP Camera [camera]](#ip-camera-camera)
 * [Chart [chart]](#chart-chart)
 * [CIE Color space [cie]](#cie-color-space-cie)
+* [Contact sensor [contact]](#contact-sensor-contact)
 * [Light with color temperature [ct]](#light-with-color-temperature-ct)
 * [Light dimmer [dimmer]](#light-dimmer-dimmer)
 * [Door sensor [door]](#door-sensor-door)
@@ -118,7 +119,7 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 |----------|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
 | *        | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |          | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|          | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|          | SPEED_LEVEL             | level.speed                   | %    | number         | W  |     |       | `/^level\.speed$/`                                |
 |          | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |          | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |          | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
@@ -308,6 +309,21 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
 
 
+### Contact sensor [contact]
+
+Generic contact sensor for cases where it is not known whether it is a window, a door or something else: contact closed - true, contact open - false.
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.contact                |      | boolean | -  |     |       | `/^sensor\.contact$/`                             |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
 ### Light with color temperature [ct]
 
 Light, where the color is set by color temperature (normally from 2700°K (warm-white) to 6000°K (cold-white)).
@@ -381,7 +397,7 @@ Fan controlled by a speed mode. Could optionally have a continuous speed level, 
 |---|-------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
 | * | SPEED             | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |   | POWER             | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|   | SPEED_LEVEL       | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|   | SPEED_LEVEL       | level.speed                   | %    | number         | W  |     |       | `/^level\.speed$/`                                |
 |   | SWING             | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |   | SWING             | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |   | AIRFLOW_DIRECTION | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
@@ -556,16 +572,18 @@ Many information states could be combined under this device, e.g., current, ampe
 
 Slider with position set by number. Could be used for any device that is controlled by numeric value. Limits could be defined by `min`, `max` attributes. Normally from 0 (off) to 100 (full power).
 
-| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
-|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
-| * | SET      | level                         | %    | number  | W  | m   | M   |     |       | `/^level(\..*)?$/`                                |
-|   | ACTUAL   | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                |
-|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
+| R | Name      | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|-----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | SET       | level                         | %    | number  | W  | m   | M   |     |       | `/^level(\..*)?$/`                                |
+|   | ON        | switch                        |      | boolean | W  |     |     |     |       | `/^switch(\.active)?$/`                           |
+|   | ON_ACTUAL | sensor.switch                 |      | boolean | -  |     |     |     |       | `/^state\.active$｜^sensor\.switch$/`              |
+|   | ACTUAL    | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                |
+|   | WORKING   | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN  | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR     | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY   | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
 
 
 ### Light switch [light]

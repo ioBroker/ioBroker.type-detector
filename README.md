@@ -100,6 +100,9 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@Apollon77) Added new device types `pressure` and `flow` for pressure and flow sensors
+-   (@Apollon77) Added new device type `contact` for generic contact sensors
+-   (@Apollon77) Added the optional states `ON` and `ON_ACTUAL` to `slider`, so a dimmed device that is not a light keeps its on/off in one control
+-   (@Apollon77) The continuous fan speed of `fan` and `airPurifier` uses the existing role `level.speed` instead of a new role `level.fan`
 -   (@Apollon77) Added the state flag `requiredOneOf` to require at least one state out of a group instead of one specific state
 -   (@Apollon77) An `airPurifier` is now also detected when it reports only the activated carbon filter
 -   (@Apollon77) Added new device type `airPurifier` for air purifiers (Matter Air Purifier device)

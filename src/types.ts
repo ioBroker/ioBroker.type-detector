@@ -33,6 +33,7 @@ export type PatternName =
     | 'buttonSensor'
     | 'camera'
     | 'chart'
+    | 'contact'
     | 'cie'
     | 'ct'
     | 'dimmer'
@@ -86,6 +87,7 @@ export enum Types {
     buttonSensor = 'buttonSensor',
     camera = 'camera',
     chart = 'chart',
+    contact = 'contact',
     cie = 'cie',
     ct = 'ct',
     dimmer = 'dimmer',

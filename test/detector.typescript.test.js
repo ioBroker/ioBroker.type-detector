@@ -264,6 +264,109 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a slider that can also be switched off`, done => {
+        const objects = {
+            'test.0.Motor': { common: { name: 'Motor' }, type: 'device' },
+            'test.0.Motor.speed': {
+                common: {
+                    name: 'Speed',
+                    type: 'number',
+                    role: 'level.speed.motor',
+                    min: 0,
+                    max: 100,
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'test.0.Motor.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Motor.running': {
+                common: { name: 'Running', type: 'boolean', role: 'sensor.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Motor' });
+
+        // The on/off belongs to the slider, it must not become a separate socket
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.slider, {
+            SET: 'test.0.Motor.speed',
+            ON: 'test.0.Motor.on',
+            ON_ACTUAL: 'test.0.Motor.running',
+        });
+
+        done();
+    });
+
+    it(`${name} Must still detect a plain socket`, done => {
+        const objects = {
+            'test.0.Plug2': { common: { name: 'Plug' }, type: 'device' },
+            'test.0.Plug2.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.active', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Plug2.actual': {
+                common: { name: 'Actual', type: 'boolean', role: 'sensor.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Plug2' });
+
+        validate(controls[0], Types.socket, {
+            SET: 'test.0.Plug2.on',
+            ACTUAL: 'test.0.Plug2.actual',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a generic contact sensor`, done => {
+        const objects = {
+            'matter.0.Contact': { common: { name: 'Contact sensor' }, type: 'device' },
+            'matter.0.Contact.state': {
+                common: { name: 'Contact', type: 'boolean', role: 'sensor.contact', read: true, write: false },
+                type: 'state',
+            },
+            'matter.0.Contact.battery': {
+                common: { name: 'Battery', type: 'number', role: 'value.battery', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Contact' });
+
+        validate(controls[0], Types.contact, {
+            ACTUAL: 'matter.0.Contact.state',
+            BATTERY: 'matter.0.Contact.battery',
+        });
+
+        done();
+    });
+
+    it(`${name} Must keep window and door sensors out of the contact type`, done => {
+        const sensor = role => ({
+            'test.0.Sensor': { common: { name: 'Sensor' }, type: 'device' },
+            'test.0.Sensor.state': {
+                common: { name: 'State', type: 'boolean', role, read: true, write: false },
+                type: 'state',
+            },
+        });
+
+        validate(detect(sensor('sensor.window'), { id: 'test.0.Sensor' })[0], Types.window, {
+            ACTUAL: 'test.0.Sensor.state',
+        });
+        validate(detect(sensor('sensor.door'), { id: 'test.0.Sensor' })[0], Types.door, {
+            ACTUAL: 'test.0.Sensor.state',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect pressure sensor`, done => {
         const objects = {
             'matter.0.Baro': { common: { name: 'Barometer' }, type: 'device' },
@@ -512,7 +615,7 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Purifier': { common: { name: 'Dyson Purifier' }, type: 'device' },
             'matter.0.Purifier.fanMode': writable('Fan mode', 'level.mode.fan', { 0: 'AUTO', 1: 'HIGH' }),
-            'matter.0.Purifier.percent': writable('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Purifier.percent': writable('Percent setting', 'level.speed', undefined, '%'),
             'matter.0.Purifier.rock': writable('Rocking', 'level.mode.swing', { 0: 'AUTO', 2: 'STATIONARY' }),
             'matter.0.Purifier.airflow': writable('Airflow', 'level.mode.airflow', { 0: 'FORWARD', 1: 'REVERSE' }),
             'matter.0.Purifier.onOff': {
@@ -562,7 +665,7 @@ describe(`${name} Test Detector`, () => {
                 2: 'LOW',
                 3: 'MEDIUM',
             }),
-            'matter.0.Fan.percent': writableNumber('Percent setting', 'level.fan', undefined, '%'),
+            'matter.0.Fan.percent': writableNumber('Percent setting', 'level.speed', undefined, '%'),
             'matter.0.Fan.rock': writableNumber('Rocking', 'level.mode.swing', {
                 0: 'AUTO',
                 1: 'HORIZONTAL',

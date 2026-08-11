@@ -218,13 +218,13 @@ const FanPatterns: {
         defaultRole: 'switch.power',
     },
     speedLevel: {
-        role: /^level\.fan$/,
+        role: /^level\.speed$/,
         indicator: false,
         write: true,
         type: StateType.Number,
         name: 'SPEED_LEVEL',
         required: false,
-        defaultRole: 'level.fan',
+        defaultRole: 'level.speed',
         defaultUnit: '%',
         ignoreRole: IGNORE_SETTINGS_REGEX,
     },
@@ -2541,6 +2541,29 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.motion,
     },
+    contact: {
+        states: [
+            {
+                role: /^sensor\.contact$/,
+                indicator: false,
+                type: StateType.Boolean,
+                write: false,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'sensor.contact',
+                defaultChannelRole: 'sensor.contact',
+            },
+            // optional
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.contact,
+        enumRequired: false,
+    },
     window: {
         states: [
             {
@@ -3017,6 +3040,25 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'level',
                 defaultUnit: '%',
                 ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            // optional
+            {
+                role: /^switch(\.active)?$/,
+                indicator: false,
+                write: true,
+                type: StateType.Boolean,
+                name: 'ON',
+                required: false,
+                defaultRole: 'switch',
+            },
+            {
+                role: /^state\.active$|^sensor\.switch$/,
+                indicator: false,
+                write: false,
+                type: StateType.Boolean,
+                name: 'ON_ACTUAL',
+                required: false,
+                defaultRole: 'sensor.switch',
             },
             // optional
             {
