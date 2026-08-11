@@ -337,15 +337,29 @@ describe(`${name} Test Detector`, () => {
     });
 
     it(`${name} Must offer the on time only on types that can be switched on`, done => {
+        const expected = [
+            'airPurifier',
+            'cie',
+            'ct',
+            'dimmer',
+            'fan',
+            'hue',
+            'light',
+            'rgb',
+            'rgbSingle',
+            'rgbwSingle',
+            'socket',
+        ];
         const patterns = ChannelDetector.getPatterns();
-        const hasOnTime = type => (patterns[type]?.states || []).some(state => state?.name === 'ON_TIME');
 
-        for (const type of ['light', 'socket', 'dimmer', 'ct', 'hue', 'cie', 'rgb', 'rgbSingle', 'rgbwSingle', 'fan', 'airPurifier']) {
-            expect(hasOnTime(type), `${type} must have an ON_TIME state`);
-        }
-        for (const type of ['thermostat', 'window', 'motion', 'temperature', 'lock', 'blinds']) {
-            expect(!hasOnTime(type), `${type} must not have an ON_TIME state`);
-        }
+        // Compare against every pattern, so a type cannot gain or lose the state unnoticed
+        const actual = Object.keys(patterns)
+            .filter(type => (patterns[type]?.states || []).some(state => state?.name === 'ON_TIME'))
+            .sort();
+        expect(
+            actual.join(',') === expected.join(','),
+            `Expected ON_TIME on ${expected.join(', ')} but found it on ${actual.join(', ')}`,
+        );
 
         done();
     });
