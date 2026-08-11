@@ -136,6 +136,7 @@ const SharedPatterns: {
         defaultStates: { 0: 'None', 1: 'Up/Open', 2: 'Down/Close', 3: 'Unknown' },
         defaultRole: 'value.direction',
     },
+    /** @deprecated Use `unreach` instead, which every other device type uses. Kept for the media player. */
     reachable: {
         role: /^indicator\.reachable$/,
         indicator: true,
@@ -719,6 +720,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             SharedPatterns.reachable,
+            SharedPatterns.unreach,
             SharedPatterns.lowbat,
             SharedPatterns.maintain,
             SharedPatterns.error,
@@ -2494,6 +2496,23 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
                 noSubscribe: true,
                 defaultRole: 'button.stop',
+            },
+            // Two separate contacts, because a gate can also stand between fully open and fully closed
+            {
+                role: /^indicator\.opened$/,
+                indicator: true,
+                type: StateType.Boolean,
+                name: 'OPENED',
+                required: false,
+                defaultRole: 'indicator.opened',
+            },
+            {
+                role: /^indicator\.closed$/,
+                indicator: true,
+                type: StateType.Boolean,
+                name: 'CLOSED',
+                required: false,
+                defaultRole: 'indicator.closed',
             },
             SharedPatterns.direction,
             SharedPatterns.direction_enum,

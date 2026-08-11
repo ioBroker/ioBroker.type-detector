@@ -1072,7 +1072,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Trv': { common: { name: 'Radiator thermostat' }, type: 'device' },
             'matter.0.Trv.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.Trv.valve': {
@@ -1107,7 +1114,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Trv2': { common: { name: 'Radiator thermostat' }, type: 'device' },
             'matter.0.Trv2.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.Trv2.valve': {
@@ -1130,7 +1144,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.AC5': { common: { name: 'Room AC' }, type: 'device' },
             'matter.0.AC5.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.AC5.mode': {
@@ -1315,6 +1336,80 @@ describe(`${name} Test Detector`, () => {
 
         const controls3 = detect('./hm-thermostat.json', options);
         expect(controls3 === null, 'No controls expected');
+
+        done();
+    });
+
+    it(`${name} Must offer UNREACH on every type that describes a device`, done => {
+        const patterns = ChannelDetector.getPatterns();
+
+        // `chart`, `warning` and `weatherForecast` describe a service, not a device that can be unreachable
+        const expected = ['chart', 'warning', 'weatherForecast'];
+        const actual = Object.keys(patterns)
+            .filter(type => !(patterns[type]?.states || []).some(state => state?.name === 'UNREACH'))
+            .sort();
+        expect(
+            actual.join(',') === [...expected].sort().join(','),
+            `Expected only ${expected.join(', ')} without UNREACH but found ${actual.join(', ')}`,
+        );
+
+        // CONNECTED stays on the media player for compatibility and is not spread any further
+        const withConnected = Object.keys(patterns).filter(type =>
+            (patterns[type]?.states || []).some(state => state?.name === 'CONNECTED'),
+        );
+        expect(
+            withConnected.join(',') === 'mediaPlayer',
+            `Expected CONNECTED only on mediaPlayer but found it on ${withConnected.join(', ')}`,
+        );
+
+        done();
+    });
+
+    it(`${name} Must detect the two end contacts of a gate`, done => {
+        const contact = role => ({
+            common: { name: role, type: 'boolean', role, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'test.0.Gate': { common: { name: 'Gate', role: 'gate' }, type: 'channel' },
+            'test.0.Gate.set': {
+                common: { name: 'Set', type: 'boolean', role: 'switch.gate', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Gate.opened': contact('indicator.opened'),
+            'test.0.Gate.closed': contact('indicator.closed'),
+        };
+
+        const controls = detect(objects, { id: 'test.0.Gate', ignoreEnums: true });
+
+        validate(controls[0], Types.gate, {
+            SET: 'test.0.Gate.set',
+            OPENED: 'test.0.Gate.opened',
+            CLOSED: 'test.0.Gate.closed',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a gate that reports only one of the contacts`, done => {
+        const objects = {
+            'test.0.Gate2': { common: { name: 'Gate', role: 'gate' }, type: 'channel' },
+            'test.0.Gate2.set': {
+                common: { name: 'Set', type: 'boolean', role: 'switch.gate', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Gate2.closed': {
+                common: { name: 'Closed', type: 'boolean', role: 'indicator.closed', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Gate2', ignoreEnums: true });
+
+        validate(controls[0], Types.gate, {
+            SET: 'test.0.Gate2.set',
+            CLOSED: 'test.0.Gate2.closed',
+        });
 
         done();
     });

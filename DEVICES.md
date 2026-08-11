@@ -554,6 +554,8 @@ Control of the gates. You can open (true) or close (false) the gate. Optionally,
 | * | SET            | switch.gate                   |      | boolean | W  | E    |     |       | `/^switch(\.gate)?$/`                    |
 |   | ACTUAL         | value.blind                   | %    | number  |    | E    |     |       | `/^value(\.(position｜gate))?$/`          |
 |   | STOP           | button.stop                   |      | boolean | W  | E    |     |       | `/^(button｜action)\.stop$/`              |
+|   | OPENED         | indicator.opened              |      | boolean |    |      | X   |       | `/^indicator\.opened$/`                  |
+|   | CLOSED         | indicator.closed              |      | boolean |    |      | X   |       | `/^indicator\.closed$/`                  |
 |   | DIRECTION      | indicator.direction           |      | boolean |    |      | X   |       | `/^indicator\.direction$/`               |
 |   | DIRECTION_ENUM | value.direction               |      | number  |    |      |     |       | `/^(indicator｜value)\.direction$/`       |
 |   | WORKING        | indicator.working             |      |         |    |      | X   |       | `/^indicator\.working$/`                 |
@@ -754,39 +756,40 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 
 ### Media player [mediaPlayer]
 
-| R | Name          | Role                         | Unit | Type           | Wr | Min | Max | Ind | Multi | Regex                                             |
-|---|---------------|------------------------------|------|----------------|----|-----|-----|-----|-------|---------------------------------------------------|
-| * | STATE         | media.state                  |      | boolean/number |    |     |     |     |       | `/^media\.state(\..*)?$/`                         |
-|   | PLAY          | button.play                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.play(\..*)?$/`                |
-|   | PAUSE         | button.pause                 |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.pause(\..*)?$/`               |
-|   | STOP          | button.stop                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.stop(\..*)?$/`                |
-|   | NEXT          | button.next                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.next(\..*)?$/`                |
-|   | PREV          | button.prev                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.prev(\..*)?$/`                |
-|   | SHUFFLE       | media.mode.shuffle           |      | boolean        | W  |     |     |     |       | `/^media\.mode\.shuffle(\..*)?$/`                 |
-|   | REPEAT        | media.mode.repeat            |      | number         | W  |     |     |     |       | `/^media\.mode\.repeat(\..*)?$/`                  |
-|   | ARTIST        | media.artist                 |      | string         | -  |     |     |     |       | `/^media\.artist(\..*)?$/`                        |
-|   | ALBUM         | media.album                  |      | string         | -  |     |     |     |       | `/^media\.album(\..*)?$/`                         |
-|   | TITLE         | media.title                  |      | string         | -  |     |     |     |       | `/^media\.title(\..*)?$/`                         |
-|   | COVER         | media.cover                  |      | string         | -  |     |     |     |       | `/^media\.cover(\.big)?$/`                        |
-|   | COVER         |                              |      | string         | -  |     |     |     |       | `/^media\.cover(\..*)$/`                          |
-|   | DURATION      | media.duration               | sec  | number         | -  |     |     |     |       | `/^media\.duration(\..*)?$/`                      |
-|   | ELAPSED       | media.elapsed                | sec  | number         |    |     |     |     |       | `/^media\.elapsed(\..*)?$/`                       |
-|   | SEEK          | media.seek                   |      | number         | W  |     |     |     |       | `/^media\.seek(\..*)?$/`                          |
-|   | TRACK         | media.track                  |      | string         |    |     |     |     |       | `/^media\.track(\..*)?$/`                         |
-|   | EPISODE       | media.episode                |      | string         |    |     |     |     |       | `/^media\.episode(\..*)?$/`                       |
-|   | SEASON        | media.season                 |      | string         |    |     |     |     |       | `/^media\.season(\..*)?$/`                        |
-|   | VOLUME        | level.volume                 | %    | number         | W  | m   | M   |     |       | `/^level(\.volume)?$/`                            |
-|   | VOLUME_ACTUAL | value.volume                 | %    | number         | -  | m   | M   |     |       | `/^value(\.volume)?$/`                            |
-|   | MUTE          | media.mute                   |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                              |
-|   | PLAYER_NAME   | media.player.name            |      | string         |    |     |     |     |       | `/^media\.player\.name$/`                         |
-|   | PLAYER_TYPE   | media.player.type            |      | string         | -  |     |     |     |       | `/^media\.player\.type/`                          |
-|   | IGNORE        |                              |      |                |    |     |     |     | x     |                                                   |
-|   | CONNECTED     | indicator.reachable          |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                        |
-|   | LOWBAT        | indicator.maintenance.lowbat |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN      | indicator.maintenance        |      | boolean        |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR         | indicator.error              |      |                |    |     |     | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY       | value.battery                | %    | number         | -  |     |     |     |       | `/^value\.battery$/`                              |
-|   | RSSI          | value.rssi                   | dBm  | number         | -  |     |     |     |       | `/^value\.rssi$/`                                 |
+| R | Name          | Role                          | Unit | Type           | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|---------------|-------------------------------|------|----------------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | STATE         | media.state                   |      | boolean/number |    |     |     |     |       | `/^media\.state(\..*)?$/`                         |
+|   | PLAY          | button.play                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.play(\..*)?$/`                |
+|   | PAUSE         | button.pause                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.pause(\..*)?$/`               |
+|   | STOP          | button.stop                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.stop(\..*)?$/`                |
+|   | NEXT          | button.next                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.next(\..*)?$/`                |
+|   | PREV          | button.prev                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.prev(\..*)?$/`                |
+|   | SHUFFLE       | media.mode.shuffle            |      | boolean        | W  |     |     |     |       | `/^media\.mode\.shuffle(\..*)?$/`                 |
+|   | REPEAT        | media.mode.repeat             |      | number         | W  |     |     |     |       | `/^media\.mode\.repeat(\..*)?$/`                  |
+|   | ARTIST        | media.artist                  |      | string         | -  |     |     |     |       | `/^media\.artist(\..*)?$/`                        |
+|   | ALBUM         | media.album                   |      | string         | -  |     |     |     |       | `/^media\.album(\..*)?$/`                         |
+|   | TITLE         | media.title                   |      | string         | -  |     |     |     |       | `/^media\.title(\..*)?$/`                         |
+|   | COVER         | media.cover                   |      | string         | -  |     |     |     |       | `/^media\.cover(\.big)?$/`                        |
+|   | COVER         |                               |      | string         | -  |     |     |     |       | `/^media\.cover(\..*)$/`                          |
+|   | DURATION      | media.duration                | sec  | number         | -  |     |     |     |       | `/^media\.duration(\..*)?$/`                      |
+|   | ELAPSED       | media.elapsed                 | sec  | number         |    |     |     |     |       | `/^media\.elapsed(\..*)?$/`                       |
+|   | SEEK          | media.seek                    |      | number         | W  |     |     |     |       | `/^media\.seek(\..*)?$/`                          |
+|   | TRACK         | media.track                   |      | string         |    |     |     |     |       | `/^media\.track(\..*)?$/`                         |
+|   | EPISODE       | media.episode                 |      | string         |    |     |     |     |       | `/^media\.episode(\..*)?$/`                       |
+|   | SEASON        | media.season                  |      | string         |    |     |     |     |       | `/^media\.season(\..*)?$/`                        |
+|   | VOLUME        | level.volume                  | %    | number         | W  | m   | M   |     |       | `/^level(\.volume)?$/`                            |
+|   | VOLUME_ACTUAL | value.volume                  | %    | number         | -  | m   | M   |     |       | `/^value(\.volume)?$/`                            |
+|   | MUTE          | media.mute                    |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                              |
+|   | PLAYER_NAME   | media.player.name             |      | string         |    |     |     |     |       | `/^media\.player\.name$/`                         |
+|   | PLAYER_TYPE   | media.player.type             |      | string         | -  |     |     |     |       | `/^media\.player\.type/`                          |
+|   | IGNORE        |                               |      |                |    |     |     |     | x     |                                                   |
+|   | CONNECTED     | indicator.reachable           |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                        |
+|   | UNREACH       | indicator.maintenance.unreach |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT        | indicator.maintenance.lowbat  |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN      | indicator.maintenance         |      | boolean        |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR         | indicator.error               |      |                |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY       | value.battery                 | %    | number         | -  |     |     |     |       | `/^value\.battery$/`                              |
+|   | RSSI          | value.rssi                    | dBm  | number         | -  |     |     |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Motion sensor [motion]
