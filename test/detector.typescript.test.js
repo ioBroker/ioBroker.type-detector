@@ -1168,6 +1168,157 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect the RSSI of a device`, done => {
+        const objects = {
+            'zigbee.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
+            'zigbee.0.Lamp.state': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.Lamp.rssi': {
+                common: { name: 'RSSI', type: 'number', role: 'value.rssi', unit: 'dBm', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'zigbee.0.Lamp' });
+
+        validate(controls[0], Types.socket, {
+            SET: 'zigbee.0.Lamp.state',
+            RSSI: 'zigbee.0.Lamp.rssi',
+        });
+
+        done();
+    });
+
+    it(`${name} Must offer the RSSI to every control of a device`, done => {
+        const controls = detect('./hm-thermostat.json', {
+            id: 'hm-rpc.1.JEQ0XXXXXX',
+        });
+
+        // The radio quality describes the device, so it is not consumed by the first control that matches
+        const withRssi = controls.filter(control =>
+            control.states.some(({ name, id }) => name === 'RSSI' && id === 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER'),
+        );
+        expect(withRssi.length > 1, `Expected the RSSI in more than one control but found it in ${withRssi.length}`);
+
+        done();
+    });
+
+    it(`${name} Must not offer the RSSI on types that are not radio devices`, done => {
+        const excluded = ['chart', 'image', 'location', 'locationOne', 'warning', 'weatherCurrent', 'weatherForecast'];
+        const patterns = ChannelDetector.getPatterns();
+
+        // Compare against every pattern, so a type cannot gain or lose the state unnoticed
+        const actual = Object.keys(patterns)
+            .filter(type => !(patterns[type]?.states || []).some(state => state?.name === 'RSSI'))
+            .sort();
+        expect(
+            actual.join(',') === [...excluded].sort().join(','),
+            `Expected no RSSI on ${excluded.join(', ')} but found none on ${actual.join(', ')}`,
+        );
+
+        done();
+    });
+
+    it(`${name} Must detect thermostat correctly when device is used`, done => {
+        const controls = detect('./hm-thermostat.json', {
+            id: 'hm-rpc.1.JEQ0XXXXXX',
+        });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect one device only also when starting on channel when using checkParent option`, done => {
+        const options = {
+            id: 'hm-rpc.1.JEQ0XXXXXX.1',
+            detectParent: true,
+        };
+
+        const controls = detect('./hm-thermostat.json', options);
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
+
+        const controls2 = detect('./hm-thermostat.json', options);
+        expect(controls2 === null, 'No controls expected');
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX';
+
+        const controls3 = detect('./hm-thermostat.json', options);
+        expect(controls3 === null, 'No controls expected');
+
+        done();
+    });
+
+    it(`${name} Must detect thermostat correctly when device is used`, done => {
+        const controls = detect('./hm-thermostat.json', {
+            id: 'hm-rpc.1.JEQ0XXXXXX',
+        });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect one device only also when starting on channel when using checkParent option`, done => {
+        const options = {
+            id: 'hm-rpc.1.JEQ0XXXXXX.1',
+            detectParent: true,
+        };
+
+        const controls = detect('./hm-thermostat.json', options);
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
+
+        const controls2 = detect('./hm-thermostat.json', options);
+        expect(controls2 === null, 'No controls expected');
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX';
+
+        const controls3 = detect('./hm-thermostat.json', options);
+        expect(controls3 === null, 'No controls expected');
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
@@ -2195,6 +2346,7 @@ describe(`${name} Test Detector`, () => {
             POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
             UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
             LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
         });
 
         done();
@@ -2245,6 +2397,7 @@ describe(`${name} Test Detector`, () => {
             POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
             UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
             LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
         });
 
         options.id = 'hm-rpc.1.JEQ0XXXXXX.2';

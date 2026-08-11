@@ -122,6 +122,7 @@ Air conditioner with warming and cooling functions.
 |            | LOWBAT                  | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |            | MAINTAIN                | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
 |            | ERROR                   | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|            | RSSI                    | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                 |
 |            | BATTERY                 | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
 
 
@@ -147,6 +148,7 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 |          | MAINTAIN                | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
 |          | ERROR                   | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
 |          | BATTERY                 | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+|          | RSSI                    | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Air quality sensor [airQuality]
@@ -188,6 +190,7 @@ Air quality sensor with an overall index and optionally single pollutant concent
 |   | MAINTAIN   | indicator.maintenance         |       | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR      | indicator.error               |       |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY    | value.battery                 | %     | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI       | value.rssi                    | dBm   | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Blinds controlled only by buttons [blindButtons]
@@ -212,6 +215,7 @@ Blinds, Shutter, Jalousie controlled by stop, up, down buttons. Position is unkn
 |   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY        | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+|   | RSSI           | value.rssi                    | dBm  | number  | -  |      |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Blinds or Shutter [blinds]
@@ -238,6 +242,7 @@ Blinds, Shutter, Jalousie controlled by state with percent.
 |   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY        | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+|   | RSSI           | value.rssi                    | dBm  | number  | -  |      |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Button [button]
@@ -252,6 +257,7 @@ Button that could be only pressed (command). It has no feedback, you can write o
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Contact or button with feedback [buttonSensor]
@@ -267,6 +273,7 @@ Button with feedback. It is known if the button pressed or not.
 |   | MAINTAIN   | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR      | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY    | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI       | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### IP Camera [camera]
@@ -286,6 +293,7 @@ IP/Web Camera.
 |   | MAINTAIN         | indicator.maintenance          |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                               |
 |   | ERROR            | indicator.error                |      |         |    | X   |       | `/^indicator\.error$/`                                     |
 |   | BATTERY          | value.battery                  | %    | number  | -  |     |       | `/^value\.battery$/`                                       |
+|   | RSSI             | value.rssi                     | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                          |
 
 
 ### Chart [chart]
@@ -323,6 +331,7 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI            | value.rssi                    | dBm  | number        | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### CO alarm sensor [coAlarm]
@@ -340,6 +349,7 @@ If the carbon monoxide sensor is alarmed (true) or not (false).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Contact sensor [contact]
@@ -355,6 +365,7 @@ Generic contact sensor for cases where it is not known whether it is a window, a
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Light with color temperature [ct]
@@ -382,6 +393,7 @@ Light, where the color is set by color temperature (normally from 2700°K (warm-
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI            | value.rssi                    | dBm  | number        | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Light dimmer [dimmer]
@@ -408,6 +420,7 @@ Dimmer, that is controlled by state (normally from 0 to 100 %, but it could be a
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |      |     |       | `/^value\.battery$/`                              |
+|   | RSSI            | value.rssi                    | dBm  | number        | -  |      |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Door sensor [door]
@@ -422,6 +435,7 @@ Sensor if the door opened (true) or closed (false).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |      |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Electricity measurement [electricity]
@@ -441,6 +455,7 @@ Device that only measures electricity: power, current, voltage, consumption or f
 |               | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |               | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |               | BATTERY        | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|               | RSSI           | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Fan [fan]
@@ -462,6 +477,7 @@ Fan controlled by a speed mode. Could optionally have a continuous speed level, 
 |   | MAINTAIN          | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR             | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY           | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI              | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Fill level [fillLevel]
@@ -476,6 +492,7 @@ Fill level of something (read-only). Value in `%` or in an absolute unit like li
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Fire alarm sensor [fireAlarm]
@@ -494,6 +511,7 @@ If smoke/fire sensor is alarmed (true) or not (false).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Flood alarm sensor [floodAlarm]
@@ -508,6 +526,7 @@ If water sensor senses water (true) or not (false).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Flow sensor [flow]
@@ -523,6 +542,7 @@ Flow sensor, e.g. of water or gas, normally in m³/h.
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Gate [gate]
@@ -540,6 +560,7 @@ Control of the gates. You can open (true) or close (false) the gate. Optionally,
 |   | UNREACH        | indicator.maintenance.unreach |      | boolean |    |      | X   |       | `/^indicator(\.maintenance)?\.unreach$/` |
 |   | MAINTAIN       | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`             |
 |   | ERROR          | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                   |
+|   | RSSI           | value.rssi                    | dBm  | number  | -  |      |     |       | `/^value\.rssi$/`                        |
 
 
 ### Light with HUE color [hue]
@@ -569,6 +590,7 @@ HUE light from 0° to 360°.
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI            | value.rssi                    | dBm  | number        | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Humidity [humidity]
@@ -583,6 +605,7 @@ Air humidity in %.
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Illuminance sensor [illuminance]
@@ -597,6 +620,7 @@ Illuminance sensor (normally in lux).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Image [image]
@@ -626,6 +650,7 @@ Many information states could be combined under this device, e.g., current, ampe
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Slider [levelSlider]
@@ -644,6 +669,7 @@ Slider with position set by number. Could be used for any device that is control
 |   | MAINTAIN  | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR     | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY   | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
+|   | RSSI      | value.rssi                    | dBm  | number  | -  |     |     |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Light switch [light]
@@ -667,6 +693,7 @@ Light with only ON/OFF options. Could have information about current, amperage, 
 |   | MAINTAIN       | indicator.maintenance         |      | boolean       |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR          | indicator.error               |      |               |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY        | value.battery                 | %    | number        | -  |      |     |       | `/^value\.battery$/`                              |
+|   | RSSI           | value.rssi                    | dBm  | number        | -  |      |     |       | `/^value\.rssi$/`                                 |
 
 
 ### GPS Location (longitude, latitude) [location]
@@ -722,6 +749,7 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY        | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI           | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Media player [mediaPlayer]
@@ -758,6 +786,7 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | MAINTAIN      | indicator.maintenance        |      | boolean        |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR         | indicator.error              |      |                |    |     |     | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY       | value.battery                | %    | number         | -  |     |     |     |       | `/^value\.battery$/`                              |
+|   | RSSI          | value.rssi                   | dBm  | number         | -  |     |     |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Motion sensor [motion]
@@ -771,6 +800,7 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Percentage slider [percentage]
@@ -787,6 +817,7 @@ Same as slider, but from 0 to 100%
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Pressure sensor [pressure]
@@ -802,6 +833,7 @@ Pressure sensor for air or liquid pressure, normally in mbar (identical to hPa).
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Pump [pump]
@@ -826,6 +858,7 @@ Pump that can be switched on and off. Could optionally report its level, tempera
 |   | MAINTAIN       | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR          | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY        | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI           | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### RGB(W) Light with different states for every color [rgb]
@@ -857,6 +890,7 @@ R,G,B(,W) Light with different states for every color. The value is from 0 to 25
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI            | value.rssi                    | dBm  | number        | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### RGB Light Single [rgbSingle]
@@ -885,6 +919,7 @@ RGB light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-25
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI            | value.rssi                    | dBm  | number        | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### RGBW Light Single [rgbwSingle]
@@ -913,6 +948,7 @@ RGBW light with one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI            | value.rssi                    | dBm  | number        | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Socket [socket]
@@ -934,6 +970,7 @@ Socket with an ON/OFF option. Could have information about current, amperage, en
 |   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | RSSI           | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Temperature [temperature]
@@ -949,6 +986,7 @@ Combined temperature and humidity sensor. Humidity is optional.
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Thermostat [thermostat]
@@ -974,6 +1012,7 @@ Thermostat to be controlled by the desired temperature. Could have mode.
 |            | MAINTAIN     | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
 |            | ERROR        | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
 |            | BATTERY      | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+|            | RSSI         | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Vacuum cleaner (robot) [vacuumCleaner]
@@ -1001,6 +1040,7 @@ Thermostat to be controlled by the desired temperature. Could have mode.
 |   | MAINTAIN    | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                                       |
 |   | ERROR       | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                                             |
 |   | BATTERY     | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                                               |
+|   | RSSI        | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                                  |
 
 
 ### Volume [volume]
@@ -1018,6 +1058,7 @@ Sound volume.
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |     |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Volume group [volumeGroup]
@@ -1035,6 +1076,7 @@ Group of volumes.
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |     |     |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Warning [warning]
@@ -1135,6 +1177,7 @@ Window sensor: opened - true, closed - false.
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |      |     |       | `/^value\.rssi$/`                                 |
 
 
 ### Window that could be in tilted state [windowTilt]
@@ -1149,6 +1192,7 @@ Window tilt sensor: closed - 0, opened - 1, tiled - 2.
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    |      | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR    | indicator.error               |      |         |    |      | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY  | value.battery                 | %    | number  | -  |      |     |       | `/^value\.battery$/`                              |
+|   | RSSI     | value.rssi                    | dBm  | number  | -  |      |     |       | `/^value\.rssi$/`                                 |
 
 
 

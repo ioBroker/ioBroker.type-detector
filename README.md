@@ -99,6 +99,7 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) Added the optional state `RSSI` to all device types that describe a radio device
 -   (@Apollon77) Added the optional state `VALVE` to `thermostat` and the optional state `WORKING_MODE` to `thermostat` (`value.mode.thermostat`) and `airCondition` (`value.mode.airconditioner`)
 -   (@Apollon77) Added new device type `electricity` for devices that only measure electricity
 -   (@Apollon77) The feedback state `ACTUAL` of `socket` no longer matches the generic role `state`, and `ON_ACTUAL` no longer matches any role that merely ends in `switch`
