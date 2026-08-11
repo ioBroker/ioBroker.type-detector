@@ -100,6 +100,20 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@Apollon77) Added the optional state `VALVE` to `thermostat` and the optional state `WORKING_MODE` to `thermostat` (`value.mode.thermostat`) and `airCondition` (`value.mode.airconditioner`)
+-   (@Apollon77) Added new device type `electricity` for devices that only measure electricity
+-   (@Apollon77) The feedback state `ACTUAL` of `socket` no longer matches the generic role `state`, and `ON_ACTUAL` no longer matches any role that merely ends in `switch`
+-   (@Apollon77) Fixed the escaping of object IDs used to build regular expressions, so IDs containing characters like `\`, `+` or `*` are matched literally
+-   (@Apollon77) Added the optional states `SPEED_LEVEL`, `AIRFLOW_DIRECTION`, `FILTER_CONDITION`, `FILTER_CONDITION_CARBON` and `FILTER_CHANGE` to `airCondition`
+-   (@Apollon77) Added the missing shared states `WORKING`, `LOWBAT` and `BATTERY` to `airCondition`. They were previously reported as a separate `info` device
+-   (@Apollon77) Added the optional states `SET_HEATING` and `SET_COOLING` to `airCondition` and `thermostat` for devices that hold a heating and a cooling setpoint at once. One of `SET`, `SET_HEATING` and `SET_COOLING` is now required instead of `SET` alone. A device whose only setpoint carries the role `level.temperature.heating` or `level.temperature.cooling` is still detected, but that state is now reported as `SET_HEATING` / `SET_COOLING` instead of `SET`
+-   (@Apollon77) Added the optional state `ON_TIME` to the light types, `socket`, `fan` and `airPurifier`
+-   (@Apollon77) Added new device type `coAlarm` for carbon monoxide alarms
+-   (@Apollon77) Added the optional states `CO`, `SEVERITY`, `MUTED` and `TEST` to `fireAlarm`, so a combined smoke and CO alarm is one device
+-   (@Apollon77) Added new device type `pump` for pumps (Matter Pump device)
+-   (@Apollon77) Added new device types `pressure` and `flow` for pressure and flow sensors
+-   (@Apollon77) Added new device type `contact` for generic contact sensors
+-   (@Apollon77) Added the optional states `ON` and `ON_ACTUAL` to `slider`, so a dimmed device that is not a light keeps its on/off in one control
+-   (@Apollon77) The continuous fan speed of `fan` and `airPurifier` uses the existing role `level.speed` instead of a new role `level.fan`
 -   (@Apollon77) Added the state flag `requiredOneOf` to require at least one state out of a group instead of one specific state
 -   (@Apollon77) An `airPurifier` is now also detected when it reports only the activated carbon filter
 -   (@Apollon77) Added new device type `airPurifier` for air purifiers (Matter Air Purifier device)
