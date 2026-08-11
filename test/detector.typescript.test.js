@@ -1597,6 +1597,45 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must assign a boolean swing to one definition only`, done => {
+        const objects = {
+            'alias.0.ac': { common: { name: 'AC', role: 'airCondition' }, type: 'channel' },
+            'alias.0.ac.SET': {
+                common: { name: 'SET', role: 'level.temperature', type: 'number', read: true, write: true },
+                type: 'state',
+            },
+            'alias.0.ac.MODE': {
+                common: {
+                    name: 'MODE',
+                    role: 'level.mode.airconditioner',
+                    type: 'number',
+                    states: { 0: 'AUTO' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'alias.0.ac.SWING_BOOLEAN': {
+                common: { name: 'SWING', role: 'switch.mode.swing', type: 'boolean', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'alias.0.ac' });
+
+        // One object must not fill both SWING definitions, which would report it twice with conflicting type and role
+        const swings = controls[0].states.filter(({ name, id }) => name === 'SWING' && id);
+        expect(
+            swings.length === 1 &&
+                swings[0].id === 'alias.0.ac.SWING_BOOLEAN' &&
+                swings[0].type === 'boolean' &&
+                swings[0].defaultRole === 'switch.mode.swing',
+            `Expected one boolean SWING but found ${JSON.stringify(swings.map(({ id, type, defaultRole }) => [id, type, defaultRole]))}`,
+        );
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
@@ -3126,7 +3165,7 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it('Must keep a state that no slot of the pattern could take', done => {
+    it('Must map each variant of a repeated state name to its own definition', done => {
         const objects = {
             'ac.0.AC': { common: { name: 'AC' }, type: 'device' },
             'ac.0.AC.SET': {
@@ -3163,17 +3202,14 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, { id: 'ac.0.AC' });
 
-        validate(controls[0], Types.airCondition, {
-            SET: 'ac.0.AC.SET',
-            MODE: 'ac.0.AC.MODE',
-            SWING: 'ac.0.AC.swingNum',
-        });
-
-        // The boolean SWING definition can never fill the slot the numeric one already took, so the state
-        // must stay available to other device types instead of vanishing
+        // Each SWING definition takes the state whose type it declares, so both end up on the air conditioner
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        const swings = controls[0].states.filter(({ name, id }) => name === 'SWING' && id);
         expect(
-            controls.some(control => control.states.some(({ id }) => id === 'ac.0.AC.swingBool')),
-            'Expected ac.0.AC.swingBool to still be detected',
+            swings.length === 2 &&
+                swings.some(({ id, type }) => id === 'ac.0.AC.swingNum' && type === 'number') &&
+                swings.some(({ id, type }) => id === 'ac.0.AC.swingBool' && type === 'boolean'),
+            `Expected both swing states on their own definition but found ${JSON.stringify(swings.map(({ id, type }) => [id, type]))}`,
         );
 
         done();

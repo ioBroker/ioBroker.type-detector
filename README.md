@@ -99,6 +99,7 @@ if (controls) {
 
 ## Changelog
 ### **WORK IN PROGRESS**
+-   (@Apollon77) Fixed one object being assigned to two state definitions of the same name, which reported the swing of an air conditioner twice with a conflicting type and role
 -   (@Apollon77) Added the electricity states to `thermostat`, `fan` and `airPurifier`
 -   (@Apollon77) Added the optional state `WINDOW` to `thermostat` for the open window detection of the device
 -   (@Apollon77) Added the optional states `HOME`, `RUN_MODE`, `PROGRESS` and `PHASE` and the missing `WORKING` to `vacuumCleaner`
