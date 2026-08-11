@@ -2639,7 +2639,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 indicator: false,
                 type: StateType.Number,
                 name: 'WIND_SPEED',
-                defaultRole: 'value.speed.wind$',
+                defaultRole: 'value.speed.wind',
                 defaultUnit: 'km/h',
             },
             SharedPatterns.lowbat,
