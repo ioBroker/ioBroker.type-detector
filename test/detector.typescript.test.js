@@ -1068,6 +1068,106 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect the valve and the running mode of a thermostat`, done => {
+        const objects = {
+            'matter.0.Trv': { common: { name: 'Radiator thermostat' }, type: 'device' },
+            'matter.0.Trv.set': {
+                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Trv.valve': {
+                common: { name: 'Valve', type: 'number', role: 'value.valve', unit: '%', read: true, write: false },
+                type: 'state',
+            },
+            'matter.0.Trv.running': {
+                common: {
+                    name: 'Running mode',
+                    type: 'number',
+                    role: 'value.mode.thermostat',
+                    states: { 0: 'OFF', 1: 'HEAT', 2: 'COOL' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Trv' });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'matter.0.Trv.set',
+            VALVE: 'matter.0.Trv.valve',
+            WORKING_MODE: 'matter.0.Trv.running',
+        });
+
+        done();
+    });
+
+    it(`${name} Must accept a writable valve of a thermostat`, done => {
+        const objects = {
+            'matter.0.Trv2': { common: { name: 'Radiator thermostat' }, type: 'device' },
+            'matter.0.Trv2.set': {
+                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Trv2.valve': {
+                common: { name: 'Valve', type: 'number', role: 'level.valve', unit: '%', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Trv2' });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'matter.0.Trv2.set',
+            VALVE: 'matter.0.Trv2.valve',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect the running mode of an air conditioner`, done => {
+        const objects = {
+            'matter.0.AC5': { common: { name: 'Room AC' }, type: 'device' },
+            'matter.0.AC5.set': {
+                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.AC5.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'number',
+                    role: 'level.mode.airconditioner',
+                    states: { 0: 'AUTO', 3: 'COOL' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.AC5.running': {
+                common: {
+                    name: 'Running mode',
+                    type: 'number',
+                    role: 'value.mode.airconditioner',
+                    states: { 0: 'IDLE', 1: 'HEAT', 2: 'COOL' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.AC5' });
+
+        validate(controls[0], Types.airCondition, {
+            SET: 'matter.0.AC5.set',
+            MODE: 'matter.0.AC5.mode',
+            WORKING_MODE: 'matter.0.AC5.running',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect the RSSI of a device`, done => {
         const objects = {
             'zigbee.0.Lamp': { common: { name: 'Lamp' }, type: 'device' },
@@ -1117,6 +1217,55 @@ describe(`${name} Test Detector`, () => {
             actual.join(',') === [...excluded].sort().join(','),
             `Expected no RSSI on ${excluded.join(', ')} but found none on ${actual.join(', ')}`,
         );
+
+        done();
+    });
+
+    it(`${name} Must detect thermostat correctly when device is used`, done => {
+        const controls = detect('./hm-thermostat.json', {
+            id: 'hm-rpc.1.JEQ0XXXXXX',
+        });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect one device only also when starting on channel when using checkParent option`, done => {
+        const options = {
+            id: 'hm-rpc.1.JEQ0XXXXXX.1',
+            detectParent: true,
+        };
+
+        const controls = detect('./hm-thermostat.json', options);
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'hm-rpc.1.JEQ0XXXXXX.2.SETPOINT',
+            ACTUAL: 'hm-rpc.1.JEQ0XXXXXX.1.TEMPERATURE',
+            HUMIDITY: 'hm-rpc.1.JEQ0XXXXXX.1.HUMIDITY',
+            POWER: 'hm-rpc.1.JEQ0XXXXXX.2.STATE',
+            UNREACH: 'hm-rpc.1.JEQ0XXXXXX.0.UNREACH',
+            LOWBAT: 'hm-rpc.1.JEQ0XXXXXX.0.LOWBAT',
+            RSSI: 'hm-rpc.1.JEQ0XXXXXX.0.RSSI_PEER',
+        });
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX.2';
+
+        const controls2 = detect('./hm-thermostat.json', options);
+        expect(controls2 === null, 'No controls expected');
+
+        options.id = 'hm-rpc.1.JEQ0XXXXXX';
+
+        const controls3 = detect('./hm-thermostat.json', options);
+        expect(controls3 === null, 'No controls expected');
 
         done();
     });

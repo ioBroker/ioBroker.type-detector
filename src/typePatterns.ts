@@ -367,6 +367,36 @@ function concentrationPatterns(name: string, roleId: string, defaultUnit?: strin
 }
 
 /**
+ * What a climate device is actually doing, as opposed to what it was told to do.
+ * Each type keeps the role of its own writable mode, so the air conditioner reuses the documented
+ * `value.mode.airconditioner` instead of the thermostat role.
+ */
+const RunningModePatterns: { thermostat: InternalDetectorState; airCondition: InternalDetectorState } = {
+    thermostat: {
+        role: /^value\.mode\.thermostat$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        searchInParent: true,
+        name: 'WORKING_MODE',
+        required: false,
+        defaultRole: 'value.mode.thermostat',
+        defaultStates: { 0: 'OFF', 1: 'HEAT', 2: 'COOL' },
+    },
+    airCondition: {
+        role: /^value\.mode\.airconditioner$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        searchInParent: true,
+        name: 'WORKING_MODE',
+        required: false,
+        defaultRole: 'value.mode.airconditioner',
+        defaultStates: { 0: 'IDLE', 1: 'HEAT', 2: 'COOL' },
+    },
+};
+
+/**
  * Filter monitoring shared by the device types that move air through a filter.
  * `airPurifier` puts the two conditions into a group, because there the filter is what separates it from a `fan`,
  * while for an air conditioner the filter is just extra information.
@@ -1770,6 +1800,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 ignoreRole: IGNORE_SETTINGS_REGEX,
             },
             // optional
+            RunningModePatterns.airCondition,
             FanPatterns.speed,
             FanPatterns.speedLevel,
             FanPatterns.power,
@@ -1950,6 +1981,18 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'level.mode.thermostat',
                 defaultStates: { 0: 'AUTO', 1: 'MANUAL' },
             },
+            {
+                role: /^(value|level)\.valve$/,
+                indicator: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'VALVE',
+                required: false,
+                defaultRole: 'value.valve',
+                defaultUnit: '%',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            RunningModePatterns.thermostat,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
