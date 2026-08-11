@@ -100,6 +100,7 @@ if (controls) {
 ## Changelog
 ### **WORK IN PROGRESS**
 -   (@Apollon77) Added the optional end contacts `OPENED` and `CLOSED` to `gate`
+-   (@Apollon77) Added `UNREACH` to `media`, so every device type reports reachability the same way. `CONNECTED` (`indicator.reachable`) stays on `media` for compatibility but is deprecated, prefer `UNREACH`
 -   (@Apollon77) Added the optional state `RSSI` to all device types that describe a radio device
 -   (@Apollon77) Added the optional state `VALVE` to `thermostat` and the optional state `WORKING_MODE` to `thermostat` (`value.mode.thermostat`) and `airCondition` (`value.mode.airconditioner`)
 -   (@Apollon77) Added new device type `electricity` for devices that only measure electricity

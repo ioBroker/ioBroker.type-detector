@@ -136,6 +136,7 @@ const SharedPatterns: {
         defaultStates: { 0: 'None', 1: 'Up/Open', 2: 'Down/Close', 3: 'Unknown' },
         defaultRole: 'value.direction',
     },
+    /** @deprecated Use `unreach` instead, which every other device type uses. Kept for the media player. */
     reachable: {
         role: /^indicator\.reachable$/,
         indicator: true,
@@ -719,6 +720,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 noSubscribe: true,
             },
             SharedPatterns.reachable,
+            SharedPatterns.unreach,
             SharedPatterns.lowbat,
             SharedPatterns.maintain,
             SharedPatterns.error,
