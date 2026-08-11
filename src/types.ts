@@ -33,7 +33,11 @@ export type PatternName =
     | 'buttonSensor'
     | 'camera'
     | 'chart'
+<<<<<<< HEAD
     | 'coAlarm'
+=======
+    | 'contact'
+>>>>>>> master
     | 'cie'
     | 'ct'
     | 'dimmer'
@@ -45,6 +49,7 @@ export type PatternName =
     | 'hue'
     | 'humidity'
     | 'illuminance'
+    | 'pressure'
     | 'image'
     | 'levelSlider'
     | 'light'
@@ -54,12 +59,14 @@ export type PatternName =
     | 'mediaPlayer'
     | 'motion'
     | 'percentage'
+    | 'pump'
     | 'rgb'
     | 'rgbSingle'
     | 'rgbwSingle'
     | 'socket'
     | 'temperature'
     | 'fillLevel'
+    | 'flow'
     | 'thermostat'
     | 'unknown'
     | 'vacuumCleaner'
@@ -85,7 +92,11 @@ export enum Types {
     buttonSensor = 'buttonSensor',
     camera = 'camera',
     chart = 'chart',
+<<<<<<< HEAD
     coAlarm = 'coAlarm',
+=======
+    contact = 'contact',
+>>>>>>> master
     cie = 'cie',
     ct = 'ct',
     dimmer = 'dimmer',
@@ -107,6 +118,7 @@ export enum Types {
     media = 'media',
     motion = 'motion',
     percentage = 'percentage',
+    pump = 'pump',
     rgb = 'rgb',
     rgbSingle = 'rgbSingle',
     rgbwSingle = 'rgbwSingle',
@@ -114,6 +126,8 @@ export enum Types {
     socket = 'socket',
     temperature = 'temperature',
     fillLevel = 'fillLevel',
+    flow = 'flow',
+    pressure = 'pressure',
     thermostat = 'thermostat',
     vacuumCleaner = 'vacuumCleaner',
     volume = 'volume',
