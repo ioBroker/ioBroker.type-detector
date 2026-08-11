@@ -1072,7 +1072,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Trv': { common: { name: 'Radiator thermostat' }, type: 'device' },
             'matter.0.Trv.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.Trv.valve': {
@@ -1107,7 +1114,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.Trv2': { common: { name: 'Radiator thermostat' }, type: 'device' },
             'matter.0.Trv2.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.Trv2.valve': {
@@ -1130,7 +1144,14 @@ describe(`${name} Test Detector`, () => {
         const objects = {
             'matter.0.AC5': { common: { name: 'Room AC' }, type: 'device' },
             'matter.0.AC5.set': {
-                common: { name: 'Setpoint', type: 'number', role: 'level.temperature', unit: '°C', read: true, write: true },
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
                 type: 'state',
             },
             'matter.0.AC5.mode': {
