@@ -47,6 +47,7 @@ In [brackets] is given the class name of a device.
 * [IP Camera [camera]](#ip-camera-camera)
 * [Chart [chart]](#chart-chart)
 * [CIE Color space [cie]](#cie-color-space-cie)
+* [Contact sensor [contact]](#contact-sensor-contact)
 * [Light with color temperature [ct]](#light-with-color-temperature-ct)
 * [Light dimmer [dimmer]](#light-dimmer-dimmer)
 * [Door sensor [door]](#door-sensor-door)
@@ -304,6 +305,21 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+
+
+### Contact sensor [contact]
+
+Generic contact sensor for cases where it is not known whether it is a window, a door or something else: contact closed - true, contact open - false.
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.contact                |      | boolean | -  |     |       | `/^sensor\.contact$/`                             |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Light with color temperature [ct]
