@@ -47,6 +47,8 @@ In [brackets] is given the class name of a device.
 * [IP Camera [camera]](#ip-camera-camera)
 * [Chart [chart]](#chart-chart)
 * [CIE Color space [cie]](#cie-color-space-cie)
+* [CO alarm sensor [coAlarm]](#co-alarm-sensor-coalarm)
+* [Contact sensor [contact]](#contact-sensor-contact)
 * [Light with color temperature [ct]](#light-with-color-temperature-ct)
 * [Light dimmer [dimmer]](#light-dimmer-dimmer)
 * [Door sensor [door]](#door-sensor-door)
@@ -54,6 +56,7 @@ In [brackets] is given the class name of a device.
 * [Fill level [fillLevel]](#fill-level-filllevel)
 * [Fire alarm sensor [fireAlarm]](#fire-alarm-sensor-firealarm)
 * [Flood alarm sensor [floodAlarm]](#flood-alarm-sensor-floodalarm)
+* [Flow sensor [flow]](#flow-sensor-flow)
 * [Gate [gate]](#gate-gate)
 * [Light with HUE color [hue]](#light-with-hue-color-hue)
 * [Humidity [humidity]](#humidity-humidity)
@@ -68,6 +71,8 @@ In [brackets] is given the class name of a device.
 * [Media player [mediaPlayer]](#media-player-mediaplayer)
 * [Motion sensor [motion]](#motion-sensor-motion)
 * [Percentage slider [percentage]](#percentage-slider-percentage)
+* [Pressure sensor [pressure]](#pressure-sensor-pressure)
+* [Pump [pump]](#pump-pump)
 * [RGB(W) Light with different states for every color [rgb]](#rgb-w--light-with-different-states-for-every-color-rgb)
 * [RGB Light Single [rgbSingle]](#rgb-light-single-rgbsingle)
 * [RGBW Light Single [rgbwSingle]](#rgbw-light-single-rgbwsingle)
@@ -118,13 +123,14 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 |----------|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
 | *        | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |          | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|          | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|          | SPEED_LEVEL             | level.speed                   | %    | number         | W  |     |       | `/^level\.speed$/`                                |
 |          | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |          | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |          | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
 | 1:filter | FILTER_CONDITION        | value.filter                  | %    | number         | -  |     |       | `/^value\.filter$/`                               |
 | 1:filter | FILTER_CONDITION_CARBON | value.filter.carbon           | %    | number         | -  |     |       | `/^value\.filter\.carbon$/`                       |
 |          | FILTER_CHANGE           | indicator.maintenance.filter  |      | boolean        |    | X   |       | `/^indicator\.maintenance\.filter$/`              |
+|          | ON_TIME                 | level.timer.off               | s    | number         | W  |     |       | `/^level\.timer\.off$/`                           |
 |          | WORKING                 | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
 |          | UNREACH                 | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |          | LOWBAT                  | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
@@ -295,6 +301,7 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -306,6 +313,38 @@ Light with CIE (International Commission on Illumination) color space (XY).
 |   | MAINTAIN        | indicator.maintenance         |      | boolean       |    | X   |       | `/^indicator\.maintenance$/`                      |
 |   | ERROR           | indicator.error               |      |               |    | X   |       | `/^indicator\.error$/`                            |
 |   | BATTERY         | value.battery                 | %    | number        | -  |     |       | `/^value\.battery$/`                              |
+
+
+### CO alarm sensor [coAlarm]
+
+If the carbon monoxide sensor is alarmed (true) or not (false).
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor)(\.alarm)?\.co$/`                |
+|   | SEVERITY | value.severity                |      | number  | -  |     |       | `/^value\.severity$/`                             |
+|   | MUTED    | indicator.alarm.muted         |      | boolean |    | X   |       | `/^indicator\.alarm\.muted$/`                     |
+|   | TEST     | indicator.working.test        |      | boolean |    | X   |       | `/^indicator\.working\.test$/`                    |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
+### Contact sensor [contact]
+
+Generic contact sensor for cases where it is not known whether it is a window, a door or something else: contact closed - true, contact open - false.
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | ACTUAL   | sensor.contact                |      | boolean | -  |     |       | `/^sensor\.contact$/`                             |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
 ### Light with color temperature [ct]
@@ -321,6 +360,7 @@ Light, where the color is set by color temperature (normally from 2700°K (warm-
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | EFFECT          | level.effect                  |      | number/string | W  |     |       | `/^level\.effect$/`                               |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -346,6 +386,7 @@ Dimmer, that is controlled by state (normally from 0 to 100 %, but it could be a
 |   | EFFECT          | level.effect                  |      | number/string | W  |      |     |       | `/^level\.effect$/`                               |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  | E    |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |      |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |      |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |      |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |      |     |       | `/^value\.voltage$/`                              |
@@ -381,10 +422,11 @@ Fan controlled by a speed mode. Could optionally have a continuous speed level, 
 |---|-------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
 | * | SPEED             | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |   | POWER             | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|   | SPEED_LEVEL       | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|   | SPEED_LEVEL       | level.speed                   | %    | number         | W  |     |       | `/^level\.speed$/`                                |
 |   | SWING             | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |   | SWING             | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |   | AIRFLOW_DIRECTION | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
+|   | ON_TIME           | level.timer.off               | s    | number         | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | WORKING           | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
 |   | UNREACH           | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT            | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
@@ -414,6 +456,10 @@ If smoke/fire sensor is alarmed (true) or not (false).
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | ACTUAL   | sensor.alarm.fire             |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.fire$/`    |
+|   | CO       | sensor.alarm.co               |      | boolean |    |     |       | `/^(state｜sensor)(\.alarm)?\.co$/`                |
+|   | SEVERITY | value.severity                |      | number  | -  |     |       | `/^value\.severity$/`                             |
+|   | MUTED    | indicator.alarm.muted         |      | boolean |    | X   |       | `/^indicator\.alarm\.muted$/`                     |
+|   | TEST     | indicator.working.test        |      | boolean |    | X   |       | `/^indicator\.working\.test$/`                    |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
@@ -428,6 +474,21 @@ If water sensor senses water (true) or not (false).
 | R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
 |---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | ACTUAL   | sensor.alarm.flood            |      | boolean |    |     |       | `/^(state｜sensor｜indicator)(\.alarm)?\.flood$/`   |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
+### Flow sensor [flow]
+
+Flow sensor, e.g. of water or gas, normally in m³/h.
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | FLOW     | value.flow                    | m³/h | number  | -  |     |       | `/^value\.flow$/`                                 |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
 |   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
@@ -467,6 +528,7 @@ HUE light from 0° to 360°.
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -541,16 +603,18 @@ Many information states could be combined under this device, e.g., current, ampe
 
 Slider with position set by number. Could be used for any device that is controlled by numeric value. Limits could be defined by `min`, `max` attributes. Normally from 0 (off) to 100 (full power).
 
-| R | Name     | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
-|---|----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
-| * | SET      | level                         | %    | number  | W  | m   | M   |     |       | `/^level(\..*)?$/`                                |
-|   | ACTUAL   | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                |
-|   | WORKING  | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
-|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
-|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
-|   | MAINTAIN | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
-|   | ERROR    | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
-|   | BATTERY  | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
+| R | Name      | Role                          | Unit | Type    | Wr | Min | Max | Ind | Multi | Regex                                             |
+|---|-----------|-------------------------------|------|---------|----|-----|-----|-----|-------|---------------------------------------------------|
+| * | SET       | level                         | %    | number  | W  | m   | M   |     |       | `/^level(\..*)?$/`                                |
+|   | ON        | switch                        |      | boolean | W  |     |     |     |       | `/^switch(\.active)?$/`                           |
+|   | ON_ACTUAL | sensor.switch                 |      | boolean | -  |     |     |     |       | `/^state\.active$｜^sensor\.switch$/`              |
+|   | ACTUAL    | value                         | %    | number  | -  | m   | M   |     |       | `/^value(\..*)?$/`                                |
+|   | WORKING   | indicator.working             |      |         |    |     |     | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH   | indicator.maintenance.unreach |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT    | indicator.maintenance.lowbat  |      | boolean |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN  | indicator.maintenance         |      | boolean |    |     |     | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR     | indicator.error               |      |         |    |     |     | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY   | value.battery                 | %    | number  | -  |     |     |     |       | `/^value\.battery$/`                              |
 
 
 ### Light switch [light]
@@ -562,6 +626,7 @@ Light with only ON/OFF options. Could have information about current, amperage, 
 | * | SET            | switch.light                  |      | boolean       | W  | E    |     |       | `/^switch(\.light)?$｜^state$/`                    |
 |   | ON_ACTUAL      | sensor.light                  |      | boolean       | -  | E    |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | EFFECT         | level.effect                  |      | number/string | W  |      |     |       | `/^level\.effect$/`                               |
+|   | ON_TIME        | level.timer.off               | s    | number        | W  |      |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER | value.power                   | W    | number        | -  |      |     |       | `/^value\.power$/`                                |
 |   | CURRENT        | value.current                 | mA   | number        | -  |      |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE        | value.voltage                 | V    | number        | -  |      |     |       | `/^value\.voltage$/`                              |
@@ -695,6 +760,45 @@ Same as slider, but from 0 to 100%
 |   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
 
 
+### Pressure sensor [pressure]
+
+Pressure sensor for air or liquid pressure, normally in mbar (identical to hPa).
+
+| R | Name     | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                             |
+|---|----------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
+| * | PRESSURE | value.pressure                | mbar | number  | -  |     |       | `/^value\.pressure$/`                             |
+|   | WORKING  | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH  | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT   | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR    | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY  | value.battery                 | %    | number  | -  |     |       | `/^value\.battery$/`                              |
+
+
+### Pump [pump]
+
+Pump that can be switched on and off. Could optionally report its level, temperature, pressure and flow.
+
+| R | Name           | Role                          | Unit | Type           | Wr | Ind | Multi | Regex                                             |
+|---|----------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
+| * | POWER          | switch.pump                   |      | boolean/number | W  |     |       | `/^switch\.pump$/`                                |
+|   | LEVEL          | level.pump                    | %    | number         | W  |     |       | `/^level\.pump$/`                                 |
+|   | TEMPERATURE    | value.temperature             | °C   | number         | -  |     |       | `/temperature(\..*)?$/`                           |
+|   | PRESSURE       | value.pressure                | mbar | number         | -  |     |       | `/^value\.pressure$/`                             |
+|   | FLOW           | value.flow                    | m³/h | number         | -  |     |       | `/^value\.flow$/`                                 |
+|   | ELECTRIC_POWER | value.power                   | W    | number         | -  |     |       | `/^value\.power$/`                                |
+|   | CURRENT        | value.current                 | mA   | number         | -  |     |       | `/^value\.current$/`                              |
+|   | VOLTAGE        | value.voltage                 | V    | number         | -  |     |       | `/^value\.voltage$/`                              |
+|   | CONSUMPTION    | value.power.consumption       | Wh   | number         | -  |     |       | `/^value\.power\.consumption$/`                   |
+|   | FREQUENCY      | value.frequency               | Hz   | number         | -  |     |       | `/^value\.frequency$/`                            |
+|   | WORKING        | indicator.working             |      |                |    | X   |       | `/^indicator\.working$/`                          |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean        |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean        |    | X   |       | `/^indicator\.maintenance$/`                      |
+|   | ERROR          | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                            |
+|   | BATTERY        | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                              |
+
+
 ### RGB(W) Light with different states for every color [rgb]
 
 R,G,B(,W) Light with different states for every color. The value is from 0 to 255.
@@ -712,6 +816,7 @@ R,G,B(,W) Light with different states for every color. The value is from 0 to 25
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$｜^state$/`                    |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -739,6 +844,7 @@ RGB light with one state of color. Could be HEX #RRGGBB, or rgb(0-255,0-255,0-25
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -766,6 +872,7 @@ RGBW light with one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,
 |   | ON              | switch.light                  |      | boolean       | W  |     |       | `/^switch(\.light)?$/`                            |
 |   | ON_ACTUAL       | sensor.light                  |      | boolean       | -  |     |       | `/^(state｜switch｜sensor)\.light｜switch$/`         |
 |   | TRANSITION_TIME | time.span                     | ms   | number        | W  |     |       | `/^time\.(span｜interval)$/`                       |
+|   | ON_TIME         | level.timer.off               | s    | number        | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER  | value.power                   | W    | number        | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT         | value.current                 | mA   | number        | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE         | value.voltage                 | V    | number        | -  |     |       | `/^value\.voltage$/`                              |
@@ -787,6 +894,7 @@ Socket with an ON/OFF option. Could have information about current, amperage, en
 |---|----------------|-------------------------------|------|---------|----|-----|-------|---------------------------------------------------|
 | * | SET            | switch                        |      | boolean | W  |     |       | `/^switch(\.active)?$｜^state$/`                   |
 |   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state(\.active)?$｜^sensor.switch$/`            |
+|   | ON_TIME        | level.timer.off               | s    | number  | W  |     |       | `/^level\.timer\.off$/`                           |
 |   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                |
 |   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                              |
 |   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                              |

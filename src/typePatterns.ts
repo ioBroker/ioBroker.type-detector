@@ -70,6 +70,7 @@ const SharedPatterns: {
     direction_enum: InternalDetectorState;
     reachable: InternalDetectorState;
     battery: InternalDetectorState;
+    onTime: InternalDetectorState;
 } = {
     working: {
         role: /^indicator\.working$/,
@@ -143,6 +144,17 @@ const SharedPatterns: {
         required: false,
         defaultRole: 'indicator.reachable',
         inverted: true,
+    },
+    onTime: {
+        role: /^level\.timer\.off$/,
+        indicator: false,
+        write: true,
+        type: StateType.Number,
+        name: 'ON_TIME',
+        required: false,
+        defaultRole: 'level.timer.off',
+        defaultUnit: 's',
+        ignoreRole: IGNORE_SETTINGS_REGEX,
     },
     battery: {
         role: /^value\.battery$/,
@@ -251,13 +263,13 @@ const FanPatterns: {
         defaultRole: 'switch.power',
     },
     speedLevel: {
-        role: /^level\.fan$/,
+        role: /^level\.speed$/,
         indicator: false,
         write: true,
         type: StateType.Number,
         name: 'SPEED_LEVEL',
         required: false,
-        defaultRole: 'level.fan',
+        defaultRole: 'level.speed',
         defaultUnit: '%',
         ignoreRole: IGNORE_SETTINGS_REGEX,
     },
@@ -340,6 +352,39 @@ function concentrationPatterns(name: string, roleId: string, defaultUnit?: strin
         },
     ];
 }
+
+/**
+ * Optional details a smoke or CO alarm can report next to the alarm itself.
+ * Shared by `fireAlarm` and `coAlarm`, which are one device in Matter and differ only in what they sense.
+ */
+const AlarmPatterns: { severity: InternalDetectorState; muted: InternalDetectorState; test: InternalDetectorState } = {
+    severity: {
+        role: /^value\.severity$/,
+        indicator: false,
+        write: false,
+        type: StateType.Number,
+        name: 'SEVERITY',
+        required: false,
+        defaultRole: 'value.severity',
+        defaultStates: { 0: 'NORMAL', 1: 'WARNING', 2: 'CRITICAL' },
+    },
+    muted: {
+        role: /^indicator\.alarm\.muted$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'MUTED',
+        required: false,
+        defaultRole: 'indicator.alarm.muted',
+    },
+    test: {
+        role: /^indicator\.working\.test$/,
+        indicator: true,
+        type: StateType.Boolean,
+        name: 'TEST',
+        required: false,
+        defaultRole: 'indicator.working.test',
+    },
+};
 
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
@@ -1083,6 +1128,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1174,6 +1220,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1265,6 +1312,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1356,6 +1404,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1458,6 +1507,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1539,6 +1589,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -1743,6 +1794,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
                 defaultRole: 'indicator.maintenance.filter',
             },
+            SharedPatterns.onTime,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
@@ -1761,6 +1813,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             FanPatterns.swing,
             FanPatterns.swingBoolean,
             FanPatterns.airflowDirection,
+            SharedPatterns.onTime,
             SharedPatterns.working,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
@@ -2578,6 +2631,29 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.motion,
     },
+    contact: {
+        states: [
+            {
+                role: /^sensor\.contact$/,
+                indicator: false,
+                type: StateType.Boolean,
+                write: false,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'sensor.contact',
+                defaultChannelRole: 'sensor.contact',
+            },
+            // optional
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.contact,
+        enumRequired: false,
+    },
     window: {
         states: [
             {
@@ -2635,6 +2711,17 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultChannelRole: 'sensor.alarm.fire',
             },
             // optional
+            {
+                role: /^(state|sensor)(\.alarm)?\.co$/,
+                indicator: false,
+                type: StateType.Boolean,
+                name: 'CO',
+                required: false,
+                defaultRole: 'sensor.alarm.co',
+            },
+            AlarmPatterns.severity,
+            AlarmPatterns.muted,
+            AlarmPatterns.test,
             SharedPatterns.unreach,
             SharedPatterns.lowbat,
             SharedPatterns.maintain,
@@ -2642,6 +2729,30 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.battery,
         ],
         type: Types.fireAlarm,
+        enumRequired: false,
+    },
+    coAlarm: {
+        states: [
+            {
+                role: /^(state|sensor)(\.alarm)?\.co$/,
+                indicator: false,
+                type: StateType.Boolean,
+                name: 'ACTUAL',
+                required: true,
+                defaultRole: 'sensor.alarm.co',
+                defaultChannelRole: 'sensor.alarm.co',
+            },
+            // optional
+            AlarmPatterns.severity,
+            AlarmPatterns.muted,
+            AlarmPatterns.test,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.coAlarm,
         enumRequired: false,
     },
     floodAlarm: {
@@ -2755,6 +2866,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'time.span',
                 defaultUnit: 'ms',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -2800,6 +2912,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'level.effect',
                 defaultStates: { 0: 'None' },
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -3005,6 +3118,74 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         ],
         type: Types.volumeGroup,
     },
+    pump: {
+        states: [
+            {
+                // A dedicated role, because keying on `switch.power` would make every socket a pump
+                role: /^switch\.pump$/,
+                indicator: false,
+                write: true,
+                type: [StateType.Boolean, StateType.Number],
+                name: 'POWER',
+                required: true,
+                defaultRole: 'switch.pump',
+            },
+            // optional
+            {
+                role: /^level\.pump$/,
+                indicator: false,
+                write: true,
+                type: StateType.Number,
+                name: 'LEVEL',
+                required: false,
+                defaultRole: 'level.pump',
+                defaultUnit: '%',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            {
+                role: /temperature(\..*)?$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'TEMPERATURE',
+                required: false,
+                defaultRole: 'value.temperature',
+                defaultUnit: '°C',
+                ignoreRole: IGNORE_SETTINGS_REGEX,
+            },
+            {
+                role: /^value\.pressure$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'PRESSURE',
+                required: false,
+                defaultRole: 'value.pressure',
+                defaultUnit: 'mbar',
+            },
+            {
+                role: /^value\.flow$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                searchInParent: true,
+                name: 'FLOW',
+                required: false,
+                defaultRole: 'value.flow',
+                defaultUnit: 'm³/h',
+            },
+            ...Object.values(ElectricityPatterns),
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.pump,
+    },
     percentage: {
         states: [
             {
@@ -3057,6 +3238,25 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
+                role: /^switch(\.active)?$/,
+                indicator: false,
+                write: true,
+                type: StateType.Boolean,
+                name: 'ON',
+                required: false,
+                defaultRole: 'switch',
+            },
+            {
+                role: /^state\.active$|^sensor\.switch$/,
+                indicator: false,
+                write: false,
+                type: StateType.Boolean,
+                name: 'ON_ACTUAL',
+                required: false,
+                defaultRole: 'sensor.switch',
+            },
+            // optional
+            {
                 role: /^value(\..*)?$/,
                 indicator: false,
                 type: StateType.Number,
@@ -3099,6 +3299,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: false,
                 defaultRole: 'sensor.switch',
             },
+            SharedPatterns.onTime,
             ...Object.values(ElectricityPatterns),
             SharedPatterns.working,
             SharedPatterns.unreach,
@@ -3316,6 +3517,48 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.battery,
         ],
         type: Types.illuminance,
+    },
+    pressure: {
+        states: [
+            {
+                role: /^value\.pressure$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'PRESSURE',
+                required: true,
+                defaultRole: 'value.pressure',
+                defaultUnit: 'mbar',
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.pressure,
+    },
+    flow: {
+        states: [
+            {
+                role: /^value\.flow$/,
+                indicator: false,
+                write: false,
+                type: StateType.Number,
+                name: 'FLOW',
+                required: true,
+                defaultRole: 'value.flow',
+                defaultUnit: 'm³/h',
+            },
+            SharedPatterns.working,
+            SharedPatterns.unreach,
+            SharedPatterns.lowbat,
+            SharedPatterns.maintain,
+            SharedPatterns.error,
+            SharedPatterns.battery,
+        ],
+        type: Types.flow,
     },
     fillLevel: {
         states: [
