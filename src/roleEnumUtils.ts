@@ -147,16 +147,21 @@ export function getEnums(): Record<
     };
 }
 
+/** An object ID may contain any character, so all of them have to survive as literals in a regular expression */
+function escapeForRegExp(id: string): string {
+    return id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 export function getAllStatesInChannel(keys: string[], channelId: string): string[] {
     const list: string[] = [];
-    const reg = new RegExp(`^${channelId.replace(/([$^.)([\]{}])/g, '\\$1')}\\.[^.]+$`);
+    const reg = new RegExp(`^${escapeForRegExp(channelId)}\\.[^.]+$`);
     keys.forEach(_id => reg.test(_id) && list.push(_id));
     return list;
 }
 
 export function getAllStatesInDevice(keys: string[], channelId: string): string[] {
     const list: string[] = [];
-    const reg = new RegExp(`^${channelId.replace(/([$^.)([\]{}])/g, '\\$1')}\\.[^.]+\\.[^.]+$`);
+    const reg = new RegExp(`^${escapeForRegExp(channelId)}\\.[^.]+\\.[^.]+$`);
     keys.forEach(_id => reg.test(_id) && list.push(_id));
     return list;
 }

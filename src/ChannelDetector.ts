@@ -672,6 +672,15 @@ export class ChannelDetector {
             context.pattern = pattern;
             context.usedInCurrentDevice = [];
             context.rejectedInCurrentDevice = [];
+
+            const untestedPerGroup = new Map<string, number>();
+            for (const state of patterns[pattern].states) {
+                if (state.requiredOneOf) {
+                    untestedPerGroup.set(state.requiredOneOf, (untestedPerGroup.get(state.requiredOneOf) ?? 0) + 1);
+                }
+            }
+            const satisfiedGroups = new Set<string>();
+
             for (const state of patterns[pattern].states) {
                 let found = false;
 
@@ -680,8 +689,21 @@ export class ChannelDetector {
                 if (this._testOneState(context)) {
                     found = true;
                 }
-                // A group member may be missing as long as one of its siblings is found, so it cannot abort here
-                if (state.required && !state.requiredOneOf && !found) {
+
+                const group = state.requiredOneOf;
+                if (group) {
+                    if (found) {
+                        satisfiedGroups.add(group);
+                    }
+                    // A group member may be missing as long as one of its siblings is found, so only the last
+                    // untested member of an unsatisfied group can tell that the pattern cannot match anymore
+                    const untested = (untestedPerGroup.get(group) ?? 0) - 1;
+                    untestedPerGroup.set(group, untested);
+                    if (untested <= 0 && !satisfiedGroups.has(group)) {
+                        delete context.result;
+                        break;
+                    }
+                } else if (state.required && !found) {
                     delete context.result;
                     break;
                 }
