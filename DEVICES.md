@@ -117,7 +117,7 @@ Air purifier controlled by a speed mode. Could optionally have a continuous spee
 |----------|-------------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
 | *        | SPEED                   | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |          | POWER                   | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|          | SPEED_LEVEL             | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|          | SPEED_LEVEL             | level.speed                   | %    | number         | W  |     |       | `/^level\.speed$/`                                |
 |          | SWING                   | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |          | SWING                   | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |          | AIRFLOW_DIRECTION       | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
@@ -395,7 +395,7 @@ Fan controlled by a speed mode. Could optionally have a continuous speed level, 
 |---|-------------------|-------------------------------|------|----------------|----|-----|-------|---------------------------------------------------|
 | * | SPEED             | level.mode.fan                |      | number         | W  |     |       | `/(speed｜mode)\.fan$/`                            |
 |   | POWER             | switch.power                  |      | boolean/number | W  |     |       | `/^switch(\.power)?$/`                            |
-|   | SPEED_LEVEL       | level.fan                     | %    | number         | W  |     |       | `/^level\.fan$/`                                  |
+|   | SPEED_LEVEL       | level.speed                   | %    | number         | W  |     |       | `/^level\.speed$/`                                |
 |   | SWING             | level.mode.swing              |      | number         | W  |     |       | `/swing$/`                                        |
 |   | SWING             | switch.mode.swing             |      | boolean        | W  |     |       | `/swing$/`                                        |
 |   | AIRFLOW_DIRECTION | level.mode.airflow            |      | number         | W  |     |       | `/^level\.mode\.airflow$/`                        |
