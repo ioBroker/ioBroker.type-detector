@@ -264,6 +264,67 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a slider that can also be switched off`, done => {
+        const objects = {
+            'test.0.Motor': { common: { name: 'Motor' }, type: 'device' },
+            'test.0.Motor.speed': {
+                common: {
+                    name: 'Speed',
+                    type: 'number',
+                    role: 'level.speed.motor',
+                    min: 0,
+                    max: 100,
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'test.0.Motor.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Motor.running': {
+                common: { name: 'Running', type: 'boolean', role: 'sensor.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Motor' });
+
+        // The on/off belongs to the slider, it must not become a separate socket
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.slider, {
+            SET: 'test.0.Motor.speed',
+            ON: 'test.0.Motor.on',
+            ON_ACTUAL: 'test.0.Motor.running',
+        });
+
+        done();
+    });
+
+    it(`${name} Must still detect a plain socket`, done => {
+        const objects = {
+            'test.0.Plug2': { common: { name: 'Plug' }, type: 'device' },
+            'test.0.Plug2.on': {
+                common: { name: 'On', type: 'boolean', role: 'switch.active', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.Plug2.actual': {
+                common: { name: 'Actual', type: 'boolean', role: 'sensor.switch', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'test.0.Plug2' });
+
+        validate(controls[0], Types.socket, {
+            SET: 'test.0.Plug2.on',
+            ACTUAL: 'test.0.Plug2.actual',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect a generic contact sensor`, done => {
         const objects = {
             'matter.0.Contact': { common: { name: 'Contact sensor' }, type: 'device' },

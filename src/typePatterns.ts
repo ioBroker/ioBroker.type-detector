@@ -3043,6 +3043,25 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             },
             // optional
             {
+                role: /^switch(\.active)?$/,
+                indicator: false,
+                write: true,
+                type: StateType.Boolean,
+                name: 'ON',
+                required: false,
+                defaultRole: 'switch',
+            },
+            {
+                role: /^state\.active$|^sensor\.switch$/,
+                indicator: false,
+                write: false,
+                type: StateType.Boolean,
+                name: 'ON_ACTUAL',
+                required: false,
+                defaultRole: 'sensor.switch',
+            },
+            // optional
+            {
                 role: /^value(\..*)?$/,
                 indicator: false,
                 type: StateType.Number,
