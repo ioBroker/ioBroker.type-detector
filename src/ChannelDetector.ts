@@ -290,7 +290,13 @@ export class ChannelDetector {
                 // map the detected ID to the relevant state in result - if allowed
                 if (!result.states.find(({ id }) => id === stateId)) {
                     for (const checkState of result.states) {
-                        if (checkState.name === state.name) {
+                        // A pattern may declare the same name more than once, e.g. a numeric and a boolean variant
+                        // of one control. The object was validated against one of them, so it may only be mapped
+                        // into a definition it actually satisfies, not merely into the first one with that name.
+                        if (
+                            checkState.name === state.name &&
+                            ChannelDetector.stateTypeMatches(checkState, objects[stateId])
+                        ) {
                             // If we already have a mapped ID, we need to decide if we keep this ID or overrule it
                             if (checkState.id) {
                                 let useThisMapping: boolean | undefined; // three-state flag
@@ -534,6 +540,18 @@ export class ChannelDetector {
         }
 
         return !excludedTypes || !excludedTypes.includes(pattern.type);
+    }
+
+    /** Whether an object satisfies the declared type of a pattern state. A state without a type accepts anything. */
+    private static stateTypeMatches(state: DetectorState | InternalDetectorState, obj?: ioBroker.Object): boolean {
+        if (!state.type) {
+            return true;
+        }
+        const type = obj?.common?.type;
+        if (!type) {
+            return true;
+        }
+        return Array.isArray(state.type) ? state.type.includes(type as StateType) : state.type === type;
     }
 
     private static allRequiredStatesFound(context: DetectorContext): context is MatchedDetectorContext {
