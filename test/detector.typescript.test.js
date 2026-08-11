@@ -1414,6 +1414,86 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a robotic vacuum that has only the run mode`, done => {
+        const objects = {
+            'matter.0.Rvc': { common: { name: 'Robot' }, type: 'device' },
+            'matter.0.Rvc.power': {
+                common: { name: 'Power', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Rvc.run': {
+                common: {
+                    name: 'Run mode',
+                    type: 'number',
+                    role: 'level.mode.vacuum',
+                    states: { 0: 'IDLE', 1: 'CLEANING', 2: 'MAPPING' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'matter.0.Rvc.home': {
+                common: { name: 'Home', type: 'boolean', role: 'button.home', read: true, write: true },
+                type: 'state',
+            },
+            'matter.0.Rvc.progress': {
+                common: {
+                    name: 'Progress',
+                    type: 'number',
+                    role: 'value.progress',
+                    unit: '%',
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+            'matter.0.Rvc.phase': {
+                common: { name: 'Phase', type: 'string', role: 'value.vacuum.phase', read: true, write: false },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'matter.0.Rvc' });
+
+        validate(controls[0], Types.vacuumCleaner, {
+            POWER: 'matter.0.Rvc.power',
+            RUN_MODE: 'matter.0.Rvc.run',
+            HOME: 'matter.0.Rvc.home',
+            PROGRESS: 'matter.0.Rvc.progress',
+            PHASE: 'matter.0.Rvc.phase',
+        });
+
+        done();
+    });
+
+    it(`${name} Must still detect a vacuum that has only the cleaning mode`, done => {
+        const objects = {
+            'mihome.0.Vac': { common: { name: 'Vacuum' }, type: 'device' },
+            'mihome.0.Vac.power': {
+                common: { name: 'Power', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'mihome.0.Vac.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'number',
+                    role: 'level.mode.cleanup',
+                    states: { 0: 'AUTO', 1: 'NORMAL' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        validate(detect(objects, { id: 'mihome.0.Vac' })[0], Types.vacuumCleaner, {
+            POWER: 'mihome.0.Vac.power',
+            MODE: 'mihome.0.Vac.mode',
+        });
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
