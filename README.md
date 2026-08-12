@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 6.0.0 (2026-08-12)
 -   (@Apollon77) Fixed the default role of the wind speed of `weatherCurrent`, which carried a regular expression anchor
 -   (@Apollon77) Fixed one object being assigned to two state definitions of the same name, which reported the swing of an air conditioner twice with a conflicting type and role
 -   (@Apollon77) Added the electricity states to `thermostat`, `fan` and `airPurifier`
