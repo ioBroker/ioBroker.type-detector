@@ -1135,7 +1135,7 @@ Just sensor if alarm should be shown.
 |   | WEATHER               | weather.state                 |      | string  |    |     |       | `/^weather\.state$/`                              |
 |   | WIND_DIRECTION        | value.direction.wind          | °    | string  |    |     |       | `/^value\.direction\.wind$/`                      |
 |   | WIND_GUST             | value.speed.wind.gust         | km/h | number  |    |     |       | `/^value\.speed\.wind\.gust$/`                    |
-|   | WIND_SPEED            | value.speed.wind$             | km/h | number  |    |     |       | `/^value\.speed\.wind$/`                          |
+|   | WIND_SPEED            | value.speed.wind              | km/h | number  |    |     |       | `/^value\.speed\.wind$/`                          |
 |   | LOWBAT                | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
 |   | UNREACH               | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | MAINTAIN              | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                      |

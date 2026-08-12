@@ -1636,6 +1636,26 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must not leak a regular expression anchor into a default role`, done => {
+        const patterns = ChannelDetector.getPatterns();
+        const bad = [];
+
+        for (const [type, control] of Object.entries(patterns)) {
+            for (const state of control.states || []) {
+                for (const entry of Array.isArray(state) ? state : [state]) {
+                    // A default role is used to create a state, so it must be a plain role and never carry `^`, `$` or `\`
+                    if (entry?.defaultRole && /[$^\\]/.test(entry.defaultRole)) {
+                        bad.push(`${type}.${entry.name}: ${entry.defaultRole}`);
+                    }
+                }
+            }
+        }
+
+        expect(bad.length === 0, `Default roles must not contain regular expression characters: ${bad.join(', ')}`);
+
+        done();
+    });
+
     it('Must detect nothing if not all required states are defined', done => {
         const objects = {
             'something.0.channel': {
