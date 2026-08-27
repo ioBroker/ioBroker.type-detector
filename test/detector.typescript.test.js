@@ -1110,6 +1110,128 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect a thermostat whose mode is a string`, done => {
+        // Not every thermostat numbers its modes: ESPHOME and Tuya devices report them as plain
+        // strings (issue #614). `common.states` still maps the written value to a label, only the
+        // written value is now the string itself.
+        const objects = {
+            'esphome.0.Trv': { common: { name: 'Radiator thermostat' }, type: 'device' },
+            'esphome.0.Trv.set': {
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'esphome.0.Trv.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'string',
+                    role: 'level.mode.thermostat',
+                    states: { AUTO: 'Auto', MANUAL: 'Manual' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'esphome.0.Trv.running': {
+                common: {
+                    name: 'Running mode',
+                    type: 'string',
+                    role: 'value.mode.thermostat',
+                    states: { OFF: 'Off', HEAT: 'Heat', COOL: 'Cool' },
+                    read: true,
+                    write: false,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'esphome.0.Trv' });
+
+        validate(controls[0], Types.thermostat, {
+            SET: 'esphome.0.Trv.set',
+            MODE: 'esphome.0.Trv.mode',
+            WORKING_MODE: 'esphome.0.Trv.running',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect an air conditioner whose mode is a string`, done => {
+        // The shape the midea adapter produces: the mode is a string and `common.states` is keyed
+        // by that string. Before, the number-only pattern rejected it and the device was not an
+        // air conditioner at all.
+        const objects = {
+            'midea.0.AC': { common: { name: 'Air conditioner' }, type: 'device' },
+            'midea.0.AC.set': {
+                common: {
+                    name: 'Setpoint',
+                    type: 'number',
+                    role: 'level.temperature',
+                    unit: '°C',
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+            'midea.0.AC.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'string',
+                    role: 'level.mode.airconditioner',
+                    states: { AUTO: 'Auto', COOL: 'Cool', DRY: 'Dry', FAN_ONLY: 'Fan only' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'midea.0.AC' });
+
+        validate(controls[0], Types.airCondition, {
+            SET: 'midea.0.AC.set',
+            MODE: 'midea.0.AC.mode',
+        });
+
+        done();
+    });
+
+    it(`${name} Must detect a vacuum cleaner whose mode is a string`, done => {
+        const objects = {
+            'vacuum.0.Robot': { common: { name: 'Robot' }, type: 'device' },
+            'vacuum.0.Robot.power': {
+                common: { name: 'Power', type: 'boolean', role: 'switch.power', read: true, write: true },
+                type: 'state',
+            },
+            'vacuum.0.Robot.mode': {
+                common: {
+                    name: 'Mode',
+                    type: 'string',
+                    role: 'level.mode.cleanup',
+                    states: { AUTO: 'Auto', QUIET: 'Quiet', EXPRESS: 'Express' },
+                    read: true,
+                    write: true,
+                },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'vacuum.0.Robot' });
+
+        validate(controls[0], Types.vacuumCleaner, {
+            POWER: 'vacuum.0.Robot.power',
+            MODE: 'vacuum.0.Robot.mode',
+        });
+
+        done();
+    });
+
     it(`${name} Must accept a writable valve of a thermostat`, done => {
         const objects = {
             'matter.0.Trv2': { common: { name: 'Radiator thermostat' }, type: 'device' },

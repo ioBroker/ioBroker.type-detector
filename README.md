@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Allowed mode to be not only as number with states, but also as string with states
+
 ### 6.0.0 (2026-08-12)
 -   (@Apollon77) Fixed the default role of the wind speed of `weatherCurrent`, which carried a regular expression anchor
 -   (@Apollon77) Fixed one object being assigned to two state definitions of the same name, which reported the swing of an air conditioner twice with a conflicting type and role
