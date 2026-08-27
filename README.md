@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 6.0.1 (2026-08-27)
 -   (@GermanBluefox) Allowed mode to be not only a number with states, but also a string with states
 
 ### 6.0.0 (2026-08-12)
