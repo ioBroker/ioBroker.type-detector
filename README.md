@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Lights are now also detected when the whole device (and not only its channel) is assigned to the function "Light"
+
 ### 6.0.1 (2026-08-27)
 -   (@GermanBluefox) Allowed mode to be not only a number with states, but also a string with states
 

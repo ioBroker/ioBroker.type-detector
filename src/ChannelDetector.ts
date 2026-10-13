@@ -204,6 +204,18 @@ export class ChannelDetector {
                         result.push(e);
                     }
                 });
+
+                // The whole device is often put into a function, so check the device above the channel too
+                if (!result.length && objects[channel].type === 'channel') {
+                    const device = getParentId(channel);
+                    if (objects[device]?.type === 'device') {
+                        this.enums.forEach(e => {
+                            if (objects[e].common.members.includes(device)) {
+                                result.push(e);
+                            }
+                        });
+                    }
+                }
             }
         }
 
