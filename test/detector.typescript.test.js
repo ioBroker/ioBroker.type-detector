@@ -3512,4 +3512,54 @@ describe(`${name} Test Detector`, () => {
 
         done();
     });
+
+    it('Must detect Shelly Dimmer as dimmer when the device is in the light function', done => {
+        const objects = JSON.parse(JSON.stringify(require('./shelly-dimmer.json')));
+        objects['enum.functions.light'] = {
+            type: 'enum',
+            common: { name: 'Licht', members: ['shelly.0.SHDM-2#081234567896#1'] },
+            native: {},
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.SHDM-2#081234567896#1.lights' });
+        const dimmer = controls.find(c => c.type === Types.dimmer);
+        expect(!!dimmer, 'Dimmer must be detected');
+
+        validate(dimmer, Types.dimmer, {
+            SET: 'shelly.0.SHDM-2#081234567896#1.lights.brightness',
+            ON_SET: 'shelly.0.SHDM-2#081234567896#1.lights.Switch',
+            ELECTRIC_POWER: 'shelly.0.SHDM-2#081234567896#1.lights.Power',
+            CONSUMPTION: 'shelly.0.SHDM-2#081234567896#1.lights.Energy',
+        });
+
+        done();
+    });
+
+    it('Must prefer the channel function over the device function', done => {
+        const objects = JSON.parse(JSON.stringify(require('./shelly-dimmer.json')));
+        objects['enum.functions.light'] = {
+            type: 'enum',
+            common: { name: 'Licht', members: ['shelly.0.SHDM-2#081234567896#1'] },
+            native: {},
+        };
+        objects['enum.functions.socket'] = {
+            type: 'enum',
+            common: { name: 'Steckdose', members: ['shelly.0.SHDM-2#081234567896#1.lights'] },
+            native: {},
+        };
+
+        const controls = detect(objects, { id: 'shelly.0.SHDM-2#081234567896#1.lights' });
+        expect(!controls?.find(c => c.type === Types.dimmer), 'Dimmer must not be detected');
+
+        done();
+    });
+
+    it('Must not detect Shelly Dimmer as dimmer without the light function', done => {
+        const objects = JSON.parse(JSON.stringify(require('./shelly-dimmer.json')));
+
+        const controls = detect(objects, { id: 'shelly.0.SHDM-2#081234567896#1.lights' });
+        expect(!controls?.find(c => c.type === Types.dimmer), 'Dimmer must not be detected');
+
+        done();
+    });
 });

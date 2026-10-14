@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Function enums assigned to the whole device are now also taken into account for its channels (e.g., a dimmer is detected when the whole device is in the function "Light")
+
 ### 6.0.1 (2026-08-27)
 -   (@GermanBluefox) Allowed mode to be not only a number with states, but also a string with states
 
