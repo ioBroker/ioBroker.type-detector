@@ -98,6 +98,9 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) `CONSUMPTION` now also accepts the documented role `value.energy.consumed` (and uses it as the default role); the deprecated `value.power.consumption` is still detected
+
 ### 6.0.2 (2026-10-14)
 -   (@GermanBluefox) Function enums assigned to the whole device are now also taken into account for its channels (e.g., a dimmer is detected when the whole device is in the function "Light")
 

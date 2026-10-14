@@ -214,13 +214,14 @@ const ElectricityPatterns: { [id: string]: InternalDetectorState } = {
         defaultUnit: 'V',
     },
     consumption: {
-        role: /^value\.power\.consumption$/,
+        // value.power.consumption is deprecated in favor of value.energy.consumed, but still accepted
+        role: /^value\.(energy\.consumed|power\.consumption)$/,
         indicator: false,
         type: StateType.Number,
         write: false,
         name: 'CONSUMPTION',
         required: false,
-        defaultRole: 'value.power.consumption',
+        defaultRole: 'value.energy.consumed',
         defaultUnit: 'Wh',
     },
     frequency: {

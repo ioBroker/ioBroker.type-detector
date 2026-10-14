@@ -1021,6 +1021,35 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must accept value.energy.consumed as consumption`, done => {
+        const value = (role, unit) => ({
+            common: { name: role, type: 'number', role, unit, read: true, write: false },
+            type: 'state',
+        });
+        const objects = {
+            'test.0.dose': { common: { name: 'Dose' }, type: 'channel' },
+            'test.0.dose.STATE': {
+                common: { name: 'State', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'test.0.dose.POWER': value('value.power', 'W'),
+            'test.0.dose.VERBRAUCH': value('value.energy.consumed', 'Wh'),
+            'test.0.meter': { common: { name: 'Meter' }, type: 'device' },
+            'test.0.meter.total': value('value.energy.consumed', 'kWh'),
+        };
+
+        validate(detect(objects, { id: 'test.0.dose' })[0], Types.socket, {
+            SET: 'test.0.dose.STATE',
+            ELECTRIC_POWER: 'test.0.dose.POWER',
+            CONSUMPTION: 'test.0.dose.VERBRAUCH',
+        });
+        validate(detect(objects, { id: 'test.0.meter' })[0], Types.electricity, {
+            CONSUMPTION: 'test.0.meter.total',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect an electricity meter that reports only one value`, done => {
         const objects = {
             'shelly.0.Energy': { common: { name: 'Energy' }, type: 'device' },
