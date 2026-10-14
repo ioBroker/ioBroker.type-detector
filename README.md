@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 6.0.2 (2026-10-14)
 -   (@GermanBluefox) Function enums assigned to the whole device are now also taken into account for its channels (e.g., a dimmer is detected when the whole device is in the function "Light")
 
 ### 6.0.1 (2026-08-27)
