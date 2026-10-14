@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 6.0.3 (2026-10-14)
 -   (@GermanBluefox) `CONSUMPTION` now also accepts the documented role `value.energy.consumed` (and uses it as the default role); the deprecated `value.power.consumption` is still detected
 
 ### 6.0.2 (2026-10-14)
