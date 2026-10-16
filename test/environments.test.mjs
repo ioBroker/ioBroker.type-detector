@@ -1,17 +1,20 @@
 // Proves that the package works in both places it is used:
 // - backend: Node.js loads it with require() (CommonJS build) or with import (ES module build)
 // - frontend: a bundler builds it for the browser, and the result runs without any Node.js API
+// The package is loaded by its name, so the fields "exports", "main" and "module" of package.json are tested too
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import vm from 'node:vm';
 import { buildSync } from 'esbuild';
+import ts from 'typescript';
 
 const require = createRequire(import.meta.url);
 const testDir = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(testDir, '..');
+const PACKAGE = '@iobroker/type-detector';
 
 // Real devices from the test fixtures and the type that each of them must be detected as
 const DEVICES = [
@@ -46,30 +49,124 @@ function checkTypes(json) {
 
 // The result of the CommonJS build, the one ioBroker adapters use, is the reference for all others
 function nodeResult() {
-    return detectAll(require('..').default, INPUT);
+    return detectAll(require(PACKAGE).default, INPUT);
+}
+
+function importFile(...path) {
+    return import(pathToFileURL(join(rootDir, ...path)).href);
 }
 
 describe('Backend: Node.js', () => {
-    it('CommonJS: require() of the package loads the build from "main" and detects devices', () => {
-        assert.equal(require.resolve('..'), join(rootDir, 'build', 'index.js'));
+    it('CommonJS: require() loads the CommonJS build and detects devices', () => {
+        assert.equal(require.resolve(PACKAGE), join(rootDir, 'build', 'index.js'));
 
-        const lib = require('..');
+        const lib = require(PACKAGE);
+        assert.equal(typeof lib.default, 'function');
+        // `const { ChannelDetector } = require(...)`, as shown in README.md
+        assert.equal(lib.ChannelDetector, lib.default);
         // TypeScript adapters compiled to CommonJS get the class of `import ChannelDetector from` through these two
         assert.equal(lib.__esModule, true);
-        assert.equal(typeof lib.default, 'function');
         assert.equal(lib.Types.light, 'light');
         assert.equal(typeof lib.roleOrEnumLight, 'function');
 
         checkTypes(detectAll(lib.default, INPUT));
     });
 
-    it('ES module: the ES module build is imported natively by Node.js and detects the same', async () => {
-        const lib = await import(pathToFileURL(join(rootDir, 'build', 'esm', 'index.js')).href);
+    it('ES module: import loads the ES module build, its default export is the class, and detects the same', async () => {
+        const lib = await import(PACKAGE);
+        assert.equal(lib.default, (await importFile('build', 'esm', 'index.js')).default);
         assert.equal(typeof lib.default, 'function');
+        assert.equal(lib.ChannelDetector, lib.default);
         assert.equal(lib.Types.light, 'light');
         assert.equal(typeof lib.roleOrEnumLight, 'function');
 
         assert.equal(detectAll(lib.default, INPUT), nodeResult());
+    });
+
+    it('deep imports into build/ keep working, with and without extension', async () => {
+        assert.equal(require.resolve(`${PACKAGE}/build/roleEnumUtils`), join(rootDir, 'build', 'roleEnumUtils.js'));
+        assert.equal(typeof require(`${PACKAGE}/build/roleEnumUtils`).roleOrEnumLight, 'function');
+        assert.equal(require(`${PACKAGE}/build/types.js`).Types.light, 'light');
+        assert.equal(require(`${PACKAGE}/build/ChannelDetector`).ChannelDetector, require(PACKAGE).default);
+
+        // import gets the files of the ES module build, so they are the same as with the package name
+        const { ChannelDetector } = await import(`${PACKAGE}/build/ChannelDetector`);
+        assert.equal(ChannelDetector, (await import(PACKAGE)).default);
+        assert.equal((await import(`${PACKAGE}/build/types.js`)).Types, (await import(PACKAGE)).Types);
+
+        assert.equal(require(`${PACKAGE}/package.json`).name, PACKAGE);
+    });
+
+    describe('TypeScript: the types match what is loaded at runtime', function () {
+        this.timeout(60000);
+
+        // Type-checks the file like a project with these settings does and returns the errors and the declarations used.
+        // Only errors in the test file and in the declarations of the package count: @iobroker/types needs @types/node,
+        // which is not installed here
+        function typeCheck(file, module, moduleResolution) {
+            const program = ts.createProgram([join(testDir, 'types', file)], {
+                module,
+                moduleResolution,
+                strict: true,
+                noEmit: true,
+                types: ['@iobroker/types'],
+            });
+            const ownFile = fileName => !relative(rootDir, fileName).replace(/\\/g, '/').startsWith('node_modules/');
+            return {
+                errors: ts
+                    .getPreEmitDiagnostics(program)
+                    .filter(d => d.file && ownFile(d.file.fileName))
+                    .map(
+                        d =>
+                            `${relative(rootDir, d.file.fileName)}: ${ts.flattenDiagnosticMessageText(d.messageText, '\n')}`,
+                    ),
+                declarations: program
+                    .getSourceFiles()
+                    .map(sourceFile => relative(rootDir, sourceFile.fileName).replace(/\\/g, '/'))
+                    .filter(fileName => fileName.startsWith('build/'))
+                    .sort(),
+            };
+        }
+
+        const ESM_DECLARATIONS = [
+            'build/esm/ChannelDetector.d.ts',
+            'build/esm/index.d.ts',
+            'build/esm/roleEnumUtils.d.ts',
+            'build/esm/types.d.ts',
+        ];
+
+        it('ES module (moduleResolution "node16")', () => {
+            const { errors, declarations } = typeCheck(
+                'consumer.mts',
+                ts.ModuleKind.Node16,
+                ts.ModuleResolutionKind.Node16,
+            );
+            assert.deepEqual(errors, []);
+            assert.deepEqual(declarations, ESM_DECLARATIONS);
+        });
+
+        it('CommonJS (moduleResolution "node16")', () => {
+            const { errors, declarations } = typeCheck(
+                'consumer.cts',
+                ts.ModuleKind.Node16,
+                ts.ModuleResolutionKind.Node16,
+            );
+            assert.deepEqual(errors, []);
+            assert.deepEqual(
+                declarations,
+                ESM_DECLARATIONS.map(file => file.replace('build/esm/', 'build/')),
+            );
+        });
+
+        it('bundler (moduleResolution "bundler", like Vite)', () => {
+            const { errors, declarations } = typeCheck(
+                'consumer.mts',
+                ts.ModuleKind.ESNext,
+                ts.ModuleResolutionKind.Bundler,
+            );
+            assert.deepEqual(errors, []);
+            assert.deepEqual(declarations, ESM_DECLARATIONS);
+        });
     });
 });
 
@@ -77,8 +174,8 @@ describe('Frontend: browser bundle', function () {
     // the first call starts the esbuild service
     this.timeout(30000);
 
-    // Bundles like Vite or webpack do for a web page: the package is resolved by its name from package.json
-    // (fields "browser", "module", "main"), and an import of a Node.js module would make the build fail
+    // Bundles like Vite or webpack do for a web page: the package is resolved by its name (fields "exports", "browser",
+    // "module", "main"), and an import of a Node.js module would make the build fail
     function bundleForBrowser(contents) {
         const result = buildSync({
             stdin: { contents, resolveDir: testDir, sourcefile: 'app.js' },
@@ -102,10 +199,10 @@ describe('Frontend: browser bundle', function () {
 
     let bundle;
     before(() => {
-        bundle = bundleForBrowser(`export { default, Types } from '..';`);
+        bundle = bundleForBrowser(`export { default, Types } from '${PACKAGE}';`);
     });
 
-    it('uses the ES module build from the field "module" and no CommonJS', () => {
+    it('uses the ES module build and no CommonJS', () => {
         assert.ok(bundle.files.length, 'The bundle contains no file of the package');
         assert.deepEqual(
             bundle.files.filter(file => !file.startsWith('build/esm/')),
@@ -113,6 +210,9 @@ describe('Frontend: browser bundle', function () {
             'The bundle contains files of the CommonJS build',
         );
         assert.doesNotMatch(bundle.code, /\brequire\s*\(/, 'The bundle still calls require()');
+
+        // older bundlers do not know "exports" and take the field "module": the path of the folder is resolved like that
+        assert.deepEqual(bundleForBrowser(`export { default, Types } from '..';`).files, bundle.files);
     });
 
     it('runs without any Node.js API and detects the same devices as Node.js', () => {
@@ -144,7 +244,7 @@ describe('Frontend: browser bundle', function () {
     });
 
     it('keeps only what is imported (tree-shaking)', () => {
-        const { files, code } = bundleForBrowser(`export { roleOrEnumLight } from '..';`);
+        const { files, code } = bundleForBrowser(`export { roleOrEnumLight } from '${PACKAGE}';`);
         assert.deepEqual(files, ['build/esm/roleEnumUtils.js'], `Bundle of ${code.length} bytes`);
         // the full bundle has the patterns and the detector
         assert.ok(bundle.files.includes('build/esm/typePatterns.js'));

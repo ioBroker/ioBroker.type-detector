@@ -26,6 +26,7 @@ import { ChannelDetector } from './ChannelDetector.js';
 export { roleOrEnumLight, roleOrEnumBlind, roleOrEnumWindow, roleOrEnumDoor, roleOrEnumGate } from './roleEnumUtils.js';
 
 export default ChannelDetector;
+export { ChannelDetector };
 export {
     type DetectorState,
     type DetectOptions,
