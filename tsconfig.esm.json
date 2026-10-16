@@ -1,0 +1,11 @@
+// ES module build for bundlers (field "module" of package.json): with it, they keep only what is imported.
+// The CommonJS build in build/ stays the one for Node.js and brings the type declarations
+{
+    "extends": "./tsconfig.build.json",
+    "compilerOptions": {
+        "module": "ES2022",
+        "moduleResolution": "bundler",
+        "outDir": "./build/esm/",
+        "declaration": false
+    }
+}

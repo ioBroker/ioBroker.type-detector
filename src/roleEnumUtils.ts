@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import type { PatternLanguages, PatternWords } from './types';
+import type { PatternLanguages, PatternWords } from './types.js';
 
 export function checkEnum(enums: string[], words: PatternWords): boolean {
     let found = false;

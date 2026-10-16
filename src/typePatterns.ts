@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types';
-import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './roleEnumUtils';
+import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types.js';
+import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './roleEnumUtils.js';
 
 const IGNORE_SETTINGS_REGEX = /^[^.]+\.setting\./;
 
