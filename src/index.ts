@@ -22,10 +22,11 @@
  * THE SOFTWARE.
  */
 
-import { ChannelDetector } from './ChannelDetector';
-export { roleOrEnumLight, roleOrEnumBlind, roleOrEnumWindow, roleOrEnumDoor, roleOrEnumGate } from './roleEnumUtils';
+import { ChannelDetector } from './ChannelDetector.js';
+export { roleOrEnumLight, roleOrEnumBlind, roleOrEnumWindow, roleOrEnumDoor, roleOrEnumGate } from './roleEnumUtils.js';
 
 export default ChannelDetector;
+export { ChannelDetector };
 export {
     type DetectorState,
     type DetectOptions,
@@ -35,4 +36,4 @@ export {
     type PatternName,
     Types,
     StateType,
-} from './types';
+} from './types.js';

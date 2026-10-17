@@ -1,0 +1,10 @@
+// ES module build: for bundlers (they keep only what is imported) and for `import` in Node.js.
+// It brings its own type declarations, so TypeScript sees the same default export as Node.js does
+{
+    "extends": "./tsconfig.build.json",
+    "compilerOptions": {
+        "module": "ES2022",
+        "moduleResolution": "bundler",
+        "outDir": "./build/esm/"
+    }
+}

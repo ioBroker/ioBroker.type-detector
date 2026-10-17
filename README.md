@@ -98,6 +98,11 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added: an ES module build, so bundlers keep only what is imported
+-   (@GermanBluefox) Fixed: in Node.js ES modules, `import ChannelDetector from '@iobroker/type-detector'` now gives the class and not an object with all exports (field `exports` in `package.json`). Deep imports into `build/` still work
+-   (@GermanBluefox) Added: the named export `ChannelDetector`, so `const { ChannelDetector } = require('@iobroker/type-detector')` as shown above works
+
 ### 6.0.3 (2026-10-14)
 -   (@GermanBluefox) `CONSUMPTION` now also accepts the documented role `value.energy.consumed` (and uses it as the default role); the deprecated `value.power.consumption` is still detected
 

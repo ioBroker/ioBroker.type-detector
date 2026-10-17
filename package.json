@@ -19,12 +19,12 @@
     "type": "git",
     "url": "git+https://github.com/ioBroker/ioBroker.type-detector.git"
   },
-  "dependencies": {},
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",
     "@alcalzone/release-script-plugin-license": "^5.2.0",
-    "@iobroker/types": "^7.2.2",
     "@iobroker/eslint-config": "^2.3.4",
+    "@iobroker/types": "^7.2.2",
+    "esbuild": "^0.28.2",
     "mocha": "^11.7.6",
     "typescript": "~6.0.3"
   },
@@ -32,6 +32,42 @@
     "url": "https://github.com/ioBroker/ioBroker.type-detector/issues"
   },
   "main": "build/index.js",
+  "module": "build/esm/index.js",
+  "types": "build/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/esm/index.d.ts",
+        "default": "./build/esm/index.js"
+      },
+      "require": {
+        "types": "./build/index.d.ts",
+        "default": "./build/index.js"
+      }
+    },
+    "./build/*.js": {
+      "import": {
+        "types": "./build/esm/*.d.ts",
+        "default": "./build/esm/*.js"
+      },
+      "require": {
+        "types": "./build/*.d.ts",
+        "default": "./build/*.js"
+      }
+    },
+    "./build/*": {
+      "import": {
+        "types": "./build/esm/*.d.ts",
+        "default": "./build/esm/*.js"
+      },
+      "require": {
+        "types": "./build/*.d.ts",
+        "default": "./build/*.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
   "files": [
     "LICENSE",
     "build/"
@@ -42,7 +78,7 @@
     "test:package": "node -e \"console.log('Not applicable')\"",
     "lint": "eslint -c eslint.config.mjs",
     "watch": "mocha --watch",
-    "build:ts": "tsc -p tsconfig.build.json",
+    "build:ts": "tsc -p tsconfig.build.json && tsc -p tsconfig.esm.json && node lib/markEsm",
     "build:doc": "node lib/createMd",
     "build": "npm run build:ts && npm run build:doc",
     "release": "release-script --noPush -y",
