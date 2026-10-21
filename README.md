@@ -98,7 +98,7 @@ if (controls) {
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 6.1.0 (2026-10-21)
 -   (@GermanBluefox) Added: an ES module build, so bundlers keep only what is imported
 -   (@GermanBluefox) Fixed: in Node.js ES modules, `import ChannelDetector from '@iobroker/type-detector'` now gives the class and not an object with all exports (field `exports` in `package.json`). Deep imports into `build/` still work
 -   (@GermanBluefox) Added: the named export `ChannelDetector`, so `const { ChannelDetector } = require('@iobroker/type-detector')` as shown above works
