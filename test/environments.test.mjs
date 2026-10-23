@@ -132,6 +132,7 @@ describe('Backend: Node.js', () => {
             'build/esm/ChannelDetector.d.ts',
             'build/esm/index.d.ts',
             'build/esm/roleEnumUtils.d.ts',
+            'build/esm/tvValues.d.ts',
             'build/esm/types.d.ts',
         ];
 

@@ -1,6 +1,7 @@
 const ChannelDetectorImport = require('../build/index');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
+const { TV_KEYS, TV_APPS, TV_INPUTS } = ChannelDetectorImport;
 const name = 'TS';
 
 function expect(condition, message) {
@@ -3588,6 +3589,161 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, { id: 'shelly.0.SHDM-2#081234567896#1.lights' });
         expect(!controls?.find(c => c.type === Types.dimmer), 'Dimmer must not be detected');
+
+        done();
+    });
+});
+
+describe(`${name} TV`, () => {
+    const state = (name, type, role, write, extra = {}) => ({
+        common: { name, type, role, read: !write || type !== 'boolean' || !role.startsWith('button'), write, ...extra },
+        type: 'state',
+    });
+    const KEYS = { UP: 'Up', DOWN: 'Down', LEFT: 'Left', RIGHT: 'Right', SELECT: 'Select', BACK: 'Back', HOME: 'Home' };
+
+    // a Samsung The Frame
+    function frameTv() {
+        return {
+            'samsung_tizen.0.tv': { common: { name: 'Samsung The Frame 55' }, type: 'channel' },
+            'samsung_tizen.0.tv.power': state('Power', 'boolean', 'switch.power', true),
+            'samsung_tizen.0.tv.key': state('Remote control key', 'string', 'media.key', true, { states: KEYS }),
+            'samsung_tizen.0.tv.volume': state('Volume', 'number', 'level.volume', true, { min: 0, max: 100 }),
+            'samsung_tizen.0.tv.mute': state('Mute', 'boolean', 'media.mute', true),
+            'samsung_tizen.0.tv.volumeUp': state('Volume up', 'boolean', 'button.volume.up', true),
+            'samsung_tizen.0.tv.volumeDown': state('Volume down', 'boolean', 'button.volume.down', true),
+            'samsung_tizen.0.tv.play': state('Play', 'boolean', 'button.play', true),
+            'samsung_tizen.0.tv.pause': state('Pause', 'boolean', 'button.pause', true),
+            'samsung_tizen.0.tv.app': state('App', 'string', 'media.app', true, {
+                states: { YOUTUBE: 'YouTube', NETFLIX: 'Netflix', DISNEY_PLUS: 'Disney+' },
+            }),
+            'samsung_tizen.0.tv.input': state('Input', 'string', 'media.input', true, {
+                states: { TV: 'TV', HDMI1: 'HDMI 1', HDMI2: 'HDMI 2' },
+            }),
+            'samsung_tizen.0.tv.artMode': state('Art mode', 'boolean', 'switch.mode.art', true),
+            'samsung_tizen.0.tv.unreach': state('Not reachable', 'boolean', 'indicator.maintenance.unreach', false),
+        };
+    }
+
+    it('Must detect a TV with all its states', done => {
+        const controls = detect(frameTv(), { id: 'samsung_tizen.0.tv' });
+
+        validate(controls[0], Types.tv, {
+            POWER: 'samsung_tizen.0.tv.power',
+            KEY: 'samsung_tizen.0.tv.key',
+            VOLUME: 'samsung_tizen.0.tv.volume',
+            MUTE: 'samsung_tizen.0.tv.mute',
+            VOLUME_UP: 'samsung_tizen.0.tv.volumeUp',
+            VOLUME_DOWN: 'samsung_tizen.0.tv.volumeDown',
+            PLAY: 'samsung_tizen.0.tv.play',
+            PAUSE: 'samsung_tizen.0.tv.pause',
+            APP: 'samsung_tizen.0.tv.app',
+            INPUT: 'samsung_tizen.0.tv.input',
+            ART_MODE: 'samsung_tizen.0.tv.artMode',
+            UNREACH: 'samsung_tizen.0.tv.unreach',
+        });
+        expect(controls.length === 1, `Expected one control, but found ${controls.map(c => c.type).join(', ')}`);
+
+        done();
+    });
+
+    it('Must detect a TV with only power and the remote control key', done => {
+        const objects = {
+            'tv.0.living': { common: { name: 'TV' }, type: 'channel' },
+            'tv.0.living.power': state('Power', 'boolean', 'switch.power', true),
+            'tv.0.living.key': state('Key', 'string', 'media.key', true),
+        };
+
+        const controls = detect(objects, { id: 'tv.0.living' });
+
+        validate(controls[0], Types.tv, { POWER: 'tv.0.living.power', KEY: 'tv.0.living.key' });
+
+        done();
+    });
+
+    it('Must not detect a TV without the remote control key', done => {
+        const objects = {
+            'tv.0.living': { common: { name: 'TV' }, type: 'channel' },
+            'tv.0.living.power': state('Power', 'boolean', 'switch.power', true),
+            'tv.0.living.volume': state('Volume', 'number', 'level.volume', true, { min: 0, max: 100 }),
+        };
+
+        const controls = detect(objects, { id: 'tv.0.living' });
+
+        expect(!controls?.find(c => c.type === Types.tv), 'TV must not be detected');
+
+        done();
+    });
+
+    it('Must keep the playback state of a TV and not detect a media player next to it', done => {
+        const objects = {
+            ...frameTv(),
+            'samsung_tizen.0.tv.state': state('Playback state', 'number', 'media.state', false, {
+                states: { 0: 'pause', 1: 'play', 2: 'stop' },
+            }),
+        };
+
+        const controls = detect(objects, { id: 'samsung_tizen.0.tv' });
+
+        expect(controls[0].type === Types.tv, `Expected tv but found ${controls[0].type}`);
+        expectStateToHaveId(controls[0].states, 'STATE', 'samsung_tizen.0.tv.state');
+        expect(!controls.find(c => c.type === Types.media), 'Media player must not be detected');
+
+        done();
+    });
+
+    it('Must still detect a media player without the remote control key', done => {
+        const objects = {
+            'sonos.0.player': { common: { name: 'Kitchen' }, type: 'channel' },
+            'sonos.0.player.state': state('State', 'number', 'media.state', false),
+            'sonos.0.player.play': state('Play', 'boolean', 'button.play', true),
+            'sonos.0.player.volume': state('Volume', 'number', 'level.volume', true, { min: 0, max: 100 }),
+            'sonos.0.player.power': state('Power', 'boolean', 'switch.power', true),
+        };
+
+        const controls = detect(objects, { id: 'sonos.0.player' });
+
+        validate(
+            controls[0],
+            Types.media,
+            {
+                STATE: 'sonos.0.player.state',
+                PLAY: 'sonos.0.player.play',
+                VOLUME: 'sonos.0.player.volume',
+            },
+            true,
+        );
+
+        done();
+    });
+
+    it('Must offer the fixed keys, apps and inputs as default states', done => {
+        const tv = ChannelDetector.getPatterns().tv;
+        const byName = name => tv.states.find(s => s.name === name);
+
+        expect(byName('KEY').defaultRole === 'media.key', `Unexpected default role ${byName('KEY').defaultRole}`);
+        expect(JSON.stringify(byName('KEY').defaultStates) === JSON.stringify(TV_KEYS), 'KEY must offer TV_KEYS');
+        expect(JSON.stringify(byName('APP').defaultStates) === JSON.stringify(TV_APPS), 'APP must offer TV_APPS');
+        expect(JSON.stringify(byName('INPUT').defaultStates) === JSON.stringify(TV_INPUTS), 'INPUT must offer TV_INPUTS');
+
+        done();
+    });
+
+    it('Must export the fixed values of keys, apps and inputs', done => {
+        for (const code of ['UP', 'DOWN', 'LEFT', 'RIGHT', 'SELECT', 'BACK', 'HOME']) {
+            expect(TV_KEYS[code], `Key ${code} is missing`);
+        }
+        for (const app of ['YOUTUBE', 'NETFLIX', 'DISNEY_PLUS', 'PRIME_VIDEO']) {
+            expect(TV_APPS[app], `App ${app} is missing`);
+        }
+        for (const input of ['TV', 'HDMI1', 'HDMI2', 'HDMI3', 'HDMI4']) {
+            expect(TV_INPUTS[input], `Input ${input} is missing`);
+        }
+        for (const values of [TV_KEYS, TV_APPS, TV_INPUTS]) {
+            for (const key of Object.keys(values)) {
+                expect(/^[A-Z][A-Z0-9_]*$/.test(key), `Invalid key ${key}`);
+            }
+            expect(Object.isFrozen(values), 'The fixed values must not be changeable');
+        }
 
         done();
     });

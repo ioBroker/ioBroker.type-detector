@@ -80,6 +80,7 @@ In [brackets] is given the class name of a device.
 * [Socket [socket]](#socket-socket)
 * [Temperature [temperature]](#temperature-temperature)
 * [Thermostat [thermostat]](#thermostat-thermostat)
+* [TV [tv]](#tv-tv)
 * [Vacuum cleaner (robot) [vacuumCleaner]](#vacuum-cleaner--robot--vacuumcleaner)
 * [Volume [volume]](#volume-volume)
 * [Volume group [volumeGroup]](#volume-group-volumegroup)
@@ -1032,6 +1033,34 @@ Thermostat to be controlled by the desired temperature. Could have mode.
 |            | ERROR          | indicator.error               |      |                |    | X   |       | `/^indicator\.error$/`                             |
 |            | BATTERY        | value.battery                 | %    | number         | -  |     |       | `/^value\.battery$/`                               |
 |            | RSSI           | value.rssi                    | dBm  | number         | -  |     |       | `/^value\.rssi$/`                                  |
+
+
+### TV [tv]
+
+TV switched on and off and controlled with the keys of a remote control (`media.key`). Could have volume, mute, playback buttons, input, app and art mode (Samsung The Frame).
+
+| R | Name          | Role                          | Unit | Type           | Wr | Min | Max | Ind | Multi | Regex                                    |
+|---|---------------|-------------------------------|------|----------------|----|-----|-----|-----|-------|------------------------------------------|
+| * | POWER         | switch.power                  |      | boolean        | W  |     |     |     |       | `/^switch\.power$/`                      |
+| * | KEY           | media.key                     |      | string         | W  |     |     |     |       | `/^media\.key$/`                         |
+|   | VOLUME        | level.volume                  | %    | number         | W  | m   | M   |     |       | `/^level(\.volume)?$/`                   |
+|   | VOLUME_ACTUAL | value.volume                  | %    | number         | -  | m   | M   |     |       | `/^value(\.volume)?$/`                   |
+|   | MUTE          | media.mute                    |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                     |
+|   | VOLUME_UP     | button.volume.up              |      | boolean        | W  |     |     |     |       | `/^button\.volume\.up$/`                 |
+|   | VOLUME_DOWN   | button.volume.down            |      | boolean        | W  |     |     |     |       | `/^button\.volume\.down$/`               |
+|   | STATE         | media.state                   |      | boolean/number |    |     |     |     |       | `/^media\.state(\..*)?$/`                |
+|   | PLAY          | button.play                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.play(\..*)?$/`       |
+|   | PAUSE         | button.pause                  |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.pause(\..*)?$/`      |
+|   | STOP          | button.stop                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.stop(\..*)?$/`       |
+|   | NEXT          | button.next                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.next(\..*)?$/`       |
+|   | PREV          | button.prev                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.prev(\..*)?$/`       |
+|   | INPUT         | media.input                   |      | string         | W  |     |     |     |       | `/^media\.input$/`                       |
+|   | APP           | media.app                     |      | string         | W  |     |     |     |       | `/^media\.app$/`                         |
+|   | ART_MODE      | switch.mode.art               |      | boolean        | W  |     |     |     |       | `/^switch\.mode\.art$/`                  |
+|   | UNREACH       | indicator.maintenance.unreach |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/` |
+|   | MAINTAIN      | indicator.maintenance         |      | boolean        |    |     |     | X   |       | `/^indicator\.maintenance$/`             |
+|   | ERROR         | indicator.error               |      |                |    |     |     | X   |       | `/^indicator\.error$/`                   |
+|   | RSSI          | value.rssi                    | dBm  | number         | -  |     |     |     |       | `/^value\.rssi$/`                        |
 
 
 ### Vacuum cleaner (robot) [vacuumCleaner]

@@ -66,6 +66,7 @@ export type PatternName =
     | 'fillLevel'
     | 'flow'
     | 'thermostat'
+    | 'tv'
     | 'unknown'
     | 'vacuumCleaner'
     | 'volume'
@@ -125,6 +126,7 @@ export enum Types {
     flow = 'flow',
     pressure = 'pressure',
     thermostat = 'thermostat',
+    tv = 'tv',
     vacuumCleaner = 'vacuumCleaner',
     volume = 'volume',
     volumeGroup = 'volumeGroup',

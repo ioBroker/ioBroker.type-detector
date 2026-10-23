@@ -92,12 +92,24 @@ if (controls) {
 }
 ```
 
+## Fixed values of the device type `tv`
+
+The keys of `common.states` of `KEY` (`media.key`), `APP` (`media.app`) and `INPUT` (`media.input`) come from `TV_KEYS`, `TV_APPS` and `TV_INPUTS` - any subset, own labels, no other keys:
+
+```js
+import { TV_KEYS, TV_APPS, TV_INPUTS } from '@iobroker/type-detector';
+// e.g. "states": { "YOUTUBE": "YouTube", "NETFLIX": "Netflix" }
+```
+
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added device type `tv`, see [Fixed values of the device type `tv`](#fixed-values-of-the-device-type-tv) and [DEVICES.md](DEVICES.md)
+
 ### 6.1.0 (2026-10-21)
 -   (@GermanBluefox) Added: an ES module build, so bundlers keep only what is imported
 -   (@GermanBluefox) Fixed: in Node.js ES modules, `import ChannelDetector from '@iobroker/type-detector'` now gives the class and not an object with all exports (field `exports` in `package.json`). Deep imports into `build/` still work
