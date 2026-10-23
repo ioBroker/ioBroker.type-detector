@@ -472,10 +472,7 @@ const AlarmPatterns: { severity: InternalDetectorState; muted: InternalDetectorS
     },
 };
 
-/**
- * States shared by the media player and the TV. They must stay identical across those types so
- * consumers can handle playback and volume with one implementation.
- */
+/** States shared by the media player and the TV */
 const MediaPatterns: {
     state: InternalDetectorState;
     play: InternalDetectorState;
@@ -588,11 +585,9 @@ export const patterns: { [key: string]: InternalPatternControl } = {
         states: [{ objectType: 'chart', name: 'CHART' }],
         type: Types.chart,
     },
-    // Registered before `mediaPlayer`, so a TV that also reports `media.state` keeps it as its own STATE
+    // before `mediaPlayer`: a TV with `media.state` stays a TV
     tv: {
-        // Switched on and off and controlled with the keys of a remote control - the two together are what
-        // separates a TV from a plain power switch. Maps to the Matter Basic Video Player, with APP to the
-        // Casting Video Player, and with the volume states to its Speaker endpoint.
+        // Matter: Basic Video Player, with APP Casting Video Player, volume on its Speaker endpoint
         states: [
             {
                 role: /^switch\.power$/,
@@ -612,7 +607,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: true,
                 noSubscribe: true,
                 defaultRole: 'media.key',
-                // the keys of `common.states` must be a subset of `TV_KEYS`
                 defaultStates: TV_KEYS,
             },
             // optional
@@ -649,7 +643,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 role: /^media\.input$/,
                 indicator: false,
                 write: true,
-                // a string, because the keys of `common.states` must be a subset of `TV_INPUTS`
                 type: StateType.String,
                 name: 'INPUT',
                 required: false,
@@ -664,7 +657,6 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'APP',
                 required: false,
                 defaultRole: 'media.app',
-                // the keys of `common.states` must be a subset of `TV_APPS`
                 defaultStates: TV_APPS,
             },
             {

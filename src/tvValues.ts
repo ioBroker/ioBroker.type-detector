@@ -1,26 +1,9 @@
 /**
- * The values of the `tv` states that take one of a fixed set of values: `KEY` (`media.key`),
- * `APP` (`media.app`) and `INPUT` (`media.input`).
- *
- * The keys of these objects are binding. A device lists the keys it supports in `common.states`
- * of its state - a subset, in any order - and may label them as it likes, e.g. translated:
- *
- * ```json
- * "common": { "role": "media.app", "type": "string", "states": { "YOUTUBE": "YouTube", "NETFLIX": "Netflix" } }
- * ```
- *
- * A key that is not listed here must not be used: consumers (widgets, the devices adapter, Matter)
- * rely on the keys to show the right button and icon and to translate them for other systems. A
- * missing app or input is added here with a new release.
- *
- * The adapter translates a written key into what its device understands (e.g. `YOUTUBE` into the
- * Samsung app ID `111299001912`).
+ * Fixed values of the `tv` states `KEY`, `APP` and `INPUT`. A device lists the keys it supports in
+ * `common.states` (any subset, own labels); other keys must not be used.
  */
 
-/**
- * Keys of a remote control, written to `media.key`. The names follow the CEC key codes of the
- * Matter KeypadInput cluster.
- */
+/** Keys of a remote control (`media.key`), named like the CEC codes of Matter KeypadInput */
 export const TV_KEYS: Readonly<Record<string, string>> = Object.freeze({
     UP: 'Up',
     DOWN: 'Down',
@@ -56,7 +39,7 @@ export const TV_KEYS: Readonly<Record<string, string>> = Object.freeze({
     BLUE: 'Blue',
 });
 
-/** Apps a TV can start, written to `media.app` */
+/** Apps a TV can start (`media.app`) */
 export const TV_APPS: Readonly<Record<string, string>> = Object.freeze({
     YOUTUBE: 'YouTube',
     YOUTUBE_MUSIC: 'YouTube Music',
@@ -79,10 +62,7 @@ export const TV_APPS: Readonly<Record<string, string>> = Object.freeze({
     BROWSER: 'Browser',
 });
 
-/**
- * Inputs a TV can switch to, written to `media.input`. `TV` is the built-in tuner (antenna, cable),
- * `SAT` a built-in satellite tuner.
- */
+/** Inputs a TV can switch to (`media.input`) */
 export const TV_INPUTS: Readonly<Record<string, string>> = Object.freeze({
     TV: 'TV',
     SAT: 'Satellite',

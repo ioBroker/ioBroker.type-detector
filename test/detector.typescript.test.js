@@ -3601,7 +3601,7 @@ describe(`${name} TV`, () => {
     });
     const KEYS = { UP: 'Up', DOWN: 'Down', LEFT: 'Left', RIGHT: 'Right', SELECT: 'Select', BACK: 'Back', HOME: 'Home' };
 
-    /** The `tv` channel the samsung_tizen adapter creates for a Samsung The Frame */
+    // a Samsung The Frame
     function frameTv() {
         return {
             'samsung_tizen.0.tv': { common: { name: 'Samsung The Frame 55' }, type: 'channel' },
@@ -3738,7 +3738,6 @@ describe(`${name} TV`, () => {
         for (const input of ['TV', 'HDMI1', 'HDMI2', 'HDMI3', 'HDMI4']) {
             expect(TV_INPUTS[input], `Input ${input} is missing`);
         }
-        // the keys are what devices and consumers agree on: upper case, digits and underscores only
         for (const values of [TV_KEYS, TV_APPS, TV_INPUTS]) {
             for (const key of Object.keys(values)) {
                 expect(/^[A-Z][A-Z0-9_]*$/.test(key), `Invalid key ${key}`);
