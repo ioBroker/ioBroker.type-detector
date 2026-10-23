@@ -107,7 +107,7 @@ import { TV_KEYS, TV_APPS, TV_INPUTS } from '@iobroker/type-detector';
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 6.2.0 (2026-10-23)
 -   (@GermanBluefox) Added device type `tv`, see [Fixed values of the device type `tv`](#fixed-values-of-the-device-type-tv) and [DEVICES.md](DEVICES.md)
 
 ### 6.1.0 (2026-10-21)
