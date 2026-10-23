@@ -98,6 +98,10 @@ if (controls) {
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added new device type `tv`: switched on and off (`switch.power`) and controlled with the keys of a remote control (new role `media.key`), optionally with volume, mute, playback buttons, input, app (new role `media.app`) and art mode (new role `switch.mode.art`). Maps to the Matter Basic and Casting Video Player
+-   (@GermanBluefox) Combined the playback and volume states shared by `media` and `tv` into one definition
+
 ### 6.1.0 (2026-10-21)
 -   (@GermanBluefox) Added: an ES module build, so bundlers keep only what is imported
 -   (@GermanBluefox) Fixed: in Node.js ES modules, `import ChannelDetector from '@iobroker/type-detector'` now gives the class and not an object with all exports (field `exports` in `package.json`). Deep imports into `build/` still work
