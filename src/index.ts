@@ -24,6 +24,7 @@
 
 import { ChannelDetector } from './ChannelDetector.js';
 export { roleOrEnumLight, roleOrEnumBlind, roleOrEnumWindow, roleOrEnumDoor, roleOrEnumGate } from './roleEnumUtils.js';
+export { TV_KEYS, TV_APPS, TV_INPUTS } from './tvValues.js';
 
 export default ChannelDetector;
 export { ChannelDetector };

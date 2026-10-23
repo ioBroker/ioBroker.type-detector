@@ -92,6 +92,33 @@ if (controls) {
 }
 ```
 
+## Fixed values of the device type `tv`
+
+The states `KEY` (`media.key`), `APP` (`media.app`) and `INPUT` (`media.input`) of a `tv` are strings with `common.states`. Their **keys** come from a fixed list, so that every consumer - widgets, the devices adapter, Matter - knows what a button means and which icon it gets:
+
+```js
+import { TV_KEYS, TV_APPS, TV_INPUTS } from '@iobroker/type-detector';
+```
+
+-   `TV_KEYS` - `UP`, `DOWN`, `LEFT`, `RIGHT`, `SELECT`, `BACK`, `EXIT`, `HOME`, `MENU`, `INFO`, `GUIDE`, `CHANNEL_UP`, `CHANNEL_DOWN`, `NUMBER_0` … `NUMBER_9`, `PLAY`, `PAUSE`, `STOP`, `REWIND`, `FAST_FORWARD`, `RED`, `GREEN`, `YELLOW`, `BLUE` (the CEC key codes of the Matter KeypadInput cluster)
+-   `TV_APPS` - `YOUTUBE`, `YOUTUBE_MUSIC`, `NETFLIX`, `DISNEY_PLUS`, `PRIME_VIDEO`, `APPLE_TV`, `MAX`, `PARAMOUNT_PLUS`, `DAZN`, `WOW`, `JOYN`, `RTL_PLUS`, `MAGENTA_TV`, `ARD_MEDIATHEK`, `ZDF_MEDIATHEK`, `SPOTIFY`, `TWITCH`, `PLEX`, `BROWSER`
+-   `TV_INPUTS` - `TV`, `SAT`, `HDMI1` … `HDMI4`, `USB`, `AV`, `COMPONENT`, `SCART`, `OPTICAL`, `AUX`
+
+A device lists only what it supports, in any order, and labels it as it likes:
+
+```json
+{
+    "common": {
+        "role": "media.app",
+        "type": "string",
+        "write": true,
+        "states": { "YOUTUBE": "YouTube", "NETFLIX": "Netflix", "DISNEY_PLUS": "Disney+" }
+    }
+}
+```
+
+The adapter translates a written key into what its device understands. A key that is not in the list must not be used - a missing app or input is added to the list with a new release.
+
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
@@ -101,6 +128,7 @@ if (controls) {
 ### **WORK IN PROGRESS**
 -   (@GermanBluefox) Added new device type `tv`: switched on and off (`switch.power`) and controlled with the keys of a remote control (new role `media.key`), optionally with volume, mute, playback buttons, input, app (new role `media.app`) and art mode (new role `switch.mode.art`). Maps to the Matter Basic and Casting Video Player
 -   (@GermanBluefox) Combined the playback and volume states shared by `media` and `tv` into one definition
+-   (@GermanBluefox) Added the fixed values of the `tv` states `KEY`, `APP` and `INPUT` as exports `TV_KEYS`, `TV_APPS` and `TV_INPUTS`: the keys of `common.states` must be taken from them (e.g. `YOUTUBE`, `NETFLIX`, `DISNEY_PLUS`, `HDMI1`)
 
 ### 6.1.0 (2026-10-21)
 -   (@GermanBluefox) Added: an ES module build, so bundlers keep only what is imported

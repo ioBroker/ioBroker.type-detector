@@ -1054,7 +1054,7 @@ TV switched on and off and controlled with the keys of a remote control (`media.
 |   | STOP          | button.stop                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.stop(\..*)?$/`       |
 |   | NEXT          | button.next                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.next(\..*)?$/`       |
 |   | PREV          | button.prev                   |      | boolean        | W  |     |     |     |       | `/^(button｜action)\.prev(\..*)?$/`       |
-|   | INPUT         | media.input                   |      | string/number  | W  |     |     |     |       | `/^media\.input$/`                       |
+|   | INPUT         | media.input                   |      | string         | W  |     |     |     |       | `/^media\.input$/`                       |
 |   | APP           | media.app                     |      | string         | W  |     |     |     |       | `/^media\.app$/`                         |
 |   | ART_MODE      | switch.mode.art               |      | boolean        | W  |     |     |     |       | `/^switch\.mode\.art$/`                  |
 |   | UNREACH       | indicator.maintenance.unreach |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/` |

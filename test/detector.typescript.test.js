@@ -1,6 +1,7 @@
 const ChannelDetectorImport = require('../build/index');
 const ChannelDetector = ChannelDetectorImport.default;
 const Types = ChannelDetectorImport.Types;
+const { TV_KEYS, TV_APPS, TV_INPUTS } = ChannelDetectorImport;
 const name = 'TS';
 
 function expect(condition, message) {
@@ -3613,7 +3614,10 @@ describe(`${name} TV`, () => {
             'samsung_tizen.0.tv.play': state('Play', 'boolean', 'button.play', true),
             'samsung_tizen.0.tv.pause': state('Pause', 'boolean', 'button.pause', true),
             'samsung_tizen.0.tv.app': state('App', 'string', 'media.app', true, {
-                states: { 111299001912: 'YouTube' },
+                states: { YOUTUBE: 'YouTube', NETFLIX: 'Netflix', DISNEY_PLUS: 'Disney+' },
+            }),
+            'samsung_tizen.0.tv.input': state('Input', 'string', 'media.input', true, {
+                states: { TV: 'TV', HDMI1: 'HDMI 1', HDMI2: 'HDMI 2' },
             }),
             'samsung_tizen.0.tv.artMode': state('Art mode', 'boolean', 'switch.mode.art', true),
             'samsung_tizen.0.tv.unreach': state('Not reachable', 'boolean', 'indicator.maintenance.unreach', false),
@@ -3633,6 +3637,7 @@ describe(`${name} TV`, () => {
             PLAY: 'samsung_tizen.0.tv.play',
             PAUSE: 'samsung_tizen.0.tv.pause',
             APP: 'samsung_tizen.0.tv.app',
+            INPUT: 'samsung_tizen.0.tv.input',
             ART_MODE: 'samsung_tizen.0.tv.artMode',
             UNREACH: 'samsung_tizen.0.tv.unreach',
         });
@@ -3711,13 +3716,34 @@ describe(`${name} TV`, () => {
         done();
     });
 
-    it('Must offer the remote control keys as default states of KEY', done => {
+    it('Must offer the fixed keys, apps and inputs as default states', done => {
         const tv = ChannelDetector.getPatterns().tv;
-        const key = tv.states.find(s => s.name === 'KEY');
+        const byName = name => tv.states.find(s => s.name === name);
 
-        expect(key.defaultRole === 'media.key', `Unexpected default role ${key.defaultRole}`);
+        expect(byName('KEY').defaultRole === 'media.key', `Unexpected default role ${byName('KEY').defaultRole}`);
+        expect(JSON.stringify(byName('KEY').defaultStates) === JSON.stringify(TV_KEYS), 'KEY must offer TV_KEYS');
+        expect(JSON.stringify(byName('APP').defaultStates) === JSON.stringify(TV_APPS), 'APP must offer TV_APPS');
+        expect(JSON.stringify(byName('INPUT').defaultStates) === JSON.stringify(TV_INPUTS), 'INPUT must offer TV_INPUTS');
+
+        done();
+    });
+
+    it('Must export the fixed values of keys, apps and inputs', done => {
         for (const code of ['UP', 'DOWN', 'LEFT', 'RIGHT', 'SELECT', 'BACK', 'HOME']) {
-            expect(key.defaultStates?.[code], `Default state ${code} is missing`);
+            expect(TV_KEYS[code], `Key ${code} is missing`);
+        }
+        for (const app of ['YOUTUBE', 'NETFLIX', 'DISNEY_PLUS', 'PRIME_VIDEO']) {
+            expect(TV_APPS[app], `App ${app} is missing`);
+        }
+        for (const input of ['TV', 'HDMI1', 'HDMI2', 'HDMI3', 'HDMI4']) {
+            expect(TV_INPUTS[input], `Input ${input} is missing`);
+        }
+        // the keys are what devices and consumers agree on: upper case, digits and underscores only
+        for (const values of [TV_KEYS, TV_APPS, TV_INPUTS]) {
+            for (const key of Object.keys(values)) {
+                expect(/^[A-Z][A-Z0-9_]*$/.test(key), `Invalid key ${key}`);
+            }
+            expect(Object.isFrozen(values), 'The fixed values must not be changeable');
         }
 
         done();

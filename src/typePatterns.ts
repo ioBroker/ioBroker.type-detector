@@ -24,6 +24,7 @@
 
 import { type InternalDetectorState, type InternalPatternControl, StateType, Types } from './types.js';
 import { roleOrEnumBlind, roleOrEnumDoor, roleOrEnumGate, roleOrEnumLight, roleOrEnumWindow } from './roleEnumUtils.js';
+import { TV_APPS, TV_INPUTS, TV_KEYS } from './tvValues.js';
 
 const IGNORE_SETTINGS_REGEX = /^[^.]+\.setting\./;
 
@@ -582,46 +583,6 @@ const MediaPatterns: {
     },
 };
 
-/**
- * The keys of a remote control as written to `media.key`. The names follow the CEC key codes of the
- * Matter KeypadInput cluster, so a consumer can forward them without a lookup table of its own.
- * An adapter lists the keys its device understands in `common.states`; this is only the default.
- */
-const TV_KEYS: Record<string, string> = {
-    UP: 'Up',
-    DOWN: 'Down',
-    LEFT: 'Left',
-    RIGHT: 'Right',
-    SELECT: 'Select',
-    BACK: 'Back',
-    EXIT: 'Exit',
-    HOME: 'Home',
-    MENU: 'Menu',
-    INFO: 'Info',
-    GUIDE: 'Guide',
-    CHANNEL_UP: 'Channel up',
-    CHANNEL_DOWN: 'Channel down',
-    NUMBER_0: '0',
-    NUMBER_1: '1',
-    NUMBER_2: '2',
-    NUMBER_3: '3',
-    NUMBER_4: '4',
-    NUMBER_5: '5',
-    NUMBER_6: '6',
-    NUMBER_7: '7',
-    NUMBER_8: '8',
-    NUMBER_9: '9',
-    PLAY: 'Play',
-    PAUSE: 'Pause',
-    STOP: 'Stop',
-    REWIND: 'Rewind',
-    FAST_FORWARD: 'Fast forward',
-    RED: 'Red',
-    GREEN: 'Green',
-    YELLOW: 'Yellow',
-    BLUE: 'Blue',
-};
-
 export const patterns: { [key: string]: InternalPatternControl } = {
     chart: {
         states: [{ objectType: 'chart', name: 'CHART' }],
@@ -651,6 +612,7 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 required: true,
                 noSubscribe: true,
                 defaultRole: 'media.key',
+                // the keys of `common.states` must be a subset of `TV_KEYS`
                 defaultStates: TV_KEYS,
             },
             // optional
@@ -687,10 +649,12 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 role: /^media\.input$/,
                 indicator: false,
                 write: true,
-                type: [StateType.String, StateType.Number],
+                // a string, because the keys of `common.states` must be a subset of `TV_INPUTS`
+                type: StateType.String,
                 name: 'INPUT',
                 required: false,
                 defaultRole: 'media.input',
+                defaultStates: TV_INPUTS,
             },
             {
                 role: /^media\.app$/,
@@ -700,6 +664,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 name: 'APP',
                 required: false,
                 defaultRole: 'media.app',
+                // the keys of `common.states` must be a subset of `TV_APPS`
+                defaultStates: TV_APPS,
             },
             {
                 role: /^switch\.mode\.art$/,
