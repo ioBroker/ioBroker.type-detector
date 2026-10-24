@@ -23,7 +23,7 @@ export function register(config?: {
     onUpdate: (r: ServiceWorkerRegistration) => void;
     onSuccess: (r: ServiceWorkerRegistration) => void;
 }): void {
-    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    if (import.meta.env.PROD && 'serviceWorker' in navigator) {
         // The URL constructor is available in all browsers that support SW.
         const publicUrl = new URL('./', window.location.href);
         if (publicUrl.origin !== window.location.origin) {

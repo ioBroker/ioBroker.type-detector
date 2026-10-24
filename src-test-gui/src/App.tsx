@@ -18,8 +18,8 @@ import {
     FormControlLabel,
     Checkbox,
 } from '@mui/material';
-import ChannelDetector, { type DetectOptions, type PatternControl, Types } from '../../src';
 import { Brightness1 } from '@mui/icons-material';
+import ChannelDetector, { type DetectOptions, type PatternControl, Types } from '../../src';
 
 interface AppState {
     json: string;
