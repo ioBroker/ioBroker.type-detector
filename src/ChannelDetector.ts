@@ -250,6 +250,8 @@ export class ChannelDetector {
         const sortedKeys = context.sortedKeys;
         let result = context.result;
         let found = false;
+        // States rejected before this scan lost a slot of another state of the pattern and stay available to this one
+        const rejectedBeforeThisState = context.rejectedInCurrentDevice.length;
         // let count = 0;
 
         // check every state in a channel
@@ -409,7 +411,8 @@ export class ChannelDetector {
                             if (
                                 (state.indicator ||
                                     (!usedInCurrentDevice.includes(cid) &&
-                                        !context.rejectedInCurrentDevice.includes(cid) &&
+                                        // Do not re-adopt a state this scan has just evicted from its slot
+                                        context.rejectedInCurrentDevice.lastIndexOf(cid) < rejectedBeforeThisState &&
                                         (state.notSingle || !usedIds.includes(cid)))) &&
                                 this._applyPattern(objects, cid, state, ignoreEnums, sortedKeys)
                             ) {
@@ -594,7 +597,14 @@ export class ChannelDetector {
 
     private static cleanState(state: DetectorState, objects: Record<string, ioBroker.Object>): void {
         const role: string = objects[state.id]?.common?.role || '';
-        if (state.name.includes('%d') && state.role && state.id && role) {
+        const stateName = state.original?.stateName;
+        if (state.name.includes('%d') && state.id && stateName) {
+            // A state matched by its ID takes the number from the ID, e.g. `POWER2` becomes `SET2`
+            const m = stateName.exec(state.id);
+            if (m?.[1] !== undefined) {
+                state.name = state.name.replace('%d', m[1]);
+            }
+        } else if (state.name.includes('%d') && state.role && state.id && role) {
             const m = state.role.exec(role);
             if (m) {
                 state.name = state.name.replace('%d', m[1]);
@@ -917,6 +927,9 @@ export class ChannelDetector {
                 const oldState = patterns[type].states[i];
                 if (oldState.role) {
                     item.states[i].role = oldState.role.toString();
+                }
+                if (oldState.stateName) {
+                    item.states[i].stateName = oldState.stateName.toString();
                 }
 
                 if (oldState.enums) {

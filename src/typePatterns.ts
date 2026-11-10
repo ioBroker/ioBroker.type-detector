@@ -3590,6 +3590,20 @@ export const patterns: { [key: string]: InternalPatternControl } = {
                 defaultRole: 'switch',
             },
             // optional
+            // Further outlets of a power strip or of a device with several relays in one channel, e.g. Tasmota's
+            // `POWER1` ... `POWERn`. Only IDs ending with a number qualify, so a child lock or an LED switch beside
+            // the outlet is not taken. `SET` keeps the outlet it had before; the others get the number of their ID.
+            // No `defaultRole`, so `ioBroker.devices` does not offer it as a field of its own.
+            {
+                role: /^(?:switch(?:\.active)?|state)$/,
+                stateName: /(\d+)$/,
+                indicator: false,
+                type: StateType.Boolean,
+                write: true,
+                name: 'SET%d',
+                required: false,
+                multiple: true,
+            },
             {
                 role: /^state\.active$|^sensor\.switch$/,
                 indicator: false,

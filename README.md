@@ -101,12 +101,23 @@ import { TV_KEYS, TV_APPS, TV_INPUTS } from '@iobroker/type-detector';
 // e.g. "states": { "YOUTUBE": "YouTube", "NETFLIX": "Netflix" }
 ```
 
+## Several outlets of the device type `socket`
+
+A power strip or a device with several relays in one channel, e.g. Tasmota with `POWER1` ... `POWERn`, is detected as one `socket`. `SET` is the outlet the socket had before, and every further outlet is a state `SET<n>`, where `<n>` is the number at the end of its ID: `POWER1` becomes `SET1`. A shared energy meter belongs to the socket as usual.
+
+Only writable boolean switches whose ID ends with a number become further outlets, so a child lock or an LED switch beside the outlet is not taken. To show all outlets, use `SET` and every state whose name matches `/^SET\d+$/`.
+
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Added: a `socket` takes the further outlets of a power strip or a multi-relay device as `SET1` ... `SETn`, see [Several outlets of the device type `socket`](#several-outlets-of-the-device-type-socket)
+-   (@GermanBluefox) Fixed: a `multiple` state of a pattern also takes states that lost the slot of another state of the same pattern, as intended in 6.0.0 (#284). This also changes the weather forecast: `WIND_DIRECTION_STR0` now lists all wind directions of day 1 that `WIND_DIRECTION_STR` did not take
+-   (@GermanBluefox) Fixed: `getPatterns()` returns `stateName` as a string like `role`, not as an empty object
+
 ### 6.2.0 (2026-10-23)
 -   (@GermanBluefox) Added device type `tv`, see [Fixed values of the device type `tv`](#fixed-values-of-the-device-type-tv) and [DEVICES.md](DEVICES.md)
 

@@ -251,9 +251,10 @@ export interface DetectorState extends InternalDetectorState {
     original?: InternalDetectorState;
     id: string;
 }
-export interface ExternalDetectorState extends Omit<InternalDetectorState, 'enums' | 'role'> {
+export interface ExternalDetectorState extends Omit<InternalDetectorState, 'enums' | 'role' | 'stateName'> {
     enums?: boolean;
     role?: string;
+    stateName?: string;
 }
 
 export interface DetectOptions {
