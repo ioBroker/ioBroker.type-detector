@@ -1824,6 +1824,47 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must return the ID regex of a state as a string in getPatterns()`, done => {
+        const patterns = ChannelDetector.getPatterns();
+
+        const ignore = patterns.mediaPlayer.states.find(state => state.name === 'IGNORE');
+        expect(
+            ignore.stateName === String.raw`/\.(paused|playerState)$/`,
+            `Unexpected stateName of IGNORE: ${JSON.stringify(ignore.stateName)}`,
+        );
+        // A state without an ID regex must not get a stateName
+        const set = patterns.socket.states.find(state => state.name === 'SET');
+        expect(!('stateName' in set), `Unexpected stateName of SET: ${JSON.stringify(set.stateName)}`);
+
+        done();
+    });
+
+    it(`${name} Must find the sockets of relays with a separator before the number`, done => {
+        const relay = name => ({
+            common: { name, type: 'boolean', role: 'switch', read: true, write: true },
+            type: 'state',
+        });
+        const objects = {
+            'test.0.Strip': { common: { name: 'Power strip' }, type: 'device' },
+            'test.0.Strip.relay': relay('Relay'),
+            'test.0.Strip.relay_1': relay('Relay 1'),
+            'test.0.Strip.relay-2': relay('Relay 2'),
+            'test.0.Strip.relay10': relay('Relay 10'),
+            'test.0.Strip.led_1': relay('LED'),
+        };
+
+        const controls = detect(objects, { id: 'test.0.Strip' });
+        const relays = controls
+            .filter(({ type }) => type === Types.socket)
+            .map(({ states }) => states.find(({ name }) => name === 'SET').id.split('.').pop());
+        expect(
+            JSON.stringify(relays) === JSON.stringify(['relay', 'relay_1', 'relay-2', 'relay10']),
+            `Unexpected sockets: ${relays.join(', ')}`,
+        );
+
+        done();
+    });
+
     it(`${name} Must offer the electricity states on the mains appliances`, done => {
         const patterns = ChannelDetector.getPatterns();
         const hasPower = type =>

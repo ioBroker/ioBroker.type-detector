@@ -607,7 +607,16 @@ export class ChannelDetector {
      * The IDs of the devices of a `repeatable` pattern in one channel must have the same stem.
      */
     private static getRepeatStem(id: string): string {
-        return (id.split('.').pop() || '').replace(/[_-]?\d+$/, '');
+        const name = id.split('.').pop() || '';
+        // Without a regular expression: `/[_-]?\d+$/` gets slow on a name with many digits before another character
+        let end = name.length;
+        while (end > 0 && name[end - 1] >= '0' && name[end - 1] <= '9') {
+            end--;
+        }
+        if (end < name.length && end > 0 && (name[end - 1] === '_' || name[end - 1] === '-')) {
+            end--;
+        }
+        return name.slice(0, end);
     }
 
     /**
