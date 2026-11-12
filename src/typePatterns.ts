@@ -3609,6 +3609,8 @@ export const patterns: { [key: string]: InternalPatternControl } = {
             SharedPatterns.rssi,
         ],
         type: Types.socket,
+        // One socket for every relay of a power strip or of a device with several relays in one channel
+        repeatable: true,
     },
     button: {
         states: [

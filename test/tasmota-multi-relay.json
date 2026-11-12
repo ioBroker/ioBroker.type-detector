@@ -1,0 +1,651 @@
+{
+  "sonoff.0.DVES_000001": {
+    "_id": "sonoff.0.DVES_000001",
+    "type": "channel",
+    "common": {
+      "name": "DVES_000001",
+      "desc": ""
+    }
+  },
+  "sonoff.0.DVES_000001.ANALOG_A0": {
+    "_id": "sonoff.0.DVES_000001.ANALOG_A0",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 ANALOG  A0"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_ApparentPower": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_ApparentPower",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.power.apparent",
+      "read": true,
+      "write": false,
+      "unit": "VA",
+      "name": "DVES_000001 ENERGY  ApparentPower"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Current": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Current",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.current",
+      "read": true,
+      "write": false,
+      "unit": "A",
+      "name": "DVES_000001 ENERGY  Current"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Factor": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Factor",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 ENERGY  Factor"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Period": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Period",
+    "type": "state",
+    "common": {
+      "role": "value",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001 ENERGY  Period"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Power": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Power",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.power.consumption",
+      "read": true,
+      "write": false,
+      "unit": "W",
+      "name": "DVES_000001 ENERGY  Power"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_ReactivePower": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_ReactivePower",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.power.reactive",
+      "read": true,
+      "write": false,
+      "unit": "var",
+      "name": "DVES_000001 ENERGY  ReactivePower"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Today": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Today",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.energy.consumed",
+      "read": true,
+      "write": false,
+      "unit": "kWh",
+      "name": "DVES_000001 ENERGY  Today"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Total": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Total",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.power.consumption",
+      "read": true,
+      "write": false,
+      "unit": "kWh",
+      "name": "DVES_000001 ENERGY  Total"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_TotalStartTime": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_TotalStartTime",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "value",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 ENERGY  TotalStartTime"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Voltage": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Voltage",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.voltage",
+      "read": true,
+      "write": false,
+      "unit": "V",
+      "name": "DVES_000001 ENERGY  Voltage"
+    }
+  },
+  "sonoff.0.DVES_000001.ENERGY_Yesterday": {
+    "_id": "sonoff.0.DVES_000001.ENERGY_Yesterday",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.energy.consumed",
+      "read": true,
+      "write": false,
+      "unit": "kWh",
+      "name": "DVES_000001 ENERGY  Yesterday"
+    }
+  },
+  "sonoff.0.DVES_000001.Heap": {
+    "_id": "sonoff.0.DVES_000001.Heap",
+    "type": "state",
+    "common": {
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001  Heap",
+      "unit": "kB"
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.BuildDateTime": {
+    "_id": "sonoff.0.DVES_000001.INFO.BuildDateTime",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  BuildDateTime",
+      "type": "string",
+      "role": "date",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Core": {
+    "_id": "sonoff.0.DVES_000001.INFO.Core",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Core",
+      "type": "string",
+      "role": "info.firmware",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.CpuFrequency": {
+    "_id": "sonoff.0.DVES_000001.INFO.CpuFrequency",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  CpuFrequency",
+      "type": "number",
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "unit": "MHz"
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.DNSServer1": {
+    "_id": "sonoff.0.DVES_000001.INFO.DNSServer1",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  DNSServer1",
+      "type": "string",
+      "role": "info.ip",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.DNSServer2": {
+    "_id": "sonoff.0.DVES_000001.INFO.DNSServer2",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  DNSServer2",
+      "type": "string",
+      "role": "info.ip",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Gateway": {
+    "_id": "sonoff.0.DVES_000001.INFO.Gateway",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Gateway",
+      "type": "string",
+      "role": "info.ip",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.HTTP_API": {
+    "_id": "sonoff.0.DVES_000001.INFO.HTTP_API",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  HTTP_API",
+      "type": "number",
+      "role": "info.status",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Hardware": {
+    "_id": "sonoff.0.DVES_000001.INFO.Hardware",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Hardware",
+      "type": "string",
+      "role": "info.hardware",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Hostname": {
+    "_id": "sonoff.0.DVES_000001.INFO.Hostname",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Hostname",
+      "type": "string",
+      "role": "info.name",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.IPAddress": {
+    "_id": "sonoff.0.DVES_000001.INFO.IPAddress",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  IPAddress",
+      "type": "string",
+      "role": "info.ip",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Info1_Module": {
+    "_id": "sonoff.0.DVES_000001.INFO.Info1_Module",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 INFO Info1  Module"
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Info1_Version": {
+    "_id": "sonoff.0.DVES_000001.INFO.Info1_Version",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 INFO Info1  Version"
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Info2_Hostname": {
+    "_id": "sonoff.0.DVES_000001.INFO.Info2_Hostname",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 INFO Info2  Hostname"
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Info2_IPAddress": {
+    "_id": "sonoff.0.DVES_000001.INFO.Info2_IPAddress",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 INFO Info2  IPAddress"
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Info3_RestartReason": {
+    "_id": "sonoff.0.DVES_000001.INFO.Info3_RestartReason",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 INFO Info3  RestartReason"
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Mac": {
+    "_id": "sonoff.0.DVES_000001.INFO.Mac",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Mac",
+      "type": "string",
+      "role": "info.mac",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.SDK": {
+    "_id": "sonoff.0.DVES_000001.INFO.SDK",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  SDK",
+      "type": "string",
+      "role": "info.firmware",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Subnetmask": {
+    "_id": "sonoff.0.DVES_000001.INFO.Subnetmask",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Subnetmask",
+      "type": "string",
+      "role": "info.address",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Version": {
+    "_id": "sonoff.0.DVES_000001.INFO.Version",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Version",
+      "type": "string",
+      "role": "info.firmware",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.Webserver": {
+    "_id": "sonoff.0.DVES_000001.INFO.Webserver",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  Webserver",
+      "type": "number",
+      "role": "info.status",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.WifiConfig": {
+    "_id": "sonoff.0.DVES_000001.INFO.WifiConfig",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  WifiConfig",
+      "type": "number",
+      "role": "info.status",
+      "read": true,
+      "write": false
+    }
+  },
+  "sonoff.0.DVES_000001.INFO.WifiPower": {
+    "_id": "sonoff.0.DVES_000001.INFO.WifiPower",
+    "type": "state",
+    "common": {
+      "name": "DVES_000001 INFO  WifiPower",
+      "type": "number",
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "unit": "dBm"
+    }
+  },
+  "sonoff.0.DVES_000001.LoadAvg": {
+    "_id": "sonoff.0.DVES_000001.LoadAvg",
+    "type": "state",
+    "common": {
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001  LoadAvg"
+    }
+  },
+  "sonoff.0.DVES_000001.MqttCount": {
+    "_id": "sonoff.0.DVES_000001.MqttCount",
+    "type": "state",
+    "common": {
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001  MqttCount"
+    }
+  },
+  "sonoff.0.DVES_000001.POWER": {
+    "_id": "sonoff.0.DVES_000001.POWER",
+    "type": "state",
+    "common": {
+      "type": "boolean",
+      "role": "switch",
+      "read": true,
+      "write": true,
+      "name": "DVES_000001 POWER"
+    }
+  },
+  "sonoff.0.DVES_000001.POWER1": {
+    "_id": "sonoff.0.DVES_000001.POWER1",
+    "type": "state",
+    "common": {
+      "type": "boolean",
+      "role": "switch",
+      "read": true,
+      "write": true,
+      "name": "DVES_000001  POWER1"
+    }
+  },
+  "sonoff.0.DVES_000001.POWER2": {
+    "_id": "sonoff.0.DVES_000001.POWER2",
+    "type": "state",
+    "common": {
+      "type": "boolean",
+      "role": "switch",
+      "read": true,
+      "write": true,
+      "name": "DVES_000001  POWER2"
+    }
+  },
+  "sonoff.0.DVES_000001.POWER3": {
+    "_id": "sonoff.0.DVES_000001.POWER3",
+    "type": "state",
+    "common": {
+      "type": "boolean",
+      "role": "switch",
+      "read": true,
+      "write": true,
+      "name": "DVES_000001  POWER3"
+    }
+  },
+  "sonoff.0.DVES_000001.POWER4": {
+    "_id": "sonoff.0.DVES_000001.POWER4",
+    "type": "state",
+    "common": {
+      "type": "boolean",
+      "role": "switch",
+      "read": true,
+      "write": true,
+      "name": "DVES_000001  POWER4"
+    }
+  },
+  "sonoff.0.DVES_000001.Sleep": {
+    "_id": "sonoff.0.DVES_000001.Sleep",
+    "type": "state",
+    "common": {
+      "role": "value.interval",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001  Sleep",
+      "unit": "ms"
+    }
+  },
+  "sonoff.0.DVES_000001.SleepMode": {
+    "_id": "sonoff.0.DVES_000001.SleepMode",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001  SleepMode"
+    }
+  },
+  "sonoff.0.DVES_000001.Time": {
+    "_id": "sonoff.0.DVES_000001.Time",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": true,
+      "name": "DVES_000001  Time"
+    }
+  },
+  "sonoff.0.DVES_000001.Uptime": {
+    "_id": "sonoff.0.DVES_000001.Uptime",
+    "type": "state",
+    "common": {
+      "type": "mixed",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001  Uptime"
+    }
+  },
+  "sonoff.0.DVES_000001.UptimeSec": {
+    "_id": "sonoff.0.DVES_000001.UptimeSec",
+    "type": "state",
+    "common": {
+      "role": "value.interval",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001  UptimeSec",
+      "unit": "s"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_AP": {
+    "_id": "sonoff.0.DVES_000001.Wifi_AP",
+    "type": "state",
+    "common": {
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001 Wifi  AP"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_BSSId": {
+    "_id": "sonoff.0.DVES_000001.Wifi_BSSId",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 Wifi  BSSId"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_Channel": {
+    "_id": "sonoff.0.DVES_000001.Wifi_Channel",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 Wifi  Channel"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_Downtime": {
+    "_id": "sonoff.0.DVES_000001.Wifi_Downtime",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "state",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 Wifi  Downtime"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_LinkCount": {
+    "_id": "sonoff.0.DVES_000001.Wifi_LinkCount",
+    "type": "state",
+    "common": {
+      "role": "info.status",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001 Wifi  LinkCount"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_Mode": {
+    "_id": "sonoff.0.DVES_000001.Wifi_Mode",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "value",
+      "read": true,
+      "write": true,
+      "name": "DVES_000001 Wifi  Mode"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_RSSI": {
+    "_id": "sonoff.0.DVES_000001.Wifi_RSSI",
+    "type": "state",
+    "common": {
+      "type": "number",
+      "role": "value.rssi",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 Wifi  RSSI"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_SSId": {
+    "_id": "sonoff.0.DVES_000001.Wifi_SSId",
+    "type": "state",
+    "common": {
+      "type": "string",
+      "role": "text",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 Wifi  SSId"
+    }
+  },
+  "sonoff.0.DVES_000001.Wifi_Signal": {
+    "_id": "sonoff.0.DVES_000001.Wifi_Signal",
+    "type": "state",
+    "common": {
+      "role": "value.rssi",
+      "read": true,
+      "write": false,
+      "type": "number",
+      "name": "DVES_000001 Wifi  Signal",
+      "unit": "dBm"
+    }
+  },
+  "sonoff.0.DVES_000001.alive": {
+    "_id": "sonoff.0.DVES_000001.alive",
+    "type": "state",
+    "common": {
+      "type": "boolean",
+      "role": "indicator.reachable",
+      "read": true,
+      "write": false,
+      "name": "DVES_000001 alive"
+    }
+  }
+}

@@ -793,7 +793,7 @@ Lock. Could be opened (true), closed (false) or opened completely by `OPEN` stat
 |   | MUTE          | media.mute                    |      | boolean        | W  |     |     |     |       | `/^media(\.mute)?$/`                              |
 |   | PLAYER_NAME   | media.player.name             |      | string         |    |     |     |     |       | `/^media\.player\.name$/`                         |
 |   | PLAYER_TYPE   | media.player.type             |      | string         | -  |     |     |     |       | `/^media\.player\.type/`                          |
-|   | IGNORE        |                               |      |                |    |     |     |     | x     |                                                   |
+|   | IGNORE        |                               |      |                |    |     |     |     | x     | ID: `/\.(paused｜playerState)$/`                   |
 |   | CONNECTED     | indicator.reachable           |      | boolean        |    |     |     | X   |       | `/^indicator\.reachable$/`                        |
 |   | UNREACH       | indicator.maintenance.unreach |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.unreach$/`          |
 |   | LOWBAT        | indicator.maintenance.lowbat  |      | boolean        |    |     |     | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/` |
@@ -968,6 +968,8 @@ RGBW light with one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,
 ### Socket [socket]
 
 Socket with an ON/OFF option. Could have information about current, amperage, energy and power.
+
+Several devices of this type can be in one channel: one for every state of the required state whose ID differs only by a number at the end (e.g. `POWER`, `POWER1`, `POWER2`). The other states belong to the first device only.
 
 | R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                              |
 |---|----------------|-------------------------------|------|---------|----|-----|-------|----------------------------------------------------|

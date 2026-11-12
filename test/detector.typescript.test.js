@@ -1098,6 +1098,93 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
+    it(`${name} Must detect every relay of a multi-relay device as a socket of its own`, done => {
+        // A Tasmota device with five relays and one energy meter for all of them (ioBroker.devices issue #740)
+        const controls = detect('./tasmota-multi-relay.json', { id: 'sonoff.0.DVES_000001' });
+        const sockets = controls.filter(({ type }) => type === Types.socket);
+
+        const relays = sockets.map(({ states }) => states.find(({ name }) => name === 'SET').id);
+        const expected = ['POWER', 'POWER1', 'POWER2', 'POWER3', 'POWER4'].map(r => `sonoff.0.DVES_000001.${r}`);
+        expect(JSON.stringify(relays) === JSON.stringify(expected), `Unexpected sockets: ${relays.join(', ')}`);
+
+        // The energy meter is shared by all relays and belongs to the first socket only
+        expectStateToHaveId(sockets[0].states, 'CURRENT', 'sonoff.0.DVES_000001.ENERGY_Current');
+        expectStateToHaveId(sockets[0].states, 'VOLTAGE', 'sonoff.0.DVES_000001.ENERGY_Voltage');
+        for (const socket of sockets.slice(1)) {
+            expect(
+                !socket.states.some(({ name, id }) => id && ['CURRENT', 'VOLTAGE', 'CONSUMPTION'].includes(name)),
+                'The energy meter must belong to the first socket only',
+            );
+            // The signal strength is an indicator of the whole device and belongs to every socket
+            expectStateToHaveId(socket.states, 'RSSI', 'sonoff.0.DVES_000001.Wifi_Signal');
+        }
+
+        done();
+    });
+
+    it(`${name} Must end the sockets of a multi-relay device in every detection mode`, done => {
+        const objects = require('./tasmota-multi-relay.json');
+        // `detectAllPossibleDevices` forgets the used states after every device, so the sockets must still end
+        const controls = new ChannelDetector().detect({
+            objects,
+            id: 'sonoff.0.DVES_000001',
+            detectAllPossibleDevices: true,
+        });
+        const sockets = controls.filter(({ type }) => type === Types.socket);
+        expect(sockets.length === 5, `Expected 5 sockets but found ${sockets.length}`);
+
+        done();
+    });
+
+    it(`${name} Must make a socket only of the switches named like the first one`, done => {
+        const objects = {
+            'zigbee.0.DuoPlug': { common: { name: 'Duo plug' }, type: 'device' },
+            'zigbee.0.DuoPlug.child_lock': {
+                common: { name: 'Child lock', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.DuoPlug.state_l1': {
+                common: { name: 'Outlet 1', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.DuoPlug.state_l2': {
+                common: { name: 'Outlet 2', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'zigbee.0.DuoPlug' });
+
+        expect(controls.length === 2, `Expected two controls but found ${controls.length}`);
+        validate(controls[0], Types.socket, { SET: 'zigbee.0.DuoPlug.state_l1' }, true);
+        validate(controls[1], Types.socket, { SET: 'zigbee.0.DuoPlug.state_l2' }, true);
+
+        done();
+    });
+
+    it(`${name} Must detect a single socket beside another switch as before`, done => {
+        const objects = {
+            'zigbee.0.Plug5': { common: { name: 'Plug' }, type: 'device' },
+            'zigbee.0.Plug5.led': {
+                common: { name: 'LED', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+            'zigbee.0.Plug5.state_l1': {
+                common: { name: 'Outlet', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
+        };
+
+        const controls = detect(objects, { id: 'zigbee.0.Plug5' });
+
+        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
+        validate(controls[0], Types.socket, {
+            SET: 'zigbee.0.Plug5.state_l1',
+        });
+
+        done();
+    });
+
     it(`${name} Must detect the valve and the running mode of a thermostat`, done => {
         const objects = {
             'matter.0.Trv': { common: { name: 'Radiator thermostat' }, type: 'device' },
@@ -1733,6 +1820,47 @@ describe(`${name} Test Detector`, () => {
             ELECTRIC_POWER: 'hp.0.HeatPump.power',
             CONSUMPTION: 'hp.0.HeatPump.energy',
         });
+
+        done();
+    });
+
+    it(`${name} Must return the ID regex of a state as a string in getPatterns()`, done => {
+        const patterns = ChannelDetector.getPatterns();
+
+        const ignore = patterns.mediaPlayer.states.find(state => state.name === 'IGNORE');
+        expect(
+            ignore.stateName === String.raw`/\.(paused|playerState)$/`,
+            `Unexpected stateName of IGNORE: ${JSON.stringify(ignore.stateName)}`,
+        );
+        // A state without an ID regex must not get a stateName
+        const set = patterns.socket.states.find(state => state.name === 'SET');
+        expect(!('stateName' in set), `Unexpected stateName of SET: ${JSON.stringify(set.stateName)}`);
+
+        done();
+    });
+
+    it(`${name} Must find the sockets of relays with a separator before the number`, done => {
+        const relay = name => ({
+            common: { name, type: 'boolean', role: 'switch', read: true, write: true },
+            type: 'state',
+        });
+        const objects = {
+            'test.0.Strip': { common: { name: 'Power strip' }, type: 'device' },
+            'test.0.Strip.relay': relay('Relay'),
+            'test.0.Strip.relay_1': relay('Relay 1'),
+            'test.0.Strip.relay-2': relay('Relay 2'),
+            'test.0.Strip.relay10': relay('Relay 10'),
+            'test.0.Strip.led_1': relay('LED'),
+        };
+
+        const controls = detect(objects, { id: 'test.0.Strip' });
+        const relays = controls
+            .filter(({ type }) => type === Types.socket)
+            .map(({ states }) => states.find(({ name }) => name === 'SET').id.split('.').pop());
+        expect(
+            JSON.stringify(relays) === JSON.stringify(['relay', 'relay_1', 'relay-2', 'relay10']),
+            `Unexpected sockets: ${relays.join(', ')}`,
+        );
 
         done();
     });

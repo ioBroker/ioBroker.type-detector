@@ -101,12 +101,24 @@ import { TV_KEYS, TV_APPS, TV_INPUTS } from '@iobroker/type-detector';
 // e.g. "states": { "YOUTUBE": "YouTube", "NETFLIX": "Netflix" }
 ```
 
+## Several sockets in one channel
+
+A power strip or a device with several relays in one channel, e.g. Tasmota (adapter `sonoff`) with `POWER`, `POWER1` ... `POWERn`, is detected as one `socket` for every relay. `detect()` returns them in the order of their IDs: `POWER`, `POWER1`, `POWER2` ...
+
+- Only writable boolean switches whose ID differs from the first socket only by a number at the end become further sockets, so a child lock or an LED switch beside the relays is not taken.
+- States shared by all relays, e.g. one energy meter, belong to the first socket only. Indicators like `UNREACH` or `RSSI` belong to every socket.
+- All these sockets have the same channel, so identify a device by the ID of its state `SET`, not by the channel.
+
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+-   (@GermanBluefox) Changed: every relay of a power strip or of a multi-relay device in one channel is now detected as a `socket` of its own; before only one relay was detected and the others were lost, see [Several sockets in one channel](#several-sockets-in-one-channel)
+-   (@GermanBluefox) Fixed: `getPatterns()` returns `stateName` as a string like `role`, not as an empty object
+
 ### 6.2.0 (2026-10-23)
 -   (@GermanBluefox) Added device type `tv`, see [Fixed values of the device type `tv`](#fixed-values-of-the-device-type-tv) and [DEVICES.md](DEVICES.md)
 
