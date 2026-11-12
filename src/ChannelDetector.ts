@@ -250,8 +250,6 @@ export class ChannelDetector {
         const sortedKeys = context.sortedKeys;
         let result = context.result;
         let found = false;
-        // States rejected before this scan lost a slot of another state of the pattern and stay available to this one
-        const rejectedBeforeThisState = context.rejectedInCurrentDevice.length;
         // let count = 0;
 
         // check every state in a channel
@@ -264,6 +262,16 @@ export class ChannelDetector {
 
             // one exception: if we already found a state with name COVER, so ignore the second one
             if (state.name === 'COVER' && result?.states.find(e => e.id && e.name === 'COVER')) {
+                continue;
+            }
+
+            // A further device of a `repeatable` pattern takes only a state like the one of the first device
+            if (
+                state.required &&
+                context.repeat &&
+                (context.repeat.usedIds.includes(stateId) ||
+                    ChannelDetector.getRepeatStem(stateId) !== context.repeat.stem)
+            ) {
                 continue;
             }
 
@@ -411,8 +419,7 @@ export class ChannelDetector {
                             if (
                                 (state.indicator ||
                                     (!usedInCurrentDevice.includes(cid) &&
-                                        // Do not re-adopt a state this scan has just evicted from its slot
-                                        context.rejectedInCurrentDevice.lastIndexOf(cid) < rejectedBeforeThisState &&
+                                        !context.rejectedInCurrentDevice.includes(cid) &&
                                         (state.notSingle || !usedIds.includes(cid)))) &&
                                 this._applyPattern(objects, cid, state, ignoreEnums, sortedKeys)
                             ) {
@@ -595,16 +602,62 @@ export class ChannelDetector {
         return true;
     }
 
+    /**
+     * The last part of an ID without a number at the end, e.g. `POWER` for `sonoff.0.DVES_1.POWER2`.
+     * The IDs of the devices of a `repeatable` pattern in one channel must have the same stem.
+     */
+    private static getRepeatStem(id: string): string {
+        return (id.split('.').pop() || '').replace(/[_-]?\d+$/, '');
+    }
+
+    /**
+     * Decides which state takes the required state of a `repeatable` pattern, so that the devices come in the order
+     * of their IDs: `POWER`, `POWER1`, `POWER2` ... The other candidates are not blocked, so that the next run of the
+     * pattern takes them as further devices.
+     */
+    private _selectRepeatedState(context: MatchedDetectorContext, options: DetectOptions): void {
+        const slot = context.result.states.find(state => state.required && state.id);
+        if (!slot?.original) {
+            return;
+        }
+        const original = slot.original;
+        const winner = slot.id;
+        options._repeated ||= {};
+        const repeat = (options._repeated[context.pattern] ||= {
+            stem: ChannelDetector.getRepeatStem(winner),
+            usedIds: [],
+        });
+
+        // Every state that could have taken the slot in this run
+        const candidates = context.channelStates
+            .filter(
+                cid =>
+                    cid === winner ||
+                    (!context.usedInCurrentDevice.includes(cid) &&
+                        !repeat.usedIds.includes(cid) &&
+                        (original.notSingle || context.detectAllPossibleDevices || !context.usedIds.includes(cid)) &&
+                        ChannelDetector.getRepeatStem(cid) === repeat.stem &&
+                        this._applyPattern(context.objects, cid, original, context.ignoreEnums, context.sortedKeys)),
+            )
+            .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+
+        const chosen = context.favorId && candidates.includes(context.favorId) ? context.favorId : candidates[0];
+        if (chosen !== winner) {
+            slot.id = chosen;
+            const pos = context.usedInCurrentDevice.indexOf(winner);
+            if (pos !== -1) {
+                context.usedInCurrentDevice.splice(pos, 1);
+            }
+            context.usedInCurrentDevice.push(chosen);
+        }
+        // The other candidates stay free for the further devices of the pattern
+        context.rejectedInCurrentDevice = context.rejectedInCurrentDevice.filter(id => !candidates.includes(id));
+        repeat.usedIds.push(chosen);
+    }
+
     private static cleanState(state: DetectorState, objects: Record<string, ioBroker.Object>): void {
         const role: string = objects[state.id]?.common?.role || '';
-        const stateName = state.original?.stateName;
-        if (state.name.includes('%d') && state.id && stateName) {
-            // A state matched by its ID takes the number from the ID, e.g. `POWER2` becomes `SET2`
-            const m = stateName.exec(state.id);
-            if (m?.[1] !== undefined) {
-                state.name = state.name.replace('%d', m[1]);
-            }
-        } else if (state.name.includes('%d') && state.role && state.id && role) {
+        if (state.name.includes('%d') && state.role && state.id && role) {
             const m = state.role.exec(role);
             if (m) {
                 state.name = state.name.replace('%d', m[1]);
@@ -704,10 +757,15 @@ export class ChannelDetector {
             if (options._checkedPatterns.includes(pattern)) {
                 continue;
             }
-            options._checkedPatterns.push(pattern);
+            // A `repeatable` pattern is tested again after every match and is done only when it does not match
+            const repeatable = !!patterns[pattern].repeatable;
+            if (!repeatable) {
+                options._checkedPatterns.push(pattern);
+            }
 
             // reset the result
             delete context.result;
+            context.repeat = repeatable ? options._repeated?.[pattern] : undefined;
 
             context.pattern = pattern;
             context.usedInCurrentDevice = [];
@@ -750,7 +808,14 @@ export class ChannelDetector {
             }
 
             if (!ChannelDetector.allRequiredStatesFound(context)) {
+                if (repeatable) {
+                    options._checkedPatterns.push(pattern);
+                }
                 continue;
+            }
+
+            if (repeatable) {
+                this._selectRepeatedState(context, options);
             }
 
             // Store all used IDs in the array
@@ -870,6 +935,7 @@ export class ChannelDetector {
             }
         }
         options._checkedPatterns = [];
+        options._repeated = {};
 
         const result: PatternControl[] = [];
         let detected;

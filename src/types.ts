@@ -325,6 +325,17 @@ export interface DetectOptions {
 
     /** For optimization, internal list of patterns order to process */
     _patternList?: PatternName[];
+
+    /** Internal: the devices already detected by a `repeatable` pattern in this run, per pattern */
+    _repeated?: { [pattern: string]: RepeatedPattern };
+}
+
+/** Internal state of a `repeatable` pattern during one `detect()` run */
+export interface RepeatedPattern {
+    /** The last part of the ID of the first device without the number, e.g. `POWER` for `POWER1` */
+    stem: string;
+    /** The IDs that the required state of the pattern has already taken, one per device */
+    usedIds: string[];
 }
 
 export interface DetectorContext {
@@ -343,6 +354,8 @@ export interface DetectorContext {
     sortedKeys: string[];
     favorId?: string;
     detectAllPossibleDevices?: boolean;
+    /** Set when a `repeatable` pattern is tested again after its first device */
+    repeat?: RepeatedPattern;
 }
 
 export interface MatchedDetectorContext extends Omit<DetectorContext, 'result'> {
@@ -353,17 +366,27 @@ export interface InternalPatternControl {
     states: InternalDetectorState[];
     type: Types;
     enumRequired?: boolean;
+    /**
+     * The pattern may be detected several times in one channel, once for every state of its required state,
+     * e.g. one `socket` for each relay `POWER`, `POWER1` ... `POWERn` of a Tasmota device.
+     * Only states whose ID differs from the first one by a number at the end make further devices, and all other
+     * states of the pattern (e.g. a shared energy meter) belong to the first device only.
+     * The pattern must have exactly one `required` state.
+     */
+    repeatable?: boolean;
 }
 export interface PatternControl {
     states: DetectorState[];
     type: Types;
     enumRequired?: boolean;
+    repeatable?: boolean;
 }
 
 export interface ExternalPatternControl {
     states: ExternalDetectorState[];
     type: Types;
     enumRequired?: boolean;
+    repeatable?: boolean;
 }
 
 export type PatternLanguages = 'en' | 'de' | 'ru';

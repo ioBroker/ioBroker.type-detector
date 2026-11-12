@@ -1098,40 +1098,45 @@ describe(`${name} Test Detector`, () => {
         done();
     });
 
-    it(`${name} Must detect all relays of a multi-relay device as outlets of one socket`, done => {
-        // A Tasmota device with four relays and one energy meter for all of them (ioBroker.devices issue #740)
+    it(`${name} Must detect every relay of a multi-relay device as a socket of its own`, done => {
+        // A Tasmota device with five relays and one energy meter for all of them (ioBroker.devices issue #740)
         const controls = detect('./tasmota-multi-relay.json', { id: 'sonoff.0.DVES_000001' });
-        const socket = controls.find(({ type }) => type === Types.socket);
-        expect(!!socket, 'The device must be detected as a socket');
+        const sockets = controls.filter(({ type }) => type === Types.socket);
 
-        const outlets = socket.states
-            .filter(({ id, name }) => id && /^SET\d*$/.test(name))
-            .map(({ name, id }) => `${name}=${id}`)
-            .sort();
-        const expected = [
-            // SET keeps the relay it had before the outlets were added
-            'SET=sonoff.0.DVES_000001.POWER4',
-            'SET1=sonoff.0.DVES_000001.POWER1',
-            'SET2=sonoff.0.DVES_000001.POWER2',
-            'SET3=sonoff.0.DVES_000001.POWER3',
-        ].sort();
-        expect(
-            JSON.stringify(outlets) === JSON.stringify(expected),
-            `Unexpected outlets: ${outlets.join(', ')}`,
-        );
-        // `POWER` has no number, so it is no outlet of its own
-        expect(
-            !socket.states.some(({ id }) => id === 'sonoff.0.DVES_000001.POWER'),
-            'A switch without a number must not become an outlet',
-        );
-        // The energy meter is shared by all relays and stays with the socket
-        expectStateToHaveId(socket.states, 'CURRENT', 'sonoff.0.DVES_000001.ENERGY_Current');
-        expectStateToHaveId(socket.states, 'VOLTAGE', 'sonoff.0.DVES_000001.ENERGY_Voltage');
+        const relays = sockets.map(({ states }) => states.find(({ name }) => name === 'SET').id);
+        const expected = ['POWER', 'POWER1', 'POWER2', 'POWER3', 'POWER4'].map(r => `sonoff.0.DVES_000001.${r}`);
+        expect(JSON.stringify(relays) === JSON.stringify(expected), `Unexpected sockets: ${relays.join(', ')}`);
+
+        // The energy meter is shared by all relays and belongs to the first socket only
+        expectStateToHaveId(sockets[0].states, 'CURRENT', 'sonoff.0.DVES_000001.ENERGY_Current');
+        expectStateToHaveId(sockets[0].states, 'VOLTAGE', 'sonoff.0.DVES_000001.ENERGY_Voltage');
+        for (const socket of sockets.slice(1)) {
+            expect(
+                !socket.states.some(({ name, id }) => id && ['CURRENT', 'VOLTAGE', 'CONSUMPTION'].includes(name)),
+                'The energy meter must belong to the first socket only',
+            );
+            // The signal strength is an indicator of the whole device and belongs to every socket
+            expectStateToHaveId(socket.states, 'RSSI', 'sonoff.0.DVES_000001.Wifi_Signal');
+        }
 
         done();
     });
 
-    it(`${name} Must take only switches with a number as further outlets of a socket`, done => {
+    it(`${name} Must end the sockets of a multi-relay device in every detection mode`, done => {
+        const objects = require('./tasmota-multi-relay.json');
+        // `detectAllPossibleDevices` forgets the used states after every device, so the sockets must still end
+        const controls = new ChannelDetector().detect({
+            objects,
+            id: 'sonoff.0.DVES_000001',
+            detectAllPossibleDevices: true,
+        });
+        const sockets = controls.filter(({ type }) => type === Types.socket);
+        expect(sockets.length === 5, `Expected 5 sockets but found ${sockets.length}`);
+
+        done();
+    });
+
+    it(`${name} Must make a socket only of the switches named like the first one`, done => {
         const objects = {
             'zigbee.0.DuoPlug': { common: { name: 'Duo plug' }, type: 'device' },
             'zigbee.0.DuoPlug.child_lock': {
@@ -1150,18 +1155,20 @@ describe(`${name} Test Detector`, () => {
 
         const controls = detect(objects, { id: 'zigbee.0.DuoPlug' });
 
-        expect(controls.length === 1, `Expected a single control but found ${controls.length}`);
-        validate(controls[0], Types.socket, {
-            SET: 'zigbee.0.DuoPlug.state_l2',
-            SET1: 'zigbee.0.DuoPlug.state_l1',
-        });
+        expect(controls.length === 2, `Expected two controls but found ${controls.length}`);
+        validate(controls[0], Types.socket, { SET: 'zigbee.0.DuoPlug.state_l1' }, true);
+        validate(controls[1], Types.socket, { SET: 'zigbee.0.DuoPlug.state_l2' }, true);
 
         done();
     });
 
-    it(`${name} Must not add an outlet to a socket with a single numbered switch`, done => {
+    it(`${name} Must detect a single socket beside another switch as before`, done => {
         const objects = {
             'zigbee.0.Plug5': { common: { name: 'Plug' }, type: 'device' },
+            'zigbee.0.Plug5.led': {
+                common: { name: 'LED', type: 'boolean', role: 'switch', read: true, write: true },
+                type: 'state',
+            },
             'zigbee.0.Plug5.state_l1': {
                 common: { name: 'Outlet', type: 'boolean', role: 'switch', read: true, write: true },
                 type: 'state',

@@ -969,23 +969,24 @@ RGBW light with one state of color. Could be HEX #RRGGBBWW, or rgba(0-255,0-255,
 
 Socket with an ON/OFF option. Could have information about current, amperage, energy and power.
 
-| R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                               |
-|---|----------------|-------------------------------|------|---------|----|-----|-------|-----------------------------------------------------|
-| * | SET            | switch                        |      | boolean | W  |     |       | `/^switch(\.active)?$｜^state$/`                     |
-|   | SET%d          |                               |      | boolean | W  |     | x     | `/^(?:switch(?:\.active)?｜state)$/`, ID: `/(\d+)$/` |
-|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state\.active$｜^sensor\.switch$/`                |
-|   | ON_TIME        | level.timer.off               | s    | number  | W  |     |       | `/^level\.timer\.off$/`                             |
-|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                  |
-|   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                                |
-|   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                                |
-|   | CONSUMPTION    | value.energy.consumed         | Wh   | number  | -  |     |       | `/^value\.(energy\.consumed｜power\.consumption)$/`  |
-|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                              |
-|   | WORKING        | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                            |
-|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`            |
-|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/`   |
-|   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                        |
-|   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                              |
-|   | RSSI           | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                   |
+Several devices of this type can be in one channel: one for every state of the required state whose ID differs only by a number at the end (e.g. `POWER`, `POWER1`, `POWER2`). The other states belong to the first device only.
+
+| R | Name           | Role                          | Unit | Type    | Wr | Ind | Multi | Regex                                              |
+|---|----------------|-------------------------------|------|---------|----|-----|-------|----------------------------------------------------|
+| * | SET            | switch                        |      | boolean | W  |     |       | `/^switch(\.active)?$｜^state$/`                    |
+|   | ACTUAL         | sensor.switch                 |      | boolean | -  |     |       | `/^state\.active$｜^sensor\.switch$/`               |
+|   | ON_TIME        | level.timer.off               | s    | number  | W  |     |       | `/^level\.timer\.off$/`                            |
+|   | ELECTRIC_POWER | value.power                   | W    | number  | -  |     |       | `/^value\.power$/`                                 |
+|   | CURRENT        | value.current                 | mA   | number  | -  |     |       | `/^value\.current$/`                               |
+|   | VOLTAGE        | value.voltage                 | V    | number  | -  |     |       | `/^value\.voltage$/`                               |
+|   | CONSUMPTION    | value.energy.consumed         | Wh   | number  | -  |     |       | `/^value\.(energy\.consumed｜power\.consumption)$/` |
+|   | FREQUENCY      | value.frequency               | Hz   | number  | -  |     |       | `/^value\.frequency$/`                             |
+|   | WORKING        | indicator.working             |      |         |    | X   |       | `/^indicator\.working$/`                           |
+|   | UNREACH        | indicator.maintenance.unreach |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.unreach$/`           |
+|   | LOWBAT         | indicator.maintenance.lowbat  |      | boolean |    | X   |       | `/^indicator(\.maintenance)?\.(lowbat｜battery)$/`  |
+|   | MAINTAIN       | indicator.maintenance         |      | boolean |    | X   |       | `/^indicator\.maintenance$/`                       |
+|   | ERROR          | indicator.error               |      |         |    | X   |       | `/^indicator\.error$/`                             |
+|   | RSSI           | value.rssi                    | dBm  | number  | -  |     |       | `/^value\.rssi$/`                                  |
 
 
 ### Temperature [temperature]
